@@ -1,0 +1,55 @@
+<ui:composition
+    template="modalModeloPadrao.xhtml"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:p="http://primefaces.org/ui">
+    <ui:define name="titulo">Encontre um #{pgModalArquivoDeEntidade.paginaVinculada.modalAtual.comoModalDados.campoSelecionado.label}  em seu computador </ui:define>
+
+    <ui:define name="conteudo" >
+
+        <script>
+            function enviarArquivo(slugEntidade, idNomeArquivo) {
+                //      document.getElementById["form:botoes"].style.display = 'none';
+                PF('enviarArquivo').show();
+            }
+        </script>
+        <h:form rendered="false">
+            <p:remoteCommand actionListener="#{pgModalArquivoDeEntidade.fecharPaginaMatandoViewScoped()}"
+                             name="fecharModal"
+                             autoRun="false"
+                             />
+            <p:commandButton value="Teste Fechar" update="@form" oncomplete="fecharModal();" />
+        </h:form>
+
+        <h:form>
+            <div class="Container12  "
+                 style="padding: 0;
+                 margin: 0;
+                 display: flex;
+                 height: 100px;
+                 align-items: center;
+                 flex-wrap: wrap;
+                 justify-content: center;"
+
+                 >
+
+
+                <div class="" >
+                    <p:fileUpload
+                        mode="advanced"
+                        label="Escolher #{pgModalArquivoDeEntidade.paginaVinculada.modalAtual.comoModalDados.campoSelecionado.label}"
+                        fileUploadListener="#{pgModalArquivoDeEntidade.paginaVinculada.modalAtual.comoModalDados.enviarArquivoDoCampoUpload}"
+                        auto="true"
+                        styleClass="estiloBotoaoEnviarArquivo"
+                        />
+                </div>
+            </div>
+
+
+        </h:form>
+
+    </ui:define>
+
+
+
+</ui:composition>

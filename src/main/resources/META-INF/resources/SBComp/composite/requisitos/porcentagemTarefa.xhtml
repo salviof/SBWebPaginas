@@ -1,0 +1,58 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:cc="http://java.sun.com/jsf/composite"
+                xmlns:sb="http://superbitsframework/ui" 
+
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <!-- INTERFACE -->
+    <cc:interface>
+
+        <cc:attribute name="moduloPrevisto" displayName="Previsao Gestao"
+                      type="com.super_bits.projeto.Jira.ItfPrevisaoModulo" />
+
+
+    </cc:interface>
+    <!-- IMPLEMENTATION -->
+    <cc:implementation>
+
+
+
+        <div class="botaoCard Container3  w3-btn w3-border " >
+            <span class="Fs16 FontAdamantiumBold ">#{cc.attrs.moduloPrevisto.moduloAssociado.nome} </span><br/>
+
+            <p:progressBar    />
+            <br/>
+            <p:panel id="imagem" styleClass=" w3-circle w3-right  w3-margin-right">
+                <i class="#{cc.attrs.moduloPrevisto.moduloAssociado.iconeDaClasse} Fs30"  />
+            </p:panel>
+            <p:tooltip for="@parent:imagem"
+                       position="bottom"
+                       hideDelay="3"
+                       value="#{cc.attrs.moduloPrevisto.moduloAssociado.descricao}"/>
+
+
+            <span>Tempo previsto: </span><br/>
+            <span>Formulários nescessários: </span><br/>
+            <span>Ações do Sistema nescessários: </span><br/>
+            <span>Custo com desenvolvedores: #{cc.attrs.moduloPrevisto.custoDesenvolvimento.valorTotal}</span><br/>
+            <span>Horas totais de desenvolvimento: #{cc.attrs.moduloPrevisto.custoDesenvolvimento.horasTotal}</span>
+
+        </div>
+
+
+
+
+    </cc:implementation>
+</ui:composition>
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,58 @@
+<ui:composition
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:cc="http://java.sun.com/jsf/composite"
+    xmlns:sb="http://superbitsframework/ui" >
+    <!-- INTERFACE -->
+    <cc:interface>
+
+
+        <cc:attribute name="acao" type="com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ItfAcaoDoSistema"
+                      shortDescription="A ação que será exibida " />
+
+        <cc:attribute name="update"
+                      shortDescription="IDs que devem ser atualizados após clicar na alção"
+                      />
+        <cc:attribute name="javaScriptOncomplete"  default="acoesPosAjax();"
+                      shortDescription="Javascript que deve ser executado após a execucao do botão"
+                      />
+        <cc:attribute name="tipoVisualizacao"
+
+                      type="com.super_bits.modulosSB.SBCore.modulos.view.fabricasCompVisual.ItfComponenteVisualSB"
+                      default="#{layoutsComponenteSB.layoutBotoes.iconeENome}"
+                      shortDescription="Tipo de visualização do botão (Utilize #tipos.tipoVisualBotao"
+                      />
+        <cc:attribute name="cor"
+                      default="#{null}"
+                      shortDescription="Cor do botão caso ele deva ser exibido por em uma cor especifica"
+                      />
+        <cc:attribute name="label"
+                      type="java.lang.String"
+                      shortDescription="Label do botão"
+                      default="#{cc.attrs.acao.nomeAcao}"
+                      />
+    </cc:interface>
+    <!-- IMPLEMENTATION -->
+    <cc:implementation>
+        <sb:botaoAcaoPaginaAtual
+            acao="#{cc.attrs.acao}"
+            layout="#{cc.attrs.tipoVisualizacao}"
+            javaScriptOncomplete="#{cc.attrs.javaScriptOncomplete}"
+            idUpdate="#{cc.attrs.update}"
+            label="#{cc.attrs.label}"
+            icone="#{cc.attrs.acao.iconeAcao}"
+
+            />
+
+    </cc:implementation>
+</ui:composition>
+
+
+
+
+
+
+
+
+
+

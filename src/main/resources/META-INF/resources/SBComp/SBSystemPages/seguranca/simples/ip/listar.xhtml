@@ -1,0 +1,74 @@
+<ui:composition
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+
+
+    xmlns:SBComp="http://xmlns.jcp.org/jsf/composite/SBComp"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    template="/resources/SBComp/template/basico/conteudo.xhtml"  >
+    <ui:define name="parametros">
+
+
+        <ui:param name="iconeConteudo" value="#{pgIps.acaoVinculada.iconeAcao}]" />
+
+    </ui:define>
+
+    <ui:define name="titulo">
+        Gestão de Ips
+    </ui:define>
+    <ui:define name="subtitulo">
+        Gestão de Ips do sistema
+    </ui:define>
+    <ui:define name="conteudoDireita">
+        <h:form>
+            <div class="ContainerIndent">
+
+            </div>
+        </h:form>
+    </ui:define>
+    <ui:define name="conteudoCard">
+
+        <h:form>
+            <p:dataTable sortMode="multiple"
+                         value="#{pgIps.ipsEncontrados}"
+                         var="ips"
+                         emptyMessage="Sem Ips cadastrados"
+                         paginator="true">
+                <f:facet name="header">
+                    Ips cadastrados
+                </f:facet>
+
+                <p:column headerText="Id">
+                    <center> <p:outputLabel value="#{ips.id}"/></center>
+                </p:column>
+
+                <p:column headerText="Inicial" sortBy="#{ips.inicialFaixa}">
+                    <center> <p:outputLabel value="#{ips.inicialFaixa}"/></center>
+                </p:column>
+
+
+                <p:column headerText="Final" sortBy="#{ips.finalFaixa}">
+                    <center> <p:outputLabel value="#{ips.finalFaixa}"/></center>
+                </p:column>
+
+                <p:column headerText="DNS" sortBy="#{ips.dns}">
+                    <center> <p:outputLabel value="#{ips.dns}"/></center>
+                </p:column>
+
+                <p:column headerText="Ações">
+
+                </p:column>
+
+            </p:dataTable>
+
+        </h:form>
+
+
+
+    </ui:define>
+</ui:composition>
+
+
+
+

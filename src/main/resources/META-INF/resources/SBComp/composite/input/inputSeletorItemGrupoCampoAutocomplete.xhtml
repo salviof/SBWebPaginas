@@ -1,0 +1,30 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:cc="http://java.sun.com/jsf/composite"
+                xmlns:SBSeletor="http://xmlns.jcp.org/jsf/composite/SBComp/composite/seletores"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <!-- INTERFACE -->
+    <cc:interface>
+        <cc:attribute name="registro"
+                      required="true"
+                      type="com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campoInstanciado.ItfCampoInstanciado"
+                      default="#{pgUtil.campoNaoImplementado}"
+                      shortDescription="Exibe um atributo de um Objeto para insersão de dados do usuário (Ou Visualização)"
+                      />
+        <cc:attribute name="label"  default="Selecione um  #{cc.attrs.registro.label}"/>
+        <cc:attribute name="idAreaPrincipal" default="seletorGrande#{cc.attrs.registro.comoCampoSeltorItem.grupoCampoExibicao.nomeIdentificadorSlug}" />
+    </cc:interface>
+    <!-- IMPLEMENTATION -->
+    <cc:implementation>
+        <h:panelGroup >
+            <SBSeletor:seletorItemGrCpAutocomplete grupoCamposExibicao="#{cc.attrs.registro.comoCampoSeltorItem.grupoCampoExibicao}"
+                                                   grupoCamposPesquisa="#{cc.attrs.registro.comoCampoSeltorItem.grupoCampoExibicao}"
+                                                   grupoCamposmodal="#{cc.attrs.registro.comoCampoSeltorItem.grupoCampoExibicao}"
+                                                   itemSelecionado="#{cc.attrs.registro.valor}"
+                                                   metodo="#{cc.attrs.registro.comoCampoSeltorItem.filtrarPorAutoComplet(pParametro)}"
+                                                   titulo="#{cc.attrs.label}"/>
+
+        </h:panelGroup>
+    </cc:implementation>
+</ui:composition>
+

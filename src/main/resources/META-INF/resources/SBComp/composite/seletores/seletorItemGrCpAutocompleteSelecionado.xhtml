@@ -1,0 +1,79 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:cc="http://java.sun.com/jsf/composite"
+                xmlns:sb="http://superbitsframework/ui"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:SBSeletor="http://xmlns.jcp.org/jsf/composite/SBComp/composite/seletores"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <!-- INTERFACE -->
+    <cc:interface>
+
+        <cc:attribute name="metodo"
+                      method-signature="java.util.List complete(java.lang.String)"
+                      shortDescription="Método de filtragem, deve conter um parametro de String e tornar uma lista com os objetos"/>
+        <cc:attribute name="itemSelecionado" type="com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfBeanSimples" />
+        <cc:attribute name="grupoCamposExibicao" type="com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campo.ItfGrupoCampos"/>
+        <cc:attribute name="grupoCamposPesquisa" type="com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campo.ItfGrupoCampos"/>
+        <cc:attribute name="grupoCamposmodal" type="com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campo.ItfGrupoCampos"/>
+        <cc:attribute name="titulo" />
+
+        <cc:attribute name="metodoOnChange" required="false"   type="javax.el.MethodExpression"
+                      shortDescription="Médodo que deve ser executado ao alterar um valor"
+
+                      />
+
+    </cc:interface>
+    <!-- IMPLEMENTATION -->
+    <cc:implementation>
+
+
+        <p:fieldset  styleClass="AreaSeletorGrande" >
+
+            <h:panelGroup rendered="#{cc.attrs.itemSelecionado!=null}" >
+                <SBSeletor:visualizacaoItemSelecionado
+                    itemSelecionado="#{cc.attrs.itemSelecionado}"
+                    grupoCampos="#{cc.attrs.grupoCamposExibicao}" />
+            </h:panelGroup>
+            <h:panelGroup rendered="#{cc.attrs.itemSelecionado==null}">
+
+                <sb:parametroMetodo nome="metodoOnChange" valor="#{cc.attrs.metodoOnChange}" />
+                <p:autoComplete
+                    styleClass="inputTexto"
+                    converter="conversorGenerico"
+                    itemLabel="#{item.nome}"
+                    itemValue="#{item}"
+                    forceSelection="true"
+                    emptyMessage="Nada Selecionado"
+                    placeholder="#{cc.attrs.titulo}"
+                    var="item"
+                    value="#{cc.attrs.itemSelecionado}"
+                    minQueryLength="4"
+                    queryDelay="1000"
+                    maxResults="6"
+                    completeMethod="#{cc.attrs.metodo}"
+                    >
+                    <p:ajax event="itemSelect"
+                            listener="#{metodoOnChange}"
+                            update="@(AreaSeletorGrande)"/>
+                    <c:forEach var="campo" items="#{cc.attrs.grupoCamposPesquisa.campos}" rendered="#{pgUtil.isAtributoPreenchidoComExpressao(cc, 'grupoCamposExibicao')}">
+                        <p:column >
+                            <sb:inputSB
+                                registro="#{item.getCampoByNomeOuAnotacao(campo.caminhoSemNomeClasse)}"
+                                atualizarFormOnChange="false"
+                                atualizarGrupoOnChange="false"
+                                label="#{item.getCampoByNomeOuAnotacao(campo.caminhoSemNomeClasse).label}"
+                                obrigatorio="false"
+                                possuiIDOnChange="false"
+                                possuiMetodoOnChange="false"
+                                desabilitarEdicao="true"
+                                layoutCampo="#{layoutsComponenteSB.layoutCampo.resumido}"
+                                />
+                        </p:column>
+                    </c:forEach>
+                </p:autoComplete>
+
+            </h:panelGroup>
+        </p:fieldset>
+    </cc:implementation>
+</ui:composition>

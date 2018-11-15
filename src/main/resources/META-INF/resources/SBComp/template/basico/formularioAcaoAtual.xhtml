@@ -1,0 +1,40 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+
+    <h:panelGroup layout="block" >
+        <div class="CardTopic">
+            #{paginaAtual.infoPagina.acaoSelecionada.nomeAcao}
+            <i class="#{paginaAtual.infoPagina.acaoSelecionada.iconeAcao} Fs30 Fleft MarRight10"></i>
+            <br/>
+            <div class="quebraBlocoComEspacoVertical10 somenteMobile"></div>
+            <span class="CardSubTopic">
+                #{paginaAtual.infoPagina.acaoSelecionada.descricao}
+            </span>
+            <h:panelGroup styleClass="Fright" layout="block">
+                <ui:insert name="conteudoDireita" />
+            </h:panelGroup>
+        </div>
+        <div class="quebraBlocoComEspacoVertical10"></div>
+
+        <ui:insert name="conteudoCard" />
+        <ui:insert name="conteudo" />
+
+
+    </h:panelGroup>
+
+    <ui:insert name="conteudoExtraCard" />
+
+</ui:composition>
+
+
+
+
+
+
+
+
+
+

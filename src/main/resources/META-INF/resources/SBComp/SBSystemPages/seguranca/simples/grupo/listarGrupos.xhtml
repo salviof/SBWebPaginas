@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:SBAcaoNav="http://xmlns.jcp.org/jsf/composite/SBComp/composite/acoesENavegacao"
+
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      
+      xmlns:p="http://primefaces.org/ui">
+
+
+    <ui:composition template="/resources/SBComp/template/basico/conteudo.xhtml"  >
+        <ui:define name="parametros">
+            <ui:param name="iconeConteudo" value="fa fa-users" />
+        </ui:define>
+
+
+        <ui:define name="titulo">
+            Grupos de usuários
+        </ui:define>
+        <ui:define name="subtitulo">
+            Gerenciamento de Grupos e permissões
+
+
+        </ui:define>
+        <ui:define name="conteudoDireita">
+            <div class="ContainerIndent">
+                <SBAcaoNav:botaoDeAcao acao="#{pgPermissoes.acaoNovoGrupo}" metodo="#{pgPermissoes.executarAcaoListaGrupo(pgPermissoes.grupoSelecionado)}" armazenamentoAcaoExecutada="#{pgPermissoes.acaoselecionada}" />
+            </div>
+
+        </ui:define>
+        <ui:define name="conteudoCard">
+            <h:form >
+                <p:dataTable  value="#{pgPermissoes.grupos}" var="grp" >
+                    <p:column headerText="Código" width="50" >
+                        <center> <p:outputLabel value="#{grp.id}" /></center>
+                    </p:column>
+                    <p:column headerText="Nome">
+                        <p:outputLabel value="#{grp.nome}" />
+                    </p:column>
+                    <p:column headerText="Data Criação" width="80">
+                        <p:outputLabel value="#{grp.dataHoraCriacao}"/>
+                    </p:column>
+                    <p:column headerText="Grupo Ativo" width="80">
+                        <h:form>
+                            <p:selectBooleanButton offLabel="Não" onLabel="Sim" value="#{grp.ativo}" disabled="true" />
+                        </h:form>
+                    </p:column>
+                    <p:column headerText="Açoes">
+                        <SBAcaoNav:seletorDeAcoes  metodo="#{pgPermissoes.executarAcaoListaGrupo(grp)}" opcaoSelecionada="#{pgPermissoes.acaoselecionada}" opcoes="#{pgPermissoes.acoesListarGrupos}" />
+                    </p:column>
+
+                </p:dataTable>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

@@ -1,0 +1,50 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:SBAcaoNav="http://xmlns.jcp.org/jsf/composite/SBComp/composite/acoesENavegacao"
+                xmlns:SBComp="http://xmlns.jcp.org/jsf/composite/resources/SBComp">
+    <div class="">
+        <div class="CardTopic">
+            #{paginaAtual.infoPagina.acaoSelecionada.nomeAcao}
+            <i class="#{paginaAtual.infoPagina.acaoSelecionada.iconeAcao} Fs30 Fleft MarRight10"></i>
+            <br/>
+            <div class="quebraBlocoComEspacoVertical10 somenteMobile"></div>
+
+            <span class="CardSubTopic">
+                #{paginaAtual.infoPagina.acaoSelecionada.descricao}
+
+            </span>
+
+            <h:panelGroup styleClass="Fright">
+                <h:form>
+                    <SBAcaoNav:botaoDeAcao_Pagina acao="#{paginaAtual.infoPagina.comoPaginaEntidade.acaoListarRegistros}"
+                                                  tipoVisualizacao="#{layoutsComponenteSB.layoutBotoes.iconeENome}"
+                                                  label="Voltar"
+
+
+                                                  />
+                </h:form>
+            </h:panelGroup>
+
+        </div>
+
+        <div class="SeparatorFull"></div>
+
+        <div class="ContainerIndent">
+
+            <ui:insert name="conteudo" />
+
+
+        </div>
+    </div>
+
+</ui:composition>
+
+
+
+
+
+
+
+
+

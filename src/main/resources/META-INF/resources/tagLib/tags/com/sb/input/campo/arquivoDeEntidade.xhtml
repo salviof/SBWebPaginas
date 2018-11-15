@@ -1,0 +1,115 @@
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:decorate template="#{layout.xhtmlJsfCaminhoRelativo}">
+
+
+        <ui:define name="input">
+
+
+            <p:inputText  style=" visibility: hidden;"/>
+
+            <p:fieldset >
+
+                <h:panelGroup  rendered="#{registro.vazio and !desabilitarEdicao}"   >
+
+                    <p:commandButton value="Selecionar  #{label}"
+                                     actionListener="#{pgUtil.exibirModalEnvioArquivo()}"
+                                     partialSubmit="true"
+                                     process="#{pgUtil.getNomeIdPainelDoComponente(component)}"
+                                     >
+                        <p:ajax event="dialogReturn"  update="#{pgUtil.getNomeIdPainelDoComponente(component)}"/>
+
+                        <f:setPropertyActionListener target="#{paginaAtual.infoPagina.comoPaginaDeGestao.campoInstSelecionado}"
+                                                     value="#{registro}" />
+                    </p:commandButton>
+
+                </h:panelGroup>
+                <h:panelGroup  rendered="#{registro.vazio and desabilitarEdicao}"   >
+                    Arquivo não enviado
+                </h:panelGroup>
+
+
+                <h:panelGroup rendered="#{!registro.vazio}" >
+                    <h:panelGroup rendered="#{registro.umCampoArquivoEntidade}" >
+                        #{registro.valor}
+
+                    </h:panelGroup>
+                    <br/>
+
+                    <div class="table-responsive">
+                        <table class="table">
+                            <tbody>
+                                <tr>
+
+
+
+                                    <h:column rendered="#{registro.comoArquivoDeEntidade.usuarioLogadoTemPermissaoBaixarArquivo}"
+                                              headerClass=".col-md-1">
+                                        <td>
+                                            <p:commandButton value="Baixar"
+                                                             partialSubmit="true"
+                                                             process="@this"
+                                                             onclick="javaScript:window.open('#{registro.comoArquivoDeEntidade.linkBaixarArquivo}', '_blank');"
+                                                             icon="#{iconeIconeFontAwesome.REG_BAIXAR.tagHtml}"
+                                                             />
+                                            <p:commandButton value="Abrir"
+                                                             partialSubmit="true"
+                                                             process="@this"
+                                                             onclick="javaScript:window.open('#{registro.comoArquivoDeEntidade.linkAbrirArquivo}', '_blank');"
+                                                             icon="#{iconeIconeFontAwesome.REG_VISUALIZAR.tagHtml}"
+                                                             />
+
+                                        </td>
+                                    </h:column>
+
+
+                                    <h:column rendered="#{registro.comoArquivoDeEntidade.usuarioLogadoTemAlterarArquivo and !desabilitarEdicao}" >
+                                        <td>
+                                            <p:commandButton value="Atualizar"
+                                                             actionListener="#{pgUtil.exibirModalEnvioArquivo()}"
+                                                             partialSubmit="true"
+                                                             process="#{pgUtil.getNomeIdPainelDoComponente(component)}"
+                                                             icon="#{iconeIconeFontAwesome.REG_ATUALIZAR.tagHtml}"
+                                                             >
+                                                <p:ajax event="dialogReturn"  update="@namingcontainer" />
+                                                <f:setPropertyActionListener target="#{paginaAtual.infoPagina.comoPaginaDeGestao.campoInstSelecionado}"
+                                                                             value="#{registro}" />
+
+                                            </p:commandButton>
+                                        </td>
+                                    </h:column>
+
+
+                                    <h:column rendered="#{registro.comoArquivoDeEntidade.usuarioLogadoTemAlterarArquivo and !desabilitarEdicao}" >
+                                        <td>
+                                            <p:commandButton value="Excluir"
+                                                             partialSubmit="true"
+                                                             process="@this"
+                                                             icon="#{iconeIconeFontAwesome.REG_REMOVER.tagHtml}"
+                                                             action="#{registro.comoArquivoDeEntidade.excluirArquivo()}"
+                                                             update="#{pgUtil.getNomeIdPainelDoComponente(component)}"
+                                                             rendered="#{!somenteLeitura}"
+                                                             />
+                                        </td>
+                                    </h:column>
+
+
+
+                                </tr>
+                            </tbody>
+
+                        </table>
+                    </div>
+
+
+                </h:panelGroup>
+            </p:fieldset>
+
+        </ui:define>
+    </ui:decorate>
+</ui:composition>

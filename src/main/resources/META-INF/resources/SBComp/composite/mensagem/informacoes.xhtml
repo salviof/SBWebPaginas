@@ -1,0 +1,25 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:cc="http://java.sun.com/jsf/composite"
+
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <!-- INTERFACE -->
+    <cc:interface>
+
+        <cc:attribute name="descricao" required="true"  />
+
+        <cc:attribute name="titulo" default="Atenção!" />
+
+
+    </cc:interface>
+
+    <!-- IMPLEMENTATION -->
+
+    <cc:implementation>
+        <div class="alert alert-info" >
+            <strong>#{cc.attrs.titulo}</strong> #{cc.attrs.descricao}
+        </div>
+
+    </cc:implementation>
+
+</ui:composition>

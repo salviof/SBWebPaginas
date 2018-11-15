@@ -1,0 +1,57 @@
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:SBAcaoNav="http://xmlns.jcp.org/jsf/composite/SBComp/composite/acoesENavegacao"
+    xmlns:SBInput="http://xmlns.jcp.org/jsf/composite/SBComp/composite/input"
+    xmlns:p="http://primefaces.org/ui"
+    template="../modalModeloComunicacao.xhtml"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <ui:define name="titulo" >#{pgModalJustificativa.comunicacao.mensagem}  </ui:define>
+    <ui:define name="opcoes" >
+        <h:panelGroup   class="ContainerIndent" >
+            <h:panelGroup rendered="#{pgModalJustificativa.campoJustificativa != null}">
+                <div class="Container12" >
+                    <SBInput:input registro="#{pgModalJustificativa.campoJustificativa}"
+
+                                   layout="#{layoutsComponenteSB.layoutCampo.superior}"
+                                   />
+                </div>
+            </h:panelGroup>
+            <h:panelGroup   layout="block"  styleClass="Container12" style="margin: 10px;" >
+
+                <p:inputTextarea value="#{pgModalJustificativa.justificativa}"
+                                 style="width: 100%!important; "
+                                 placeholder="Justifique esta alteração"
+                                 required="true"
+                                 id="justificativa"
+                                 validatorMessage="Escreva mais sobre esssa justificativa"
+                                 requiredMessage="Você precisa justificar esta alteração."
+                                 >
+                    <f:validateLength minimum="10" />
+                </p:inputTextarea>
+                <p:message for="justificativa"/>
+            </h:panelGroup>
+
+
+        </h:panelGroup>
+
+
+        <br/>
+
+        <h:panelGroup   layout="block"  styleClass="OrganizadorContainer" style="width: 100%">
+            <ui:repeat value="#{pgModalJustificativa.comunicacao.repostasPossiveis}" var="resp" >
+                <div class="Container2">
+                    <SBAcaoNav:botaoRespostaModal
+                        resposta="#{resp}"
+                        armazenamentoAcaoExecutada="#{pgModalJustificativa.respostaSelecionada}"
+                        metodo="#{pgModalJustificativa.enviarRespostaEExecutarAcao()}"
+                        />
+                </div>
+            </ui:repeat>
+        </h:panelGroup>
+
+    </ui:define>
+</ui:composition>
+
+

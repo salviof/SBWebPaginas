@@ -1,0 +1,28 @@
+
+
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+                 xmlns:h="http://xmlns.jcp.org/jsf/html"
+                 xmlns:p="http://primefaces.org/ui"
+                 xmlns:SBForm="http://xmlns.jcp.org/jsf/composite/SBComp/composite/formulario"
+                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+
+                 >
+
+
+
+
+
+
+
+
+    <p:fieldset style="margin: 2%" legend="#{pgTestesCampo.grupoSelecionado.nomeGrupo}">
+        <h:form>
+            <SBForm:camposDoGrupo registro="#{pgTestesCampo.entidadeCarregada}"
+                                  grupoCampos="#{pgTestesCampo.grupoSelecionado}" />
+        </h:form>
+    </p:fieldset>
+
+
+
+
+</ui:composition>

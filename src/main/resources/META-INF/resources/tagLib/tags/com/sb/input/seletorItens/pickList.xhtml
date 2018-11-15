@@ -1,0 +1,57 @@
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <ui:decorate   template="#{layout.xhtmlJsfCaminhoRelativo}">
+
+
+        <ui:define name="input">
+            <h:panelGroup rendered="#{desabilitarEdicao}" >
+
+                <p:dataList value="#{registro.valor}" var="item"  type="ordered">
+
+                    #{item.nome}
+                </p:dataList>
+
+
+            </h:panelGroup>
+
+            <p:panel class="Container12 " rendered="#{!desabilitarEdicao}">
+
+                <p:pickList
+                    value="#{registro.comoSeltorItens.campoSeletorItens.dualListPrime}"
+                    var="item"
+                    itemValue="#{item}"
+                    itemLabel="#{item.nome}"
+                    responsive="true"
+                    converter="conversorGenerico"
+                    style="margin-left: 0.5%"
+                    >
+
+                    <c:if test="#{atualizarFormOnChange}" >
+                        <p:ajax event="transfer" listener="#{registro.comoSeltorItens.atualizarListaCompleta()}" update="@form"  />
+                    </c:if>
+
+                    <c:if test="#{possuiIDOnChange}" >
+                        <p:ajax event="transfer" listener="#{pgUtil.atualizaTelaPorID(idAtualizarOnChange)}" />
+                    </c:if>
+
+
+                    <f:facet name="sourceCaption">#{registro.comoSeltorItens.campoSeletorItens.nomeOrigem}</f:facet>
+                    <f:facet name="targetCaption">#{registro.label}</f:facet>
+                </p:pickList>
+                <div class="quebraBlocoComEspacoVertical10"/>
+
+            </p:panel>
+
+
+
+        </ui:define>
+    </ui:decorate>
+</ui:composition>
+
+

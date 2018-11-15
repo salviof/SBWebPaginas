@@ -1,0 +1,48 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:cc="http://java.sun.com/jsf/composite"
+                xmlns:sb="http://superbitsframework/ui" 
+
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <!-- INTERFACE -->
+    <cc:interface>
+
+        <cc:attribute name="campoInstanciado" required="true" type="com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campoInstanciado.ItfCampoInstanciado" default="#{pgUtil.campoNaoImplementado}" />
+        <cc:attribute name="acao" required="true" type="com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ItfAcaoDoSistema" />
+
+    </cc:interface>
+
+    <!-- IMPLEMENTATION -->
+
+    <cc:implementation>
+
+        <!-- inclui o xhtml da ação com o parametro pr Campo, para inspeção -->
+        não está funcionando!!! oq é reinderizado nunca mais some da tela, porque?
+
+        <br/> DEBUG CAMPO <br/>
+        #{cc.attrs.acao.comoFormulario.xhtml}
+        #{cc.attrs.campoInstanciado.label}
+        <ui:include src="#{cc.attrs.acao.comoFormulario.xhtml}" >
+            <ui:param name="prCampo" value="#{cc.attrs.campoInstanciado}" />
+        </ui:include>
+        <br/> FIM DEBUG CAMPO <br/>
+
+
+
+
+    </cc:implementation>
+
+</ui:composition>
+
+
+
+
+
+
+
+
+
+

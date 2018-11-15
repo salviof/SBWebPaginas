@@ -1,0 +1,79 @@
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+    xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:decorate  id="cores" template="#{layout.xhtmlJsfCaminhoRelativo}">
+        <ui:define name="input">
+            <p:selectOneMenu
+                styleClass="seletorResponsivo"
+                id="seletor"
+                disabled="desabilitarEdicao}"
+                required="obrigatorio}" value="#{cc.attrs.registro}"
+                converter="conversorGenerico"
+                var="it"
+                converterMessage="Erro ao converter objeto" >
+
+                <f:selectItem   itemLabel=" não Selecionado"  />
+                <f:selectItems value="#{lista}" var="item" itemLabel="#{item.nomeCurto}" itemValue="#{item}" />
+
+                <c:if  test="#{parametroIdOnChange==null}" >
+                    Parametro IDOnChange Nulo
+                </c:if>
+
+
+
+                <c:if  test="#{parametroMetodoOnChange==null}" >
+                    Parametro metodoOnchange Nulo
+                </c:if>
+
+
+                <c:choose>
+                    <c:when test="#{atualizaFormOnChange == true}">
+                        <p:ajax global="#{statusAjax}" event="valueChange" update="@form" />
+                    </c:when>
+                    <c:when test="#{atualizaPeloMetodoOnChange == true}">
+
+                        <p:ajax global="true"   event="valueChange"   listener="#{cc.attrs.parametroMetodoOnChange}">
+
+
+                        </p:ajax>
+                    </c:when>
+                    <c:when test="#{atualizaPorIdOnChange == true}">
+                        <f:attribute name="idAtualizacao" value="#{cc.attrs.parametroIdOnChange}" />
+                        <p:ajax global="true" event="valueChange" listener="#{pgUtil.eventAtualizaTelaPorID}" />
+                    </c:when>
+                    <c:otherwise>
+                    </c:otherwise>
+                </c:choose>
+
+                <c:choose>
+                    <c:when test="#{cc.attrs.mostraSomenteImagem == true}">
+                        <p:column>
+                            <p:graphicImage value="#{it.imgPequena}" width="40" height="50" />
+                        </p:column>
+                    </c:when>
+                    <c:when test="#{cc.attrs.mostraTextoImagem == true}">
+                        <p:column>
+                            <p:graphicImage value="#{it.imgPequena}" width="40" height="50" />
+                        </p:column>
+                        <p:column>
+                            #{it.nomeCurto}
+                        </p:column>
+                    </c:when>
+                    <c:otherwise>
+                        <p:column>
+                            #{it.nomeCurto}
+                        </p:column>
+                    </c:otherwise>
+                </c:choose>
+
+            </p:selectOneMenu>
+
+
+        </ui:define>
+    </ui:decorate>
+</ui:composition>

@@ -1,0 +1,25 @@
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <p:commandLink onmousedown="esconderTooltips();"
+                   action="#{prMetodo}"
+                   update="#{pgUtil.makeCaminhoCompletoID(idUpdate)}"
+                   oncomplete="#{javaScriptOncomplete}">
+        <div class="botaoCard Container3  w3-btn w3-border " >
+            <p:graphicImage
+                id="imagem"
+                styleClass="w3-circle w3-left  w3-margin-right"
+                url="#{infoWebApp.urlPagina}#{origem.imgPequena}"
+                style="width:50px;background: #fff;"
+                />
+            <span> {origem.nome} </span>
+            <f:setPropertyActionListener target="#{destino}"
+                                         value="#{origem}"  />
+            <p:ajax event="dialogReturn" listener="#{paginaAtual.infoPagina.metodoRespostaModal}"/>
+
+        </div>
+    </p:commandLink>
+</ui:composition>

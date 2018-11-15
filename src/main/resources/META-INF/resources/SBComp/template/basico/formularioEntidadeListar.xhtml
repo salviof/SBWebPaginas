@@ -1,0 +1,47 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:SBAcaoNav="http://xmlns.jcp.org/jsf/composite/SBComp/composite/acoesENavegacao"
+                xmlns:SBpaginaAtual="http://xmlns.jcp.org/jsf/composite/SBComp/composite/paginaAtualDeEntidade"
+                >
+
+    <div class="" style="position: relative">
+        <div class="CardTopic " style="margin-left: 10px;">
+            #{paginaAtual.infoPagina.comoFormularioWeb.acaoSelecionada.nomeAcao}
+            <i class="#{paginaAtual.infoPagina.comoFormularioWeb.acaoVinculada.iconeAcao} Fs30 Fleft MarRight10"></i>
+            <br/>
+            <div class="quebraBlocoComEspacoVertical10 somenteMobile"></div>
+
+            <span class="CardSubTopic">
+                #{paginaAtual.infoPagina.comoFormularioWeb.acaoSelecionada.descricao}sasd
+            </span>
+            <h:panelGroup styleClass="Fright" style="position: relative  " layout="block">
+                <h:form rendered="#{paginaAtual.infoPagina.comoPaginaEntidade.acaoNovoRegistro!=null}">
+                    <SBpaginaAtual:botaoAcaoPersonalizada  acao="#{paginaAtual.infoPagina.comoPaginaEntidade.acaoNovoRegistro}"
+
+                                                           />
+                </h:form>
+            </h:panelGroup>
+
+        </div>
+
+        <div class="quebraBlocoComEspacoVertical10"></div>
+
+
+        <div class="Container12" >
+            <ui:insert name="conteudo" />
+        </div>
+
+
+    </div>
+
+</ui:composition>
+
+
+
+
+
+
+
+
+

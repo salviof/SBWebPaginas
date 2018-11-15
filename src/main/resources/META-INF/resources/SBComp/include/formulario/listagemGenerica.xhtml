@@ -1,0 +1,39 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:SBListagem="http://xmlns.jcp.org/jsf/composite/SBComp/composite/listagens"
+                xmlns:cc="http://xmlns.jcp.org/jsf/composite">
+
+
+
+    <SBListagem:listaComOpcoesMobile
+        grupoCampos="#{paginaAtual.infoPagina.acaoVinculada.acaoFormularioListarPadrao.gruposDeCampos[0]}"
+        mensagemSemRegistro="Nenhum #{paginaAtual.infoPagina.acaoVinculada.acaoFormularioListarPadrao.nomeDominio} foi encontrado"
+        armazenamentoAcaoSelecionada="#{paginaAtual.infoPagina.acaoSelecionada}"
+        itemSelecionado="#{paginaAtual.infoPagina.comoPaginaEntidade.entidadeSelecionada}"
+        itens="#{paginaAtual.infoPagina.comoPaginaEntidade.entidadesListadas}"
+        metodo="#{paginaAtual.infoPagina.comoPaginaEntidade.executarAcao(item)}"
+        opcoes="#{paginaAtual.infoPagina.comoPaginaEntidade.acoesRegistros}"
+        rendered="#{paginaAtual.sessao.telaUsuario.umMobile}"
+        titulo="Listagem de  #{paginaAtual.infoPagina.acaoVinculada.acaoFormularioListarPadrao.comoFormularioEntidade.nomeTipoObjetoClasseRelacionadaPlural}"
+        />
+
+
+
+    <SBListagem:listaComOpcoesDesktop
+        grupoCampos="#{paginaAtual.infoPagina.acaoVinculada.acaoFormularioListarPadrao.gruposDeCampos[0]}"
+        mensagemSemRegistro="Nenhum #{paginaAtual.infoPagina.acaoVinculada.acaoFormularioListarPadrao.nomeDominio} foi encontrado"
+        armazenamentoAcaoSelecionada="#{paginaAtual.infoPagina.acaoSelecionada}"
+        itemSelecionado="#{paginaAtual.infoPagina.comoPaginaEntidade.entidadeSelecionada}"
+        itens="#{paginaAtual.infoPagina.comoPaginaEntidade.entidadesListadas}"
+        metodo="#{paginaAtual.infoPagina.comoPaginaEntidade.executarAcao(item)}"
+        opcoes="#{paginaAtual.infoPagina.comoPaginaEntidade.acoesRegistros}"
+        rendered="#{!paginaAtual.sessao.telaUsuario.umMobile}"
+        titulo="Listagem de  #{paginaAtual.infoPagina.acaoVinculada.acaoFormularioListarPadrao.comoFormularioEntidade.nomeTipoObjetoClasseRelacionadaPlural}"
+        />
+
+
+
+
+
+
+</ui:composition>

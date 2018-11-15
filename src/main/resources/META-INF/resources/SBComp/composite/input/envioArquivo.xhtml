@@ -1,0 +1,26 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:cc="http://java.sun.com/jsf/composite"
+
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <!-- INTERFACE -->
+    <cc:interface>
+        <cc:attribute name="item" type="com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.reflexao.ItfBeanDeclarado" />
+
+
+
+    </cc:interface>
+    <!-- IMPLEMENTATION -->
+    <cc:implementation>
+
+
+        <c:set var="item" value="#{cc.attrs.item.valor}" />
+        <c:set var="beanItem" value="#{cc.attrs.item}" />
+
+        <ui:include  src="#{cc.attrs.item.visualizacaoItem}" />
+
+
+
+    </cc:implementation>
+
+</ui:composition>

@@ -1,0 +1,53 @@
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:decorate template="#{layoutCampo.xhtmlJsfCaminhoRelativo}">
+        <ui:define name="input">
+            <p:password  value="#{registro.valor}"
+
+                         class=" campoResponsivo  TexAlCenter #{componente.classeCSS}"
+                         autocomplete="false"
+                         redisplay="#{!paginaAtual.umaPaginaEdicaoOuNovoRegistro}"
+
+                         feedback="true"
+                         disabled="#{desabilitarEdicao}"
+                         validatorMessage="O valor informado no campo #{label} não é valido! A senha precisa conter 6 caractéres"
+                         promptLabel="Digite uma senha segura"
+
+                         weakLabel="Você pode melhorar esta senha"
+                         goodLabel="Esta senha é uma boa senha,nós podemos aceita-la, porém você pode melhora-la adcionando numeros, caracteres especiais e letras"
+                         strongLabel="Parabéns, esta senha é muito difícil de ser quebrada"
+                         required="#{obrigatorio}"
+                         requiredMessage="O campo #{label} não foi informado! "
+                         >
+                <f:passThroughAttribute name="autocomplete" value="off" />
+
+                <p:clientValidator/>
+
+                <c:if test="#{possuiMetodoOnChange}">
+                    <p:ajax rendered="#{possuiMetodoOnChange}"
+                            global="true"
+                            event="valueChange"
+                            listener="#{prMetodo}"/>
+                </c:if>
+
+                <c:if test="#{possuiIDOnChange}" >
+                    <p:ajax
+                        rendered="#{possuiIDOnChange}"
+                        global="true"
+                        event="valueChange"
+                        listener="#{pgUtil.atualizaTelaPorID(idAtualizarOnChange)}" />
+                </c:if>
+
+                <f:validateLength minimum="6" />
+
+            </p:password>
+
+        </ui:define>
+    </ui:decorate>
+</ui:composition>

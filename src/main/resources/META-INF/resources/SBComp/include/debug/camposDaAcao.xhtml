@@ -1,0 +1,24 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:SBForm="http://xmlns.jcp.org/jsf/composite/SBComp/composite/formulario"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+
+
+
+
+    <ui:define name="conteudo">
+
+
+
+        <ui:repeat  value="#{pgTestesCampo.acaoFormularioSelecionada.gruposDeCampos}" var="grupo" >
+            <p:fieldset style="margin: 2%" legend="#{grupo.nomeGrupo}">
+                <SBForm:camposDoGrupo registro="#{pgTestesCampo.entidadeCarregada}"
+                                      grupoCampos="#{grupo}" />
+            </p:fieldset>
+        </ui:repeat>
+
+    </ui:define>
+
+
+</ui:composition>

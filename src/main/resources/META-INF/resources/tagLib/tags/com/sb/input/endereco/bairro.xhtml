@@ -1,0 +1,39 @@
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui">
+    <ui:decorate template="#{layout.xhtmlJsfCaminhoRelativo}">
+        <ui:define name="input">
+
+
+            <p:outputLabel value="Selecione uma Cidade, para Selecionar um Bairro" rendered="#{!registro.comoCampoLocalizacao.podeColetarBairro}"/>
+
+            <p:autoComplete converter="conversorGenerico"
+                            completeMethod="#{registro.comoCampoLocalizacao.metodoAutoCompleteBairro}"
+                            var="bairro"
+                            value="#{registro.comoCampoLocalizacao.bairro}"
+                            forceSelection="true"
+                            itemValue="#{bairro}"
+                            itemLabel="#{bairro.nome}"
+                            placeholder="Localize um Bairro"
+                            disabled="#{desabilitarEdicao or registro.comoCampoLocalizacao.bairroSomenteLeitura}"
+                            rendered="#{registro.comoCampoLocalizacao.podeColetarBairro}"
+                            styleClass="campoResponsivo"
+                            minQueryLength="3"
+                            dynamic="true"
+                            queryDelay="800"
+                            >
+                <p:ajax
+                    event="itemSelect"
+                    process="@this"
+                    update="#{pgUtil.getNomeIdPainelDoComponente(component)}"
+
+                    />
+            </p:autoComplete>
+
+
+
+        </ui:define>
+    </ui:decorate>
+</ui:composition>
+

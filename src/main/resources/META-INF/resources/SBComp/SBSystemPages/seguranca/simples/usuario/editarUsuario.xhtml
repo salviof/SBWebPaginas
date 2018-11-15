@@ -1,0 +1,102 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:SBInput="http://xmlns.jcp.org/jsf/composite/SBComp/composite/input"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+
+
+
+
+
+    <ui:composition template="/resources/SBComp/template/basico/conteudo.xhtml"  >
+        <ui:define name="parametros">
+            <ui:param name="iconeConteudo" value="fa fa-user" />
+        </ui:define>
+
+        <ui:define name="titulo">
+            #{pgCadastroUsuarios.usuarioSelecionado.nome}
+            <c:if test="#{pgCadastroUsuarios.novoRegistro}">
+                CADASTRO DE NOVO USUÁRIO
+            </c:if>
+        </ui:define>
+        <ui:define name="subtitulo"> Edição de Usuário
+        </ui:define>
+        <ui:define name="conteudoDireita">
+            <h:form >
+                <p:commandButton value="#{pgCadastroUsuarios.acaoListarRegistros.nomeAcao}" action="#{pgCadastroUsuarios.executarAcao(pgCadastroUsuarios.usuarioSelecionado)}" >
+                    <f:setPropertyActionListener target="#{pgCadastroUsuarios.acaoSelecionada}" value="#{pgCadastroUsuarios.acaoListarRegistros}" />
+                </p:commandButton>
+            </h:form>
+
+        </ui:define>
+        <ui:define name="conteudoCard">
+
+            <h:form >
+                <div class="Container12 TexAlCenter">
+
+
+                    <p:panelGrid columns="2"  style="border:0px !important; background:none;" styleClass="FormContent">
+
+
+
+
+                        <SBInput:input  registro="#{pgCadastroUsuarios.usuarioSelecionado.getCampoByNomeOuAnotacao(tipos.tipoCampo.NOME_CURTO)}"  layout="#{layoutsComponenteSB.layoutCampo.esquerda}"  desabilitarEdicao="#{!pgCadastroUsuarios.podeEditar}"  />
+                        <SBInput:input  registro="#{pgCadastroUsuarios.usuarioSelecionado.getCampoByNomeOuAnotacao(tipos.tipoCampo.EMAIL)}"   layout="#{layoutsComponenteSB.layoutCampo.esquerda}"   desabilitarEdicao="#{!pgCadastroUsuarios.podeEditar}"   />
+                        <SBInput:input  registro="#{pgCadastroUsuarios.usuarioSelecionado.getCampoByNomeOuAnotacao(tipos.tipoCampo.senha)}"  layout="#{layoutsComponenteSB.layoutCampo.esquerda}"  desabilitarEdicao="#{!pgCadastroUsuarios.podeEditar}"  />
+                        <SBInput:input  registro="#{pgCadastroUsuarios.usuarioSelecionado.getCampoByNomeOuAnotacao('grupo')}"   layout="#{layoutsComponenteSB.layoutCampo.esquerda}"   desabilitarEdicao="#{!pgCadastroUsuarios.podeEditar}"  />
+
+
+
+
+
+
+
+
+                    </p:panelGrid>
+
+
+
+
+
+                </div>
+                <div class="SeparatorFull somenteDesktop">                         </div>
+                <c:if test="#{pgCadastroUsuarios.podeEditar}">
+                    <div class="Container12 TexAlCenter">
+                        <p:commandButton  value="#{pgCadastroUsuarios.acaoSalvarAlteracoes.nomeAcao}" action="#{pgCadastroUsuarios.salvarAlteracoes()}" update="@form" >
+                            <f:setPropertyActionListener target="#{pgCadastroUsuarios.acaoSelecionada}" value="#{pgCadastroUsuarios.acaoNovoRegistro}"  />
+                        </p:commandButton>
+                    </div>
+                </c:if>
+
+            </h:form>
+
+
+        </ui:define>
+    </ui:composition>
+
+
+
+
+
+
+
+
+
+</html>
+
+
+
+
+
+
+
+
+
+

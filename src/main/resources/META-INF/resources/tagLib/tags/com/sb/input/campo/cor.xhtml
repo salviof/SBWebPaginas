@@ -1,0 +1,40 @@
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+    xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <ui:decorate  id="cores" template="#{layout.xhtmlJsfCaminhoRelativo}">
+        <ui:define name="input">
+            <h:panelGroup rendered="#{desabilitarEdicao}">
+                <div class="center" style="background: ##{valor}; width: 100%; height:30px;">
+                </div>
+            </h:panelGroup>
+            <p:colorPicker
+
+                class=" campoResponsivo  TexAlCenter #{componente.classeCSS}"
+                rendered="#{!desabilitarEdicao}"
+                required="#{obrigatorio}"
+                value="#{valor}"
+
+                validatorMessage="O valor informado no campo #{label} não é valido! "
+                requiredMessage="O campo #{label} não foi informado! "
+
+                >
+
+
+                <c:if test="#{possuiMetodoOnChange}">
+                    <!--  [#possuiMetodoOnChange para cor em desenvolvimento] -->
+                </c:if>
+
+                <c:if test="#{possuiIDOnChange}" >
+                    <!--
+                    [#possuiIdOnChange para cor em desenvolvimento] -->
+                </c:if>
+
+            </p:colorPicker>
+
+        </ui:define>
+    </ui:decorate>
+</ui:composition>

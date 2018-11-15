@@ -1,0 +1,22 @@
+<ui:composition
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <p:commandLink
+        onmousedown="esconderTooltips();"
+        styleClass="Responsive btnIconeGrande Fs60"
+        style="text-align: center; "
+        action="#{paginaAtual.infoPagina.executarAcaoSelecionada()}"
+        update="#{pgUtil.makeCaminhoCompletoID(idUpdate)}"
+        oncomplete="#{javaScriptOncomplete}"
+        ajax="true"
+        >
+        <f:setPropertyActionListener target="#{paginaAtual.infoPagina.acaoSelecionada}"
+                                     value="#{acao}"  />
+        <i class="#{acao.iconeAcao} "    ></i>
+    </p:commandLink>
+</ui:composition>
+
+

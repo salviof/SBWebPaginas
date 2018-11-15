@@ -1,0 +1,96 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:cc="http://java.sun.com/jsf/composite"
+                xmlns:sb="http://superbitsframework/ui"
+                xmlns:SBAcaoNav="http://xmlns.jcp.org/jsf/composite/SBComp/composite/acoesENavegacao"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <!-- INTERFACE -->
+    <cc:interface>
+
+        <cc:attribute name="campoInstanciado"
+                      required="true"
+                      type="com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campoInstanciado.ItfCampoInstanciado"
+                      default="#{pgUtil.campoNaoImplementado}"
+                      shortDescription="Exibe um atributo de um Objeto para insersão de dados do usuário (Ou Visualização)"
+                      />
+        <cc:attribute name="opcoes" required="true"  />
+        <cc:attribute name="campos"  />
+        <cc:attribute name="titulo"  default="Pesquisa de  #{cc.attrs.campoInstanciado.label}"/>
+        <cc:attribute
+
+            name="metodo"
+
+            />
+
+
+
+    </cc:interface>
+    <!-- IMPLEMENTATION -->
+    <cc:implementation>
+
+        <h:panelGroup>
+            <p:dataTable sortMode="multiple"
+                         value="#{cc.attrs.campoInstanciado.comoCampoSeltorItem.seletor.origem}"
+                         var="item"
+                         emptyMessage="Nenhum #{cc.attrs.campoInstanciado.nomeDoObjeto} Encontrado"
+                         paginator="true"
+                         rows="10"
+                         >
+
+                <f:facet name="header">
+                    <p:inputText  placeholder="#{cc.attrs.titulo}"/>
+
+                </f:facet>
+
+                <p:columns var="coluna" value="#{cc.attrs.campos}"
+                           sortBy="#{item[coluna.caminhoSemNomeClasse]}"
+                           filterBy="#{item[coluna.caminhoSemNomeClasse]}"
+                           filterMatchMode="contains"
+
+                           >
+
+                    <f:facet name="header">
+                        <h:outputText value= "#{coluna.label}"/>
+                    </f:facet>
+
+                    <sb:inputSB
+                        registro="#{item.getCampoByNomeOuAnotacao(coluna.caminhoSemNomeClasse)}"
+                        desabilitarEdicao="true"
+                        layoutCampo="#{layoutsComponenteSB.layoutCampo.semLabel}"
+                        possuiIDOnChange="false"
+                        possuiMetodoOnChange="false"
+                        atualizarFormOnChange="false"
+                        atualizarGrupoOnChange="false"
+                        obrigatorio="false"
+                        label="#{item.getCampoByNomeOuAnotacao(coluna.caminhoSemNomeClasse).label}"
+
+                        />
+
+                </p:columns>
+
+                <p:column headerText="Ações" width="180">
+
+                    <sb:parametroMetodo nome="metodo" valor="#{cc.attrs.metodo}" />
+
+                    <h:panelGroup id="seletorPesquisa" >
+
+                        <SBAcaoNav:seletorDeAcoes
+
+                            metodo="#{metodo}"
+                            opcaoSelecionada="#{paginaAtual.infoPagina.acaoSelecionada}"
+                            opcoes="#{cc.attrs.opcoes}"
+                            />
+
+                    </h:panelGroup>
+
+                </p:column>
+
+            </p:dataTable>
+
+        </h:panelGroup>
+
+    </cc:implementation>
+
+</ui:composition>

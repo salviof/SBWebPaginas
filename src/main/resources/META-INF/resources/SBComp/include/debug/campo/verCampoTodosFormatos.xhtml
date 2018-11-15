@@ -1,0 +1,61 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:cc="http://java.sun.com/jsf/composite"
+                xmlns:sb="http://superbitsframework/ui" 
+
+
+                xmlns:SBForm="http://xmlns.jcp.org/jsf/composite/SBComp/composite/formulario"
+                xmlns:SBInput="http://xmlns.jcp.org/jsf/composite/SBComp/composite/input"
+                xmlns:SBAcaoNav="http://xmlns.jcp.org/jsf/composite/SBComp/composite/acoesENavegacao"
+                xmlns:SBListagem="http://xmlns.jcp.org/jsf/composite/SBComp/composite/listagens"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <p:panelGrid columns="3" >
+
+        <p:panel header="Marca daqua"  >
+
+            <h:form>
+
+                <SBInput:input registro="#{pgEditarComponente.beanExemplo.getCampoByNomeOuAnotacao(pgTestesCampo.campoSelecionado.caminhoSemNomeClasse)}"
+                               layout="#{layoutsComponenteSB.layoutCampo.resumido}"
+                               />
+                <p:commandButton update="@form" value="Validar"/>
+            </h:form>
+
+        </p:panel>
+
+        <p:panel header="Esquerda" >
+
+            <h:form>
+
+                <SBInput:input registro="#{pgEditarComponente.beanExemplo.getCampoByNomeOuAnotacao(pgTestesCampo.campoSelecionado.caminhoSemNomeClasse)}"
+
+                               layout="#{layoutsComponenteSB.layoutCampo.esquerda}"
+                               />
+                <p:commandButton update="@form" value="Validar"/>
+
+            </h:form>
+
+        </p:panel>
+
+        <p:panel header="superior"  >
+
+            <h:form>
+
+                <SBInput:input  id="superior"
+                                registro="#{pgEditarComponente.beanExemplo.getCampoByNomeOuAnotacao(pgTestesCampo.campoSelecionado.caminhoSemNomeClasse)}"
+                                layout="#{layoutsComponenteSB.layoutCampo.superior}"
+                                />
+                <p:commandButton update="@form" value="Validar"/>
+
+            </h:form>
+
+        </p:panel>
+
+    </p:panelGrid>
+
+</ui:composition>
+
+</html>

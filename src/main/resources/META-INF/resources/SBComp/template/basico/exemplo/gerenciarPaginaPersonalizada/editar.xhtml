@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+
+    <ui:composition template="/resources/SBComp/template/basico/conteudo.xhtml"  >
+
+        <ui:define name="parametros">
+
+            <!-- AREA PARA DEFINIÇÃO DE PARAMETROS NO CASO O ICONE -->
+
+            <ui:param name="iconeConteudo" value="fa fa-user" />
+
+        </ui:define>
+
+        <ui:define name="titulo">
+
+            COLOQUE O TITULO AQUI PARA O CASO DE NÃO SER UM NOVO REGISTRO
+
+            <c:if test="true"> DICA: VOCÊ PODE COLOCAR UM TITULO ALTERNATIVO CASO SEJA UM NOVO REGISTRO
+
+                COLOQUE O TITULO AQUI PARA O CASO DE SER UM NOVO REGISTRO
+
+            </c:if>
+
+        </ui:define>
+
+        <ui:define name="subtitulo">
+
+            COLOQUE O SUBTITULO AQUI
+
+        </ui:define>
+
+        <ui:define name="conteudoDireita">
+
+            AREA DE CONTEUDO NA DIREITA SUPERIOR DA TELA, UTILIZADA PARA BOTÕES DE ESCAPE OU NOVO REGISTRO
+
+        </ui:define>
+
+        <ui:define name="conteudoCard">
+
+            AREA DO CONTEUDO PRINCIPAL DA PAGINA
+
+        </ui:define>
+
+    </ui:composition>
+
+</html>
+
+
+
+
+
+
+
+
+
+

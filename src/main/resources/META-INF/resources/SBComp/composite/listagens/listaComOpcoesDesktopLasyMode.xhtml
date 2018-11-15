@@ -1,0 +1,157 @@
+<ui:composition
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:cc="http://java.sun.com/jsf/composite"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:sb="http://superbitsframework/ui"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:SBAcaoNav="http://xmlns.jcp.org/jsf/composite/SBComp/composite/acoesENavegacao"
+
+    xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <!-- INTERFACE -->
+    <cc:interface
+        shortDescription="Exibe uma lista de registro com opções de seleção a partir de uma acao de listagem"
+        >
+
+        <cc:attribute
+            type="com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfBeanSimples"
+            name="itemSelecionado"
+            required="true"
+            />
+
+        <cc:attribute name="grupoCampos"
+                      type="com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campo.ItfGrupoCampos"
+                      required="true"
+                      shortDescription="Grupo de Campos a serem exibitos"
+                      />
+
+        <cc:attribute
+            type="com.super_bits.modulosSB.webPaginas.JSFBeans.PrimeFacesBeanModel.dataListLasy.BP_DataModelLasy"
+            name="itens"
+            required="true"
+            />
+
+        <cc:attribute
+            method-signature="void listener()"
+            name="metodo"
+            required="true"    />
+        <cc:attribute name="armazenamentoAcaoSelecionada"
+                      required="true"
+                      type="com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ItfAcaoDoSistema"
+                      shortDescription="Bean onde a ação selecionada será armazenada"
+                      />
+
+        <cc:attribute name="opcoes"
+                      required="true"  />
+
+        <cc:attribute name="mensagemSemRegistro"/>
+
+        <cc:attribute name="titulo"
+                      required="true"
+                      shortDescription="Título da Listagem"
+                      />
+
+
+
+    </cc:interface>
+    <!-- IMPLEMENTATION -->
+    <cc:implementation>
+
+        <c:set var="layoutListagem" value="#{pgUtilLayout.gerarLayout(cc.attrs.grupoCampos, cc.attrs.opcoes)}" />
+
+
+        <h:panelGroup>
+            <h:form>
+                <p:dataTable sortMode="multiple"
+                             value="#{cc.attrs.itens}"
+                             var="item"
+                             paginatorPosition="bottom"
+                             emptyMessage="#{cc.attrs.mensagemSemRegistro}"
+                             paginator="true"
+                             rows="10"
+                             widgetVar="#{pgUtil.gerarNomeSlug(cc.attrs.titulo)}"
+                             resizeMode="fit"
+                             lazy="true"
+                             >
+
+                    <f:facet name="header" >
+
+                        <div  class="container-fluid">
+                            <div class="row" >
+                                <div class="col-md-4 col-md-offset-4 " style="margin-top: 10px;margin-right: 0px " >
+                                    #{cc.attrs.titulo}
+                                </div>
+                                <div class="col-md-4 " style="margin-top: 5px; margin-bottom: 5px; " >
+
+
+                                    <p:inputText
+                                        onfocus="pesquisaDataSetComDelay(this.id, '#{pgUtil.gerarNomeSlug(cc.attrs.titulo)}')"
+                                        id="globalFilter"
+
+                                        style="width:100%; height: 35px;"
+                                        placeholder="Pesquise aqui:"/>
+
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </f:facet>
+
+
+                    <p:columns var="coluna" value="#{cc.attrs.grupoCampos.campos}"
+                               sortBy="#{item[coluna.primeiroCaminhoSemNomeClasse]}"
+                               filterBy="#{item[coluna.primeiroCaminhoSemNomeClasse]}"
+                               filterMatchMode="contains"
+                               filterStyleClass="listaComOcoesOcultaFitro"
+                               width="#{layoutListagem.getColunaByNomeCompleto(coluna.caminhoCompletoComGrupoCampo).porcentagemCalculada}%"
+
+                               >
+
+
+                        <f:facet name="header">
+
+                            <h:outputText value= "#{coluna.labelAlternativo}"/>
+                        </f:facet>
+                        <center>
+                            <sb:inputSB
+                                registro="#{item.getCampoByNomeOuAnotacao(coluna.caminhoSemNomeClasse)}"
+                                desabilitarEdicao="true"
+                                layoutCampo="#{layoutsComponenteSB.layoutCampo.semLabel}"
+                                possuiIDOnChange="false"
+                                possuiMetodoOnChange="false"
+                                label="#{coluna.labelAlternativo}"
+                                atualizarFormOnChange="false"
+                                atualizarGrupoOnChange="false"
+                                obrigatorio="false"
+                                />
+                        </center>
+                    </p:columns>
+
+
+                    <p:column headerText="Ações  "
+                              width="#{layoutListagem.pixelPorNumeroDeAcoes}">
+
+                        <center>
+
+                            <SBAcaoNav:seletorDeAcoes
+                                metodo="#{cc.attrs.metodo}"
+                                opcoes="#{cc.attrs.opcoes}"
+                                visualizacaoBotao="#{layoutsComponenteSB.layoutBotoes.icone}"
+                                opcaoSelecionada="#{cc.attrs.armazenamentoAcaoSelecionada}"
+                                />
+
+
+                        </center>
+
+                    </p:column>
+
+
+
+                </p:dataTable>
+            </h:form>
+
+        </h:panelGroup>
+
+    </cc:implementation>
+</ui:composition>

@@ -1,0 +1,78 @@
+/* NESTE ARQUIVO FICAM OS ESTILOS PARA CAMPOS DE IMPUT */
+@charset "utf-8";
+/* CSS Document */
+.tabelaCampoFormulario{
+    width:   100%!important;
+}
+.colunaLabelEsquerda{
+    width: 120px;
+}
+.colunaResponsiva{
+    width: auto;
+
+}
+
+.campoMascara{
+
+    font-size:31px;
+}
+.campoSimples{
+
+    font-size:31px;
+}
+.campoGrande{}
+.campoMultiplasLinhas{}
+.camoMinimoEMaximo{}
+.campoSenha{}
+.campoCEP{}
+.campoCor{}
+.campoHTML{}
+.campoQuantidade{}
+.campoMoeda{}
+.campoEmail{}
+.campoData{}
+.campoDataHora{}
+.campoLigadoDesligado{}
+.campoEntidadeSimples{}
+
+
+/* CSS OLD APENAS PARA COMPATIBILIDADE MOMENTANEA, SERÁ EXCLUIDO  */
+.colunaLabel{
+    width: 120px;
+}
+.colunaResponsiva{
+    width: auto;
+
+}
+.colunaCampoFixo{
+
+}
+.campoResponsivo{
+    width:   98%!important;
+
+}
+
+.seletorResponsivo{
+    width:   80%!important;
+}
+
+.tabelaFormulario{
+    width:   100%!important;
+}
+
+.Container20.Responsive
+{
+    padding: 2%;
+}
+
+
+.Container30.Responsive
+{
+    padding: 1%;
+}
+
+
+.invisivel{
+
+    display: none;
+}

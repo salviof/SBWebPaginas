@@ -1,0 +1,27 @@
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    >
+    <ui:param name="iconeConteudo" value="#{paginaAtual.infoPagina.comoFormularioWeb.acaoVinculada.iconeAcao}" />
+    <ui:insert name="parametros" />
+    <h:panelGroup layout="block" >
+        <div class="CardTopic">
+            <ui:insert name="titulo"/>
+            <i class="#{iconeConteudo} Fs30 Fleft MarRight10"></i>
+            <br/>
+            <div class="quebraBlocoComEspacoVertical10 somenteMobile"></div>
+            <span class="CardSubTopic">
+                <ui:insert name="subtitulo" />
+            </span>
+            <h:panelGroup styleClass="Fright Container8" layout="block">
+                <ui:insert name="conteudoDireita" />
+            </h:panelGroup>
+        </div>
+        <div class="quebraBlocoComEspacoVertical10"></div>
+
+        <ui:insert name="conteudoCard" />
+        <ui:insert name="conteudo" />
+    </h:panelGroup>
+
+</ui:composition>

@@ -1,0 +1,70 @@
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+                 xmlns:h="http://xmlns.jcp.org/jsf/html"
+                 xmlns:p="http://primefaces.org/ui"
+                 xmlns:SBForm="http://xmlns.jcp.org/jsf/composite/SBComp/composite/formulario"
+                 xmlns:SBAcaoNav="http://xmlns.jcp.org/jsf/composite/SBComp/composite/acoesENavegacao"
+                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                 >
+
+
+
+    <ui:composition template="/resources/SBComp/template/basico/modeloGeral.xhtml">
+
+
+        <ui:define name="head"  >
+
+
+        </ui:define>
+        <ui:define name="divConteudo">
+            <h:form>
+                #{pgTestesCampo.modoInspecionarCampo}
+                #{pgTestesCampo.acaoSelecionada}
+                0000
+
+
+                <SBAcaoNav:botaoDeAcao_Pagina acao="#{pgTestesCampo.acaoEditarVisualizacaoItem}"
+                                              tipoVisualizacao="#{layoutsComponenteSB.layoutBotoes.iconeENome}"
+                                              update="#{pgTestesCampo.idAreaExbicaoAcaoSelecionada}"
+                                              />
+            </h:form>
+
+            <h:panelGroup class="Container12">
+                <p:fieldset  legend="Dados da Entidade" class="Container2 Responsive">
+                    <h:form >
+
+
+                        <p:panelGrid columns="2">
+                            <p:panelGrid columns="1" >
+                                <p:inputText value="#{pgTestesCampo.strNomeDaEntidade}"/>
+                                <p:inputNumber value="#{pgTestesCampo.idDaEntidade}" />
+
+                            </p:panelGrid>
+                            <p:commandButton icon="fa fa-refresh" action="#{pgTestesCampo.carregaEntidade()}"
+                                             update="#{pgUtil.makeCaminhoCompletoID('subMenu')} @form"/>
+                            <p:outputLabel value="Nome do tipo de  Entidade"/><p:outputLabel value="#{pgTestesCampo.entidadeCarregada.nomeDoObjeto}"/>
+                            <p:outputLabel value="Nome:"/><p:outputLabel value="#{pgTestesCampo.entidadeCarregada.nome}"/>
+                            <p:outputLabel value="id:"/><p:outputLabel value="#{pgTestesCampo.entidadeCarregada.id}"/>
+                            <p:outputLabel value="Exibindo o Campo"/><p:outputLabel value="#{pgTestesCampo.strNomeCampo}"/>
+                        </p:panelGrid>
+
+                    </h:form>
+
+                </p:fieldset>
+            </h:panelGroup>
+
+
+            <h:panelGroup id="subMenu" >
+
+            </h:panelGroup>
+
+            <h:panelGroup id="#{pgTestesCampo.idAreaExbicaoAcaoSelecionada}" >
+                <p:lifecycle />
+                <ui:include src="#{pgTestesCampo.xhtmlAcaoAtual}"/>
+
+            </h:panelGroup>
+
+
+        </ui:define>
+
+    </ui:composition>
+

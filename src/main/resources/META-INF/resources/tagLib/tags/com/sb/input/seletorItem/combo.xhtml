@@ -1,0 +1,85 @@
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+    xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:decorate   template="#{layout.xhtmlJsfCaminhoRelativo}">
+
+
+        <ui:define name="input">
+
+            <h:panelGrid styleClass="colunaResponsiva" rendered="#{!desabilitarEdicao}" >
+                <p:selectOneMenu rendered="#{!desabilitarEdicao}"
+
+                                 disabled="#{desabilitarEdicao}"
+                                 required="#{obrigatorio}"
+                                 value="#{valor}"
+                                 immediate="true"
+                                 validatorMessage="O valor informado no campo #{label} não é valido!"
+                                 requiredMessage="O campo #{label} não foi informado!"
+                                 autoWidth="true"
+                                 styleClass="autoCompleteResponsivo #{componente.classeCSS}"
+                                 converter="conversorGenerico"
+                                 var="it"
+
+                                 placeholder="TESTE"
+                                 converterMessage="Erro ao converter objeto" >
+
+                    <f:selectItem
+                        itemLabel="Nenhum Registro selecionado" noSelectionOption="true" value="#{null}" />
+
+                    <f:selectItems
+                        value="#{lista}"
+                        var="item"
+
+                        itemLabel="#{item.nome}"
+                        itemValue="#{item}" />
+                    <c:if test="#{possuiMetodoOnChange}">
+                        <p:ajax rendered="#{possuiMetodoOnChange}"
+                                global="true"
+                                event="itemSelect"
+                                listener="#{prMetodo}"/>
+                    </c:if>
+
+                    <c:if test="#{atualizarFormOnChange}" >
+                        <p:ajax
+                            rendered="#{atualizarFormOnChange}"
+                            event="itemSelect"
+                            update="@form"/>
+                    </c:if>
+
+                    <c:if test="#{atualizarGrupoOnChange}" >
+                        <p:ajax
+                            rendered="#{atualizarGrupoOnChange}"
+                            event="itemSelect"
+                            update="#{pgUtil.getNomeIdPainelDoComponente(component)}"/>
+                    </c:if>
+
+                    <c:if test="#{possuiIDOnChange}" >
+                        <p:ajax
+                            rendered="#{possuiIDOnChange}"
+                            global="true"
+                            event="itemSelect"
+                            update="#{pgUtil.gerarCaminhoCompletoID(idAtualizarOnChange)}"
+                            process="@this" />
+                    </c:if>
+                    <p:column>
+                        #{it.nome}
+                    </p:column>
+
+                </p:selectOneMenu>
+
+
+
+
+            </h:panelGrid>
+
+            <p:outputLabel value="#{valor.nome}" rendered="#{desabilitarEdicao}"  />
+
+
+        </ui:define>
+    </ui:decorate>
+</ui:composition>

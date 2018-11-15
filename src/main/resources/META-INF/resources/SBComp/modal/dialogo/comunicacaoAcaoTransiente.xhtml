@@ -1,0 +1,31 @@
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:SBAcaoNav="http://xmlns.jcp.org/jsf/composite/SBComp/composite/acoesENavegacao"
+
+    xmlns:p="http://primefaces.org/ui"
+    template="../modalModeloComunicacao.xhtml"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <ui:define name="titulo" >#{pgModalRespostaAcaoTransient.comunicacao.mensagem}  </ui:define>
+    <ui:define name="opcoes" >
+
+
+
+        <ui:repeat value="#{pgModalRespostaAcaoTransient.comunicacao.repostasPossiveis}" var="resp" >
+            <div class="Container3" style="padding: 3px; ">
+
+                <SBAcaoNav:botaoRespostaModal
+                    resposta="#{resp}"
+                    armazenamentoAcaoExecutada="#{pgModalRespostaAcaoTransient.respostaSelecionada}"
+                    metodo="#{pgModalRespostaAcaoTransient.enviarRespostaEExecutarAcao()}"
+
+                    />
+
+            </div>
+
+
+
+        </ui:repeat>
+    </ui:define>
+</ui:composition>

@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+
+      xmlns:SBAcaoNav="http://xmlns.jcp.org/jsf/composite/SBComp/composite/acoesENavegacao"
+
+      >
+
+
+    <ui:composition template="/resources/SBComp/template/basico/modeloAnonimo.xhtml">
+
+
+
+        <ui:define name="divConteudo">
+
+
+            TIPOS  #{pgProjetoSBVisaoGeral.tiposVisualizacao}
+            <h:form >
+                <SBAcaoNav:seletorDeAcoes metodo="#{pgProjetoSBVisaoGeral.executarAcaoSelecionada()}"
+                                          opcaoSelecionada="#{pgProjetoSBVisaoGeral.acaoSelecionada}"
+                                          opcoes="#{pgProjetoSBVisaoGeral.tiposVisualizacao}"
+                                          visualizacaoBotao="#{layoutsComponenteSB.layoutBotoes.iconeENome}"
+                                          update="#{pgProjetoSBVisaoGeral.idAreaExbicaoAcaoSelecionada}"
+                                          />
+            </h:form>
+            <h:panelGroup id="#{pgProjetoSBVisaoGeral.idAreaExbicaoAcaoSelecionada}">
+                <ui:include src="#{pgProjetoSBVisaoGeral.xhtmlAcaoAtual}" />
+            </h:panelGroup>
+
+
+        </ui:define>
+
+    </ui:composition>
+</html>
+
+
+
+
+
+
+
+
+
+

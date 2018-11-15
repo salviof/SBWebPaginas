@@ -1,0 +1,19 @@
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:sb="http://superbitsframework/ui" >
+
+
+    <br/>
+    <ui:fragment >
+        <ui:param name="xhtmlINPUT" value="#{compSBCompVisualFormularioDeAcao.getComponentePadrao(layout).xhtmlJsfCaminhoRelativo}" />
+        <ui:param name="entidade" value="#{entidade}"/>
+        <ui:param name="grupos" value="#{acao.gruposDeCampos}"/>
+        <sb:camposDosGrupos
+            grupos="#{grupos}"
+
+            entidade="#{entidade}"
+            />
+    </ui:fragment>
+</ui:composition>
+

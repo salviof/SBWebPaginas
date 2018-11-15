@@ -1,0 +1,60 @@
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+    xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:decorate template="#{layout.xhtmlJsfCaminhoRelativo}">
+
+        <ui:define name="input">
+
+            <p:outputLabel value="#{valor}"
+                           rendered="#{desabilitarEdicao}"
+                           />
+            <p:inputNumber
+                rendered="#{!desabilitarEdicao}"
+                disabled="#{desabilitarEdicao}"
+                styleClass="campoResponsivo #{componente.classeCSS} TexAlCenter"
+                required="#{obrigatorio}"
+                value="#{valor}"
+                decimalPlaces="#{pgUtil.converterNuloEmZero(numCasaDecimal)}"
+                thousandSeparator="."
+                decimalSeparator=","
+                maxValue="#{valorMaximo}"
+                requiredMessage="O campo #{label} não foi informado! "
+                >
+                <f:passThroughAttribute name="caminhoCampo" value="#{registro.nomeCompostoIdentificador}" />
+                <f:passThroughAttribute name="dominio" value="#{registro.nomeClasseOrigemAtributo}" />
+                <f:passThroughAttribute name="campoInstanciado" value="#{registro}" />
+                <p:clientValidator/>
+                <f:validator  validatorId="org.super_bits.view.validadores.generico"
+                              for="@parent"
+                              />
+
+                <c:if test="#{possuiMetodoOnChange}">
+                    <p:ajax rendered="#{possuiMetodoOnChange}"
+                            global="true"
+                            process="@this"
+                            event="valueChange"
+                            listener="#{prMetodo}"/>
+                </c:if>
+
+                <c:if test="#{possuiIDOnChange}" >
+                    <p:ajax
+                        rendered="#{possuiIDOnChange}"
+                        global="true"
+                        event="valueChange"
+                        process="@this"
+                        update="#{pgUtil.gerarCaminhoCompletoID(idAtualizarOnChange)}"
+                        />
+                </c:if>
+
+            </p:inputNumber>
+
+
+
+        </ui:define>
+    </ui:decorate>
+</ui:composition>
+

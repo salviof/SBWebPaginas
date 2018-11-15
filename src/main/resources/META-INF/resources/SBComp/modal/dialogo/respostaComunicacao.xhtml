@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:SBAcaoNav="http://xmlns.jcp.org/jsf/composite/SBComp/composite/acoesENavegacao"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+
+    <h:head>
+        <title> #{pgModalREspostaComunicacao.comunicacao.assunto} </title>
+        <ui:include src="../folhasDeEstiloModal.xhtml" />
+    </h:head>
+
+    <h:body>
+        <h:form>
+            <h1>#{pgModalREspostaComunicacao.comunicacao.mensagem}</h1>
+            <div class=" OrganizadorContainer" style="width: 100%">
+                <ui:repeat value="#{pgModalREspostaComunicacao.comunicacao.repostasPossiveis}" var="resp" >
+                    <SBAcaoNav:botaoRespostaModal
+                        resposta="#{resp}"
+                        armazenamentoAcaoExecutada="#{pgModalREspostaComunicacao.respostaSelecionada}"
+                        metodo="#{pgModalREspostaComunicacao.enviarRespostaEExecutarAcao()}"
+                        />
+                </ui:repeat>
+            </div>
+
+        </h:form>
+
+
+
+
+    </h:body>
+
+</html>

@@ -1,0 +1,28 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:cc="http://java.sun.com/jsf/composite"
+
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <!-- INTERFACE -->
+    <cc:interface>
+
+        <cc:attribute name="item" type="com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfBeanSimplesSomenteLeitura"  />
+        <cc:attribute name="container" type="com.super_bits.modulosSB.SBCore.modulos.view.componenteObjeto.ItfContaineVisualizacaoObjeto"/>
+
+
+
+    </cc:interface>
+    <!-- IMPLEMENTATION -->
+    <cc:implementation>
+
+        <h:panelGroup styleClass="#{cc.attrs.container.classeContainer}" rendered="#{!cc.attrs.container.temVersaoMobile and !sessaoAtualSBWP.telaUsuario.umMobile}" >
+            <ui:include src="#{cc.attrs.container.caminhoRelativo}" />
+        </h:panelGroup>
+
+        <h:panelGroup styleClass="#{cc.attrs.container.classeContainer}" rendered="#{cc.attrs.container.temVersaoMobile and sessaoAtualSBWP.telaUsuario.umMobile}" >
+            <ui:include src="#{cc.attrs.container.caminhoRelativoMobile}" />
+        </h:panelGroup>
+
+    </cc:implementation>
+
+</ui:composition>

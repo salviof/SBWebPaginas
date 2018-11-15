@@ -1,0 +1,17 @@
+<ui:composition
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <p:link
+        href="#{infoWebApp.getAcaoComLink(acao).urlDeAcesso}"
+        onmousedown="esconderTooltips();"
+        styleClass="Responsive btnIconeGrande"
+        target="_parent"
+        >
+        <i class="#{label} Fs60"    ></i>
+    </p:link>
+</ui:composition>
+
+

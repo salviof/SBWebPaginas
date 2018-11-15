@@ -1,0 +1,28 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/*
+    Created on : 24/08/2017, 21:53:22
+    Author     : Salvio Furbino
+*/
+
+.Invisivel{
+    visibility: hidden;
+}
+.Avatar {
+    width:150px;
+    height:150px;
+    margin: 25px auto;
+    overflow: hidden;
+    border-radius:50%;
+    position: relative;
+}
+
+.Avatar img {
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%)
+}

@@ -1,0 +1,25 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:SBAcaoNav="http://xmlns.jcp.org/jsf/composite/SBComp/composite/acoesENavegacao"
+                xmlns:cc="http://xmlns.jcp.org/jsf/composite"
+                >
+    <cc:interface>
+        <cc:attribute name="acao" type="com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ItfAcaoDoSistema" shortDescription="Ação que será realizada"/>
+        <cc:attribute name="label"
+                      shortDescription="Label do botão"
+                      default="#{cc.attrs.acao.nomeAcao}"
+                      type="java.lang.String"
+                      />
+    </cc:interface>
+    <cc:implementation>
+        <SBAcaoNav:botaoDeAcao
+            label="#{cc.attrs.label}"
+            metodo="#{paginaAtual.infoPagina.comoPaginaEntidade.executarAcao(paginaAtual.infoPagina.comoPaginaEntidade.entidadeSelecionada)}"
+            acao="#{cc.attrs.acao}"
+            armazenamentoAcaoExecutada="#{paginaAtual.infoPagina.comoPaginaEntidade.acaoSelecionada}"
+            tipoVisualizacao="#{layoutsComponenteSB.layoutBotoes.iconeENome}"
+            update="#{paginaAtual.infoPagina.comoPaginaEntidade.idAreaExbicaoAcaoSelecionada}"
+            javaScriptOncomplete="acoesPosAjax();"
+            />
+    </cc:implementation>
+</ui:composition>

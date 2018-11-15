@@ -1,0 +1,32 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:SBComp="http://xmlns.jcp.org/jsf/composite/resources/SBComp"
+                xmlns:p="http://primefaces.org/ui">
+
+    <div style="position: absolute;top: 0;">
+
+
+        <!-- CODIGO QUE ENVIA INFORMACOES SOBRE A TELA DA SESSÃO DO USUÁRIO -->
+        <h:panelGroup rendered="#{!sessaoAtualSBWP.tipoViewDefinido}" style="visibility: hidden; " >
+            <h:form id="contactfrm"  >
+                <p:remoteCommand name="enviarInfoTela"  actionListener="#{sessaoAtualSBWP.defineInfoTela}"  />
+                <p:inputText  id="clientinfo" />
+            </h:form>
+
+            <script >
+                atualizarResolucaoDaTela();
+            </script>
+
+        </h:panelGroup>
+    </div>
+
+</ui:composition>
+
+
+
+
+
+
+
+

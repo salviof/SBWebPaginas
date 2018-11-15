@@ -1,0 +1,65 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:cc="http://java.sun.com/jsf/composite"
+                xmlns:sb="http://superbitsframework/ui" 
+
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+
+
+
+
+    <c:set var="idInputCampo" value="inputCampo#{cc.attrs.id}" />
+    <c:set value="#{pgUtil.makeCaminhoComponenteByClientID(component.clientId)}:#{idInputCampo}:cp#{cc.attrs.registro.tipoCampo.strTipoInputCampo}:componenteInputDado"
+           var="caminhoBase" />
+
+
+    <c:set var="caminho"  value="#{caminhoBase}"/>
+
+
+
+    <p:panel header="Informações do campo:">
+        <p:panelGrid columns="2">
+            <p:outputLabel value="Tipo Campo:"/>-- #{prCampo.tipoCampo}
+            <p:outputLabel value="Tipo Input:"/>-- #{prCampo.tipoCampo.tipo_input_prime}
+            <p:outputLabel value="Xhtml para input:"/>#{prCampo.tipoCampo.tipo_input_prime.componente.xhtmlJSF}
+
+
+            <p:outputLabel value="Caminho para input"/>-- #{caminho}
+            <p:outputLabel value="msk jqry"/>-- #{prCampo.mascaraJqueryMode}
+            <p:outputLabel value="Label"/>-- #{prCampo.label}
+            <p:outputLabel value="Validação regex:"/>-- #{prCampo.validacaoRegex}
+            <p:outputLabel value="é uma lista de opções? "/>-- #{prCampo.listaDeOpcoes}
+            <p:outputLabel value="é uma mascara? "/>-- #{prCampo.mascara}
+            <p:outputLabel value="é um numeral? "/>-- #{prCampo.numeral}
+            <p:outputLabel value="numero de casas decimais "/>-- #{prCampo.numeroDeCasasDecimais}
+            <p:outputLabel value="é do tipo moeda? "/>-- #{prCampo.moeda}
+            <p:outputLabel value="é obrigatorio? "/>-- #{prCampo.obrigatorio}
+            <p:outputLabel value="tem mascara? "/>-- #{prCampo.temMascara}
+            <p:outputLabel value="tem validação maximo? "/>-- #{prCampo.temValidacaoMaximo}
+            <p:outputLabel value="tem validação minimo? "/>-- #{prCampo.temValidacaoMinimo}
+            <p:outputLabel value="tem validação regex? "/>-- #{prCampo.temValidacaoRegex}
+            <p:outputLabel value="qual valor? "/>-- #{prCampo.valor}
+            <p:outputLabel value="Opções disponiveis"/>-- #{prCampo.listaDeOpcoes}
+            <p:outputLabel value="Camminho do For"/> <p:outputLabel value="#{caminho}" />
+
+
+        </p:panelGrid>
+
+    </p:panel>
+
+</ui:composition>
+
+</html>
+
+
+
+
+
+
+
+
+
+

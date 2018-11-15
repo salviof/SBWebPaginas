@@ -1,0 +1,85 @@
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+    xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:decorate template="#{layout.xhtmlJsfCaminhoRelativo}">
+        <ui:define name="input">
+
+
+
+            <c:set var="idcompInput" value="componenteInputDado"/>
+            <c:set var="exibicaoPadrao" value="#{false}" />
+
+
+            <p:inputMask     class=" campoResponsivo  TexAlCenter #{componente.classeCSS}"
+                             validator="validadorCEP"
+                             required="#{obrigatorio}"
+                             value="#{registro.comoCampoLocalizacao.cep}"
+                             validatorMessage="O valor informado no campo #{label} não é valido! "
+                             requiredMessage="O campo #{label} não foi informado! "
+                             mask="#{registro.mascaraJqueryMode}"
+                             disabled="#{desabilitarEdicao}"
+                             >
+
+                <c:if test="#{registro.temValidacaoRegex}">
+
+                    <f:validateRegex pattern="#{registro.validacaoRegex}"/>
+
+                </c:if>
+
+                <c:if test="#{registro.temValidacaoMaximo}">
+
+                    <f:validateLength maximum="#{registro.valorMaximo}"  />
+
+                </c:if>
+
+
+                <p:ajax
+                    event="valueChange"
+                    process="@this"
+                    update="#{pgUtil.getNomeIdPainelDoComponente(component)}"
+                    />
+
+                <c:if test="#{registro.temValidacaoMinimo}">
+
+                    <f:validateLength minimum="#{registro.valorMinimo}" />
+
+                </c:if>
+
+            </p:inputMask>
+
+            <p:ajaxStatus style="width:32px;height:32px;position:fixed;right:7px;bottom:7px">
+
+                <f:facet name="start">
+
+                    <p:graphicImage name="images/preloader.gif" library="primefaces-adamantium"/>
+
+                </f:facet>
+
+                <f:facet name="complete">
+
+                </f:facet>
+
+            </p:ajaxStatus>
+
+        </ui:define>
+    </ui:decorate>
+
+
+</ui:composition>
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,108 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/*
+    Created on : 24/08/2017, 21:53:22
+    Author     : Sálvio Furbino
+*/
+
+.botao{
+    margin-top: 2px;
+    width: 100%!important;
+}
+
+.tamanhoIconePequeno{
+    width: 10px;
+}
+
+
+.btnIcone{
+
+}
+.btnIconeENome{
+
+}
+.btnIconeGrande{
+    font-size:80px !important;
+    align-items: center;
+    color: #ffffff !important;
+    background-color: #0099ff !important;
+}
+
+.btnIconeGrande:hover {
+    background-color: #00aeff !important;
+}
+/* Fica mais interessante utilizando w3-btn e w3-border  */
+.botaoCard{
+
+    height: auto!important;
+    margin: 10px;
+    white-space:normal!important;
+    background-color: #e5ffee!important;
+    color: #000000!important;
+    font-family: 'latobold', sans-serif;
+
+}
+
+.botaoCardSimples{
+
+    height: auto!important;
+    margin: 5px;
+    max-width: 150px;
+
+    white-space:normal!important;
+    word-wrap: break-word!important;
+    background-color: #e5ffee!important;
+    color: #000000!important;
+    font-family: 'latobold', sans-serif;
+
+}
+
+.botaoCardSimples div{
+    color: #000000!important;
+}
+
+.SbBotoesDeEscolha:parent:parent {
+    margin: 0px;
+    padding: 3px;
+}
+
+.SbBotoesDeEscolha button{
+    font-size:13px !important;
+
+}
+
+div[class^="btnSeletor"]{
+    float: left;
+    margin: 0 10px 10px 0;
+    height: 90px;
+    position: relative;
+    cursor: pointer;
+    transition: all .4s ease;
+    user-drag: element;
+    border: solid 2px transparent;
+    text-align:center;
+
+}
+div[class^="btnSeletor"]:hover{
+    opacity: 0.7;
+}
+div[class^="btnSeletor"]:active{
+    transform: scale(.98,.98);
+}
+.btnSeletor-big{width: 200px;}
+.btnSeletor-small{width: 95px;}
+.btnSeletor-label{
+    position: relative;
+    word-wrap: break-word;
+    font-family: Arial;
+    width: 100%;
+    height: 100%;
+    font-size: 28px;
+    color: #000;
+    font: 500 12px sans-serif;
+
+}
+.btnSeletor-Bkg{ background: #e5ffee!important;}

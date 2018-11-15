@@ -1,0 +1,33 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:cc="http://java.sun.com/jsf/composite"
+
+                xmlns:SBSeletor="http://xmlns.jcp.org/jsf/composite/SBComp/composite/seletores"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <!-- INTERFACE -->
+    <cc:interface>
+        <cc:attribute name="campoInstanciado"
+                      required="true"
+                      type="com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campoInstanciado.ItfCampoInstanciado"
+                      default="#{pgUtil.campoNaoImplementado}"
+                      shortDescription="Exibe um atributo de um Objeto para insersão de dados do usuário (Ou Visualização)"
+                      />
+
+        <cc:attribute name="titulo"  default="Pesquisa de  #{cc.attrs.campoInstanciado.label}"/>
+        <cc:attribute name="metodoAoSelecionar" type="javax.el.MethodExpression" />
+    </cc:interface>
+    <!-- IMPLEMENTATION -->
+    <cc:implementation>
+        <SBSeletor:seletorItemGridGrandeColSelecionado itemSelecionado="#{cc.attrs.campoInstanciado.valor}"
+                                                       atributoBeanFriltro="#{cc.attrs.campoInstanciado.comoCampoSeltorItem.filtro}"
+                                                       lista="#{cc.attrs.campoInstanciado.comoCampoSeltorItem.seletor.origem}"
+                                                       frasePesquisa="Pesquise por #{cc.attrs.campoInstanciado.nomeDoObjetoPlural} cadastrados"
+
+                                                       grupoCampos="#{cc.attrs.campoInstanciado.comoCampoSeltorItem.grupoCampoExibicao}"
+                                                       mensagemSemRegistros="Nenhum #{cc.attrs.campoInstanciado.nomeDoObjeto} Encontrado"
+                                                       label="#{cc.attrs.campoInstanciado.label}"
+                                                       metodoAoSelecionar="#{cc.attrs.metodoAoSelecionar}"
+                                                       />
+
+    </cc:implementation>
+
+</ui:composition>

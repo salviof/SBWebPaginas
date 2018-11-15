@@ -1,0 +1,65 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:cc="http://xmlns.jcp.org/jsf/composite"
+
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:SBAcao="http://xmlns.jcp.org/jsf/composite/SBComp/composite/acoesENavegacao"
+                xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <!-- INTERFACE -->
+    <cc:interface>
+
+        <cc:attribute name="acao" type="com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ItfAcaoDoSistema" shortDescription="Ação que será realizada"/>
+
+    </cc:interface>
+
+    <!-- IMPLEMENTATION -->
+    <cc:implementation>
+
+        <p:panelGrid columns="2" >
+
+
+
+            <p:outputLabel value="Nome Ação Atual"/>
+            <p:outputLabel value="#{paginaAtual.infoPagina.acaoSelecionada.nomeAcao}"/>
+
+            <p:outputLabel value="Formulário:"/>
+            <p:outputLabel value="#{paginaAtual.infoPagina.acaoSelecionada.comoFormulario.xhtml}"/>
+
+
+            <p:outputLabel value="Campos"/>
+            <p:outputLabel value="#{paginaAtual.infoPagina.acaoSelecionada.comoFormulario.campos}"/>
+
+
+            <p:outputLabel value=""/>
+            <p:outputLabel value=""/>
+
+            <p:outputLabel value="Url para pagina" rendered="#{paginaAtual.infoPagina.umaPaginaGestaoEntidade}"/>
+
+
+            <p:outputLabel
+                value="#{pgUtilAcoes.getUrlAcao(paginaAtual.infoPagina.acaoSelecionada,paginaAtual.infoPagina.comoPaginaEntidade.entidadeSelecionada)}"
+                rendered="#{paginaAtual.infoPagina.umaPaginaGestaoEntidade}"/>
+
+            <p:outputLabel value="URL para esta Pagina"/>
+            <SBAcao:linkDeAcao acao="#{paginaAtual.infoPagina.acaoSelecionada}"
+                               tipoVisualizacao="#{layoutsComponenteSB.layoutBotoes.iconeENome}"
+                               />
+
+
+
+
+        </p:panelGrid>
+
+    </cc:implementation>
+</ui:composition>
+
+
+
+
+
+
+
+
+
+

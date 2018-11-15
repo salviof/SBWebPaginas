@@ -1,0 +1,89 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:cc="http://java.sun.com/jsf/composite"
+                xmlns:SBListagem="http://xmlns.jcp.org/jsf/composite/SBComp/composite/listagens"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <!-- INTERFACE -->
+    <cc:interface   shortDescription="Exibe uma lista de registro com opções de seleção a partir de uma acao de listagem"
+                    >
+
+        <cc:attribute
+            type="com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfBeanSimples"
+            name="itemSelecionado"
+            required="true"
+            />
+        <cc:attribute name="grupoCampos"
+                      type="com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campo.ItfGrupoCampos"
+                      required="true"
+                      shortDescription="Grupo de Campos a serem exibitos"
+                      />
+
+
+        <cc:attribute
+            type="java.util.List"
+            name="itens"
+            required="true"
+            />
+
+        <cc:attribute
+            method-signature="void listener()"
+            name="metodo"
+            required="true"    />
+        <cc:attribute name="armazenamentoAcaoSelecionada"
+                      required="true"
+
+                      type="com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ItfAcaoDoSistema"
+                      shortDescription="Bean onde a ação selecionada será armazenada"
+                      />
+
+        <cc:attribute name="opcoes"
+                      required="true"  />
+
+        <cc:attribute name="mensagemSemRegistro"/>
+
+        <cc:attribute name="titulo"
+                      required="true"
+                      shortDescription="Título da Listagem"
+                      />
+
+
+    </cc:interface>
+    <!-- IMPLEMENTATION -->
+    <cc:implementation>
+
+
+
+        <c:if test="#{paginaAtual.sessao.telaUsuario.umMobile}">
+            <SBListagem:listaComOpcoesMobile
+
+                itemSelecionado="#{cc.attrs.itemSelecionado}"
+                itens="#{cc.attrs.itens}"
+                metodo="#{cc.attrs.metodo}"
+                opcoes="#{cc.attrs.opcoes}"
+                titulo="#{cc.attrs.titulo}"
+
+                armazenamentoAcaoSelecionada="#{cc.attrs.armazenamentoAcaoSelecionada}"
+                grupoCampos="#{cc.attrs.grupoCampos}"
+                rendered="#{paginaAtual.sessao.telaUsuario.umMobile}"
+                />
+        </c:if>
+
+        <c:if test="#{!paginaAtual.sessao.telaUsuario.umMobile}">
+            <SBListagem:listaComOpcoesDesktop
+                armazenamentoAcaoSelecionada="#{cc.attrs.armazenamentoAcaoSelecionada}"
+                grupoCampos="#{cc.attrs.grupoCampos}"
+                itemSelecionado="#{cc.attrs.itemSelecionado}"
+                itens="#{cc.attrs.itens}"
+                metodo="#{cc.attrs.metodo}"
+                opcoes="#{cc.attrs.opcoes}"
+                titulo="#{cc.attrs.titulo}"
+                rendered="#{!paginaAtual.sessao.telaUsuario.umMobile}"
+                />
+        </c:if>
+
+
+
+
+    </cc:implementation>
+
+</ui:composition>

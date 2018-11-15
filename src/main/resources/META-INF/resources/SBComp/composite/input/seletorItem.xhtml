@@ -1,0 +1,81 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:cc="http://java.sun.com/jsf/composite"
+                xmlns:sb="http://superbitsframework/ui"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <cc:interface>
+        <cc:attribute name="itemSelecionado"
+                      type="com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfBeanSimplesSomenteLeitura"
+                      shortDescription="Bean onde o item selecionado será armazenado ao postar, e referencia de exibição "
+                      />
+        <cc:attribute name="lista" type="java.util.List"
+                      shortDescription="Lista de opções disponíveis para seleção"
+                      />
+        <cc:attribute name="tipoVisualizacao" type="com.super_bits.modulosSB.SBCore.modulos.view.fabricasCompVisual.ItfComponenteVisualSB"
+                      default="#{layoutsComponenteSB.layoutSeletorItem.combo}"
+                      />
+        <cc:attribute name="statusAjax" type="java.lang.Boolean" default="#{null}" />
+        <cc:attribute name="idOnChange" type="java.lang.String" />
+        <cc:attribute name="layoutCampo" default="#{layoutsComponenteSB.layoutCampo.superior}" />
+        <cc:attribute name="metodoOnChange" type="javax.el.MethodExpression"/>
+        <cc:attribute name="mostraSomenteImagem" type="java.lang.Boolean" default="#{false}" />
+        <cc:attribute name="mostraTextoImagem" type="java.lang.Boolean" default="#{false}" />
+        <cc:attribute name="desabilitarEdicao" type="java.lang.Boolean" default="#{false}" />
+        <cc:attribute name="obrigatorio" type="java.lang.Boolean" default="#{false}" />
+        <cc:attribute name="mostrarMensagemValidacao" type="java.lang.Boolean" default="#{false}" />
+        <cc:attribute name="label" default="" />
+        <cc:attribute name="atualizarFormOnChange" default="#{false}" />
+    </cc:interface>
+
+    <!-- IMPLEMENTATION -->
+    <cc:implementation>
+
+        <sb:parametroMetodo nome="metodo" valor="#{cc.attrs.metodoOnChange}" />
+
+        <p:selectOneMenu rendered="#{!cc.attrs.desabilitarEdicao}"
+                         class=" seletorResponsivo colunaResponsiva  TexAlCenter #{componenteVisual.classeCSS}"
+
+                         required="#{cc.attrs.obrigatorio}"
+                         value="#{cc.attrs.itemSelecionado}"
+                         validatorMessage="O valor informado no campo #{cc.attrs.label} não é valido!"
+                         requiredMessage="O campo  #{cc.attrs.label}  não foi informado!"
+                         autoWidth="true"
+                         styleClass="seletorResponsivo "
+                         converter="conversorGenerico"
+                         var="it"
+                         converterMessage="Erro ao converter objeto" >
+
+            <f:selectItem
+                itemLabel=" não selecionado"  />
+
+            <f:selectItems
+                value="#{cc.attrs.lista}"
+                var="item"
+                itemLabel="#{item.nome}"
+                itemValue="#{item}" />
+            <c:if test="#{pgUtil.isAtributoPreenchidoComExpressao(cc,'metodoOnChange')}">
+                <p:ajax rendered="#{pgUtil.isAtributoPreenchidoComExpressao(cc,'metodoOnChange')}"
+                        global="true"
+                        event="valueChange"
+                        listener="#{metodo}"/>
+            </c:if>
+
+            <c:if test="#{pgUtil.isAtributoPreenchidoComExpressao(cc,'idOnChange')}" >
+                <p:ajax
+                    rendered="#{pgUtil.isAtributoPreenchidoComExpressao(cc,'idOnChange')}"
+                    global="true"
+                    event="valueChange"
+                    listener="#{pgUtil.atualizaTelaPorID(cc.attrs.idOnChange)}" />
+            </c:if>
+            <p:column>
+                #{it.nome}
+            </p:column>
+
+        </p:selectOneMenu>
+
+    </cc:implementation>
+
+</ui:composition>

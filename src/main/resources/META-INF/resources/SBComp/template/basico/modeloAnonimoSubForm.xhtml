@@ -1,0 +1,55 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"                   
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:SBComp="http://xmlns.jcp.org/jsf/composite/resources/SBComp"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+        <f:facet name="first">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+            <meta name="apple-mobile-web-app-capable" content="yes" />
+        </f:facet>
+        <title>#{paginaAtual.infoPagina.titulo}</title>
+
+        <h:outputScript name="js/ripple-effect.js" library="primefaces-adamantium" />
+        <h:outputScript name="js/perfect-scrollbar.js" library="primefaces-adamantium" />
+        <h:outputScript name="js/layout.js" library="primefaces-adamantium" />
+
+
+
+        <h:outputScript target="head"  name="SBComp/template/esqueleto/ativarGridsResp.js"/>
+
+
+
+        <ui:insert name="head" />
+    </h:head>
+
+
+    <h:body>
+        <h:outputStylesheet  name="SBLayout.css" library="SBComp/template/basico/css" />
+        <h:outputStylesheet  name="css/core-layout.css" library="primefaces-adamantium" />
+        <h:outputStylesheet name="css/animate.css" library="primefaces-adamantium" />
+        <h:outputStylesheet name="css/adamantium-font.css" library="primefaces-adamantium" />
+        <h:outputStylesheet name="css/ripple-effect.css" library="primefaces-adamantium" />
+        <h:outputStylesheet name="css/perfect-scrollbar.css" library="primefaces-adamantium" />
+        <h:outputStylesheet name="css/font-awesome.css" library="primefaces-adamantium" />
+        <h:outputStylesheet name="css/adamantium-layout.css" library="primefaces-adamantium" />
+
+        <h:outputScript name="js/layout.js" library="primefaces-adamantium" />
+
+
+
+
+        <ui:insert name="divSubConteudo" />
+
+
+
+
+
+
+
+    </h:body>
+
+    </ui:composition>

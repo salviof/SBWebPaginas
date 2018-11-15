@@ -1,0 +1,37 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:cc="http://java.sun.com/jsf/composite"
+
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <!-- INTERFACE -->
+    <cc:interface>
+
+        <cc:attribute name="item" type="com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfBeanSimplesSomenteLeitura"  />
+        <cc:attribute name="container" type="com.super_bits.modulosSB.SBCore.modulos.view.componenteObjeto.ItfContaineVisualizacaoObjeto"/>
+        <cc:attribute name="colunasContainerSuperior" type="java.lang.Integer" default="12"/>
+
+
+
+    </cc:interface>
+    <!-- IMPLEMENTATION -->
+    <cc:implementation>
+
+        <h:panelGroup styleClass="#{cc.attrs.container.getClasseContainerRelativoColunaSuperior(cc.attrs.colunasContainerSuperior)}"
+                      layout="block"
+                      rendered="#{!cc.attrs.container.temVersaoMobile or(cc.attrs.container.temVersaoMobile and !sessaoAtualSBWP.telaUsuario.umMobile) }" >
+            <ui:include src="#{cc.attrs.container.caminhoRelativo}" >
+                <ui:param name="item" value="#{cc.attrs.item}" />
+            </ui:include>
+        </h:panelGroup>
+
+        <h:panelGroup styleClass="#{cc.attrs.container.getClasseContainerRelativoColunaSuperior(cc.attrs.colunasContainerSuperior)}"
+                      layout="block"
+                      rendered="#{cc.attrs.container.temVersaoMobile and sessaoAtualSBWP.telaUsuario.umMobile}" >
+            <ui:include src="#{cc.attrs.container.caminhoRelativoMobile}" >
+                <ui:param name="item" value="#{cc.attrs.item}" />
+            </ui:include>
+        </h:panelGroup>
+
+    </cc:implementation>
+
+</ui:composition>

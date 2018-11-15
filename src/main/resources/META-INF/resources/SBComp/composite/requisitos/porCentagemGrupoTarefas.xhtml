@@ -1,0 +1,57 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:cc="http://java.sun.com/jsf/composite"
+                xmlns:sb="http://superbitsframework/ui" 
+
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <!-- INTERFACE -->
+    <cc:interface>
+
+        <cc:attribute name="grupoDeTarefas" displayName="Grupo de Tarefas"
+                      type="com.super_bits.projeto.Jira.ItfGrupoDeTarefas" />
+    </cc:interface>
+    <!-- IMPLEMENTATION -->
+    <cc:implementation>
+        <i>
+            <span class="Fs16 FontAdamantiumRegular Fright MarBot10">
+                #{cc.attrs.grupoDeTarefas.nomeDoAgrupamento} <i class="#{cc.attrs.grupoDeTarefas.tipoGrupoTarefa.icone} Fs12"/>
+            </span>
+        </i>
+        <p:panel id="imagem" styleClass=" w3-circle Fleft  w3-margin-right MarTop10 ">
+            <i class="#{cc.attrs.grupoDeTarefas.icone} Fs30"  />
+        </p:panel>
+        <p:tooltip for="@parent:imagem"
+                   position="bottom"
+                   hideDelay="3"
+                   value="#{cc.attrs.grupoDeTarefas.descricao}"/>
+        <br/>
+        <div class="DispBlock Fright">
+            <p:progressBar   value="0"  style="width: 270px;" labelTemplate="{value}% Densenvolvido"   />
+        </div>
+        <div class="SeparatorFull"/>
+        <span class="Green">  <i class="fa fa-clock-o  Fs16"  /> Tempo previsto:</span>
+        <span>   #{cc.attrs.grupoDeTarefas.custoDesenvolvimento.horasTotal}</span>
+
+        <br/>
+        <span class="Green" style="text-align: left;">  <i class="fa  fa-usd   Fs16"  /> Valor Total:  </span>
+        <span class="" style="text-align:  right;"><p:inputNumber symbol="R$" value="#{cc.attrs.grupoDeTarefas.custoDesenvolvimento.valorTotal}" disabled="#{true}"  readonly="#{true}" decimalPlaces="2" decimalSeparator="," thousandSeparator="."/></span><br/>
+
+
+
+
+
+    </cc:implementation>
+</ui:composition>
+
+
+
+
+
+
+
+
+
+

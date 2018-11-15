@@ -1,0 +1,1041 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<facelet-taglib xmlns="http://java.sun.com/xml/ns/javaee"
+                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facelettaglibrary_2_0.xsd"
+                version="2.0">
+
+    <namespace>http://superbitsframework/ui</namespace>
+    <tag>
+        <tag-name>botaoAcao</tag-name>
+        <source>resources/tagLib/tags/com/sb/botaoAcao.xhtml</source>
+        <attribute>
+            <name>acao</name>
+            <description>
+               <![CDATA[ Ação vinculada ao botão]]> </description>
+            <required>true</required>
+            <type>com.super_bits.Controller.Interfaces.acoes</type>
+        </attribute>
+        <attribute>
+            <name>layout</name>
+            <description><![CDATA[O componente utilizado para exibição]]></description>
+            <required>true</required>
+            <type>com.super_bits.view.fabricasCompVisual.ItfComponenteVisualSB</type>
+        </attribute>
+        <attribute>
+
+            <name>metodo</name>
+            <description><![CDATA[Metodo para]]></description>
+            <required>true</required>
+            <type>javax.el.MethodExpression</type>
+        </attribute>
+        <attribute>
+            <name>javaScriptOncomplete</name>
+            <description>
+              <![CDATA[  JavaScript que deve ser executado ao final do Ajax]]>
+            </description>
+            <type>java.lang.String</type>
+            <required>true</required>
+            <type>com.super_bits.Controller.Interfaces.acoes.ItfAcaoDoSistema</type>
+        </attribute>
+        <attribute>
+            <name>idUpdate</name>
+            <description>
+              <![CDATA[ Id do componente que deve ser atualizado (Nao precisa ser o caminho completo)
+                O Sistema utilizará o pgUtil.makeCaminhoCompletoID(idUpdate) ]]>
+            </description>
+            <type>java.lang.String</type>
+            <required>true</required>
+        </attribute>
+
+        <attribute>
+            <description>
+            <![CDATA[informa  o Label do input (nome do campo de entrada)]]>
+            </description>
+            <name>label</name>
+            <required>true</required>
+            <type>java.lang.String</type>
+        </attribute>
+    </tag>
+
+    <tag>
+        <tag-name>botaoAcaoModal</tag-name>
+        <source>resources/tagLib/tags/com/sb/botaoAcaoModal.xhtml</source>
+        <attribute>
+            <name>acao</name>
+            <description>
+               <![CDATA[ Ação vinculada ao botão]]> </description>
+            <required>true</required>
+            <type>com.super_bits.Controller.Interfaces.acoes</type>
+        </attribute>
+
+        <attribute>
+            <name>layout</name>
+            <description><![CDATA[O componente utilizado para exibição]]></description>
+            <required>true</required>
+            <type>com.super_bits.view.fabricasCompVisual.ItfComponenteVisualSB</type>
+        </attribute>
+
+
+        <attribute>
+            <name>javaScriptOncomplete</name>
+            <description>
+              <![CDATA[  JavaScript que deve ser executado ao final do Ajax]]>
+            </description>
+            <type>java.lang.String</type>
+            <required>true</required>
+            <type>com.super_bits.Controller.Interfaces.acoes.ItfAcaoDoSistema</type>
+        </attribute>
+        <attribute>
+            <name>idUpdate</name>
+            <description>
+              <![CDATA[ Id do componente que deve ser atualizado (Nao precisa ser o caminho completo)
+                O Sistema utilizará o pgUtil.makeCaminhoCompletoID(idUpdate) ]]>
+            </description>
+            <type>java.lang.String</type>
+            <required>true</required>
+        </attribute>
+
+        <attribute>
+            <description>
+            <![CDATA[informa  o Label do input (nome do campo de entrada)]]>
+            </description>
+            <name>label</name>
+            <required>true</required>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+
+    <tag>
+        <tag-name>camposDoGrupo</tag-name>
+        <source>resources/tagLib/tags/com/sb/camposDoGrupo.xhtml</source>
+        <attribute>
+            <description> <![CDATA[ Entidade referente]]></description>
+            <name>entidade</name>
+            <required>true</required>
+            <type>com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfBeanSimples</type>
+        </attribute>
+
+        <attribute>
+            <description> <![CDATA[ Entidade referente]]></description>
+            <name>grupo</name>
+            <required>true</required>
+            <type>com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campo.GrupoCampos</type>
+        </attribute>
+
+        <attribute>
+            <description> <![CDATA[ Se true desativiva a edição]]></description>
+            <name>desabilitarEdicao</name>
+            <required>false</required>
+            <type>java.lang.Boolean</type>
+        </attribute>
+
+        <attribute>
+            <description>
+             <![CDATA[     O layout do campo, que podem ser: resumido,esquerda,superior,e automatico]]>
+            </description>
+            <name>layoutCampo</name>
+            <required>false</required>
+            <type>com.super_bits.view.fabricasCompVisual.ItfComponenteVisualSB</type>
+        </attribute>
+    </tag>
+    <tag>
+        <tag-name>camposDosGrupos</tag-name>
+        <source>resources/tagLib/tags/com/sb/camposDosGrupos.xhtml</source>
+        <attribute>
+            <description> <![CDATA[ Entidade referente]]></description>
+            <name>entidade</name>
+            <required>true</required>
+            <type>com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfBeanSimples</type>
+        </attribute>
+
+        <attribute>
+            <description> <![CDATA[ Entidade referente]]></description>
+            <name>grupos</name>
+            <required>true</required>
+            <type>java.util.List</type>
+        </attribute>
+
+        <attribute>
+            <description> <![CDATA[ Se true desativiva a edição]]></description>
+            <name>desabilitarEdicao</name>
+            <required>false</required>
+            <type>java.lang.Boolean</type>
+        </attribute>
+
+        <attribute>
+            <description>
+             <![CDATA[     O layout do campo, que podem ser: resumido,esquerda,superior,e automatico]]>
+            </description>
+            <name>layoutCampo</name>
+            <required>false</required>
+            <type>com.super_bits.view.fabricasCompVisual.ItfComponenteVisualSB</type>
+        </attribute>
+    </tag>
+
+
+    <tag>
+        <tag-name>formularioDaAcao</tag-name>
+        <source>resources/tagLib/tags/com/sb/formularioDaAcao.xhtml</source>
+        <attribute>
+            <description> <![CDATA[ Entidade referente]]></description>
+            <name>entidade</name>
+            <required>true</required>
+            <type>com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfBeanSimples</type>
+        </attribute>
+        <attribute>
+            <description> <![CDATA[ Entidade referente]]></description>
+            <name>acao</name>
+            <required>true</required>
+            <type>com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.permissoes.ItfAcaoFormulario</type>
+        </attribute>
+
+        <attribute>
+            <name>layout</name>
+            <description><![CDATA[O componente utilizado para exibição]]></description>
+            <required>true</required>
+            <type>com.super_bits.view.fabricasCompVisual.ItfComponenteVisualSB</type>
+        </attribute>
+
+
+        <attribute>
+            <description> <![CDATA[ Se true desativiva a edição]]></description>
+            <name>desabilitarEdicao</name>
+            <required>false</required>
+            <type>java.lang.Boolean</type>
+        </attribute>
+
+        <attribute>
+            <description>
+             <![CDATA[     O layout do campo, que podem ser: resumido,esquerda,superior,e automatico]]>
+            </description>
+            <name>layoutCampo</name>
+            <required>false</required>
+            <type>com.super_bits.view.fabricasCompVisual.ItfComponenteVisualSB</type>
+        </attribute>
+    </tag>
+
+
+
+    <tag>
+        <tag-name>inputSB</tag-name>
+        <source>resources/tagLib/tags/com/sb/inputSB.xhtml</source>
+
+        <attribute>
+            <description> <![CDATA[ Campo Instanciado (Obtido por item.getcampoNyNameOuAnotacao('nomeDoCampo')]]></description>
+            <name>registro</name>
+            <required>true</required>
+            <type>com.super_bits.modulosSB.SBCore.InfoCampos.campo.ItfCampoInstanciado</type>
+        </attribute>
+        <attribute>
+            <description>
+             <![CDATA[     O layout do campo, que podem ser: resumido,esquerda,superior,e automatico]]>
+            </description>
+            <name>layoutCampo</name>
+            <required>false</required>
+            <type>com.super_bits.view.fabricasCompVisual.ItfComponenteVisualSB</type>
+        </attribute>
+
+        <attribute>
+            <description> <![CDATA[
+                Alguns campos possuem diversos Layouts especiais, como Seletor de Item,
+                que possui combo, grade, botoes e outos]]>
+            </description>
+            <name>layoutCampoEspecial</name>
+            <required>false</required>
+            <type>com.super_bits.view.fabricasCompVisual.ItfComponenteVisualSB</type>
+        </attribute>
+
+
+        <attribute>
+            <description>
+            <![CDATA[informa  o Label do input (nome do campo de entrada)]]>
+            </description>
+            <name>label</name>
+            <required>true</required>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>
+            <![CDATA[informa  o Label do input (nome do campo de entrada)]]>
+            </description>
+            <name>xhtmlVisualizacao</name>
+            <required>false</required>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description> <![CDATA[ Se true desativiva a edição]]></description>
+            <name>desabilitarEdicao</name>
+            <required>false</required>
+            <type>java.lang.Boolean</type>
+        </attribute>
+
+
+        <attribute>
+            <description> <![CDATA[ Se true desativiva a edição]]></description>
+            <name>possuiIDOnChange</name>
+            <required>true</required>
+            <type>java.lang.Boolean</type>
+        </attribute>
+
+
+        <attribute>
+            <description> <![CDATA[ Se true desativiva a edição]]></description>
+            <name>atualizarGrupoOnChange</name>
+            <required>true</required>
+            <type>java.lang.Boolean</type>
+        </attribute>
+
+
+
+        <attribute>
+            <description> <![CDATA[ Se true desativiva a edição]]></description>
+            <name>atualizarFormOnChange</name>
+            <required>true</required>
+            <type>java.lang.Boolean</type>
+        </attribute>
+
+        <attribute>
+            <description>
+                 <![CDATA[ Informando um id para atualizar, quando acontecer
+                uma alteração, acontecerá um ajax com os novos valores dos beans, na area selecionada,
+                Formidável não ?]]>
+            </description>
+            <name>idAtualizarOnChange</name>
+            <required>false</required>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>O item que será exibido no componente</description>
+            <name>opcoes</name>
+            <required>false</required>
+            <type>java.util.Collection</type>
+        </attribute>
+
+        <attribute>
+            <description> <![CDATA[ Informando um metodo quando alterar, o método será executado,
+                este metodo pode ser utilizado em conjunto com o idAtualizarOnChange,
+                para atualizar uma área específica no fim do método, ou vc pode chamar
+                o paginaUtil dentro do managedBean para atualizar]]>
+            </description>
+            <name>metodoOnChange</name>
+            <required>false</required>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description> <![CDATA[ Se true desativiva a edição]]></description>
+            <name>possuiMetodoOnChange</name>
+            <required>true</required>
+            <type>java.lang.Boolean</type>
+        </attribute>
+
+        <attribute>
+            <description> <![CDATA[ Se true desativiva a edição]]></description>
+            <name>obrigatorio</name>
+            <required>true</required>
+            <type>java.lang.Boolean</type>
+        </attribute>
+
+        <attribute>
+
+            <description>
+                 <![CDATA[ Informando um id para atualizar, quando acontecer
+                uma alteração, acontecerá um ajax com os novos valores dos beans, na area selecionada,
+                Formidável não ?]]>
+            </description>
+            <name>arqComponenteVisual</name>
+            <required>false</required>
+            <type>java.lang.String</type>
+            <required>false</required>
+        </attribute>
+
+    </tag>
+
+    <tag>
+        <tag-name>componenteSBItemSimples</tag-name>
+        <source>tags/com/sb/componenteSBGenerico.xhtml</source>
+        <attribute>
+            <description> <![CDATA[ O componente utilizado para exibição]]></description>
+            <name>componente</name>
+            <required>true</required>
+            <type>com.super_bits.view.fabricasCompVisual.ItfComponenteVisualSB</type>
+        </attribute>
+        <attribute>
+            <description>O item que será exibido no componente</description>
+            <name>itemSimples</name>
+            <required>true</required>
+            <type>com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfBeanSimples</type>
+        </attribute>
+    </tag>
+
+    <tag>
+        <tag-name>seletorItem</tag-name>
+
+        <source>resources/tagLib/tags/com/sb/seletorItem.xhtml</source>
+        <attribute>
+            <description> <![CDATA[ O componente utilizado para exibição]]></description>
+            <name>layoutComponente</name>
+            <required>true</required>
+            <type>com.super_bits.view.fabricasCompVisual.ItfComponenteVisualSB</type>
+        </attribute>
+        <attribute>
+            <description>
+               <![CDATA[   O layout do campo, que podem ser: resumido,esquerda,superior,e automatico]]>
+            </description>
+            <name>layoutCampo</name>
+            <required>true</required>
+            <type>com.super_bits.view.fabricasCompVisual.ItfComponenteVisualSB</type>
+        </attribute>
+        <attribute>
+            <description> <![CDATA[ O item que será exibido no componente]]></description>
+            <name>itemSelecionado</name>
+            <required>true</required>
+            <type>com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfBeanSimples</type>
+        </attribute>
+        <attribute>
+            <description>O item que será exibido no componente</description>
+            <name>opcoes</name>
+            <required>true</required>
+            <type>java.util.Collection</type>
+        </attribute>
+
+
+        <attribute>
+            <description>O item que será exibido no componente</description>
+            <name>opcoes</name>
+            <required>true</required>
+            <type>java.util.Collection</type>
+        </attribute>
+
+
+        <attribute>
+            <description> <![CDATA[ ]]></description>
+            <name>mostrarOpcoesAcancadas</name>
+            <required>true</required>
+            <type>java.lang.Boolean</type>
+        </attribute>
+
+        <attribute>
+            <description> <![CDATA[ ]]></description>
+            <name>possuiIDOnChange</name>
+            <required>true</required>
+            <type>java.lang.Boolean</type>
+        </attribute>
+
+        <attribute>
+            <description> <![CDATA[ O item que será exibido no componente]]></description>
+            <name>idAtualizarOnChange</name>
+            <required>false</required>
+            <type>java.lang.Boolean</type>
+        </attribute>
+
+        <attribute>
+            <description> <![CDATA[ O item que será exibido no componente]]></description>
+            <name>possuiMetodoOnChange</name>
+            <required>true</required>
+            <type>java.lang.Boolean</type>
+        </attribute>
+
+        <attribute>
+            <description> <![CDATA[ O item que será exibido no componente]]></description>
+            <name>atualizarFormOnChange</name>
+            <required>true</required>
+            <type>java.lang.Boolean</type>
+        </attribute>
+
+        <attribute>
+            <description> <![CDATA[ O item que será exibido no componente]]></description>
+            <name>metodoOnChange</name>
+            <required>false</required>
+            <type>javax.el.MethodExpression</type>
+        </attribute>
+
+
+        <attribute>
+            <description>
+            <![CDATA[informa  o Label do input (nome do campo de entrada)]]>
+            </description>
+            <name>label</name>
+            <required>true</required>
+            <type>java.lang.String</type>
+        </attribute>
+
+
+
+
+
+    </tag>
+
+
+
+    <tag>
+        <tag-name>seletorItens</tag-name>
+        <source>resources/tagLib/tags/com/sb/seletorItem.xhtml</source>
+        <attribute>
+            <description> <![CDATA[ O componente utilizado para exibição]]></description>
+            <name>componente</name>
+            <required>true</required>
+            <type>com.super_bits.view.fabricasCompVisual.ItfComponenteVisualSB</type>
+        </attribute>
+        <attribute>
+            <description>
+                <![CDATA[  O layout do campo, que podem ser: resumido,esquerda,superior,e automatico]]>
+            </description>
+            <name>layoutCampo</name>
+            <required>true</required>
+            <type>com.super_bits.view.fabricasCompVisual.ItfComponenteVisualSB</type>
+        </attribute>
+        <attribute>
+            <description>O item que será exibido no componente</description>
+            <name>itensSelecionados</name>
+            <required>true</required>
+            <type>java.util.Collection</type>
+        </attribute>
+        <attribute>
+            <description>O item que será exibido no componente</description>
+            <name>opcoes</name>
+            <required>true</required>
+            <type>java.util.Collection</type>
+        </attribute>
+    </tag>
+
+    <tag>
+        <tag-name>parametroMetodo</tag-name>
+        <handler-class>org.super_bits.tags.metodo.MetodoComoParametro</handler-class>
+        <attribute>
+            <name>nome</name>
+            <required>true</required>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <name>valor</name>
+            <required>true</required>
+            <type>java.lang.String</type>
+        </attribute>
+    </tag>
+
+    <tag>
+        <tag-name>componenteAdaptador</tag-name>
+        <handler-class>org.super_bits.tags.componenteAdaptador.ExibicaoComponentePropriedades</handler-class>
+        <attribute>
+            <name>componente</name>
+            <required>true</required>
+            <type>com.super_bits.modulosSB.webPaginas.JSFBeans.SBBeanModel.input.ItfCampoInput</type>
+        </attribute>
+        <attribute>
+            <name>variavelXhtml</name>
+            <required>true</required>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <name>teste1</name>
+            <required>true</required>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <name>teste2</name>
+            <required>true</required>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <tag-name>botaoLink</tag-name>
+        <source>resources/tagLib/tags/com/sb/botaoAcaoLink.xhtml</source>
+        <attribute>
+
+            <name>layout</name>
+            <description> <![CDATA[ O componente utilizado para exibição]]></description>
+            <required>true</required>
+            <type>com.super_bits.view.fabricasCompVisual.ItfComponenteVisualSB</type>
+        </attribute>
+
+        <attribute>
+            <name>acao</name>
+            <description>
+                Ação vinculada ao botão
+            </description>
+            <required>true</required>
+            <type>com.super_bits.Controller.Interfaces.acoes.ItfAcaoDoSistema</type>
+        </attribute>
+
+        <attribute>
+            <name>label</name>
+            <description>
+             <![CDATA[Label do Botãpo]]>
+            </description>
+            <required>false</required>
+            <type>java.lang.String</type>
+        </attribute>
+    </tag>
+
+
+    <tag>
+        <tag-name>botaoFake</tag-name>
+        <source>resources/tagLib/tags/com/sb/botaoFake.xhtml</source>
+        <attribute>
+            <description> <![CDATA[ O componente utilizado para exibição]]></description>
+            <name>layout</name>
+            <required>true</required>
+            <type>com.super_bits.view.fabricasCompVisual.ItfComponenteVisualSB</type>
+        </attribute>
+
+        <attribute>
+            <description>
+                Ação vinculada ao botão
+            </description>
+            <name>acao</name>
+            <required>true</required>
+            <type>com.super_bits.Controller.Interfaces.acoes.ItfAcaoDoSistema</type>
+        </attribute>
+
+        <attribute>
+            <name>label</name>
+            <description>
+             <![CDATA[Label do Botãpo]]>
+            </description>
+            <required>false</required>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <name>icone</name>
+            <description>
+             <![CDATA[Icone do botão]]>
+            </description>
+
+            <type>java.lang.String</type>
+        </attribute>
+
+
+
+
+    </tag>
+
+    <tag>
+        <tag-name>botaoAcaoEntidadePaginaAtual</tag-name>
+        <source>resources/tagLib/tags/com/sb/btEntidadePgAtual.xhtml</source>
+        <attribute>
+            <description> <![CDATA[ O componente utilizado para exibição]]></description>
+            <name>layout</name>
+            <required>true</required>
+            <type>com.super_bits.view.fabricasCompVisual.ItfComponenteVisualSB</type>
+        </attribute>
+        <attribute>
+            <description>
+                Registro vinculado a ação
+            </description>
+            <name>registro</name>
+            <required>true</required>
+        </attribute>
+
+        <attribute>
+            <description>
+                Ação vinculada ao botão
+            </description>
+            <name>acao</name>
+            <required>true</required>
+            <type>com.super_bits.Controller.Interfaces.acoes.ItfAcaoDoSistema</type>
+        </attribute>
+
+
+        <attribute>
+            <description>
+                JavaScript que deve ser executado ao final do Ajax
+            </description>
+            <name>javaScriptOncomplete</name>
+            <type>java.lang.String</type>
+            <required>true</required>
+
+        </attribute>
+
+
+        <attribute>
+            <description>
+              <![CDATA[    Id do componente que deve ser atualizado (Nao precisa ser o caminho completo)
+                O Sistema utilizará o pgUtil.makeCaminhoCompletoID(idUpdate) ]]>
+            </description>
+            <name>idUpdate</name>
+            <type>java.lang.String</type>
+            <required>true</required>
+        </attribute>
+
+        <attribute>
+            <name>label</name>
+            <description>
+             <![CDATA[Label do Botãpo]]>
+            </description>
+            <required>false</required>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <name>icone</name>
+            <description>
+             <![CDATA[Icone do botão]]>
+            </description>
+
+            <type>java.lang.String</type>
+        </attribute>
+
+
+
+    </tag>
+
+    <tag>
+
+        <tag-name>botaoAcaoPaginaAtual</tag-name>
+        <source>resources/tagLib/tags/com/sb/botaoAcaoPg.xhtml</source>
+        <attribute>
+            <description> <![CDATA[ O componente utilizado para exibição]]></description>
+            <name>layout</name>
+            <required>true</required>
+            <type>com.super_bits.view.fabricasCompVisual.ItfComponenteVisualSB</type>
+        </attribute>
+
+        <attribute>
+            <description>
+                Ação vinculada ao botão
+            </description>
+            <name>acao</name>
+            <required>true</required>
+            <type>com.super_bits.Controller.Interfaces.acoes.ItfAcaoDoSistema</type>
+        </attribute>
+
+        <attribute>
+            <description>
+               <![CDATA[   JavaScript que deve ser executado ao final do Ajax]]>
+            </description>
+            <name>javaScriptOncomplete</name>
+            <type>java.lang.String</type>
+            <required>true</required>
+
+        </attribute>
+
+
+
+        <attribute>
+            <description>
+             <![CDATA[     Id do componente que deve ser atualizado (Nao precisa ser o caminho completo)
+                O Sistema utilizará o pgUtil.makeCaminhoCompletoID(idUpdate)]]>
+            </description>
+            <name>idUpdate</name>
+            <type>java.lang.String</type>
+            <required>true</required>
+        </attribute>
+
+        <attribute>
+            <name>label</name>
+            <description>
+             <![CDATA[Label do Botãpo]]>
+            </description>
+            <required>false</required>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <name>icone</name>
+            <description>
+             <![CDATA[Icone do botão]]>
+            </description>
+
+            <type>java.lang.String</type>
+        </attribute>
+
+
+    </tag>
+
+    <tag>
+        <tag-name>botaoAcaoAcaoTarget</tag-name>
+        <source>resources/tagLib/tags/com/sb/botaoAcaoTarget.xhtml</source>
+        <attribute>
+            <description> <![CDATA[ O componente utilizado para exibição]]></description>
+            <name>layout</name>
+            <required>true</required>
+            <type>com.super_bits.view.fabricasCompVisual.ItfComponenteVisualSB</type>
+        </attribute>
+
+        <attribute>
+            <description>
+                Origem
+            </description>
+            <name>origem</name>
+            <required>true</required>
+        </attribute>
+
+        <attribute>
+            <description>
+                Destino
+            </description>
+            <name>destino</name>
+
+        </attribute>
+
+        <attribute>
+            <description>
+               <![CDATA[   Ação vinculada ao botão]]>
+            </description>
+            <name>acao</name>
+            <required>true</required>
+            <type>com.super_bits.Controller.Interfaces.acoes.ItfAcaoDoSistema</type>
+        </attribute>
+
+        <attribute>
+            <description>
+                JavaScript que deve ser executado ao final do Ajax
+            </description>
+            <name>javaScriptOncomplete</name>
+            <type>java.lang.String</type>
+            <required>true</required>
+
+        </attribute>
+
+
+        <attribute>
+            <name>metodo</name>
+            <required>false</required>
+            <type>javax.el.MethodExpression</type>
+        </attribute>
+
+
+        <attribute>
+            <name>icone</name>
+            <description>
+             <![CDATA[Icone do botão]]>
+            </description>
+            <type>java.lang.String</type>
+        </attribute>
+
+
+
+        <attribute>
+            <name>label</name>
+            <description>
+             <![CDATA[Label do Botãpo]]>
+            </description>
+            <type>java.lang.String</type>
+        </attribute>
+
+        <attribute>
+            <description>
+               <![CDATA[   Id do componente que deve ser atualizado (Nao precisa ser o caminho completo)
+                O Sistema utilizará o pgUtil.makeCaminhoCompletoID(idUpdate)]]>
+            </description>
+            <name>idUpdate</name>
+            <type>java.lang.String</type>
+            <required>true</required>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <tag-name>inputSBQuantidade</tag-name>
+        <source>resources/tagLib/tags/com/sb/input/campo/quantidade.xhtml</source>
+       
+    </tag>
+
+
+    <tag>
+        <tag-name>inputSBCep</tag-name>
+        <source>resources/tagLib/tags/com/sb/input/endereco/cep.xhtml</source>
+    </tag>
+    <tag>
+        <tag-name>inputSBData</tag-name>
+        <source>resources/tagLib/tags/com/sb/input/campo/data.xhtml</source>
+    </tag>
+
+    <tag>
+        <tag-name>inputSBDataHora</tag-name>
+        <source>resources/tagLib/tags/com/sb/input/campo/dataHora.xhtml</source>
+    </tag>
+    <tag>
+        <tag-name>inputSBTextDEscritivo</tag-name>
+        <source>resources/tagLib/tags/com/sb/input/campo/descritivo.xhtml</source>
+    </tag>
+    <tag>
+        <tag-name>inputSBEntidadeSimples</tag-name>
+        <source>resources/tagLib/tags/com/sb/input/campo/entidadeSimples.xhtml</source>
+    </tag>
+    <tag>
+        <tag-name>inputSBHtml</tag-name>
+        <source>resources/tagLib/tags/com/sb/input/campo/html.xhtml</source>
+    </tag>
+    <tag>
+        <tag-name>inputSBHtmlTemplate</tag-name>
+        <source>resources/tagLib/tags/com/sb/input/campo/htmlTemplate.xhtml</source>
+    </tag>
+
+
+    <tag>
+        <tag-name>inputSBTextMascara</tag-name>
+        <source>resources/tagLib/tags/com/sb/input/campo/inputMascara.xhtml</source>
+        <attribute>
+            <description>
+             <![CDATA[     O layout do campo, que podem ser: resumido,esquerda,superior,e automatico]]>
+            </description>
+            <name>layout</name>
+            <required>false</required>
+            <type>com.super_bits.view.fabricasCompVisual.ItfComponenteVisualSB</type>
+        </attribute>
+    </tag>
+    <tag>
+        <tag-name>inputSBSimples</tag-name>
+        <source>resources/tagLib/tags/com/sb/input/campo/inputSimples.xhtml</source>
+    </tag>
+    <tag>
+        <tag-name>inputSBMinMax</tag-name>
+        <source>resources/tagLib/tags/com/sb/input/campo/minimoEMaximo.xhtml</source>
+    </tag>
+    <tag>
+        <tag-name>inputSBMoeda</tag-name>
+        <source>resources/tagLib/tags/com/sb/input/campo/moeda.xhtml</source>
+    </tag>
+    <tag>
+        <tag-name>inputSBSenha</tag-name>
+        <source>resources/tagLib/tags/com/sb/input/campo/senha.xhtml</source>
+    </tag>
+
+    <tag>
+        <tag-name>inputSBEmail</tag-name>
+        <source>resources/tagLib/tags/com/sb/input/campo/email.xhtml</source>
+    </tag>
+
+    <tag>
+        <tag-name>inputSBVerdadeiroFalso</tag-name>
+        <source>resources/tagLib/tags/com/sb/input/campo/veradeiroOuFalso.xhtml</source>
+    </tag>
+
+    <tag>
+        <tag-name>inputSBSelAutoCompletar</tag-name>
+        <source>resources/tagLib/tags/com/sb/input/seletorItem/autoCompletar.xhtml</source>
+    </tag>
+    <tag>
+        <tag-name>inputSBCarroussel</tag-name>
+        <source>resources/tagLib/tags/com/sb/input/seletorItem/carrousel.xhtml</source>
+    </tag>
+    <tag>
+        <tag-name>inputSBCombo</tag-name>
+        <source>resources/tagLib/tags/com/sb/input/seletorItem/combo.xhtml</source>
+    </tag>
+    <tag>
+        <tag-name>inputSBComboComImagens</tag-name>
+        <source>resources/tagLib/tags/com/sb/input/seletorItem/comboComImagens.xhtml</source>
+    </tag>
+    <tag>
+        <tag-name>inputSBGrade</tag-name>
+        <source>resources/tagLib/tags/com/sb/input/seletorItem/grade.xhtml</source>
+    </tag>
+    <tag>
+        <tag-name>inputSBmenuBotoes</tag-name>
+        <source>resources/tagLib/tags/com/sb/input/seletorItem/menuBotoes.xhtml</source>
+    </tag>
+    <tag>
+        <tag-name>inputSBradio</tag-name>
+        <source>resources/tagLib/tags/com/sb/input/seletorItem/radio.xhtml</source>
+    </tag>
+
+    <tag>
+        <tag-name>inputSBArquivoDeEntidade</tag-name>
+        <source>resources/tagLib/tags/com/sb/input/campo/arquivoDeEntidade.xhtml</source>
+    </tag>
+
+
+    <tag>
+        <tag-name>inputSBImagemMedDeEntidade</tag-name>
+        <source>resources/tagLib/tags/com/sb/input/campo/arquivoDeEntidade.xhtml</source>
+    </tag>
+
+    <tag>
+        <tag-name>inputSBImagemPequenaDeDeEntidade</tag-name>
+        <source>resources/tagLib/tags/com/sb/input/campo/imagemDeEntidadePequeno.xhml</source>
+    </tag>
+
+    <tag>
+        <tag-name>inputImagemMediaDeEntidade</tag-name>
+        <source>resources/tagLib/tags/com/sb/input/campo/imagemDeEntidadeMedio.xhml</source>
+    </tag>
+    <tag>
+        <tag-name>inputSBImagemGrandeDeEntidade</tag-name>
+        <source>resources/tagLib/tags/com/sb/input/campo/imagemDeEntidadeGrande.xhml</source>
+    </tag>
+
+    <tag>
+        <tag-name>inputSBEndereco</tag-name>
+        <source>resources/tagLib/tags/com/sb/input/campo/endereco.xhtml</source>
+    </tag>
+
+
+    <tag>
+        <tag-name>inputSBBairro</tag-name>
+        <source>resources/tagLib/tags/com/sb/input/endereco/bairro.xhtml</source>
+
+    </tag>
+
+    <tag>
+        <tag-name>inputSBestadoUF</tag-name>
+        <source>resources/tagLib/tags/com/sb/input/endereco/estado.xhtml</source>
+    </tag>
+
+
+    <tag>
+        <tag-name>inputSBCidade</tag-name>
+        <source>resources/tagLib/tags/com/sb/input/endereco/cidade.xhtml</source>
+    </tag>
+
+    <tag>
+        <tag-name>inputSBNacao</tag-name>
+        <source>resources/tagLib/tags/com/sb/input/endereco/nacao.xhtml</source>
+    </tag>
+
+
+    <tag>
+        <tag-name>ligadoDesligado</tag-name>
+        <source>resources/tagLib/tags/com/sb/input/campo/verdadeiroOuFalso.xhtml</source>
+    </tag>
+
+
+
+    <tag>
+        <tag-name>inputSBSubForm</tag-name>
+        <source>resources/tagLib/tags/com/sb/input/seletorItens/subForm.xhtml</source>
+    </tag>
+
+    <tag>
+        <tag-name>inputSBPickList</tag-name>
+        <source>resources/tagLib/tags/com/sb/input/seletorItens/pickList.xhtml</source>
+    </tag>
+    <tag>
+        <tag-name>inputSBCor</tag-name>
+        <source>resources/tagLib/tags/com/sb/input/campo/cor.xhtml</source>
+    </tag>
+
+
+    <tag>
+        <tag-name>inputSBEnumGrade</tag-name>
+        <source>resources/tagLib/tags/com/sb/input/enumEstatico/enumGrade.xhtml</source>
+    </tag>
+
+    <tag>
+        <tag-name>inputSBEnumAutoComplete</tag-name>
+        <source>resources/tagLib/tags/com/sb/input/enumEstatico/enumAutoComplete.xhtml</source>
+    </tag>
+
+
+    <tag>
+        <tag-name>inputSBSubFormSimples</tag-name>
+        <source>resources/tagLib/tags/com/sb/input/enumEstatico/enumAutoComplete.xhtml</source>
+    </tag>
+
+    <tag>
+        <tag-name>inputSBSubFormSimples</tag-name>
+        <source>resources/tagLib/tags/com/sb/input/subItens/subForm.xhtml</source>
+    </tag>
+
+</facelet-taglib>

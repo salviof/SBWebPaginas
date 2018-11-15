@@ -1,0 +1,46 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:cc="http://java.sun.com/jsf/composite"
+                xmlns:SBRec="http://xmlns.jcp.org/jsf/composite/SBComp/composite/requisitos"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <!-- INTERFACE -->
+    <cc:interface>
+
+        <cc:attribute name="tarefaSistema" displayName="Previsao Gestao" type="com.super_bits.projeto.Jira.Jira.ItfTarefaSuperBitsFW" />
+
+
+    </cc:interface>
+    <!-- IMPLEMENTATION -->
+    <cc:implementation>
+
+
+
+        <div class=" Container3  w3-btn w3-border  botaoCard"
+             >
+            <span><p:progressBar value="2"  style="margin: 5px;"/></span>
+            <SBRec:tipoProfissional
+                tipoProfissional="#{cc.attrs.tarefaSistema.tipoProfissionalNescessario}"
+                />
+
+            <span>#{cc.attrs.tarefaSistema.tipoProfissionalNescessario.nome} </span> <br/>
+            <span>Tempo previsto: #{cc.attrs.tarefaSistema.minutosPrevistosTrabalho}</span><br/>
+            #{cc.attrs.tarefaSistema.tarefaJiraOrigem.nomeTarefa}
+        </div>
+
+
+
+
+    </cc:implementation>
+</ui:composition>
+
+
+
+
+
+
+
+
+
+

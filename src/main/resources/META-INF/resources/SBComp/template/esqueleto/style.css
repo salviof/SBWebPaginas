@@ -1,0 +1,290 @@
+/*
+Responsive 996px grid system ~ Style CSS.
+Copyright 2012, Josh Cope
+*/
+
+/* =============================================================================
+   Site Styles
+   ========================================================================== */
+   
+	body {
+		background:url('../images/bg.jpg');
+		color:#000f2d;
+	}
+	
+	.center {
+		text-align:center;
+	}
+	
+	#header-wrapper {
+		height:120px;
+		background:transparent url('../images/header-bg-repeat.jpg') repeat-x;
+		margin-bottom:20px;
+	}
+	
+	#header {
+		height:120px;
+		background:transparent url('../images/header-bg.jpg') no-repeat top center;
+	}
+
+/* =============================================================================
+   Page Styles
+   ========================================================================== */
+	div.botright{
+		display:block;
+
+		/*set the div in the bottom right corner*/
+		width:148px;
+		height:148px;
+		bottom: 0;
+		margin: 0;
+		padding: 0;
+		position: fixed;
+		right: 0;
+		
+		background:transparent url('../images/resize.png') no-repeat;
+	}
+	
+	.logo img {
+		margin-top:30px;
+	}
+	
+	.tag {
+		text-align:center;
+	}
+	
+	.tag img {
+		margin-top:40px;
+	}
+	
+	h2.fun {
+		color:#b32217;
+		font-weight:normal;
+		font-family: ArvoRegular, Rockwell, "Courier New", Courier, Georgia, Times, "Times New Roman", serif;
+		font-size:3.464em;
+		line-height:1;
+	}
+	
+	h3 {
+		font-size:2.143em;
+		color:#213355;
+		text-shadow: 1px 1px 1px #ffffff;
+		/*filter: dropshadow(color=#ffffff, offx=1, offy=1);*/
+		font-family: ArvoRegular, Rockwell, "Courier New", Courier, Georgia, Times, "Times New Roman", serif;
+		margin-bottom:10px;
+	}
+	
+	h4 {
+		color:#213355;
+		font-size:1.429em;
+		font-family: ArvoRegular, Rockwell, "Courier New", Courier, Georgia, Times, "Times New Roman", serif;
+	}
+	
+	#content-1 h3 {
+		width:90%;
+		background: transparent url('../images/dash.png') repeat-x bottom left;
+		padding-bottom:5px;
+	}
+	
+	#content-1 {
+		color:#000f2d;
+	
+		border-top:2px solid #79899c;
+		border-bottom:2px solid #79899c;
+	
+		background: -moz-linear-gradient(top,  rgba(70,99,147,0.25) 0%, rgba(70,99,147,0.25) 100%); /* FF3.6+ */
+		background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(70,99,147,0.25)), color-stop(100%,rgba(70,99,147,0.25))); /* Chrome,Safari4+ */
+		background: -webkit-linear-gradient(top,  rgba(70,99,147,0.25) 0%,rgba(70,99,147,0.25) 100%); /* Chrome10+,Safari5.1+ */
+		background: -o-linear-gradient(top,  rgba(70,99,147,0.25) 0%,rgba(70,99,147,0.25) 100%); /* Opera 11.10+ */
+		background: -ms-linear-gradient(top,  rgba(70,99,147,0.25) 0%,rgba(70,99,147,0.25) 100%); /* IE10+ */
+		background: linear-gradient(top,  rgba(70,99,147,0.25) 0%,rgba(70,99,147,0.25) 100%); /* W3C */
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#40466393', endColorstr='#40466393',GradientType=0 ); /* IE6-9 */
+	}
+	
+	.top-margin {
+		margin-top:2.143em;
+	}
+	
+	.dl {
+		margin-top:4em;
+	}
+	
+	.dl img {
+		margin-bottom:20px;
+	}
+	
+	.included h4 {
+		margin-bottom: 4px;
+		margin-top:5px;
+	}
+	
+	.included ul {
+		list-style-image: none;
+		list-style: none;
+		list-style-type: none;
+		padding-left:0;
+		margin-top:2px;
+	}
+	
+	.included ul li img, ul li ul li img { vertical-align:text-bottom; }
+	.included ul li ul{
+		padding:0 0 0 35px;
+	}
+	.bullet {
+		background:transparent url('../images/star.png') no-repeat 9px 5px;
+		display:block;
+		padding:0 0 0 35px;
+	}
+	
+	#footer-container {
+		height:35px;
+		background: url('../images/footer-bg.png');
+		font-size:1.143em;
+		padding-top:15px;
+		margin-top:10px;
+	}
+	
+	#twitter {
+		margin-left:77px;
+	}
+	
+	.ticker {
+		padding:0.5em 0;
+		background:#b32217;
+		text-align:center;
+		color:#fff;
+		font-size:0.8em;
+	}
+	
+	.ticker a {
+		color:#fff;
+	}
+
+/* =============================================================================
+   Media Queries
+   ========================================================================== */
+
+/* Tablet Portrait size to Base 996px */
+@media only screen and (min-width: 768px) and (max-width: 995px) {
+
+	#twitter {
+		margin-left:25px;
+	}
+
+}
+
+/* All Mobile Sizes */
+@media only screen and (max-width: 767px) {
+	div.botright{
+		display:none;
+	}
+	
+	.logo {
+		text-align:center;
+	}
+	
+	.logo img {
+	}
+	
+	.tag img {
+		margin-top:10px;
+		margin-bottom:20px;
+	}
+	
+	#header-wrapper {
+		height:153px;
+		background:transparent url('../images/header-bg-mobile.jpg') no-repeat;
+	}
+	
+	#header {
+		height:auto;
+		background:none;
+	}
+	
+	h2.fun {
+		margin-top:10px;
+	}
+	
+	h3 {
+		text-align:center;
+	}
+	
+	#content-1 h3 {
+		width:auto;
+	}
+	
+	#footer-container {
+		font-size:1.143em;
+		height:auto;
+		padding-bottom:10px;
+	}
+}
+
+/* Mobile Landscape Size to Tablet Portrait */
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+
+	#twitter {
+		margin-left:48px;
+	}
+
+}
+
+/* Mobile Portrait Size to Mobile Landscape Size */
+@media only screen and (max-width: 479px) {
+	#twitter {
+		margin-left:0px;
+	}
+}
+
+
+/* =============================================================================
+   Font-Face
+   ========================================================================== */
+
+@font-face {
+    font-family: 'ArvoRegular';
+    src: url('fonts/Arvo-Regular-webfont.eot');
+    src: url('fonts/Arvo-Regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/Arvo-Regular-webfont.woff') format('woff'),
+         url('fonts/Arvo-Regular-webfont.ttf') format('truetype'),
+         url('fonts/Arvo-Regular-webfont.svg#ArvoRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'ArvoItalic';
+    src: url('fonts/Arvo-Italic-webfont.eot');
+    src: url('fonts/Arvo-Italic-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/Arvo-Italic-webfont.woff') format('woff'),
+         url('fonts/Arvo-Italic-webfont.ttf') format('truetype'),
+         url('fonts/Arvo-Italic-webfont.svg#ArvoItalic') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'ArvoBold';
+    src: url('fonts/Arvo-Bold-webfont.eot');
+    src: url('fonts/Arvo-Bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/Arvo-Bold-webfont.woff') format('woff'),
+         url('fonts/Arvo-Bold-webfont.ttf') format('truetype'),
+         url('fonts/Arvo-Bold-webfont.svg#ArvoBold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'ArvoBoldItalic';
+    src: url('fonts/Arvo-BoldItalic-webfont.eot');
+    src: url('fonts/Arvo-BoldItalic-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/Arvo-BoldItalic-webfont.woff') format('woff'),
+         url('fonts/Arvo-BoldItalic-webfont.ttf') format('truetype'),
+         url('fonts/Arvo-BoldItalic-webfont.svg#ArvoBoldItalic') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}

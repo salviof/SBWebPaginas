@@ -1,0 +1,47 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:cc="http://java.sun.com/jsf/composite"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:SBForm="http://xmlns.jcp.org/jsf/composite/SBComp/composite/formulario"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <!-- INTERFACE -->
+    <cc:interface>
+        <cc:attribute name="acao" required="#{true}" type="com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.permissoes.ItfAcaoFormulario" />
+        <cc:attribute name="registro" required="true" type="com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfBeanSimples" />
+        <cc:attribute name="somenteLeitura" default="#{true}" />
+        <cc:attribute name="tipoVisualizacaoLabel" default="#{tipos.tipoVisualCampo.padrao}" />
+
+
+    </cc:interface>
+    <!-- IMPLEMENTATION -->
+    <cc:implementation>
+
+        <p:wizard flowListener="#{userWizard.onFlowProcess}" backLabel="Anterior" nextLabel="Proximo">
+
+            <c:forEach  var="wizard" items="#{cc.attrs.acao.gruposDeCampos}" varStatus="rec">
+
+                <p:tab title="Etapa #{rec.index + 1}" titletip="#{wizard.nomeGrupo}">
+
+                    <SBForm:camposDoGrupo registro="#{cc.attrs.registro}" grupoCampos="#{wizard}" tipoVisualizacaoLabel="#{cc.attrs.tipoVisualizacaoLabel}" somenteLeitura="#{cc.attrs.somenteLeitura}"/>
+
+                    <div class="quebraBlocoComEspacoVertical10"/>
+
+                </p:tab>
+
+            </c:forEach>
+
+        </p:wizard>
+
+    </cc:implementation>
+
+
+</ui:composition>
+
+
+
+
+
+
+
+

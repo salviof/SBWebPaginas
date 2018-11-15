@@ -1,0 +1,86 @@
+<ui:composition
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:cc="http://java.sun.com/jsf/composite"
+
+    xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+    xmlns:SBInput="http://xmlns.jcp.org/jsf/composite/SBComp/composite/input"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:panelGroup >
+        <!-- INTERFACE -->
+
+        <p:commandButton
+            id="botaoRemoverSubform"
+            action="#{registro.comoSubItens.subItens.removerItemSelecionadoPeloIndice() }"
+            update="#{pgUtil.makeCaminhoCompletoID('subForm')}"
+            styleClass="invisivel"
+            process="@this"
+            />
+
+
+        <p:inputText  id="indiceSubformulario"  styleClass="invisivel"  />
+
+
+
+        <h:panelGroup id="subForm" styleClass="Container12 Responsive">
+
+
+            <div class=" Container2 Responsive Fright" style="float:right!important;">
+
+                <p:commandButton
+                    actionListener="#{registro.comoSubItens.subItens.adicionarItem()}"
+                    update="#{pgUtil.makeCaminhoCompletoID('subForm')}"
+                    process="@this"
+                    value="#{registro.comoSubItens.subItens.acaoAdicionarItem.nomeAcao}"
+                    />
+            </div>
+
+            <c:forEach items="#{registro.valor}" var="itemDaLista" varStatus="infoRec" >
+
+                <br/>
+                <h:form>
+                    <c:forEach items="#{grupoCampos.campos}" var="cpItem">
+                        <div class="Container2 ">
+
+                            <SBInput:input registro="#{itemDaLista.getCampoByNomeOuAnotacao(cpItem.caminhoParcialSemListaPai)}"  layout="#{layoutsComponenteSB.layoutCampo.superior}"
+                                           idAtualizarOnChange="@this"
+
+                                           />
+                        </div>
+
+                    </c:forEach>
+
+                    <div class="Container2 ">
+
+
+
+                        <p:commandLink
+                            process="@this"
+                            onclick="modificarIntputEclicar('#{pgUtil.gerarCaminhoCompletoIDParaJavaScript('botaoRemoverSubform')}', '#{pgUtil.gerarCaminhoCompletoIDParaJavaScript('indiceSubformulario')}', '#{infoRec.index}')">
+                            <i class="fa fa-minus Fs30" aria-hidden="true"></i>
+                        </p:commandLink>
+
+                    </div>
+                    <div class="quebraBlocoComEspacoVertical3" >
+
+                        <p:separator/>
+                    </div>
+                </h:form>
+                <div class="quebraBlocoComEspacoVertical100"/>
+
+
+            </c:forEach>
+
+
+
+        </h:panelGroup>
+    </h:panelGroup>
+
+
+</ui:composition>
+
+
+
+
+
+

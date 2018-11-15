@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:SBLogin="http://xmlns.jcp.org/jsf/composite/SBComp/composite/login"
+    xmlns:SBAcaoNav="http://xmlns.jcp.org/jsf/composite/SBComp/composite/acoesENavegacao"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+
+
+    <div class="Container12 BordBottom GrayBack loginback">
+
+        <div class="quebraBlocoComEspacoVertical6"></div>
+
+        <div class="Wid90 MarAuto">
+            <div class="Wid90 DispBlock MarAuto WidAutoOnMobile">
+                <div class="Card TexAlCenter" style="margin-bottom:-100px">
+
+
+                    <div class="Card SoftGrayBack">
+                        <div class="quebraBlocoComEspacoVertical3"></div>
+                        <i class="fa fa-key DispBlock Fs100 BlackOpac"></i>
+                        <div class="quebraBlocoComEspacoVertical4"></div>
+                        <div class="Wid100 Fs30 FontAdamantiumBold Red MarAuto">Acesso Negado <br/> </div>
+                        <div class="quebraBlocoComEspacoVertical10"></div>
+                        <div class="Wid80 Fs18 FontAdamantiumRegular Fnone MarAuto">:( O Acesso a esta pagina está bloqueado.</div>
+                        <div class="Wid80 Fs18 FontAdamantiumRegular Fnone MarAuto">
+
+
+
+
+                            <SBLogin:infoLogin ocultarFormulario="false" />
+
+                            <SBAcaoNav:irParaPaginaInicial />
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+
+        <div class="quebraBlocoComEspacoVertical10">
+
+
+
+        </div>
+
+    </div>
+
+
+</ui:define>
+
+
+</ui:composition>

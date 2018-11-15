@@ -1,0 +1,214 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/*
+    Created on : 24/08/2017, 21:53:22
+    Author     : Salvio Furbino
+*/
+
+.colunaLabel{
+    width: 120px;
+    text-align: left;
+
+}
+.colunaResponsiva{
+    width: auto;
+
+}
+
+.InputColunaSuperiorConteudoLeitura{
+    background-color: #f7f5f3!important;
+    display: inline-block;
+    vertical-align: top;
+    min-height: 30px;
+    width: 99%;
+}
+
+.InputColunaSuperiorConteudo{
+
+
+}
+.InputColunaSuperiorLabel{
+
+}
+.InputColunaSuperiorMensagem{
+}
+
+.InputSBSuperior{
+    width: 100%;
+}
+
+.InputSBEsquerda{
+
+
+}
+.InputSBEsquerdaConteudoSomenteLeitura{
+    background-color: #f7f5f3!important;
+    display: inline-block;
+    vertical-align: top;
+    min-height: 30px;
+    width: 99%;
+}
+.InputSBEsquerdaConteudo{
+    width: 99%;
+}
+.InputSBEsquerdaLabel{
+    text-align: center;
+    width: 120px;
+
+}
+
+.InputSBEsquerdaLabel label{
+    width: 120px;
+}
+.InputSBEsquerdaMensagem{
+
+}
+
+
+.listaComOcoesOcultaFitro{
+    height: 5px!important;
+    display: none!important;
+}
+
+.inputCampo{
+    width:   100%!important;
+    border : none!important;
+    position: relative;
+
+}
+.panelGridEsquerda{
+    border: none;
+}
+.panelGridSuperior{
+    border: none;
+}
+.colunaLabel{
+    width: 120px;
+}
+.campoMascara{
+}
+.campoGrande{}
+.campoMultiplasLinhas{}
+.camoMinimoEMaximo{}
+.campoSenha{}
+.campoCEP{}
+.campoCor{}
+.campoHTML{}
+.campoQuantidade{
+    width: 10% !important;
+}
+.campoMoeda{
+    width: 10%  !important;
+}
+.campoEmail{}
+.campoData{
+    width: 15%  !important;
+}
+.campoDataHora{}
+.campoLigadoDesligado{}
+.campoEntidadeSimples{}
+
+
+/* CSS OLD APENAS PARA COMPATIBILIDADE MOMENTANEA, SERÁ EXCLUIDO  */
+.colunaLabel{
+    width: 120px;
+}
+.colunaResponsiva{
+    width: auto;
+
+}
+.colunaCampoFixo{
+
+}
+.campoResponsivo{
+    width:   98%!important;
+
+}
+
+.campoResponsivo input{
+    width:   98%!important;
+
+}
+.ui-selectonemenu, .ui-selectcheckboxmenu {
+    padding:  0px 11px 0px 0px !important;
+}
+.inputUploadGrande div span  span:nth-child(2)
+{
+
+    width: 100%!important;
+    height: 50%!important;
+    margin-top: 100%;
+    font-size: 16px;
+
+}
+.inputUploadGrande div span {
+    width: 100%!important;
+
+}
+
+.inputUploadGrande div span  span:nth-child(1)
+{
+
+    width: 20px!important;
+
+}
+
+
+
+.campoSimples{
+
+
+}
+
+.seletorResponsivo{
+    width:   100%!important;
+}
+
+.tabelaFormulario{
+    width:   100%!important;
+}
+
+
+.invisivel{
+    visibility: hidden;
+    display: none;
+}
+
+.Coluna20{
+    width: 20%;
+}
+.Coluna80{
+    width: 80%;
+}
+
+.Coluna10{
+    width: 10%;
+}
+.Coluna90{
+    width: 90%;
+}
+.IconePequeno{
+    width: 10px;
+}
+
+.col-md-1.ColunaPequenaBotstrap span span input{
+    width: 120px!important;
+
+}
+
+
+.estiloBotoaoEnviarArquivo {
+
+}
+
+.autoCompleteResponsivo {
+    width: 100%!important;
+}
+
+.autoCompleteResponsivo input{
+    width: 100%!important;
+}
+

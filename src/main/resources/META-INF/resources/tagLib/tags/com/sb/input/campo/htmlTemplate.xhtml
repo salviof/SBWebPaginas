@@ -1,0 +1,49 @@
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:p="http://primefaces.org/ui"
+    >
+    <ui:decorate template="#{layout.xhtmlJsfCaminhoRelativo}">
+        <ui:define name="input">
+
+            <p:editor height="300" style="width: 100%"
+                      rendered="#{desabilitarEdicao}"
+                      value="#{valor}"
+                      disabled="true"
+                      />
+            <p:fieldset styleClass="Container12 Responsive" style="height: 300px; "
+                        rendered="#{!desabilitarEdicao}"
+                        >
+                <h:inputTextarea
+                    style="width: 0px; height: 0px;"
+                    title="teste"
+                    value="#{valor}"
+                    styleClass="invisivel"
+                    >
+                    <f:passThroughAttribute name="palavras_placeholder" value="#{registro.comoTemplate.opcoesPalavaChaveJson}" />
+                </h:inputTextarea>
+                <p:inputTextarea value="#{valor}" style="width: 1px; height: 1px;"  styleClass="invisivel"/>
+                <script src="#{infoWebApp.urlPagina}/libUrlPadrao/ckeditor/ckeditor.js"></script>
+                <script type="text/javascript">
+
+                    function recarregarCK#{component.id}() {
+                        CKEDITOR.replace('#{pgUtil.getIDComponenteFilhoPorCordenada(component,0)}', {
+                            extraPlugins: 'placeholderSeletor'
+                        });
+                        CKEDITOR.instances['#{pgUtil.getIDComponenteFilhoPorCordenada(component,0)}'].on('change', function () {
+                            copiarValoresCKEditor('#{pgUtil.getIDComponenteFilhoPorCordenada(component,0)}', '#{pgUtil.getIDComponenteFilhoPorCordenada(component,1)}');
+                        });
+                    }
+                    recarregarCK#{component.id}();
+                </script>
+
+            </p:fieldset>
+
+
+        </ui:define>
+
+    </ui:decorate>
+</ui:composition>

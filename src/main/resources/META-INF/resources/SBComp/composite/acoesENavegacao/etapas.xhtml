@@ -1,0 +1,104 @@
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:cc="http://xmlns.jcp.org/jsf/composite"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:sb="http://superbitsframework/ui"
+    xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <!-- INTERFACE -->
+    <cc:interface>
+
+        <cc:attribute name="etapascriando"
+                      required="true"
+                      type="com.super_bits.modulosSB.webPaginas.JSFBeans.SBBeanModel.etapas.B_Etapas"
+                      default="#{pgUtil.campoNaoImplementado}"
+                      />
+
+        <cc:attribute
+
+            type="java.util.ArrayList"
+            name="itens"
+            required="true"
+
+            />
+
+        <cc:attribute
+
+            method-signature="void listener()"
+            name="metodo"
+            required="false"
+
+            />
+
+
+    </cc:interface>
+    <!-- IMPLEMENTATION -->
+    <cc:implementation>
+        <h:outputStylesheet name="steps.css" library="css" />
+        <h:panelGroup rendered="#{!paginaAtual.sessao.telaUsuario.umMobile}">
+
+            <div class="stepwizard">
+
+                <div class="stepwizard-row">
+
+                    <c:forEach items="#{cc.attrs.etapascriando.listaDeAcoes}" var="etapaDesktop" varStatus="posicaoDesktop">
+
+
+                        <h:panelGroup class="stepwizard-step  ui-fluid Responsive" rendered="#{cc.attrs.etapascriando.isSelecionadaAtual(etapaDesktop)}" >
+                            <button type="button" class="btn btn-primary btn-circle">#{posicaoDesktop.index +1}</button>
+                            <p>#{etapaDesktop.nomeAcao}</p>
+                        </h:panelGroup>
+
+                        <h:panelGroup  class="stepwizard-step  ui-fluid Responsive"  rendered="#{!cc.attrs.etapascriando.isSelecionadaAtual(etapaDesktop)}">
+
+                            <button type="button" class="btn btn-default btn-circle">#{posicaoDesktop.index +1}</button>
+                            <p>#{etapaDesktop.nomeAcao}</p>
+                        </h:panelGroup>
+
+                    </c:forEach>
+
+                </div>
+
+            </div>
+
+        </h:panelGroup>
+
+        <h:panelGroup rendered="#{paginaAtual.sessao.telaUsuario.umMobile}">
+
+            <div class="row bs-wizard" style="border-bottom:0;">
+
+                <c:forEach items="#{cc.attrs.etapascriando.listaEtapasMobile()}" var="etapaMobile" varStatus="posicaoMobile">
+
+                    <h:panelGroup rendered="#{cc.attrs.etapascriando.isSelecionadaAtual(etapaMobile)}" >
+
+                        <div class="col-md-4 bs-wizard-step active"><!-- active -->
+                            <div class="text-center bs-wizard-stepnum">#{etapaMobile.nomeAcao}</div>
+                            <div class="progress"><div class="progress-bar"></div></div>
+                            <a href="#" class="bs-wizard-dot"><span class="glyphicon" aria-hidden="true"></span></a>
+
+                        </div>
+
+                    </h:panelGroup>
+
+                    <h:panelGroup rendered="#{!cc.attrs.etapascriando.isSelecionadaAtual(etapaMobile)}" >
+
+                        <div class="col-md-4 bs-wizard-step disabled"><!-- disabled -->
+                            <div class="text-center bs-wizard-stepnum">#{etapaMobile.nomeAcao}</div>
+                            <div class="progress"><div class="progress-bar"></div></div>
+                            <a href="#" class="bs-wizard-dot"><span class="glyphicon" aria-hidden="true"></span></a>
+                        </div>
+
+                    </h:panelGroup>
+
+                </c:forEach>
+
+            </div>
+
+        </h:panelGroup>
+
+
+        <div class="SeparatorFull"/>
+
+    </cc:implementation>
+</ui:composition>

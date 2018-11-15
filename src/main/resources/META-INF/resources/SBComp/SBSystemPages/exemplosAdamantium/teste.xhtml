@@ -1,0 +1,98 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="head">
+        <style type="text/css">
+            .calendarDemo .ui-inputfield {
+                width: 68%;
+            }
+        </style>
+    </ui:define>
+
+    <ui:define name="subheader">
+        Forms
+    </ui:define>
+
+    <ui:define name="content">
+
+        <div class="Container12">
+            <div class="ContainerIndent">
+                <div class="Card ui-fluid">
+
+                    <div class="CardTopic">SelectCheckBoxMenu - Input Switch - SelectOneListBox</div>
+                    <div class="SeparatorFull"></div>
+                    <div class="Container3 ">
+                        <div class="ContainerIndent">
+
+                            <h2 class="BigTopic">SelectCheckBoxMenu</h2>
+
+                            <h:panelGrid columns="2" style="width: 100%; padding: 5px;" columnClasses="colunaAEsquerda,colunaDireita" >
+
+                                <p:outputLabel value="Nome" style=""/>
+                                <p:autoComplete styleClass=""
+
+
+                                                dropdown="true" value="#{autoCompleteView.txt6}" completeMethod="#{autoCompleteView.completeText}" style="width:94%;"/>
+
+                            </h:panelGrid>
+
+
+                            <h:panelGrid columns="2" style="width: 100%; padding: 5px;" columnClasses="colunaAEsquerda,colunaDireita" >
+
+                                <p:outputLabel value="Nome Graaaaa" style=""/>
+                                <p:autoComplete styleClass=""
+
+
+                                                dropdown="true" value="#{autoCompleteView.txt6}" completeMethod="#{autoCompleteView.completeText}" style="width:94%;"/>
+
+                            </h:panelGrid>
+
+
+                            <!-- inicio-->
+
+                            <div id="j_idt66" class="ui-selectcheckboxmenu ui-widget ui-state-default ui-corner-all">
+                                <div class="ui-helper-hidden-accessible">
+                                    <input id="j_idt66_focus" name="j_idt66_focus" type="text" readonly="readonly"/>
+                                </div>
+                                <div class="ui-helper-hidden">
+                                    <input id="j_idt66:0" name="j_idt66" type="checkbox" value="1" data-escaped="true"/>
+                                    <label for="j_idt66:0">Option 1</label>
+                                    <input id="j_idt66:1" name="j_idt66" type="checkbox" value="2" data-escaped="true"/>
+                                    <label for="j_idt66:1">Option 2</label>
+                                    <input id="j_idt66:2" name="j_idt66" type="checkbox" value="3" data-escaped="true"/>
+                                    <label for="j_idt66:2">Option 3</label>
+                                </div>
+                                <span class="ui-selectcheckboxmenu-label-container">
+                                    <label class="ui-selectcheckboxmenu-label ui-corner-all">Cities</label>
+                                </span>
+                                <div class="ui-selectcheckboxmenu-trigger ui-state-default ui-corner-right">
+                                    <span class="ui-icon ui-icon-triangle-1-s"></span>
+                                </div>
+                            </div>
+                            <!--fim-->
+                        </div>
+
+                    </div>
+                    <div class="Container3 ">
+                        <div class="ContainerIndent">
+                            <h2 class="BigTopic">Input Switch</h2>
+                            asdasdasd
+                        </div>
+                    </div>
+                    <div class="Container3 ">
+                        <div class="ContainerIndent">
+                            <p:autoComplete styleClass="" id="dd22" dropdown="true" value="#{autoCompleteView.txt6}" completeMethod="#{autoCompleteView.completeText}" style=""/>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ui:define>
+
+</ui:composition>

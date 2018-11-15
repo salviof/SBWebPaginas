@@ -1,0 +1,24 @@
+<ui:composition
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <p:commandButton onmousedown="esconderTooltips();"
+                     styleClass="btnIconeENome botao"
+                     icon="#{acao.iconeAcao}"
+                     action="#{prMetodo}"
+                     update="#{pgUtil.makeCaminhoCompletoID(idUpdate)}"
+                     oncomplete="#{javaScriptOncomplete}"
+                     >
+        <f:setPropertyActionListener target="#{destino}"
+                                     value="#{origem}"  />
+        <p:tooltip
+            for="@parent"
+            value="#{acao.nomeAcao}"
+            trackMouse="true"
+            />
+    </p:commandButton>
+</ui:composition>
+
+

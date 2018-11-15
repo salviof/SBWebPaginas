@@ -1,0 +1,102 @@
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:SBInput="http://xmlns.jcp.org/jsf/composite/SBComp/composite/input"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+    xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:decorate   template="#{layout.xhtmlJsfCaminhoRelativo}">
+
+
+        <ui:define name="input">
+
+
+            <p:outputLabel value="#{valor.nome}" rendered="#{desabilitarEdicao}" />
+
+            <h:panelGrid columns="3" style="width: 100%;" columnClasses="colunaResponsiva,tamanhoIconePequeno,tamanhoIconePequeno" rendered="#{!desabilitarEdicao}" >
+                <h:panelGroup >
+                    <p:autoComplete
+
+                        styleClass="autoCompleteResponsivo"
+                        rendered="#{registro.umItemDeUmaLista}"
+                        converter="conversorGenerico"
+                        itemLabel="#{item.nome}"
+
+                        itemValue="#{item}"
+                        forceSelection="true"
+                        emptyMessage="Nada Selecionado"
+                        placeholder="Pesquise por um #{label}"
+                        var="item"
+                        value="#{registro.valor}"
+                        minQueryLength="4"
+                        queryDelay="300"
+                        completeMethod="#{registro.comoCampoSeltorItem.filtrarPorAutoComplet}"
+                        >
+                        <c:if test="#{possuiMetodoOnChange}">
+                            <p:ajax rendered="#{possuiMetodoOnChange}"
+                                    global="true"
+                                    event="itemSelect"
+                                    listener="#{prMetodo}"/>
+                        </c:if>
+                        <c:if test="#{possuiIDOnChange}">
+                            <p:ajax
+                                rendered="#{possuiIDOnChange}"
+                                global="true"
+                                event="itemSelect"
+                                listener="#{pgUtil.atualizaTelaPorID(idAtualizarOnChange)}"
+                                />
+                        </c:if>
+
+                        <ui:repeat var="campo" rendered="#{registro.umItemDeUmaLista}" value="#{registro.comoCampoSeltorItem.grupoCampoExibicao.campos}">
+                            <p:column>
+                                #{item.getCampoByNomeOuAnotacao(campo.caminhoSemNomeClasse).valorTextoFormatado}
+                            </p:column>
+
+                        </ui:repeat>>
+
+
+                    </p:autoComplete>
+                </h:panelGroup>
+                <h:panelGroup >
+
+                    <p:commandButton
+                        icon="#{acoesPaginasDoSistema_PaginaPesquisaAvancadaMbPadrao.paginaPesquisaAvancadaMbPadrao.icone}"
+                        rendered="#{!desabilitarEdicao}"
+                        actionListener="#{pgUtil.exibirModalImportacaoPesquisaAvancada()}"
+                        partialSubmit="true"
+                        process="@this"
+                        >
+
+
+                        <p:ajax event="dialogReturn"
+                                update="@form"
+                                listener="#{pgUtil.atualizaTelaPorID(pgUtil.getIdDoComponenteAtual(component))}" />
+
+                        <c:if test="#{possuiIDOnChange}" >
+                            <p:ajax
+                                rendered="#{possuiIDOnChange}"
+                                global="true"
+                                event="dialogReturn"
+                                listener="#{pgUtil.atualizaTelaPorID(idAtualizarOnChange)}"
+                                />
+                        </c:if>
+                        <c:if test="#{possuiMetodoOnChange}">
+                            <p:ajax rendered="#{possuiMetodoOnChange}"
+                                    global="true"
+                                    event="dialogReturn"
+                                    listener="#{prMetodo}"/>
+                        </c:if>
+                        <f:setPropertyActionListener target="#{paginaAtual.infoPagina.comoFormularioWeb.campoInstSelecionado}"
+                                                     value="#{registro}" />
+
+                    </p:commandButton>
+                </h:panelGroup>
+
+            </h:panelGrid>
+
+
+
+        </ui:define>
+    </ui:decorate>
+</ui:composition>

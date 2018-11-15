@@ -1,0 +1,162 @@
+<ui:composition
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:sb="http://superbitsframework/ui"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:panelGroup  layout="block"  id="inputFormPadrao"   >
+
+        <sb:parametroMetodo nome="prMetodo" valor="#{metodoOnChange}" rendered="#{possuiMetodoOnChange}" />
+        <ui:param name="xhtmlINPUT" value="#{registro.getComponenteDiferenciado(layoutCampoEspecial).xhtmlJsfCaminhoRelativo}" />
+
+        <ui:param name="layout" value="#{layoutCampo}"/>
+        <ui:param name="registro" value="#{registro}" />
+        <ui:param name="componente" value="#{registro.getComponenteDiferenciado(layoutCampoEspecial)}"  />
+        <ui:param name="prefixoID" value="#{registro.prefixoUnicoParaIDHtml}"  />
+        <ui:param name="numCasaDecimal"  value="#{registro.numeroDeCasasDecimais}"/>
+
+        <ui:param name="valor" value="#{registro.valor}"/>
+        <ui:param name="obrigatorio" value="#{registro.obrigatorio}"/>
+        <ui:param name="nomeItem" value="#{registro.label}"/>
+        <ui:param rendered="#{registro.umValorComLista}" name="lista" value="#{registro.listaDeOpcoes}"/>
+        <ui:param name="regex" value="#{registro.validacaoRegex}" rendered="#{registro.temValidacaoRegex}"/>
+        <ui:param name="valorMaximo" value="#{registro.valorMaximo}" />
+        <ui:param name="valorMinimo" value="#{registro.valorMinimo}" />
+        <ui:param name="mascara" value="#{registro.mascaraJqueryMode}" rendered="#{registro.temMascara}"/>
+        <ui:param name="atualizarFormOnChange" value="#{atualizarFormOnChange}"/>
+        <ui:param name="idAtualizarOnChange" value="#{idAtualizarOnChange}" />
+
+
+
+        <ui:fragment rendered="#{xhtmlINPUT==compSBCompVisualInputs.texto_Com_FOrmatacao.xhtmlJsfCaminhoRelativo}">
+            <sb:inputSBTextMascara />
+        </ui:fragment>
+        <ui:fragment
+            rendered="#{compSBCompVisualInputs.texto_multiplas_Linhas.isXhtmlJSFCaminhoRelativoIgualA(xhtmlINPUT)}">
+            <sb:inputSBTextDEscritivo />
+        </ui:fragment>
+
+        <ui:fragment  rendered="#{xhtmlINPUT==compSBCompVisualInputs.moeda.xhtmlJsfCaminhoRelativo}"  >
+            <sb:inputSBMoeda />
+        </ui:fragment>
+
+        <ui:fragment rendered="#{xhtmlINPUT==compSBCompVisualInputs.texto_Sem_Formatacao.xhtmlJsfCaminhoRelativo}">
+            <sb:inputSBSimples />
+
+        </ui:fragment>
+
+        <ui:fragment  rendered="#{xhtmlINPUT==compSBCompVisualInputs.HTML.xhtmlJsfCaminhoRelativo}"  >
+            <sb:inputSBHtml />
+        </ui:fragment>
+
+
+        <ui:fragment  rendered="#{xhtmlINPUT==compSBCompVisualInputs.data.xhtmlJsfCaminhoRelativo}"  >
+            <sb:inputSBData />
+        </ui:fragment>
+
+        <ui:fragment  rendered="#{xhtmlINPUT==compSBCompVisualInputs.data_Hora.xhtmlJsfCaminhoRelativo}"  >
+            <sb:inputSBDataHora />
+        </ui:fragment>
+        <ui:fragment  rendered="#{xhtmlINPUT==compSBCompVisualInputs.senha.xhtmlJsfCaminhoRelativo}"  >
+            <sb:inputSBSenha />
+        </ui:fragment>
+
+        <ui:fragment  rendered="#{xhtmlINPUT==compSBCompVisualInputs.quantidade.xhtmlJsfCaminhoRelativo}"  >
+            <sb:inputSBQuantidade  />
+        </ui:fragment>
+
+
+        <ui:fragment  rendered="#{xhtmlINPUT==compSBCompVisualInputs.valor_com_minimo_e_Maximo.xhtmlJsfCaminhoRelativo}"  >
+            <sb:inputSBMinMax />
+        </ui:fragment>
+
+
+        <ui:fragment  rendered="#{xhtmlINPUT==compSBCompVisualInputs.email.xhtmlJsfCaminhoRelativo}"  >
+            <sb:inputSBEmail />
+        </ui:fragment>
+
+        <ui:fragment  rendered="#{xhtmlINPUT==compSBCompVisualSeletorItem.combo.xhtmlJsfCaminhoRelativo}"  >
+
+            <sb:inputSBCombo  />
+        </ui:fragment>
+
+        <ui:fragment  rendered="#{xhtmlINPUT==compSBCompVisualSeletorItem.auto_Complete.xhtmlJsfCaminhoRelativo}"  >
+            <sb:inputSBSelAutoCompletar />
+        </ui:fragment>
+
+        <ui:fragment  rendered="#{xhtmlINPUT==compSBCompVisualSeletorItem.carrousel.xhtmlJsfCaminhoRelativo}"  >
+            <sb:inputSBCarroussel />
+        </ui:fragment>
+        <ui:fragment  rendered="#{xhtmlINPUT==compSBCompVisualSeletorItem.grade.xhtmlJsfCaminhoRelativo}"  >
+            <sb:inputSBGrade />
+        </ui:fragment>
+
+        <ui:fragment  rendered="#{xhtmlINPUT==compSBCompVisualSeletorItem.menu_em_Botoes.xhtmlJsfCaminhoRelativo}"  >
+            <sb:inputSBmenuBotoes />
+        </ui:fragment>
+
+        <ui:fragment  rendered="#{xhtmlINPUT==compSBCompVisualSeletorItem.radio.xhtmlJsfCaminhoRelativo}"  >
+            <sb:inputSBradio  />
+        </ui:fragment>
+
+        <ui:fragment rendered="#{xhtmlINPUT==compSBCompVisualInputs.arquivo_de_Entidade.xhtmlJsfCaminhoRelativo}">
+            <sb:inputSBArquivoDeEntidade  />
+        </ui:fragment>
+
+
+
+        <h:panelGroup rendered="#{registro.umCampoCampoLocalizacao}">
+            <ui:fragment  rendered="#{xhtmlINPUT==compSBCompVisualEndereco.endereco.xhtmlJsfCaminhoRelativo}">
+                <sb:inputSBEndereco />
+            </ui:fragment>
+        </h:panelGroup>
+
+        <ui:fragment rendered="#{xhtmlINPUT==compSBCompVisualSeletorItens.pickList.xhtmlJsfCaminhoRelativo}">
+            <sb:inputSBPickList  />
+        </ui:fragment>
+
+        <ui:fragment rendered="#{xhtmlINPUT==compSBCompVisualInputs.ligado_ou_Desligado.xhtmlJsfCaminhoRelativo}">
+            <sb:ligadoDesligado  />
+        </ui:fragment>
+
+        <ui:fragment rendered="#{xhtmlINPUT==compSBCompVisualInputs.cor.xhtmlJsfCaminhoRelativo}">
+            <sb:inputSBCor  />
+        </ui:fragment>
+
+
+        <ui:fragment rendered="#{xhtmlINPUT==compSBcompVisualEnums.enum_AtutoComplete.xhtmlJsfCaminhoRelativo}" >
+            <sb:inputSBEnumAutoComplete />
+        </ui:fragment>
+        <ui:fragment rendered="#{xhtmlINPUT==compSBcompVisualEnums.enum_Grade.xhtmlJsfCaminhoRelativo}" >
+            <sb:inputSBEnumGrade  />
+        </ui:fragment>
+
+
+        <ui:fragment rendered="#{xhtmlINPUT==compSBCompVisualEndereco.bairro.xhtmlJsfCaminhoRelativo}">
+            <sb:inputSBBairro />
+        </ui:fragment>
+
+        <ui:fragment rendered="#{xhtmlINPUT==compSBCompVisualEndereco.cidade.xhtmlJsfCaminhoRelativo}">
+            <sb:inputSBCidade />
+        </ui:fragment>
+
+        <ui:fragment rendered="#{xhtmlINPUT==compSBCompVisualEndereco.unidade_federativa_Estado.xhtmlJsfCaminhoRelativo}">
+            <sb:inputSBestadoUF />
+        </ui:fragment>
+        <ui:fragment  rendered="#{xhtmlINPUT==compSBCompVisualEndereco.cep.xhtmlJsfCaminhoRelativo}"  >
+            <sb:inputSBCep />
+        </ui:fragment>
+
+        <ui:fragment  rendered="#{xhtmlINPUT==compSBCompVisualSubItens.subFormSimples.xhtmlJsfCaminhoRelativo}"  >
+            <sb:inputSBSubFormSimples />
+        </ui:fragment>
+
+        <ui:fragment  rendered="#{xhtmlINPUT==compSBCompVisualInputs.HTML_Template.xhtmlJsfCaminhoRelativo}"  >
+            <sb:inputSBHtmlTemplate />
+        </ui:fragment>
+
+
+
+
+    </h:panelGroup>
+</ui:composition>

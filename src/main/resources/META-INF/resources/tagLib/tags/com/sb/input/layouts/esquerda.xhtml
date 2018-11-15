@@ -1,0 +1,28 @@
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:p="http://primefaces.org/ui">
+
+
+    <h:panelGrid columns="2"  class="inputCampo"
+                 columnClasses="#{layoutsComponenteSB.layoutCampo.superior.getEstiloColuna(desabilitarEdicao)}"
+
+                 >
+        <p:outputLabel  value="#{label}"
+                        for="#{pgUtil.getNomeIdComponenteInput(component)}"  />
+        <h:panelGroup >
+            <ui:insert name="input" />
+            <p:message  for="#{pgUtil.getNomeIdComponenteInput(component)}" />
+        </h:panelGroup>
+        <p:tooltip  rendered="#{registro.temDescricao}"
+                    for="#{pgUtil.getNomeIdComponenteInput(component)}"
+                    value="Info: #{registro.descricao}"
+                    />
+
+
+    </h:panelGrid>
+
+
+</ui:composition>

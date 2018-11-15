@@ -1,0 +1,102 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:cc="http://java.sun.com/jsf/composite"
+
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <!-- INTERFACE -->
+
+    <cc:interface>
+
+        <cc:attribute name="resposta" type="com.super_bits.modulosSB.SBCore.modulos.comunicacao.ItfRespostaComunicacao"
+                      shortDescription="A ação que será exibida " />
+        <cc:attribute name="armazenamentoAcaoExecutada"
+                      shortDescription="Ben para armazenar esta ação quando clicada, Esta opção só é exexutada com o atributo deste botão armazenarAcaoSelecionada for true "
+                      required="true"
+                      />
+
+
+        <cc:attribute name="javaScriptOncomplete"  default=""
+                      shortDescription="Javascript que deve ser executado após a execucao do botão"
+                      />
+        <cc:attribute name="tipoVisualizacao"
+                      type="com.super_bits.modulosSB.SBCore.modulos.view.fabricasCompVisual.ItfComponenteVisualSB"
+                      default="#{layoutsComponenteSB.layoutBotoes.iconeENome}"
+                      shortDescription="Tipo de visualização do botão (Utilize #tipos.tipoVisualBotao"
+                      />
+        <cc:attribute name="cor"
+                      default="#{null}"
+                      shortDescription="Cor do botão caso ele deva ser exibido por em uma cor especifica"
+                      />
+        <cc:attribute name="modalResposta" />
+
+
+
+        <cc:attribute name="label"
+                      shortDescription="Label do botão"
+                      default="#{cc.attrs.resposta.botaoAcao.nomeAcao}"
+                      type="java.lang.String"
+                      />
+
+
+        <cc:attribute name="metodo"  method-signature="void listener()"
+                      required="true"
+                      shortDescription="Metodo que será chamado ao selecionar uma ação"
+                      />
+
+
+    </cc:interface>
+    <!-- IMPLEMENTATION -->
+    <cc:implementation>
+
+
+        <p:commandButton
+            rendered="#{cc.attrs.resposta.tipoResposta.respostasPosiva}"
+
+            styleClass="btnIconeENome botao"
+            icon="#{cc.attrs.resposta.tipoResposta.icone}"
+            action="#{cc.attrs.metodo}"
+            value="#{cc.attrs.resposta.tipoResposta.nome}"
+            update="@form"
+            oncomplete="#{cc.attrs.javaScriptOncomplete}"
+            >
+
+            <f:setPropertyActionListener target="#{cc.attrs.armazenamentoAcaoExecutada}"
+                                         value="#{cc.attrs.resposta}"  />
+        </p:commandButton>
+
+        <p:commandButton
+            rendered="#{!cc.attrs.resposta.tipoResposta.respostasPosiva}"
+            styleClass="btnIconeENome botao"
+
+            icon="#{cc.attrs.resposta.tipoResposta.icone}"
+            action="#{cc.attrs.metodo}"
+            value="#{cc.attrs.resposta.tipoResposta.nome}"
+            update="@form"
+            process="@this"
+            oncomplete="#{cc.attrs.javaScriptOncomplete}"
+            >
+
+            <f:setPropertyActionListener target="#{cc.attrs.armazenamentoAcaoExecutada}"
+                                         value="#{cc.attrs.resposta}"  />
+        </p:commandButton>
+
+
+
+
+
+
+
+    </cc:implementation>
+</ui:composition>
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,73 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/*
+    Created on : 24/08/2017, 21:53:22
+    Author     : Salvio Furbino
+*/
+
+
+/*  [AJUSTES EM TABELAS PRIMEFACES]
+
+- Retirando Padding da tabela
+*/
+.ui-datatable .ui-datatable-header{
+    padding: 0 !important;
+}
+
+/*
+- Retirando Padding do conteudo da tabela
+*/
+.ui-datatable-tablewrapper table tbody tr td{
+    padding: 3px!important;
+}
+
+.ui-datatable-tablewrapper {
+    margin: 0px!important;
+}
+ui-datatable-header.ui-widget-header.ui-corner-top{
+    padding: 0 !important;
+
+}
+.ui-datatable table tbody tr td{
+    word-break: break-word;
+}
+
+/* Colocando modal de dialogo por cima de tudo*/
+.ui-dialog{
+    z-index: 20000!important;
+}
+
+.invisivel{
+    visibility: hidden;
+}
+
+
+
+.ui-growl {
+    z-index: 999!important;
+    position: fixed;
+    top: 120px!important;
+    right: 100px!important;
+    width: 80%!important;
+}
+
+.ui-growl-message {
+    padding: 0 0 5px 0!important;
+    width: 80%!important;
+    float: left!important;
+}
+
+
+.ui-datatable table thead tr th, .ui-datatable table tfoot tr td, .ui-datatable table thead tr th{
+    font-size: 12px!important;
+
+}
+/* desabilitando o icone  shortColuna das tabelas*/
+.ui-sortable-column-icon.ui-icon.ui-icon-carat-2-n-s{
+    display: none;
+}
+
+

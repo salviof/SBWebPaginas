@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:SBAcaoNav="http://xmlns.jcp.org/jsf/composite/SBComp/composite/acoesENavegacao"
+      xmlns:SBInput="http://xmlns.jcp.org/jsf/composite/SBComp/composite/input">
+
+
+    <ui:composition template="/resources/SBComp/template/basico/conteudo.xhtml"  >
+
+        <ui:define name="parametros">
+
+
+            <ui:param name="iconeConteudo" value="#{pgIps.acaoVinculada.iconeAcao}" />
+
+        </ui:define>
+
+        <ui:define name="titulo">
+            #{pgIps.ipSelecionado.tipo.nome}
+            <c:if test="#{pgIps.novoRegistro}">
+                Cadastro de Ips
+            </c:if>
+        </ui:define>
+
+        <ui:define name="subtitulo">
+            Edição de Ips
+        </ui:define>
+
+        <ui:define name="conteudoDireita">
+
+            <SBAcaoNav:botaoDeAcao acao="#{pgIps.acaoListarRegistros}"
+                                   metodo="#{pgIps.executarAcao(pgIps.ipSelecionado)}"
+                                   tipoVisualizacao="#{tipos.tipoVisualBotao.iconeENome}"
+                                   armazenamentoAcaoExecutada="#{pgIps.acaoSelecionada}" />
+
+        </ui:define>
+
+        <ui:define name="conteudoCard">
+
+            <h:form>
+                <div class="Container3 Responsive">
+                    <SBInput:input registro="#{pgIps.ipSelecionado.getCampoByNomeOuAnotacao('inicialFaixa')}" layout="#{layoutsComponenteSB.layoutCampo.esquerda}" desabilitarEdicao="#{!pgIps.podeEditar}"/>
+
+                </div>
+
+
+                <div class="Container3  Responsive">
+
+                    <SBInput:input registro="#{pgIps.ipSelecionado.getCampoByNomeOuAnotacao('finalFaixa')}" layout="#{layoutsComponenteSB.layoutCampo.esquerda}" desabilitarEdicao="#{!pgIps.podeEditar}"/>
+
+                </div>
+
+                <c:if test="#{pgIps.podeEditar}">
+
+                    <div class="Container12 TexAlCenter">
+                        <SBAcaoNav:botaoDeAcao
+                            acao="#{pgIps.acaoSalvarAlteracoes}"
+                            armazenamentoAcaoExecutada="#{pgIps.acaoSelecionada}"
+                            tipoVisualizacao="#{tipos.tipoVisualBotao.iconeENome}"
+                            metodo="#{pgIps.executarAcao(pgIps.ipSelecionado)}"
+                            update="@form" />
+                    </div>
+
+                </c:if>
+            </h:form>
+
+        </ui:define>
+    </ui:composition>
+
+
+
+
+</html>
+
+
+
+
+
+
+

@@ -1,0 +1,55 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:cc="http://java.sun.com/jsf/composite"
+                xmlns:sb="http://superbitsframework/ui" 
+
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+
+    <cc:interface>
+        <cc:attribute name="itemSelecionado"
+                      type="com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.reflexao.ItfBeanDeclarado"
+                      shortDescription="Bean onde o item selecionado será armazenado ao postar, e referencia de exibição "
+                      />
+        <cc:attribute name="lista" type="java.util.List"
+                      shortDescription="Lista de opções disponíveis para seleção"
+                      />
+
+
+        <cc:attribute name="statusAjax" type="java.lang.Boolean" default="#{null}" />
+
+
+        <cc:attribute name="idOnChange" type="java.lang.String" default="#{null}" />
+
+        <cc:attribute name="metodoOnChange"  method-signature="void listener()"/>
+        <cc:attribute name="mostraSomenteImagem" type="java.lang.Boolean" default="#{false}" />
+        <cc:attribute name="mostraTextoImagem" type="java.lang.Boolean" default="#{false}" />
+        <cc:attribute name="desabilitarEdicao" type="java.lang.Boolean" default="#{false}" />
+        <cc:attribute name="obrigatorio" type="java.lang.Boolean" default="#{false}" />
+        <cc:attribute name="mostrarMensagemValidacao" type="java.lang.Boolean" default="#{false}" />
+        <cc:attribute name="porcentagemvisualizacao" default="20" />
+    </cc:interface>
+
+    <!-- IMPLEMENTATION -->
+    <cc:implementation>
+
+
+
+        <ui:repeat value="#{cc.attrs.lista}" var="item" >
+            <div class=" Container#{cc.attrs.porcentagemvisualizacao}  w3-btn w3-border " style=" text-align: left!important; background-color: #f7f5f3!important" >
+                <p:commandLink action="#{cc.attrs.metodoOnChange}" update="#{cc.attrs.idOnChange}" >
+                    <f:setPropertyActionListener target="#{cc.attrs.itemSelecionado.valor}" value="#{item}" />
+                    <ui:include src="#{cc.attrs.itemSelecionado.infoBean.visualizacaoItem}"/>
+                </p:commandLink>
+            </div>
+        </ui:repeat>
+
+
+
+
+    </cc:implementation>
+
+</ui:composition>

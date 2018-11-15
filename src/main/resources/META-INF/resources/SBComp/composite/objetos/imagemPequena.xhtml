@@ -1,0 +1,46 @@
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:cc="http://java.sun.com/jsf/composite"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <!-- INTERFACE -->
+    <cc:interface>
+        <cc:attribute name="item"
+                      type="com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfBeanSimples" required="true"/>
+        <cc:attribute name="somenteLeitura"
+                      type="java.lang.Boolean" required="true"/>
+
+    </cc:interface>
+    <!-- IMPLEMENTATION -->
+    <cc:implementation>
+
+
+        <h:form >
+            <p:remoteCommand name="atualizarEntidadeAtual" update="@form" >
+                <f:setPropertyActionListener target="#{paginaAtual.infoPagina.comoFormularioWeb.beanSelecionado}" value="#{cc.attrs.item}"/>
+
+            </p:remoteCommand>
+
+        </h:form>
+
+        <p:graphicImage url="#{cc.attrs.item.imgPequena}"    />
+        <h:form rendered="#{!cc.attrs.somenteLeitura}">
+
+            <h:inputHidden converter="conversorGenerico" value=""  />
+            <p:fileUpload  allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
+                           fileUploadListener="#{pgUtil.enviarImagemPequenaUpload}"
+                           multiple="false"
+                           onstart="atualizarEntidadeAtual();"
+
+                           >
+
+            </p:fileUpload>
+        </h:form>
+
+
+    </cc:implementation>
+</ui:composition>

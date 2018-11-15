@@ -1,0 +1,118 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:SBAcaoNav="http://xmlns.jcp.org/jsf/composite/SBComp/composite/acoesENavegacao"
+      xmlns:SBInput="http://xmlns.jcp.org/jsf/composite/SBComp/composite/input"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+
+
+
+    <ui:composition template="/resources/SBComp/template/basico/conteudo.xhtml"  >
+        <ui:define name="parametros">
+            <ui:param name="iconeConteudo" value="#{pgPermissoes.acaoListarGrupos.iconeAcao}" />
+        </ui:define>
+
+        <ui:define name="titulo">
+            #{pgPermissoes.grupoSelecionado.nome}
+            <c:if test="#{pgPermissoes.novogrupo}">
+                CADASTRO DE NOVO GRUPO
+            </c:if>
+        </ui:define>
+        <ui:define name="subtitulo">
+            #{pgPermissoes.grupoSelecionado.descricao}
+        </ui:define>
+        <ui:define name="conteudoDireita">
+            <h:form>
+
+
+                <SBAcaoNav:botaoDeAcao_Pagina_Entidade
+                    acao="#{paginaAtual.infoPagina.comoPaginaEntidade.acaoListarRegistros}"
+                    tipoVisualizacao="#{layoutsComponenteSB.layoutBotoes.iconeENome}"
+                    registro="#{paginaAtual.infoPagina.comoPaginaEntidade.entidadeSelecionada}"
+                    />
+
+
+
+
+            </h:form>
+
+
+        </ui:define>
+        <ui:define name="conteudoCard">
+            <h:form>
+                <c:if test="#{pgPermissoes.bloquearEdicao==false}">
+
+                    <p:panelGrid columns="2" style="border:0px !important; background:none;" styleClass="FormContent">
+
+                        <SBInput:input  registro="#{pgPermissoes.grupoSelecionado.getCampoByNomeOuAnotacao('nome')}"  />
+                        <SBInput:input registro="#{pgPermissoes.grupoSelecionado.getCampoByNomeOuAnotacao('descricao')}"/>
+
+
+
+
+                    </p:panelGrid>
+                </c:if>
+
+
+
+
+                <p:tabView orientation="left">
+                    <c:forEach items="#{pgPermissoes.modulos}" var="modulo" varStatus="rec">
+
+
+
+                        <p:tab title="#{modulo.nome}">
+
+                            <h:panelGroup class="Fleft" >
+
+                                <i class="fa fa-cube Fs40 Fleft Orange MarRight10"></i>
+                                Módulo #{modulo.nome} - Marque os acessos para o grupo #{pgPermissoes.grupoSelecionado.nome}
+                            </h:panelGroup>
+                            <div class="ContainerIndent" style="padding-top: 50px;" >
+                                <h:panelGroup styleClass="Fleft" >
+
+
+                                    <p:selectManyCheckbox disabled="#{pgPermissoes.bloquearEdicao}" id="grid" value="#{modulo.selecaoAcoes}" converter="conversorGenerico"  layout="responsive" columns="1">
+                                        <f:selectItems  value="#{modulo.acoes}" var="acao" itemLabel="#{acao.nomeAcao}" itemValue="#{acao}" />
+                                    </p:selectManyCheckbox>
+                                </h:panelGroup>
+                            </div>
+                        </p:tab>
+
+
+                    </c:forEach>
+
+                </p:tabView>
+                <div class="Container12 TexAlCenter">
+
+                    <SBAcaoNav:botaoDeAcao rendered="#{!pgPermissoes.bloquearEdicao}" acao="#{pgPermissoes.acaoSalvarPermissoes}"  armazenamentoAcaoExecutada="#{pgPermissoes.acaoselecionada}"  metodo="#{pgPermissoes.executarAcaoListaGrupo(pgPermissoes.grupoSelecionado)}" update="@form"/>
+
+                </div>
+            </h:form>
+
+        </ui:define>
+
+
+
+    </ui:composition>
+
+
+
+
+</html>
+
+
+
+
+
+
+
+
+
+

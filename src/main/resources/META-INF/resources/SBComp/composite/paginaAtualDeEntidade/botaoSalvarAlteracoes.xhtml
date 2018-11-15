@@ -1,0 +1,41 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:cc="http://xmlns.jcp.org/jsf/composite"
+                xmlns:SBAcaoNav="http://xmlns.jcp.org/jsf/composite/SBComp/composite/acoesENavegacao"
+
+                xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <!-- INTERFACE -->
+    <cc:interface>
+
+
+    </cc:interface>
+
+    <!-- IMPLEMENTATION -->
+    <cc:implementation>
+        <h:panelGroup layout="block" styleClass="Fleft">
+
+            <SBAcaoNav:botaoDeAcao
+
+                metodo="#{paginaAtual.infoPagina.comoPaginaEntidade.executarAcao(paginaAtual.infoPagina.comoPaginaEntidade.entidadeSelecionada)}"
+                acao="#{paginaAtual.infoPagina.comoPaginaEntidade.acaoSalvarAlteracoes}"
+                armazenamentoAcaoExecutada="#{paginaAtual.infoPagina.comoPaginaEntidade.acaoSelecionada}"
+                tipoVisualizacao="#{layoutsComponenteSB.layoutBotoes.iconeENome}"
+                update="#{paginaAtual.infoPagina.comoPaginaEntidade.idAreaExbicaoAcaoSelecionada}"
+                rendered="#{paginaAtual.infoPagina.comoPaginaEntidade.podeEditar}"
+                javaScriptOncomplete="acoesPosAjax()"
+                />
+        </h:panelGroup>
+
+    </cc:implementation>
+</ui:composition>
+
+
+
+
+
+
+
+
+
+

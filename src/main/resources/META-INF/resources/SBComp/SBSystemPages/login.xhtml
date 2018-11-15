@@ -1,0 +1,58 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <f:facet name="first">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+            <meta name="apple-mobile-web-app-capable" content="yes" />
+        </f:facet>
+        <title>PrimeFaces Adamantium</title>
+        <ui:insert name="head" />
+    </h:head>
+
+    <h:body>
+
+        <div class="Container12 BordBottom BlueBack loginback">
+            <div class="quebraBlocoComEspacoVertical6"></div>
+
+            <div class="Wid90 MarAuto">
+                <div class="Wid30 DispBlock MarAuto WidAutoOnMobile">
+                    <div class="Card TexAlCenter" style="margin-bottom:-650px;">
+                        <h:graphicImage name="logoSuperVip.png" id="logo" library="img"  style="max-width:180px;"/>
+                        <div class="SeparatorFull"></div>
+                        <div class="Wid100 OvHidden BigTopic"><i class="icon-security DispBlock"></i> Login </div>
+                        <div class="quebraBlocoComEspacoVertical3"></div>
+                        <div class="Card SoftGrayBack">
+                            <p:inputText placeholder="Nome de Usuário" styleClass="Wid90 TexAlCenter"/>
+                            <div class="quebraBlocoComEspacoVertical10"></div>
+                            <p:inputText type="password" placeholder="Senha" styleClass="Wid90 TexAlCenter"/>
+                            <div class="quebraBlocoComEspacoVertical4"></div>
+
+                            <div class="quebraBlocoComEspacoVertical4"></div>
+                            <p:button value="Entrar" icon="fa fa-sign-in" href="dashboard.xhtml" styleClass="CyanButton"/>
+                            <div class="quebraBlocoComEspacoVertical10 somenteMobile"></div>
+                            <p:button value="Esqueceu a senha ?" icon="fa fa-lock" styleClass="RedButton"/>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="quebraBlocoComEspacoVertical10"></div>
+        </div>
+
+        <h:outputStylesheet name="css/core-layout.css" library="primefaces-adamantium" />
+        <h:outputStylesheet name="css/animate.css" library="primefaces-adamantium" />
+        <h:outputStylesheet name="css/-font.css" library="primefaces-adamantium" />
+        <h:outputStylesheet name="css/ripple-effect.css" library="primefaces-adamantium" />
+        <h:outputStylesheet name="css/font-awesome.css" library="primefaces-adamantium" />
+        <h:outputStylesheet name="css/adamantium-layout.css" library="primefaces-adamantium" />
+    </h:body>
+
+</html>

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+
+
+      xmlns:SBSeletores="http://xmlns.jcp.org/jsf/composite/SBComp/composite/seletores"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+
+    <h:head>
+
+
+        <title>Pesquisa Avançada</title>
+        <ui:include src="folhasDeEstiloModal.xhtml" />
+
+    </h:head>
+
+    <h:body>
+
+        <div class="Container12">
+            <h:form>
+                <p:dataTable sortMode="multiple"
+                             value="#{pgModalSBJSF.campoInstanciado.comoCampoSeltorItem.seletor.origem}"
+                             var="item"
+                             emptyMessage=""
+                             paginator="true"
+                             rows="10"
+                             widgetVar="pesquisaAvancadaModal"
+                             >
+                    <f:facet name="header" >
+
+                        <div  class="Container12 OrganizadorContainerEsquerda" style="margin: 0px;">
+
+                            <div class="Container1" style="margin-top: 10px;margin-right: 0px " >
+                                #{pgModalSBJSF.campoInstanciado.label}
+                            </div>
+                            <div class="Container3" style="margin-top: 5px; margin-bottom: 5px; " >
+
+
+                                <p:inputText
+                                    id="globalFilter"
+                                    onkeyup="PF('pesquisaAvancadaModal').filter()"
+                                    style="width:100%; height: 35px;"
+                                    placeholder="Pesquise aqui:"/>
+
+                            </div>
+
+                        </div>
+                    </f:facet>
+
+
+                    <p:columns var="coluna" value="#{pgModalSBJSF.campoInstanciado.grupoCampoExibicao.campos}"
+                               sortBy="#{item[coluna.primeiroCaminhoSemNomeClasse]}"
+                               filterBy="#{item[coluna.primeiroCaminhoSemNomeClasse]}"
+                               filterMatchMode="contains"
+                               filterStyleClass="listaComOcoesOcultaFitro"
+
+                               >
+
+                        <f:facet name="header">
+
+                            <h:outputText value= "#{coluna.label}"/>
+                        </f:facet>
+                        <center>
+
+
+                            #{item.getCampoByNomeOuAnotacao(coluna.caminhoSemNomeClasse).valorTextoFormatado}
+                        </center>
+                    </p:columns>
+                    <p:column headerText="" width="50">
+
+                        <p:commandButton icon="fa fa-hand-pointer-o"
+                                         actionListener="#{pgModalSBJSF.fecharModal()}"
+                                         process="@this"
+                                         >
+                            <f:setPropertyActionListener target="#{pgModalSBJSF.campoInstanciado.valor}" value="#{item}"
+                                                         />
+                        </p:commandButton>
+
+                    </p:column>
+
+                </p:dataTable>
+            </h:form>
+        </div>
+
+
+
+
+
+    </h:body>
+
+</html>

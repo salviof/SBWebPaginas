@@ -1,0 +1,54 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:cc="http://java.sun.com/jsf/composite"
+                xmlns:SBInput="http://xmlns.jcp.org/jsf/composite/SBComp/composite/input"
+                xmlns:SBFormulario="http://xmlns.jcp.org/jsf/composite/SBComp/composite/formulario"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <!-- INTERFACE -->
+    <cc:interface>
+
+        <cc:attribute name="registro"
+                      required="true"
+                      type="com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campoInstanciado.ItfCampoInstanciado"
+                      default="#{pgUtil.campoNaoImplementado}"
+                      shortDescription="Exibe um atributo de um Objeto para insersão de dados do usuário (Ou Visualização)"
+                      />
+
+
+        <cc:attribute name="somenteLeitura" default="#{false}" />
+        <cc:attribute shortDescription="O layoyt indica os formatos possíveis de exibição do campo,
+                      para visualizar todas as opções acesse: #layoutsComponenteSB.layoutCampo.  "
+                      name="tipoVisualizacaoLabel"
+                      type="com.super_bits.modulosSB.SBCore.modulos.view.fabricasCompVisual.ItfComponenteVisualSB"
+                      default="#{layoutsComponenteSB.layoutCampo.resumido}"
+                      />
+
+        <cc:attribute name="grupoCampos" required="true" type="com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campo.ItfGrupoCampos" />
+
+
+
+    </cc:interface>
+    <!-- IMPLEMENTATION -->
+    <cc:implementation>
+
+        <h:panelGroup rendered="#{cc.attrs.registro.umaListagemParticular}" >
+            <SBFormulario:subFormularioListaParticular registro="#{cc.attrs.registro}"
+                                                       grupoCampos="#{cc.attrs.grupoCampos}"
+                                                       somenteLeitura="#{cc.attrs.somenteLeitura}"
+                                                       />
+        </h:panelGroup>
+
+        <h:panelGroup rendered="#{!cc.attrs.registro.umaListagemParticular}" >
+            <SBInput:input registro="#{cc.attrs.registro}"
+                           desabilitarEdicao="#{cc.attrs.somenteLeitura}"
+                           />
+        </h:panelGroup>
+
+
+
+
+
+
+    </cc:implementation>
+</ui:composition>

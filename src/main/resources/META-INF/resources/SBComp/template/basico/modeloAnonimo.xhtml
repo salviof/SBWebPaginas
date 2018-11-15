@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html
+
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+
+    xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <f:facet name="first">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+            <meta name="apple-mobile-web-app-capable" content="yes" />
+        </f:facet>
+        <title>#{paginaAtual.infoPagina.titulo}</title>
+        <ui:include src="folhasDeEstiloBasicas.xhtml" />
+        <ui:insert name="head" />
+    </h:head>
+    <h:body>
+
+
+        <h:panelGroup id="#{layoutIdsAreasConhecidas.AREA_MENSAGEM_INTERFACE}">
+            <p:growl widgetVar="#{layoutIdsAreasConhecidas.AREA_MENSAGEM_INTERFACE}" />
+        </h:panelGroup>
+
+        <ui:include src="cabecalhoInicialDoBody.xhtml" />
+        <h:panelGroup id="#{layoutIdsAreasConhecidas.AREA_CONTEUDO}" >
+            <ui:insert name="divConteudo"/>
+            <ui:insert name="conteudo"   />
+        </h:panelGroup>
+
+
+        <p:ajaxStatus style="width:32px;height:32px;position:fixed;right:7px;bottom:7px" >
+            <f:facet name="start">
+                <p:graphicImage name="images/preloader.gif" library="primefaces-adamantium"/>
+            </f:facet>
+            <f:facet name="complete">
+
+            </f:facet>
+        </p:ajaxStatus>
+    </h:body>
+
+</html>

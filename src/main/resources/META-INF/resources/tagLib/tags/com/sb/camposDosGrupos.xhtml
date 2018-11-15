@@ -1,0 +1,22 @@
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:sb="http://superbitsframework/ui" 
+    xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <ui:param name="entidade" value="#{entidade}"/>
+    <c:forEach items="#{grupos}" var="gpr" >
+
+        <sb:camposDoGrupo
+            grupo="#{gpr}"
+            entidade="#{entidade}"
+            />
+    </c:forEach>
+</ui:composition>
+
+
+
+
+
+
+

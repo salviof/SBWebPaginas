@@ -1,0 +1,213 @@
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:SBAcaoNav="http://xmlns.jcp.org/jsf/composite/SBComp/composite/acoesENavegacao"
+    xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+
+
+    <p:panel class="Container12 ">
+
+
+
+        <h:panelGroup id="Assistente" class="Container9 Responsive" >
+            <p:fieldset legend="Açoes de Gestão da entidade" class="Container2 Responsive">
+
+
+
+
+                <h:form>
+                    <p:selectOneMenu  value="#{pgTestesCampo.acaoGestaoSelecionada}"
+                                      effect="fold"
+                                      converter="conversorGenerico"
+
+                                      label="#{acaoGestao.nomeAcao}"
+
+
+                                      style="width:125px!important;"
+                                      >
+                        <f:selectItem itemLabel="Ação de Gestão" itemValue="" />
+                        <f:selectItems
+                            var="acaoGestao"
+                            itemLabel="#{acaoGestao.nomeAcao}"
+                            itemValue="#{acaoGestao}"
+                            value="#{pgTestesCampo.acoesDeGestaoDoSistema}" />
+                        <p:column style="width:10%">
+                            <h:form>
+                                <p:commandButton icon="#{acaoGestao.iconeAcao}" disabled="#{true}" />
+                            </h:form>
+                        </p:column>
+
+                        <p:column style="width:10%">
+                            #{acaoGestao.nomeAcao}
+                        </p:column>
+
+
+                    </p:selectOneMenu>
+                </h:form>
+
+            </p:fieldset>
+
+            <p:fieldset  legend="Localizador de campos" class="Container2 Responsive">
+
+                <h:form>
+                    <p:selectOneMenu  value="#{pgTestesCampo.acaoFormularioSelecionada}"
+                                      effect="fold"
+                                      converter="conversorGenerico"
+                                      var="acaoFormulario"
+                                      style="width:125px!important;"
+                                      >
+                        <f:selectItem itemLabel="Ação do formulário"
+                                      itemValue="" />
+
+                        <f:selectItems value="#{pgTestesCampo.acoesFormularioDaGestao}"
+                                       var="acaoFormulario"
+                                       itemValue="#{acaoFormulario}"
+                                       itemLabel="#{acaoFormulario.nomeAcao}"
+                                       />
+
+                        <p:ajax global="true"   event="valueChange"  update="#{pgUtil.makeCaminhoCompletoID('Assistente')}"/>
+                        <p:column style="width:10%">
+                            <h:form>
+                                <p:commandButton icon="#{acaoFormulario.iconeAcao}" disabled="#{true}" />
+                            </h:form>
+                        </p:column>
+
+                        <p:column style="width:10%">
+                            #{acaoFormulario.nomeAcao}
+                        </p:column>
+
+
+                    </p:selectOneMenu>
+
+                </h:form>
+
+
+
+
+                <h:form>
+                    <p:selectOneMenu  value="#{pgTestesCampo.grupoSelecionado}"
+                                      effect="fold" converter="conversorGenerico"
+                                      var="grupo"
+                                      label="#{grupo.nomeGrupo}"
+                                      styleClass="campoResponsivo"
+                                      style="width:125px!important"
+                                      >
+                        <f:selectItem itemLabel="Grupo de Campos" itemValue="" />
+                        <f:selectItems value="#{pgTestesCampo.acaoFormularioSelecionada.gruposDeCampos}"
+                                       var="#{grupo}"
+                                       itemLabel="#{grupo.nomeGrupo}"
+
+                                       />
+
+                        <p:column style="width:10%">
+                            #{grupo.nomeGrupo}
+                        </p:column>
+
+
+
+
+                    </p:selectOneMenu>
+                </h:form>
+
+
+                <h:form>
+                    <p:selectOneMenu  value="#{pgTestesCampo.campoSelecionado}"  effect="fold" converter="conversorGenerico"
+                                      var="campo"
+                                      style="width:125px!important;"
+                                      >
+                        <f:selectItem itemLabel="Selecione um campo" itemValue="" />
+                        <f:selectItems value="#{pgTestesCampo.acaoFormularioSelecionada.campos}"  var="#{campo}"/>
+
+
+                        <p:column style="width:10%">
+                            #{campo}
+                        </p:column>
+
+
+                    </p:selectOneMenu>
+                </h:form>
+
+
+            </p:fieldset>
+
+
+            <p:fieldset legend="Ação padrão " class="Container2 Responsive" >
+
+                <p:outputLabel value="Exibição padrão, mudança de campo" />
+                <h:form>
+                    <p:selectOneButton converter="conversorGenerico"
+                                       value="#{pgTestesCampo.acaoPadraoDeExibicao}" label=""
+
+                                       >
+
+                        <c:forEach items="#{pgTestesCampo.acoesParaCampo}"  var="opcao" begin="0">
+                            <f:selectItem  itemLabel=" #{opcao.nome}"  itemValue="#{opcao}"  />
+                        </c:forEach>
+                        <p:ajax global="true"     update="#{pgUtil.makeCaminhoCompletoID('Assistente')}"/>
+                    </p:selectOneButton>
+                </h:form>
+            </p:fieldset>
+        </h:panelGroup>
+
+
+
+
+        <!-- Fim do Conteiner Geral -->
+    </p:panel>
+
+    <p:fieldset legend="Ver campo" class="Container6 Responsive">
+        <h:form>
+            <p:panelGrid columns="2" >
+                <p:outputLabel value="Nome do Campo" />
+                <p:inputText value="#{pgTestesCampo.strNomeCampo}" style="width: 300px;"/>
+
+                <p:outputLabel />
+                <SBAcaoNav:seletorDeAcoes metodo="#{pgTestesCampo.executarAcaoSelecionada()}"
+                                          opcaoSelecionada="#{pgTestesCampo.acaoSelecionada}"
+                                          opcoes="#{pgTestesCampo.acoesParaCampo}"
+                                          />
+
+            </p:panelGrid>
+
+
+
+
+        </h:form>
+
+    </p:fieldset>
+
+    <p:fieldset legend="Ver campo" class="Container3 Responsive">
+
+        <p:outputLabel value="Navegação de campos" />
+        <h:panelGroup >
+            <h:form>
+                <p:commandButton action="#{pgTestesCampo.verProximoCampo()}" value="Proximo Campo" update="#{pgUtil.makeCaminhoCompletoID('Assistente')}"/>
+                <p:commandButton action="#{pgTestesCampo.verCampoAnterior()}" value="Campo Anterior" update="#{pgUtil.makeCaminhoCompletoID('Assistente')}"/>
+                <p:commandButton action="#{pgTestesCampo.verProximoGrupo()}" value=" Proximo grupo" update="#{pgUtil.makeCaminhoCompletoID('Assistente')}"/>
+                <p:commandButton action="#{pgTestesCampo.verGrupoAnterior()}" value="Grupo Anterior" update="#{pgUtil.makeCaminhoCompletoID('Assistente')}"/>
+
+            </h:form>
+        </h:panelGroup>
+
+    </p:fieldset>
+
+    <p:fieldset legend="Açoes de controller" class="Container12 ">
+
+
+    </p:fieldset>
+
+    <p:fieldset legend="Ver formulario" class="Container12 ">
+
+
+    </p:fieldset>
+
+
+
+</ui:composition>
+
+
+

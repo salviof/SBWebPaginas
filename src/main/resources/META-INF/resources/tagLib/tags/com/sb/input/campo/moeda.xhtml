@@ -1,0 +1,53 @@
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <ui:decorate template="#{layout.xhtmlJsfCaminhoRelativo}">
+
+        <ui:define name="input">
+            <p:outputLabel value="#{pgUtil.gerarMoeda(valor)}"
+                           rendered="#{desabilitarEdicao}"
+                           />
+            <p:inputNumber
+                disabled="#{desabilitarEdicao}"
+                rendered="#{!desabilitarEdicao}"
+                symbol="R$"
+                decimalSeparator=","
+                thousandSeparator="."
+
+                class="campoResponsivo #{componente.classeCSS} TexAlCenter"
+                required="#{obrigatorio}"
+                value="#{valor}"
+                validatorMessage="O valor informado no campo #{label} não é valido! "
+                requiredMessage="O campo #{label} não foi informado! "
+                >
+
+                <p:clientValidator/>
+
+                <c:if test="#{possuiMetodoOnChange}">
+                    <p:ajax rendered="#{possuiMetodoOnChange}"
+                            global="true"
+                            event="valueChange"
+                            listener="#{prMetodo}"/>
+                </c:if>
+
+                <c:if test="#{possuiIDOnChange}" >
+                    <p:ajax
+                        rendered="#{possuiIDOnChange}"
+                        global="true"
+                        event="valueChange"
+                        listener="#{pgUtil.atualizaTelaPorID(idAtualizarOnChange)}" />
+                </c:if>
+
+            </p:inputNumber>
+
+        </ui:define>
+
+    </ui:decorate>
+</ui:composition>
+
+
+
+

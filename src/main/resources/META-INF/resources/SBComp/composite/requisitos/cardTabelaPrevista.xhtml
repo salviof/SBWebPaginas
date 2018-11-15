@@ -1,0 +1,51 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:cc="http://java.sun.com/jsf/composite"
+                xmlns:SBRec="http://xmlns.jcp.org/jsf/composite/SBComp/composite/requisitos"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <!-- INTERFACE -->
+    <cc:interface>
+
+        <cc:attribute name="entidadePrevisa" displayName="Previsao Desenvolvimento Entidade" type="com.super_bits.projeto.Jira.ItfPrevisaoEntidade" />
+
+
+    </cc:interface>
+    <!-- IMPLEMENTATION -->
+    <cc:implementation>
+
+
+
+        <div class="botaoCard Container3  w3-btn w3-border "
+             >
+
+            <SBRec:porCentagemGrupoTarefas grupoDeTarefas="#{cc.attrs.entidadePrevisa}" />
+
+
+
+            <span> #{cc.attrs.entidadePrevisa.estruturaDeEntidade.plural}</span>
+            <span>#{cc.attrs.entidadePrevisa.estruturaDeEntidade.nomeEntidade}</span>
+
+
+            <span>   #{cc.attrs.entidadePrevisa.custoDesenvolvimento.horasTotal}</span>
+            <span>   Valor total:#{cc.attrs.entidadePrevisa.custoDesenvolvimento.valorTotal}<br/></span>
+            <span>       #{cc.attrs.entidadePrevisa.estruturaDeEntidade.calculos}</span>
+
+        </div>
+
+
+
+
+    </cc:implementation>
+</ui:composition>
+
+
+
+
+
+
+
+
+
+

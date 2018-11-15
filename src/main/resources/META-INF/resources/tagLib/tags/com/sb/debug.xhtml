@@ -1,0 +1,38 @@
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+    xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:body>
+        <c:set var="componenteVisual"  value="#{registro.getComponenteDiferenciado(layoutCampoEspecial)}"/>
+
+        <p:panel header="DadosInput" >
+            <p:panelGrid columns="2">
+                <p:outputLabel value="Label REgistro"/><p:outputLabel value="#{registro.label}"/>
+                <p:outputLabel value="layout:"/><p:outputLabel value="#{layoutCampo}"/>
+                <p:outputLabel value="XHTML layout"/><p:outputLabel value="#{layoutCampo.xhtmlJSF}"/>
+                <p:outputLabel value="layout Especial:"/><p:outputLabel value="#{layoutCampoEspecial}"/>
+                <p:outputLabel value="XHTML layout"/><p:outputLabel value="#{layoutCampoEspecial.xhtmlJSF}"/>
+                <p:outputLabel value="XHTML padrao do Campo"/><p:outputLabel value="#{registro.componenteVisualPadrao}"/>
+                <p:outputLabel value="XHTML diferenciado"/><p:outputLabel value="#{componenteVisual.xhtmlJSF}"/>
+
+                <p:outputLabel value="Nome unico id HTML Objeto principal:"/><p:outputLabel value="#{registro.idHTMLObjetoPrincipal}"/>
+                <p:outputLabel value="Classe CSS e acesso"/><p:outputLabel value="#{componenteVisual.classeCSS}"/>
+
+
+            </p:panelGrid>
+        </p:panel>
+
+    </h:body>
+</ui:composition>
+
+
+
+
+
+
+
+
+
+

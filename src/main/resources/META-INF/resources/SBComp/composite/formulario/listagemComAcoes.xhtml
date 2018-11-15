@@ -1,0 +1,189 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:cc="http://java.sun.com/jsf/composite"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:c="http://java.sun.com/jsp/jstl/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:SBInput="http://xmlns.jcp.org/jsf/composite/SBComp/composite/input"
+                xmlns:SBAcaoNav="http://xmlns.jcp.org/jsf/composite/SBComp/composite/acoesENavegacao"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <!-- INTERFACE -->
+    <cc:interface>
+
+        <cc:attribute name="pagina" required="#{true}" type="com.super_bits.modulosSB.webPaginas.JSFBeans.SB.siteMap.ItfPaginaGerenciarEntidade" />
+        <cc:attribute name="metodo" method-signature="void listener()"  />
+
+
+    </cc:interface>
+    <!-- IMPLEMENTATION -->
+    <cc:implementation>
+
+        <div class="Card">
+
+            <div class="CardTopic">
+                #{cc.attrs.pagina.acaoSelecionada.nomeAcao}
+                <i class="#{cc.attrs.pagina.acaoSelecionada} Fs30 Fleft MarRight10"></i>
+                <br/>
+                <div class="quebraBlocoComEspacoVertical10 somenteMobile"></div>
+
+                <span class="CardSubTopic">
+                    #{cc.attrs.pagina.acaoSelecionada.descricao}
+
+                </span>
+
+                <c:if test="#{cc.attrs.pagina.temPesquisa}">
+
+                    <h:panelGroup styleClass="Fleft" style="margin-top: -2%">
+
+                        <SBAcaoNav:botaoDeAcao acao="#{cc.attrs.pagina.acaoListarRegistros}"
+                                               metodo="#{cc.attrs.pagina.executarAcao(cc.attrs.pagina.entidadeSelecionada)}"
+                                               tipoVisualizacao="#{tipos.tipoVisualBotao.iconeENome}"
+                                               armazenamentoAcaoExecutada="#{cc.attrs.pagina.acaoSelecionada}" />
+
+                    </h:panelGroup>
+
+                </c:if>
+
+                <c:if test="#{cc.attrs.pagina.temNovo}">
+
+                    <h:panelGroup styleClass="Fright" style="margin-top: -2%">
+
+                        <SBAcaoNav:botaoDeAcao acao="#{cc.attrs.pagina.acaoNovoRegistro}"
+                                               metodo="#{cc.attrs.pagina.executarAcao(cc.attrs.pagina.entidadeSelecionada)}"
+                                               tipoVisualizacao="#{tipos.tipoVisualBotao.iconeENome}"
+                                               armazenamentoAcaoExecutada="#{cc.attrs.pagina.acaoSelecionada}" />
+
+                    </h:panelGroup>
+
+                </c:if>
+
+            </div>
+
+            <div class="SeparatorFull"></div>
+
+            <div class="ContainerIndent">
+
+                <c:if test="#{!sessaoAtualSBWP.tipoView.umMobile}">
+
+                    <h:form>
+
+                        <p:dataTable sortMode="multiple"
+                                     value="#{cc.attrs.pagina.entidadesListadas}"
+                                     var="listada"
+                                     emptyMessage="Nenhuma Entidade Listada"
+                                     paginator="true">
+
+
+                            <div class="Container12 Responsive" >
+
+                                <p:columns value="#{cc.attrs.pagina.acaoListarRegistros.gruposDeCampos[0].campos}" var="coluna" >
+
+                                    <f:facet name="header" >
+
+                                        <h:outputText value="#{coluna.label}" />
+
+                                    </f:facet>
+
+                                    <SBInput:input
+
+                                        registro="#{listada.getCampoByNomeOuAnotacao(coluna.caminhoSemNomeClasse)}"
+                                        desabilitarEdicao="#{true}"
+
+                                        />
+
+                                </p:columns>
+
+
+                                <p:column headerText="Ações" width="100">
+
+                                    <SBAcaoNav:seletorDeAcoes
+
+                                        opcoes="#{cc.attrs.pagina.acoesRegistros}"
+                                        metodo="#{cc.attrs.pagina.executarAcao(listada)}"
+                                        opcaoSelecionada="#{cc.attrs.pagina.acaoSelecionada}"
+
+                                        />
+
+
+
+                                </p:column>
+                            </div>
+                        </p:dataTable>
+
+                    </h:form>
+                </c:if>
+
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+
+                <!-- comentario -->
+
+                <c:if test="#{sessaoAtualSBWP.tipoView.umMobile}">
+                    <p:dataGrid var="dados" value="#{cc.attrs.pagina.entidadesListadas}" columns="3"
+                                rows="12" paginator="true" id="dad"
+                                emptyMessage="Nnehuma Entidade Listada"
+                                paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                rowsPerPageTemplate="6,12,16">
+
+                        <f:facet name="header">
+
+                            #{dados.label}
+
+                        </f:facet>
+
+                        <p:panel header="#{coluna.label}" style="text-align:center">
+
+                            <h:panelGrid columns="2" style="width:100%">
+
+                                <h:form>
+
+                                    <c:forEach items="#{cc.attrs.pagina.acaoListarRegistros.gruposDeCampos[1].campos}" var="campos">
+
+                                        <SBInput:input
+
+                                            registro="#{dados.getCampoByNomeOuAnotacao(campos.caminhoSemNomeClasse)}"
+                                            desabilitarEdicao="#{true}"
+
+                                            />
+
+                                    </c:forEach>
+
+                                </h:form>
+
+                            </h:panelGrid>
+
+                            <SBAcaoNav:seletorDeAcoes
+
+                                opcoes="#{cc.attrs.pagina.acoesRegistros}"
+                                metodo="#{cc.attrs.pagina.executarAcao(dados)}"
+                                opcaoSelecionada="#{cc.attrs.pagina.acaoSelecionada}"
+
+                                />
+
+                        </p:panel>
+
+                    </p:dataGrid>
+
+                </c:if>
+
+            </div>
+
+        </div>
+
+    </cc:implementation>
+
+</ui:composition>
+
+
+
+
+
+
+
+
+

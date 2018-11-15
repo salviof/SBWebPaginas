@@ -1,0 +1,52 @@
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:decorate template="#{layout.xhtmlJsfCaminhoRelativo}">
+        <ui:define name="input">
+            Valor selecionado: #{registro.comoEnumFabricaObjeto.beanSelecionado.nome}
+            <p:selectOneListbox
+                rendered="#{!desabilitarEdicao}"
+                value="#{registro.comoEnumFabricaObjeto.beanSelecionado}"
+                converter="conversorGenerico"
+                var="item"
+                converterMessage="Falha ao converter o Valor"
+                filter="true"
+                styleClass="campoResponsivo"
+                filterMatchMode="contains">
+                <f:selectItems value="#{registro.comoEnumFabricaObjeto.listaOpcoesObjeto}"
+                               var="item"
+                               itemLabel="#{item.nome}"
+                               itemValue="#{item}"
+                               />
+
+                <p:column>
+                    <h:outputText styleClass="ui-theme ui-theme-#{item.id}" />
+                </p:column>
+
+                <p:column>
+                    <h:outputText value="#{item.nome}" />
+                </p:column>
+
+                <c:if test="#{possuiMetodoOnChange}">
+                    <p:ajax rendered="#{possuiMetodoOnChange}"
+                            global="true"
+                            event="valueChange"
+                            listener="#{prMetodo}"/>
+                </c:if>
+
+                <c:if test="#{possuiIDOnChange}" >
+                    <p:ajax
+                        rendered="#{possuiIDOnChange}"
+                        global="true"
+                        event="valueChange"
+                        listener="#{pgUtil.atualizaTelaPorID(idAtualizarOnChange)}" />
+                </c:if>
+            </p:selectOneListbox>
+
+        </ui:define>
+    </ui:decorate>
+</ui:composition>

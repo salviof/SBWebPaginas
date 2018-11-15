@@ -1,0 +1,20 @@
+<ui:composition
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <p:commandButton onmousedown="esconderTooltips();"
+
+                     action="#{paginaAtual.infoPagina.executarAcaoSelecionada()}"
+                     update="#{pgUtil.makeCaminhoCompletoID(idUpdate)}"
+                     value="#{label}"
+                     oncomplete="#{javaScriptOncomplete}"
+
+                     >
+        <f:setPropertyActionListener target="#{paginaAtual.infoPagina.acaoSelecionada}"
+                                     value="#{acao}"  />
+    </p:commandButton>
+</ui:composition>
+

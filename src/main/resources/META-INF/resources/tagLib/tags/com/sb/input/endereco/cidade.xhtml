@@ -1,0 +1,38 @@
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui">
+    <ui:decorate template="#{layout.xhtmlJsfCaminhoRelativo}">
+        <ui:define name="input">
+
+            <p:outputLabel value="(Escolha um Estado)"
+                           rendered="#{registro.comoCampoLocalizacao.unidadeFederativaEstadoNulo}"
+                           />
+            <p:outputLabel value="#{valor.nome}" rendered="#{desabilitarEdicao}"  />
+
+            <p:autoComplete converter="conversorGenerico"
+                            rendered="#{pgUtil.isTudoVerdadeiro(!registro.comoCampoLocalizacao.unidadeFederativaEstadoNulo,!desabilitarEdicao)}"
+                            completeMethod="#{registro.comoCampoLocalizacao.metodoAutoCompleteCidade}"
+                            var="cidade"
+                            value="#{registro.comoCampoLocalizacao.cidade}"
+                            forceSelection="true"
+                            disabled="#{desabilitarEdicao or registro.comoCampoLocalizacao.cidadeSomenteLeitura}"
+                            itemValue="#{cidade}"
+                            itemLabel="#{cidade.nome}"
+                            placeholder="Localize a Cidade"
+                            styleClass="campoResponsivo"
+                            minQueryLength="3"
+                            dynamic="true"
+                            queryDelay="800"
+                            >
+                <p:ajax
+                    event="itemSelect"
+
+                    update="#{pgUtil.getNomeIdPainelDoComponente(component)}"
+                    />
+            </p:autoComplete>
+
+
+        </ui:define>
+    </ui:decorate>
+</ui:composition>

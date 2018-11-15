@@ -1,0 +1,33 @@
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:cc="http://xmlns.jcp.org/jsf/composite"
+    xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <!-- INTERFACE -->
+    <cc:interface>
+        <cc:attribute name="texto" default="ir para Pagina Inicial"/>
+
+    </cc:interface>
+    <!-- IMPLEMENTATION -->
+    <cc:implementation>
+
+
+        <h:form styleClass="TexAlCenter Container4">
+            <p:button style="" href="#{infoWebApp.urlPagina}" icon="fa fa-home"  value="#{cc.attrs.texto}"/>
+        </h:form>
+
+    </cc:implementation>
+</ui:composition>
+
+
+
+
+
+
+
+
+
+

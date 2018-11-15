@@ -1,0 +1,114 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:cc="http://java.sun.com/jsf/composite"
+                xmlns:SBInput="http://xmlns.jcp.org/jsf/composite/SBComp/composite/input"
+                xmlns:SBAcaoNav="http://xmlns.jcp.org/jsf/composite/SBComp/composite/acoesENavegacao"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <!-- INTERFACE -->
+    <cc:interface>
+
+        <cc:attribute
+            type="com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfBeanSimples"
+            name="itemSelecionado"
+            required="true"
+            />
+
+        <cc:attribute name="grupoCampos"
+                      type="com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campo.ItfGrupoCampos"
+                      required="true"
+                      shortDescription="Grupo de Campos a serem exibitos"
+                      />
+
+        <cc:attribute
+            type="java.util.List"
+            name="itens"
+            required="true"
+            />
+
+        <cc:attribute
+            method-signature="void listener()"
+            name="metodo"
+            required="true"    />
+        <cc:attribute name="armazenamentoAcaoSelecionada"
+                      required="true"
+                      type="com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ItfAcaoDoSistema"
+                      shortDescription="Bean onde a ação selecionada será armazenada"
+                      />
+
+        <cc:attribute name="opcoes"
+                      required="true"  />
+
+        <cc:attribute name="mensagemSemRegistro"/>
+
+        <cc:attribute name="titulo"
+                      required="true"
+                      shortDescription="Título da Listagem"
+                      />
+
+
+    </cc:interface>
+    <!-- IMPLEMENTATION -->
+    <cc:implementation>
+        <h:panelGroup>
+            <h:form>
+                <p:dataGrid
+
+                    var="item"
+                    value="#{cc.attrs.itens}"
+                    layout="grid"
+                    columns="3"
+                    widgetVar="#{pgUtil.gerarNomeSlug(cc.attrs.titulo)}"
+                    emptyMessage="#{cc.attrs.mensagemSemRegistro}"
+                    paginatorTemplate=" {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                    rowsPerPageTemplate="6,9,12,15"
+                    >
+
+
+
+                    <f:facet name="header">
+                        #{cc.attrs.titulo}
+
+                        <p:inputText
+                            id="globalFilter"
+                            onkeyup="PF('#{pgUtil.gerarNomeSlug(cc.attrs.titulo)}').filter()"
+                            style="width:100%; height: 35px;"
+                            placeholder="Pesquise aqui:"/>
+
+                    </f:facet>
+
+                    <p:panel>
+
+                        <ui:repeat value="#{cc.attrs.grupoCampos.campos}"
+                                   var="campo">
+
+                            <SBInput:input
+                                registro="#{item.getCampoByNomeOuAnotacao(campo.caminhoSemNomeClasse)}"
+                                desabilitarEdicao="true"
+                                layout="#{layoutsComponenteSB.layoutCampo.semLabel}"
+
+
+                                />
+
+                        </ui:repeat>
+
+                        <center>
+                            <SBAcaoNav:seletorDeAcoes
+                                metodo="#{cc.attrs.metodo}"
+                                opcaoSelecionada="#{cc.attrs.armazenamentoAcaoSelecionada}"
+                                opcoes="#{cc.attrs.opcoes}"
+                                visualizacaoBotao="#{layoutsComponenteSB.layoutBotoes.icone}"
+                                />
+                        </center>
+
+
+                    </p:panel>
+
+                </p:dataGrid>
+            </h:form>
+        </h:panelGroup>
+
+    </cc:implementation>
+
+</ui:composition>

@@ -1,0 +1,79 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:cc="http://java.sun.com/jsf/composite"
+                xmlns:sb="http://superbitsframework/ui"
+                xmlns:SBInput="http://xmlns.jcp.org/jsf/composite/SBComp/composite/input"
+                xmlns:SBAcaoNav="http://xmlns.jcp.org/jsf/composite/SBComp/composite/acoesENavegacao"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <!-- INTERFACE -->
+    <cc:interface>
+        <cc:attribute name="registro"
+                      required="true"
+                      type="com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campoInstanciado.ItfCampoInstanciado"
+                      default="#{pgUtil.campoNaoImplementado}"
+                      shortDescription="Exibe um atributo de um Objeto para insersão de dados do usuário (Ou Visualização)"
+                      />
+        <cc:attribute name="opcoes" required="true"  />
+        <cc:attribute name="campos"  />
+        <cc:attribute name="titulo"  default="Listagem de  #{cc.attrs.registro.label}"/>
+        <cc:attribute
+            name="metodo"
+            />
+
+    </cc:interface>
+    <!-- IMPLEMENTATION -->
+    <cc:implementation>
+
+        <h:panelGroup>
+
+            <p:autoComplete
+                styleClass="inputTexto"
+
+                converter="conversorGenerico"
+                itemLabel="#{item.nome}"
+                itemValue="#{item}"
+                forceSelection="true"
+                emptyMessage="Nada Selecionado"
+                placeholder="Pesquise por um #{label}"
+                var="item"
+                value="#{cc.attrs.registro.valor}"
+                minQueryLength="4"
+                queryDelay="300"
+                completeMethod="#{cc.attrs.registro.comoCampoSeltorItem.filtrarPorAutoComplet}"
+                >
+                <p:ajax event="itemSelect" update="seletorPesquisa"/>
+                <c:forEach var="campo" items="#{cc.attrs.campos}" rendered="#{pgUtil.isAtributoPreenchidoComExpressao(cc, 'campos')}">
+                    <p:column>
+
+                        <SBInput:input registro="#{item.getCampoByNomeOuAnotacao(campo.caminhoSemNomeClasse)}"
+                                       layout="#{layoutsComponenteSB.layoutCampo.resumido}"
+                                       desabilitarEdicao="#{true}"
+                                       />
+                    </p:column>
+
+                </c:forEach>
+
+
+            </p:autoComplete>
+
+            <sb:parametroMetodo nome="metodo" valor="#{cc.attrs.metodo}" />
+
+            <h:panelGroup id="seletorPesquisa" >
+
+                <SBAcaoNav:seletorDeAcoes
+
+                    rendered="#{cc.attrs.registro.valor!=null}"
+                    metodo="#{metodo}"
+                    opcaoSelecionada="#{paginaAtual.infoPagina.acaoSelecionada}"
+                    opcoes="#{cc.attrs.opcoes}"
+                    />
+
+            </h:panelGroup>
+
+        </h:panelGroup>
+
+    </cc:implementation>
+
+</ui:composition>

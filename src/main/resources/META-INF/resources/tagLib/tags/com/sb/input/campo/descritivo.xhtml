@@ -1,0 +1,47 @@
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <ui:decorate template="#{layout.xhtmlJsfCaminhoRelativo}">
+        <ui:define name="input">
+
+            <p:outputLabel rendered="#{desabilitarEdicao}" value="#{valor}" />
+            <p:inputTextarea
+                class=" campoResponsivo  TexAlCenter #{componente.classeCSS}"
+                required="#{obrigatorio}"
+                value="#{valor}"
+                maxlength="#{valorMaximo}"
+                onfocus="mesclarOnChangeComDelay(this.id)"
+                rendered="#{!desabilitarEdicao}"                validatorMessage="O valor informado no campo #{label} não é valido! "
+                requiredMessage="O campo #{label} não foi informado! "
+                disabled="#{desabilitarEdicao}" >
+
+
+                <p:clientValidator/>
+
+                <c:if test="#{possuiMetodoOnChange}">
+                    <p:ajax rendered="#{possuiMetodoOnChange}"
+                            global="true"
+                            event="valueChange"
+                            listener="#{prMetodo}"/>
+                </c:if>
+                <c:if test="#{atualizarFormOnChange}" >
+                    <p:ajax
+                        rendered="#{atualizarFormOnChange}"
+                        event="valueChange"
+                        update="@form"/>
+                </c:if>
+                <c:if test="#{possuiIDOnChange}" >
+                    <p:ajax
+                        rendered="#{possuiIDOnChange}"
+                        global="true"
+                        event="valueChange"
+                        listener="#{pgUtil.atualizaTelaPorID(idAtualizarOnChange)}" />
+                </c:if>
+
+            </p:inputTextarea>
+        </ui:define>
+    </ui:decorate>
+</ui:composition>

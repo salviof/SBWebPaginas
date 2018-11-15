@@ -1,0 +1,78 @@
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+    xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:decorate template="#{layout.xhtmlJsfCaminhoRelativo}">
+        <ui:define name="input">
+
+            <p:outputLabel value="#{valor}" rendered="#{desabilitarEdicao}"/>
+
+            <p:inputMask
+                onfocus="mesclarOnChangeComDelay(this.id)"
+
+                mask="#{mascara}"
+                class=" campoResponsivo  TexAlCenter #{componente.classeCSS}"
+                disabled="#{desabilitarEdicao}"
+                rendered="#{!desabilitarEdicao}"
+                required="#{obrigatorio}"
+                value="#{valor}"
+                validatorMessage="O campo #{label} não é um valor válido"
+                requiredMessage="O campo #{label} não foi informado! "
+                autoClear="false"
+                validator="org.super_bits.view.validadores.generico"
+
+                converterMessage="Impossível converter o valor de #{label} em um tipo válido "
+                >
+                <f:passThroughAttribute name="caminhoCampo" value="#{registro.nomeCompostoIdentificador}" />
+                <f:passThroughAttribute name="dominio" value="#{registro.nomeClasseOrigemAtributo}" />
+                <f:passThroughAttribute name="campoInstanciado" value="#{registro}" />
+                <p:clientValidator/>
+
+                <c:if test="#{registro.temValidacaoRegex}">
+                    <f:validateRegex pattern="#{regex}"/>
+                </c:if>
+
+
+
+                <c:if test="#{atualizarGrupoOnChange}" >
+                    <p:ajax
+                        rendered="#{atualizarGrupoOnChange}"
+
+                        event="valueChange"
+                        update="#{pgUtil.getNomeIdPainelDoComponente(component)}"/>
+                </c:if>
+
+                <c:if test="#{atualizarFormOnChange}" >
+                    <p:ajax
+                        rendered="#{atualizarFormOnChange}"
+                        event="valueChange"
+                        update="@form"/>
+                </c:if>
+
+                <c:if test="#{possuiMetodoOnChange}" >
+                    <p:ajax rendered="#{possuiMetodoOnChange}"
+                            global="true"
+                            event="valueChange"
+                            listener="#{prMetodo}"/>
+                </c:if>
+
+
+                <c:if test="#{possuiIDOnChange}" >
+                    <p:ajax
+                        rendered="#{possuiIDOnChange}"
+                        event="valueChange"
+                        update="#{pgUtil.gerarCaminhoCompletoID(idAtualizarOnChange)}"
+                        />
+
+                </c:if>
+
+            </p:inputMask>
+
+
+        </ui:define>
+    </ui:decorate>
+</ui:composition>

@@ -1,0 +1,66 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:cc="http://java.sun.com/jsf/composite"
+                xmlns:sb="http://superbitsframework/ui"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+
+    <!-- INTERFACE -->
+    <cc:interface>
+        <cc:attribute name="acao" type="com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ItfAcaoDoSistema"
+                      shortDescription="A ação que será exibida " />
+        <cc:attribute name="armazenamentoAcaoExecutada"
+                      shortDescription="Ben para armazenar esta ação quando clicada, Esta opção só é exexutada com o atributo deste botão armazenarAcaoSelecionada for true "
+                      />
+        <cc:attribute name="update"
+                      shortDescription="IDs que devem ser atualizados após clicar na alção"
+                      />
+        <cc:attribute name="javaScriptOncomplete"  default="acoesPosAjax();"
+                      shortDescription="Javascript que deve ser executado após a execucao do botão"
+                      />
+        <cc:attribute name="tipoVisualizacao"
+                      type="com.super_bits.modulosSB.SBCore.modulos.view.fabricasCompVisual.ItfComponenteVisualSB"
+                      default="#{layoutsComponenteSB.layoutBotoes.iconeENome}"
+                      shortDescription="Tipo de visualização do botão (Utilize #tipos.tipoVisualBotao"
+                      />
+        <cc:attribute name="cor"
+                      default="#{null}"
+                      shortDescription="Cor do botão caso ele deva ser exibido por em uma cor especifica"
+                      />
+
+
+        <cc:attribute name="label"
+                      shortDescription="Label do botão"
+                      default="#{cc.attrs.acao.nomeAcao}"
+                      type="java.lang.String"
+                      />
+
+
+    </cc:interface>
+    <!-- IMPLEMENTATION -->
+    <cc:implementation>
+
+
+
+        <sb:botaoAcaoModal
+            acao="#{cc.attrs.acao}"
+            javaScriptOncomplete="#{cc.attrs.javaScriptOncomplete}"
+            idUpdate="#{cc.attrs.update}"
+            layout="#{cc.attrs.tipoVisualizacao}"
+            label="#{cc.attrs.label}"
+
+            />
+
+
+
+
+    </cc:implementation>
+</ui:composition>
+
+
+
+
+
+
+
+
+

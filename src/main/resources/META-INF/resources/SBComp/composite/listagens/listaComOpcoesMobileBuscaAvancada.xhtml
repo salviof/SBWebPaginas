@@ -1,0 +1,106 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:cc="http://java.sun.com/jsf/composite"
+                xmlns:SBInput="http://xmlns.jcp.org/jsf/composite/SBComp/composite/input"
+                xmlns:SBAcaoNav="http://xmlns.jcp.org/jsf/composite/SBComp/composite/acoesENavegacao"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <!-- INTERFACE -->
+    <cc:interface>
+
+        <cc:attribute
+
+            type="com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.permissoes.ItfAcaoFormulario"
+            name="acaoDeListagem"
+            required="true"
+
+            />
+        <cc:attribute
+
+            type="com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfBeanSimples"
+            name="itemSelecionado"
+            required="true"
+
+            />
+
+        <cc:attribute
+
+            type="java.util.List"
+            name="itens"
+            required="true"
+
+            />
+
+        <cc:attribute
+
+            method-signature="void listener()"
+            name="metodo"
+            required="true"
+
+            />
+
+        <cc:attribute name="opcoes" required="true"  />
+
+        <cc:attribute name="titulo"  default="Listagem de #{cc.attrs.acaoDeListagem.nomeDominio}"/>
+
+
+
+    </cc:interface>
+    <!-- IMPLEMENTATION -->
+    <cc:implementation>
+        <h:panelGroup>
+            <h:form>
+                <p:dataGrid
+
+                    var="item"
+                    value="#{cc.attrs.itens}"
+                    layout="grid"
+                    columns="3"
+
+                    emptyMessage="Nenhum #{cc.attrs.acaoDeListagem.nomeDominio} encontrado"
+                    paginatorTemplate=" {FirstPageLink} {PreviousPageLink}
+                    {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                    rowsPerPageTemplate="6,9,12,15"
+                    >
+
+
+
+                    <f:facet name="header">
+                        #{cc.attrs.titulo}
+                    </f:facet>
+
+                    <p:panel>
+
+                        <ui:repeat value="#{cc.attrs.acaoDeListagem.campos}"
+                                   var="campo">
+
+                            <SBInput:input
+                                registro="#{item.getCampoByNomeOuAnotacao(campo.caminhoSemNomeClasse)}"
+                                desabilitarEdicao="true"
+                                layout="#{layoutsComponenteSB.layoutCampo.semLabel}"
+
+
+                                />
+
+                        </ui:repeat>
+
+                        <center>
+                            <SBAcaoNav:seletorDeAcoes
+                                metodo="#{cc.attrs.metodo}"
+                                opcaoSelecionada="#{paginaAtual.infoPagina.acaoSelecionada}"
+                                opcoes="#{cc.attrs.opcoes}"
+                                visualizacaoBotao="#{layoutsComponenteSB.layoutBotoes.icone}"
+                                />
+                        </center>
+
+
+                    </p:panel>
+
+                </p:dataGrid>
+            </h:form>
+        </h:panelGroup>
+
+    </cc:implementation>
+
+</ui:composition>
