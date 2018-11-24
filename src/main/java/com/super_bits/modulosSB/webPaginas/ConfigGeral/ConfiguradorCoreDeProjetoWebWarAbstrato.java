@@ -16,10 +16,10 @@ import com.super_bits.modulosSB.SBCore.ConfigGeral.arquivosConfiguracao.ArquivoC
 import com.super_bits.modulosSB.SBCore.modulos.Mensagens.CentramMensagemProgramadorMsgStop;
 import com.super_bits.modulosSB.SBCore.modulos.TratamentoDeErros.InfoErroSBCoreDeveloperSopMessagem;
 import com.super_bits.modulosSB.SBCore.modulos.TratamentoDeErros.InfoErroSBCoreFW;
-import com.super_bits.modulosSB.SBCore.modulos.comunicacao.CentralComunicacaoDesktop;
 import com.super_bits.modulosSB.SBCore.modulos.logeventos.CentralLogEventosArqTextoGenerica;
 import com.super_bits.modulosSB.webPaginas.arquivosDoProjeto.CentralDeArquivosWebAppServidorSB;
 import com.super_bits.modulosSB.webPaginas.centralAtributo.CentralAtributosWebApp;
+import com.super_bits.modulosSB.webPaginas.centralComunicacao.CentralComunicaoWebPadrao;
 import com.super_bits.modulosSB.webPaginas.centralDados.CentralDadosWebApp;
 import com.super_bits.modulosSB.webPaginas.controller.sessao.ControleDeSessaoWeb;
 import com.super_bits.modulosSB.webPaginas.util.CentralDeMensagensJSFAPP;
@@ -75,7 +75,8 @@ public abstract class ConfiguradorCoreDeProjetoWebWarAbstrato extends Configurad
         pConfiguracao.setCentralDeEventos(CentralLogEventosArqTextoGenerica.class);
         pConfiguracao.setServicoVisualizacao(ServicoVisuaslizacaoWebResponsivo.class);
         pConfiguracao.setCentralDados(CentralDadosWebApp.class);
-        pConfiguracao.setCentralComunicacao(CentralComunicacaoDesktop.class);
+        //pConfiguracao.setCentralComunicacao(CentralComunicacaoDesktop.class);
+        pConfiguracao.setCentralComunicacao(CentralComunicaoWebPadrao.class);
         pConfiguracao.setCentralDeArquivos(CentralDeArquivosWebAppServidorSB.class);
         pConfiguracao.setCentralAtributoDados(CentralAtributosSBPersistencia.class);
         pConfiguracao.setCentralDeLocalizacao(CentraLocalizacaoSBPersistenciaPadrao.class);

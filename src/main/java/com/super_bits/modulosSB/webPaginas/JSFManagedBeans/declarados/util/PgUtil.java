@@ -10,6 +10,8 @@ import com.google.common.collect.Lists;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreNumeros;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringFiltros;
+import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringGerador;
+import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringGerador.TIPO_LOREN;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringValidador;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ItfAcaoDoSistema;
 import com.super_bits.modulosSB.SBCore.modulos.ManipulaArquivo.UtilSBCoreArquivos;
@@ -801,7 +803,7 @@ public class PgUtil implements Serializable {
      * @return Retorna um loren Ipsum de uma palavra
      */
     public String getLorrenIpsUmaPalavra() {
-        return UtilSBCoreStringValidador.GetLorenIpsilum(1, UtilSBCoreStringValidador.TIPO_LOREN.PALAVRAS);
+        return UtilSBCoreStringGerador.GetLorenIpsilum(1, TIPO_LOREN.PALAVRAS);
     }
 
     /**
@@ -809,7 +811,7 @@ public class PgUtil implements Serializable {
      * @return Retorna 5 palavras do lorenIpsum
      */
     public String getLorrenIpsUmaFrase() {
-        return UtilSBCoreStringValidador.GetLorenIpsilum(3, UtilSBCoreStringValidador.TIPO_LOREN.PALAVRAS);
+        return UtilSBCoreStringGerador.GetLorenIpsilum(3, TIPO_LOREN.PALAVRAS);
     }
 
     /**
@@ -817,7 +819,7 @@ public class PgUtil implements Serializable {
      * @return Um paragrafro de palavras LorenIpsum
      */
     public String getLorrenIpsUmParagrafo() {
-        return UtilSBCoreStringValidador.GetLorenIpsilum(1, UtilSBCoreStringValidador.TIPO_LOREN.PARAGRAFO);
+        return UtilSBCoreStringGerador.GetLorenIpsilum(1, TIPO_LOREN.PARAGRAFO);
     }
 
     /**
@@ -825,7 +827,7 @@ public class PgUtil implements Serializable {
      * @return 3 paragrafos lorenIpsum
      */
     public String getLorrenIps3Paragrafos() {
-        return UtilSBCoreStringValidador.GetLorenIpsilum(3, UtilSBCoreStringValidador.TIPO_LOREN.PARAGRAFO);
+        return UtilSBCoreStringGerador.GetLorenIpsilum(3, UtilSBCoreStringGerador.TIPO_LOREN.PARAGRAFO);
     }
 
     public String getSaudacao() {

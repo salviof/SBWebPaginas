@@ -30,7 +30,7 @@ public class GeradorGetComponentesVisuais extends GeradorClasseEscopoApp {
     private boolean foiGerado = false;
 
     public GeradorGetComponentesVisuais(Class<? extends ItfFabTipoComponenteVisual> pFabrica, boolean pComponenteNativo) {
-        super("org.coletivoJava.superBitsFW.webPaginas.constantes.componentes", pFabrica.getSimpleName().replace("Fab", "CompSB"), DIRETORIO_CODIGO_WEB_PAGINAS);
+        super("org.coletivoJava.superBitsFW.webPaginas.constantes.componentes", pFabrica.getSimpleName().replace("Fab", "CompSB"), null);
         componenteNativo = pComponenteNativo;
         fabricaFamiliaComponente = pFabrica;
     }
@@ -68,7 +68,7 @@ public class GeradorGetComponentesVisuais extends GeradorClasseEscopoApp {
         corpoCosntructor += "this.familia = " + fabricaFamiliaComponente.getTypeName() + ".class.getEnumConstants()[0].getFamilia().getRegistro(); ";
         for (ItfFabTipoComponenteVisual pcomp : fabricaFamiliaComponente.getEnumConstants()) {
             String nomeVariavel = UtilSBCoreStringsMaiuculoMinusculo.getPrimeiraLetraMinuscula(UtilSBCoreStringFiltros.gerarUrlAmigavel(pcomp.getRegistro().getNomeComponente()));
-            corpoCosntructor += "this." + nomeVariavel + " = " + fabricaFamiliaComponente.getSimpleName() + "." + pcomp.toString() + ".getComponente(); ";
+            corpoCosntructor += "this." + nomeVariavel + " = " + fabricaFamiliaComponente.getSimpleName() + "." + pcomp.toString() + ".getRegistro(); ";
         }
 
         MethodSource<JavaClassSource> metodoConstructor = getCodigoJava().addMethod();
@@ -78,9 +78,9 @@ public class GeradorGetComponentesVisuais extends GeradorClasseEscopoApp {
 
         MethodSource metodoGetPadrao = getCodigoJava().addMethod();
         metodoGetPadrao.setName("getComponentePadrao");
-        metodoGetPadrao.setReturnType(ItfFabTipoComponenteVisual.class);
+        metodoGetPadrao.setReturnType(ItfComponenteVisualSB.class);
         metodoGetPadrao.setPublic();
-        metodoGetPadrao.addParameter(ItfFabTipoComponenteVisual.class, "pComponente");
+        metodoGetPadrao.addParameter(ItfComponenteVisualSB.class, "pComponente");
         metodoGetPadrao.setBody(" "
                 + ""
                 + "  try {"
@@ -89,7 +89,7 @@ public class GeradorGetComponentesVisuais extends GeradorClasseEscopoApp {
                 + "            } else {"
                 + "                if (!pComponente.getFamilia().equals(familia.getFabrica())) { "
                 + "                    throw new UnsupportedOperationException(\"O layout enviado não pertence a família de componentes compatíveis,"
-                + "\" + pComponente.getNome() + \"é da família: \" + pComponente.getFamilia().getNomeFAmilia() + "
+                + "\" + pComponente.getNomeComponente() + \"é da família: \" + pComponente.getFamilia().getNomeFAmilia() + "
                 + "\"incompativel com \" + familia.getNome());"
                 + "                }"
                 + "                return pComponente;"

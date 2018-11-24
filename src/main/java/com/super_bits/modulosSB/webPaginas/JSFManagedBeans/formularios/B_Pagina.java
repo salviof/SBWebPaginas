@@ -370,7 +370,7 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
                 if (parametrosURL.get(novoParametro.getNome()) != null) {
                     throw new UnsupportedOperationException("Dois parametros com o mesmo nome foram definidos no MB de formulário" + this.getClass().getSimpleName(), null);
                 }
-                parametrosURL.put(UtilSBCoreStringFiltros.filtrarApenasLetra(novoParametro.getNome()), novoParametro);
+                parametrosURL.put(UtilSBCoreStringFiltros.gerarUrlAmigavel(novoParametro.getNome()), novoParametro);
                 parametrosOrdenados.add(novoParametro);
 
             }

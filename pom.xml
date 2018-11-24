@@ -11,7 +11,7 @@
     <name>Web Paginas Super-Bits</name>
     <groupId>br.org.coletivoJava.fw</groupId>
 
-    <version>1.0RC-SNAPSHOT</version>
+    <version>1.0.0-RC-SNAPSHOT</version>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
@@ -78,37 +78,37 @@
 
     <dependencies>
         <dependency>
-            <groupId>br.org.coletivoJava.fw</groupId>
+            <groupId>br.org.coletivoJava.utilitarios</groupId>
             <artifactId>clienteRest</artifactId>
-            <version>1.0RC-SNAPSHOT</version>
+            <version>1.0.0-RC-SNAPSHOT</version>
         </dependency>
         <!-- DEPENDENCIAS SUPER-BITS  -->
         <dependency>
             <groupId>br.org.coletivoJava.utilitarios</groupId>
             <artifactId>editorImagem</artifactId>
-            <version>1.0RC-SNAPSHOT</version>
+            <version>1.0.0-RC-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>br.org.coletivoJava.fw</groupId>
             <artifactId>SBPersistencia</artifactId>
-            <version>1.0RC-SNAPSHOT</version>
+            <version>1.0.0-RC-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>br.org.coletivoJava.fw.api.erp.comunicacao</groupId>
             <artifactId>apiComunicacao</artifactId>
-            <version>1.0-RC-SNAPSHOT</version>
+            <version>1.0.0-RC-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>br.org.coletivoJava.fw</groupId>
             <artifactId>SBTestes</artifactId>
-            <version>1.0RC-SNAPSHOT</version>
+            <version>1.0.0-RC-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
 
         <dependency>
-            <groupId>br.org.coletivojava.FW.modulos</groupId>
+            <groupId>br.org.coletivoJava.fw.modulos</groupId>
             <artifactId>SBAcessosModel</artifactId>
-            <version>1.0RC-SNAPSHOT</version>
+            <version>1.0.0-RC-SNAPSHOT</version>
         </dependency>
 
         <dependency>

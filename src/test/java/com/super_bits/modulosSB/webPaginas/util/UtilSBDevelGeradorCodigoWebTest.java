@@ -57,6 +57,7 @@ public class UtilSBDevelGeradorCodigoWebTest extends TesteJunit {
     public void testarGerarCOmponente() {
         try {
             System.out.println("TESTE:");
+            System.out.println(SBCore.getCaminhoDesenvolvimento() + "/src/main/java/");
 
             UtilSBDevelGeradorCodigoWeb.criarClassesDeComponentes(FabCompVisualSeletorItens.class, true);
             UtilSBDevelGeradorCodigoWeb.criarClassesDeComponentes(FabCompVisualSeletorItem.class, true);
