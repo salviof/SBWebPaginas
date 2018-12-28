@@ -146,7 +146,7 @@ public interface ItfPaginaGerenciarEntidade<T> extends ItfB_Pagina {
      */
     public boolean isTemPesquisa();
 
-    public ItfAcaoFormularioEntidade getAcaoVisualisar();
+    public ItfAcaoFormularioEntidade getAcaoVisualizar();
 
     public ItfAcaoControllerEntidade getAcaoAlterarStatus();
 

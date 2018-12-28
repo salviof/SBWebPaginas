@@ -129,10 +129,10 @@ public abstract class TestePaginaEntidade<T> extends TesteJunitSBPersistencia {
     public abstract ItfPaginaGerenciarEntidade definirPagina();
 
     public void visualisarDados() {
-        pagina.setAcaoSelecionada((AcaoDoSistema) pagina.getAcaoVisualisar());
+        pagina.setAcaoSelecionada((AcaoDoSistema) pagina.getAcaoVisualizar());
         pagina.executarAcao(pagina.getEntidadesListadas().get(0));
 
-        assertTrue("O XHTML para visualizar um registro não foi configurado ao executar a ação visualizar", pagina.getXhtmlAcaoAtual().equals(pagina.getAcaoVisualisar().getXhtml()));
+        assertTrue("O XHTML para visualizar um registro não foi configurado ao executar a ação visualizar", pagina.getXhtmlAcaoAtual().equals(pagina.getAcaoVisualizar().getXhtml()));
         assertTrue(" entidade selecionada está nula, durante a solicitação de visualização", pagina.getEntidadeSelecionada() != null);
         assertTrue("O boolean is novo registro precisa estar falso durante a visualização", !pagina.isNovoRegistro());
         assertTrue("O boolean  que permite a edição deve ser falso durante a visualização", !pagina.isPodeEditar());

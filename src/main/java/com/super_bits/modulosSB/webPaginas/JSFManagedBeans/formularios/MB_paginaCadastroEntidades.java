@@ -7,6 +7,7 @@ package com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios;
 import com.super_bits.modulos.SBAcessosModel.model.acoes.AcaoDoSistema;
 import com.super_bits.modulosSB.Persistencia.ConfigGeral.SBPersistencia;
 import com.super_bits.modulosSB.Persistencia.dao.UtilSBPersistencia;
+import com.super_bits.modulosSB.Persistencia.dao.consultaDinamica.ConsultaDinamicaDeEntidade;
 import com.super_bits.modulosSB.Persistencia.registro.persistidos.EntidadeSimples;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreReflexao;
@@ -31,6 +32,7 @@ import com.super_bits.modulosSB.SBCore.modulos.fabrica.ItfFabricaAcoes;
 import com.super_bits.modulosSB.SBCore.modulos.geradorCodigo.model.EstruturaDeEntidade;
 import com.super_bits.modulosSB.SBCore.modulos.geradorCodigo.model.LigacaoMuitosParaUm;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.anotacoes.InfoPreparacaoObjeto;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campo.FabTipoAtributoObjeto;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.MapaObjetosProjetoAtual;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfBeanGenerico;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfBeanSimples;
@@ -685,7 +687,7 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
     }
 
     @Override
-    public ItfAcaoFormularioEntidade getAcaoVisualisar() {
+    public ItfAcaoFormularioEntidade getAcaoVisualizar() {
         return acaoEntidadeVisualizar;
     }
 
@@ -729,15 +731,34 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
 
     @Override
     public void listarDados() {
-        if (mostarApenasORegistroCriadoAoListar && isNovoRegistro() && getEntidadeSelecionada() != null && getEntidadeSelecionadaComoBeanSimples().getId() == 0) {
-            if (getEntidadesListadas() != null) {
-                getEntidadesListadas().clear();
-                getEntidadesListadas().add(entidadeSelecionada);
-            }
-        } else {
-            setEntidadesListadas(UtilSBPersistencia.getListaTodos(getAcaoVinculada().getClasseRelacionada(), getEMPagina()));
-        }
+        listarDados(false);
 
+    }
+
+    protected void listarDados(boolean mostrarInativos) {
+        try {
+            if (mostarApenasORegistroCriadoAoListar && isNovoRegistro() && getEntidadeSelecionada() != null && getEntidadeSelecionadaComoBeanSimples().getId() == 0) {
+                if (getEntidadesListadas() != null) {
+                    getEntidadesListadas().clear();
+                    getEntidadesListadas().add(entidadeSelecionada);
+                }
+            } else {
+                try {
+                    ItfBeanSimples bean = (ItfBeanSimples) getAcaoVinculada().getClasseRelacionada().newInstance();
+                    if (!mostrarInativos && bean.isTemCampoAnotado(FabTipoAtributoObjeto.REG_ATIVO_INATIVO)) {
+                        setEntidadesListadas(new ConsultaDinamicaDeEntidade(getAcaoVinculada().getClasseRelacionada(), getEMPagina()).addCondicaoPositivo(bean.getNomeCampo(FabTipoAtributoObjeto.REG_ATIVO_INATIVO)).resultadoRegistros());
+
+                    } else {
+                        setEntidadesListadas(UtilSBPersistencia.getListaTodos(getAcaoVinculada().getClasseRelacionada(), getEMPagina()));
+                    }
+                } catch (Throwable t) {
+                    setEntidadesListadas(UtilSBPersistencia.getListaTodos(getAcaoVinculada().getClasseRelacionada(), getEMPagina()));
+                }
+
+            }
+        } catch (Throwable t) {
+            SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "Erro ao processar lista padrão em" + this.getClass().getSimpleName(), t);
+        }
     }
 
     @Override
@@ -832,11 +853,12 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
                 boolean mesmoentreEntidadeEAcaoAtual = true;
                 if (getAcaoSelecionada().isUmaAcaoFormulario()) {
                     if (getAcaoSelecionada() instanceof ItfAcaoEntidade) {
-
-                        if (getAcaoSelecionada().getComoAcaoDeEntidade()
-                                .getClasseRelacionada().getSimpleName().
-                                equals(pEnTidade.getClass().getSimpleName())) {
-                            mesmoentreEntidadeEAcaoAtual = false;
+                        if (pEnTidade != null) {
+                            if (getAcaoSelecionada().getComoAcaoDeEntidade()
+                                    .getClasseRelacionada().getSimpleName().
+                                    equals(pEnTidade.getClass().getSimpleName())) {
+                                mesmoentreEntidadeEAcaoAtual = false;
+                            }
                         }
                     }
                 }

@@ -12,6 +12,7 @@ import org.coletivojava.fw.api.tratamentoErros.FabErro;
 
 public abstract class SBWebPaginas {
 
+    public static final String DIRETORIO_PADRAO_MODULO_WEBAPP_FW_DESENVOLVIMENTO = "/home/superBits/projetos/coletivoJava/source/fw/SBWebPaginas";
     // variaveis temporarias apenas para compatibilidade
     // VARIAVEIS DE ARQUIVAR_LOG
     private static String SITE_HOST;

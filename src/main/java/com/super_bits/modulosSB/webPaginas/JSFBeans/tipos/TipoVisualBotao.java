@@ -7,7 +7,6 @@ package com.super_bits.modulosSB.webPaginas.JSFBeans.tipos;
 import com.super_bits.modulosSB.SBCore.modulos.view.fabricasCompVisual.ItfComponenteVisualSB;
 import com.super_bits.modulosSB.SBCore.modulos.view.fabricasCompVisual.componentes.FabCompVisualBotaoAcao;
 import javax.enterprise.context.ApplicationScoped;
-import org.coletivojava.fw.api.objetoNativo.view.componente.ComponenteVisualSB;
 
 /**
  * ATENÇÃO A DOCUMENTAÇÃO DA CLASSE É OBRIGATÓRIA O JAVADOC DOS METODOS PUBLICOS

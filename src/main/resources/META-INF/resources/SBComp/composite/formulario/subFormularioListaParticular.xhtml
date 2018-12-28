@@ -66,7 +66,7 @@
                 <h:panelGroup styleClass="Fright" layout="block" >
 
                     <p:commandButton
-
+                        icon="fa fa-plus-square-o"
                         actionListener="#{cc.attrs.registro.comoSubItens.subItens.adicionarItem()}"
                         update="#{pgUtil.makeCaminhoCompletoID('subForm')}"
                         process="@this"
@@ -98,10 +98,12 @@
 
                                         <p:fragment>
 
-                                            <SBInput:input registro="#{itemDaLista.getCampoByNomeOuAnotacao(cpItem.caminhoCampoRelativoAListaPai)}"  layout="#{cc.attrs.tipoVisualizacaoLabel}"
-                                                           idAtualizarOnChange="@this"
-                                                           transient="false"
-                                                           />
+                                            <SBInput:input
+                                                registro="#{itemDaLista.getCampoByNomeOuAnotacao(cpItem.caminhoCampoRelativoAListaPai)}"
+                                                layout="#{cc.attrs.tipoVisualizacaoLabel}"
+                                                idAtualizarOnChange="@this"
+                                                transient="false"
+                                                />
                                         </p:fragment>
 
 

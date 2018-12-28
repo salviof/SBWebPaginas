@@ -82,12 +82,20 @@
             <artifactId>clienteRest</artifactId>
             <version>1.0.0-RC-SNAPSHOT</version>
         </dependency>
+
         <!-- DEPENDENCIAS SUPER-BITS  -->
         <dependency>
             <groupId>br.org.coletivoJava.utilitarios</groupId>
             <artifactId>editorImagem</artifactId>
             <version>1.0.0-RC-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>3.17</version>
+        </dependency>
+
+
         <dependency>
             <groupId>br.org.coletivoJava.fw</groupId>
             <artifactId>SBPersistencia</artifactId>
@@ -220,6 +228,8 @@
             <artifactId>junit</artifactId>
             <version>4.11</version>
         </dependency>
+
+        
         <!--Nescessário para Hibernate em ambiente WEB -->
         <dependency>
             <groupId>org.jboss.logging</groupId>

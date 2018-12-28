@@ -33,54 +33,55 @@
     </cc:interface>
     <!-- IMPLEMENTATION -->
     <cc:implementation>
-        <h:panelGroup >
+        <c:if test="#{cc.attrs.registro.umValorEmLista}">
+            <h:panelGroup  rendered="#{cc.attrs.registro.umValorEmLista}">
 
-            <c:set var="layoutListagem" value="#{pgUtilLayout.gerarLayoutGrupoCampo(cc.attrs.grupoCampos)}" />
-            <p:fieldset rendered="#{cc.attrs.registro.valor !=null and cc.attrs.registro.umValorComLista}" >
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
+                <c:set rendered="#{cc.attrs.registro.umValorEmLista}" var="layoutListagem" value="#{pgUtilLayout.gerarLayoutGrupoCampo(cc.attrs.grupoCampos)}" />
+                <p:fieldset rendered="#{cc.attrs.registro.valor !=null and cc.attrs.registro.umValorEmLista}" >
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
 
-                            <c:forEach  items="#{cc.attrs.grupoCampos.campos}" var="campoColonaLeitura" >
-                                <th>#{campoColonaLeitura.label}</th>
-                            </c:forEach>
-
-                        </tr>
-                    </thead>
-                    <tbody>
-
-
-                        <ui:repeat value="#{cc.attrs.registro.valor}" var="item" rendered="#{cc.attrs.registro.umValorComLista}" varStatus="infoRec"  >
-                            <tr scope="row">
-                                <ui:repeat value="#{cc.attrs.grupoCampos.campos}"  var="campoColonaLeitura"  >
-
-
-                                    <td class="col-md-1 ColunaPequenaBotstrap">
-
-                                        <sb:inputSB
-                                            registro="#{item.getCampoInstanciadoByNomeOuAnotacao(campoColonaLeitura.caminhoCampo.caminhoRelativoItemSublista)}"
-                                            desabilitarEdicao="true"
-                                            layoutCampo="#{layoutsComponenteSB.layoutCampo.resumido}"
-                                            possuiIDOnChange="false"
-                                            possuiMetodoOnChange="false"
-                                            label=""
-                                            atualizarFormOnChange="false"
-                                            atualizarGrupoOnChange="false"
-                                            obrigatorio="false"
-
-                                            opcoes="#{cc.attrs.registro.listaDeOpcoes}"
-                                            />
-                                    </td>
-
-                                </ui:repeat>
+                                <c:forEach  items="#{cc.attrs.grupoCampos.campos}" var="campoColonaLeitura" >
+                                    <th>#{campoColonaLeitura.label}</th>
+                                </c:forEach>
 
                             </tr>
-                        </ui:repeat>
-                    </tbody>
+                        </thead>
+                        <tbody>
 
-                </table>
-            </p:fieldset>
 
-        </h:panelGroup>
+                            <c:forEach items="#{cc.attrs.registro.valor}" var="item" rendered="#{cc.attrs.registro.umValorComLista}" varStatus="infoRec"  >
+                                <tr scope="row">
+                                    <c:forEach items="#{cc.attrs.grupoCampos.campos}"  var="campoColonaLeitura"  >
+
+
+                                        <td class="col-md-1 ColunaPequenaBotstrap">
+                                            <sb:inputSB
+                                                registro="#{item.getCampoInstanciadoByNomeOuAnotacao(campoColonaLeitura.caminhoCampo.caminhoRelativoItemSublista)}"
+                                                desabilitarEdicao="true"
+                                                layoutCampo="#{layoutsComponenteSB.layoutCampo.resumido}"
+                                                possuiIDOnChange="false"
+                                                possuiMetodoOnChange="false"
+                                                label=""
+                                                atualizarFormOnChange="false"
+                                                atualizarGrupoOnChange="false"
+                                                obrigatorio="false"
+
+                                                opcoes="#{cc.attrs.registro.listaDeOpcoes}"
+                                                />
+                                        </td>
+
+                                    </c:forEach>
+
+                                </tr>
+                            </c:forEach>
+                        </tbody>
+
+                    </table>
+                </p:fieldset>
+
+            </h:panelGroup>
+        </c:if>
     </cc:implementation>
 </ui:component>

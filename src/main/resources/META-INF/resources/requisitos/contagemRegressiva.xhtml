@@ -1,11 +1,11 @@
-<ui:composition
-    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-    xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:cc="http://java.sun.com/jsf/composite"
-    xmlns:p="http://primefaces.org/ui"
-    xmlns:h="http://xmlns.jcp.org/jsf/html"
-    xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:cc="http://java.sun.com/jsf/composite"
+      xmlns:sb="http://superbitsframework/ui"
 
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <!-- INTERFACE -->
     <cc:interface>
 
         <cc:attribute name="contagem"
@@ -15,10 +15,9 @@
 
 
     </cc:interface>
-
     <!-- IMPLEMENTATION -->
     <cc:implementation>
-        <h:outputStylesheet name="composite/dataHora/calendarioRegressivoGigante.css" library="SBComp" />
+
         <c:forEach var="tempo" items="#{cc.attrs.contagem.quantidadesTempo}" >
 
             <div class="Container30 Responsive100">
@@ -36,4 +35,4 @@
 
     </cc:implementation>
 
-</ui:composition>
+</html>

@@ -14,11 +14,9 @@ import com.super_bits.modulosSB.SBCore.modulos.view.telas.LayoutTelaAreaConhecid
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.declarados.util.PgUtil;
 import com.super_bits.modulosSB.webPaginas.util.UtilSBWP_JSFTools;
 import java.util.List;
-import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
-import javax.faces.validator.FacesValidator;
 import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
 import org.coletivojava.fw.api.tratamentoErros.FabErro;
@@ -26,17 +24,12 @@ import org.primefaces.PrimeFaces;
 
 /**
  *
- * @author SalvioF
+ * @author desenvolvedor
  */
-@FacesValidator("org.super_bits.view.validadores.generico")
-public class ValidadorGenerico implements Validator<String> {
-
-    @RequestScoped
-    private PgUtil paginaUtil;
+public abstract class ValidadorGenericoAbstrato<T> implements Validator<T> {
 
     @Override
-    public void validate(FacesContext context, UIComponent component, String value) throws ValidatorException {
-
+    public void validate(FacesContext context, UIComponent component, T value) throws ValidatorException {
         ItfCampoInstanciado campoInstanciado = null;
 
         try {
@@ -51,7 +44,7 @@ public class ValidadorGenerico implements Validator<String> {
         }
         if (campoInstanciado != null) {
             boolean umNovoRegistro = campoInstanciado.getObjetoDoAtributo().getId() == 0;
-            List<String> validacao = UtilSBCoreValidacao.gerarMensagensValidacao(campoInstanciado, value, umNovoRegistro);
+            List<String> validacao = UtilSBCoreValidacao.gerarMensagensValidacao(campoInstanciado, value, umNovoRegistro, !campoInstanciado.validarCampo(value));
 
             if (campoInstanciado.isTemValidadacaoLogica()) {
                 try {
@@ -87,7 +80,6 @@ public class ValidadorGenerico implements Validator<String> {
 
             }
         }
-
     }
 
 }

@@ -1,0 +1,45 @@
+<ui:component
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns="http://www.w3.org/1999/xhtml"
+
+    xmlns:cc="http://java.sun.com/jsf/composite"
+
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:cc="http://java.sun.com/jsf/composite"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:SBRec="http://xmlns.jcp.org/jsf/composite/requisitos"
+    xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <!-- INTERFACE -->
+    <cc:interface>
+
+        <cc:attribute name="tarefas" displayName="Previsao Gestao" type="java.util.List" />
+
+
+        <cc:attribute name="destinoTarefaSelecionada"
+                      required="#{true}"
+                      type="com.super_bits.projeto.Jira.Jira.ItfTarefaSuperBitsFW"
+                      shortDescription="Local onde o Bean de Origem será armazenado"
+                      />
+
+    </cc:interface>
+    <!-- IMPLEMENTATION -->
+    <cc:implementation>
+        <p:fieldset legend="Equipe de desenvolvimento" >
+            <c:forEach items="#{cc.attrs.tarefas}" var="tarefa" >
+                <SBRec:botaocardTarefa origem="#{tarefa}"
+                                       destino="#{cc.attrs.destinoTarefaSelecionada}"
+                                       tarefaSistema="#{tarefa}" />
+            </c:forEach>
+        </p:fieldset>
+    </cc:implementation>
+</ui:composite>
+
+
+
+
+
+
+
+
+
+

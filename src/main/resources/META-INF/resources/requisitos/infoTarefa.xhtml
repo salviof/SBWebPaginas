@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:cc="http://java.sun.com/jsf/composite"
+      xmlns:p="http://primefaces.org/ui">
+
+    <!-- INTERFACE -->
+    <cc:interface>
+
+        <cc:attribute name="tarefaSistema" displayName="Previsao Gestao" type="com.super_bits.projeto.Jira.Jira.ItfTarefaSuperBitsFW" />
+
+
+    </cc:interface>
+    <!-- IMPLEMENTATION -->
+    <cc:implementation>
+
+
+        <p:panelGrid columns="3" >
+            <p:outputLabel value="Descrição"/>
+            <p:outputLabel value="Tempo nescessário (em minutos)"/>
+            <p:outputLabel value="Tipo de Profissional nescessário"/>
+            <p:outputLabel value="#{cc.attrs.tarefaSistema.tarefaJiraOrigem.nomeTarefa}" />
+            <p:outputLabel value="#{cc.attrs.tarefaSistema.minutosPrevistosTrabalho}" />
+            <p:outputLabel value="#{cc.attrs.tarefaSistema.tipoProfissionalNescessario.nome}" />
+        </p:panelGrid>
+
+    </cc:implementation>
+</html>
+
+
+
+
+
+
+
+
+
+

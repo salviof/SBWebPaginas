@@ -1,0 +1,47 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:cc="http://java.sun.com/jsf/composite"
+                xmlns:SBRec="http://xmlns.jcp.org/jsf/composite/requisitos"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+
+    <!-- INTERFACE -->
+    <cc:interface>
+
+        <cc:attribute name="gestaoPrevista" displayName="Previsao Gestao" type="com.super_bits.projeto.Jira.ItfPrevisaoGestaoEntidade" />
+
+
+    </cc:interface>
+    <!-- IMPLEMENTATION -->
+    <cc:implementation>
+
+
+
+        <div class="botaoCard Container30  w3-btn w3-border " >
+            <SBRec:porCentagemGrupoTarefas grupoDeTarefas="#{cc.attrs.gestaoPrevista}" />
+
+            <span>#{cc.attrs.gestaoPrevista.gestao.nomeAcao} </span> <br/>
+            <span>Tempo previsto: #{cc.attrs.gestaoPrevista.horasProgramadas}</span><br/>
+            <span>Formulários nescessários: #{cc.attrs.gestaoPrevista.qtdAcoesDeFormulario}</span><br/>
+            <span>Ações do Sistema nescessários: #{cc.attrs.gestaoPrevista.qtdAoesDeController}</span><br/>
+            <span>Custo com desenvolvedores: #{cc.attrs.gestaoPrevista.custoDesenvolvimento.valorTotal}</span><br/>
+            <span>Horas totais de desenvolvimento: #{cc.attrs.gestaoPrevista.custoDesenvolvimento.horasTotal}</span>
+
+        </div>
+
+
+
+
+    </cc:implementation>
+</ui:composite>
+
+
+
+
+
+
+
+
+
+

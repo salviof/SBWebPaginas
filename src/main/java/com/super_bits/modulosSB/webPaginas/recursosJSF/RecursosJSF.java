@@ -36,7 +36,12 @@ public class RecursosJSF extends ResourceHandlerWrapper {
                 @Override
                 public URL getURL() {
                     try {
-                        String caminho = "/META-INF" + name;
+                        String caminho = name;
+                        if (!name.startsWith("/resources")) {
+                            caminho = "/META-INF/resources" + name;
+                        } else {
+                            caminho = "/META-INF" + name;
+                        }
 
                         URL urlEncontrada = getClass().getResource(caminho);
 
@@ -47,21 +52,13 @@ public class RecursosJSF extends ResourceHandlerWrapper {
                         if (urlEncontrada == null) {
                             urlEncontrada = SBWebPaginas.class.getResource(name);
                         }
-                        String caminho2 = "META-INF" + name;
-                        if (urlEncontrada == null) {
-
-                            urlEncontrada = getClass().getResource(caminho2);
-                        }
-                        if (urlEncontrada == null) {
-                            urlEncontrada = SBWebPaginas.class.getResource(caminho2);
-                        }
 
                         if (urlEncontrada == null) {
                             ResourceManager manager = ApplicationAssociate.getInstance(context.getExternalContext()).getResourceManager();
                             String contentType = context.getExternalContext().getMimeType(caminho);
                             ResourceInfo resourceInfo = manager.findViewResource(caminho, contentType, context);
                             if (resourceInfo == null) {
-                                resourceInfo = manager.findViewResource(caminho2, contentType, context);
+                                resourceInfo = manager.findViewResource(caminho, contentType, context);
                             }
                             if (resourceInfo != null) {
                                 return resourceInfo.getHelper().getURL(resourceInfo, context);

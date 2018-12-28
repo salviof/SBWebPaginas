@@ -4,7 +4,8 @@
 
     xmlns:p="http://primefaces.org/ui"
     xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
-    xmlns:h="http://xmlns.jcp.org/jsf/html">
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://xmlns.jcp.org/jsf/core">
     <ui:decorate template="#{layout.xhtmlJsfCaminhoRelativo}">
 
 
@@ -25,13 +26,16 @@
                 showSecond="false"
                 showButtonPanel="true"
                 showOn="button"
-                validatorMessage="O valor informado no campo #{label} não é valido! "
+
                 requiredMessage="O campo #{label} não foi informado! "
                 disabled="#{desabilitarEdicao}"
                 showHour="true"
                 showMinute="true"
                 pattern="dd/MM/yyyy HH:mm:ss"
                 >
+                <f:validator  validatorId="org.super_bits.view.validadores.genericoDatas"
+                              for="@parent"
+                              />
 
                 <p:clientValidator/>
 

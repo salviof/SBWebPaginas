@@ -4,6 +4,7 @@
  */
 package com.super_bits.modulosSB.webPaginas.util.geradorCodigo;
 
+import com.super_bits.modulosSB.webPaginas.ConfigGeral.SBWebPaginas;
 import java.io.Serializable;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Named;
@@ -16,7 +17,7 @@ import testesFW.geradorDeCodigo.GeradorClasseGenerico;
  */
 public abstract class GeradorClasseEscopoApp extends GeradorClasseGenerico {
 
-    protected static final String DIRETORIO_CODIGO_WEB_PAGINAS = "/home/superBits/projetos/Super_Bits/source/SuperBits_FrameWork/SB_FRAMEWORK/SBWebPaginas/src/main/java/";
+    protected static final String DIRETORIO_CODIGO_WEB_PAGINAS = SBWebPaginas.DIRETORIO_PADRAO_MODULO_WEBAPP_FW_DESENVOLVIMENTO + "/src/main/java/";
 
     public GeradorClasseEscopoApp(String pNomePacote, String pNomeClasse) {
         super(pNomePacote, pNomeClasse);

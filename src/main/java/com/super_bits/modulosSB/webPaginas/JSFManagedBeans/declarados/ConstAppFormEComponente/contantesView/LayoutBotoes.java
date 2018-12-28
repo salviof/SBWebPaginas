@@ -6,7 +6,6 @@ package com.super_bits.modulosSB.webPaginas.JSFManagedBeans.declarados.ConstAppF
 
 import com.super_bits.modulosSB.SBCore.modulos.view.fabricasCompVisual.ItfComponenteVisualSB;
 import com.super_bits.modulosSB.SBCore.modulos.view.fabricasCompVisual.componentes.FabCompVisualBotaoAcao;
-import org.coletivojava.fw.api.objetoNativo.view.componente.ComponenteVisualSB;
 
 /**
  *

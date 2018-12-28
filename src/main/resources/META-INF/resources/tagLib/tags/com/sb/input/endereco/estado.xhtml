@@ -5,10 +5,11 @@
     <ui:decorate template="#{layout.xhtmlJsfCaminhoRelativo}">
         <ui:define name="input">
 
-            <p:outputLabel value="#{registro.comoCampoLocalizacao.unidadeFederativa.nome}"
-                           rendered="#{pgUtil.isTudoVerdadeiro(desabilitarEdicao,valor!=null)}"
+            <p:outputLabel value="#{registro.valor.nome}"
+                           rendered="#{desabilitarEdicao and registro.valor!=null}"
 
                            />
+
             <p:autoComplete converter="conversorGenerico"
                             completeMethod="#{registro.comoCampoLocalizacao.metodoAutoCompleteEstado}"
                             var="estado"

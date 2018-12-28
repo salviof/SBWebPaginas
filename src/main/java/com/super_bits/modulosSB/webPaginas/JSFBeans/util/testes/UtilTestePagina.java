@@ -141,7 +141,7 @@ public abstract class UtilTestePagina {
         if (icone.startsWith("fa ")) {
 
             String iconeSemInicio = icone.substring(3);
-            String arquivoCSSFOntAnsome = "/home/superBits/projetos/Super_Bits/source/SuperBits_FrameWork/SB_FRAMEWORK/SBWebPaginas/src/main/resources/META-INF/resources/fontAwesome/css/font-awesome.css";
+            String arquivoCSSFOntAnsome = SBWebPaginas.DIRETORIO_PADRAO_MODULO_WEBAPP_FW_DESENVOLVIMENTO + "/src/main/resources/META-INF/resources/fontAwesome/css/font-awesome.css";
             Assert.assertTrue("O arquivo font-awesome.css não foi encontrado no sistema", UtilSBCoreArquivos.isArquivoExiste(arquivoCSSFOntAnsome));
 
             if (!UtilSBCoreArquivoTexto.isTemPalavraNoArquivo(arquivoCSSFOntAnsome, iconeSemInicio)) {

@@ -50,6 +50,7 @@ function acoesPosAjax() {
     try {
         esconderTooltips();
         liberarBloqueios();
+
         if (!scrollEmCampoNaoValidado()) {
             irParTopo();
         }
@@ -161,6 +162,7 @@ function mesclarOnChangeComDelay(idElementoDigitacao) {
                     timeout = setTimeout(function () {
 
 
+
                         elemento.metodoOnchangeComDelay();
                     }, 800);
                 }
@@ -169,15 +171,25 @@ function mesclarOnChangeComDelay(idElementoDigitacao) {
             }
         };
     }
-
-
-
-
-
-    // Listen for keystroke events
-
-
 }
+
+function focarComSelacaoAposAjax() {
+    try {
+        contemClientID = false;
+        for (i = 0; i < arguments.length; i++) {
+            if (document.activeElement.id.includes(arguments[i])) {
+                contemClientID = true;
+            }
+        }
+        if (!contemClientID) {
+            $(PrimeFaces.escapeClientId(document.activeElement.id)).select();
+        }
+    } catch (o) {
+
+    }
+}
+
+
 
 
 function pesquisaDataSetComDelay(idElementoDigitacao, idDataSetPrime) {
@@ -191,7 +203,6 @@ function pesquisaDataSetComDelay(idElementoDigitacao, idDataSetPrime) {
     elemento.onkeyup = function (e) {
 
 
-
         // Clear the timeout if it has already been set.
         // This will prevent the previous task from executing
         // if it has been less than <MILLISECONDS>
@@ -201,5 +212,5 @@ function pesquisaDataSetComDelay(idElementoDigitacao, idDataSetPrime) {
 
             PF(idDataSetPrime).filter();
         }, 800);
-    };
+    }
 }
