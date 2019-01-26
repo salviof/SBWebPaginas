@@ -26,6 +26,8 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
+import javax.enterprise.inject.Default;
+import javax.enterprise.inject.Produces;
 import javax.imageio.ImageIO;
 import javax.inject.Inject;
 import javax.persistence.Entity;
@@ -38,6 +40,7 @@ import org.primefaces.event.FileUploadEvent;
  * @author Salvio
  */
 @SessionScoped
+@QlSessaoFacesContext
 @Named
 public class SessaoAtualSBWP extends SessaoOffline implements ItfSessao, Serializable {
 
@@ -46,6 +49,10 @@ public class SessaoAtualSBWP extends SessaoOffline implements ItfSessao, Seriali
     private ItfModuloAcaoSistema moduloSelecionado;
     @Inject
     private EntityManager entidadePrincipal;
+
+    public SessaoAtualSBWP() {
+        super();
+    }
 
     public void defineInfoTela() {
         String infoTela = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("contactfrm:clientinfo");

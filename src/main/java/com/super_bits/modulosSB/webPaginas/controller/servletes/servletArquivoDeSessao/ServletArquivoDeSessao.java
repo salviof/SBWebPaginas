@@ -11,6 +11,7 @@ import com.super_bits.modulosSB.webPaginas.ConfigGeral.SBWebPaginas;
 import com.super_bits.modulosSB.webPaginas.controller.servletes.ServletArquivosSBWPGenerico;
 import com.super_bits.modulosSB.webPaginas.controller.servletes.urls.UrlInterpretada;
 import com.super_bits.modulosSB.webPaginas.controller.servletes.urls.UtilFabUrlServlet;
+import com.super_bits.modulosSB.webPaginas.controller.sessao.QlSessaoFacesContext;
 import com.super_bits.modulosSB.webPaginas.controller.sessao.SessaoAtualSBWP;
 import com.super_bits.modulosSB.webPaginas.util.UtilSBWP_JSFTools;
 import java.io.IOException;
@@ -28,7 +29,9 @@ public class ServletArquivoDeSessao extends ServletArquivosSBWPGenerico {
 
     public static final String NOME_URL_SERVLET = "arquivosDeSessao";
     public static final String URL_SERVLET = SBWebPaginas.getSiteURL() + "/" + NOME_URL_SERVLET;
+
     @Inject
+    @QlSessaoFacesContext
     private SessaoAtualSBWP sessaoAtual;
 
     @Override

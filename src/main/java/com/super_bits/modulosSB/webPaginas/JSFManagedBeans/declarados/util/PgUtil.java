@@ -8,6 +8,7 @@ package com.super_bits.modulosSB.webPaginas.JSFManagedBeans.declarados.util;
 import br.org.coletivojava.erp.comunicacao.transporte.ERPTransporteComunicacao;
 import com.google.common.collect.Lists;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
+import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreDataHora;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreNumeros;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringFiltros;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringGerador;
@@ -41,6 +42,7 @@ import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.siteMap.AcaoComLink;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.siteMap.AcaoDeContexto;
 import com.super_bits.modulosSB.webPaginas.controller.push.Notificacao;
 import com.super_bits.modulosSB.webPaginas.controller.servletes.WebPaginasServlet;
+import com.super_bits.modulosSB.webPaginas.controller.sessao.QlSessaoFacesContext;
 import com.super_bits.modulosSB.webPaginas.controller.sessao.SessaoAtualSBWP;
 import com.super_bits.modulosSB.webPaginas.util.UtilSBWPServletTools;
 import com.super_bits.modulosSB.webPaginas.util.UtilSBWP_JSFTools;
@@ -84,6 +86,7 @@ public class PgUtil implements Serializable {
     private Tema tema;
 
     @Inject
+    @QlSessaoFacesContext
     private SessaoAtualSBWP sessao;
 
     @Inject
@@ -182,6 +185,10 @@ public class PgUtil implements Serializable {
     public long getDataHoraLong() {
 
         return new Date().getTime();
+    }
+
+    public Date getDataHora() {
+        return new Date();
     }
 
     @InfoMB_Acao(descricao = "Evento de ajax que recebe o atributo idAtualizacao  <p ajax event='onAlgumaCoisa') que atualiza uma parte da tela pelo ID")
@@ -1362,6 +1369,23 @@ public class PgUtil implements Serializable {
         } catch (Throwable t) {
             SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "Erro enviando imagem tamanho curto", t);
         }
+    }
+
+    public String getHorarioHHmmSSAgoraStr() {
+
+        SimpleDateFormat formatador = new SimpleDateFormat("HH:mm:ss");
+        return formatador.format(new Date());
+
+    }
+
+    public String getHoraHHAgoraStr() {
+        SimpleDateFormat formatador = new SimpleDateFormat("HH");
+        return formatador.format(new Date());
+
+    }
+
+    public int gerarValorInteiroCondicional(boolean condicao, int valorPositivo, int valorNegativo) {
+        return condicao ? valorPositivo : valorNegativo;
     }
 
 }

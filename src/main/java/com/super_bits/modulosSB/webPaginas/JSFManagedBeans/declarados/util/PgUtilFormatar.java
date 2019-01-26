@@ -5,6 +5,8 @@
 package com.super_bits.modulosSB.webPaginas.JSFManagedBeans.declarados.util;
 
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreNumeros;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 
@@ -28,6 +30,14 @@ public class PgUtilFormatar {
 
     public String moeda(long pValor) {
         return UtilSBCoreNumeros.converterMoeda(pValor);
+    }
+
+    public String gerarDataHoraSegundoJavascript(Date pDataHora) {
+        if (pDataHora == null) {
+            return null;
+        }
+        SimpleDateFormat formatador = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        return formatador.format(pDataHora);
     }
 
 }

@@ -22,7 +22,7 @@ import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ItfDestinatario;
 import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ItfDisparoComunicacao;
 import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ItfModeloMensagem;
 import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ItfTipoTransporteComunicacao;
-import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.ItensGenericos.basico.UsuarioOSistema;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.ItensGenericos.basico.UsuarioAplicacaoEmExecucao;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfUsuario;
 import java.util.ArrayList;
 import java.util.List;
@@ -121,7 +121,7 @@ public class CentralComunicaoWebPadrao extends CentralComunicaoAbstrato implemen
     @Override
     public ItfComunicacao gerarComunicacaoSistema_UsuairoLogado(FabTipoComunicacao tipocomunicacao, String mensagem, ItffabricaTrasporteComunicacao... tiposTransporte) {
         ItfComunicacao comunicacao
-                = new ComunicacaoTransient(new UsuarioOSistema(), SBCore.getUsuarioLogado(),
+                = new ComunicacaoTransient(new UsuarioAplicacaoEmExecucao(), SBCore.getUsuarioLogado(),
                         tipocomunicacao.getRegistro(), gerarListaTransportes(tiposTransporte));
         comunicacao.setMensagem(mensagem);
         comunicacao.setNome(mensagem);

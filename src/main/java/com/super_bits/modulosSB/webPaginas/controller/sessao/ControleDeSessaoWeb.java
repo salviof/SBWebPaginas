@@ -15,6 +15,7 @@ import java.io.File;
 import java.io.Serializable;
 import javax.annotation.PreDestroy;
 import javax.enterprise.context.RequestScoped;
+import javax.enterprise.inject.Default;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -33,7 +34,8 @@ import org.coletivojava.fw.api.tratamentoErros.FabErro;
 public class ControleDeSessaoWeb extends ControleDeSessaoAbstratoSBCore implements Serializable {
 
     @Inject
-    private SessaoAtualSBWP sessaoAtual;
+    @QlSessaoFacesContext
+    private ItfSessao sessaoAtual;
 
     private String usuarioLogar;
     private String senhaLogar;
@@ -46,9 +48,13 @@ public class ControleDeSessaoWeb extends ControleDeSessaoAbstratoSBCore implemen
     public ItfSessao getSessaoAtual() {
 
         if (sessaoAtual == null) {
+            if (FacesContext.getCurrentInstance() != null) {
+                sessaoAtual = UtilSBWPServletTools.getSessaoAtual();
 
-            sessaoAtual = UtilSBWPServletTools.getSessaoAtual();
+            } else {
+                sessaoAtual = new SessaoAtualWebDoApllicativo();
 
+            }
             if (sessaoAtual != null) {
                 return sessaoAtual;
             }
@@ -93,7 +99,7 @@ public class ControleDeSessaoWeb extends ControleDeSessaoAbstratoSBCore implemen
         SBCore.getCentralPermissao().configuraPermissoes();
         ItfGrupoUsuario grupoUsuarioLogado = sessaoAtual.getUsuario().getGrupo();
 
-        sessaoAtual.setMenusDaSessao(SBCore.getCentralPermissao().definirMenu(grupoUsuarioLogado));
+        ((SessaoAtualSBWP) sessaoAtual).setMenusDaSessao(SBCore.getCentralPermissao().definirMenu(grupoUsuarioLogado));
 
     }
 

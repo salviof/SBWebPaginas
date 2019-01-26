@@ -281,15 +281,14 @@ h1, h2, h3, h4, h5, h6{ margin:0px !important;
     .Container12{ width:100%; float:left;}
     .Container11{ width:100%; float:left;}
     .Container10{ width:100%; float:left;}
-    .Container9{ width:90%; float:left;}
-    .Container8{ width:80%; float:left;}
-    .Container7{ width:70%; float:left;}
-    .Container6{ width:60%; float:left;}
-    .Container5{ width:50%; float:left;}
-    .Container4{ width:40%; float:left;}
-    .Container3{ width:30%!important; float:left!important; }
-
-    .Container2{ width:20%; float:left;}/*DE 22 PARA 25*/
+    .Container9{ width:75%; float:left;}
+    .Container8{ width:67%; float:left;}
+    .Container7{ width:60%; float:left;}
+    .Container6{ width:50%; float:left;}
+    .Container5{ width:40%; float:left;}
+    .Container4{ width:32%; float:left;}
+    .Container3{ width:25%; float:left;}
+    .Container2{ width:22%; float:left;}
     .Container1{ width:10%; float:left;}
 
 }
@@ -303,13 +302,13 @@ h1, h2, h3, h4, h5, h6{ margin:0px !important;
     .Container11{ width:90%; float:left;}
     .Container10{ width:80%; float:left;}
     .Container9{ width:75%; float:left;}
-    .Container8{ width:60%; float:left;}
-    .Container7{ width:50%; float:left;}
+    .Container8{ width:67%; float:left;}
+    .Container7{ width:58%; float:left;}
     .Container6{ width:50%; float:left;}
     .Container5{ width:40%; float:left;}
-    .Container4{ width:33%; float:left;}
+    .Container4{ width:32%; float:left;}
     .Container3{ width:25%; float:left;}
-    .Container2{ width:15%; float:left;}
+    .Container2{ width:16%; float:left;}
     .Container1{ width:8%; float:left;}
     .Fs14{font-size:13px !important;}
     .Fs15{font-size:15px !important;}

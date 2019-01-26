@@ -5,6 +5,7 @@
 package com.super_bits.modulosSB.webPaginas.util;
 
 import com.google.common.collect.Lists;
+import com.super_bits.modulosSB.SBCore.ConfigGeral.ControleDeSessaoPadrao;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringFiltros;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringValidador;
@@ -130,6 +131,7 @@ public class UtilSBWPServletTools {
             if (SBCore.getEstadoAPP() == SBCore.ESTADO_APP.DESENVOLVIMENTO) {
                 return new SessaoAtualSBWP();
             }
+
             SessaoAtualSBWP sessao = (SessaoAtualSBWP) getBeanByNamed("sessaoAtualSBWP", SessaoAtualSBWP.class);
             return sessao;
         } catch (Exception e) {
@@ -147,6 +149,9 @@ public class UtilSBWPServletTools {
      */
     public static ControleDeSessaoWeb getControleDeSessaoWeb() {
         try {
+            if (FacesContext.getCurrentInstance() == null) {
+                return new ControleDeSessaoWeb();
+            }
             ControleDeSessaoWeb controle = (ControleDeSessaoWeb) getBeanByNamed("controleDeSessaoWeb", ControleDeSessaoWeb.class);
             return controle;
         } catch (Exception e) {

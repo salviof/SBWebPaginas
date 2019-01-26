@@ -138,38 +138,46 @@ function adicionarChamadaComDelay(idElemento, metodo) {
 }
 
 function mesclarOnChangeComDelay(idElementoDigitacao) {
-    elemento = document.getElementById(idElementoDigitacao);
-    var timeout = null;
+    try {
+        elemento = document.getElementById(idElementoDigitacao);
+        var timeout = null;
 
 
-    if (elemento.onchange) {
-        elemento.metodoOnchangeComDelay = elemento.onchange;
-        elemento.ultimapesquisa = elemento.value;
-        //elemento.onchange = null;
+        if (elemento.onchange) {
+            elemento.metodoOnchangeComDelay = elemento.onchange;
+            elemento.ultimapesquisa = elemento.value;
+            //elemento.onchange = null;
 
-        elemento.onkeyup = function (e) {
+            elemento.onkeyup = function (e) {
 
-            try {
-                if (elemento.value === elemento.ultimapesquisa) {
+                try {
+                    if (elemento.value === elemento.ultimapesquisa) {
 
-                } else {
-                    // Clear the timeout if it has already been set.
-                    // This will prevent the previous task from executing
-                    // if it has been less than <MILLISECONDS>
-                    clearTimeout(timeout);
-                    // Make a new timeout set to go off in 800ms
-                    elemento.ultimapesquisa = elemento.value;
-                    timeout = setTimeout(function () {
+                    } else {
+                        // Clear the timeout if it has already been set.
+                        // This will prevent the previous task from executing
+                        // if it has been less than <MILLISECONDS>
+                        clearTimeout(timeout);
+                        // Make a new timeout set to go off in 800ms
+                        elemento.ultimapesquisa = elemento.value;
+                        timeout = setTimeout(function () {
 
 
+                            try {
+                                elemento.metodoOnchangeComDelay();
+                            } catch (t) {
 
-                        elemento.metodoOnchangeComDelay();
-                    }, 800);
+                            }
+                        }, 800);
+                    }
+                } catch (t) {
+
                 }
-            } catch (t) {
+            };
 
-            }
-        };
+        }
+    } catch (t) {
+
     }
 }
 

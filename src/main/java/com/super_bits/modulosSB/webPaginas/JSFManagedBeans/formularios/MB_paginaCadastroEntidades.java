@@ -959,8 +959,11 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
 
         super.autoExecAlterarFormulario(pAcao);
         if (pAcao != null) {
-            atualizaInformacoesDeEdicao(pAcao.getTipoAcaoGenerica().getEstadoFormularioPadrao());
-
+            if (pAcao.getComoFormulario().getEstadoFormulario() == FabEstadoFormulario.INDEFINIDO) {
+                atualizaInformacoesDeEdicao(pAcao.getTipoAcaoGenerica().getEstadoFormularioPadrao());
+            } else {
+                atualizaInformacoesDeEdicao(pAcao.getComoFormulario().getEstadoFormulario());
+            }
         }
 
     }

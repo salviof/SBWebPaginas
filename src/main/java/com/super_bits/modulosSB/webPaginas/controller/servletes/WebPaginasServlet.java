@@ -170,6 +170,11 @@ public class WebPaginasServlet extends HttpServlet implements Serializable {
     }
 
     @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        super.doGet(req, resp); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
     protected void doGet(HttpServletRequest requisicao, HttpServletResponse resposta) throws ServletException, IOException {
         System.out.println("Iniciando servlet WP");
 
