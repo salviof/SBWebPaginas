@@ -13,7 +13,7 @@ import javax.inject.Qualifier;
 
 /**
  *
- * @author desenvolvedor
+ * @author SALVIOF@GMAIL.COM
  */
 @Qualifier
 @Retention(RUNTIME)
