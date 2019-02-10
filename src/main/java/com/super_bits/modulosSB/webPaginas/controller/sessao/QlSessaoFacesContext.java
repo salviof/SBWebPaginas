@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 /*
  *  Desenvolvido pela equipe Super-Bits.com CNPJ 20.019.971/0001-90
 
@@ -22,5 +22,3 @@ import javax.inject.Qualifier;
 public @interface QlSessaoFacesContext {
 
 }
-=======
->>>>>>> c89c95f0d31e4bcceba3eeae237f32b5f9354732
