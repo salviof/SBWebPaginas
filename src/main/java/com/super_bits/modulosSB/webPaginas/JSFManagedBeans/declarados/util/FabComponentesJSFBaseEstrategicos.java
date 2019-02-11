@@ -4,6 +4,11 @@
  */
 package com.super_bits.modulosSB.webPaginas.JSFManagedBeans.declarados.util;
 
+import com.sun.faces.taglib.html_basic.PanelGroupTag;
+import javax.faces.component.html.HtmlPanelGroup;
+
+import org.primefaces.component.fieldset.FieldsetRenderer;
+
 /**
  *
  * @author desenvolvedor

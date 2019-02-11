@@ -1,0 +1,39 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:cc="http://java.sun.com/jsf/composite"
+                xmlns:SBRec="http://xmlns.jcp.org/jsf/composite/requisitos"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <!-- INTERFACE -->
+    <cc:interface>
+
+        <cc:attribute name="requisitoSolicitado" displayName="Previsao Gestao" type="com.super_bits.projeto.Jira.requisito.ItfRequisitoSolicitado" />
+
+
+    </cc:interface>
+    <!-- IMPLEMENTATION -->
+    <cc:implementation>
+
+
+
+        <div class="botaoCard Container30  w3-btn w3-border " >
+            #{cc.attrs.requisitoSolicitado.nome}
+            <SBRec:porCentagemRequisitoSolicitado />
+        </div>
+
+
+
+
+    </cc:implementation>
+</ui:composition>
+
+
+
+
+
+
+
+
+
+

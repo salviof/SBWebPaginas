@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:cc="http://java.sun.com/jsf/composite"
+
+    xmlns:p="http://primefaces.org/ui">
+
+    <!-- INTERFACE -->
+    <cc:interface
+        shortDescription="Cria um botão, referenciando ao link da ação ex: http://www.portal.com.br/NomeDaAcaoDeGestao/ac-acaoSecundaria.html "
+        >
+        <cc:attribute name="acao" type="com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ItfAcaoDoSistema"
+                      shortDescription="A ação que será exibida " />
+        <cc:attribute name="javaScriptOncomplete"  default="acoesPosAjax();"
+                      shortDescription="Javascript que deve ser executado após a execucao do botão"
+                      />
+        <cc:attribute name="url" required="true" />
+        <cc:attribute name="cor"
+                      default="#{null}"
+                      shortDescription="Cor do botão caso ele deva ser exibido por em uma cor especifica"
+                      />
+        <cc:attribute name="label"
+                      shortDescription="Label do botão"
+                      default="#{cc.attrs.acao.nomeAcao}"
+                      type="java.lang.String"
+                      />
+    </cc:interface>
+    <!-- IMPLEMENTATION -->
+    <cc:implementation>
+
+
+
+        <p:button href="#{cc.attrs.url}"
+                  styleClass="btnIconeENome botao"
+                  icon="#{cc.attrs.acao.iconeAcao}"
+                  value="#{cc.attrs.label}"
+                  target="_parent"
+                  />
+
+
+
+    </cc:implementation>
+
+
+</html>

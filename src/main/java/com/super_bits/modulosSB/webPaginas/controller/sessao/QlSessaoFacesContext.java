@@ -1,4 +1,3 @@
-
 /*
  *  Desenvolvido pela equipe Super-Bits.com CNPJ 20.019.971/0001-90
 
@@ -14,7 +13,7 @@ import javax.inject.Qualifier;
 
 /**
  *
- * @author SALVIOF@GMAIL.COM
+ * @author desenvolvedor
  */
 @Qualifier
 @Retention(RUNTIME)

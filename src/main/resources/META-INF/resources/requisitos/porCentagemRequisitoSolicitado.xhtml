@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:cc="http://java.sun.com/jsf/composite"
+      xmlns:p="http://primefaces.org/ui">
+
+    <!-- INTERFACE -->
+    <cc:interface>
+
+        <cc:attribute name="requisitoSolicitado" displayName="Grupo de Tarefas"
+                      type="com.super_bits.projeto.Jira.requisito.ItfRequisitoSolicitado" />
+    </cc:interface>
+    <!-- IMPLEMENTATION -->
+    <cc:implementation>
+        <i>
+            <span class="Fs30 FontAdamantiumRegular Fright MarBot10">
+                #{cc.attrs.requisitoSolicitado.nome}
+            </span>
+        </i>
+
+
+
+
+        <div class="DispBlock Fright">
+            <p:progressBar   value="0"  style="width: 270px;" labelTemplate="{value}% Densenvolvido"   />
+        </div>
+        <div class="SeparatorFull"/>
+        <span class="Green">  <i class="fa fa-clock-o  Fs16"  /> Tempo previsto:</span>
+        <span>   #{cc.attrs.requisitoSolicitado.previsaoProjeto.custosDesenvolvimento.horasTotal}</span>
+
+        <br/>
+        <span class="Green" style="text-align: left;">  <i class="fa  fa-usd   Fs16"  /> Valor Total:  </span>
+        <span class="" style="text-align:  right;"><p:inputNumber symbol="R$" value="#{cc.attrs.requisitoSolicitado.previsaoProjeto.custosDesenvolvimento.valorTotal}" disabled="#{true}"  readonly="#{true}" decimalPlaces="2" decimalSeparator="," thousandSeparator="."/></span><br/>
+
+
+
+
+
+    </cc:implementation>
+</html>
+
+
+
+
+
+
+
+
+
+

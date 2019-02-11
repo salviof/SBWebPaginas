@@ -1,0 +1,55 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:cc="http://java.sun.com/jsf/composite"
+                xmlns:SBRec="http://xmlns.jcp.org/jsf/composite/requisitos"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <!-- INTERFACE -->
+    <cc:interface>
+
+        <cc:attribute name="requisitoSolicitado"
+                      displayName="Previsao Gestao"
+                      required="#{true}"
+                      type="com.super_bits.projeto.Jira.requisito.ItfRequisitoSolicitado" />
+
+
+        <cc:attribute name="updateID"
+                      shortDescription="IDs que devem ser atualizados após clicar na alção"
+                      type="java.lang.String"
+                      />
+        <cc:attribute name="javaScriptOncomplete"  default="javascript:irParaTopo();"
+                      shortDescription="Javascript que deve ser executado após a execucao do botão"
+                      />
+
+
+        <cc:attribute name="destino"
+                      required="#{true}"
+                      type="com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfBeanSimples"
+
+                      shortDescription="Local onde o Bean de Origem será armazenado"
+                      />
+    </cc:interface>
+    <!-- IMPLEMENTATION -->
+    <cc:implementation>
+
+        <p:commandLink action="#{paginaAtual.infoPagina.executarAcaoSelecionada()}"
+                       update="#{cc.attrs.updateID}" oncomplete="javascript:irParaTopo();" >
+            <f:setPropertyActionListener target="#{paginaAtual.infoPagina.acaoSelecionada}"
+                                         value="#{pgRequisitosSolicitados.acaoVisualizarRequisitoSelecionado}" />
+            <f:setPropertyActionListener target="#{cc.attrs.destino}" value="#{cc.attrs.requisitoSolicitado}"/>
+            <SBRec:cardRequisitoSolicitado requisitoSolicitado="#{cc.attrs.requisitoSolicitado}"/>
+        </p:commandLink>
+
+    </cc:implementation>
+</ui:composition>
+
+
+
+
+
+
+
+
+
+

@@ -163,7 +163,7 @@ public class ParametroUrlInstanciado implements ItfParametroRequisicaoInstanciad
                             System.out.println("O parametro de URL " + getNome() + " é do tipo Entidade, porém este projeto não tem Persistencia configurada");
                         }
                     } catch (Exception e) {
-                        SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "Erro obtendo registro de parametroURL de entidade pela URL", e);
+                        SBCore.RelatarErro(FabErro.SOLICITAR_REPARO,"Erro obtendo registro de parametroURL de entidade pela URL", e);
                     }
 
                     if (registroByURL == null) {
@@ -171,7 +171,7 @@ public class ParametroUrlInstanciado implements ItfParametroRequisicaoInstanciad
 
                         if (getValor() == null) {
                             if (estruturaParametro.isParametroObrigatorio()) {
-                                SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "Não encontrado Registro" + getValor() + " do tipo" + getTipoEntidade().getSimpleName(), null);
+                                SBCore.RelatarErro(FabErro.SOLICITAR_REPARO,"Não encontrado Registro" + getValor() + " do tipo" + getTipoEntidade().getSimpleName(), null);
                                 setValor(getValorPadrao());
                             }
                             // caso contrario renova o Objeto

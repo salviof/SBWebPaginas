@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:cc="http://java.sun.com/jsf/composite"
+      xmlns:p="http://primefaces.org/ui">
+
+    <!-- INTERFACE -->
+    <cc:interface>
+        <cc:attribute name="previsaoGestao"
+                      displayName="Previsao Gestao"
+                      type="com.super_bits.projeto.Jira.ItfPrevisaoGestaoEntidade" />
+    </cc:interface>
+    <!-- IMPLEMENTATION -->
+    <cc:implementation>
+
+
+
+        <div class="Container100 w3-card-4">
+
+            <div class="Container50 w3-card-2 Fright" style="margin: 10px; margin-left: 10px">
+                <p:fieldset legend="Descricao Da Tarefa">
+                    <h2 class="FontAdamantiumBold"> #{cc.attrs.previsaoGestao.gestao.nome}</h2>
+                    #{pgUtil.lorrenIps3Paragrafos}
+                    #{cc.attrs.previsaoGestao.gestao.descricao}
+                </p:fieldset>
+            </div>
+            <div class="Container40 w3-card-2 Fleft ">
+                <p:fieldset legend="Informações Gerais do desenvolvimento" >
+
+                    <p:panelGrid  columns="2" >
+                        <p:outputLabel value="Horas Totais Programadas:"/> <p:outputLabel value="#{cc.attrs.previsaoGestao.horasProgramadas}"/>
+                        <p:outputLabel value="Formulários previstos:"/> <p:outputLabel value="#{cc.attrs.previsaoGestao.qtdAcoesDeFormulario}"/>
+                        <p:outputLabel value="Ações de controle prevista:"/> <p:outputLabel value="#{cc.attrs.previsaoGestao.qtdAoesDeController}"/>
+                        <p:outputLabel value="Tipo de registro vinculado:"/> <p:outputLabel value="#{cc.attrs.previsaoGestao.entidadeVinculada.simpleName}"/>
+                    </p:panelGrid>
+
+                </p:fieldset>
+            </div>
+
+
+        </div>
+        <div class="SeparatorFull" />
+        <p:progressBar labelTemplate="Porcentagem desenvolvida: (Sem conexão com Jira)"  value="5"/>
+
+
+
+    </cc:implementation>
+</html>
+
+
+
+
+
+
+
+
+
+
