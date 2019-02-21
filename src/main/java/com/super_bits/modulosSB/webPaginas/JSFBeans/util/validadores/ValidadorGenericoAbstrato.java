@@ -62,23 +62,27 @@ public abstract class ValidadorGenericoAbstrato<T> implements Validator<T> {
             }
 
             if (!validacao.isEmpty()) {
-                FacesMessage mensagemErro = new FacesMessage();
-                mensagemErro.setSummary(validacao.get(0));
-                mensagemErro.setSeverity(FacesMessage.SEVERITY_ERROR);
-                PgUtil paninaUtil = new PgUtil();
-                String idCompoentePai = paninaUtil.getNomeIdPainelGroupInputSB(component);
-                if (!UtilSBCoreStringValidador.isNuloOuEmbranco(idCompoentePai)) {
-                    PrimeFaces.current().ajax().update(idCompoentePai);
-                    //PrimeFaces.current().scrollTo(idCompoentePai);
 
-                    throw new ValidatorException(mensagemErro);
-                } else {
-                    SBCore.getCentralDeMensagens().enviarMsgErroAoUsuario(mensagemErro.getSummary());
-                    UtilSBWP_JSFTools.atualizaPorId(LayoutTelaAreaConhecida.AREA_MENSAGEM_INTERFACE);
-                    throw new ValidatorException(mensagemErro);
-                }
-
+                exibirMensagemValidacao(component, validacao.get(0));
             }
+        }
+    }
+
+    public void exibirMensagemValidacao(UIComponent component, String pMmensagem) {
+        FacesMessage mensagemErro = new FacesMessage();
+        mensagemErro.setSummary(pMmensagem);
+        mensagemErro.setSeverity(FacesMessage.SEVERITY_ERROR);
+        PgUtil paninaUtil = new PgUtil();
+        String idCompoentePai = paninaUtil.getNomeIdPainelGroupInputSB(component);
+        if (!UtilSBCoreStringValidador.isNuloOuEmbranco(idCompoentePai)) {
+            PrimeFaces.current().ajax().update(idCompoentePai);
+            //PrimeFaces.current().scrollTo(idCompoentePai);
+
+            throw new ValidatorException(mensagemErro);
+        } else {
+            SBCore.getCentralDeMensagens().enviarMsgErroAoUsuario(mensagemErro.getSummary());
+            UtilSBWP_JSFTools.atualizaPorId(LayoutTelaAreaConhecida.AREA_MENSAGEM_INTERFACE);
+            throw new ValidatorException(mensagemErro);
         }
     }
 
