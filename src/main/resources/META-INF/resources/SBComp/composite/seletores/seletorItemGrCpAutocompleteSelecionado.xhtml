@@ -22,7 +22,7 @@
                       shortDescription="Médodo que deve ser executado ao alterar um valor"
 
                       />
-
+        <cc:attribute name="estiloCss" default="campoResponsivo" />
     </cc:interface>
     <!-- IMPLEMENTATION -->
     <cc:implementation>
@@ -39,7 +39,7 @@
 
                 <sb:parametroMetodo nome="metodoOnChange" valor="#{cc.attrs.metodoOnChange}" />
                 <p:autoComplete
-                    styleClass="inputTexto"
+                    styleClass="inputTexto #{cc.attrs.estiloCss}"
                     converter="conversorGenerico"
                     itemLabel="#{item.nome}"
                     itemValue="#{item}"
