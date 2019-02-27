@@ -11,8 +11,9 @@
 
         <ui:define name="input">
 
-            <p:outputLabel value="#{pgUtil.gerarDataHoraTexto(registro.valor)}"
+            <p:outputLabel value="#{pgUtil.gerarDataHoraTexto(valor)}"
                            rendered="#{desabilitarEdicao}"
+                           style="text-align: center !important;"
                            />
 
             <p:calendar

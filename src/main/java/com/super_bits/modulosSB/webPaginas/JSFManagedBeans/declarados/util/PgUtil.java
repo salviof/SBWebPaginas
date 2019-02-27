@@ -8,7 +8,6 @@ package com.super_bits.modulosSB.webPaginas.JSFManagedBeans.declarados.util;
 import br.org.coletivojava.erp.comunicacao.transporte.ERPTransporteComunicacao;
 import com.google.common.collect.Lists;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
-import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreDataHora;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreNumeros;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringFiltros;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringGerador;
@@ -53,6 +52,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.RequestScoped;
@@ -1215,7 +1215,9 @@ public class PgUtil implements Serializable {
         if (pDataHora == null) {
             return null;
         }
-        SimpleDateFormat formatador = new SimpleDateFormat("dd/MM/yy 'às' HH:mm");
+        Locale local = new Locale("pt", "BR");
+
+        SimpleDateFormat formatador = new SimpleDateFormat("'dia' dd 'de' MMM 'de' yy 'às' HH:mm", local);
         return formatador.format(pDataHora);
     }
 
