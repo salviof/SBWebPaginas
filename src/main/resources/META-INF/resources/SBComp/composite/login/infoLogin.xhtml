@@ -10,7 +10,6 @@
     <!-- INTERFACE -->
     <cc:interface>
         <cc:attribute name="ocultarFormulario" type="java.lang.Boolean" default="true"/>
-        <cc:attribute name="ocultarBotaoSair" type="java.lang.Boolean" default="false"/>
     </cc:interface>
     <!-- IMPLEMENTATION -->
     <cc:implementation >
@@ -45,7 +44,7 @@
 
             </c:if>
             <!-- logado -->
-            <c:if test="#{paginaAtual.sessao.identificado and !cc.attrs.ocultarBotaoSair}" >
+            <c:if test="#{paginaAtual.sessao.identificado}" >
                 <h:form >
                     <div class="TexAlCenter">
                         <p:commandButton style="margin-top: 10px;" id="botao-logado" icon="ui-icon-gear" iconPos="" value="Sair \ alterar perfil" type="button" onclick="PF('janelaLogout').show();"  />

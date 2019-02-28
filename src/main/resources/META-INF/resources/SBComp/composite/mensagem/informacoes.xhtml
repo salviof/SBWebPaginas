@@ -8,8 +8,6 @@
 
         <cc:attribute name="descricao" required="true"  />
 
-        <cc:attribute name="titulo" default="Atenção!" />
-
 
     </cc:interface>
 
@@ -17,7 +15,7 @@
 
     <cc:implementation>
         <div class="alert alert-info" >
-            <strong>#{cc.attrs.titulo}</strong> #{cc.attrs.descricao}
+            <strong>Atenção!</strong> #{cc.attrs.descricao}
         </div>
 
     </cc:implementation>

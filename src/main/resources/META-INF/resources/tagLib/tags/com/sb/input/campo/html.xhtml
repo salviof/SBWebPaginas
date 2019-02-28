@@ -2,26 +2,13 @@
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 
-    xmlns:p="http://primefaces.org/ui"
-    xmlns:f="http://xmlns.jcp.org/jsf/core"
-    xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    xmlns:p="http://primefaces.org/ui">
     <ui:decorate template="#{layout.xhtmlJsfCaminhoRelativo}">
         <ui:define name="input">
-            <!-- TODO ajax on value change   -->
-            <p:textEditor
 
-                rendered="#{!desabilitarEdicao}"
-                styleClass="campoResponsivo  TexAlCenter #{componente.classeCSS}"
-                required="false"
-                value="#{valor}"
-                validatorMessage="O valor informado no campo #{label} não é valido! "
-                requiredMessage="O campo #{label} não foi informado! "
+            <p:inputText value="Utilize o pe CK editor, este componente está desabilitado temporariamente" />
 
-                >
-                <p:clientValidator />
-                <f:validator  validatorId="org.super_bits.view.validadores.generico"/>
 
-            </p:textEditor>
 
 
         </ui:define>

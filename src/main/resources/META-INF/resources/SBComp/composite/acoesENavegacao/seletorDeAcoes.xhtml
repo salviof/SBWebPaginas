@@ -102,44 +102,33 @@
 
                         <c:when test="#{cc.attrs.visualizacaoBotao==layoutsComponenteSB.layoutBotoes.gigante}">
 
-                            <p:commandLink
-
-                                action="#{cc.attrs.metodo}"
-                                >
 
 
-                                <div class="btnSeletor-small btnSeletor-Bkg " style="min-height: 200px;min-width: 200px;" >
+                            <p:commandLink action="#{cc.attrs.metodo}"
+                                           oncomplete="acoesPosAjax()"
+                                           >
+                                <div class="ContainerIndent">
 
-
-                                    <h:panelGroup>
-                                        <font color="##{opc.cor}" >
-                                            <div class="Container12" style=" color:##{opc.cor}!important;background-color:#{opc.cor}">
-                                                <i  class=" #{opc.iconeAcao} fa fa-5x" style=" background: #F5F5F5;   padding:15px;   border-radius: 100%;"  > </i><br/>
+                                    <div class="Container2 Responsive">
+                                        <div class="ContainerIndent">
+                                            <div class="Card RedBack SoftRed TexAlCenter HoverEffect">
+                                                <div class="quebraBlocoComEspacoVertical5"></div>
+                                                <i class="#{opc.iconeAcao} Fs50"></i>
+                                                <div class="quebraBlocoComEspacoVertical5"></div>
+                                                <div class="FontRobotoLight Fs16 SoftRed DispBlock ClearBoth">#{opc.nomeAcao}</div>
                                             </div>
-                                        </font>
-                                    </h:panelGroup>
-
-                                    <h:panelGroup styleClass="btnSeletor-label "
-                                                  style="color: #000000; "
-                                                  layout="block" >
-                                        <div style="display: table-cell; vertical-align: middle; height: 100px;">
-                                            <h3>#{opc.nomeAcao}</h3>
                                         </div>
-
-
-                                    </h:panelGroup>
-                                    <p:tooltip rendered="#{opc.descricao!=null}"
-                                               value="#{opc.descricao}"
-                                               />
+                                    </div>
                                 </div>
 
-
-                                <f:setPropertyActionListener
-                                    target="#{cc.attrs.opcaoSelecionada}"
-                                    value="#{opc}"  />
-
+                                <f:setPropertyActionListener target="#{cc.attrs.opcaoSelecionada}" value="#{opc}"/>
+                                <p:ajax event="dialogReturn" listener="#{paginaAtual.infoPagina.metodoRespostaModal}"
+                                        rendered="#{opc.acaoTemModal}"
+                                        />
+                                <c:if test="#{cc.attrs.update!=null}">
+                                    <f:ajax execute="#{cc.attrs.update}"/>
+                                </c:if>
                             </p:commandLink>
-
 
                         </c:when>
 

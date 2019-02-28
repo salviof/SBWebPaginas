@@ -1,17 +1,12 @@
 <ui:composition
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-    xmlns:p="http://primefaces.org/ui"
-    xmlns:h="http://xmlns.jcp.org/jsf/html">
+    xmlns:p="http://primefaces.org/ui">
     <ui:decorate template="#{layout.xhtmlJsfCaminhoRelativo}">
         <ui:define name="input">
 
-            <h:panelGroup rendered="#{!desabilitarEdicao}">
-                <p:outputLabel value="Selecione uma Cidade, para Selecionar um Bairro"
-                               rendered="#{!registro.comoCampoLocalizacao.podeColetarBairro and !desabilitarEdicao}"/>
-            </h:panelGroup>
-            <p:outputLabel value="#{registro.valor.nome}" rendered="#{desabilitarEdicao}"/>
 
+            <p:outputLabel value="Selecione uma Cidade, para Selecionar um Bairro" rendered="#{!registro.comoCampoLocalizacao.podeColetarBairro}"/>
 
             <p:autoComplete converter="conversorGenerico"
                             completeMethod="#{registro.comoCampoLocalizacao.metodoAutoCompleteBairro}"
@@ -22,7 +17,7 @@
                             itemLabel="#{bairro.nome}"
                             placeholder="Localize um Bairro"
                             disabled="#{desabilitarEdicao or registro.comoCampoLocalizacao.bairroSomenteLeitura}"
-                            rendered="#{registro.comoCampoLocalizacao.podeColetarBairro and !desabilitarEdicao}"
+                            rendered="#{registro.comoCampoLocalizacao.podeColetarBairro}"
                             styleClass="campoResponsivo"
                             minQueryLength="3"
                             dynamic="true"

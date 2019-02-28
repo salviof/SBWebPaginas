@@ -53,9 +53,9 @@ public class CentralDeArquivosWebAppServidorSB extends CentralDeArquivosAbstrata
 
     @Override
     public String getEntrLocalArquivosFormulario() {
-        if (endrLocaResource != null) {
-            return endrLocaResource;
-        }
+        // if (endrLocaResource != null) {
+        //      return endrLocaResource;
+        //  }
         if (!SBCore.isEmModoDesenvolvimento()) {
             endrLocaResource = SBWebPaginas.getCaminhoRealJavaWebAppContexto();
         } else {

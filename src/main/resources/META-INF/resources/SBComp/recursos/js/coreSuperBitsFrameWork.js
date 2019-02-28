@@ -50,7 +50,6 @@ function acoesPosAjax() {
     try {
         esconderTooltips();
         liberarBloqueios();
-
         if (!scrollEmCampoNaoValidado()) {
             irParTopo();
         }
@@ -107,25 +106,9 @@ function baixarArquivo(fileURL, fileName) {
 }
 
 function modificarIntputEclicar(idBotao, idInputEnvio, valor) {
-    try {
-        elementos = idInputEnvio.split(" ");
+    document.getElementById(idInputEnvio).value = valor;
+    document.getElementById(idBotao).click();
 
-        elementoCodigo = document.getElementById(elementos[0]);
-        if (elementoCodigo === null) {
-            elementoCodigo = document.getElementById(elementos[1]);
-        }
-
-
-        elementoCodigo.value = valor;
-        botoes = idBotao.split(" ");
-        botao = document.getElementById(botoes[0]);
-        if (botao === null) {
-            botao = document.getElementById(botoes[1]);
-        }
-        botao.click();
-    } catch (t) {
-        console.log(t);
-    }
 }
 
 function copiarValoresCKEditor(idOrigem, idDestino) {
@@ -138,66 +121,40 @@ function adicionarChamadaComDelay(idElemento, metodo) {
 }
 
 function mesclarOnChangeComDelay(idElementoDigitacao) {
-    try {
-        elemento = document.getElementById(idElementoDigitacao);
-        var timeout = null;
+    elemento = document.getElementById(idElementoDigitacao);
+    var timeout = null;
 
 
-        if (elemento.onchange) {
-            elemento.metodoOnchangeComDelay = elemento.onchange;
-            elemento.ultimapesquisa = elemento.value;
-            //elemento.onchange = null;
+    if (elemento.onchange) {
+        elemento.metodoOnchangeComDelay = elemento.onchange;
+        //elemento.onchange = null;
 
-            elemento.onkeyup = function (e) {
+        elemento.onkeyup = function (e) {
 
-                try {
-                    if (elemento.value === elemento.ultimapesquisa) {
+            try {
+                // Clear the timeout if it has already been set.
+                // This will prevent the previous task from executing
+                // if it has been less than <MILLISECONDS>
+                clearTimeout(timeout);
+                // Make a new timeout set to go off in 800ms
 
-                    } else {
-                        // Clear the timeout if it has already been set.
-                        // This will prevent the previous task from executing
-                        // if it has been less than <MILLISECONDS>
-                        clearTimeout(timeout);
-                        // Make a new timeout set to go off in 800ms
-                        elemento.ultimapesquisa = elemento.value;
-                        timeout = setTimeout(function () {
+                timeout = setTimeout(function () {
+                    elemento.metodoOnchangeComDelay();
+                }, 800);
+            } catch (t) {
 
-
-                            try {
-                                elemento.metodoOnchangeComDelay();
-                            } catch (t) {
-
-                            }
-                        }, 800);
-                    }
-                } catch (t) {
-
-                }
-            };
-
-        }
-    } catch (t) {
-
-    }
-}
-
-function focarComSelacaoAposAjax() {
-    try {
-        contemClientID = false;
-        for (i = 0; i < arguments.length; i++) {
-            if (document.activeElement.id.includes(arguments[i])) {
-                contemClientID = true;
             }
-        }
-        if (!contemClientID) {
-            $(PrimeFaces.escapeClientId(document.activeElement.id)).select();
-        }
-    } catch (o) {
-
+        };
     }
+
+
+
+
+
+    // Listen for keystroke events
+
+
 }
-
-
 
 
 function pesquisaDataSetComDelay(idElementoDigitacao, idDataSetPrime) {
@@ -211,6 +168,7 @@ function pesquisaDataSetComDelay(idElementoDigitacao, idDataSetPrime) {
     elemento.onkeyup = function (e) {
 
 
+
         // Clear the timeout if it has already been set.
         // This will prevent the previous task from executing
         // if it has been less than <MILLISECONDS>
@@ -220,5 +178,5 @@ function pesquisaDataSetComDelay(idElementoDigitacao, idDataSetPrime) {
 
             PF(idDataSetPrime).filter();
         }, 800);
-    }
+    };
 }

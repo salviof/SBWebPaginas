@@ -26,10 +26,10 @@ import java.util.List;
  */
 public class ServicoVisuaslizacaoWebResponsivo extends ServicoVisualizacaoAbstrato {
 
-    private static final String CAMINHO_ITEM_SIMPLES = "/modelo/objeto/include/itemSimples.xhtml";
-    private static final String CAMINHO_ITEM_NORMAL = "/modelo/objeto/include/itemNormal.xhtml";
-    public static final String CAMINHO_ITEM_SIMPLES_NULO = "/modelo/objeto/include/itemSimplesNulo.xhtml";
-    public static final String CAMINHO_ITEM_NORMAL_NULO = "/modelo/objeto/include/itemNormalNulo.xhtml";
+    private static final String CAMINHO_ITEM_SIMPLES = "/resources/modelo/objeto/include/itemSimples.xhtml";
+    private static final String CAMINHO_ITEM_NORMAL = "/resources/modelo/objeto/include/itemNormal.xhtml";
+    public static final String CAMINHO_ITEM_SIMPLES_NULO = "/resources/modelo/objeto/include/itemSimplesNulo.xhtml";
+    public static final String CAMINHO_ITEM_NORMAL_NULO = "/resources/modelo/objeto/include/itemNormalNulo.xhtml";
 
     public ServicoVisuaslizacaoWebResponsivo() {
         super(TIPOS_INTERFACES_COMUM_VISUALIZACAO.WEB_RESPONSIVO);

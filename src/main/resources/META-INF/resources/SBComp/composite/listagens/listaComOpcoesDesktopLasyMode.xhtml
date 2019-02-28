@@ -66,17 +66,14 @@
                              value="#{cc.attrs.itens}"
                              var="item"
                              paginatorPosition="bottom"
-
+                             emptyMessage="#{cc.attrs.mensagemSemRegistro}"
                              paginator="true"
                              rows="10"
                              widgetVar="#{pgUtil.gerarNomeSlug(cc.attrs.titulo)}"
                              resizeMode="fit"
                              lazy="true"
-
                              >
-                    <f:facet name="emptyMessage" >
-                        <p:outputLabel value="#{cc.attrs.mensagemSemRegistro}"/>  * Utilize o <a href="##{pgUtil.gerarCaminhoCompletoID('globalFilter')}"> campo de pesquisa </a>
-                    </f:facet>
+
                     <f:facet name="header" >
 
                         <div  class="container-fluid">

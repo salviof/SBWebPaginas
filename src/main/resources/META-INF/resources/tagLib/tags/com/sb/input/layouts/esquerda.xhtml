@@ -14,13 +14,12 @@
                         for="#{pgUtil.getNomeIdComponenteInput(component)}"  />
         <h:panelGroup >
             <ui:insert name="input" />
-            <p:message  for="#{pgUtil.getNomeIdComponenteInput(component)}" />
         </h:panelGroup>
         <p:tooltip  rendered="#{registro.temDescricao}"
                     for="#{pgUtil.getNomeIdComponenteInput(component)}"
                     value="Info: #{registro.descricao}"
                     />
-
+        <p:message  for="#{pgUtil.getNomeIdComponenteInput(component)}"/>
 
     </h:panelGrid>
 

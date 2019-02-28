@@ -4,8 +4,8 @@
     xmlns:sb="http://superbitsframework/ui"
     xmlns:h="http://xmlns.jcp.org/jsf/html"
     xmlns:f="http://xmlns.jcp.org/jsf/core">
-    <h:panelGroup  layout="block"  id="inputFormPadrao"   >
-
+    <h:panelGroup  layout="block"   >
+        <f:passThroughAttribute name="marcador" value="inputFormulario" />
         <sb:parametroMetodo nome="prMetodo" valor="#{metodoOnChange}" rendered="#{possuiMetodoOnChange}" />
         <ui:param name="xhtmlINPUT" value="#{registro.getComponenteDiferenciado(layoutCampoEspecial).xhtmlJsfCaminhoRelativo}" />
 
@@ -20,8 +20,8 @@
         <ui:param name="nomeItem" value="#{registro.label}"/>
         <ui:param rendered="#{registro.umValorComLista}" name="lista" value="#{registro.listaDeOpcoes}"/>
         <ui:param name="regex" value="#{registro.validacaoRegex}" rendered="#{registro.temValidacaoRegex}"/>
-        <ui:param name="valorMaximo" value="#{registro.valorMaximo}" />
-        <ui:param name="valorMinimo" value="#{registro.valorMinimo}" />
+        <ui:param name="valorMaximo" value="#{registro.valorMaximo}" rendered="#{registro.temValidacaoMaximo}"/>
+        <ui:param name="valorMinimo" value="#{registro.valorMinimo}" rendered="#{registro.temValidacaoMinimo}"/>
         <ui:param name="mascara" value="#{registro.mascaraJqueryMode}" rendered="#{registro.temMascara}"/>
         <ui:param name="atualizarFormOnChange" value="#{atualizarFormOnChange}"/>
         <ui:param name="idAtualizarOnChange" value="#{idAtualizarOnChange}" />
@@ -29,6 +29,8 @@
 
 
         <ui:fragment rendered="#{xhtmlINPUT==compSBCompVisualInputs.texto_Com_FOrmatacao.xhtmlJsfCaminhoRelativo}">
+
+
             <sb:inputSBTextMascara />
         </ui:fragment>
         <ui:fragment
@@ -62,7 +64,7 @@
         </ui:fragment>
 
         <ui:fragment  rendered="#{xhtmlINPUT==compSBCompVisualInputs.quantidade.xhtmlJsfCaminhoRelativo}"  >
-            <sb:inputSBQuantidade  />
+            <sb:inputSBQuantidade />
         </ui:fragment>
 
 

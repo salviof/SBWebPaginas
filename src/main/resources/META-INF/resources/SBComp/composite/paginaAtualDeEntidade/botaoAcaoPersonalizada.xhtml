@@ -5,15 +5,10 @@
                 >
     <cc:interface>
         <cc:attribute name="acao" type="com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ItfAcaoDoSistema" shortDescription="Ação que será realizada"/>
-        <cc:attribute name="label"
-                      shortDescription="Label do botão"
-                      default="#{cc.attrs.acao.nomeAcao}"
-                      type="java.lang.String"
-                      />
     </cc:interface>
     <cc:implementation>
         <SBAcaoNav:botaoDeAcao
-            label="#{cc.attrs.label}"
+
             metodo="#{paginaAtual.infoPagina.comoPaginaEntidade.executarAcao(paginaAtual.infoPagina.comoPaginaEntidade.entidadeSelecionada)}"
             acao="#{cc.attrs.acao}"
             armazenamentoAcaoExecutada="#{paginaAtual.infoPagina.comoPaginaEntidade.acaoSelecionada}"

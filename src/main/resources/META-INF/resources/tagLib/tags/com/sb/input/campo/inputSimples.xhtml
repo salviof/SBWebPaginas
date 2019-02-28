@@ -12,15 +12,12 @@
                 onfocus="mesclarOnChangeComDelay(this.id)"
                 rendered="#{!desabilitarEdicao}"
                 styleClass="campoResponsivo  TexAlCenter #{componente.classeCSS}"
-                required="#{obrigatorio}"
+                required="false"
                 value="#{valor}"
                 validatorMessage="O valor informado no campo #{label} não é valido! "
                 requiredMessage="O campo #{label} não foi informado! "
                 maxlength="#{valorMaximo}"
                 >
-                <f:passThroughAttribute name="caminhoCampo" value="#{registro.nomeCompostoIdentificador}" />
-                <f:passThroughAttribute name="dominio" value="#{registro.nomeClasseOrigemAtributo}" />
-                <f:passThroughAttribute name="campoInstanciado" value="#{registro}" />
                 <p:clientValidator />
                 <f:validator  validatorId="org.super_bits.view.validadores.generico"/>
                 <c:if test="#{atualizarGrupoOnChange}" >
