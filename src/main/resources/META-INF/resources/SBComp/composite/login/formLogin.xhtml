@@ -40,15 +40,19 @@
                     <div class="quebraBlocoComEspacoVertical4"></div>
 
                     <div class="quebraBlocoComEspacoVertical4"></div>
-                    <p:commandButton value="Entrar" icon="fa fa-sign-in"  actionListener="#{controleDeSessaoWeb.efetuarLogIn()}"
-                                     update="@form" />
-                    <div class="quebraBlocoComEspacoVertical10 somenteMobile"></div>
-                    <p:commandButton value="Enviar Senha" partialSubmit="true"
+                    <p:commandButton value="Esqueci minha Senha" partialSubmit="true"
                                      process="#{pgUtil.gerarCaminhoCompletoID('email')} @this"
                                      icon="fa fa-exclamation"
                                      styleClass="RedButton"
                                      actionListener="#{controleDeSessaoWeb.esqueceuaSenha()}"
                                      update="@form" />
+
+                    <div class="quebraBlocoComEspacoVertical10 somenteMobile"></div>
+                    <p:commandButton value="Entrar" icon="fa fa-sign-in"
+                                     id="botaoEntrarSec"
+                                     actionListener="#{controleDeSessaoWeb.efetuarLogIn()}"
+                                     update="@form" />
+                    <p:defaultCommand target="botaoEntrarSec"  />
 
                 </div>
 

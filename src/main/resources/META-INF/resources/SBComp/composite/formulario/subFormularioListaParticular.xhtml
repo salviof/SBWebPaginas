@@ -44,33 +44,32 @@
 
 
         <h:panelGroup  rendered="#{!cc.attrs.somenteLeitura}">
-            <h:panelGroup rendered="#{!cc.attrs.somenteLeitura}" >
-                <p:fragment>
+
+
+            <h:panelGroup id="subForm" styleClass="Container12 Responsive" >
+                <h:panelGroup  styleClass="invisivel" layout="block" >
+
                     <p:commandButton
                         id="botaoRemoverSubform"
+                        process="@parent"
                         action="#{cc.attrs.registro.comoSubItens.subItens.removerItemSelecionadoPeloIndice() }"
                         update="#{pgUtil.makeCaminhoCompletoID('subForm')}"
                         styleClass="invisivel"
-
-
-
-
                         />
-                    <p:inputText  id="indiceSubformulario"  styleClass="invisivel"  />
-                </p:fragment>
+                    <h:inputText  id="indiceSubformulario"  styleClass="invisivel"  />
 
 
-            </h:panelGroup>
 
-            <h:panelGroup id="subForm" styleClass="Container12 Responsive" >
+                </h:panelGroup>
 
-                <h:panelGroup styleClass="Fright" >
+
+                <h:panelGroup styleClass="Fright" layout="block" >
 
                     <p:commandButton
-
+                        icon="fa fa-plus-square-o"
                         actionListener="#{cc.attrs.registro.comoSubItens.subItens.adicionarItem()}"
                         update="#{pgUtil.makeCaminhoCompletoID('subForm')}"
-
+                        process="@this"
                         value="#{cc.attrs.registro.comoSubItens.subItens.acaoAdicionarItem.nomeAcao}"
 
 
@@ -99,10 +98,12 @@
 
                                         <p:fragment>
 
-                                            <SBInput:input registro="#{itemDaLista.getCampoByNomeOuAnotacao(cpItem.caminhoCampoRelativoAListaPai)}"  layout="#{cc.attrs.tipoVisualizacaoLabel}"
-                                                           idAtualizarOnChange="@this"
-                                                           transient="false"
-                                                           />
+                                            <SBInput:input
+                                                registro="#{itemDaLista.getCampoByNomeOuAnotacao(cpItem.caminhoCampoRelativoAListaPai)}"
+                                                layout="#{cc.attrs.tipoVisualizacaoLabel}"
+                                                idAtualizarOnChange="@this"
+                                                transient="false"
+                                                />
                                         </p:fragment>
 
 
@@ -112,6 +113,7 @@
                                 </ui:repeat>
                                 <td class="col-md-1" >
                                     <p:commandLink
+                                        process="@this"
                                         rendered="#{!cc.attrs.somenteLeitura}"
                                         onclick="modificarIntputEclicar('#{pgUtil.gerarCaminhoCompletoIDParaJavaScript('botaoRemoverSubform')}', '#{pgUtil.gerarCaminhoCompletoIDParaJavaScript('indiceSubformulario')}', '#{infoRec.index}')">
                                         <i class="fa fa-times Fs30" aria-hidden="true"></i>

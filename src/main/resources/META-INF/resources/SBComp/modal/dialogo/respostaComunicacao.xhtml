@@ -3,24 +3,27 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:SBAcaoNav="http://xmlns.jcp.org/jsf/composite/SBComp/composite/acoesENavegacao"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
 
 
     <h:head>
-        <title> #{pgModalREspostaComunicacao.comunicacao.assunto} </title>
+        <title> <h:outputText escape="false" value="#{pgModalREspostaComunicacao.comunicacao.assunto}" /> </title>
         <ui:include src="../folhasDeEstiloModal.xhtml" />
     </h:head>
 
     <h:body>
         <h:form>
-            <h1>#{pgModalREspostaComunicacao.comunicacao.mensagem}</h1>
+            <p:textEditor toolbarVisible="false" readonly="true" value="#{pgModalREspostaComunicacao.comunicacao.mensagem}" />
             <div class=" OrganizadorContainer" style="width: 100%">
                 <ui:repeat value="#{pgModalREspostaComunicacao.comunicacao.repostasPossiveis}" var="resp" >
-                    <SBAcaoNav:botaoRespostaModal
-                        resposta="#{resp}"
-                        armazenamentoAcaoExecutada="#{pgModalREspostaComunicacao.respostaSelecionada}"
-                        metodo="#{pgModalREspostaComunicacao.enviarRespostaEExecutarAcao()}"
-                        />
+                    <h:panelGroup layout="block" styleClass="Container1" >
+                        <SBAcaoNav:botaoRespostaModal
+                            resposta="#{resp}"
+                            armazenamentoAcaoExecutada="#{pgModalREspostaComunicacao.respostaSelecionada}"
+                            metodo="#{pgModalREspostaComunicacao.enviarRespostaEExecutarAcao()}"
+                            />
+                    </h:panelGroup>
                 </ui:repeat>
             </div>
 

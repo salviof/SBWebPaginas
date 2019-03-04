@@ -20,7 +20,7 @@
 
 
         <h:form >
-            <p:remoteCommand name="atualizarEntidadeAtual" update="@form" >
+            <p:remoteCommand name="atualizarEntidadeAtual" update="@form" process="@this" >
                 <f:setPropertyActionListener target="#{paginaAtual.infoPagina.comoFormularioWeb.beanSelecionado}" value="#{cc.attrs.item}"/>
 
             </p:remoteCommand>

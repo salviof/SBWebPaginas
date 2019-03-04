@@ -3,13 +3,10 @@
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:SBDev="http://xmlns.jcp.org/jsf/composite/resources/SBComp/composite/devel"
                 xmlns:p="http://primefaces.org/ui">
-
-
-    <h:panelGroup rendered="false">
-
+    <h:panelGroup rendered="true">
         <p:socket
             rendered="false"
-            channel="/mensagens/#{paginaAtual.infoPagina.acaoVinculada.nomeUnico}/#{sessaoAtualSBWP.usuario.grupo.email}/#{sessaoAtualSBWP.usuario.email}"
+            channel="/mensagens/#{paginaAtual.infoPagina.comoFormularioWeb.acaoSelecionada.nomeUnico}/#{sessaoAtualSBWP.usuario.grupo.email}/#{sessaoAtualSBWP.usuario.email}"
             onMessage="notificacoesPush" />
 
         <h:form id="formularioComunicacao" >
@@ -17,42 +14,26 @@
             <h:inputHidden  id="codigoComunicacao" value="#{pgUtilComunicacao.codigoComunicacao}" class="codigoComunicado" />
             <p:commandButton   widgetVar="botaoAbrirModalConversa" update="@form"
                                style="display:none"  actionListener="#{pgUtilComunicacao.exibirModalComunicacaoCodigo()}">
-
                 <p:ajax event="dialogReturn"
-
                         update="#{pgUtil.gerarCaminhoCompletoID(layoutIdsAreasConhecidas.AREA_TOPO_ITERNFACES)}"
                         />
+            </p:commandButton>
+        </h:form>
+        <h:form>
+            <p:remoteCommand actionListener="#{pgUtilComunicacao.removerNotificacoes()}" name="removerNotificacoes"
+                             update="#{pgUtil.atualizaTelaPorID(layoutIdsAreasConhecidas.AREA_TOPO_ITERNFACES)}"
+                             />
+        </h:form>
+        <h:form id="formularioComunicacaoRespostaRapida" >
+
+            <h:inputHidden  id="codigoSeloCMRespostaRapida" value="#{pgUtilComunicacao.codigoComunicacao}" class="codigoSeloCMRespostaRapida" />
+            <h:inputHidden  id="codigoRespostaRapida" value="#{pgUtilComunicacao.idTipoResposta}" class="codigoRespostaRapida" />
+            <p:commandButton   widgetVar="respostaRapidaAct"
+                               update="#{pgUtil.atualizaTelaPorID(layoutIdsAreasConhecidas.AREA_TOPO_ITERNFACES)}"
+                               style="display:none"  actionListener="#{pgUtilComunicacao.respostaRapida()}">
 
             </p:commandButton>
         </h:form>
 
-        <h:panelGroup rendered="false" >
-            <script type="text/javascript" >
-                function notificacoesPush(notificacao) {
-                    console.log(notificacao);
-                    if (notificacao.temMensagem) {
-                        PF("#{layoutIdsAreasConhecidas.AREA_MENSAGEM_INTERFACE}").renderMessage(JSON.parse(notificacao.mensagemJson));
-                    }
-                    if (notificacao.temCodigoConversa) {
-
-                        responderConversa(notificacao.codigoConversa);
-                    }
-                }
-                function responderConversa(codigoSelo) {
-                    (document.getElementById('formularioComunicacao:codigoComunicacao')).value = codigoSelo;
-                    PF('botaoAbrirModalConversa').jq.click();
-
-                }
-            </script>
-        </h:panelGroup>
     </h:panelGroup>
-
 </ui:composition>
-
-
-
-
-
-
-
-

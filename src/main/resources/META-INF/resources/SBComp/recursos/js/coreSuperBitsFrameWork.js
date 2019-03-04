@@ -50,6 +50,7 @@ function acoesPosAjax() {
     try {
         esconderTooltips();
         liberarBloqueios();
+
         if (!scrollEmCampoNaoValidado()) {
             irParTopo();
         }
@@ -106,9 +107,25 @@ function baixarArquivo(fileURL, fileName) {
 }
 
 function modificarIntputEclicar(idBotao, idInputEnvio, valor) {
-    document.getElementById(idInputEnvio).value = valor;
-    document.getElementById(idBotao).click();
+    try {
+        elementos = idInputEnvio.split(" ");
 
+        elementoCodigo = document.getElementById(elementos[0]);
+        if (elementoCodigo === null) {
+            elementoCodigo = document.getElementById(elementos[1]);
+        }
+
+
+        elementoCodigo.value = valor;
+        botoes = idBotao.split(" ");
+        botao = document.getElementById(botoes[0]);
+        if (botao === null) {
+            botao = document.getElementById(botoes[1]);
+        }
+        botao.click();
+    } catch (t) {
+        console.log(t);
+    }
 }
 
 function copiarValoresCKEditor(idOrigem, idDestino) {
@@ -121,40 +138,66 @@ function adicionarChamadaComDelay(idElemento, metodo) {
 }
 
 function mesclarOnChangeComDelay(idElementoDigitacao) {
-    elemento = document.getElementById(idElementoDigitacao);
-    var timeout = null;
+    try {
+        elemento = document.getElementById(idElementoDigitacao);
+        var timeout = null;
 
 
-    if (elemento.onchange) {
-        elemento.metodoOnchangeComDelay = elemento.onchange;
-        //elemento.onchange = null;
+        if (elemento.onchange) {
+            elemento.metodoOnchangeComDelay = elemento.onchange;
+            elemento.ultimapesquisa = elemento.value;
+            //elemento.onchange = null;
 
-        elemento.onkeyup = function (e) {
+            elemento.onkeyup = function (e) {
 
-            try {
-                // Clear the timeout if it has already been set.
-                // This will prevent the previous task from executing
-                // if it has been less than <MILLISECONDS>
-                clearTimeout(timeout);
-                // Make a new timeout set to go off in 800ms
+                try {
+                    if (elemento.value === elemento.ultimapesquisa) {
 
-                timeout = setTimeout(function () {
-                    elemento.metodoOnchangeComDelay();
-                }, 800);
-            } catch (t) {
+                    } else {
+                        // Clear the timeout if it has already been set.
+                        // This will prevent the previous task from executing
+                        // if it has been less than <MILLISECONDS>
+                        clearTimeout(timeout);
+                        // Make a new timeout set to go off in 800ms
+                        elemento.ultimapesquisa = elemento.value;
+                        timeout = setTimeout(function () {
 
-            }
-        };
+
+                            try {
+                                elemento.metodoOnchangeComDelay();
+                            } catch (t) {
+
+                            }
+                        }, 800);
+                    }
+                } catch (t) {
+
+                }
+            };
+
+        }
+    } catch (t) {
+
     }
-
-
-
-
-
-    // Listen for keystroke events
-
-
 }
+
+function focarComSelacaoAposAjax() {
+    try {
+        contemClientID = false;
+        for (i = 0; i < arguments.length; i++) {
+            if (document.activeElement.id.includes(arguments[i])) {
+                contemClientID = true;
+            }
+        }
+        if (!contemClientID) {
+            $(PrimeFaces.escapeClientId(document.activeElement.id)).select();
+        }
+    } catch (o) {
+
+    }
+}
+
+
 
 
 function pesquisaDataSetComDelay(idElementoDigitacao, idDataSetPrime) {
@@ -168,7 +211,6 @@ function pesquisaDataSetComDelay(idElementoDigitacao, idDataSetPrime) {
     elemento.onkeyup = function (e) {
 
 
-
         // Clear the timeout if it has already been set.
         // This will prevent the previous task from executing
         // if it has been less than <MILLISECONDS>
@@ -178,5 +220,30 @@ function pesquisaDataSetComDelay(idElementoDigitacao, idDataSetPrime) {
 
             PF(idDataSetPrime).filter();
         }, 800);
-    };
+    }
+}
+
+//Funções de comunicação
+function notificacoesPush(notificacao) {
+    console.log(notificacao);
+    if (notificacao.temMensagem) {
+        PF("#{layoutIdsAreasConhecidas.AREA_MENSAGEM_INTERFACE}").renderMessage(JSON.parse(notificacao.mensagemJson));
+    }
+    if (notificacao.temCodigoConversa) {
+
+        responderConversa(notificacao.codigoConversa);
+    }
+}
+function responderConversa(codigoSelo) {
+    (document.getElementById('formularioComunicacao:codigoComunicacao')).value = codigoSelo;
+    PF('botaoAbrirModalConversa').jq.click();
+
+}
+
+function responderConversaRespostaRapida(codigoSelo, codigoResposta) {
+    (document.getElementById('formularioComunicacaoRespostaRapida:codigoSeloCMRespostaRapida')).value = codigoSelo;
+    (document.getElementById('formularioComunicacaoRespostaRapida:codigoRespostaRapida')).value = codigoResposta;
+
+    PF('respostaRapidaAct').jq.click();
+
 }

@@ -62,6 +62,14 @@ public class PgUtilComunicacao implements Serializable {
         }
     }
 
+    public void removerNotificacoes() {
+        SBCore.getCentralDeComunicacao().getComunicacoesAguardandoRespostaDoDestinatario(SBCore.getUsuarioLogado()).forEach(cm -> {
+            SBCore.getCentralComunicacao().responderComunicacao(cm, cm.getRepostasPossiveis().get(0));
+
+        });
+        paginaUtil.atualizaTelaPorID("idAreaSBTopoInterface");
+    }
+
     public void responderComunicacao(ComunicacaoAcaoSistema pComunicacao, ItfRespostaComunicacao pResposta) {
         SBCore.getCentralComunicacao().responderComunicacao(pComunicacao, pResposta);
     }

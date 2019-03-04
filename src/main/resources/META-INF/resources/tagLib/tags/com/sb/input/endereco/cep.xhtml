@@ -13,7 +13,7 @@
             <c:set var="idcompInput" value="componenteInputDado"/>
             <c:set var="exibicaoPadrao" value="#{false}" />
 
-
+            <p:outputLabel value="#{registro.valor}" rendered="#{desabilitarEdicao}" />
             <p:inputMask     class=" campoResponsivo  TexAlCenter #{componente.classeCSS}"
                              validator="validadorCEP"
                              required="#{obrigatorio}"
@@ -22,6 +22,7 @@
                              requiredMessage="O campo #{label} não foi informado! "
                              mask="#{registro.mascaraJqueryMode}"
                              disabled="#{desabilitarEdicao}"
+                             rendered="#{!desabilitarEdicao}"
                              >
 
                 <c:if test="#{registro.temValidacaoRegex}">

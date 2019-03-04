@@ -2,6 +2,7 @@ package com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios;
 
 import com.google.common.collect.Lists;
 import com.super_bits.modulos.SBAcessosModel.model.acoes.acaoDeEntidade.AcaoGestaoEntidade;
+import com.super_bits.modulosSB.Persistencia.ConfigGeral.SBPersistencia;
 import com.super_bits.modulosSB.Persistencia.dao.UtilSBPersistencia;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreReflexao;
@@ -279,7 +280,9 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
     private void renovarEMPagina(boolean segundaExcucao) {
 
         try {
-
+            if (!SBPersistencia.isConfigurado()) {
+                return;
+            }
             try {
                 if (emPagina != null) {
 
@@ -766,33 +769,37 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
      *
      * @return True se tiver que aparcer um modal
      */
-    protected boolean verificaModalAcaoAtual() {
-        boolean temModal = false;
-        if (acaoSelecionada.isUmaAcaoController()) {
-            String idModal = null;
-            if (mapaRespostasComunicacaoTransienteDeAcaoByAcoes.isEmpty()) {
-                if (acaoSelecionada.getComoController().isPrecisaJustificativa()) {
-                    if (acaoSelecionada.getComoController().isTemXHTMLModalVinculado()) {
-                        idModal = paginaUtil.exibirModalConfirmacaoAcao(acaoSelecionada.getComoController().getXhtmlModalVinculado());
-                    } else {
-                        idModal = paginaUtil.exibirModalConfirmacaoAcaoComColetaDeDado(UtilSBWP_JSFTools.FORMULARIO_MODAL_JUSTIFICATIVA);
-                    }
-                    temModal = true;
+    protected void exibeModalComunicacaoTransientPreAcaoAtual() {
+
+        if (!(acaoSelecionada.isUmaAcaoController() && acaoSelecionada.getComoController().isTemComunicacaoTransiente())) {
+            return;
+        }
+
+        String idModal = null;
+        if (mapaRespostasComunicacaoTransienteDeAcaoByAcoes.isEmpty()) {
+            if (acaoSelecionada.getComoController().isPrecisaJustificativa()) {
+                if (acaoSelecionada.getComoController().isTemXHTMLModalVinculado()) {
+                    idModal = paginaUtil.exibirModalConfirmacaoAcao(acaoSelecionada.getComoController().getXhtmlModalVinculado());
+                } else {
+                    idModal = paginaUtil.exibirModalConfirmacaoAcaoComColetaDeDado(UtilSBWP_JSFTools.FORMULARIO_MODAL_JUSTIFICATIVA);
                 }
-                if (acaoSelecionada.getComoController().isPrecisaComunicacao()) {
-                    idModal = paginaUtil.exibirModalConfirmacaoAcao(UtilSBWP_JSFTools.FORMULARIO_MODAL_COMUNICACAO_ACAO_TRANSIENTE);
-                    temModal = true;
-                }
-            } else {
-                return mapaRespostasComunicacaoTransienteDeAcaoByAcoes.containsKey(getAcaoSelecionada().getNomeUnico());
+
             }
-            if (idModal != null) {
-                mapaRespostasComunicacaoTransienteDeAcaoByAcoes.clear();
-                mapaComunicacaoTransienteDeAcaoByIdModal.clear();
-                mapaComunicacaoTransienteDeAcaoByIdModal.put(idModal, new ComunicacaoAcaoSistema((ItfAcaoController) getAcaoSelecionada(), getBeanSelecionado()));
+            if (acaoSelecionada.getComoController().isPrecisaComunicacao()) {
+                idModal = paginaUtil.exibirModalConfirmacaoAcao(UtilSBWP_JSFTools.FORMULARIO_MODAL_COMUNICACAO_ACAO_TRANSIENTE);
+
             }
         }
-        return temModal;
+        if (idModal != null) {
+            mapaRespostasComunicacaoTransienteDeAcaoByAcoes.clear();
+            mapaComunicacaoTransienteDeAcaoByIdModal.clear();
+            mapaComunicacaoTransienteDeAcaoByIdModal.put(idModal, new ComunicacaoAcaoSistema((ItfAcaoController) getAcaoSelecionada(), getBeanSelecionado()));
+        }
+
+    }
+
+    protected boolean isRespostaComunicacaoTransientPreAcaoEnviada() {
+        return mapaRespostasComunicacaoTransienteDeAcaoByAcoes.containsKey(getAcaoSelecionada().getNomeUnico());
     }
 
     protected void adicionarAcaoNoHistorico(ItfAcaoDoSistema pAcao) {
@@ -924,7 +931,7 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
 
             if (acaoSelecionada.isUmaAcaoController()) {
 
-                verificaModalAcaoAtual();
+                exibeModalComunicacaoTransientPreAcaoAtual();
 
             }
 
@@ -1226,6 +1233,7 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
             acaoSelecionada = ultimoForm;
             xhtmlAcaoAtual = ultimoForm.getXhtml();
         }
+        //  paginaUtil.enviaMensagem("teste");
     }
 
     protected void autoExecProximaAcaoAposController(ItfAcaoController pAcaoController, ItfRespostaAcaoDoSistema pResposta) {

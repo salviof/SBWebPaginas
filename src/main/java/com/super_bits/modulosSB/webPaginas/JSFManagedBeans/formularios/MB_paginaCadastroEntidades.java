@@ -100,6 +100,7 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
     private boolean mostarApenasORegistroCriadoAoListar = false;
     private Boolean umaEntidadePersistivel;
     private GestaoDeDominioEmPagina<T> gestaoDominio;
+    private ItfRespostaAcaoDoSistema ultimaRespostaControllerRecebida;
 
     /**
      *
@@ -465,7 +466,7 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
 
             ItfRespostaAcaoDoSistema resp = (ItfRespostaAcaoDoSistema) metodo.invoke(null, getEntidadeSelecionada());
             if (pExecutarPosAcaoPadrao) {
-                resp.dispararMensagens();
+
                 autoExecProximaAcaoAposController(pAcaoController, resp);
 
             }
@@ -698,6 +699,7 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
 
     @Override
     protected void renovarEMPagina() {
+
         if (isUmaEntidadePersistivel()) {
             super.renovarEMPagina(); //To change body of generated methods, choose Tools | Templates.
             limparLista();
@@ -773,7 +775,7 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
     @Override
     public void atualizarEntidadeSelecionada() {
         try {
-            if (getEntidadeSelecionada() != null) {
+            if (getEntidadeSelecionada() != null && isUmaEntidadePersistivel()) {
                 ItfBeanSimplesSomenteLeitura entidadeComoBeanSimples = (ItfBeanSimplesSomenteLeitura) getEntidadeSelecionada();
 
                 renovarEMPagina();
@@ -1138,25 +1140,31 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
                 case ACAO_ENTIDADE_CONTROLLER:
                 case ACAO_CONTROLLER:
                     try {
-                        if (!verificaModalAcaoAtual()) {
-                            PrimeFaces.current().executeScript("acoesPosAjax()");
-
-                            ItfRespostaAcaoDoSistema respAcao = autoExecAcaoController((T) pEntidadeSelecionada);
-                            autoExecProximaAcaoAposController((ItfAcaoController) acaoSelecionada, respAcao);
-
-                        } else {
-                            FabTipoRespostaComunicacao respComunicacao = mapaRespostasComunicacaoTransienteDeAcaoByAcoes.get(getAcaoSelecionada().getNomeUnico());
-                            if (respComunicacao != null) {
-                                if (respComunicacao.isRespostaPositiva()) {
-                                    ItfRespostaAcaoDoSistema respAcao = autoExecAcaoController((T) pEntidadeSelecionada);
-                                    autoExecProximaAcaoAposController((ItfAcaoController) acaoSelecionada, respAcao);
-                                } else {
-
-                                    autoExecProximaAcaoAposController((ItfAcaoController) acaoSelecionada, null);
+                        if (acaoSelecionada.getComoController().isTemComunicacaoTransiente()) {
+                            if (!isRespostaComunicacaoTransientPreAcaoEnviada()) {
+                                exibeModalComunicacaoTransientPreAcaoAtual();
+                            } else {
+                                FabTipoRespostaComunicacao respComunicacao = mapaRespostasComunicacaoTransienteDeAcaoByAcoes.get(getAcaoSelecionada().getNomeUnico());
+                                if (respComunicacao != null) {
+                                    if (respComunicacao.isRespostaPositiva()) {
+                                        ItfRespostaAcaoDoSistema respAcao = autoExecAcaoController((T) pEntidadeSelecionada);
+                                        ultimaRespostaControllerRecebida = respAcao;
+                                        autoExecProximaAcaoAposController((ItfAcaoController) acaoSelecionada, respAcao);
+                                    } else {
+                                        ultimaRespostaControllerRecebida = null;
+                                        autoExecProximaAcaoAposController((ItfAcaoController) acaoSelecionada, null);
+                                    }
                                 }
                             }
-
+                        } else {
+                            PrimeFaces.current().executeScript("acoesPosAjax()");
+                            ItfRespostaAcaoDoSistema respAcao = autoExecAcaoController((T) pEntidadeSelecionada);
+                            if (respAcao != null) {
+                                respAcao.dispararMensagens();
+                            }
+                            autoExecProximaAcaoAposController((ItfAcaoController) acaoSelecionada, respAcao);
                         }
+
                     } catch (Throwable t) {
                         SBCore.enviarAvisoAoUsuario("Houve um erro inesperado!, entre em contato com o suporte");
                         SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "Erro executando ação de controler padrão, a resposta não foi obtida para:" + acaoSelecionada, t);
@@ -1253,7 +1261,6 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
             try {
                 respExecucao = execucaoAcaoControllerPadrao(acaoSelecionada.getComoController(), false);
 
-                respExecucao.dispararMensagens();
                 if (respExecucao.isSucesso()) {
                     renovarEMPagina();
                 }
@@ -1312,6 +1319,14 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
 
     public List<ItfAcaoDoSistema> getAcoesDoRegistroSelecionado() {
         return autoExecObterAcoesDoRegistro(getEntidadeSelecionada());
+    }
+
+    @Override
+    public void selAcaoDeCtrParaUltimoFrm() {
+        super.selAcaoDeCtrParaUltimoFrm(); //To change body of generated methods, choose Tools | Templates.
+        if (ultimaRespostaControllerRecebida != null) {
+            ultimaRespostaControllerRecebida.dispararMensagens();
+        }
     }
 
 }

@@ -12,6 +12,7 @@
                 class=" campoResponsivo  TexAlCenter #{componente.classeCSS}"
                 required="#{obrigatorio}"
                 value="#{valor}"
+                maxlength="#{valorMaximo}"
                 onfocus="mesclarOnChangeComDelay(this.id)"
                 rendered="#{!desabilitarEdicao}"                validatorMessage="O valor informado no campo #{label} não é valido! "
                 requiredMessage="O campo #{label} não foi informado! "

@@ -210,5 +210,14 @@ and open the template in the editor.
 
 .autoCompleteResponsivo input{
     width: 100%!important;
+
+}
+
+.estiloDataHora{
+    display: flex!important;
+}
+.estiloDataHora input{
+    flex:1;
+    text-align: center;
 }
 

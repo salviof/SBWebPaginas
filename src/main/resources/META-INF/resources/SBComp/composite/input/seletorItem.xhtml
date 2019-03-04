@@ -26,7 +26,7 @@
         <cc:attribute name="desabilitarEdicao" type="java.lang.Boolean" default="#{false}" />
         <cc:attribute name="obrigatorio" type="java.lang.Boolean" default="#{false}" />
         <cc:attribute name="mostrarMensagemValidacao" type="java.lang.Boolean" default="#{false}" />
-        <cc:attribute name="label" default="" />
+        <cc:attribute name="label" default="não selecionado" />
         <cc:attribute name="atualizarFormOnChange" default="#{false}" />
     </cc:interface>
 
@@ -49,7 +49,7 @@
                          converterMessage="Erro ao converter objeto" >
 
             <f:selectItem
-                itemLabel=" não selecionado"  />
+                itemLabel="#{cc.attrs.label}"  />
 
             <f:selectItems
                 value="#{cc.attrs.lista}"

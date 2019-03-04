@@ -42,11 +42,11 @@
                             >
                             <SBInput:input registro="#{cc.attrs.registro.getCampoByNomeOuAnotacao(coluna.componenteVinculado.caminhoCampo.caminhoSemNomeClasse)}"
                                            layout="#{cc.attrs.tipoVisualizacaoLabel}"
-                                           desabilitarEdicao="#{(cc.attrs.somenteLeitura) or (cc.attrs.registro.getCampoByNomeOuAnotacao(coluna.componenteVinculado.caminhoCampo.caminhoSemNomeClasse).somenteLeitura)}"
+                                           desabilitarEdicao="#{(cc.attrs.somenteLeitura) or (cc.attrs.registro.getCampoByNomeOuAnotacao(coluna.componenteVinculado.caminhoCampo.caminhoSemNomeClasse).somenteLeitura) or coluna.componenteVinculado.campoExibicaoFormulario.somenteLeitura}"
                                            atualizarFormOnChange="#{cc.attrs.grupoCampos.campos.get(numCol.index).atualizarFormAoAlterar}"
                                            idAtualizarOnChange="#{cc.attrs.grupoCampos.campos.get(numCol.index).idAtualizacao}"
                                            atualizarGrupoOnChange="#{cc.attrs.grupoCampos.campos.get(numCol.index).atualizarGrupoAoAlterar}"
-                                           label="#{camp.labelAlternativo}"
+                                           label="#{coluna.componenteVinculado.campoExibicaoFormulario.labelAlternativo}"
                                            />
 
                         </h:panelGroup>
