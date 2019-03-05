@@ -11,7 +11,6 @@ import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreValidacao;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campoInstanciado.ItfCampoInstanciado;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.validador.ErroValidacao;
 import com.super_bits.modulosSB.SBCore.modulos.view.telas.LayoutTelaAreaConhecida;
-import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.declarados.util.PgUtil;
 import com.super_bits.modulosSB.webPaginas.util.UtilSBWP_JSFTools;
 import java.util.List;
 import javax.faces.application.FacesMessage;
@@ -20,7 +19,6 @@ import javax.faces.context.FacesContext;
 import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
 import org.coletivojava.fw.api.tratamentoErros.FabErro;
-import org.primefaces.PrimeFaces;
 
 /**
  *
@@ -72,10 +70,10 @@ public abstract class ValidadorGenericoAbstrato<T> implements Validator<T> {
         FacesMessage mensagemErro = new FacesMessage();
         mensagemErro.setSummary(pMmensagem);
         mensagemErro.setSeverity(FacesMessage.SEVERITY_ERROR);
-        PgUtil paninaUtil = new PgUtil();
-        String idCompoentePai = paninaUtil.getNomeIdPainelGroupInputSB(component);
-        if (!UtilSBCoreStringValidador.isNuloOuEmbranco(idCompoentePai)) {
-            PrimeFaces.current().ajax().update(idCompoentePai);
+        // PgUtil paninaUtil = new PgUtil();
+        // String idCompoentePai = paninaUtil.getNomeIdPainelGroupInputSB(component);
+        if (!UtilSBCoreStringValidador.isNuloOuEmbranco(true)) {
+            //         PrimeFaces.current().ajax().update(idCompoentePai);
             //PrimeFaces.current().scrollTo(idCompoentePai);
 
             throw new ValidatorException(mensagemErro);
