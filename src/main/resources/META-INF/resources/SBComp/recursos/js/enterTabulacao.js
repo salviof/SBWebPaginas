@@ -51,6 +51,7 @@ $(document).keydown(function (e) {
 
     }
 });
+
 $(function () {
     var focusedElement;
     $(document).on('focus', 'input', function () {
