@@ -12,33 +12,47 @@
     </cc:interface>
     <!-- IMPLEMENTATION -->
     <cc:implementation >
-        <ul style="margin-left:-230px;">
-            <c:forEach var="comunicacao" items="#{sessaoAtualSBWP.ultimasComuniccoesAguardandoRespostaUsuarioSesso}" >
-                <span>
-                    <h:form>
-                        <li>
-                            <h:panelGroup layout="">
-                                <c:forEach items="#{comunicacao.repostasPossiveis}" var="resp" >
-                                    <h:panelGroup layout="block" >
-                                        <i  onclick="responderConversaRespostaRapida(#{comunicacao.codigoSelo}, #{resp.tipoResposta.id})" class="w3-btn   #{resp.tipoResposta.icone} Fs20 Blue Fright" style="margin: 10px; background-color: white; color: #0074c7" >
-                                        </i>
-                                    </h:panelGroup>
 
-                                </c:forEach>
-                                <p:commandLink  onclick="responderConversa(#{comunicacao.codigoSelo})">
-                                    <i class="#{comunicacao.tipoComunicacao.icone} Fs20 Blue Fleft" style="margin: 5px; position: absolute"> </i>
-                                    <span class="FontAdamantiumBold Blue"> <h:outputLabel escape="false" style="margin-left: 28px" value="#{comunicacao.assunto}" /> </span><br />
-                                    <span class="Fs12"><h:outputLabel escape="false" value="#{comunicacao.mensagem}" /></span>
-                                    <p:ajax event="dialogReturn" listener="#{pgUtilComunicacao.metodoRespostaModal}"/>
-                                </p:commandLink>
-                            </h:panelGroup>
-                        </li>
-                    </h:form>
-                </span>
-            </c:forEach>
-            <li>     <h:form><p:commandLink onclick="removerNotificacoes()"  rendered="#{sessaoAtualSBWP.comunicacaoAguardandoRespostaUsuarioSesso.size()>4}" hreflang="#"><i class="fa fa-times Fs18 Fleft MarRight10"></i> <span class="FontAdamantiumBold"> Remover notificações </span></p:commandLink></h:form></li>
-            <li> <h:form><p:commandLink hreflang="#" rendered="#{sessaoAtualSBWP.comunicacaoAguardandoRespostaUsuarioSesso.size()>5}"  > ... mais (#{sessaoAtualSBWP.comunicacaoAguardandoRespostaUsuarioSesso.size()-7})</p:commandLink> </h:form></li>
-        </ul>
+        <li>
+            <a class="menulink Animated05 ">
+                <i class="fa #{sessaoAtualSBWP.comunicacaoAguardandoRespostaUsuarioSesso.isEmpty() ? 'fa-bell-o' : 'fa-bell' } #{sessaoAtualSBWP.comunicacaoAguardandoRespostaUsuarioSesso.isEmpty() ? '' : 'animated swing' }  " style="" >
+                    <h:panelGroup styleClass="#{sessaoAtualSBWP.comunicacaoAguardandoRespostaUsuarioSesso.size()>=10 ? 'sinoNotificacaoDezena' : 'sinoNotificacao' }"
+                                  rendered="#{!sessaoAtualSBWP.comunicacaoAguardandoRespostaUsuarioSesso.isEmpty()}" >
+                        #{sessaoAtualSBWP.comunicacaoAguardandoRespostaUsuarioSesso.size()}
+                    </h:panelGroup>
+                </i> <span></span>
+            </a>
+
+
+
+            <ul style="margin-left:-230px;">
+                <c:forEach var="comunicacao" items="#{sessaoAtualSBWP.ultimasComuniccoesAguardandoRespostaUsuarioSesso}" >
+                    <span>
+                        <h:form>
+                            <li>
+                                <h:panelGroup layout="">
+                                    <c:forEach items="#{comunicacao.repostasPossiveis}" var="resp" >
+                                        <h:panelGroup layout="block" >
+                                            <i  onclick="responderConversaRespostaRapida(#{comunicacao.codigoSelo}, #{resp.tipoResposta.id})" class="w3-btn   #{resp.tipoResposta.icone} Fs20 Blue Fright" style="margin: 10px; background-color: white; color: #0074c7" >
+                                            </i>
+                                        </h:panelGroup>
+
+                                    </c:forEach>
+                                    <p:commandLink  onclick="responderConversa(#{comunicacao.codigoSelo})">
+                                        <i class="#{comunicacao.tipoComunicacao.icone} Fs20 Blue Fleft" style="margin: 5px; position: absolute"> </i>
+                                        <span class="FontAdamantiumBold Blue"> <h:outputLabel escape="false" style="margin-left: 28px" value="#{comunicacao.assunto}" /> </span><br />
+                                        <span class="Fs12"><h:outputLabel escape="false" value="#{comunicacao.mensagem}" /></span>
+                                        <p:ajax event="dialogReturn" listener="#{pgUtilComunicacao.metodoRespostaModal}"/>
+                                    </p:commandLink>
+                                </h:panelGroup>
+                            </li>
+                        </h:form>
+                    </span>
+                </c:forEach>
+                <li>     <h:form><p:commandLink onclick="removerNotificacoes()"  rendered="#{sessaoAtualSBWP.comunicacaoAguardandoRespostaUsuarioSesso.size()>4}" hreflang="#"><i class="fa fa-times Fs18 Fleft MarRight10"></i> <span class="FontAdamantiumBold"> Remover notificações </span></p:commandLink></h:form></li>
+                <li> <h:form><p:commandLink hreflang="#" rendered="#{sessaoAtualSBWP.comunicacaoAguardandoRespostaUsuarioSesso.size()>5}"  > ... mais (#{sessaoAtualSBWP.comunicacaoAguardandoRespostaUsuarioSesso.size()-7})</p:commandLink> </h:form></li>
+            </ul>
+        </li>
     </cc:implementation>
 </ui:composition>
 

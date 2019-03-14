@@ -12,8 +12,7 @@
         <ui:define name="input">
             <h:panelGroup rendered="#{desabilitarEdicao}" >
 
-                <p:dataList value="#{registro.valor}" var="item"  type="ordered">
-
+                <p:dataList value="#{registro.valor}" var="item"  type="ordered" emptyMessage="nenhum selecionado">
                     #{item.nome}
                 </p:dataList>
 

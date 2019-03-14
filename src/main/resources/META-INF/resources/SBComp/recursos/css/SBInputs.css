@@ -17,6 +17,9 @@ and open the template in the editor.
     width: auto;
 
 }
+.InputControlador tbody tr td table{
+    min-width: 200px;
+}
 
 .InputColunaSuperiorConteudoLeitura{
     background-color: #f7f5f3!important;
