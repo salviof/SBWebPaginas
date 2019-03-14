@@ -960,12 +960,26 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
     protected void autoExecAlterarFormulario(final ItfAcaoFormulario pAcao) {
 
         super.autoExecAlterarFormulario(pAcao);
-        if (pAcao != null) {
-            if (pAcao.getComoFormulario().getEstadoFormulario() == FabEstadoFormulario.INDEFINIDO) {
-                atualizaInformacoesDeEdicao(pAcao.getTipoAcaoGenerica().getEstadoFormularioPadrao());
-            } else {
-                atualizaInformacoesDeEdicao(pAcao.getComoFormulario().getEstadoFormulario());
+        try {
+            FabEstadoFormulario statusModoForm = pAcao.getComoFormulario().getEstadoFormulario();
+
+            if (statusModoForm == FabEstadoFormulario.INDEFINIDO) {
+                statusModoForm = pAcao.getTipoAcaoGenerica().getEstadoFormularioPadrao();
             }
+
+            atualizaInformacoesDeEdicao(statusModoForm);
+            final FabEstadoFormulario statusCampo = statusModoForm;
+            if (statusModoForm.equals(FabEstadoFormulario.VISUALIZAR)) {
+                if (getAcaoSelecionada().isUmaAcaoFormulario()) {
+                    getAcaoSelecionada().getComoFormulario().getCampos().forEach(cp -> {
+                        getEntidadeSelecionada().getCampoInstanciadoByNomeOuAnotacao(cp.getCaminhoSemNomeClasse());
+                        getEntidadeSelecionada().getCampoInstanciadoByNomeOuAnotacao(cp.getCaminhoSemNomeClasse()).setStatusFormularioExibicao(statusCampo);
+                    });
+                }
+            }
+
+        } catch (NullPointerException n) {
+            //ignora caso ação ou entidade nulos
         }
 
     }
@@ -988,6 +1002,7 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
                 podeEditar = true;
                 break;
             case VISUALIZAR:
+
                 novoRegistro = false;
                 podeEditar = false;
                 break;
