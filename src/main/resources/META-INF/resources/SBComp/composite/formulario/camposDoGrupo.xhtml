@@ -48,13 +48,14 @@
                                            atualizarGrupoOnChange="#{cc.attrs.grupoCampos.campos.get(numCol.index).atualizarGrupoAoAlterar}"
                                            label="#{coluna.componenteVinculado.campoExibicaoFormulario.labelAlternativo}"
                                            />
-
+                            #{cc.attrs.registro.getCampoByNomeOuAnotacao(coluna.componenteVinculado.caminhoCampo.caminhoSemNomeClasse).somenteLeitura}
                         </h:panelGroup>
 
                         <c:if test="#{coluna.componenteVinculado.umComponenteAtributoDeObjeto and coluna.componenteVinculado.caminhoCampo.umCampoComLista}">
                             <h:panelGroup rendered="#{coluna.componenteVinculado.umComponenteAtributoDeObjeto}" layout="block"
                                           styleClass="#{cc.attrs.registro.getCampoByNomeOuAnotacao(coluna.componenteVinculado.caminhoCampo.caminhoSemNomeClasse).somenteLeitura ? 'Container3':'Container12'}">
 
+                                #{cc.attrs.registro.getCampoByNomeOuAnotacao(coluna.componenteVinculado.caminhoCampo.caminhoSemNomeClasse).somenteLeitura}
 
                                 <h:outputText
                                     value="O sistema não suporta subformulários em grupo de campos, você precisa chamar o componente subformulário de maneira independente"
