@@ -53,12 +53,13 @@
 
                             <c:forEach items="#{cc.attrs.registro.valor}" var="item" rendered="#{cc.attrs.registro.umValorComLista}" varStatus="infoRec"  >
                                 <tr scope="row">
-                                    <c:forEach items="#{cc.attrs.grupoCampos.campos}"  var="campoColonaLeitura"  >
+                                    <c:forEach items="#{cc.attrs.grupoCampos.campos}"  var="campoColunaLeitura"  >
 
 
                                         <td class="col-md-1 ColunaPequenaBotstrap">
+
                                             <sb:inputSB
-                                                registro="#{item.getCampoInstanciadoByNomeOuAnotacao(campoColonaLeitura.caminhoCampo.caminhoRelativoItemSublista)}"
+                                                registro="#{item.getCampoInstanciadoByNomeOuAnotacao(campoColunaLeitura.caminhoCampo.caminhoRelativoItemSublista)}"
                                                 desabilitarEdicao="true"
                                                 layoutCampo="#{layoutsComponenteSB.layoutCampo.semLabel}"
                                                 possuiIDOnChange="false"

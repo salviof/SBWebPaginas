@@ -10,16 +10,18 @@
 
 
         <ui:define name="input">
-            <h:panelGroup rendered="#{desabilitarEdicao}" >
 
-                <p:dataList value="#{registro.valor}" var="item"  type="ordered" emptyMessage="nenhum selecionado">
+            <h:panelGroup styleClass="Container12" layout="block" rendered="#{desabilitarEdicao}">
+                <p:dataList value="#{registro.valor}"
+
+                            var="item"   emptyMessage="nenhum selecionado" styleClass="inputItensDataListSomenteLeituraResponsivo">
                     #{item.nome}
                 </p:dataList>
-
-
             </h:panelGroup>
 
-            <p:panel class="Container12 " rendered="#{!desabilitarEdicao}">
+
+
+            <p:panel  styleClass="Container12" rendered="#{!desabilitarEdicao}">
 
                 <p:pickList
                     value="#{registro.comoSeltorItens.campoSeletorItens.dualListPrime}"

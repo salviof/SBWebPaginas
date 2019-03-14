@@ -53,7 +53,7 @@
 
                         <c:if test="#{coluna.componenteVinculado.umComponenteAtributoDeObjeto and coluna.componenteVinculado.caminhoCampo.umCampoComLista}">
                             <h:panelGroup rendered="#{coluna.componenteVinculado.umComponenteAtributoDeObjeto}" layout="block"
-                                          styleClass="#{cc.registro.somenteLeitura ? 'Container3':'Container12'}">
+                                          styleClass="#{cc.attrs.registro.getCampoByNomeOuAnotacao(coluna.componenteVinculado.caminhoCampo.caminhoSemNomeClasse).somenteLeitura ? 'Container3':'Container12'}">
 
 
                                 <h:outputText
@@ -62,7 +62,7 @@
                                     />
 
                                 <SBForm:subFormulario
-
+                                    tipoVisualizacaoLabel="#{cc.attrs.tipoVisualizacaoLabel}"
                                     registro="#{cc.attrs.registro.getCampoByNomeOuAnotacao(coluna.componenteVinculado.caminhoCampo.caminhoSemNomeClasse)}"
                                     grupoCampos="#{coluna.componenteVinculado.caminhoCampo.grupoSubcampos}"
                                     somenteLeitura="#{cc.attrs.somenteLeitura}"
