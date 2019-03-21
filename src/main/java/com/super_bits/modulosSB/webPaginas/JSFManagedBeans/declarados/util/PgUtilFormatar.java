@@ -5,6 +5,8 @@
 package com.super_bits.modulosSB.webPaginas.JSFManagedBeans.declarados.util;
 
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreNumeros;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.enterprise.context.RequestScoped;
@@ -26,6 +28,30 @@ public class PgUtilFormatar {
     public String inteiro(long pValor) {
 
         return UtilSBCoreNumeros.formatarNumeroInteiro(pValor);
+    }
+
+    public String getNumeroComCasasDecimais(int pInteiro, int pQtd) {
+        try {
+            if (pQtd == 0) {
+                return String.valueOf(pInteiro);
+            } else {
+                return String.valueOf(pInteiro) + ",00";
+            }
+        } catch (Throwable t) {
+            return String.valueOf(pInteiro);
+        }
+    }
+
+    public String getNimeroComCasasDecimais(double pNumero, int pQtdCasasDecimais) {
+        try {
+            BigDecimal bd = new BigDecimal(pNumero);
+
+            bd = bd.setScale(pQtdCasasDecimais, RoundingMode.HALF_DOWN);
+            String valor = String.valueOf(bd.doubleValue());
+            return valor.replace(".", ",");
+        } catch (Throwable t) {
+            return String.valueOf(pNumero);
+        }
     }
 
     public String moeda(long pValor) {
