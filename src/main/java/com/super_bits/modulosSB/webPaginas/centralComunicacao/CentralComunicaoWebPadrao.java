@@ -14,9 +14,9 @@ import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ComunicacaoTransient;
 
 import com.super_bits.modulosSB.SBCore.modulos.comunicacao.FabTipoComunicacao;
 import com.super_bits.modulosSB.SBCore.modulos.comunicacao.FabTipoRespostaComunicacao;
-import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ItfArmazenamentoComunicacao;
+import com.super_bits.modulosSB.SBCore.modulos.servicosCore.ItfArmazenamentoComunicacao;
 
-import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ItfCentralComunicacao;
+import com.super_bits.modulosSB.SBCore.modulos.servicosCore.ItfCentralComunicacao;
 import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ItfComunicacao;
 import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ItfDestinatario;
 import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ItfDisparoComunicacao;

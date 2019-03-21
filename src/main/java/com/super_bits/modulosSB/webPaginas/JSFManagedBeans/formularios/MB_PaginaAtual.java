@@ -4,7 +4,7 @@ import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ItfAcaoDoSistema;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfBeanSimples;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfSessao;
-import com.super_bits.modulosSB.SBCore.modulos.sessao.Interfaces.ItfControleDeSessao;
+import com.super_bits.modulosSB.SBCore.modulos.servicosCore.ItfControleDeSessao;
 import com.super_bits.modulosSB.webPaginas.ConfigGeral.SBWebPaginas;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.declarados.Paginas.ErroCritico.InfoErroCritico;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.interfaces.ItfB_PaginaSimples;

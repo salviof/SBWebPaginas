@@ -34,6 +34,7 @@ import com.super_bits.modulosSB.SBCore.modulos.geradorCodigo.model.LigacaoMuitos
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.anotacoes.InfoPreparacaoObjeto;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campo.FabTipoAtributoObjeto;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.MapaObjetosProjetoAtual;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.estrutura.ItfLigacaoMuitosParaUm;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfBeanGenerico;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfBeanSimples;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfBeanSimplesSomenteLeitura;
@@ -1039,11 +1040,11 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
                     } else {
                         EstruturaDeEntidade est = MapaObjetosProjetoAtual.getEstruturaObjeto(classeEntidadeSel);
 
-                        Optional<LigacaoMuitosParaUm> pesquisaLigacao
+                        Optional<ItfLigacaoMuitosParaUm> pesquisaLigacao
                                 = est.getMuitosParaUm().stream().filter(
                                         ligacao -> prs.stream().filter(
                                                 prPg -> prPg.getTipoEntidade().getSimpleName().equals(ligacao.getNomeEntidade())).findFirst().isPresent())
-                                        .findFirst();
+                                .findFirst();
                         if (pesquisaLigacao.isPresent()) {
                             UtilSBWP_JSFTools.vaParaPagina(MapaDeFormularios.getUrlFormulario(acaoSelecionada, getEntidadeSelecionada().getCampoInstanciadoByNomeOuAnotacao(pesquisaLigacao.get().getNomeDeclarado()).getValor()));
                         } else {
