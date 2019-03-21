@@ -16,24 +16,43 @@
                 value="#{valor}"
                 validatorMessage="O valor informado no campo #{label} não é valido! "
                 requiredMessage="O campo #{label} não foi informado! "
-                height="100px"
-                placeholder="#{label}"
-
+                height="100"
                 >
-                <p:clientValidator />
-                <f:validator  validatorId="org.super_bits.view.validadores.generico"/>
                 <f:facet name="toolbar">
+                    <span class="ql-formats">
+
+
+
+                    </span>
                     <span class="ql-formats">
                         <button class="ql-bold"></button>
                         <button class="ql-italic"></button>
                         <button class="ql-underline"></button>
                         <button class="ql-strike"></button>
+
                     </span>
                     <span class="ql-formats">
-                        <select class="ql-font"></select>
                         <select class="ql-size"></select>
+                        <select class="ql-color" title="Cor Texto">
+                            <option value="#ff0000" />
+                            <option selected="" />
+                            <option value="#0000ff" />
+                        </select>
+                        <select class="ql-background" title="Cor Fundo">
+                            <option value="#ff0000" />
+                            <option selected="" />
+                            <option value="#0000ff" />
+                        </select>
+                        <button class="ql-header" value="1" title="Muito destaque"></button>
+                        <button class="ql-header" value="2" title="Destaque"></button>
+
                     </span>
+
+
                 </f:facet>
+
+                <p:clientValidator />
+                <f:validator  validatorId="org.super_bits.view.validadores.generico"/>
             </p:textEditor>
 
 
