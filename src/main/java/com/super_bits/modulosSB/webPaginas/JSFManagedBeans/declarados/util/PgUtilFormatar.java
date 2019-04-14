@@ -5,6 +5,7 @@
 package com.super_bits.modulosSB.webPaginas.JSFManagedBeans.declarados.util;
 
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreNumeros;
+import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringFiltros;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.SimpleDateFormat;
@@ -23,6 +24,16 @@ public class PgUtilFormatar {
     public String moeda(Double pValor) {
 
         return UtilSBCoreNumeros.converterMoeda(pValor);
+    }
+
+    public String gerarTextoSemCaracterEspecial(String pValor) {
+        return UtilSBCoreStringFiltros.gerarUrlAmigavel(pValor);
+
+    }
+
+    public String gerarTextoApenasNumero(String pValor) {
+        return UtilSBCoreStringFiltros.getNumericosDaString(pValor);
+
     }
 
     public String inteiro(long pValor) {

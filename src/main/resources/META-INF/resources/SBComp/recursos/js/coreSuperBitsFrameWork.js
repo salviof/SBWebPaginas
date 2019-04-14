@@ -5,7 +5,6 @@
  */
 function esconderTooltips() {
     $(".ui-tooltip").hide();
-
 }
 
 function liberarBloqueios() {
@@ -50,7 +49,6 @@ function acoesPosAjax() {
     try {
         esconderTooltips();
         liberarBloqueios();
-
         if (!scrollEmCampoNaoValidado()) {
             irParTopo();
         }
@@ -84,20 +82,19 @@ function getClientInfo()
 }
 
 function baixarArquivo(fileURL, fileName) {
-    // for non-IE
+// for non-IE
     if (!window.ActiveXObject) {
         var save = document.createElement('a');
         save.href = fileURL;
         save.target = '_blank';
         save.download = fileName || 'unknown';
-
         var event = document.createEvent('Event');
         event.initEvent('click', true, true);
         save.dispatchEvent(event);
         (window.URL || window.webkitURL).revokeObjectURL(save.href);
     }
 
-    // for IE
+// for IE
     else if (!!window.ActiveXObject && document.execCommand) {
         var _window = window.open(fileURL, '_blank');
         _window.document.close();
@@ -109,7 +106,6 @@ function baixarArquivo(fileURL, fileName) {
 function modificarIntputEclicar(idBotao, idInputEnvio, valor) {
     try {
         elementos = idInputEnvio.split(" ");
-
         elementoCodigo = document.getElementById(elementos[0]);
         if (elementoCodigo === null) {
             elementoCodigo = document.getElementById(elementos[1]);
@@ -141,8 +137,6 @@ function mesclarOnChangeComDelay(idElementoDigitacao) {
     try {
         elemento = document.getElementById(idElementoDigitacao);
         var timeout = null;
-
-
         if (elemento.onchange) {
             elemento.metodoOnchangeComDelay = elemento.onchange;
             elemento.ultimapesquisa = elemento.value;
@@ -174,7 +168,6 @@ function mesclarOnChangeComDelay(idElementoDigitacao) {
 
                 }
             };
-
         }
     } catch (t) {
 
@@ -201,12 +194,10 @@ function focarComSelacaoAposAjax() {
 
 
 function pesquisaDataSetComDelay(idElementoDigitacao, idDataSetPrime) {
-    //Contribuição : https://schier.co/blog/2014/12/08/wait-for-user-to-stop-typing-using-javascript.html
+//Contribuição : https://schier.co/blog/2014/12/08/wait-for-user-to-stop-typing-using-javascript.html
     elemento = document.getElementById(idElementoDigitacao);
     // Init a timeout variable to be used below
     var timeout = null;
-
-
     // Listen for keystroke events
     elemento.onkeyup = function (e) {
 
@@ -237,13 +228,90 @@ function notificacoesPush(notificacao) {
 function responderConversa(codigoSelo) {
     (document.getElementById('formularioComunicacao:codigoComunicacao')).value = codigoSelo;
     PF('botaoAbrirModalConversa').jq.click();
-
 }
 
 function responderConversaRespostaRapida(codigoSelo, codigoResposta) {
     (document.getElementById('formularioComunicacaoRespostaRapida:codigoSeloCMRespostaRapida')).value = codigoSelo;
     (document.getElementById('formularioComunicacaoRespostaRapida:codigoRespostaRapida')).value = codigoResposta;
-
     PF('respostaRapidaAct').jq.click();
+}
+
+
+function initBotaoMenuHorizontal(menuhorizontalresponsivo) {
+    var itemSize = $(menuhorizontalresponsivo).parent().find('.item-menu-horizontal-responsivo').outerWidth(true);
+    var itensQtd = $(menuhorizontalresponsivo).parent().find('.item-menu-horizontal-responsivo').length;
+    var scrollMaximo = (itensQtd * itemSize);
+    var tamanhoVisivel = $(menuhorizontalresponsivo).parent().width();
+    var pd = (itensQtd * 25);
+    var scrollMaximo = (itensQtd * itemSize) + pd;
+
+    var scrollMaximoVisivel = scrollMaximo - tamanhoVisivel;
+
+    $(menuhorizontalresponsivo).css({
+        "padding-left": pd + "px"
+    });
+    if (scrollMaximo <= tamanhoVisivel) {
+        var botaoScrollEsquerda = $(menuhorizontalresponsivo).parent().find('.botao-lateral-esquerda-menu-horizontal-responsivo');
+        var botaoScrollDireita = $(menuhorizontalresponsivo).parent().find('.botao-lateral-direita-menu-horizontal-responsivo');
+        $(botaoScrollDireita).addClass('hidden-botao-lateral');
+        $(botaoScrollEsquerda).addClass('hidden-botao-lateral');
+    }
+}
+function acoesBotaoMenuHorizontal(menuhorizontalresponsivo, parafrente) {
+    var etapaPosicaoScroolAtual = $(menuhorizontalresponsivo).parent().data("posicao");
+
+
+    if (etapaPosicaoScroolAtual == null) {
+        etapaPosicaoScroolAtual = 1;
+        $(menuhorizontalresponsivo).parent().data("posicao", etapaPosicaoScroolAtual);
+    } else {
+        etapaPosicaoScroolAtual = etapaPosicaoScroolAtual + 1;
+        $(menuhorizontalresponsivo).parent().data("posicao", etapaPosicaoScroolAtual);
+    }
+
+
+
+
+    var pixelScrolAtual = $(menuhorizontalresponsivo).scrollLeft();
+    var tamanhoVisivel = $(menuhorizontalresponsivo).parent().width();
+    var itensQtd = $(menuhorizontalresponsivo).parent().find('.item-menu-horizontal-responsivo').length;
+    var itemSize = $(menuhorizontalresponsivo).parent().find('.item-menu-horizontal-responsivo').outerWidth(true);
+    var scrollMaximo = (itensQtd * itemSize);
+    var scrollMaximoVisivel = scrollMaximo - tamanhoVisivel;
+    var intervaloScroll = tamanhoVisivel - itemSize;
+    var novoScroll = intervaloScroll * etapaPosicaoScroolAtual;
+
+    if (parafrente) {
+        novoScroll = pixelScrolAtual + (intervaloScroll * etapaPosicaoScroolAtual);
+    } else {
+        novoScroll = pixelScrolAtual - (intervaloScroll * etapaPosicaoScroolAtual);
+        novoScroll = novoScroll - 200;
+    }
+
+
+    var botaoScrollEsquerda = $(menuhorizontalresponsivo).parent().find('.botao-lateral-esquerda-menu-horizontal-responsivo');
+    var botaoScrollDireita = $(menuhorizontalresponsivo).parent().find('.botao-lateral-direita-menu-horizontal-responsivo');
+    console.log("novoScroll>" + novoScroll + "ScrollMaximo" + scrollMaximo);
+
+    if (tamanhoVisivel >= scrollMaximo) {
+        $(botaoScrollDireita).addClass('hidden-botao-lateral');
+        $(botaoScrollEsquerda).addClass('hidden-botao-lateral');
+    } else {
+
+        if (novoScroll >= scrollMaximoVisivel) {
+
+            $(botaoScrollDireita).addClass('hidden-botao-lateral');
+            $(botaoScrollEsquerda).removeClass('hidden-botao-lateral');
+
+
+        } else {
+            if (novoScroll <= 0) {
+                $(botaoScrollDireita).removeClass('hidden-botao-lateral');
+                $(botaoScrollEsquerda).addClass('hidden-botao-lateral');
+
+            }
+        }
+    }
+    $(menuhorizontalresponsivo).animate({scrollLeft: novoScroll}, 1000);
 
 }

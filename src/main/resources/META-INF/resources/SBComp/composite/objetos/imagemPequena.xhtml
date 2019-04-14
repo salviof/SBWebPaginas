@@ -18,29 +18,29 @@
     <!-- IMPLEMENTATION -->
     <cc:implementation>
 
+        <h:panelGroup styleClass="Container12">
+            <h:form >
+                <p:remoteCommand name="atualizarEntidadeAtual" update="@form" process="@this" >
+                    <f:setPropertyActionListener target="#{paginaAtual.infoPagina.comoFormularioWeb.beanSelecionado}" value="#{cc.attrs.item}"/>
 
-        <h:form >
-            <p:remoteCommand name="atualizarEntidadeAtual" update="@form" process="@this" >
-                <f:setPropertyActionListener target="#{paginaAtual.infoPagina.comoFormularioWeb.beanSelecionado}" value="#{cc.attrs.item}"/>
+                </p:remoteCommand>
 
-            </p:remoteCommand>
+            </h:form>
 
-        </h:form>
+            <p:graphicImage url="#{cc.attrs.item.imgPequena}"  width="100px;"   />
+            <h:form rendered="#{!cc.attrs.somenteLeitura}">
 
-        <p:graphicImage url="#{cc.attrs.item.imgPequena}"    />
-        <h:form rendered="#{!cc.attrs.somenteLeitura}">
+                <h:inputHidden converter="conversorGenerico" value=""  />
+                <p:fileUpload  allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
+                               fileUploadListener="#{pgUtil.enviarImagemPequenaUpload}"
+                               multiple="false"
+                               onstart="atualizarEntidadeAtual();"
 
-            <h:inputHidden converter="conversorGenerico" value=""  />
-            <p:fileUpload  allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
-                           fileUploadListener="#{pgUtil.enviarImagemPequenaUpload}"
-                           multiple="false"
-                           onstart="atualizarEntidadeAtual();"
+                               >
 
-                           >
-
-            </p:fileUpload>
-        </h:form>
-
+                </p:fileUpload>
+            </h:form>
+        </h:panelGroup>
 
     </cc:implementation>
 </ui:composition>

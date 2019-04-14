@@ -65,7 +65,7 @@
                 </div>
 
             </p:blockUI>
-            <h:panelGroup layout="block" >
+            <h:panelGroup layout="block" styleClass="OrganizadorContainer" style="margin-left:  10px;" >
                 <ui:repeat value="#{cc.attrs.opcoes}" var="opc" varStatus="rec">
                     <c:choose >
 
@@ -108,31 +108,32 @@
                                 >
 
 
-                                <div class="btnSeletor-small btnSeletor-Bkg " style="min-height: 200px;min-width: 200px;" >
+                                <div class="btnSeletor-small btnSeletor-Bkg OrganizadorContainer" style="min-height: 120px;min-width: 120px;" >
+                                    <div class="OrganizadorContainer">
 
+                                        <h:panelGroup style="height: 50px;align-self: center;">
+                                            <font color="##{opc.cor}" >
+                                                <div class="Container12" style=" color:##{opc.cor}!important;background-color:#{opc.cor}">
+                                                    <i  class=" #{opc.iconeAcao} fa fa-2x" style=" background: #F5F5F5;   padding:15px;   border-radius: 100%;"  > </i><br/>
+                                                </div>
+                                            </font>
+                                        </h:panelGroup>
 
-                                    <h:panelGroup>
-                                        <font color="##{opc.cor}" >
-                                            <div class="Container12" style=" color:##{opc.cor}!important;background-color:#{opc.cor}">
-                                                <i  class=" #{opc.iconeAcao} fa fa-5x" style=" background: #F5F5F5;   padding:15px;   border-radius: 100%;"  > </i><br/>
+                                        <h:panelGroup styleClass="btnSeletor-label "
+                                                      style="color: #000000; "
+                                                      rendered="#{!pgUtil.isNuloOuEmbranco(opc.nomeAcao)}"
+                                                      layout="block" >
+                                            <div style="display: table-cell; vertical-align: middle; height: 100px; width: 150px; ">
+                                                <h3 class="FontAdamantiumRegular Fs14 TexAlCenter ">#{opc.nomeAcao} </h3>
                                             </div>
-                                        </font>
-                                    </h:panelGroup>
-
-                                    <h:panelGroup styleClass="btnSeletor-label "
-                                                  style="color: #000000; "
-                                                  layout="block" >
-                                        <div style="display: table-cell; vertical-align: middle; height: 100px;">
-                                            <h3>#{opc.nomeAcao}</h3>
-                                        </div>
 
 
-                                    </h:panelGroup>
-                                    <p:tooltip rendered="#{opc.descricao!=null}"
-                                               value="#{opc.descricao}"
-                                               />
+                                        </h:panelGroup>
+                                        <p:tooltip rendered="#{opc.descricao!=null}"
+                                                   value="#{opc.descricao}"
+                                                   />
+                                    </div>
                                 </div>
-
 
                                 <f:setPropertyActionListener
                                     target="#{cc.attrs.opcaoSelecionada}"
