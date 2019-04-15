@@ -211,7 +211,7 @@ function pesquisaDataSetComDelay(idElementoDigitacao, idDataSetPrime) {
 
             PF(idDataSetPrime).filter();
         }, 800);
-    }
+    };
 }
 
 //Funções de comunicação
@@ -238,26 +238,43 @@ function responderConversaRespostaRapida(codigoSelo, codigoResposta) {
 
 
 function initBotaoMenuHorizontal(menuhorizontalresponsivo) {
+
     var itemSize = $(menuhorizontalresponsivo).parent().find('.item-menu-horizontal-responsivo').outerWidth(true);
     var itensQtd = $(menuhorizontalresponsivo).parent().find('.item-menu-horizontal-responsivo').length;
     var scrollMaximo = (itensQtd * itemSize);
     var tamanhoVisivel = $(menuhorizontalresponsivo).parent().width();
-    var pd = (itensQtd * 25);
-    var scrollMaximo = (itensQtd * itemSize) + pd;
+    var pd = (itensQtd * 22);
+    var scrollMaximo = (itensQtd * itemSize);
 
     var scrollMaximoVisivel = scrollMaximo - tamanhoVisivel;
 
-    $(menuhorizontalresponsivo).css({
-        "padding-left": pd + "px"
-    });
+
+
+
     if (scrollMaximo <= tamanhoVisivel) {
         var botaoScrollEsquerda = $(menuhorizontalresponsivo).parent().find('.botao-lateral-esquerda-menu-horizontal-responsivo');
         var botaoScrollDireita = $(menuhorizontalresponsivo).parent().find('.botao-lateral-direita-menu-horizontal-responsivo');
         $(botaoScrollDireita).addClass('hidden-botao-lateral');
         $(botaoScrollEsquerda).addClass('hidden-botao-lateral');
+    } else {
+        $(menuhorizontalresponsivo).css({
+            "padding-left": pd + "px"
+        });
+        $(menuhorizontalresponsivo).mousewheel(function (e, delta) {
+            // this.scrollLeft -= (delta * 350);
+            e.preventDefault();
+            if (delta < 0) {
+                acoesBotaoMenuHorizontal(menuhorizontalresponsivo, true, true);
+            } else {
+                acoesBotaoMenuHorizontal(menuhorizontalresponsivo, false, true);
+            }
+
+        });
     }
+    var pixelScrolAtual = $(menuhorizontalresponsivo).scrollLeft();
+    $(menuhorizontalresponsivo).parent().data("posicaoInicial", pixelScrolAtual);
 }
-function acoesBotaoMenuHorizontal(menuhorizontalresponsivo, parafrente) {
+function acoesBotaoMenuHorizontal(menuhorizontalresponsivo, parafrente, semefeito) {
     var etapaPosicaoScroolAtual = $(menuhorizontalresponsivo).parent().data("posicao");
 
 
@@ -265,8 +282,17 @@ function acoesBotaoMenuHorizontal(menuhorizontalresponsivo, parafrente) {
         etapaPosicaoScroolAtual = 1;
         $(menuhorizontalresponsivo).parent().data("posicao", etapaPosicaoScroolAtual);
     } else {
-        etapaPosicaoScroolAtual = etapaPosicaoScroolAtual + 1;
-        $(menuhorizontalresponsivo).parent().data("posicao", etapaPosicaoScroolAtual);
+        if (parafrente) {
+            etapaPosicaoScroolAtual = etapaPosicaoScroolAtual + 1;
+            $(menuhorizontalresponsivo).parent().data("posicao", etapaPosicaoScroolAtual);
+        } else {
+            etapaPosicaoScroolAtual = etapaPosicaoScroolAtual - 1;
+            if (etapaPosicaoScroolAtual < 1) {
+                etapaPosicaoScroolAtual = 1;
+            }
+            $(menuhorizontalresponsivo).parent().data("posicao", etapaPosicaoScroolAtual);
+        }
+
     }
 
 
@@ -276,26 +302,37 @@ function acoesBotaoMenuHorizontal(menuhorizontalresponsivo, parafrente) {
     var tamanhoVisivel = $(menuhorizontalresponsivo).parent().width();
     var itensQtd = $(menuhorizontalresponsivo).parent().find('.item-menu-horizontal-responsivo').length;
     var itemSize = $(menuhorizontalresponsivo).parent().find('.item-menu-horizontal-responsivo').outerWidth(true);
+    var pd = (itensQtd * 22);
+
+    var scrollMaximoVisivel = $(menuhorizontalresponsivo).outerWidth(true);
     var scrollMaximo = (itensQtd * itemSize);
-    var scrollMaximoVisivel = scrollMaximo - tamanhoVisivel;
+
     var intervaloScroll = tamanhoVisivel - itemSize;
-    var novoScroll = intervaloScroll * etapaPosicaoScroolAtual;
+    var novoScroll = intervaloScroll + pixelScrolAtual;
 
     if (parafrente) {
-        novoScroll = pixelScrolAtual + (intervaloScroll * etapaPosicaoScroolAtual);
+        novoScroll = pixelScrolAtual + (intervaloScroll * 0.45);
     } else {
-        novoScroll = pixelScrolAtual - (intervaloScroll * etapaPosicaoScroolAtual);
-        novoScroll = novoScroll - 200;
+        novoScroll = pixelScrolAtual - (intervaloScroll * 0.6);
+        if (novoScroll < pd) {
+            if (novoScroll < 0) {
+                novoScroll = 0;
+
+            }
+        }
+
+
     }
 
 
     var botaoScrollEsquerda = $(menuhorizontalresponsivo).parent().find('.botao-lateral-esquerda-menu-horizontal-responsivo');
     var botaoScrollDireita = $(menuhorizontalresponsivo).parent().find('.botao-lateral-direita-menu-horizontal-responsivo');
-    console.log("novoScroll>" + novoScroll + "ScrollMaximo" + scrollMaximo);
+    console.log("novoScroll>" + novoScroll + "ScrollMaximo" + scrollMaximo + "itensQtd->" + itensQtd + "itemSize" + itemSize + "erapa" + etapaPosicaoScroolAtual);
 
-    if (tamanhoVisivel >= scrollMaximo) {
+    if (tamanhoVisivel >= scrollMaximo + pd) {
         $(botaoScrollDireita).addClass('hidden-botao-lateral');
         $(botaoScrollEsquerda).addClass('hidden-botao-lateral');
+
     } else {
 
         if (novoScroll >= scrollMaximoVisivel) {
@@ -306,12 +343,36 @@ function acoesBotaoMenuHorizontal(menuhorizontalresponsivo, parafrente) {
 
         } else {
             if (novoScroll <= 0) {
+
                 $(botaoScrollDireita).removeClass('hidden-botao-lateral');
                 $(botaoScrollEsquerda).addClass('hidden-botao-lateral');
+
+            } else {
+                $(botaoScrollDireita).removeClass('hidden-botao-lateral');
+                $(botaoScrollEsquerda).removeClass('hidden-botao-lateral');
 
             }
         }
     }
-    $(menuhorizontalresponsivo).animate({scrollLeft: novoScroll}, 1000);
+    var segundosefeitos = 900;
+    if (semefeito) {
+        segundosefeitos = 0;
+    }
+    if (parafrente) {
+        if (novoScroll >= scrollMaximoVisivel - intervaloScroll) {
+            $(menuhorizontalresponsivo).css({
+                "padding-left": "0px"
+            });
+        }
+        $(menuhorizontalresponsivo).animate({scrollLeft: novoScroll}, segundosefeitos);
+
+    } else {
+        $(menuhorizontalresponsivo).css({
+            "padding-left": pd + "px"
+        });
+        $(menuhorizontalresponsivo).animate({scrollLeft: novoScroll}, segundosefeitos);
+
+    }
+
 
 }

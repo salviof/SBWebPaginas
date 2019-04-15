@@ -24,7 +24,7 @@
                       />
 
         <cc:attribute name="pid"
-                      default="#{component.clientId}" />
+                      default="#{cc.attrs.id}" />
 
         <cc:attribute name="visualizacaoBotao"
                       default="#{layoutsComponenteSB.layoutBotoes.iconeENome}"
@@ -44,15 +44,15 @@
 
         <h:panelGroup styleClass="menu-horizontal-responsivo-container" layout="block"  style="opacity: 1" >
             <h:panelGroup style="" styleClass="botao-lateral-esquerda-menu-horizontal-responsivo somenteDesktop hidden-botao-lateral" layout="block" >
-                <a href="javascript:void(0)"  onclick="acoesBotaoMenuHorizontal($('.menu-horizontal-responsivo-id-#{cc.attrs.pid}'), false)" style="">
+                <a href="javascript:void(0)"  onclick="acoesBotaoMenuHorizontal($('.menu-horizontal-responsivo-id-#{cc.attrs.pid}'), false, true)" style="">
                     <div class=" "  >
-                        <h:outputText value="&#60;&#60;" escape="true"/>
+                        <h:outputText value="&#60;&#60;&#60;" escape="true"/>
                     </div>
                 </a>
             </h:panelGroup>
 
             <ul class="menu-horizontal-responsivo menu-horizontal-responsivo-id-#{cc.attrs.pid} " style="display: flex;  justify-content: space-around;display: -webkit-flex;">
-                <ui:repeat var="opc" value="#{cc.attrs.opcoes}"  varStatus="rec">
+                <ui:repeat var="opc" value="#{cc.attrs.opcoes}" >
 
 
 
@@ -66,20 +66,15 @@
                                 value="#{opc}"  />
                             <script>
                                 function formatarCorbtIcon#{cc.attrs.pid}#{rec.index}() {
-                                    $(PrimeFaces.escapeClientId('#{component.clientId}')).css({
-                                        "background-color": "##{opc.cor}"
-                                    });
+                                    console.log('#{component.clientId}');
+                                    document.getElementById("#{component.clientId}").style.backgroundColor = "##{opc.cor}";
                                 }
-
                             </script>
                             <p:tooltip for="@parent" value=" #{opc.nomeAcao} - #{opc.descricao}"/>
                         </p:commandButton>
                         <script>
                             formatarCorbtIcon#{cc.attrs.pid}#{rec.index}();
                         </script>
-
-
-
                     </li>
 
                 </ui:repeat>
@@ -88,9 +83,9 @@
 
             </ul>
             <h:panelGroup style="" styleClass="somenteDesktop botao-lateral-direita-menu-horizontal-responsivo"  layout="block" >
-                <a href="javascript:void(0)"  onclick="acoesBotaoMenuHorizontal($('.menu-horizontal-responsivo-id-#{cc.attrs.pid}'), true)" style="">
+                <a href="javascript:void(0)"  onclick="acoesBotaoMenuHorizontal($('.menu-horizontal-responsivo-id-#{cc.attrs.pid}'), true, false)" style="">
                     <div class=" "  >
-                        <h:outputText value="&#62;&#62;" escape="true"/>
+                        <h:outputText value="&#62;&#62;&#62;" escape="true"/>
                     </div>
                 </a>
             </h:panelGroup>
@@ -108,13 +103,3 @@
 
     </cc:implementation>
 </ui:composition>
-
-
-
-
-
-
-
-
-
-
