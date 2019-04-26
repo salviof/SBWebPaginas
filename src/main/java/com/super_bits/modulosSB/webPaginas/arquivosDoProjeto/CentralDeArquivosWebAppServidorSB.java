@@ -4,6 +4,7 @@
  */
 package com.super_bits.modulosSB.webPaginas.arquivosDoProjeto;
 
+import com.super_bits.modulosSB.Persistencia.registro.persistidos.EntidadeGenerica;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.FabTipoEmpacotamento;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreOutputs;
@@ -264,6 +265,7 @@ public class CentralDeArquivosWebAppServidorSB extends CentralDeArquivosAbstrata
     @Override
     public boolean salvarArquivo(ItfBeanSimplesSomenteLeitura entidade, byte[] arquivo, String nomeCampo) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
     }
 
     @Override

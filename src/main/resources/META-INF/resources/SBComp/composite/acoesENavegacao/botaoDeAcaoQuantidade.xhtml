@@ -1,0 +1,87 @@
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:cc="http://java.sun.com/jsf/composite"
+    xmlns:sb="http://superbitsframework/ui"
+    xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <!-- INTERFACE -->
+    <cc:interface shortDescription="Exibe um botão com uma bolinha contendo uma quantidade" >
+
+        <cc:attribute name="acao" type="com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ItfAcaoDoSistema"
+                      shortDescription="A ação que será exibida " />
+        <cc:attribute name="armazenamentoAcaoExecutada"
+                      shortDescription="Ben para armazenar esta ação quando clicada, Esta opção só é exexutada com o atributo deste botão armazenarAcaoSelecionada for true "
+                      />
+        <cc:attribute name="metodo" type="javax.el.MethodExpression"  required="true"/>
+        <cc:attribute name="update"
+                      shortDescription="IDs que devem ser atualizados após clicar na alção"
+                      />
+        <cc:attribute name="javaScriptOncomplete"  default="acoesPosAjax();"
+                      shortDescription="Javascript que deve ser executado após a execucao do botão"
+                      />
+
+        <cc:attribute name="tipoVisualizacao"
+                      type="com.super_bits.modulosSB.SBCore.modulos.view.fabricasCompVisual.ItfComponenteVisualSB"
+                      default="#{layoutsComponenteSB.layoutBotoes.iconeENome}"
+                      shortDescription="Tipo de visualização do botão (Utilize #tipos.tipoVisualBotao"
+                      />
+        <cc:attribute name="cor"
+                      default="#{null}"
+                      shortDescription="Cor do botão caso ele deva ser exibido por em uma cor especifica"
+                      />
+        <cc:attribute name="trasformarAcaoEmLink" default="#{cc.attrs.acao.umaAcaoGestaoDominio}"    />
+        <cc:attribute name="quantidade"/>
+
+
+
+        <cc:attribute name="label"
+                      shortDescription="Label do botão"
+                      default="#{cc.attrs.acao.nomeAcao}"
+                      type="java.lang.String"
+                      />
+
+
+    </cc:interface>
+    <!-- IMPLEMENTATION -->
+    <cc:implementation>
+
+        <c:if test="#{!cc.attrs.trasformarAcaoEmLink}">
+            <sb:parametroMetodo nome="metodobtqtd" valor="#{cc.attrs.metodo}" />
+            <p:commandLink actionListener="#{metodobtqtd}"   >
+                <h:panelGroup  styleClass="Container2" style="margin-left:15px;" >
+                    <span class="fa-stack  has-badge" data-count="#{cc.attrs.quantidade}" >
+                        <i class="#{cc.attrs.acao.icone} fa-stack-2x fa-inverse" style=" color: #464a52"></i>
+                    </span>
+                </h:panelGroup>
+            </p:commandLink>
+
+        </c:if>
+
+        <c:if test="#{cc.attrs.trasformarAcaoEmLink}">
+
+            <p:link href="#{infoWebApp.getUrlDaAcao(cc.attrs.acao)}"
+                    <h:panelGroup  styleClass="Container2" style="margin-left:15px;" >
+                    <span class="fa-stack  has-badge" data-count="#{cc.attrs.quantidade}" >
+                        <i class="#{cc.attrs.acao.icone} fa-stack-2x fa-inverse" style=" color: #464a52"></i>
+                    </span>
+                </h:panelGroup>
+            </p:link>
+
+        </c:if>
+
+
+    </cc:implementation>
+</ui:composition>
+
+
+
+
+
+
+
+
+
+
+

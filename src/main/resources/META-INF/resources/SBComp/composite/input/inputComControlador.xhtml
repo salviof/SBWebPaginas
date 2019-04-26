@@ -43,7 +43,7 @@
     <!-- IMPLEMENTATION -->
     <cc:implementation>
 
-        <h:panelGrid columns="1"  class="InputSBSuperior InputControlador"
+        <h:panelGrid columns="1"  class="InputSBSuperior InputControlador OrganizadorContainer"
                      rowClasses=""
 
                      >
@@ -56,15 +56,16 @@
                             />
             </p:outputLabel>
 
-            <h:panelGrid columns="3" >
+            <h:panelGrid columns="3" styleClass="OrganizadorContainer" >
 
 
-                <h:panelGroup  >
+                <h:panelGroup   >
 
                     <p:commandLink actionListener="#{cc.attrs.metodoReduzir}"
                                    update="#{pgUtil.getNomeIdPFieldSetPai(component)}"
                                    rendered="#{!cc.attrs.desabilitarEdicao}"
                                    partialSubmit="true"
+                                   styleClass="Fright"
                                    process="@this">
 
                         <f:passThroughAttribute name="tabindex" value="-1"/>
@@ -81,7 +82,7 @@
                         obrigatorio="#{cc.attrs.registro.obrigatorio}"
                         registro="#{cc.attrs.registro}"
                         desabilitarEdicao="#{cc.attrs.desabilitarEdicao}"
-                        layoutCampo="#{layoutsComponenteSB.layoutCampo.resumido}"
+                        layoutCampo="#{layoutsComponenteSB.layoutCampo.semLabel}"
                         possuiIDOnChange="true"
                         possuiMetodoOnChange="#{pgUtil.isAtributoPreenchidoComExpressao(cc,'metodoExecutarAoAlterarValor')}"
                         layoutCampoEspecial="#{cc.attrs.visualizacaoEspecial}"
@@ -91,7 +92,7 @@
                         metodoOnChange="#{cc.attrs.metodoExecutarAoAlterarValor}"
 
                         />
-                    <p:message   for="@previous"/>
+
                 </h:panelGroup>
                 <h:panelGroup rendered="#{!cc.attrs.desabilitarEdicao}" >
 
@@ -118,6 +119,10 @@
 
 
         </h:panelGrid>
+        <p:messages for="#{pgUtil.getNomeIdComponenteInput(component)}"
+
+                    escape="false"
+                    autoUpdate="false" rendered="#{!cc.attrs.desabilitarEdicao}" />
 
     </cc:implementation>
 

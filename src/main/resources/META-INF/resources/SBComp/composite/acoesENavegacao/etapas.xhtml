@@ -46,7 +46,7 @@
 
 
                         <h:panelGroup class="stepwizard-step  ui-fluid Responsive" rendered="#{cc.attrs.etapascriando.isSelecionadaAtual(etapaDesktop)}" >
-                            <button type="button" class="btn btn-primary btn-circle">#{posicaoDesktop.index +1} disabled</button>
+                            <button type="button" class="btn btn-primary btn-circle">#{posicaoDesktop.index +1} </button>
                             <p>#{etapaDesktop.nomeAcao}</p>
                         </h:panelGroup>
 
@@ -96,7 +96,13 @@
             </div>
 
         </h:panelGroup>
+        <script>
 
+            $(".stepwizard-step button").each(function (index) {
+                $(this).attr("disabled", "true");
+            });
+
+        </script>
 
         <div class="SeparatorFull"/>
 

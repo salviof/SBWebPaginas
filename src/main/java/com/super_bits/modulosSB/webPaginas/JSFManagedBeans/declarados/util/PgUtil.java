@@ -5,7 +5,6 @@
  */
 package com.super_bits.modulosSB.webPaginas.JSFManagedBeans.declarados.util;
 
-import br.org.coletivojava.erp.comunicacao.transporte.ERPTransporteComunicacao;
 import com.google.common.collect.Lists;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreNumeros;
@@ -16,7 +15,6 @@ import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringValidador;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ItfAcaoDoSistema;
 import com.super_bits.modulosSB.SBCore.modulos.ManipulaArquivo.UtilSBCoreArquivos;
 import com.super_bits.modulosSB.SBCore.modulos.Mensagens.FabMensagens;
-import com.super_bits.modulosSB.SBCore.modulos.comunicacao.FabTipoComunicacao;
 import com.super_bits.modulosSB.SBCore.modulos.geradorCodigo.model.EstruturaCampo;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.ItensGenericos.basico.BeanTodosSelecionados;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campo.CaminhoCampoExibicaoFormulario;
@@ -39,7 +37,6 @@ import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.interface
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.reflexao.anotacoes.beans.InfoMB_Acao;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.siteMap.AcaoComLink;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.siteMap.AcaoDeContexto;
-import com.super_bits.modulosSB.webPaginas.controller.push.Notificacao;
 import com.super_bits.modulosSB.webPaginas.controller.servletes.WebPaginasServlet;
 import com.super_bits.modulosSB.webPaginas.controller.sessao.QlSessaoFacesContext;
 import com.super_bits.modulosSB.webPaginas.controller.sessao.SessaoAtualSBWP;
@@ -54,7 +51,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.RequestScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.component.UIInput;
@@ -66,11 +62,10 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import org.coletivojava.fw.api.tratamentoErros.FabErro;
 import org.coletivojava.fw.utilCoreBase.UtilSBCoreComunicacao;
+import org.primefaces.PrimeFaces;
 import org.primefaces.component.fieldset.FieldsetRenderer;
-import org.primefaces.context.RequestContext;
+
 import org.primefaces.event.FileUploadEvent;
-import org.primefaces.push.EventBus;
-import org.primefaces.push.EventBusFactory;
 
 /**
  *
@@ -538,35 +533,58 @@ public class PgUtil implements Serializable {
     }
 
     public String getNomeIdComponenteInput(UIComponent componente) {
-        try {
+        return getNomeIdComponenteInput(componente, true);
+    }
 
-            for (UIComponent comp : componente.getParent().getChildren()) {
+    private UIComponent getComponenteRecursivoIntput(UIComponent componente) {
 
+        if (componente == null) {
+            return null;
+        }
+        if (isComponentDeInput(componente)) {
+            return componente;
+        } else {
+            if (componente.getChildCount() == 0) {
+                return null;
+            }
+            UIComponent compEncontrado = null;
+            Iterator<UIComponent> componentes = componente.getFacetsAndChildren();
+            UIComponent comp;
+            while (componentes.hasNext()) {
+                comp = componentes.next();
                 if (isComponentDeInput(comp)) {
-                    return comp.getClientId();
-                }
-                for (UIComponent compNivel2 : comp.getChildren()) {
-                    if (isComponentDeInput(compNivel2)) {
-                        return compNivel2.getClientId();
+                    return comp;
+                } else {
+                    if (compEncontrado == null) {
+                        compEncontrado = getComponenteRecursivoIntput(comp);
+                    } else {
+                        return compEncontrado;
                     }
-                    for (UIComponent compNivel3 : compNivel2.getChildren()) {
-                        if (isComponentDeInput(compNivel3)) {
-                            return compNivel3.getClientId();
-                        }
-                        for (UIComponent compNivel4 : compNivel3.getChildren()) {
-                            if (isComponentDeInput(compNivel4)) {
-                                return compNivel4.getClientId();
-                            }
-                        }
-                    }
-
                 }
             }
+        }
+        return null;
 
-            throw new UnsupportedOperationException("Falha obtendo id do componente Input");
+    }
+
+    public String getNomeIdComponenteInput(UIComponent componente, boolean componenteInicial) {
+        try {
+            if (componenteInicial && componente.getParent() != null) {
+                UIComponent componenteencontrado = getComponenteRecursivoIntput(componente.getParent());
+                if (componenteencontrado != null) {
+                    return componenteencontrado.getClientId();
+                } else {
+                    return null;
+                }
+
+            } else {
+                return getComponenteRecursivoIntput(componente).getClientId();
+
+            }
+
         } catch (Throwable t) {
 
-            SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "erro obtendo id do input " + componente.getId(), t);
+            SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "erro obtendo id do input " + componente.getId() + t.getMessage(), t);
             UIComponent componenteMater = getComponeneInputMaster(componente);
             UIComponent compFilho = getComponenteInputChilds(componenteMater);
             if (compFilho != null) {
@@ -925,7 +943,7 @@ public class PgUtil implements Serializable {
 
         pFormularioModal = pFormularioModal.replace(".xhtml", "");
         controleModal.adicionarAoMapa(paginaAtual.getInfoPagina().getComoPaginaDeGestao());
-        RequestContext.getCurrentInstance().openDialog(pFormularioModal, pOpcoesPrimefaces, parametrosModalRequestGet);
+        PrimeFaces.current().dialog().openDynamic(pFormularioModal, pOpcoesPrimefaces, parametrosModalRequestGet);
         return idView;
     }
 
@@ -1229,12 +1247,13 @@ public class PgUtil implements Serializable {
         return formatador.format(pDataHora);
     }
 
+    @Deprecated
     public void testePush() {
 
         try {
             // Thread.sleep(5000);
-            EventBus evento2 = EventBusFactory.getDefault().eventBus();
-            evento2.publish("/mensagens/" + paginaAtual.getInfoPagina().getComoPaginaDeGestao().getAcaoVinculada().getNomeUnico() + "/*/*", new Notificacao(new FacesMessage(FacesMessage.SEVERITY_WARN, "Colé!!! olha o push2 aee!!!", "Colé!!! olha o push aee!!!")));
+            //     EventBus evento2 = EventBusFactory.getDefault().eventBus();
+            //     evento2.publish("/mensagens/" + paginaAtual.getInfoPagina().getComoPaginaDeGestao().getAcaoVinculada().getNomeUnico() + "/*/*", new Notificacao(new FacesMessage(FacesMessage.SEVERITY_WARN, "Colé!!! olha o push2 aee!!!", "Colé!!! olha o push aee!!!")));
             //exibirModalComunicacao();
             //    Thread.sleep(5000);
             //   evento.publish("/notify", new FacesMessage(FacesMessage.SEVERITY_WARN, "Colé!!! olha o push aee!!!", "Colé!!! olha o push aee!!!"));
@@ -1243,10 +1262,11 @@ public class PgUtil implements Serializable {
         }
     }
 
+    @Deprecated
     public void testePushConversa() {
-        EventBus evento2 = EventBusFactory.getDefault().eventBus();
-        evento2.publish("/mensagens/" + paginaAtual.getInfoPagina().getComoPaginaDeGestao().getAcaoVinculada().getNomeUnico() + "/*/*",
-                new Notificacao(SBCore.getCentralComunicacao().iniciarComunicacaoSistema_Usuairo(FabTipoComunicacao.NOTIFICAR, sessao.getUsuario(), "Teste Nova comunicação", ERPTransporteComunicacao.INTRANET_MODAL)));
+        // EventBus evento2 = EventBusFactory.getDefault().eventBus();
+        // evento2.publish("/mensagens/" + paginaAtual.getInfoPagina().getComoPaginaDeGestao().getAcaoVinculada().getNomeUnico() + "/*/*",
+        //          new Notificacao(SBCore.getCentralComunicacao().iniciarComunicacaoSistema_Usuairo(FabTipoComunicacao.NOTIFICAR, sessao.getUsuario(), "Teste Nova comunicação", ERPTransporteComunicacao.INTRANET_MODAL)));
     }
 
     public boolean isNuloOuEmbranco(Object pVariavel) {

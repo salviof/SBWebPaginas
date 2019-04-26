@@ -8,12 +8,44 @@ function esconderTooltips() {
 }
 
 function liberarBloqueios() {
+    var i;
     for (i in PrimeFaces.widgets) {
         if (PrimeFaces.widgets[i].show && PrimeFaces.widgets[i].blocker) {
             PrimeFaces.widgets[i].hide();
         }
     }
 }
+
+function bloquearTodosBotoes() {
+    var i;
+    for (i in $('.ui-button')) {
+        $(i).attr("disabled", true);
+    }
+}
+
+function desbloquearTodosBotoes() {
+    var i;
+    for (i in $('.ui-button')) {
+        $(i).attr("disabled", true);
+    }
+}
+
+function bloquearTodosCommandLinks() {
+
+
+    $(".ui-commandlink").each(function (index) {
+        $(this).hide();
+    });
+
+}
+
+function desbloquearTodosCommandLinks() {
+    $(".ui-commandlink").each(function (index) {
+        $(this).show();
+    });
+
+}
+
 
 function scrollEmCampoNaoValidado() {
 

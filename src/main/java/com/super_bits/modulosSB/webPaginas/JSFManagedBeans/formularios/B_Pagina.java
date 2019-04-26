@@ -429,10 +429,14 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
                 String valorStringURL = valorStringPorParametro.get(pr);
                 ParametroUrlInstanciado parametro = parametrosURL.get(pr);
 
-                if (valorStringURL == null && parametro.isParametroObrigatorio()) {
+                if (UtilSBCoreStringValidador.isNuloOuEmbranco(valorStringURL)) {
+                    if (parametro.isParametroObrigatorio()) {
 
-                    throw new UnsupportedOperationException("O valor do parametro obrigatorio nao foi enviado" + parametro.getNome());
+                        throw new UnsupportedOperationException("O valor do parametro obrigatorio nao foi enviado" + parametro.getNome());
 
+                    } else {
+                        return;
+                    }
                 }
 
                 if (valorStringURL != null) {

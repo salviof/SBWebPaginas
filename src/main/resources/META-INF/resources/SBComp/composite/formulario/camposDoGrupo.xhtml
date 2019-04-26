@@ -52,8 +52,13 @@
                         </h:panelGroup>
 
                         <c:if test="#{coluna.componenteVinculado.umComponenteAtributoDeObjeto and coluna.componenteVinculado.caminhoCampo.umCampoComLista}">
+
                             <h:panelGroup rendered="#{coluna.componenteVinculado.umComponenteAtributoDeObjeto}" layout="block"
-                                          styleClass="#{cc.attrs.somenteLeitura or cc.attrs.registro.getCampoByNomeOuAnotacao(coluna.componenteVinculado.caminhoCampo.caminhoSemNomeClasse).somenteLeitura ? 'Container3':'Container12'}">
+                                          styleClass="#{
+                                          !cc.attrs.registro.getCampoByNomeOuAnotacao(coluna.componenteVinculado.caminhoCampo.caminhoSemNomeClasse).umaListagemParticular and (cc.attrs.somenteLeitura or
+                                              cc.attrs.registro.getCampoByNomeOuAnotacao(coluna.componenteVinculado.caminhoCampo.caminhoSemNomeClasse).somenteLeitura)
+                                              ? 'Container3'
+                                              :'Container12'}">
 
 
                                 <h:outputText

@@ -5,6 +5,7 @@
 package com.super_bits.modulosSB.webPaginas.TratamentoDeErros;
 
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
+import com.super_bits.modulosSB.SBCore.modulos.TratamentoDeErros.UtilSBCoreErros;
 import java.util.Iterator;
 import javax.faces.FacesException;
 import javax.faces.context.ExceptionHandler;
@@ -38,8 +39,14 @@ public class ManipuladorErrosSBJSF extends PrimeExceptionHandler {
 
             if (unhandledExceptionQueuedEvents.hasNext()) {
                 try {
+
                     Throwable throwable = unhandledExceptionQueuedEvents.next().getContext().getException();
-                    SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "Erro processando JSF", throwable);
+                    String mensagemErro = "Erro processando JSF" + throwable.getMessage();
+                    Throwable causaraiz = UtilSBCoreErros.getCausaRaiz(throwable);
+                    if (causaraiz != null) {
+                        mensagemErro = mensagemErro + "-->" + causaraiz.getMessage();
+                    }
+                    SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, mensagemErro, throwable);
 
                 } catch (Exception ex) {
                     SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "Erro manipulando mensagem de erro JSF!", ex);

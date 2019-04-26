@@ -30,8 +30,18 @@ public class B_ListaItemEditavelJsf extends B_ListaItemEditavel {
                 break;
             }
         }
-        if (parametroEnviado) {
-            getListaObjetosSelecionados().remove(getIndiceItemSelecionado());
+        if (!getListaObjetosSelecionados().isEmpty()) {
+            if (parametroEnviado) {
+                if (getIndiceItemSelecionado() <= getListaObjetosSelecionados().size() - 1) {
+                    getListaObjetosSelecionados().remove(getIndiceItemSelecionado());
+                } else {
+                    //resolução holística para resolver tentativas de remover itens rapidamente, resultando em envio de indice errado a solução ideal é bloquear e rmoção dupla de itens bloqueando a tela para o usuário a cada ajax
+                    //este else resolve quando clicado no ultimo elemento, clicando em 2 elementos no meio de uma lista, vai exluir o item errado, podermiamos também enviar o total de itens como paramentro, desta forma, teriamos mais
+                    // uma dado para trabalhar e mitigar a exclusão de item errado subtraindo sempre do indice a diferença entre o total agora para o total anterior, o que funcionaria bem para um click rápido em sequencia de cima para baixo
+                    // que é o mais facil de acontecer..
+                    getListaObjetosSelecionados().remove(getListaObjetosSelecionados().size() - 1);
+                }
+            }
         }
     }
 

@@ -28,7 +28,7 @@
     <cc:implementation>
 
 
-        <p:fieldset  styleClass="AreaSeletorGrande" >
+        <p:fieldset  styleClass="AreaSeletorGrande"  >
 
             <h:panelGroup rendered="#{cc.attrs.itemSelecionado!=null}" >
                 <SBSeletor:visualizacaoItemSelecionado
@@ -51,11 +51,12 @@
                     minQueryLength="4"
                     queryDelay="1000"
                     maxResults="6"
+
                     completeMethod="#{cc.attrs.metodo}"
                     >
                     <p:ajax event="itemSelect"
                             listener="#{metodoOnChange}"
-                            update="@(AreaSeletorGrande)"/>
+                            update="@(.AreaSeletorGrande)"/>
                     <c:forEach var="campo" items="#{cc.attrs.grupoCamposPesquisa.campos}" rendered="#{pgUtil.isAtributoPreenchidoComExpressao(cc, 'grupoCamposExibicao')}">
                         <p:column >
                             <sb:inputSB
@@ -67,7 +68,7 @@
                                 possuiIDOnChange="false"
                                 possuiMetodoOnChange="false"
                                 desabilitarEdicao="true"
-                                layoutCampo="#{layoutsComponenteSB.layoutCampo.resumido}"
+                                layoutCampo="#{layoutsComponenteSB.layoutCampo.semLabel}"
                                 />
                         </p:column>
                     </c:forEach>

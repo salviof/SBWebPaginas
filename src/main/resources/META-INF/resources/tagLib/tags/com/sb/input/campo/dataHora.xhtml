@@ -23,6 +23,7 @@
                 value="#{valor}"
                 mask="true"
                 navigator="true"
+
                 showSecond="false"
                 showButtonPanel="true"
                 showOn="button"
@@ -33,6 +34,7 @@
                 showMinute="true"
                 pattern="dd/MM/yyyy HH:mm:ss"
                 styleClass="estiloDataHora  #{componente.classeCSS}"
+
 
                 >
                 <f:passThroughAttribute name="caminhoCampo" value="#{registro.nomeCompostoIdentificador}" />
@@ -45,7 +47,7 @@
                 <c:if test="#{possuiMetodoOnChange}">
                     <p:ajax rendered="#{possuiMetodoOnChange}"
                             global="true"
-                            event="change"
+                            event="dateSelect"
                             listener="#{prMetodo}"/>
                 </c:if>
 
@@ -53,7 +55,7 @@
                     <p:ajax
                         rendered="#{possuiIDOnChange}"
                         global="true"
-                        event="change"
+                        event="dateSelect"
                         listener="#{pgUtil.atualizaTelaPorID(idAtualizarOnChange)}" />
                 </c:if>
 

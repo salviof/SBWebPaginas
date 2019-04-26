@@ -34,6 +34,8 @@
         <cc:attribute name="visualSeletorAcoes"
                       default="#{layoutsComponenteSB.layoutBotoes.iconeENome}" />
 
+        <cc:attribute name="organizadorContainer" default="OrganizadorContainer" />
+
         <cc:attribute name="update"
                       default="#{null}" />
     </cc:interface>
@@ -43,7 +45,7 @@
 
 
 
-        <h:panelGroup styleClass="SbBotoesDeEscolha OrganizadorContainerEsquerda" layout="block"  >
+        <h:panelGroup styleClass="SbBotoesDeEscolha" layout="block"  >
             <f:passThroughAttribute name="marcador" value="inputFormulario" />
             <p:blockUI
                 rendered="#{pgUtil.getNomeIdPFieldSetPai(component)!=null}"
@@ -65,7 +67,7 @@
                 </div>
 
             </p:blockUI>
-            <h:panelGroup layout="block" styleClass="OrganizadorContainer" style="margin-left:  10px;" >
+            <h:panelGroup layout="block" styleClass=" #{cc.attrs.organizadorContainer}" style="margin-left:  10px;" >
                 <ui:repeat value="#{cc.attrs.opcoes}" var="opc" varStatus="rec">
                     <c:choose >
 
@@ -108,13 +110,13 @@
                                 >
 
 
-                                <div class="btnSeletor-small btnSeletor-Bkg OrganizadorContainer" style="min-height: 120px;min-width: 120px;" >
-                                    <div class="OrganizadorContainer">
+                                <div class="btnSeletor-big containerBtnSeletor OrganizadorContainer"  >
+                                    <h:panelGroup  layout="block" styleClass="OrganizadorContainer">
 
-                                        <h:panelGroup style="height: 50px;align-self: center;">
+                                        <h:panelGroup style="height: 50px;align-self: center;" layout="span">
                                             <font color="##{opc.cor}" >
                                                 <div class="Container12" style=" color:##{opc.cor}!important;background-color:#{opc.cor}">
-                                                    <i  class=" #{opc.iconeAcao} fa fa-2x" style=" background: #F5F5F5;   padding:15px;   border-radius: 100%;"  > </i><br/>
+                                                    <i  class="#{opc.iconeAcao} fa fa-2x iconeBotaoQuadrado" style=""  > </i><br/>
                                                 </div>
                                             </font>
                                         </h:panelGroup>
@@ -124,7 +126,7 @@
                                                       rendered="#{!pgUtil.isNuloOuEmbranco(opc.nomeAcao)}"
                                                       layout="block" >
                                             <div style="display: table-cell; vertical-align: middle; height: 100px; width: 150px; ">
-                                                <h3 class="FontAdamantiumRegular Fs14 TexAlCenter ">#{opc.nomeAcao} </h3>
+                                                <h3 class="FontAdamantiumRegular Fs14 TexAlCenter " style="">#{opc.nomeAcao} </h3>
                                             </div>
 
 
@@ -132,7 +134,7 @@
                                         <p:tooltip rendered="#{opc.descricao!=null}"
                                                    value="#{opc.descricao}"
                                                    />
-                                    </div>
+                                    </h:panelGroup>
                                 </div>
 
                                 <f:setPropertyActionListener

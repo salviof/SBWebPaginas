@@ -211,12 +211,7 @@
             <artifactId>javax.inject</artifactId>
             <version>1</version>
         </dependency>
-        <dependency>
-            <groupId>org.atmosphere</groupId>
-            <artifactId>atmosphere-runtime</artifactId>
-            <version>2.4.14</version>
-            <scope>provided</scope>
-        </dependency>
+
         <!--Nescessário para Weld Versao 2.2.x -->
         <dependency>
             <groupId>org.jboss</groupId>

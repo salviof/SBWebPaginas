@@ -4,7 +4,8 @@
 
     xmlns:p="http://primefaces.org/ui"
     xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
-    xmlns:h="http://xmlns.jcp.org/jsf/html">
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://xmlns.jcp.org/jsf/core">
     <ui:decorate template="#{layout.xhtmlJsfCaminhoRelativo}">
         <ui:define name="input">
 
@@ -24,7 +25,7 @@
                 offLabel="Não" onLabel="Sim"
                 offIcon="fa fa-check text-danger" onIcon="fa fa-check text-success"
                 value="#{registro.valor}" disabled="#{desabilitarEdicao}">
-
+                <f:validator  validatorId="org.super_bits.view.validadores.genericoBoolean"/>
 
                 <c:if test="#{atualizarGrupoOnChange}" >
                     <p:ajax

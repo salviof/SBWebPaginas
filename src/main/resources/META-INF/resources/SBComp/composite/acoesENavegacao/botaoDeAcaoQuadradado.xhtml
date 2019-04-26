@@ -1,0 +1,126 @@
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:cc="http://java.sun.com/jsf/composite"
+    xmlns:sb="http://superbitsframework/ui"
+    xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <!-- INTERFACE -->
+    <cc:interface shortDescription="Exibe um botão com uma bolinha contendo uma quantidade" >
+
+        <cc:attribute name="acao" type="com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ItfAcaoDoSistema"
+                      shortDescription="A ação que será exibida " />
+        <cc:attribute name="armazenamentoAcaoExecutada"
+                      shortDescription="Ben para armazenar esta ação quando clicada, Esta opção só é exexutada com o atributo deste botão armazenarAcaoSelecionada for true "
+                      />
+        <cc:attribute name="metodo" type="javax.el.MethodExpression"  required="true"/>
+        <cc:attribute name="update"
+                      shortDescription="IDs que devem ser atualizados após clicar na alção"
+                      />
+        <cc:attribute name="javaScriptOncomplete"  default="acoesPosAjax();"
+                      shortDescription="Javascript que deve ser executado após a execucao do botão"
+                      />
+
+
+        <cc:attribute name="cor"
+                      default="#{cc.attrs.acao.cor}"
+                      shortDescription="Cor do botão caso ele deva ser exibido por em uma cor especifica"
+                      />
+        <cc:attribute name="trasformarAcaoEmLink" default="#{cc.attrs.acao.umaAcaoGestaoDominio}"    />
+        <cc:attribute name="quantidade"/>
+
+
+
+        <cc:attribute name="label"
+                      shortDescription="Label do botão"
+                      default="#{cc.attrs.acao.nome}"
+                      type="java.lang.String"
+                      />
+
+
+    </cc:interface>
+    <!-- IMPLEMENTATION -->
+    <cc:implementation>
+
+        <c:if test="#{!cc.attrs.trasformarAcaoEmLink}">
+            <sb:parametroMetodo nome="metodobtqdr" valor="#{cc.attrs.metodo}" />
+            <p:commandLink actionListener="#{metodobtqdr}"   >
+                <div class="btnSeletor-small containerBtnSeletor OrganizadorContainer"  >
+                    <h:panelGroup  layout="block" styleClass="OrganizadorContainer">
+
+                        <h:panelGroup style="height: 40px;align-self: center;" layout="span">
+                            <font color="##{cc.attrs.cor}" >
+                                <div class="Container12" style=" color:##{opc.cor}!important;background-color:#{cc.attrs.acao.cor}">
+                                    <i  class=" #{cc.attrs.acao.icone} fa fa-1x" style=" "> </i><br/>
+                                </div>
+
+                            </font>
+                        </h:panelGroup>
+
+                        <h:panelGroup styleClass="btnSeletor-label "
+                                      style="color: #000000; "
+                                      rendered="#{!pgUtil.isNuloOuEmbranco(cc.attrs.acao.nomeAcao)}"
+                                      layout="block" >
+                            <div style="display: table-cell; vertical-align: middle; height: 100px; width: 150px; ">
+                                <h3 class="FontAdamantiumRegular Fs14 TexAlCenter " style="">#{cc.attrs.label} </h3>
+                            </div>
+
+
+                        </h:panelGroup>
+                        <p:tooltip rendered="#{cc.attrs.acao.descricao!=null}"
+                                   value="#{cc.attrs.acao.descricao}"
+                                   />
+                    </h:panelGroup>
+                </div>
+            </p:commandLink>
+        </c:if>
+
+        <c:if test="#{cc.attrs.trasformarAcaoEmLink}">
+
+            <p:link href="#{infoWebApp.getUrlDaAcao(cc.attrs.acao)}">
+                <div class="btnSeletor-small containerBtnSeletor OrganizadorContainer"  >
+                    <h:panelGroup  layout="block" styleClass="OrganizadorContainer">
+
+                        <h:panelGroup style="height: 40px;align-self: center;" layout="span">
+                            <font color="##{cc.attrs.cor}" >
+                                <div class="Container12" style=" color:##{opc.cor}!important;background-color:#{cc.attrs.acao.cor}">
+                                    <i  class=" #{cc.attrs.acao.icone} fa fa-1x" style=" "> </i><br/>
+                                </div>
+
+                            </font>
+                        </h:panelGroup>
+
+                        <h:panelGroup styleClass="btnSeletor-label "
+                                      style="color: #000000; "
+                                      rendered="#{!pgUtil.isNuloOuEmbranco(cc.attrs.acao.nomeAcao)}"
+                                      layout="block" >
+                            <div style="display: table-cell; vertical-align: middle; height: 100px; width: 150px; ">
+                                <h3 class="FontAdamantiumRegular Fs14 TexAlCenter " style="">#{cc.attrs.label} </h3>
+                            </div>
+
+
+                        </h:panelGroup>
+                        <p:tooltip rendered="#{cc.attrs.acao.descricao!=null}"
+                                   value="#{cc.attrs.acao.descricao}"
+                                   />
+                    </h:panelGroup>
+                </div>
+            </p:link>
+
+        </c:if>
+
+
+    </cc:implementation>
+</ui:composition>
+
+
+
+
+
+
+
+
+
+
+

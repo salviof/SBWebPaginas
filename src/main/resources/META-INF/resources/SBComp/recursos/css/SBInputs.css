@@ -85,10 +85,31 @@ and open the template in the editor.
 
 }
 
-.inputCampo{
+.inputCampo {
     width:   100%!important;
     border : none!important;
     position: relative;
+
+}
+.inputCampo tbody tr td{
+    border: none!important;
+
+}
+.InputControlador tbody tr td{
+    border: none!important;
+
+}
+.InputControlador input{
+    text-align: center;
+
+}
+
+.inputCampo table{
+    border: none!important;
+
+}
+.inputCampo table td{
+    border: none!important;
 
 }
 .panelGridEsquerda{

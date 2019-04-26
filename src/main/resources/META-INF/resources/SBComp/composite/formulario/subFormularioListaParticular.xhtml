@@ -3,6 +3,7 @@
                 xmlns:SBInput="http://xmlns.jcp.org/jsf/composite/SBComp/composite/input"
                 xmlns:SBFormulario="http://xmlns.jcp.org/jsf/composite/SBComp/composite/formulario"
                 xmlns:p="http://primefaces.org/ui"
+                xmlns:pe="http://primefaces.org/ui/extensions"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
@@ -72,64 +73,72 @@
                         process="@this"
                         value="#{cc.attrs.registro.comoSubItens.subItens.acaoAdicionarItem.nomeAcao}"
 
-
+                        onstart="bloquearTodosCommandLinks()"
+                        oncomplete="desbloquearTodosCommandLinks()"
                         />
 
                 </h:panelGroup>
+                <h:panelGroup  id="teste123">
 
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <c:forEach items="#{cc.attrs.grupoCampos.campos}" var="campo" >
+                    <table class="table table-striped" id="teste123">
+                        <thead>
+                            <tr>
+                                <c:forEach items="#{cc.attrs.grupoCampos.campos}" var="campo" >
 
-                                <th>#{campo.labelAlternativo}</th>
+                                    <th>#{campo.labelAlternativo}</th>
 
-                            </c:forEach>
-                            <th>-</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-
-                        <ui:repeat value="#{cc.attrs.registro.valor}" var="itemDaLista" varStatus="infoRec"  >
-                            <tr scope="row" id="#{cc.attrs.grupoCampos.idNomeGrupoCampo}#{infoRec.index}">
-                                <ui:repeat value="#{cc.attrs.grupoCampos.campos}" var="cpItem" varStatus="infoRecCol"  >
-
-                                    <td class="col-md-2">
-
-                                        <p:fragment>
-
-                                            <SBInput:input
-                                                registro="#{itemDaLista.getCampoByNomeOuAnotacao(cpItem.caminhoCampoRelativoAListaPai)}"
-                                                layout="#{cc.attrs.tipoVisualizacaoLabel}"
-                                                idAtualizarOnChange="@this"
-                                                transient="false"
-                                                />
-                                        </p:fragment>
-
-
-                                    </td>
-
-
-                                </ui:repeat>
-                                <td class="col-md-1" >
-                                    <p:commandLink
-                                        process="@this"
-                                        rendered="#{!cc.attrs.somenteLeitura}"
-                                        onclick="modificarIntputEclicar('#{pgUtil.gerarCaminhoCompletoIDParaJavaScript('botaoRemoverSubform')}', '#{pgUtil.gerarCaminhoCompletoIDParaJavaScript('indiceSubformulario')}', '#{infoRec.index}')">
-                                        <i class="fa fa-times Fs30" aria-hidden="true"></i>
-                                    </p:commandLink>
-                                </td>
+                                </c:forEach>
+                                <th>-</th>
                             </tr>
+                        </thead>
+                        <tbody>
 
-                        </ui:repeat>
-                    </tbody>
+                            <ui:repeat value="#{cc.attrs.registro.valor}" var="itemDaLista" varStatus="infoRec"  >
+                                <tr scope="row" id="#{cc.attrs.grupoCampos.idNomeGrupoCampo}#{infoRec.index}">
+                                    <ui:repeat value="#{cc.attrs.grupoCampos.campos}" var="cpItem" varStatus="infoRecCol"  >
 
-                </table>
+                                        <td class="col-md-2">
+
+                                            <p:fragment>
+
+                                                <SBInput:input
+                                                    registro="#{itemDaLista.getCampoByNomeOuAnotacao(cpItem.caminhoCampoRelativoAListaPai)}"
+                                                    layout="#{cc.attrs.tipoVisualizacaoLabel}"
+                                                    idAtualizarOnChange="@this"
+                                                    transient="false"
+                                                    />
+                                            </p:fragment>
 
 
+                                        </td>
 
+
+                                    </ui:repeat>
+                                    <td class="col-md-1" >
+                                        <p:commandLink
+                                            process="@this"
+                                            rendered="#{!cc.attrs.somenteLeitura}"
+                                            styleClass="botaoRemover"
+                                            onmouseup="bloquearTodosCommandLinks()"
+                                            onstart="bloquearTodosCommandLinks()"
+                                            oncomplete="desbloquearTodosCommandLinks()"
+                                            onclick="modificarIntputEclicar('#{pgUtil.gerarCaminhoCompletoIDParaJavaScript('botaoRemoverSubform')}', '#{pgUtil.gerarCaminhoCompletoIDParaJavaScript('indiceSubformulario')}', '#{infoRec.index}')">
+                                            <i class="fa fa-times Fs30" aria-hidden="true"></i>
+
+                                        </p:commandLink>
+                                    </td>
+                                </tr>
+
+                            </ui:repeat>
+                        </tbody>
+
+                    </table>
+
+                </h:panelGroup>
 
             </h:panelGroup>
+
+
 
 
         </h:panelGroup>
