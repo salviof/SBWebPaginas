@@ -6,7 +6,9 @@ package com.super_bits.modulosSB.webPaginas.controller.servletes.urls;
 
 import com.super_bits.modulosSB.Persistencia.dao.UtilSBPersistencia;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
+import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringValidador;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.TIPO_PARTE_URL;
+import com.super_bits.modulosSB.webPaginas.ConfigGeral.SBWebPaginas;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.reflexao.anotacoes.beans.InfoParametroURL;
 import com.super_bits.modulosSB.webPaginas.util.UtilSBWPServletTools;
 import com.super_bits.modulosSB.webPaginas.util.UtillSBWPReflexoesWebpaginas;
@@ -89,7 +91,7 @@ public class UtilFabUrlServlet {
 
     public static List<String> getListaStringsParametroURL(HttpServletRequest requisicao) {
         List<String> slugsURL = UtilSBWPServletTools.getSlugsDeUrl(requisicao);
-        if (!SBCore.isEmModoProducao()) {
+        if (!UtilSBCoreStringValidador.isNuloOuEmbranco(SBWebPaginas.getNomePacote())) {
             slugsURL.remove(0);
         }
 

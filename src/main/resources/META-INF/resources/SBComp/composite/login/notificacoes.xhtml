@@ -26,7 +26,7 @@
 
 
             <ul style="margin-left:-230px;">
-                <c:forEach var="comunicacao" items="#{sessaoAtualSBWP.ultimasComuniccoesAguardandoRespostaUsuarioSesso}" >
+                <c:forEach var="comunicacao" items="#{sessaoAtualSBWP.ultimasNotificacoesMenuAguardandoRespostaUsuarioSessao}" >
                     <span>
                         <h:form>
                             <li>
@@ -53,7 +53,9 @@
                 <li> <h:form><p:commandLink hreflang="#" rendered="#{sessaoAtualSBWP.comunicacaoAguardandoRespostaUsuarioSesso.size()>5}"  > ... mais (#{sessaoAtualSBWP.comunicacaoAguardandoRespostaUsuarioSesso.size()-7})</p:commandLink> </h:form></li>
             </ul>
         </li>
+
     </cc:implementation>
+
 </ui:composition>
 
 

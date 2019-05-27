@@ -9,7 +9,8 @@
 
         <ui:define name="input">
             <p:outputLabel value="#{pgUtil.gerarMoeda(valor)}"
-                           rendered="#{desabilitarEdicao}"
+                           rendered="#{desabilitarEdicao or valor==null}"
+
                            />
             <p:inputNumber
                 disabled="#{desabilitarEdicao}"
@@ -53,7 +54,3 @@
 
     </ui:decorate>
 </ui:composition>
-
-
-
-

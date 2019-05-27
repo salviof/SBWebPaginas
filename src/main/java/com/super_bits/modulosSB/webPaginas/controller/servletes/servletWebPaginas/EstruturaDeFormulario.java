@@ -9,6 +9,8 @@ import com.super_bits.modulos.SBAcessosModel.model.acoes.acaoDeEntidade.AcaoGest
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreReflexao;
+import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreReflexaoObjeto;
+import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringBuscaTrecho;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringFiltros;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringValidador;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.ItfParametroRequisicaoInstanciado;
@@ -179,11 +181,19 @@ public class EstruturaDeFormulario {
 
             for (Object obj : parametros) {
                 if (obj != null) {
+                    String nomeClasse = null;
                     if (mapaParametrosEnviados.get(obj.getClass().getSimpleName()) == null) {
-                        mapaParametrosEnviados.put(obj.getClass().getSimpleName(), new ArrayList());
+                        nomeClasse = UtilSBCoreStringBuscaTrecho.getStringAteEncontrarIsto(obj.getClass().getSimpleName(), "$");
+                        if (nomeClasse == null) {
+                            nomeClasse = obj.getClass().getSimpleName();
+                        }
+                        mapaParametrosEnviados.put(nomeClasse, new ArrayList());
+                    }
+                    if (nomeClasse == null) {
+                        nomeClasse = obj.getClass().getSimpleName();
                     }
 
-                    mapaParametrosEnviados.get(obj.getClass().getSimpleName()).add(obj);
+                    mapaParametrosEnviados.get(nomeClasse).add(obj);
                 }
             }
 

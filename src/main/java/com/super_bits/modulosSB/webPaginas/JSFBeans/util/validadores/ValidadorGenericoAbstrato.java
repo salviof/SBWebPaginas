@@ -47,7 +47,7 @@ public abstract class ValidadorGenericoAbstrato<T> implements Validator<T> {
             if (campoInstanciado.isTemValidadacaoLogica()) {
                 try {
                     if (umNovoRegistro) {
-                        campoInstanciado.getValidacaoLogica().validarModoEdicao(value);
+                        campoInstanciado.getValidacaoLogica().validarModoNovo(value);
                     } else {
                         campoInstanciado.getValidacaoLogica().validarModoEdicao(value);
                     }

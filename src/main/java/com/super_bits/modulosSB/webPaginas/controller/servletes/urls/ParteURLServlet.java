@@ -110,4 +110,9 @@ public class ParteURLServlet implements ItfParametroRequisicaoInstanciado {
         return parametroURL.getObjetoPorNomeFabrica(pValor);
     }
 
+    @Override
+    public String getTextoEnviadoUrl() {
+        return parametroURL.getTextoEnviadoUrl();
+    }
+
 }

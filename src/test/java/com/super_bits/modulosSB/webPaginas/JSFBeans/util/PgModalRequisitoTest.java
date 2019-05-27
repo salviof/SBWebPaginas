@@ -6,12 +6,7 @@ package com.super_bits.modulosSB.webPaginas.JSFBeans.util;
 
 import com.super_bits.modulosSB.webPaginas.JSFBeans.modal.PgModalRequisito;
 import com.super_bits.modulosSB.webPaginas.JSFBeans.declarados.Paginas.TesteWebPagina;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *

@@ -6,6 +6,7 @@
 package com.super_bits.modulosSB.webPaginas.JSFManagedBeans.declarados.util;
 
 import com.google.common.collect.Lists;
+import com.sun.faces.facelets.el.TagValueExpression;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreNumeros;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringFiltros;
@@ -32,6 +33,7 @@ import com.super_bits.modulosSB.webPaginas.JSFBeans.temas.Tema;
 import com.super_bits.modulosSB.webPaginas.JSFBeans.util.Cores;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.declarados.webSite.InfoWebApp;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.interfaces.ItfB_Pagina;
+import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.interfaces.ItfModalDados;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.interfaces.ItfPaginaAtual;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.interfaces.ItfPaginaGerenciarEntidade;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.reflexao.anotacoes.beans.InfoMB_Acao;
@@ -51,6 +53,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import javax.el.ELContext;
 import javax.faces.bean.RequestScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.component.UIInput;
@@ -58,6 +61,7 @@ import javax.faces.component.UINamingContainer;
 import javax.faces.component.html.HtmlPanelGroup;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
+import javax.faces.view.facelets.TagAttribute;
 import javax.inject.Inject;
 import javax.inject.Named;
 import org.coletivojava.fw.api.tratamentoErros.FabErro;
@@ -1114,7 +1118,11 @@ public class PgUtil implements Serializable {
                 return (comp.getRendererType().endsWith(FieldsetRenderer.class.getSimpleName()));
 
             case H_PANEL_GROUP:
-                throw new UnsupportedOperationException("Busca por Hpanel ainda não foi definida");
+                if (comp instanceof HtmlPanelGroup) {
+                    return true;
+                } else {
+                    return false;
+                }
 
             case H_PANEL_GROUP_INPUTSB:
                 if (comp instanceof HtmlPanelGroup) {
@@ -1146,6 +1154,40 @@ public class PgUtil implements Serializable {
             }
         }
         return "";
+    }
+
+    public boolean getNomeIdHPanelPaiComIdentificacaoToBackAction(UIComponent pComponente, String pParamentro, ELContext contexto) {
+        if (pComponente.getPassThroughAttributes().isEmpty()) {
+            return false;
+        }
+        Object valor = pComponente.getPassThroughAttributes().get("idToBackAct");
+        if (valor == null) {
+            return false;
+        }
+        if (valor instanceof TagValueExpression) {
+
+            return ((TagValueExpression) valor).getValue(contexto).toString().contains(pParamentro);
+        }
+        return valor.equals(pParamentro);
+
+    }
+
+    public String getNomeIdHPanelPaiComIdentifiadorPassThroughToBackAction(UIComponent pComponente, String pClasse, ELContext contexto) {
+        boolean encontrou = false;
+        UIComponent componente = pComponente;
+
+        while (!encontrou) {
+            if (isComponentByComponenteEstrategico(FabComponentesJSFBaseEstrategicos.H_PANEL_GROUP, componente) && getNomeIdHPanelPaiComIdentificacaoToBackAction(componente, pClasse, contexto)) {
+                return componente.getClientId();
+            } else {
+                componente = componente.getParent();
+                if (componente == null) {
+                    return "";
+                }
+            }
+        }
+        return "";
+
     }
 
     public String getNomeIdHPanelPai(UIComponent pComponente) {
@@ -1227,6 +1269,21 @@ public class PgUtil implements Serializable {
         }
         SimpleDateFormat formatador = new SimpleDateFormat("HH 'Horas e' mm 'minutos'");
         return formatador.format(pDataHora);
+    }
+
+    public String gerarDataHoraTextoResumido(Date pDataHora) {
+        try {
+            if (pDataHora == null) {
+                return null;
+            }
+            Locale local = new Locale("pt", "BR");
+
+            SimpleDateFormat formatador = new SimpleDateFormat("EE, dd, 'de' MMMM 'às' HH:mm", local);
+            return formatador.format(pDataHora);
+        } catch (Throwable t) {
+            SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "Erro formantando data", t);
+            return null;
+        }
     }
 
     public String gerarDataHoraTexto(Date pDataHora) {

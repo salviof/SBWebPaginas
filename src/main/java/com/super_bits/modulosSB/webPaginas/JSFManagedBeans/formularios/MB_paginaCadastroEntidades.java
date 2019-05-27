@@ -418,64 +418,8 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
         }
     }
 
-    public boolean isAcaoAtualAcaoControllerPadrao() {
-        if (getEntidadeSelecionada() == null) {
-            return false;
-        }
-        if (!getAcaoSelecionada().isUmaAcaoController()) {
-            return false;
-        }
-        Method metodo = UtilSBController.getMetodoByAcaoController(getAcaoSelecionada().getComoController());
-        if (metodo == null) {
-            throw new UnsupportedOperationException("Nenhum método foi encontrado vinculado a ação" + getAcaoSelecionada().getNomeUnico());
-        }
-        if (metodo.getParameterCount() > 1) {
-            return false;
-
-        }
-
-        if (metodo.getParameterCount() > 1) {
-
-            return false;
-        }
-        String tipoMetodoParametro = metodo.getParameterTypes()[0].getSimpleName();
-        String tipoEntidadeSelecionada = getEntidadeSelecionada().getClass().getSimpleName();
-
-        if (tipoMetodoParametro.equals(tipoEntidadeSelecionada)) {
-            return true;
-        } else {
-            try {
-                return metodo.getParameterTypes()[0].isInstance(getEntidadeSelecionada());
-
-            } catch (Throwable t) {
-                return false;
-            }
-
-        }
-
-    }
-
     public ItfRespostaAcaoDoSistema execucaoAcaoControllerPadrao(ItfAcaoController pAcaoController) {
         return execucaoAcaoControllerPadrao(pAcaoController, true);
-    }
-
-    public ItfRespostaAcaoDoSistema execucaoAcaoControllerPadrao(ItfAcaoController pAcaoController, boolean pExecutarPosAcaoPadrao) {
-
-        try {
-
-            Method metodo = UtilSBController.getMetodoByAcaoController(pAcaoController);
-
-            ItfRespostaAcaoDoSistema resp = (ItfRespostaAcaoDoSistema) metodo.invoke(null, getEntidadeSelecionada());
-            if (pExecutarPosAcaoPadrao) {
-
-                autoExecProximaAcaoAposController(pAcaoController, resp);
-
-            }
-            return resp;
-        } catch (Throwable t) {
-            SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "Erro ao executar método por implementação padrão", t);
-            return null;
-        }
     }
 
     @Override
@@ -1044,7 +988,7 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
                                 = est.getMuitosParaUm().stream().filter(
                                         ligacao -> prs.stream().filter(
                                                 prPg -> prPg.getTipoEntidade().getSimpleName().equals(ligacao.getNomeEntidade())).findFirst().isPresent())
-                                .findFirst();
+                                        .findFirst();
                         if (pesquisaLigacao.isPresent()) {
                             UtilSBWP_JSFTools.vaParaPagina(MapaDeFormularios.getUrlFormulario(acaoSelecionada, getEntidadeSelecionada().getCampoInstanciadoByNomeOuAnotacao(pesquisaLigacao.get().getNomeDeclarado()).getValor()));
                         } else {
@@ -1252,46 +1196,6 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
             }
 
         }
-    }
-
-    /**
-     * Substitua este método para executar a chamada ao método de ação
-     * controller de forma manual
-     *
-     * Para subistituir as que tratam o Objeto Resposta, Substituir
-     *
-     * @see
-     * #autoExecProximaAcaoAposController(com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ItfAcaoController,
-     * com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.ItfRespostaAcaoDoSistema)
-     *
-     * @param pEntidade Entidade selecionada
-     * @return A resposta da execução de ação controller
-     */
-    public ItfRespostaAcaoDoSistema autoExecAcaoController(T pEntidade) {
-
-        ItfRespostaAcaoDoSistema respExecucao = null;
-        if (pEntidade == null || getEntidadeSelecionada() == null) {
-            throw new UnsupportedOperationException("Entidade selecionada é nula durante chamada de método controller" + acaoSelecionada.getNomeUnico());
-        }
-        if (isAcaoAtualAcaoControllerPadrao()) {
-            try {
-                respExecucao = execucaoAcaoControllerPadrao(acaoSelecionada.getComoController(), false);
-
-                if (respExecucao.isSucesso()) {
-                    renovarEMPagina();
-                }
-
-            } catch (Throwable t) {
-                SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "Erro Obtendo Método vinculado a ação de controller da ação" + acaoSelecionada, t);
-            }
-        } else {
-            throw new UnsupportedOperationException("Não foi encontrado um método padrão para a ação " + acaoSelecionada);
-        }
-        if (respExecucao == null) {
-            return null;
-        }
-
-        return respExecucao;
     }
 
     protected BP_DataModelLasy<T> listaEntidadeLasy;

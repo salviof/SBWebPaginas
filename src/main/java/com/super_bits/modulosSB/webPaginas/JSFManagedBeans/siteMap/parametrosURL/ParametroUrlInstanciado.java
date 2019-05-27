@@ -46,6 +46,7 @@ public class ParametroUrlInstanciado implements ItfParametroRequisicaoInstanciad
     public ParametroUrlInstanciado(InfoParametroURL pInfoParametro) {
         try {
             this.estruturaParametro = new ParametroUrlEstrutura(pInfoParametro);
+            System.out.println(estruturaParametro.isUmParametoEntidadeMBPrincipal());
         } catch (Throwable t) {
             SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "Erro instanciando Parametro com anotação" + pInfoParametro, t);
             if (pInfoParametro != null) {
@@ -163,7 +164,7 @@ public class ParametroUrlInstanciado implements ItfParametroRequisicaoInstanciad
                             System.out.println("O parametro de URL " + getNome() + " é do tipo Entidade, porém este projeto não tem Persistencia configurada");
                         }
                     } catch (Exception e) {
-                        SBCore.RelatarErro(FabErro.SOLICITAR_REPARO,"Erro obtendo registro de parametroURL de entidade pela URL", e);
+                        SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "Erro obtendo registro de parametroURL de entidade pela URL", e);
                     }
 
                     if (registroByURL == null) {
@@ -171,7 +172,7 @@ public class ParametroUrlInstanciado implements ItfParametroRequisicaoInstanciad
 
                         if (getValor() == null) {
                             if (estruturaParametro.isParametroObrigatorio()) {
-                                SBCore.RelatarErro(FabErro.SOLICITAR_REPARO,"Não encontrado Registro" + getValor() + " do tipo" + getTipoEntidade().getSimpleName(), null);
+                                SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "Não encontrado Registro" + getValor() + " do tipo" + getTipoEntidade().getSimpleName(), null);
                                 setValor(getValorPadrao());
                             }
                             // caso contrario renova o Objeto
@@ -240,6 +241,11 @@ public class ParametroUrlInstanciado implements ItfParametroRequisicaoInstanciad
     @Override
     public Object getObjetoPorNomeFabrica(String pValor) {
         return estruturaParametro.getObjetoPorNomeFabrica(pValor);
+    }
+
+    @Override
+    public String getTextoEnviadoUrl() {
+        return parteURLenviada;
     }
 
 }

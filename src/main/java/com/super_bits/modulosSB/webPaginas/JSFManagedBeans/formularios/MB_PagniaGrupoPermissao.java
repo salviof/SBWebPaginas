@@ -63,6 +63,7 @@ public class MB_PagniaGrupoPermissao<T extends ItfGrupoUsuaioEditavel> extends M
 
     @Override
     public void setEntidadeSelecionada(T pEntidadeSelecionada) {
+
         if (pEntidadeSelecionada != null && pEntidadeSelecionada.getId() > 0) {
             if (getEntidadeSelecionada() == null || !getEntidadeSelecionada().equals(pEntidadeSelecionada)) {
 
@@ -74,7 +75,11 @@ public class MB_PagniaGrupoPermissao<T extends ItfGrupoUsuaioEditavel> extends M
                 }
             }
         }
-        super.setEntidadeSelecionada(pEntidadeSelecionada); //To change body of generated methods, choose Tools | Templates.
+        super.setEntidadeSelecionada(pEntidadeSelecionada);
+    }
+
+    protected void setEntidadeDireto(T pEntidadeSelecionada) {
+        super.setEntidadeSelecionada(pEntidadeSelecionada);
     }
 
     public Map<String, ItfAcaoGerenciarEntidade> getGestoesPermissionaveis() {

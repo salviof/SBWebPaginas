@@ -2,6 +2,7 @@ package com.super_bits.modulosSB.webPaginas.ConfigGeral;
 
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.arquivosConfiguracao.ArquivoConfiguracaoDistribuicao;
+import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringValidador;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.permissoes.ItfAcaoFormulario;
 import com.super_bits.modulosSB.SBCore.modulos.ManipulaArquivo.UtilSBCoreArquivos;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.siteMap.parametrosURL.ParametroURL;
@@ -45,7 +46,7 @@ public abstract class SBWebPaginas {
         SITE_HOST = config.SITE_HOST();
         pastaImagens = config.pastaImagens();
         nomePacoteProjeto = config.nomePacoteProjeto();
-        SITE_URL = SITE_HOST + "/" + nomePacoteProjeto;
+        SITE_URL = config.SITE_HOST();
         System.out.println("siteURL=" + SITE_URL);
         TituloAppWeb = config.TituloAppWeb();
         URLBASE = config.URLBASE();
@@ -65,7 +66,11 @@ public abstract class SBWebPaginas {
             SITE_URL = SITE_HOST;
             URLBASE = SITE_HOST;
         } else {
-            URLBASE = urlDesenvolvimento + "/" + config.nomePacoteProjeto();
+            if (UtilSBCoreStringValidador.isNuloOuEmbranco(config.nomePacoteProjeto())) {
+                URLBASE = urlDesenvolvimento;
+            } else {
+                URLBASE = urlDesenvolvimento + "/" + config.nomePacoteProjeto();
+            }
             SITE_HOST = urlDesenvolvimento;
             SITE_URL = URLBASE;
         }
