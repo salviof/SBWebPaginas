@@ -14,11 +14,13 @@ import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campo.ItfCampo
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campo.ItfGrupoCampos;
 import com.super_bits.modulosSB.SBCore.modulos.view.fabricasCompVisual.componentes.FabCompVisualBotaoAcao;
 import com.super_bits.modulosSB.SBCore.modulos.view.telas.ColunaTela;
+import com.super_bits.modulosSB.SBCore.modulos.view.telas.FabTipoTamanhoTelas;
 import com.super_bits.modulosSB.SBCore.modulos.view.telas.ItfTelaUsuario;
 import com.super_bits.modulosSB.SBCore.modulos.view.telas.LayoutComponentesEmTela;
 import com.super_bits.modulosSB.SBCore.modulos.view.telas.LayoutComponentesEmTelaComGrupoDeAcoes;
 import com.super_bits.modulosSB.webPaginas.JSFBeans.SBBeanModel.modelosPagina.ModeloPagina;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.interfaces.ItfB_Pagina;
+import com.super_bits.modulosSB.webPaginas.controller.sessao.TelaWP;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -37,11 +39,15 @@ public class InfoDesignFormulario {
     private Map<String, LayoutComponentesEmTela> componentesEmExibixao;
     private final ItfB_Pagina pagina;
     private Map<String, LayoutComponentesEmTela> mapaLayoutPorIdentificacao;
-    private final ItfTelaUsuario telaUsuario;
+    private ItfTelaUsuario telaUsuario;
 
     public InfoDesignFormulario(ItfB_Pagina pPagina, ItfTelaUsuario pTipoTela) {
         pagina = pPagina;
+
         telaUsuario = pTipoTela;
+        if (telaUsuario == null) {
+            telaUsuario = new TelaWP(true);
+        }
     }
 
     public List<LayoutComponentesEmTela> getLayoutsGerados() {

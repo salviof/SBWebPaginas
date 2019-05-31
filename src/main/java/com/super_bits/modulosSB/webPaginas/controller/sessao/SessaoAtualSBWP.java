@@ -26,8 +26,6 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
-import javax.enterprise.inject.Default;
-import javax.enterprise.inject.Produces;
 import javax.imageio.ImageIO;
 import javax.inject.Inject;
 import javax.persistence.Entity;

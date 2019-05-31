@@ -37,6 +37,19 @@ public class TelaWP implements ItfTelaUsuario, Serializable {
 
     private TipoTela tipoTela;
 
+    public TelaWP(boolean telatemporaria) {
+        if (!telatemporaria) {
+            throw new UnsupportedOperationException("somente uma tela temporária pode ser criada com este construtor");
+        }
+        dispositivo = "Não definido";
+        aplicativo = "Não definido";
+        versaoAplicativo = "Não definido";
+        x = 700;
+        y = 540;
+        numeroMaximoColunas = 1;
+        parametrosEncontrados = new HashMap<>();
+    }
+
     public TelaWP(String parametroTela) {
         parametrosEncontrados = new HashMap<>();
         try {

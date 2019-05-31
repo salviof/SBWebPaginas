@@ -18,7 +18,7 @@
                 <i class="fa #{sessaoAtualSBWP.comunicacaoAguardandoRespostaUsuarioSesso.isEmpty() ? 'fa-bell-o' : 'fa-bell' } #{sessaoAtualSBWP.comunicacaoAguardandoRespostaUsuarioSesso.isEmpty() ? '' : 'animated swing' }  " style="" >
                     <h:panelGroup styleClass="#{sessaoAtualSBWP.comunicacaoAguardandoRespostaUsuarioSesso.size()>=10 ? 'sinoNotificacaoDezena' : 'sinoNotificacao' }"
                                   rendered="#{!sessaoAtualSBWP.comunicacaoAguardandoRespostaUsuarioSesso.isEmpty()}" >
-                        #{sessaoAtualSBWP.comunicacaoAguardandoRespostaUsuarioSesso.size()}
+                        #{sessaoAtualSBWP.ultimasNotificacoesMenuAguardandoRespostaUsuarioSessao.size()}
                     </h:panelGroup>
                 </i> <span></span>
             </a>
@@ -41,7 +41,7 @@
                                     <p:commandLink  onclick="responderConversa(#{comunicacao.codigoSelo})">
                                         <i class="#{comunicacao.tipoComunicacao.icone} Fs20 Blue Fleft" style="margin: 5px; position: absolute"> </i>
                                         <span class="FontAdamantiumBold Blue"> <h:outputLabel escape="false" style="margin-left: 28px" value="#{comunicacao.assunto}" /> </span><br />
-                                        <span class="Fs12"><h:outputLabel escape="false" value="#{comunicacao.mensagem}" /></span>
+                                        <h:panelGroup layout="span" styleClass="Fs12" rendered="#{!comunicacao.assuntoIgualMensagem}" >  <h:outputLabel  escape="false" value="#{comunicacao.mensagem} #{comunicacao.assuntoIgualMensagem}" /></h:panelGroup>
                                         <p:ajax event="dialogReturn" listener="#{pgUtilComunicacao.metodoRespostaModal}"/>
                                     </p:commandLink>
                                 </h:panelGroup>
