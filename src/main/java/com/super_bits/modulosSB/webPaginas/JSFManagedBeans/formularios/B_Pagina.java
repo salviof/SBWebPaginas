@@ -5,6 +5,7 @@ import com.super_bits.modulos.SBAcessosModel.model.acoes.acaoDeEntidade.AcaoGest
 import com.super_bits.modulosSB.Persistencia.ConfigGeral.SBPersistencia;
 import com.super_bits.modulosSB.Persistencia.dao.UtilSBPersistencia;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
+import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreParametrosEmString;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreReflexao;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringFiltros;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringValidador;
@@ -22,6 +23,7 @@ import com.super_bits.modulosSB.SBCore.modulos.comunicacao.FabTipoRespostaComuni
 import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ItfComunicacao;
 import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ItfTipoRespostaComunicacao;
 import com.super_bits.modulosSB.SBCore.modulos.fabrica.ItfFabricaAcoes;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campo.FabTipoAtributoObjeto;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campo.TIPO_PRIMITIVO;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campoInstanciado.ItfCampoInstanciado;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.reflexao.ReflexaoCampo;
@@ -102,7 +104,7 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
     protected ItfAcaoDoSistema acaoSelecionada;
     private List<ItfAcaoDoSistema> acoesDaPagina;
     private Map<Integer, ItfAcaoDoSistema> historico_acoes_Executadas;
-    public static List<AcaoGestaoEntidade> acoesMB;
+    private static List<AcaoGestaoEntidade> acoesMB;
     private String nomeMB;
     private final Map<String, String> infoIds = new HashMap<>();
     private final Map<String, String> infoWidget = new HashMap<>();
@@ -924,8 +926,43 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
             }
             if (tipoFormulario.equals(FabTipoFormulario.PAGINA_SIMPLES)) {
                 if (!acaoSelecionada.getAcaoDeGestaoEntidade().equals(getAcaoVinculada())) {
+                    try {
+                        EstruturaDeFormulario estrutura = MapaDeFormularios.getEstruturaByNomeAcao(acaoSelecionada.getAcaoDeGestaoEntidade().getNomeUnico(), true);
+                        if (estrutura.getParametrosURL().isEmpty() || getBeanSelecionado() == null) {
 
-                    UtilSBWP_JSFTools.vaParaPagina(MapaDeFormularios.getUrlFormulario(acaoSelecionada));
+                            UtilSBWP_JSFTools.vaParaPagina(MapaDeFormularios.getUrlFormulario(acaoSelecionada));
+                        } else {
+
+                            Optional<ParametroURL> p = estrutura.getParametrosURL().stream().
+                                    filter(pr -> pr.getTipoEntidade().getSimpleName().equals(getBeanSelecionado().getClass().getSimpleName())).findFirst();
+                            if (p.isPresent()) {
+                                MapaDeFormularios.getUrlFormulario(acaoSelecionada, getBeanSelecionado());
+                            } else {
+
+                                ItfCampoInstanciado cpprvinculo = null;
+                                for (ParametroURL pr : estrutura.getParametrosURL()) {
+                                    Optional<ItfCampoInstanciado> cp = getBeanSelecionado().getCamposInstanciados().stream()
+                                            .filter(cpinst -> cpinst.getTipoCampoSTR().equals(FabTipoAtributoObjeto.OBJETO_DE_UMA_LISTA.toString())
+                                            && cpinst.getValor() != null
+                                            && UtilSBCoreReflexao.isClasseIgualOuExetende(cpinst.getValor().getClass(), pr.getTipoEntidade())
+                                            ).findFirst();
+                                    if (cp.isPresent()) {
+                                        cpprvinculo = cp.get();
+                                        break;
+                                    }
+
+                                }
+                                if (cpprvinculo != null) {
+                                    String urlAutoRedirecionamento = MapaDeFormularios.getUrlFormulario(acaoSelecionada, cpprvinculo.getValor());
+                                    UtilSBWP_JSFTools.vaParaPagina(urlAutoRedirecionamento);
+                                } else {
+                                    UtilSBWP_JSFTools.vaParaPagina(MapaDeFormularios.getUrlFormulario(acaoSelecionada));
+                                }
+                            }
+                        }
+                    } catch (Throwable t) {
+                        UtilSBWP_JSFTools.vaParaPagina(MapaDeFormularios.getUrlFormulario(acaoSelecionada));
+                    }
                 }
             }
             adicionarAcaoNoHistorico(acaoSelecionada);

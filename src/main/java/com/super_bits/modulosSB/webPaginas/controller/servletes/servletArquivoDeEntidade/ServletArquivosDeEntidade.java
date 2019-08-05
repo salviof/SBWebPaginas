@@ -6,6 +6,8 @@ package com.super_bits.modulosSB.webPaginas.controller.servletes.servletArquivoD
 
 import com.super_bits.modulosSB.Persistencia.dao.UtilSBPersistencia;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
+import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringBuscaTrecho;
+import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringValidador;
 import com.super_bits.modulosSB.SBCore.modulos.ManipulaArquivo.TipoRecurso;
 import com.super_bits.modulosSB.SBCore.modulos.ManipulaArquivo.acessoArquivo.FabTipoAcessoArquivo;
 import com.super_bits.modulosSB.SBCore.modulos.ManipulaArquivo.acessoArquivo.TipoAcessoArquivo;
@@ -127,11 +129,33 @@ public class ServletArquivosDeEntidade extends ServletArquivosSBWPGenerico imple
                 if (classeEntidade.getSimpleName().equals(UsuarioSistemaRoot.class.getSimpleName())) {
                     entidade = new UsuarioSistemaRoot();
                 }
+
             } else {
                 entidade = (ItfBeanSimples) UtilSBPersistencia.getRegistroByNomeSlug(classeEntidade, pSlugObjeto, UtilSBPersistencia.getNovoEM());
             }
 
+            switch (pTipoRecurso.getFabipoArquivo()) {
+                case IMAGE_REPRESENTATIVA_ENTIDADE_GRANDE:
+                case IMAGE_REPRESENTATIVA_ENTIDADE_MEDIO:
+                case IMAGE_REPRESENTATIVA_ENTIDADE_PEQUENO:
+                    try {
+                        entidade = (ItfBeanSimples) classeEntidade.newInstance();
+                        String[] partes = pSlugObjeto.split("-");
+                        for (String parte : partes) {
+                            if (UtilSBCoreStringValidador.isContemApenasNumero(parte)) {
+                                entidade.setId(Integer.valueOf(parte));
+                            } else {
+                                entidade.setNome(parte);
+                            }
+                        }
+                    } catch (Throwable t) {
+                        entidade = null;
+                    }
+                    break;
+            }
+
             if (entidade == null) {
+
                 throw new UnsupportedOperationException("A entidade é reconhecida, mas o registro não pôde ser localizado para" + pNomeEntidade + "-" + pSlugObjeto);
             }
 

@@ -4,7 +4,7 @@
                 xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facelettaglibrary_2_0.xsd"
                 version="2.0">
     <namespace>http://superbitsframework/ui</namespace>
-    
+
     <tag>
         <tag-name>botaoAcao</tag-name>
         <source>resources/tagLib/tags/com/sb/botaoAcao.xhtml</source>
@@ -949,21 +949,21 @@
 
     <tag>
         <tag-name>inputSBImagemMedDeEntidade</tag-name>
-        <source>resources/tagLib/tags/com/sb/input/campo/arquivoDeEntidade.xhtml</source>
+        <source>resources/tagLib/tags/com/sb/input/campo/imagemDeEntidadeMedio.xhtml</source>
     </tag>
 
     <tag>
         <tag-name>inputSBImagemPequenaDeDeEntidade</tag-name>
-        <source>resources/tagLib/tags/com/sb/input/campo/imagemDeEntidadePequeno.xhml</source>
+        <source>resources/tagLib/tags/com/sb/input/campo/imagemDeEntidadePequeno.xhtml</source>
     </tag>
 
     <tag>
         <tag-name>inputImagemMediaDeEntidade</tag-name>
-        <source>resources/tagLib/tags/com/sb/input/campo/imagemDeEntidadeMedio.xhml</source>
+        <source>resources/tagLib/tags/com/sb/input/campo/imagemDeEntidadeMedio.xhtml</source>
     </tag>
     <tag>
         <tag-name>inputSBImagemGrandeDeEntidade</tag-name>
-        <source>resources/tagLib/tags/com/sb/input/campo/imagemDeEntidadeGrande.xhml</source>
+        <source>resources/tagLib/tags/com/sb/input/campo/imagemDeEntidadeGrande.xhtml</source>
     </tag>
 
     <tag>

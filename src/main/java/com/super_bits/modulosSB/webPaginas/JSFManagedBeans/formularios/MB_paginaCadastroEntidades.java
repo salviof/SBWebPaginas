@@ -691,9 +691,14 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
                 }
             } else {
                 try {
-                    ItfBeanSimples bean = (ItfBeanSimples) getAcaoVinculada().getClasseRelacionada().newInstance();
+                    ItfBeanSimples bean = null;
+                    if (getAcaoSelecionada().isUmaAcaoFormulario() && getAcaoSelecionada().isUmaAcaoDeEntidade()) {
+                        bean = (ItfBeanSimples) getAcaoSelecionada().getComoFormularioEntidade().getClasseRelacionada().newInstance();
+                    } else {
+                        bean = (ItfBeanSimples) getAcaoVinculada().getClasseRelacionada().newInstance();
+                    }
                     if (!mostrarInativos && bean.isTemCampoAnotado(FabTipoAtributoObjeto.REG_ATIVO_INATIVO)) {
-                        setEntidadesListadas(new ConsultaDinamicaDeEntidade(getAcaoVinculada().getClasseRelacionada(), getEMPagina()).addCondicaoPositivo(bean.getNomeCampo(FabTipoAtributoObjeto.REG_ATIVO_INATIVO)).resultadoRegistros());
+                        setEntidadesListadas(new ConsultaDinamicaDeEntidade(bean.getClass(), getEMPagina()).addCondicaoPositivo(bean.getNomeCampo(FabTipoAtributoObjeto.REG_ATIVO_INATIVO)).resultadoRegistros());
 
                     } else {
                         setEntidadesListadas(UtilSBPersistencia.getListaTodos(getAcaoVinculada().getClasseRelacionada(), getEMPagina()));

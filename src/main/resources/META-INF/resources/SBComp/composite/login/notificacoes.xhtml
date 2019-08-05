@@ -18,7 +18,7 @@
                 <i class="fa #{sessaoAtualSBWP.comunicacaoAguardandoRespostaUsuarioSesso.isEmpty() ? 'fa-bell-o' : 'fa-bell' } #{sessaoAtualSBWP.comunicacaoAguardandoRespostaUsuarioSesso.isEmpty() ? '' : 'animated swing' }  " style="" >
                     <h:panelGroup styleClass="#{sessaoAtualSBWP.comunicacaoAguardandoRespostaUsuarioSesso.size()>=10 ? 'sinoNotificacaoDezena' : 'sinoNotificacao' }"
                                   rendered="#{!sessaoAtualSBWP.comunicacaoAguardandoRespostaUsuarioSesso.isEmpty()}" >
-                        #{sessaoAtualSBWP.ultimasNotificacoesMenuAguardandoRespostaUsuarioSessao.size()}
+                        #{sessaoAtualSBWP.comunicacaoAguardandoRespostaUsuarioSesso.size()}
                     </h:panelGroup>
                 </i> <span></span>
             </a>
@@ -26,7 +26,7 @@
 
 
             <ul style="margin-left:-230px;">
-                <c:forEach var="comunicacao" items="#{sessaoAtualSBWP.ultimasNotificacoesMenuAguardandoRespostaUsuarioSessao}" >
+                <c:forEach var="comunicacao" items="#{sessaoAtualSBWP.ultimasComuniccoesAguardandoRespostaUsuarioSesso}" >
                     <span>
                         <h:form>
                             <li>
@@ -41,7 +41,7 @@
                                     <p:commandLink  onclick="responderConversa(#{comunicacao.codigoSelo})">
                                         <i class="#{comunicacao.tipoComunicacao.icone} Fs20 Blue Fleft" style="margin: 5px; position: absolute"> </i>
                                         <span class="FontAdamantiumBold Blue"> <h:outputLabel escape="false" style="margin-left: 28px" value="#{comunicacao.assunto}" /> </span><br />
-                                        <h:panelGroup layout="span" styleClass="Fs12" rendered="#{!comunicacao.assuntoIgualMensagem}" >  <h:outputLabel  escape="false" value="#{comunicacao.mensagem} #{comunicacao.assuntoIgualMensagem}" /></h:panelGroup>
+                                        <span class="Fs12"><h:outputLabel escape="false" value="#{comunicacao.mensagem}" /></span>
                                         <p:ajax event="dialogReturn" listener="#{pgUtilComunicacao.metodoRespostaModal}"/>
                                     </p:commandLink>
                                 </h:panelGroup>
@@ -53,9 +53,7 @@
                 <li> <h:form><p:commandLink hreflang="#" rendered="#{sessaoAtualSBWP.comunicacaoAguardandoRespostaUsuarioSesso.size()>5}"  > ... mais (#{sessaoAtualSBWP.comunicacaoAguardandoRespostaUsuarioSesso.size()-7})</p:commandLink> </h:form></li>
             </ul>
         </li>
-
     </cc:implementation>
-
 </ui:composition>
 
 

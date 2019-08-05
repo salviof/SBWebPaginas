@@ -2,17 +2,51 @@
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 
-    xmlns:p="http://primefaces.org/ui">
-    <ui:decorate template="#{layout.xhtmlJsfCaminhoRelativo}">
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:decorate template="#{layoutsComponenteSB.layoutCampo.semLabel.xhtmlJsfCaminhoRelativo}">
         <ui:define name="input">
 
+            <h:panelGroup style="position: relative; width: 298px; height: 200px;  " id="imagemmedio" styleClass="FontAdamantiumBold OrganizadorContainer" >
+                <h:panelGroup rendered="#{registro.umCampoArquivoEntidade and registro.comoArquivoDeEntidade.existeArquivo}" >
 
-            <p:inputText/>
+                    <div style="position: relative; width: 100%; display: flex;" class="">
+                        <p:graphicImage url="#{registro.objetoDoAtributo.imgMedia}"
+                                        style="max-width: 298px; margin: auto; max-height: 200px;"
+                                        cache="false"
 
+                                        />
 
+                    </div>
+                </h:panelGroup>
 
+                <p:inplace label="Alterar  #{registro.label} #{registro.comoArquivoDeEntidade.existeArquivo}" effect="slide"
+                           rendered="#{true or !desabilitarEdicao}"
+                           styleClass="FontAdamantiumBold ui-state-highlight" style="
+                           background-color: #F3F5F7;
+                           padding: 3px;
+                           border: solid 1px #D1D3D4 !important;
+                           border-radius: 3px;
 
-            </pe:ckEditor>
+                           position: absolute;top:50%;    transform: translateY(-50%); " >
+
+                    <p:fileUpload  allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
+                                   fileUploadListener="#{pgServicoImagensSB.atualizarImagemTamanhoMedio}"
+                                   multiple="false"
+                                   auto="true"
+                                   sizeLimit="502400"
+                                   uploadLabel="Enviar Arquivo"
+                                   invalidSizeMessage="O Tamanho máximo é 5 MB"
+                                   label="Escolher (200px Altura por 195px Largura)"
+                                   update="@parent:@parent"
+                                   >
+                        <f:attribute name="entidadeIMG" value="#{registro.objetoDoAtributo}" />
+
+                    </p:fileUpload>
+
+                </p:inplace>
+            </h:panelGroup>
         </ui:define>
     </ui:decorate>
 </ui:composition>

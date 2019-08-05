@@ -119,10 +119,11 @@
 
 
         </h:panelGrid>
-        <p:messages for="#{pgUtil.getNomeIdComponenteInput(component)}"
+        <p:messages for="#{pgUtil.getNomeIdComponenteInput(cc)}"
 
                     escape="false"
-                    autoUpdate="false" rendered="#{!cc.attrs.desabilitarEdicao}" />
+                    autoUpdate="false"
+                    rendered="#{!cc.attrs.desabilitarEdicao}" />
 
     </cc:implementation>
 

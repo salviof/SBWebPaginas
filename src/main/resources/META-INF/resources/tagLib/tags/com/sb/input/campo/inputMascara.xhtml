@@ -20,7 +20,7 @@
                 rendered="#{!desabilitarEdicao}"
                 required="#{obrigatorio}"
                 value="#{valor}"
-
+                validatorMessage="O campo #{label} não é um valor válido"
                 requiredMessage="O campo #{label} não foi informado! "
                 autoClear="false"
                 validator="org.super_bits.view.validadores.generico"
@@ -32,6 +32,9 @@
                 <f:passThroughAttribute name="campoInstanciado" value="#{registro}" />
                 <p:clientValidator/>
 
+                <c:if test="#{registro.temValidacaoRegex}">
+                    <f:validateRegex pattern="#{regex}"/>
+                </c:if>
 
 
 

@@ -154,7 +154,16 @@
             <sb:inputSBHtmlTemplate />
         </ui:fragment>
 
+        <ui:fragment  rendered="#{xhtmlINPUT==compSBCompVisualInputs.imagem_pequena_Entidade.xhtmlJsfCaminhoRelativo}"  >
+            <sb:inputSBImagemPequenaDeDeEntidade />
+        </ui:fragment>
+        <ui:fragment  rendered="#{xhtmlINPUT==compSBCompVisualInputs.imagem_medio_de_Entidade.xhtmlJsfCaminhoRelativo}"  >
+            <sb:inputSBImagemMedDeEntidade />
+        </ui:fragment>
+        <ui:fragment  rendered="#{xhtmlINPUT==compSBCompVisualInputs.imagem_grande_de_Entidade.xhtmlJsfCaminhoRelativo}"  >
+            <sb:inputSBImagemGrandeDeEntidade />
 
+        </ui:fragment>
 
 
     </h:panelGroup>

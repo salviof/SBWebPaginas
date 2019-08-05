@@ -9,6 +9,7 @@ import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringValidador;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.WS.oauth.MapaInfoOauthEmAndamento;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.WS.oauth.Oath2Conexao;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.WS.oauth.TipoClienteOauth;
+import com.super_bits.modulosSB.webPaginas.ConfigGeral.SBWebPaginas;
 import com.super_bits.modulosSB.webPaginas.controller.servletes.ServletArquivosSBWPGenerico;
 import com.super_bits.modulosSB.webPaginas.controller.servletes.urls.UrlInterpretada;
 import com.super_bits.modulosSB.webPaginas.controller.servletes.urls.UtilFabUrlServlet;
@@ -26,6 +27,9 @@ import org.coletivojava.fw.api.tratamentoErros.FabErro;
  * @author SalvioF
  */
 public class ServletRecepcaoOauth extends ServletArquivosSBWPGenerico implements Serializable {
+
+    public static final String NOME_URL_SERVLET = "solicitacaoAuth2Recept";
+    public static final String URL_SERVLET = SBWebPaginas.getSiteURL() + "/" + NOME_URL_SERVLET;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
