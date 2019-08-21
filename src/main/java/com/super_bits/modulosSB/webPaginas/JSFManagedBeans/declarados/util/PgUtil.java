@@ -1390,7 +1390,6 @@ public class PgUtil implements Serializable {
      * @return
      * @deprecated Utilize PgUtilFormatar
      */
-    @Deprecated
     public String gerarMoeda(Double pValor) {
 
         return UtilSBCoreNumeros.converterMoeda(pValor);
@@ -1401,10 +1400,10 @@ public class PgUtil implements Serializable {
      * @param pValor
      * @return Utilize PgUtilFormatar
      */
-    public String gerarMoeda(long pValor) {
-        return UtilSBCoreNumeros.converterMoeda(pValor);
-    }
-
+    //@Deprecated
+    //public String gerarMoeda(long pValor) {
+    //    return UtilSBCoreNumeros.converterMoeda(pValor);
+    //}
     public void preencherAleatorioBeanSelecionado() {
         try {
             if (paginaAtual.getInfoPagina().isPaginaDeGestao()) {

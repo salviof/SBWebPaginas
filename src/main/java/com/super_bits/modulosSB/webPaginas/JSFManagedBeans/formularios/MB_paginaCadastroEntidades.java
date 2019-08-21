@@ -701,7 +701,7 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
                         setEntidadesListadas(new ConsultaDinamicaDeEntidade(bean.getClass(), getEMPagina()).addCondicaoPositivo(bean.getNomeCampo(FabTipoAtributoObjeto.REG_ATIVO_INATIVO)).resultadoRegistros());
 
                     } else {
-                        setEntidadesListadas(UtilSBPersistencia.getListaTodos(getAcaoVinculada().getClasseRelacionada(), getEMPagina()));
+                        setEntidadesListadas(UtilSBPersistencia.getListaTodos(getAcaoSelecionada().getComoAcaoDeEntidade().getClasseRelacionada(), getEMPagina()));
                     }
                 } catch (Throwable t) {
                     setEntidadesListadas(UtilSBPersistencia.getListaTodos(getAcaoVinculada().getClasseRelacionada(), getEMPagina()));

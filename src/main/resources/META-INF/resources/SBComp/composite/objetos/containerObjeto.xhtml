@@ -14,7 +14,7 @@
     </cc:interface>
     <!-- IMPLEMENTATION -->
     <cc:implementation>
-
+        #{cc.attrs.container.caminhoRelativo}
         <h:panelGroup styleClass="#{cc.attrs.container.classeContainer}" rendered="#{!cc.attrs.container.temVersaoMobile and !sessaoAtualSBWP.telaUsuario.umMobile}" >
             <ui:include src="#{cc.attrs.container.caminhoRelativo}" />
         </h:panelGroup>

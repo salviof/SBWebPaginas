@@ -7,16 +7,15 @@ package com.super_bits.modulosSB.webPaginas.JSFBeans.PrimeFacesBeanModel;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campo.seletores.seletorUnicoObjeto.B_ObjetoDeUmaListaAbs;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campoInstanciado.ItfCampoInstanciado;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfBeanSimplesSomenteLeitura;
-import java.util.List;
 
 /**
  *
  * @author desenvolvedor
  * @param <T>
  */
-public class BP_autoCompleteEPesquisa<T extends ItfBeanSimplesSomenteLeitura> extends B_ObjetoDeUmaListaAbs<T> {
+public class BP_autoCompleteEPesquisaSemPersistencia<T extends ItfBeanSimplesSomenteLeitura> extends B_ObjetoDeUmaListaAbs<T> {
 
-    public BP_autoCompleteEPesquisa(ItfCampoInstanciado pCampoInstanciado) {
+    public BP_autoCompleteEPesquisaSemPersistencia(ItfCampoInstanciado pCampoInstanciado) {
         super(pCampoInstanciado);
     }
 
@@ -27,7 +26,6 @@ public class BP_autoCompleteEPesquisa<T extends ItfBeanSimplesSomenteLeitura> ex
 
     @Override
     protected void carregaOrigemFromDataBase() {
-        origem.clear();
         campoInstanciado.getListaDeOpcoes().forEach(origem::add);
     }
 

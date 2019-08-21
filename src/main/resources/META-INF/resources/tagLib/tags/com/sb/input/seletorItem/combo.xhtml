@@ -24,7 +24,7 @@
                                  styleClass="autoCompleteResponsivo #{componente.classeCSS}"
                                  converter="conversorGenerico"
                                  var="it"
-
+                                 validator="org.super_bits.view.validadores.beanSimples"
                                  placeholder="TESTE"
                                  converterMessage="Erro ao converter objeto" >
 
@@ -76,9 +76,11 @@
 
 
             </h:panelGrid>
+            <h:panelGroup rendered="#{desabilitarEdicao}" >
 
-            <p:outputLabel value="#{valor.nome}" rendered="#{desabilitarEdicao}"  />
+                <p:outputLabel value="#{valor.nome}" rendered="#{desabilitarEdicao}"  />
 
+            </h:panelGroup>
 
         </ui:define>
     </ui:decorate>

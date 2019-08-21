@@ -144,6 +144,7 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
 
     public B_Pagina() {
         tipoFormulario = FabTipoFormulario.PAGINA_SIMPLES;
+        UtilSBCoreReflexao.instanciarListas(this);
     }
 
     private boolean isPaginaEmProcessoDeAberturaInicial() {
@@ -734,7 +735,6 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
             aplicarAnotacoes();
             titulo = defineTitulo();
             descricao = defineDescricao();
-            UtilSBCoreReflexao.instanciarListas(this);
 
             if (SBCore.getEstadoAPP() == SBCore.ESTADO_APP.DESENVOLVIMENTO) {
                 UtillSBWPReflexoesWebpaginas.instanciarInjecoes(this);

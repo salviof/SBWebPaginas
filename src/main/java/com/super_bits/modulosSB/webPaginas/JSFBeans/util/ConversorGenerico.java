@@ -55,6 +55,11 @@ public class ConversorGenerico extends ConversorSB {
                         } else {
                             if (campoInstanciado.isUmValorComLista()) {
                                 valor = campoInstanciado.getComoCampoSeltorItem().getSeletor().getOrigem().stream().filter(item -> item.toString().equals(value)).findFirst();
+                                if (valor == null || !valor.isPresent()) {
+                                    campoInstanciado.getComoCampoSeltorItem().getSeletor().limparSelecao();
+                                    campoInstanciado.getComoCampoSeltorItem().getSeletor().reloadOrigem();
+                                    valor = campoInstanciado.getComoCampoSeltorItem().getSeletor().getOrigem().stream().filter(item -> item.toString().equals(value)).findFirst();
+                                }
                             }
                         }
 
@@ -65,6 +70,7 @@ public class ConversorGenerico extends ConversorSB {
                                 /// TODO buscar autocomplete no  objeto UIComponent
                                 return null;
                             } else {
+
                                 throw new UnsupportedOperationException("O Conversor de string para BeanSimples falhou mizeravelmente" + "na lista origem existiam " + campoInstanciado.getComoCampoSeltorItem().getSeletor().getOrigem().size());
                             }
                         }

@@ -1,0 +1,20 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:cc="http://java.sun.com/jsf/composite"
+
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <!-- INTERFACE -->
+    <cc:interface>
+        <cc:attribute name="item" type="com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.reflexao.ItfBeanDeclarado" />
+
+
+
+    </cc:interface>
+    <!-- IMPLEMENTATION -->
+    <cc:implementation>
+
+        <ui:include src="#{cc.attrs.item.infoBean.formularioLab}" />
+
+
+    </cc:implementation>
+
+</ui:composition>
