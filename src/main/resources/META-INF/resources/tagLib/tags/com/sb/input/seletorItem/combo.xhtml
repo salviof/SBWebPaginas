@@ -25,9 +25,11 @@
                                  converter="conversorGenerico"
                                  var="it"
                                  validator="org.super_bits.view.validadores.beanSimples"
-                                 placeholder="TESTE"
-                                 converterMessage="Erro ao converter objeto" >
 
+                                 converterMessage="Erro ao converter objeto" >
+                    <f:passThroughAttribute name="caminhoCampo" value="#{registro.nomeCompostoIdentificador}" />
+                    <f:passThroughAttribute name="dominio" value="#{registro.nomeClasseOrigemAtributo}" />
+                    <f:passThroughAttribute name="campoInstanciado" value="#{registro}" />
                     <f:selectItem
                         itemLabel="Nenhum Registro selecionado" noSelectionOption="true" value="#{null}" />
 
