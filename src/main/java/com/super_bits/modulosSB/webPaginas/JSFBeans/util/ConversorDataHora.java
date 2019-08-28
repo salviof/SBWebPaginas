@@ -4,7 +4,7 @@
  */
 package com.super_bits.modulosSB.webPaginas.JSFBeans.util;
 
-import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreDataHora;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -17,21 +17,31 @@ import javax.faces.convert.FacesConverter;
 @FacesConverter(value = "conversorDataHora")
 public class ConversorDataHora extends ConversorSB {
 
+    private static final SimpleDateFormat formatador = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+
     @Override
     public Object getAsObject(FacesContext context, UIComponent component, String value) {
 
         try {
-            return UtilSBCoreDataHora.converteStringDD_MM_YYYYEmData(value);
+            if (value == null) {
+                return null;
+            }
+            if (value.contains("_")) {
+                // Bug primefaces
+                return new Date();
+            }
+            return formatador.parse(value);
 
         } catch (Throwable t) {
-            return new Date();
+            return null;
         }
 
     }
 
     @Override
     public String getAsString(FacesContext context, UIComponent component, Object value) {
-        return value.toString();
+        return formatador.format(value);
+
     }
 
 }

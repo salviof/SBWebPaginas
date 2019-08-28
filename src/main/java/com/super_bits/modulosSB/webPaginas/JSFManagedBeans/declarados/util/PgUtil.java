@@ -441,27 +441,12 @@ public class PgUtil implements Serializable {
             if (comp == null) {
                 return null;
             }
-            System.out.println(comp.getId());
-            if (comp instanceof HtmlPanelGroup) {
-                HtmlPanelGroup compPainel = (HtmlPanelGroup) comp;
-                System.out.println(compPainel.getId());
-                System.out.println(compPainel.getClientId());
-
-            }
-            if (comp.getNamingContainer().getClass().getSimpleName().equals("InputGenerico")) {
-                comp.getAttributes().keySet().forEach(key -> {
-                    System.out.println(key);
-                    System.out.println(comp.getAttributes().get(key));
-                });
-
-                return getIdInputSBComponentePai(comp.getParent());
+            if (comp.getClientId().endsWith(LayoutTelaAreaConhecida.AREA_INPUT_GENERICO)) {
+                return comp.getClientId();
             } else {
-                comp.getAttributes().keySet().forEach(key -> {
-                    System.out.println(key);
-                    System.out.println(comp.getAttributes().get(key));
-                });
                 return getIdInputSBComponentePai(comp.getParent());
             }
+
         } catch (Throwable t) {
             return null;
         }
