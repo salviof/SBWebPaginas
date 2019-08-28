@@ -55,7 +55,7 @@ public class CicloDeVidaPadraoJsf implements PhaseListener {
             if (liberado) {
                 timer = new Timer();
                 timer.purge();
-                timer.schedule(new RemindTask(), 2 * 800);
+                timer.schedule(new RemindTask(), 2 * 1000);
                 liberado = false;
                 return true;
             } else {

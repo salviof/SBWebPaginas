@@ -540,6 +540,35 @@ public class PgUtil implements Serializable {
         return getNomeIdComponenteInput(componente, true);
     }
 
+    public UIComponent getComponentInputFormPadraoChildRecursivo(UIComponent componente) {
+        if (componente.getClientId().endsWith(LayoutTelaAreaConhecida.AREA_INPUT_GENERICO)) {
+            return componente;
+        }
+        for (Iterator iterator = componente.getFacetsAndChildren(); iterator.hasNext();) {
+            UIComponent comp = (UIComponent) iterator.next();
+            if (comp.getClientId().endsWith(LayoutTelaAreaConhecida.AREA_INPUT_GENERICO)) {
+                return comp;
+            } else {
+                UIComponent compRec = getComponentInputFormPadraoChildRecursivo(comp);
+                if (compRec != null) {
+                    return compRec;
+                }
+            }
+        }
+        return null;
+    }
+
+    public String getNomeIdComponenteInputParaCompositeComp(UIComponent componente) {
+
+        UIComponent componenteInput = componente.findComponent(LayoutTelaAreaConhecida.AREA_INPUT_GENERICO);
+        for (UIComponent cp : componenteInput.getChildren()) {
+            if (cp.isRendered()) {
+                return getNomeIdComponenteInput(cp, false);
+            }
+        }
+        return getNomeIdComponenteInput(componente, false);
+    }
+
     private UIComponent getComponenteRecursivoIntput(UIComponent componente) {
 
         if (componente == null) {
@@ -559,8 +588,12 @@ public class PgUtil implements Serializable {
                 if (isComponentDeInput(comp)) {
                     return comp;
                 } else {
-                    if (compEncontrado == null) {
+                    if (comp != null) {
                         compEncontrado = getComponenteRecursivoIntput(comp);
+                        if (compEncontrado != null) {
+                            return compEncontrado;
+                        }
+
                     } else {
                         return compEncontrado;
                     }

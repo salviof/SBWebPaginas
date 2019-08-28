@@ -33,7 +33,7 @@ public class ServletArquivoEstaticoUrlPadrao extends ServletArquivosSBWPGenerico
         System.out.println("Abrindo Recuroso Local:" + caminhoLocal);
         String nomeArquivo = UtilSBCoreStringNomeArquivosEDiretorios.getNomeArquivo(caminhoRecurso);
         System.out.println(caminhoLocal);
-
+        resp.addHeader("Cache-Control", "max-age=2592000");
         abrirArquivo(caminhoLocal, nomeArquivo, requisicao, resp, FabTipoArquivoConhecido.getTipoArquivoByNomeArquivo(nomeArquivo));
 
     }

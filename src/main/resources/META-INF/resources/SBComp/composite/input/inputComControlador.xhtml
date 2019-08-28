@@ -4,7 +4,8 @@
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-                xmlns:f="http://xmlns.jcp.org/jsf/core">
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <!-- INTERFACE -->
     <cc:interface>
         <cc:attribute name="registro"
@@ -42,89 +43,93 @@
     </cc:interface>
     <!-- IMPLEMENTATION -->
     <cc:implementation>
+        <h:panelGroup  id="controlador">
+            <h:panelGrid columns="1"  class="InputSBSuperior InputControlador OrganizadorContainer"
+                         rowClasses=""
 
-        <h:panelGrid columns="1"  class="InputSBSuperior InputControlador OrganizadorContainer"
-                     rowClasses=""
+                         >
 
-                     >
+                <p:outputLabel  rendered="#{pgUtil.isNuloOuEmbranco(cc.attrs.label)}" value="#{cc.attrs.label}"
+                                for=""  >
+                    <p:tooltip  rendered="#{registro.temDescricao}"
+                                for="@parent"
+                                value="#{registro.descricao}"
+                                />
+                </p:outputLabel>
 
-            <p:outputLabel  rendered="#{pgUtil.isNuloOuEmbranco(cc.attrs.label)}" value="#{cc.attrs.label}"
-                            for=""  >
-                <p:tooltip  rendered="#{registro.temDescricao}"
-                            for="@parent"
-                            value="#{registro.descricao}"
+                <h:panelGrid columns="3" styleClass="OrganizadorContainer" >
+
+
+                    <h:panelGroup   >
+
+                        <p:commandLink actionListener="#{cc.attrs.metodoReduzir}"
+                                       update="#{pgUtil.getNomeIdPFieldSetPai(component)}"
+                                       rendered="#{!cc.attrs.desabilitarEdicao}"
+                                       partialSubmit="true"
+                                       styleClass="Fright"
+                                       process="@this">
+
+                            <f:passThroughAttribute name="tabindex" value="-1"/>
+                            <button type="button" class="btn btn-danger btn-number"
+                                    tabindex="-1" data-type="minus" data-field="quant[2]">
+                                <span tabindex="-1" class="glyphicon glyphicon-minus"></span>
+                            </button>
+                        </p:commandLink>
+                    </h:panelGroup>
+                    <h:panelGroup  >
+                        <sb:inputSB
+                            atualizarFormOnChange="false"
+                            atualizarGrupoOnChange="false"
+                            obrigatorio="#{cc.attrs.registro.obrigatorio}"
+                            registro="#{cc.attrs.registro}"
+                            desabilitarEdicao="#{cc.attrs.desabilitarEdicao}"
+                            layoutCampo="#{layoutsComponenteSB.layoutCampo.semLabel}"
+                            possuiIDOnChange="true"
+                            possuiMetodoOnChange="#{pgUtil.isAtributoPreenchidoComExpressao(cc,'metodoExecutarAoAlterarValor')}"
+                            layoutCampoEspecial="#{cc.attrs.visualizacaoEspecial}"
+                            label="#{cc.attrs.label}:"
+                            opcoes="#{cc.attrs.registro.listaDeOpcoes}"
+                            idAtualizarOnChange="#{cc.attrs.idAtualizarOnChange}"
+                            metodoOnChange="#{cc.attrs.metodoExecutarAoAlterarValor}"
+
                             />
-            </p:outputLabel>
-
-            <h:panelGrid columns="3" styleClass="OrganizadorContainer" >
 
 
-                <h:panelGroup   >
 
-                    <p:commandLink actionListener="#{cc.attrs.metodoReduzir}"
-                                   update="#{pgUtil.getNomeIdPFieldSetPai(component)}"
-                                   rendered="#{!cc.attrs.desabilitarEdicao}"
-                                   partialSubmit="true"
-                                   styleClass="Fright"
-                                   process="@this">
+                    </h:panelGroup>
+                    <h:panelGroup rendered="#{!cc.attrs.desabilitarEdicao}" >
 
-                        <f:passThroughAttribute name="tabindex" value="-1"/>
-                        <button type="button" class="btn btn-danger btn-number"
-                                tabindex="-1" data-type="minus" data-field="quant[2]">
-                            <span tabindex="-1" class="glyphicon glyphicon-minus"></span>
-                        </button>
-                    </p:commandLink>
-                </h:panelGroup>
-                <h:panelGroup  >
-                    <sb:inputSB
-                        atualizarFormOnChange="false"
-                        atualizarGrupoOnChange="false"
-                        obrigatorio="#{cc.attrs.registro.obrigatorio}"
-                        registro="#{cc.attrs.registro}"
-                        desabilitarEdicao="#{cc.attrs.desabilitarEdicao}"
-                        layoutCampo="#{layoutsComponenteSB.layoutCampo.semLabel}"
-                        possuiIDOnChange="true"
-                        possuiMetodoOnChange="#{pgUtil.isAtributoPreenchidoComExpressao(cc,'metodoExecutarAoAlterarValor')}"
-                        layoutCampoEspecial="#{cc.attrs.visualizacaoEspecial}"
-                        label="#{cc.attrs.label}:"
-                        opcoes="#{cc.attrs.registro.listaDeOpcoes}"
-                        idAtualizarOnChange="#{cc.attrs.idAtualizarOnChange}"
-                        metodoOnChange="#{cc.attrs.metodoExecutarAoAlterarValor}"
+                        <p:commandLink actionListener="#{cc.attrs.metodoAdicionar}"
+                                       update="#{pgUtil.getNomeIdPFieldSetPai(component)}"
 
-                        />
+                                       partialSubmit="true"
+                                       process="@this"
 
-                </h:panelGroup>
-                <h:panelGroup rendered="#{!cc.attrs.desabilitarEdicao}" >
+                                       >
+                            <f:passThroughAttribute name="tabindex" value="-1"/>
+                            <button type="button" class="btn btn-success btn-number" data-type="plus" data-field="quant[2]"
+                                    tabindex="-1"
+                                    >
 
-                    <p:commandLink actionListener="#{cc.attrs.metodoAdicionar}"
-                                   update="#{pgUtil.getNomeIdPFieldSetPai(component)}"
+                                <span tabindex="-1" class="glyphicon glyphicon-plus"></span>
+                            </button>
+                        </p:commandLink>
 
-                                   partialSubmit="true"
-                                   process="@this"
+                    </h:panelGroup>
 
-                                   >
-                        <f:passThroughAttribute name="tabindex" value="-1"/>
-                        <button type="button" class="btn btn-success btn-number" data-type="plus" data-field="quant[2]"
-                                tabindex="-1"
-                                >
+                </h:panelGrid>
 
-                            <span tabindex="-1" class="glyphicon glyphicon-plus"></span>
-                        </button>
-                    </p:commandLink>
 
-                </h:panelGroup>
 
             </h:panelGrid>
 
+            <p:messages for="#{pgUtil.getNomeIdComponenteInputParaCompositeComp(cc)}"
+                        redisplay="false"
+                        escape="false"
+                        autoUpdate="true"
+                        rendered="#{!cc.attrs.desabilitarEdicao}" />
 
-
-        </h:panelGrid>
-        <p:messages for="#{pgUtil.getNomeIdComponenteInput(cc)}"
-                    redisplay="false"
-                    escape="false"
-                    autoUpdate="false"
-                    rendered="#{!cc.attrs.desabilitarEdicao}" />
-
+        </h:panelGroup>
     </cc:implementation>
 
 </ui:composition>

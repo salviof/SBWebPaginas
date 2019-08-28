@@ -157,17 +157,112 @@ function modificarIntputEclicar(idBotao, idInputEnvio, valor) {
 }
 
 function copiarValoresCKEditor(idOrigem, idDestino) {
+    // console.log("etapa Cópia");
     var conteudo = CKEDITOR.instances[idOrigem].getData();
     document.getElementById(idDestino).value = conteudo;
+
 }
 
 function adicionarChamadaComDelay(idElemento, metodo) {
 
 }
 
+function mesclarOnChangeComDelayCkEditor(idElementoDigitacao, idElementoPersistente) {
+    try {
+        var timeout = null;
+        var elemento = document.getElementById(idElementoPersistente);
+        mesclarOnChangeComDelay(idElementoPersistente);
+        // console.log("etapa1 pesquisa de objetos");
+        // console.log('elemento escondido:');
+        // console.log(elemento);
+        // console.log("elemento replace CK=");
+        // console.log(idElementoDigitacao);
+        editorCK = CKEDITOR.instances[idElementoDigitacao];
+        editorCK.elemento = elemento;
+        //  console.log("CK instanciado:");
+        //   console.log(editorCK);
+        //  console.log("CK");
+
+        //    console.log("etapa2 definição dos novos metodos ");
+
+        editorCK.setData(elemento.value);
+        if (elemento.onchange) {
+            //     console.log("Definindo onchange do elemento, com timeout do CKEDITOR");
+            editorCK.elemento.metodoOnchangeComDelay = window.elemento.onchange;
+            editorCK.elemento.ultimapesquisa = editorCK.getData();
+
+        }
+        if (elemento.onchange) {
+
+            //  console.log("Definindo onkey do CKEDITOR");
+            editorCK.on('key', function (e) {
+
+                try {
+                    //  console.log("entrou on key");
+                    if (editorCK.getData() === this.elemento.ultimapesquisa) {
+                        if (this.elemento.idTimeout) {
+                            //   console.log("timoutEmExecucao");
+                            //    console.log(this.id);
+                            //    console.log(this.getData());
+                            //    console.log('data');
+
+                        }
+                    } else {
+                        //      console.log("keyup=" + this.elemento.ultimapesquisa + "asdasd");
+
+                        //    console.log(this.elemento.metodoOnchangeComDelay);
+
+
+                        // Clear the timeout if it has already been set.
+                        // This will prevent the previous task from executing
+                        // if it has been less than <MILLISECONDS>
+                        if (editorCK.elemento.idTimeout) {
+                            //      console.log("LimpouTimeout");
+                            clearTimeout(this.elemento.idTimeout);
+                        }
+                        // console.log("negativo");
+                        // Make a new timeout set to go off in 800ms
+                        editorCK.elemento.ultimapesquisa = editorCK.getData();
+                        this.elemento.idTimeout = setTimeout(function () {
+                            try {
+                                // console.log("foi");
+
+                                // console.log('data');
+
+                                setTimeout(function () {
+                                    window.elemento.metodoOnchangeComDelay();
+
+                                }, 1000);
+
+                            } catch (t) {
+                                //  console.log("Erro cabuloso");
+                                //   console.log(t);
+                            }
+                        }, 800);
+                        // console.log('IDTIMEOUT:');
+                        // console.log(timeout);
+                    }
+                } catch (t) {
+                    //    console.log("Erro");
+                    //    console.log(t);
+                }
+
+            });
+            elemento.onchange = null;
+        }
+
+
+    } catch (t) {
+
+    }
+}
+
+
 function mesclarOnChangeComDelay(idElementoDigitacao) {
     try {
         elemento = document.getElementById(idElementoDigitacao);
+        console.log(elemento);
+
         var timeout = null;
         if (elemento.onchange) {
             elemento.metodoOnchangeComDelay = elemento.onchange;
@@ -184,6 +279,7 @@ function mesclarOnChangeComDelay(idElementoDigitacao) {
                         // This will prevent the previous task from executing
                         // if it has been less than <MILLISECONDS>
                         clearTimeout(timeout);
+
                         // Make a new timeout set to go off in 800ms
                         elemento.ultimapesquisa = elemento.value;
                         timeout = setTimeout(function () {

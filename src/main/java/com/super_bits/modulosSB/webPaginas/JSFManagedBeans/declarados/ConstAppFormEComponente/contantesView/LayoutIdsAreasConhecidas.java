@@ -53,4 +53,7 @@ public class LayoutIdsAreasConhecidas extends LayoutTelaAreaConhecida implements
         return AREA_CARRINHO_COMPRA;
     }
 
+    public String getAREA_INPUT_GENERICO() {
+        return AREA_INPUT_GENERICO;
+    }
 }
