@@ -33,7 +33,6 @@ import com.super_bits.modulosSB.webPaginas.JSFBeans.temas.Tema;
 import com.super_bits.modulosSB.webPaginas.JSFBeans.util.Cores;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.declarados.webSite.InfoWebApp;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.interfaces.ItfB_Pagina;
-import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.interfaces.ItfModalDados;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.interfaces.ItfPaginaAtual;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.interfaces.ItfPaginaGerenciarEntidade;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.reflexao.anotacoes.beans.InfoMB_Acao;
@@ -61,7 +60,6 @@ import javax.faces.component.UINamingContainer;
 import javax.faces.component.html.HtmlPanelGroup;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
-import javax.faces.view.facelets.TagAttribute;
 import javax.inject.Inject;
 import javax.inject.Named;
 import org.coletivojava.fw.api.tratamentoErros.FabErro;
@@ -319,13 +317,67 @@ public class PgUtil implements Serializable {
         return gerarCaminhoCompletoIDParaJavaScript(pId);
     }
 
-    public String gerarCaminhoCompletoIDParaJavaScript(String pId) {
-        if (pId.contains(":")) {
-            return pId;
+    /**
+     * TODO: remover todos os metodos auxiliares do inputSB.xmhl para classe
+     * relacionada ao um render gernérico
+     *
+     * @param pId
+     * @param pComponente
+     * @return
+     */
+    public String gerarCaminhoCompletoIDRelativoSBInput(String pId, UIComponent pComponente) {
+        try {
+
+            if (pId.contains("@this")) {
+                String idAtualizaca = getIdInputSBComponentePai(pComponente);
+                if (pId.equals("@this")) {
+                    //String idinput = getNomeIdComponenteInput(componenteAdequado);
+                    return idAtualizaca;
+                } else {
+                    pId = pId.replace("@this", idAtualizaca);
+                }
+
+            }
+            return gerarCaminhoCompletoIDParaJavaScript(pId);
+        } catch (Throwable t) {
+            return null;
         }
+    }
+
+    /**
+     *
+     * TODO: remover todos os metodos auxiliares do input.xmhl para classe
+     * relacionada ao um render gernérico
+     *
+     * @param pid
+     * @param pCpInst
+     * @return
+     */
+    public String gerarIdAtualizacaoPadraoInput(String pid, ItfCampoInstanciado pCpInst) {
+        if (pCpInst.isTemValidadacaoLogica() || pCpInst.getFabricaTipoAtributo().isPossuiValidacaoLogicaNativa()) {
+            if (UtilSBCoreStringValidador.isNuloOuEmbranco(pid)) {
+                return "@this";
+            }
+            if (!pid.contains("@this")) {
+                return pid + " @this";
+            }
+
+        } else {
+            return pid;
+        }
+        return pid;
+    }
+
+    public String gerarCaminhoCompletoIDParaJavaScript(String pId) {
         if (UtilSBCoreStringValidador.isNuloOuEmbranco(pId)) {
             return pId;
         }
+        if (pId.contains(":")) {
+            if (!pId.contains(" ")) {
+                return pId;
+            }
+        }
+
         String caminhosCOmpletos = "";
         int i = 0;
         String[] caminhosEnviados = pId.split(" ");
@@ -337,6 +389,7 @@ public class PgUtil implements Serializable {
             if (!UtilSBCoreStringValidador.isNuloOuEmbranco(caminho)) {
 
                 if (caminho.contains("@") || caminho.contains(":")) {
+
                     caminhosCOmpletos += caminho + separadorCaminhosEncontradors;
                 } else {
                     caminhosCOmpletos += UtilSBWP_JSFTools.getIDSCaminhoAbsoluto(pId).substring(1) + separadorCaminhosEncontradors;
@@ -433,6 +486,22 @@ public class PgUtil implements Serializable {
             return pId;
         } catch (Throwable t) {
             return "Aconteceu Um Erro";
+        }
+    }
+
+    public String getIdInputPai(UIComponent comp) {
+        try {
+            if (comp == null) {
+                return null;
+            }
+            if (isComponentDeInput(comp)) {
+                return comp.getClientId();
+            } else {
+                return getIdInputSBComponentePai(comp.getParent());
+            }
+
+        } catch (Throwable t) {
+            return null;
         }
     }
 

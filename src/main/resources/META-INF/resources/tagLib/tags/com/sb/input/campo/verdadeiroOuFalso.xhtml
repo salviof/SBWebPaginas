@@ -53,11 +53,15 @@
                 <c:if test="#{possuiIDOnChange}" >
                     <p:ajax
                         rendered="#{possuiIDOnChange}"
-                        global="true"
+                        process="#{pgUtil.getIdInputSBComponentePai(component)}"
                         event="valueChange"
-                        listener="#{pgUtil.atualizaTelaPorID(idAtualizarOnChange)}" />
+                        update="#{idAtualizarOnChange}"
+                        onstart="bloquearArea('#{idAtualizarOnChange}')"
+                        oncomplete="desbloquearArea('#{idAtualizarOnChange}')"
+                        />
 
                 </c:if>
+
 
             </p:selectBooleanButton>
 

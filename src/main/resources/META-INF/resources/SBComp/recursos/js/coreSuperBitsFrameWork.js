@@ -305,7 +305,9 @@ function mesclarOnChangeComDelay(idElementoDigitacao) {
 function focarComSelacaoAposAjax() {
     try {
         contemClientID = false;
+        console.log("O ativo é " + document.activeElement.id);
         for (i = 0; i < arguments.length; i++) {
+            console.log("Analizando:" + arguments[i]);
             if (document.activeElement.id.includes(arguments[i])) {
                 contemClientID = true;
             }
@@ -373,12 +375,7 @@ function initBotaoMenuHorizontal(menuhorizontalresponsivo) {
     var tamanhoVisivel = $(menuhorizontalresponsivo).parent().width();
     var pd = (itensQtd * 22);
     var scrollMaximo = (itensQtd * itemSize);
-
     var scrollMaximoVisivel = scrollMaximo - tamanhoVisivel;
-
-
-
-
     if (scrollMaximo <= tamanhoVisivel) {
         var botaoScrollEsquerda = $(menuhorizontalresponsivo).parent().find('.botao-lateral-esquerda-menu-horizontal-responsivo');
         var botaoScrollDireita = $(menuhorizontalresponsivo).parent().find('.botao-lateral-direita-menu-horizontal-responsivo');
@@ -404,8 +401,6 @@ function initBotaoMenuHorizontal(menuhorizontalresponsivo) {
 }
 function acoesBotaoMenuHorizontal(menuhorizontalresponsivo, parafrente, semefeito) {
     var etapaPosicaoScroolAtual = $(menuhorizontalresponsivo).parent().data("posicao");
-
-
     if (etapaPosicaoScroolAtual == null) {
         etapaPosicaoScroolAtual = 1;
         $(menuhorizontalresponsivo).parent().data("posicao", etapaPosicaoScroolAtual);
@@ -420,24 +415,16 @@ function acoesBotaoMenuHorizontal(menuhorizontalresponsivo, parafrente, semefeit
             }
             $(menuhorizontalresponsivo).parent().data("posicao", etapaPosicaoScroolAtual);
         }
-
     }
-
-
-
-
     var pixelScrolAtual = $(menuhorizontalresponsivo).scrollLeft();
     var tamanhoVisivel = $(menuhorizontalresponsivo).parent().width();
     var itensQtd = $(menuhorizontalresponsivo).parent().find('.item-menu-horizontal-responsivo').length;
     var itemSize = $(menuhorizontalresponsivo).parent().find('.item-menu-horizontal-responsivo').outerWidth(true);
     var pd = (itensQtd * 22);
-
     var scrollMaximoVisivel = $(menuhorizontalresponsivo).outerWidth(true);
     var scrollMaximo = (itensQtd * itemSize);
-
     var intervaloScroll = tamanhoVisivel - itemSize;
     var novoScroll = intervaloScroll + pixelScrolAtual;
-
     if (parafrente) {
         novoScroll = pixelScrolAtual + (intervaloScroll * 0.45);
     } else {
@@ -445,14 +432,9 @@ function acoesBotaoMenuHorizontal(menuhorizontalresponsivo, parafrente, semefeit
         if (novoScroll < pd) {
             if (novoScroll < 0) {
                 novoScroll = 0;
-
             }
         }
-
-
     }
-
-
     var botaoScrollEsquerda = $(menuhorizontalresponsivo).parent().find('.botao-lateral-esquerda-menu-horizontal-responsivo');
     var botaoScrollDireita = $(menuhorizontalresponsivo).parent().find('.botao-lateral-direita-menu-horizontal-responsivo');
     console.log("novoScroll>" + novoScroll + "ScrollMaximo" + scrollMaximo + "itensQtd->" + itensQtd + "itemSize" + itemSize + "erapa" + etapaPosicaoScroolAtual);
@@ -467,8 +449,6 @@ function acoesBotaoMenuHorizontal(menuhorizontalresponsivo, parafrente, semefeit
 
             $(botaoScrollDireita).addClass('hidden-botao-lateral');
             $(botaoScrollEsquerda).removeClass('hidden-botao-lateral');
-
-
         } else {
             if (novoScroll <= 0) {
 
@@ -499,8 +479,12 @@ function acoesBotaoMenuHorizontal(menuhorizontalresponsivo, parafrente, semefeit
             "padding-left": pd + "px"
         });
         $(menuhorizontalresponsivo).animate({scrollLeft: novoScroll}, segundosefeitos);
-
     }
+}
 
-
+function bloquearArea(idArea) {
+    $(PrimeFaces.escapeClientId(idArea)).block({message: '<table style="min-height: 50px;"><tbody ><tr><td ><img id="j_idt978:j_idt1600" src="/javax.faces.resource/images/preloader.gif.xhtml?ln=primefaces-adamantium" alt="" style="margin-right: 12px;vertical-align: middle;"></td><td><span style="white-space: nowrap; font-size:16px; color: #546E7A">Processando...</span></td></tr></tbody></table>', css: {border: '0px'}});
+}
+function desbloquearArea(idArea) {
+    $(PrimeFaces.escapeClientId(idArea)).unblock();
 }

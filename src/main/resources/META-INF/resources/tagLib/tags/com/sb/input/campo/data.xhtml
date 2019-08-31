@@ -42,9 +42,13 @@
                 <c:if test="#{possuiIDOnChange}" >
                     <p:ajax
                         rendered="#{possuiIDOnChange}"
-                        global="true"
-                        event="dateSelect"
-                        listener="#{pgUtil.atualizaTelaPorID(idAtualizarOnChange)}" />
+                        process="#{pgUtil.getIdInputSBComponentePai(component)}"
+                        event="valueChange"
+                        update="#{idAtualizarOnChange}"
+                        onstart="bloquearArea('#{idAtualizarOnChange}')"
+                        oncomplete="desbloquearArea('#{idAtualizarOnChange}')"
+                        />
+
                 </c:if>
 
             </p:calendar>

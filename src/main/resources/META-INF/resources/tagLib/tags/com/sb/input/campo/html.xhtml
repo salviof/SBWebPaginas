@@ -72,9 +72,10 @@
                     <c:if test="#{possuiIDOnChange}" >
                         <p:ajax
                             rendered="#{possuiIDOnChange}"
-
                             event="valueChange"
-                            update="#{pgUtil.gerarCaminhoCompletoID(idAtualizarOnChange)}"
+                            update="#{idAtualizarOnChange}"
+                            onstart="bloquearArea('#{idAtualizarOnChange}')"
+                            oncomplete="desbloquearArea('#{idAtualizarOnChange}')"
                             />
 
                     </c:if>
@@ -86,6 +87,7 @@
                 <script type="text/javascript">
 
                     function recarregarCK#{component.id}() {
+
                         try {
 
                             CKEDITOR.replace('#{component.children.get(1).clientId}', {
@@ -105,7 +107,6 @@
                                     {
                                         "name": "insert",
                                         "groups": ["insert"],
-
                                     },
                                     {
                                         "name": "styles",
@@ -116,17 +117,25 @@
                                         "groups": ["mode"]
                                     }
                                 ],
-                                removeButtons: 'Flash,Save,NewPage,Preview,New'
+                                removeButtons: 'Flash,Save,NewPage,Preview,New',
+                                on: {
+                                    instanceReady: function (evt) {
+                                        CKEDITOR.instances['#{component.children.get(1).clientId}'].on('focus', function () {
+                                            mesclarOnChangeComDelayCkEditor('#{component.children.get(1).clientId}', '#{component.children.get(0).clientId}');
+                                        });
+                                        CKEDITOR.instances['#{component.children.get(1).clientId}'].on('change', function () {
+                                            copiarValoresCKEditor('#{component.children.get(1).clientId}', '#{component.children.get(0).clientId}');
+                                        });
+                                    }
+                                }
 
                             });
-                            CKEDITOR.instances['#{component.children.get(1).clientId}'].on('focus', function () {
-                                mesclarOnChangeComDelayCkEditor('#{component.children.get(1).clientId}', '#{component.children.get(0).clientId}');
-                            });
-                            CKEDITOR.instances['#{component.children.get(1).clientId}'].on('change', function () {
-                                copiarValoresCKEditor('#{component.children.get(1).clientId}', '#{component.children.get(0).clientId}');
-                            });
+
+
+
+
                         } catch (t) {
-                            console.log("Ck já foi carregado");
+                            console.log("Houve um erro carregando o ckEditor");
                         }
                     }
                     recarregarCK#{component.id}();

@@ -40,16 +40,17 @@
                         global="true"
                         event="valueChange"
                         listener="#{prMetodo}"/>
+                <c:if test="#{possuiIDOnChange}">
+                    <p:ajax
+                        rendered="#{possuiIDOnChange}"
+                        process="#{pgUtil.getIdInputSBComponentePai(component)}"
+                        event="valueChange"
+                        update="#{idAtualizarOnChange}"
+                        onstart="bloquearArea('#{idAtualizarOnChange}')"
+                        oncomplete="desbloquearArea('#{idAtualizarOnChange}')"
+                        />
 
-                <p:ajax
-                    rendered="#{possuiIDOnChange}"
-                    global="true"
-                    event="valueChange"
-                    listener="#{pgUtil.atualizaTelaPorID(idAtualizarOnChange)}" />
-
-
-
-
+                </c:if>
 
             </p:inputText>
 

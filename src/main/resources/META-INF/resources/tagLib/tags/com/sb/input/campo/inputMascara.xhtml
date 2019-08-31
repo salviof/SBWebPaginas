@@ -3,16 +3,19 @@
     xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 
     xmlns:p="http://primefaces.org/ui"
-    xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
-    xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <ui:decorate template="#{layout.xhtmlJsfCaminhoRelativo}">
         <ui:define name="input">
 
             <p:outputLabel value="#{valor}" rendered="#{desabilitarEdicao}"/>
 
+            #{idAtualizarOnChange ne pgUtil.getIdInputSBComponentePai(component)}
             <p:inputMask
-                onfocus="mesclarOnChangeComDelay(this.id)"
+
 
                 mask="#{mascara}"
                 class=" campoResponsivo  TexAlCenter #{componente.classeCSS}"
@@ -24,13 +27,16 @@
                 requiredMessage="O campo #{label} não foi informado! "
                 autoClear="false"
                 validator="org.super_bits.view.validadores.generico"
-
+                onfocus="#{metodoJSOnfocus}"
                 converterMessage="Impossível converter o valor de #{label} em um tipo válido "
                 >
+
+
+
                 <f:passThroughAttribute name="caminhoCampo" value="#{registro.nomeCompostoIdentificador}" />
                 <f:passThroughAttribute name="dominio" value="#{registro.nomeClasseOrigemAtributo}" />
                 <f:passThroughAttribute name="campoInstanciado" value="#{registro}" />
-                <p:clientValidator/>
+                <p:clientValidator  />
 
                 <c:if test="#{registro.temValidacaoRegex}">
                     <f:validateRegex pattern="#{regex}"/>
@@ -65,10 +71,15 @@
                     <p:ajax
                         rendered="#{possuiIDOnChange}"
                         event="valueChange"
-                        update="#{pgUtil.gerarCaminhoCompletoID(idAtualizarOnChange)}"
+                        update="#{idAtualizarOnChange}"
+                        onstart="bloquearArea('#{idAtualizarOnChange}')"
+                        oncomplete="desbloquearArea('#{idAtualizarOnChange}')"
                         />
 
                 </c:if>
+
+
+
 
             </p:inputMask>
 

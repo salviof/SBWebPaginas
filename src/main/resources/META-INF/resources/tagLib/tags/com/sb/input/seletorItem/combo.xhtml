@@ -43,7 +43,8 @@
                         <p:ajax rendered="#{possuiMetodoOnChange}"
                                 global="true"
                                 event="itemSelect"
-                                listener="#{prMetodo}"/>
+                                listener="#{prMetodo}"
+                                />
                     </c:if>
 
                     <c:if test="#{atualizarFormOnChange}" >
@@ -57,7 +58,10 @@
                         <p:ajax
                             rendered="#{atualizarGrupoOnChange}"
                             event="itemSelect"
-                            update="#{pgUtil.getNomeIdPainelDoComponente(component)}"/>
+                            update="#{pgUtil.getNomeIdPainelDoComponente(component)}"
+                            onstart="bloquearArea('#{pgUtil.getNomeIdPainelDoComponente(component)}')"
+                            oncomplete="desbloquearArea('#{pgUtil.getNomeIdPainelDoComponente(component)}')"
+                            />
                     </c:if>
 
                     <c:if test="#{possuiIDOnChange}" >
@@ -65,8 +69,12 @@
                             rendered="#{possuiIDOnChange}"
                             global="true"
                             event="itemSelect"
-                            update="#{pgUtil.gerarCaminhoCompletoID(idAtualizarOnChange)}"
-                            process="@this" />
+                            update="#{idAtualizarOnChange}"
+                            process="@this"
+                            onstart="bloquearArea('#{idAtualizarOnChange}')"
+                            oncomplete="desbloquearArea('#{idAtualizarOnChange}')"
+                            />
+
                     </c:if>
                     <p:column>
                         #{it.nome}

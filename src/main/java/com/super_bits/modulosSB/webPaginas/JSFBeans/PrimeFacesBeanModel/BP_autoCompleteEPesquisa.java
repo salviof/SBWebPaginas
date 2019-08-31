@@ -17,12 +17,17 @@ import java.util.List;
 public class BP_autoCompleteEPesquisa<T extends ItfBeanSimplesSomenteLeitura> extends B_ObjetoDeUmaListaAbs<T> {
 
     public BP_autoCompleteEPesquisa(ItfCampoInstanciado pCampoInstanciado) {
+
         super(pCampoInstanciado);
     }
 
     @Override
     public void atualizaPickListViewContexto() {
         // nada a fazer
+        if (getOrigem().isEmpty()) {
+            campoInstanciado.getListaDeOpcoes().forEach(getOrigem()::add);
+        }
+
     }
 
     @Override

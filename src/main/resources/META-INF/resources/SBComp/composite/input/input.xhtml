@@ -19,7 +19,6 @@
         <cc:attribute name="campoLocalizacaoCEP" default="#{null}"  />
         <cc:attribute name="desabilitarEdicao" type="java.lang.Boolean" default="#{false}" />
         <cc:attribute name="idAtualizarOnChange"
-
                       />
 
         <cc:attribute name="atualizarFormOnChange" type="java.lang.Boolean" default="#{false}" />
@@ -60,7 +59,7 @@
                     registro="#{cc.attrs.registro}"
                     desabilitarEdicao="#{cc.attrs.desabilitarEdicao}"
                     layoutCampo="#{cc.attrs.layout}"
-                    possuiIDOnChange="#{pgUtil.isAtributoPreenchidoComExpressao(cc,'idAtualizarOnChange')}"
+                    possuiIDOnChange="#{!pgUtil.isNuloOuEmbranco(cc.attrs.idAtualizarOnChange)}"
                     possuiMetodoOnChange="#{pgUtil.isAtributoPreenchidoComExpressao(cc,'metodoOnChange')}"
                     layoutCampoEspecial="#{cc.attrs.visualizacaoEspecial}"
                     label="#{cc.attrs.label}:"

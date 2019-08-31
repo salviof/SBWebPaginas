@@ -56,8 +56,8 @@
                 <c:if test="#{possuiIDOnChange}" >
                     <p:ajax
 
-                        onstart="PF('#{pgUtil.getIdInputSBComponentePai(component)}').show();"
-                        oncomplete="PF('#{pgUtil.getIdInputSBComponentePai(component)}').hide();"
+                        onstart="bloquearArea('#{idAtualizarOnChange}')"
+                        oncomplete="desbloquearArea('#{idAtualizarOnChange}')"
                         rendered="#{possuiIDOnChange}"
                         global="true"
                         event="dateSelect"
@@ -67,13 +67,7 @@
                     </p:ajax>
                 </c:if>
 
-                <p:blockUI  block="#{idAtualizarOnChange}"   rendered="#{possuiIDOnChange}" widgetVar="#{pgUtil.getIdInputSBComponentePai(component)}"  >
-                    <h:panelGrid columns="2">
-                        <p:graphicImage name="images/preloader.gif" library="primefaces-adamantium"
-                                        style="margin-right: 12px; vertical-align: middle;"/>
-                        <h:outputText value="Processando..." style="white-space: nowrap;"/>
-                    </h:panelGrid>
-                </p:blockUI>
+
             </p:calendar>
             <h:outputScript name="recursos/js/traducaoDatasPrime.js" library="SBComp"  target="body"
 

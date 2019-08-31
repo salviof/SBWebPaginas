@@ -3,7 +3,8 @@
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:sb="http://superbitsframework/ui"
     xmlns:h="http://xmlns.jcp.org/jsf/html"
-    xmlns:f="http://xmlns.jcp.org/jsf/core">
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:p="http://primefaces.org/ui">
 
     <h:panelGroup  layout="block"  id="inputFormPadrao"   >
 
@@ -25,8 +26,10 @@
         <ui:param name="valorMinimo" value="#{registro.valorMinimo}" />
         <ui:param name="mascara" value="#{registro.mascaraJqueryMode}" rendered="#{registro.temMascara}"/>
         <ui:param name="atualizarFormOnChange" value="#{atualizarFormOnChange}"/>
-        <ui:param name="idAtualizarOnChange" value="#{idAtualizarOnChange}" />
-
+        <ui:param name="idAtualizarOnChange" rendered="#{possuiIDOnChange}"
+                  value="#{pgUtil.gerarCaminhoCompletoIDRelativoSBInput(idAtualizarOnChange,component)}"
+                  />
+        <ui:param name="metodoJSOnfocus" value="#{idAtualizarOnChange ne pgUtil.getIdInputSBComponentePai(component)?'mesclarOnChangeComDelay(this.id)':''}" />
 
 
         <ui:fragment rendered="#{xhtmlINPUT==compSBCompVisualInputs.texto_Com_FOrmatacao.xhtmlJsfCaminhoRelativo}">

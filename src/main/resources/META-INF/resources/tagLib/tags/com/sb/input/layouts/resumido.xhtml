@@ -9,7 +9,7 @@
 
         <ui:insert name="input" />
         <p:watermark value="#{label}" for="#{pgUtil.getNomeIdComponenteInput(component)}" />
-        <p:messages for="#{pgUtil.getNomeIdComponenteInput(component)}"  autoUpdate="true" rendered="#{pgUtil.getNomeIdComponenteInput(component)!=null}" />
+        <p:message for="#{pgUtil.getNomeIdComponenteInput(component)}"/>
         <p:panel
             style="border: none; position: absolute;background: none;  top: -28px;right: 0px;"
             >

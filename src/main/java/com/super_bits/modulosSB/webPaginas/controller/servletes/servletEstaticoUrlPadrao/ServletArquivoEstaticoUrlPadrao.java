@@ -4,15 +4,19 @@
  */
 package com.super_bits.modulosSB.webPaginas.controller.servletes.servletEstaticoUrlPadrao;
 
+import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringNomeArquivosEDiretorios;
 import com.super_bits.modulosSB.SBCore.modulos.ManipulaArquivo.FabTipoArquivoConhecido;
 import com.super_bits.modulosSB.webPaginas.controller.servletes.ServletArquivosSBWPGenerico;
 import com.super_bits.modulosSB.webPaginas.util.UtilSBWPServletTools;
+import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
+import java.net.URL;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.coletivojava.fw.api.tratamentoErros.FabErro;
 
 /**
  *
@@ -22,19 +26,31 @@ public class ServletArquivoEstaticoUrlPadrao extends ServletArquivosSBWPGenerico
 
     @Override
     protected void doGet(HttpServletRequest requisicao, HttpServletResponse resp) throws ServletException, IOException {
+        try {
+            String caminhoRecurso = UtilSBWPServletTools.geCaminhoRecursoDoUrl(requisicao);
 
-        String caminhoRecurso = UtilSBWPServletTools.geCaminhoRecursoDoUrl(requisicao);
+            //scontext.getRealPath("/");
+            caminhoRecurso = caminhoRecurso.replace("libUrlPadrao/", "");
 
-        //scontext.getRealPath("/");
-        caminhoRecurso = caminhoRecurso.substring(caminhoRecurso.indexOf("libUrlPadrao"));
-        //req scontext.getRealPath("/")
+            //req scontext.getRealPath("/")
+//java.io.FileNotFoundException: /home/superBits/projetos/Super_Bits/source/SB_CRI/webApp/src/main/webapp/resources/SBComp/recursos/urlPadrao/libUrlPadrao/ckeditor/ckeditor.js (No such file or directory)
+            String caminhoLocal = requisicao.getServletContext().getRealPath("/") + "/resources/SBComp/recursos/urlPadrao/" + caminhoRecurso;
+            if (!new File(caminhoLocal).exists()) {
+                ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+                URL enderecoteste = classLoader.getResource("/META-INF/resources/SBComp/recursos/urlPadrao/ckeditor/ckeditor.js");
+                caminhoLocal = enderecoteste.getFile();
+            }
 
-        String caminhoLocal = requisicao.getServletContext().getRealPath("/") + "/resources/SBComp/recursos/urlPadrao/" + caminhoRecurso;
-        System.out.println("Abrindo Recuroso Local:" + caminhoLocal);
-        String nomeArquivo = UtilSBCoreStringNomeArquivosEDiretorios.getNomeArquivo(caminhoRecurso);
-        System.out.println(caminhoLocal);
-        resp.addHeader("Cache-Control", "max-age=2592000");
-        abrirArquivo(caminhoLocal, nomeArquivo, requisicao, resp, FabTipoArquivoConhecido.getTipoArquivoByNomeArquivo(nomeArquivo));
+            System.out.println("Abrindo Recuroso Local:" + caminhoLocal);
+            String nomeArquivo = UtilSBCoreStringNomeArquivosEDiretorios.getNomeArquivo(caminhoRecurso);
+            System.out.println(caminhoLocal);
+            resp.addHeader("Cache-Control", "max-age=2592000");
+            abrirArquivo(caminhoLocal, nomeArquivo, requisicao, resp, FabTipoArquivoConhecido.getTipoArquivoByNomeArquivo(nomeArquivo));
+        } catch (Throwable t) {
+            SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "Erro obtendo recurso estático", t);
+            resp.flushBuffer();
+
+        }
 
     }
 

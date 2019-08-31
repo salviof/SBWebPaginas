@@ -31,6 +31,8 @@ public class CicloDeVidaPadraoJsf implements PhaseListener {
         if (!SBCore.isEmModoProducao()) {
             System.out.println(event.getPhaseId());
             System.out.println(event.getFacesContext());
+            System.out.println(event.getPhaseId().getName());
+
         }
     }
 
