@@ -38,17 +38,11 @@
                     </c:if>
 
                     <c:if test="#{possuiIDOnChange}" >
-                        <p:ajax event="transfer" listener="#{pgUtil.atualizaTelaPorID(idAtualizarOnChange)}"
-                                onstart="PF('#{pgUtil.getIdInputSBComponentePai(component)}').show();"
-                                oncomplete="PF('#{pgUtil.getIdInputSBComponentePai(component)}').hide();"
+                        <p:ajax event="transfer"
+
+                                onstart="bloquearArea('#{idAtualizarOnChange}')"
+                                oncomplete="desbloquearArea('#{idAtualizarOnChange}')"
                                 />
-                        <p:blockUI  block="#{idAtualizarOnChange}"   rendered="#{possuiIDOnChange}" widgetVar="#{pgUtil.getIdInputSBComponentePai(component)}"  >
-                            <h:panelGrid columns="2">
-                                <p:graphicImage name="images/preloader.gif" library="primefaces-adamantium"
-                                                style="margin-right: 12px; vertical-align: middle;"/>
-                                <h:outputText value="Processando..." style="white-space: nowrap;"/>
-                            </h:panelGrid>
-                        </p:blockUI>
 
                     </c:if>
 

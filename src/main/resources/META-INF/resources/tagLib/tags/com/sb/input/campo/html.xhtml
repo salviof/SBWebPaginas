@@ -89,6 +89,12 @@
                     function recarregarCK#{component.id}() {
 
                         try {
+                            for (var i in CKEDITOR.instances) {
+                                CKEDITOR.instances[i].removeAllListeners();
+                                CKEDITOR.remove(CKEDITOR.instances[i]);
+                            }
+
+                            var CKEDITOR_BASEPATH = '/libUrlPadrao/ckeditor/';
 
                             CKEDITOR.replace('#{component.children.get(1).clientId}', {
                                 extraPlugins: 'placeholderSeletor',
@@ -119,7 +125,8 @@
                                 ],
                                 removeButtons: 'Flash,Save,NewPage,Preview,New',
                                 on: {
-                                    instanceReady: function (evt) {
+                                    loaded: function (evt) {
+
                                         CKEDITOR.instances['#{component.children.get(1).clientId}'].on('focus', function () {
                                             mesclarOnChangeComDelayCkEditor('#{component.children.get(1).clientId}', '#{component.children.get(0).clientId}');
                                         });
@@ -130,10 +137,6 @@
                                 }
 
                             });
-
-
-
-
                         } catch (t) {
                             console.log("Houve um erro carregando o ckEditor");
                         }

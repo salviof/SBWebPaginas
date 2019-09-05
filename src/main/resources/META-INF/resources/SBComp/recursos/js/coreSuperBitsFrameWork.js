@@ -483,8 +483,39 @@ function acoesBotaoMenuHorizontal(menuhorizontalresponsivo, parafrente, semefeit
 }
 
 function bloquearArea(idArea) {
-    $(PrimeFaces.escapeClientId(idArea)).block({message: '<table style="min-height: 50px;"><tbody ><tr><td ><img id="j_idt978:j_idt1600" src="/javax.faces.resource/images/preloader.gif.xhtml?ln=primefaces-adamantium" alt="" style="margin-right: 12px;vertical-align: middle;"></td><td><span style="white-space: nowrap; font-size:16px; color: #546E7A">Processando...</span></td></tr></tbody></table>', css: {border: '0px'}});
+    try {
+        var areas = idArea.split(" ");
+        for (i = 0; i < areas.length; i++) {
+            try {
+                $(PrimeFaces.escapeClientId(areas[i])).block({message: '<table style="min-height: 50px;"><tbody ><tr><td ><img src="/javax.faces.resource/images/preloader.gif.xhtml?ln=primefaces-adamantium" alt="" style="margin-right: 12px;vertical-align: middle;"></td><td><span style="white-space: nowrap; font-size:16px; color: #546E7A">Processando...</span></td></tr></tbody></table>', css: {border: '0px'}});
+            } catch (t) {
+                console.log("Erro bloqueando area");
+                console.log(t);
+            }
+        }
+
+    } catch (t) {
+        console.log("Erro bloqueando area");
+        console.log(t);
+    }
 }
 function desbloquearArea(idArea) {
-    $(PrimeFaces.escapeClientId(idArea)).unblock();
+
+    try {
+        var areas = idArea.split(" ");
+        for (i = 0; i < areas.length; i++) {
+            try {
+                $(PrimeFaces.escapeClientId(areas[i])).unblock();
+            } catch (t) {
+                console.log("Erro bloqueando area");
+                console.log(t);
+            }
+        }
+
+    } catch (t) {
+        console.log("Erro bloqueando area");
+        console.log(t);
+    }
+
+
 }

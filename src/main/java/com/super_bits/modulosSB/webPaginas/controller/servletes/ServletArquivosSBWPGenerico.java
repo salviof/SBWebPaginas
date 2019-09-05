@@ -37,9 +37,18 @@ public class ServletArquivosSBWPGenerico extends HttpServlet {
         realizarStreamDoArquivo(resp, pcaminhoArquivo);
     }
 
+    protected void definirHeaderPorNomeDeArquivo(String pCaminhoArquivo, HttpServletResponse resp) {
+        FabTipoArquivoConhecido pArquivoConhecido = FabTipoArquivoConhecido.getTipoArquivoByNomeArquivo(pCaminhoArquivo);
+        definirHeaderPorTipoArquivo(pArquivoConhecido, resp);
+    }
+
+    protected void definirHeaderPorTipoArquivo(FabTipoArquivoConhecido pTipoHeader, HttpServletResponse resp) {
+        resp.setContentType(pTipoHeader.getTipoConteudoRespostaHTML());
+    }
+
     protected void abrirArquivo(String pCaminhoArquivo, String pNomeArquivoDownload,
             HttpServletRequest requisicao, HttpServletResponse resp, FabTipoArquivoConhecido pArquivoConhecido) {
-        resp.setContentType(pArquivoConhecido.getTipoConteudoRespostaHTML());
+        definirHeaderPorTipoArquivo(pArquivoConhecido, resp);
         switch (pArquivoConhecido) {
             case IMAGEM_WEB:
                 break;
@@ -70,6 +79,7 @@ public class ServletArquivosSBWPGenerico extends HttpServlet {
             case ARQUIVO_TEXTO_SIMPLES:
                 break;
             case JAVASCRIPT:
+
                 break;
             default:
                 throw new AssertionError(pArquivoConhecido.name());
@@ -78,28 +88,34 @@ public class ServletArquivosSBWPGenerico extends HttpServlet {
         realizarStreamDoArquivo(resp, pCaminhoArquivo);
     }
 
-    protected void realizarStreamDoArquivo(HttpServletResponse resp, String pCaminhoLocalArquivo) {
+    protected void realizarStreamDoArquivo(HttpServletResponse resp, byte[] pDadosArquivo) {
         try {
-            byte[] dadosArquivo = UtilSBCoreBytes.gerarBytesPorArquivo(new File(pCaminhoLocalArquivo));
-            resp.setContentLength(dadosArquivo.length);
+            resp.setContentLength(pDadosArquivo.length);
             try (ServletOutputStream ouputStream = resp.getOutputStream()) {
-                ouputStream.write(dadosArquivo, 0, dadosArquivo.length);
+                ouputStream.write(pDadosArquivo, 0, pDadosArquivo.length);
                 ouputStream.flush();
             }
         } catch (Exception t) {
-            SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "Erro Preparando arquivo para download", t);
+            SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "Erro enviando stream para o cliente", t);
+            try {
+                resp.sendError(404, "Erro enviando dados para");
+            } catch (IOException ex) {
+                Logger.getLogger(ServletArquivosSBWPGenerico.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
-        //   try (FileInputStream in = new FileInputStream(pCaminhoLocalArquivo)) {
-        //       OutputStream out = resp.getOutputStream();
-        //       byte[] buffer = new byte[4096];
-        //       int length;
-        //       while ((length = in.read(buffer)) > 0) {
-        ///           out.write(buffer, 0, length);
-        ///      }
-        //     out.flush();
-        ///  } catch (Throwable t) {
-        ///      SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "Erro Preparando arquivo para download", t);
-        /// }
+    }
+
+    protected void realizarStreamDoArquivo(HttpServletResponse resp, String pCaminhoLocalArquivo) {
+        try {
+            realizarStreamDoArquivo(resp, UtilSBCoreBytes.gerarBytesPorArquivo(new File(pCaminhoLocalArquivo)));
+        } catch (Throwable t) {
+            try {
+                SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "Erro obtendo bytes do arquivo", t);
+                resp.sendError(404, "Erro obtendo bytes do arquivo");
+            } catch (IOException ex) {
+                Logger.getLogger(ServletArquivosSBWPGenerico.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
 
     protected void despachaParametrosNaoDefinidos(HttpServletRequest requisicao, HttpServletResponse resp, List<String> slugsURL) {

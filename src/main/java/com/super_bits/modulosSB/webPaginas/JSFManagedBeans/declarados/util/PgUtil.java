@@ -68,6 +68,7 @@ import org.primefaces.PrimeFaces;
 import org.primefaces.component.fieldset.FieldsetRenderer;
 
 import org.primefaces.event.FileUploadEvent;
+import org.primefaces.expression.SearchExpressionUtils;
 
 /**
  *
@@ -338,7 +339,20 @@ public class PgUtil implements Serializable {
                 }
 
             }
-            return gerarCaminhoCompletoIDParaJavaScript(pId);
+            StringBuilder caminhoCompleto = new StringBuilder();
+            int x = 0;
+            for (String parte : pId.split(" ")) {
+                if (parte.startsWith("@")) {
+                    parte = SearchExpressionUtils.resolveClientId(pId, pComponente);
+                }
+                if (x > 0) {
+                    caminhoCompleto.append(" ");
+                }
+                caminhoCompleto.append(parte);
+                x++;
+            }
+
+            return gerarCaminhoCompletoIDParaJavaScript(caminhoCompleto.toString());
         } catch (Throwable t) {
             return null;
         }
@@ -354,6 +368,7 @@ public class PgUtil implements Serializable {
      * @return
      */
     public String gerarIdAtualizacaoPadraoInput(String pid, ItfCampoInstanciado pCpInst) {
+
         if (pCpInst.isTemValidadacaoLogica() || pCpInst.getFabricaTipoAtributo().isPossuiValidacaoLogicaNativa()) {
             if (UtilSBCoreStringValidador.isNuloOuEmbranco(pid)) {
                 return "@this";
@@ -392,7 +407,7 @@ public class PgUtil implements Serializable {
 
                     caminhosCOmpletos += caminho + separadorCaminhosEncontradors;
                 } else {
-                    caminhosCOmpletos += UtilSBWP_JSFTools.getIDSCaminhoAbsoluto(pId).substring(1) + separadorCaminhosEncontradors;
+                    caminhosCOmpletos += UtilSBWP_JSFTools.getIDSCaminhoAbsoluto(caminho).substring(1) + separadorCaminhosEncontradors;
                 }
             }
             i++;

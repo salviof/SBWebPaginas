@@ -38,16 +38,15 @@
 
                 <c:if test="#{possuiMetodoOnChange}">
                     <p:ajax rendered="#{possuiMetodoOnChange}"
-                            global="true"
-                            process="@this"
                             event="valueChange"
+
                             listener="#{prMetodo}"/>
                 </c:if>
 
                 <c:if test="#{possuiIDOnChange}" >
                     <p:ajax
                         rendered="#{possuiIDOnChange}"
-                        process="#{pgUtil.getIdInputSBComponentePai(component)}"
+
                         event="valueChange"
                         update="#{idAtualizarOnChange}"
                         onstart="bloquearArea('#{idAtualizarOnChange}')"
