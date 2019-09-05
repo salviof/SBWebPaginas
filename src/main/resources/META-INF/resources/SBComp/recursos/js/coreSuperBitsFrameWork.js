@@ -313,7 +313,13 @@ function focarComSelacaoAposAjax() {
             }
         }
         if (!contemClientID) {
-            $(PrimeFaces.escapeClientId(document.activeElement.id)).select();
+         
+            if ($(PrimeFaces.escapeClientId(document.activeElement.id)).attr('data-p-hl') === "inputnumber"){
+                 $(PrimeFaces.escapeClientId(document.activeElement.id)).select();    
+            }else {
+                
+            }
+            
         }
     } catch (o) {
 
