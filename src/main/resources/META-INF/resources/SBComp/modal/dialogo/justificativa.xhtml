@@ -12,7 +12,7 @@
 
 
 
-        <h:panelGroup   class="ContainerIndent" >
+        <h:panelGroup   class="Container12" >
             <h:panelGroup rendered="#{pgModalJustificativa.campoJustificativa != null}">
                 <h:panelGroup layout="block" styleClass="Container12" >
                     <SBInput:input registro="#{pgModalJustificativa.campoJustificativa}"
@@ -44,7 +44,7 @@
 
         <h:panelGroup   layout="block"  styleClass="OrganizadorContainer" style="width: 100%">
             <ui:repeat value="#{pgModalJustificativa.comunicacao.repostasPossiveis}" var="resp" >
-                <h:panelGroup layout="block" styleClass="Container2" >
+                <h:panelGroup layout="block" styleClass="Container1" style="padding: 5px;" >
                     <SBAcaoNav:botaoRespostaModal
                         resposta="#{resp}"
                         armazenamentoAcaoExecutada="#{pgModalJustificativa.respostaSelecionada}"
