@@ -78,17 +78,20 @@ public class ControleDeSessaoWeb extends ControleDeSessaoAbstratoSBCore implemen
             String pastaTEmporariaStr = SBCore.getCentralDeSessao().getSessaoAtual().getPastaTempDeSessao();
             Thread exclusaoArquivosTemporarios = new Thread() {
                 public void run() {
-
-                    File pastaTemporaria = new File(pastaTEmporariaStr);
-                    //Proteção besta para evitar exclusão de pastas do sistema
-                    if (pastaTEmporariaStr.length() > 15) {
-                        if (pastaTemporaria.exists()) {
-                            if (pastaTemporaria.isDirectory()) {
-                                for (File arq : pastaTemporaria.listFiles()) {
-                                    arq.delete();
+                    try {
+                        File pastaTemporaria = new File(pastaTEmporariaStr);
+                        //Proteção besta para evitar exclusão de pastas do sistema
+                        if (pastaTEmporariaStr.length() > 15) {
+                            if (pastaTemporaria.exists()) {
+                                if (pastaTemporaria.isDirectory()) {
+                                    for (File arq : pastaTemporaria.listFiles()) {
+                                        arq.delete();
+                                    }
                                 }
                             }
                         }
+                    } catch (Throwable t) {
+
                     }
                 }
             };

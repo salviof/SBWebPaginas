@@ -87,7 +87,16 @@ public class SessaoAtualSBWP extends SessaoOffline implements ItfSessao, Seriali
         ItfUsuario usuario = (ItfUsuario) UtilSBWP_JSFTools.retirarProxyDeVisualizacaoDoBean(super.getUsuario());
 
         if (usuario.getClass().getAnnotation(Entity.class) != null) {
-            usuario = UtilSBPersistencia.loadEntidade(usuario, entidadePrincipal);
+            EntityManager em = null;
+            try {
+                em = SBCore.getServicoRepositorio().getAcessoDadosDoContexto().getEntitiManager();
+            } catch (Throwable t) {
+
+            }
+            if (em == null) {
+                em = entidadePrincipal;
+            }
+            usuario = UtilSBPersistencia.loadEntidade(usuario, em);
 
         }
         return usuario;

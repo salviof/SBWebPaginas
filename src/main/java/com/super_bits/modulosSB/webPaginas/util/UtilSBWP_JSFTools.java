@@ -82,6 +82,8 @@ public abstract class UtilSBWP_JSFTools {
     public final static String FORMULARIO_ACESSO_NEGADO_SUB_FORM = "/resources/SBComp/SBSystemPages/acessoNegadoSubForm.xhtml";
     public final static String FORMULARIO_PARAMETRO_URL_INVALIDO = "/resources/SBComp/SBSystemPages/parametroURLInvalido.xhtml";
 
+    public final static String FORMULARIO_RECUPERACAO_DE_SENHA = "/resources/SBComp/SBSystemPages/recSenhaGestao.xhtml";
+    public final static String FORMULARIO_RECUPERACAO_DE_SENHA_GERAR_SENHA = "/resources/SBComp/SBSystemPages/recSenhaGerar.xhtml";
     public final static String FORMULARIO_LOGIN = "/resources/SBComp/SBSystemPages/login.xhtml";
     public final static String FORMULARIO_SESSAO_EXPIROU = "/resources/SBComp/SBSystemPages/viewExpirou.xhtml";
     public final static String FORMULARIO_ERRO_CRITICO = "/resources/SBComp/SBSystemPages/erroGenerico.xhtml";
@@ -272,7 +274,7 @@ public abstract class UtilSBWP_JSFTools {
                 SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "Erro Atualizando tela por id de compnente JSF" + pId, e);
             }
         } catch (Exception e) {
-            SBCore.RelatarErro(FabErro.SOLICITAR_REPARO,"erro tentando atualizar ID de componente JSF" + pId, e);
+            SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "erro tentando atualizar ID de componente JSF" + pId, e);
         }
 
     }

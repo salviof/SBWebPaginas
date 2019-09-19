@@ -1,0 +1,134 @@
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:SBLogin="http://xmlns.jcp.org/jsf/composite/SBComp/composite/login"
+    xmlns:SBAcaoNav="http://xmlns.jcp.org/jsf/composite/SBComp/composite/acoesENavegacao"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:panelGroup styleClass="" style="position: fixed;right: 0px; width: 100px;">
+        <h:form styleClass="TexAlCenter ">
+            <p:button style="" href="#{infoWebApp.urlPagina}" icon="fa fa-home"  value="Pagina inicial"/>
+        </h:form>
+    </h:panelGroup>
+    <div class="Container12 BordBottom GrayBack loginback">
+
+        <div class="quebraBlocoComEspacoVertical6"></div>
+
+        <div class="Wid90 MarAuto">
+            <div class="Wid90 DispBlock MarAuto WidAutoOnMobile">
+                <div class="Card TexAlCenter" style="margin-bottom:-100px">
+
+
+                    <div class="Card SoftGrayBack">
+                        <div class="quebraBlocoComEspacoVertical3"></div>
+                        <i class="fa fa-key DispBlock Fs100 BlackOpac"></i>
+                        <div class="quebraBlocoComEspacoVertical4"></div>
+                        <div class="Wid100 Fs30 FontAdamantiumBold Red MarAuto">Redefinição de senha <br/> </div>
+                        <div class="quebraBlocoComEspacoVertical10"></div>
+                        <div class="Wid80 Fs18 FontAdamantiumRegular Fnone MarAuto">Você está acessando o link secreto para alteração de senha, este link irá se auto-destruir em breve.</div>
+                        <div class="Wid80 Fs18 FontAdamantiumRegular Fnone MarAuto">
+
+
+                            <div class="TexAlCenter" >
+
+
+
+                                <div class="quebraBlocoComEspacoVertical3"></div>
+                                <div class="Card SoftGrayBack">
+
+
+
+
+
+
+                                    <h:panelGroup styleClass="OrganizadorContainer" >
+                                        <h:form>
+
+                                            <h:outputLabel for="#{pgUtil.gerarCaminhoCompletoID('pw1')}" value="Nova senha: *" />
+
+                                            <p:password  value="#{pgRecuperacaoSenha.novaSenha}"
+                                                         id="pw1"
+                                                         class=" campoResponsivo  TexAlCenter "
+
+                                                         redisplay="true"
+
+                                                         feedback="true"
+                                                         disabled="false"
+                                                         validatorMessage="O valor informado na senha não é valido! A senha precisa conter 6 caractéres"
+                                                         promptLabel="Digite uma senha segura"
+                                                         weakLabel="Você pode melhorar esta senha"
+                                                         goodLabel="Esta senha é uma boa senha,nós podemos aceita-la, porém você pode melhora-la adcionando numeros, caracteres especiais e letras"
+                                                         strongLabel="Parabéns, esta senha é muito difícil de ser quebrada"
+                                                         required="true"
+                                                         inline="true"
+                                                         widgetVar="pw1"
+                                                         requiredMessage="O campo na senha não foi informado! "
+                                                         >
+                                                <f:passThroughAttribute name="autocomplete" value="new-password" />
+                                                <f:validateLength minimum="6" maximum="30"  />
+                                                <p:clientValidator />
+                                                <p:message for="@parent" />
+                                            </p:password>
+
+
+
+                                            <h:outputLabel for="#{pgUtil.gerarCaminhoCompletoID('pw2')}" value="Confirme a senha *" />
+                                            <p:password  value="#{pgRecuperacaoSenha.novaSenha}"
+                                                         id="pw2"
+                                                         immediate="true"
+                                                         class=" campoResponsivo  TexAlCenter "
+
+                                                         redisplay="true"
+                                                         match="pw1"
+                                                         feedback="false"
+                                                         disabled="false"
+                                                         widgetVar="pw2"
+                                                         required="true"
+                                                         validatorMessage="A confirmação da senha diverge da senha digitada"
+                                                         requiredMessage="A senha não foi informado! "
+                                                         >
+                                                <f:passThroughAttribute name="autocomplete" value="new-password" />
+
+
+                                            </p:password>
+                                            <p:message for="#{pgUtil.gerarCaminhoCompletoID('pw2')}" />
+
+                                            <h:panelGroup style="margin: 40px;">
+
+                                                <p:commandButton value="Alterar Senha" icon="fa fa-sign-in"
+                                                                 style="margin: 40px; "
+                                                                 id="botaoEntrarSec"
+                                                                 actionListener="#{pgRecuperacaoSenha.alterarSenha()}"
+                                                                 update="@form" />
+                                            </h:panelGroup>
+                                        </h:form>
+                                    </h:panelGroup>
+
+                                </div>
+
+                            </div>
+
+
+
+
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+
+        <div class="quebraBlocoComEspacoVertical10">
+
+
+
+        </div>
+
+
+    </div>
+
+
+</ui:composition>

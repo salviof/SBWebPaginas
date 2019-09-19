@@ -24,6 +24,6 @@ public class ProdutorEntityManager {
 
     public void finaliza(@Disposes EntityManager manager) {
         manager.close();
-        System.out.println("EntityManager fechado");
+        //   System.out.println("EntityManager fechado");
     }
 }

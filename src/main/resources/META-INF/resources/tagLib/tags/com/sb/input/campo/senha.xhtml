@@ -25,7 +25,7 @@
                          required="#{obrigatorio}"
                          requiredMessage="O campo #{label} não foi informado! "
                          >
-                <f:passThroughAttribute name="autocomplete" value="off" />
+                <f:passThroughAttribute name="autocomplete" rendered="#{paginaAtual.umaPaginaEdicaoOuNovoRegistro}" value="new-password" />
 
                 <p:clientValidator/>
 

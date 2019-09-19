@@ -1,0 +1,16 @@
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:SBDev="http://xmlns.jcp.org/jsf/composite/SBComp/composite/devel"
+    xmlns:p="http://primefaces.org/ui"
+    template="#{layoutsPaginas.modeloGeralAnonimo.xhtmlVinculado}">
+    <ui:define name="head"  >
+    </ui:define>
+    <ui:define name="divConteudo">
+        <h:panelGroup id="#{paginaAtual.infoPagina.idAreaExbicaoAcaoSelecionada}">
+            <ui:include src="#{paginaAtual.infoPagina.comoFormularioWeb.xhtmlAcaoAtual}"/>
+        </h:panelGroup>
+        <div style="quebraBlocoComEspacoVertical70"/>
+    </ui:define>
+</ui:composition>
