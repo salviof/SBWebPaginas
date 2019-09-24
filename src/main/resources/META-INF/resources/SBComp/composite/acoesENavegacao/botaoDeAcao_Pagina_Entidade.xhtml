@@ -17,6 +17,8 @@
         <cc:attribute name="javaScriptOncomplete"  default="acoesPosAjax();"
                       shortDescription="Javascript que deve ser executado após a execucao do botão"
                       />
+
+
         <cc:attribute name="tipoVisualizacao"
 
                       type="com.super_bits.modulosSB.SBCore.modulos.view.fabricasCompVisual.ItfComponenteVisualSB"
@@ -25,13 +27,18 @@
                       />
         <cc:attribute name="cor"
                       default="#{null}"
-                      shortDescription="Cor do botão caso ele deva ser exibido por em uma cor especifica"
+                      shortDescription="!!!DEPRECIADO, utilize o atributo classeEstilo  !!!Cor do botão caso ele deva ser exibido por em uma cor especifica"
                       />
         <cc:attribute name="registro" />
         <cc:attribute name="label"
                       shortDescription="IDs que devem ser atualizados após clicar na alção"
                       default="#{cc.attrs.acao.nomeAcao}"
                       type="java.lang.String"
+                      />
+        <cc:attribute name="classeEstilo"
+
+                      default="#{null}"
+                      shortDescription="Especifica uma classe para estilizar o botão"
                       />
 
     </cc:interface>
@@ -44,6 +51,7 @@
             javaScriptOncomplete="#{cc.attrs.javaScriptOncomplete}"
             idUpdate="#{cc.attrs.update}"
             label="#{cc.attrs.label}"
+            classeEstilo="#{cc.attrs.classeEstilo}"
             />
 
     </cc:implementation>

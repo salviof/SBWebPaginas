@@ -55,6 +55,14 @@
             <required>true</required>
             <type>java.lang.String</type>
         </attribute>
+        <attribute>
+            <description>
+            <![CDATA[informa uma classe de estilo personalizada]]>
+            </description>
+            <name>classeEstilo</name>
+            <required>false</required>
+            <type>java.lang.String</type>
+        </attribute>
     </tag>
 
     <tag>
@@ -103,6 +111,16 @@
             <required>true</required>
             <type>java.lang.String</type>
         </attribute>
+
+        <attribute>
+            <description>
+            <![CDATA[informa uma classe de estilo personalizada]]>
+            </description>
+            <name>classeEstilo</name>
+            <required>false</required>
+            <type>java.lang.String</type>
+        </attribute>
+
 
     </tag>
 
@@ -222,7 +240,7 @@
     <tag>
         <tag-name>inputSB</tag-name>
         <source>resources/tagLib/tags/com/sb/inputSB.xhtml</source>
-      
+
         <attribute>
             <description> <![CDATA[ Campo Instanciado (Obtido por item.getcampoNyNameOuAnotacao('nomeDoCampo')]]></description>
             <name>registro</name>
@@ -575,6 +593,14 @@
             <required>false</required>
             <type>java.lang.String</type>
         </attribute>
+        <attribute>
+            <description>
+            <![CDATA[informa uma classe de estilo personalizada]]>
+            </description>
+            <name>classeEstilo</name>
+            <required>false</required>
+            <type>java.lang.String</type>
+        </attribute>
     </tag>
 
 
@@ -615,7 +641,14 @@
             <type>java.lang.String</type>
         </attribute>
 
-
+        <attribute>
+            <description>
+            <![CDATA[informa uma classe de estilo personalizada]]>
+            </description>
+            <name>classeEstilo</name>
+            <required>false</required>
+            <type>java.lang.String</type>
+        </attribute>
 
 
     </tag>
@@ -685,7 +718,14 @@
             <type>java.lang.String</type>
         </attribute>
 
-
+        <attribute>
+            <description>
+            <![CDATA[informa uma classe de estilo personalizada]]>
+            </description>
+            <name>classeEstilo</name>
+            <required>false</required>
+            <type>java.lang.String</type>
+        </attribute>
 
     </tag>
 
@@ -747,7 +787,14 @@
 
             <type>java.lang.String</type>
         </attribute>
-
+        <attribute>
+            <description>
+            <![CDATA[informa uma classe de estilo personalizada]]>
+            </description>
+            <name>classeEstilo</name>
+            <required>false</required>
+            <type>java.lang.String</type>
+        </attribute>
 
     </tag>
 
@@ -830,6 +877,15 @@
             <name>idUpdate</name>
             <type>java.lang.String</type>
             <required>true</required>
+        </attribute>
+
+        <attribute>
+            <description>
+            <![CDATA[informa uma classe de estilo personalizada]]>
+            </description>
+            <name>classeEstilo</name>
+            <required>false</required>
+            <type>java.lang.String</type>
         </attribute>
 
     </tag>

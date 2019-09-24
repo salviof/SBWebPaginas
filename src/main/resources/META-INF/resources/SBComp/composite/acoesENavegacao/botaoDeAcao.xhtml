@@ -25,12 +25,17 @@
                       shortDescription="Tipo de visualização do botão (Utilize #tipos.tipoVisualBotao"
                       />
         <cc:attribute name="cor"
+
                       default="#{null}"
-                      shortDescription="Cor do botão caso ele deva ser exibido por em uma cor especifica"
+                      shortDescription="DEPRECIADO!!! Utilize classeEstilo Cor do botão caso ele deva ser exibido por em uma cor especifica"
                       />
         <cc:attribute name="trasformarAcaoEmLink" default="#{cc.attrs.acao.umaAcaoGestaoDominio}"    />
 
+        <cc:attribute name="classeEstilo"
 
+                      default="#{null}"
+                      shortDescription="Especifica uma classe para estilizar o botão"
+                      />
 
 
         <cc:attribute name="label"
@@ -58,7 +63,7 @@
                         idUpdate="#{cc.attrs.update}"
                         layout="#{cc.attrs.tipoVisualizacao}"
                         label="#{cc.attrs.label}"
-
+                        classeEstilo="#{cc.attrs.classeEstilo}"
                         />
 
 
@@ -76,6 +81,7 @@
                         idUpdate="#{cc.attrs.update}"
                         layout="#{cc.attrs.tipoVisualizacao}"
                         label="#{cc.attrs.label}"
+                        classeEstilo="#{cc.attrs.classeEstilo}"
                         />
                 </c:if>
 
@@ -88,6 +94,7 @@
                         acao="#{cc.attrs.acao}"
                         label="#{cc.attrs.label}"
                         layout="#{cc.attrs.tipoVisualizacao}"
+                        classeEstilo="#{cc.attrs.classeEstilo}"
                         />
                 </c:if>
 
@@ -100,7 +107,9 @@
             <sb:botaoLink
                 acao="#{cc.attrs.acao}"
                 label="#{cc.attrs.label}"
-                layout="#{cc.attrs.tipoVisualizacao}" />
+                layout="#{cc.attrs.tipoVisualizacao}"
+                classeEstilo="#{cc.attrs.classeEstilo}"
+                />
 
         </c:if>
 
