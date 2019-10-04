@@ -69,10 +69,10 @@ public class ConfiguracoesDeFormularioPorUrl {
                 if (pURL.length() <= inicioParametro) {
                     throw new UnsupportedOperationException("Ipossível determinar os parametros de urla para " + pURL);
                 }
-                pURL = pURL.replaceAll(".wp.*", "");
-                pURL = pURL.replaceAll(".WP", "");
-                pURL = pURL.replaceAll(".html.*", "");
-                pURL = pURL.replaceAll(".htm.*", "");
+                int indiceInicioStrExtencao = pURL.lastIndexOf(".");
+                String fimUrl = pURL.substring(indiceInicioStrExtencao, pURL.length() - 1);
+
+                pURL = pURL.substring(0, indiceInicioStrExtencao);
 
                 try {
                     String parametrosStr = pURL.substring(inicioParametro);

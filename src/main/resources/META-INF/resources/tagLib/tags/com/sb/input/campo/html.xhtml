@@ -12,17 +12,16 @@
 
             <p:editor height="300" style="width: 100%"
                       rendered="#{desabilitarEdicao}"
-                      value="#{valor}"
+
                       disabled="true"
                       />
             <h:panelGroup styleClass="Container12 Responsive" style="height: 400px; "
                           rendered="#{!desabilitarEdicao}"
 
                           >
-                
+
 
                 <p:inputText
-
                     class=" campoResponsivo  TexAlCenter #{componente.classeCSS} invisivel"
                     disabled="#{desabilitarEdicao}"
                     rendered="#{!desabilitarEdicao}"
@@ -30,19 +29,12 @@
                     value="#{valor}"
                     validatorMessage="O campo #{label} não é um valor válido"
                     requiredMessage="O campo #{label} não foi informado! "
-
                     validator="org.super_bits.view.validadores.generico"
-
                     converterMessage="Impossível converter o valor de #{label} em um tipo válido "
                     >
                     <f:passThroughAttribute name="caminhoCampo" value="#{registro.nomeCompostoIdentificador}" />
                     <f:passThroughAttribute name="dominio" value="#{registro.nomeClasseOrigemAtributo}" />
                     <f:passThroughAttribute name="campoInstanciado" value="#{registro}" />
-
-
-
-
-
 
 
                     <c:if test="#{atualizarGrupoOnChange}" >
@@ -70,6 +62,7 @@
 
 
                     <c:if test="#{possuiIDOnChange}" >
+
                         <p:ajax
                             rendered="#{possuiIDOnChange}"
                             event="valueChange"
@@ -82,7 +75,7 @@
 
                 </p:inputText>
 
-                <h:inputTextarea value="#{valor}" style="width: 1px; height: 1px;"  styleClass="invisivel"/>
+                <h:inputTextarea  style="width: 1px; height: 1px;"  styleClass="invisivel"/>
                 <script src="#{infoWebApp.urlPagina}/libUrlPadrao/ckeditor/ckeditor.js"></script>
                 <script type="text/javascript">
 
@@ -127,11 +120,21 @@
                                 on: {
                                     loaded: function (evt) {
 
+
                                         CKEDITOR.instances['#{component.children.get(1).clientId}'].on('focus', function () {
                                             mesclarOnChangeComDelayCkEditor('#{component.children.get(1).clientId}', '#{component.children.get(0).clientId}');
                                         });
                                         CKEDITOR.instances['#{component.children.get(1).clientId}'].on('change', function () {
                                             copiarValoresCKEditor('#{component.children.get(1).clientId}', '#{component.children.get(0).clientId}');
+                                        });
+                                        CKEDITOR.instances['#{component.children.get(1).clientId}'].on('blur', function () {
+
+                                            bloquearArea('#{idAtualizarOnChange}');
+
+                                            copiarValoresCKEditor('#{component.children.get(1).clientId}', '#{component.children.get(0).clientId}');
+
+                                            document.getElementById("#{component.children.get(0).clientId}").metodoOnchangeComDelay();
+                                            desbloquearArea('#{idAtualizarOnChange}');
                                         });
                                     }
                                 }
@@ -142,6 +145,7 @@
                         }
                     }
                     recarregarCK#{component.id}();
+                    CKEDITOR.instances['#{component.children.get(1).clientId}'].setData(document.getElementById('#{component.children.get(0).clientId}').value);
                 </script>
                 <h:panelGroup style="display: block; width: 1%; height:400px; overflow:hidden;" ></h:panelGroup>
             </h:panelGroup>

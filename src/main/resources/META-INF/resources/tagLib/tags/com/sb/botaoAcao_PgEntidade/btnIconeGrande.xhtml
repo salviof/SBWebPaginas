@@ -6,7 +6,7 @@
 
     <p:commandLink
         onmousedown="esconderTooltips();"
-        styleClass="Responsive btnIconeGrande Fs60"
+        styleClass="Responsive btnIconeGrande Fs60 #{classeEstilo}"
         style="text-align: center; "
         action="#{paginaAtual.infoPagina.comoPaginaEntidade.executarAcao(registro)}"
         update="#{pgUtil.makeCaminhoCompletoID(idUpdate)}"

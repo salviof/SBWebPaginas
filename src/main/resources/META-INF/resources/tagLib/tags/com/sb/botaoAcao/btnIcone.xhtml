@@ -5,7 +5,7 @@
     xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <p:commandButton onmousedown="esconderTooltips();"
-                     styleClass="btnIconeENome botao"
+                     styleClass="btnIconeENome botao #{classeEstilo}"
                      icon="#{acao.iconeAcao}"
                      action="#{prMetodo}"
                      update="#{pgUtil.makeCaminhoCompletoID(idUpdate)}"

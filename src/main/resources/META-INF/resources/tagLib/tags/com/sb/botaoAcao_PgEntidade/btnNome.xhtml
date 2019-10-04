@@ -4,7 +4,7 @@
     xmlns:p="http://primefaces.org/ui"
     xmlns:f="http://xmlns.jcp.org/jsf/core">
     <p:commandButton onmousedown="esconderTooltips();"
-
+                     styleClass="#{classeEstilo}"
                      action="#{paginaAtual.infoPagina.comoPaginaEntidade.executarAcao(registro)}"
                      update="#{pgUtil.makeCaminhoCompletoID(idUpdate)}"
                      value="#{acao.nomeAcao}"
