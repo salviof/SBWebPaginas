@@ -184,7 +184,7 @@ public class WebPaginasServlet extends HttpServlet implements Serializable {
 
         try {
             controleDeSessao.getSessaoAtual();
-            System.out.println(controleDeSessao.getSessaoAtual().getUsuario().getNome());
+            //      System.out.println(controleDeSessao.getSessaoAtual().getUsuario().getNome());
         } catch (Throwable t) {
             SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "Controle de sessão não pode ser encontrado,"
                     + "A causa mais provavel é que a injeção via CDI não esteja funcionando no ambiente de Servlet"

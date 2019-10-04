@@ -128,8 +128,10 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
     protected void inicioPadraoMBEntidade() {
         try {
             if (getAcaoSelecionada() == null) {
-                setAcaoSelecionada(acaoListarRegistros);
-                executarAcaoSelecionada();
+                if (acaoListarRegistros != null) {
+                    setAcaoSelecionada(acaoListarRegistros);
+                    executarAcaoSelecionada();
+                }
             }
         } catch (Throwable t) {
             SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "Erro executando ações iniciais PostCosntruct de " + MB_paginaCadastroEntidades.class.getSimpleName() + " em" + this.getClass().getSimpleName(), t);
@@ -248,8 +250,10 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
             for (ItfAcaoDoSistema acao : pAcoesRegistro) {
                 acoesRegistros.add((ItfAcaoDoSistema) acao);
             }
-            if (acaoListarRegistros == null) {
-                throw new UnsupportedOperationException("ação Listar não foi configurada em " + this.getClass().getSimpleName());
+            if (acoesRegistros.stream().filter(ac -> ac.getTipoAcaoGenerica().equals(FabTipoAcaoSistemaGenerica.FORMULARIO_LISTAR)).findFirst().isPresent()) {
+                if (acaoListarRegistros == null) {
+                    throw new UnsupportedOperationException("ação Listar não foi configurada em " + this.getClass().getSimpleName());
+                }
             }
 
             entidadesListadas = new ArrayList<>();
@@ -369,6 +373,7 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
         temVisualizar = pTemVisualizar;
         temNovo = pTemNovo;
         temEditar = pTemEditar;
+
         temAlterarStatus = pTemAlterarStatus;
 
         configuraAcoes();
@@ -601,11 +606,11 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
             }
 
             if (temEditar & acaoEntidadeEditar == null) {
-                System.out.println("TODO corrigir constructor recebendo ação de edição");
+                System.out.println("TODO corrigir constructor não recebendo ação de edição");
             }
 
             if (temVisualizar & acaoEntidadeVisualizar == null) {
-                System.out.println("TODO corrigir constructor recebendo ação de visualizacao");
+                System.out.println("TODO corrigir constructor não recebendo ação de visualizacao");
             }
 
             if (temAlterarStatus & acaoEntidadeAlterarStatus == null) {
