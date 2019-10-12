@@ -71,3 +71,6 @@ ui-datatable-header.ui-widget-header.ui-corner-top{
 }
 
 
+#layout-topbar #menu-button.Animated1.active-menu {
+    height: 80px!important;
+}
