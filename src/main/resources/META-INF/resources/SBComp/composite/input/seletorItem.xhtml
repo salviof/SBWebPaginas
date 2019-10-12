@@ -34,7 +34,7 @@
     <cc:implementation>
 
         <sb:parametroMetodo nome="metodo" valor="#{cc.attrs.metodoOnChange}" />
-
+        <p:outputLabel value="#{cc.attrs.itemSelecionado}" rendered="#{cc.attrs.desabilitarEdicao}" />
         <p:selectOneMenu rendered="#{!cc.attrs.desabilitarEdicao}"
                          class=" seletorResponsivo colunaResponsiva  TexAlCenter #{componenteVisual.classeCSS}"
 

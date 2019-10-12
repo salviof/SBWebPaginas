@@ -12,8 +12,8 @@
         <ui:define name="input">
 
             <h:panelGroup rendered="#{valor != null and desabilitarEdicao and registro.umValorComLista}"  >
+                <p:outputLabel value="#{valor.nome}" rendered="#{desabilitarEdicao}" />
             </h:panelGroup>
-
 
             <h:panelGrid columns="3" style="width: 100%;" columnClasses="colunaResponsiva,tamanhoIconePequeno,tamanhoIconePequeno" rendered="#{!desabilitarEdicao}" >
                 <h:panelGroup >
