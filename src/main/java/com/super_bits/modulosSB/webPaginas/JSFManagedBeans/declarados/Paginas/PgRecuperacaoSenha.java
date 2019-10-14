@@ -20,6 +20,7 @@ import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.reflexao.
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.siteMap.parametrosURL.ParametroURL;
 import com.super_bits.modulosSB.webPaginas.controller.paginasDoSistema.FabAcaoPaginasDoSistema;
 import com.super_bits.modulosSB.webPaginas.controller.paginasDoSistema.InfoAcaoPaginaDoSistema;
+import com.super_bits.modulosSB.webPaginas.util.UtilSBWP_JSFTools;
 import java.util.Date;
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
@@ -69,14 +70,16 @@ public class PgRecuperacaoSenha extends MB_PaginaConversation {
                     throw new UnsupportedOperationException("O acesso não foi validado");
                 }
                 UsuarioSB usr = (UsuarioSB) usuario;
-
                 try {
-                    usr.getCPinst("senha").setValorSeValido(pr);
+                    usr.getCPinst("senha").setValorSeValido(novaSenha);
                     UtilSBPersistencia.mergeRegistro(usr, getEMPagina());
+                    UtilSBPersistencia.exluirRegistro(pr.getValor());
                 } catch (ErroValidacao ex) {
                     SBCore.enviarMensagemUsuario(ex.getMessage(), FabMensagens.ALERTA);
                 }
 
+                UtilSBWP_JSFTools.vaParaPaginaInicial();
+                SBCore.enviarAvisoAoUsuario("A senha foi alterada");
             }
         } catch (Throwable t) {
             SBCore.enviarMensagemUsuario("Erro alterando senha", FabMensagens.ERRO);
@@ -99,7 +102,7 @@ public class PgRecuperacaoSenha extends MB_PaginaConversation {
             }
 
             int fimCodigo = pr.getTextoEnviadoUrl().lastIndexOf("-");
-            String codigo = pr.getTextoEnviadoUrl().substring(0, fimCodigo - 1);
+            String codigo = pr.getTextoEnviadoUrl().substring(0, fimCodigo);
 
             TokenRecuperacaoSenha token = (TokenRecuperacaoSenha) pr.getValor();
             if (token.getValidade().getTime() <= new Date().getTime()) {
@@ -109,6 +112,9 @@ public class PgRecuperacaoSenha extends MB_PaginaConversation {
                 acessonegado = false;
                 setAcaoSelecionada(FabAcaoPaginasDoSistema.PAGINA_NATIVA_RECUPERACAO_SENHA_FRM_GERAR_NOVA_SENHA.getRegistro().getComoFormulario());
                 xhtmlAcaoAtual = FabAcaoPaginasDoSistema.PAGINA_NATIVA_RECUPERACAO_SENHA_FRM_GERAR_NOVA_SENHA.getRegistro().getComoFormulario().getXhtml();
+            }
+            if (acessonegado) {
+                acessonegado();
             }
         } catch (Throwable t) {
             acessonegado();

@@ -5,12 +5,21 @@
 package com.super_bits.modulosSB.webPaginas.controller.sessao;
 
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
+import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreEmail;
+import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.permissoes.token.ItfTokenRecuperacaoEmail;
+import com.super_bits.modulosSB.SBCore.modulos.Mensagens.FabMensagens;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.ItensGenericos.basico.UsuarioSistemaRoot;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfGrupoUsuario;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfSessao;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfUsuario;
 import com.super_bits.modulosSB.SBCore.modulos.sessao.ControleDeSessaoAbstratoSBCore;
+import com.super_bits.modulosSB.webPaginas.ConfigGeral.SBWebPaginas;
+import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.siteMap.AcaoComLink;
+import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.siteMap.MapaDeFormularios;
+import com.super_bits.modulosSB.webPaginas.controller.paginasDoSistema.FabAcaoPaginasDoSistema;
 import com.super_bits.modulosSB.webPaginas.util.UtilSBWPServletTools;
 import com.super_bits.modulosSB.webPaginas.util.UtilSBWP_JSFTools;
+import com.super_bits.modulosSB.webPaginas.util.UtillSBWPReflexoesWebpaginas;
 import java.io.File;
 import java.io.Serializable;
 import javax.annotation.PreDestroy;
@@ -21,6 +30,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.HttpSession;
 import org.coletivojava.fw.api.tratamentoErros.FabErro;
+import org.coletivojava.fw.utilCoreBase.UtilSBCoreComunicacao;
 
 /**
  *
@@ -109,6 +119,33 @@ public class ControleDeSessaoWeb extends ControleDeSessaoAbstratoSBCore implemen
     public void esqueceuaSenha() {
 
         enviarSenhaParaEmail(usuarioLogar);
+    }
+
+    @Override
+    protected void enviarSenhaParaEmail(String pEmail) {
+        ItfUsuario usuarioEncontrado = SBCore.getCentralPermissao().getUsuarioByEmail(pEmail);
+
+        if (usuarioEncontrado == null) {
+            SBCore.enviarMensagemUsuario("O email " + pEmail + " não foi encontrado no sistema", FabMensagens.ALERTA);
+        } else {
+
+            ItfTokenRecuperacaoEmail token = SBCore.getServicoPermissao().gerarTokenRecuperacaoDeSenha(usuarioEncontrado, 10080);
+            if (token == null) {
+                SBCore.enviarMensagemUsuario("Erro gerando token de acesso", FabMensagens.ERRO);
+                return;
+            }
+            if (UtilSBCoreEmail.enviarPorServidorPadrao(
+                    pEmail,
+                    UtilSBCoreComunicacao.getSaudacao() + ", " + usuarioEncontrado.getNome()
+                    + ", utilize <a href=\" " + MapaDeFormularios.
+                            getUrlFormulario(FabAcaoPaginasDoSistema.PAGINA_NATIVA_RECUPERACAO_SENHA_MB.getRegistro(), token)
+                    + "\" > este link,</a> para recuperar sua senha.",
+                    "Recuperação de senha")) {
+                SBCore.enviarAvisoAoUsuario("Um e-mail com a senha foi enviado para " + pEmail);
+            } else {
+                SBCore.enviarMensagemUsuario("Um erro ocorreu ao tentar enviar o e-mail com a senha para: " + pEmail + " entre em contato conosco para recuperar a senha", FabMensagens.ALERTA);
+            }
+        }
     }
 
     @Override
