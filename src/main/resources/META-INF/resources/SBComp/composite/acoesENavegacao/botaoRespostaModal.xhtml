@@ -44,7 +44,11 @@
                       required="true"
                       shortDescription="Metodo que será chamado ao selecionar uma ação"
                       />
+        <cc:attribute name="classeEstilo"
 
+                      default="#{null}"
+                      shortDescription="Especifica uma classe para estilizar o botão"
+                      />
 
     </cc:interface>
     <!-- IMPLEMENTATION -->
@@ -54,7 +58,7 @@
         <p:commandButton
             rendered="#{cc.attrs.resposta.tipoResposta.respostasPosiva}"
 
-            styleClass="btnIconeENome botao"
+            styleClass="btnIconeENome botao #{cc.attrs.classeEstilo}"
             icon="#{cc.attrs.resposta.tipoResposta.icone}"
             action="#{cc.attrs.metodo}"
             value="#{cc.attrs.resposta.tipoResposta.nome}"
@@ -68,7 +72,7 @@
 
         <p:commandButton
             rendered="#{!cc.attrs.resposta.tipoResposta.respostasPosiva}"
-            styleClass="btnIconeENome botao"
+            styleClass="btnIconeENome botao #{cc.attrs.classeEstilo}"
 
             icon="#{cc.attrs.resposta.tipoResposta.icone}"
             action="#{cc.attrs.metodo}"

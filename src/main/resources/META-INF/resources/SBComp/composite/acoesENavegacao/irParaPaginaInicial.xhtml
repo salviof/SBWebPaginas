@@ -9,14 +9,18 @@
     <!-- INTERFACE -->
     <cc:interface>
         <cc:attribute name="texto" default="ir para Pagina Inicial"/>
+        <cc:attribute name="classeEstilo"
 
+                      default="#{null}"
+                      shortDescription="Especifica uma classe para estilizar o botão"
+                      />
     </cc:interface>
     <!-- IMPLEMENTATION -->
     <cc:implementation>
 
 
         <h:form styleClass="TexAlCenter Container4">
-            <p:button style="" href="#{infoWebApp.urlPagina}" icon="fa fa-home"  value="#{cc.attrs.texto}"/>
+            <p:button  styleClass="#{cc.attrs.classeEstilo}" href="#{infoWebApp.urlPagina}" icon="fa fa-home"  value="#{cc.attrs.texto}"/>
         </h:form>
 
     </cc:implementation>

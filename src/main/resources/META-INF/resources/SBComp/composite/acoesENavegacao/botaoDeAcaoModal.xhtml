@@ -32,6 +32,11 @@
                       default="#{cc.attrs.acao.nomeAcao}"
                       type="java.lang.String"
                       />
+        <cc:attribute name="classeEstilo"
+
+                      default="#{null}"
+                      shortDescription="Especifica uma classe para estilizar o botão"
+                      />
 
 
     </cc:interface>
@@ -46,6 +51,7 @@
             idUpdate="#{cc.attrs.update}"
             layout="#{cc.attrs.tipoVisualizacao}"
             label="#{cc.attrs.label}"
+            classeEstilo="#{cc.attrs.classeEstilo}"
 
             />
 

@@ -22,14 +22,16 @@
                       default="#{layoutsComponenteSB.layoutBotoes.iconeENome}"
                       shortDescription="Tipo de visualização do botão (Utilize #tipos.tipoVisualBotao"
                       />
-        <cc:attribute name="cor"
-                      default="#{null}"
-                      shortDescription="Cor do botão caso ele deva ser exibido por em uma cor especifica"
-                      />
+
         <cc:attribute name="label"
                       type="java.lang.String"
                       shortDescription="Label do botão"
                       default="#{cc.attrs.acao.nomeAcao}"
+                      />
+        <cc:attribute name="classeEstilo"
+
+                      default="#{null}"
+                      shortDescription="Especifica uma classe para estilizar o botão"
                       />
     </cc:interface>
     <!-- IMPLEMENTATION -->
@@ -41,7 +43,7 @@
             idUpdate="#{cc.attrs.update}"
             label="#{cc.attrs.label}"
             icone="#{cc.attrs.acao.iconeAcao}"
-
+            classeEstilo="#{cc.attrs.classeEstilo}"
             />
 
     </cc:implementation>

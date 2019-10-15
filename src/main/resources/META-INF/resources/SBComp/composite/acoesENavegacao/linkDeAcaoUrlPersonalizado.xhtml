@@ -25,6 +25,11 @@
                       default="#{cc.attrs.acao.nomeAcao}"
                       type="java.lang.String"
                       />
+        <cc:attribute name="classeEstilo"
+
+                      default="#{null}"
+                      shortDescription="Especifica uma classe para estilizar o botão"
+                      />
     </cc:interface>
     <!-- IMPLEMENTATION -->
     <cc:implementation>
@@ -32,10 +37,11 @@
 
 
         <p:button href="#{cc.attrs.url}"
-                  styleClass="btnIconeENome botao"
+                  styleClass="btnIconeENome botao #{cc.attrs.classeEstilo}"
                   icon="#{cc.attrs.acao.iconeAcao}"
                   value="#{cc.attrs.label}"
                   target="_parent"
+
                   />
 
 

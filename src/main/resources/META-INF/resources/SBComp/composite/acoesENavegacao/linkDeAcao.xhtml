@@ -28,14 +28,21 @@
                       default="#{cc.attrs.acao.nomeAcao}"
                       type="java.lang.String"
                       />
+        <cc:attribute name="classeEstilo"
+
+                      default="#{null}"
+                      shortDescription="Especifica uma classe para estilizar o botão"
+                      />
     </cc:interface>
     <!-- IMPLEMENTATION -->
     <cc:implementation>
+
 
         <sb:botaoLink
             acao="#{cc.attrs.acao}"
             layout="#{cc.attrs.tipoVisualizacao}"
             label="#{cc.attrs.label}"
+            classeEstilo="#{cc.attrs.classeEstilo}"
             />
 
     </cc:implementation>
