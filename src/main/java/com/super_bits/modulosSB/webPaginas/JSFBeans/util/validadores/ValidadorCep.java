@@ -5,7 +5,7 @@
 package com.super_bits.modulosSB.webPaginas.JSFBeans.util.validadores;
 
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
-import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreCEP;
+
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringValidador;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campoInstanciado.ItfCampoInstanciado;
 import com.super_bits.modulosSB.webPaginas.JSFBeans.util.UtilSBWPMensagensJSF;
@@ -27,7 +27,10 @@ public class ValidadorCep implements Validator<String> {
     @Override
     public void validate(FacesContext fc, UIComponent uic, String pCep) throws ValidatorException {
         ItfCampoInstanciado campoInstanciado = UtilSBWP_JSFTools.getInputGenericoDoComponente(uic).getRegistro();
-        if (!UtilSBCoreCEP.cepExiste(pCep)) {
+//        SBCore.getServicoLocalizacao().getImplementacaoPadraoApiCep().
+//UtilSBCoreCEP.cepExiste(pCep);
+
+        if (!SBCore.getServicoLocalizacao().getImplementacaoPadraoApiCep().getImplementacaoDoContexto().cepExiste(pCep)) {
             if (campoInstanciado != null) {
                 if (campoInstanciado.isObrigatorio() || UtilSBCoreStringValidador.isNAO_NuloNemBranco(pCep)) {
                     if (campoInstanciado.getComoCampoLocalizacao().isCepEncontradoObrigatorio()) {
