@@ -25,15 +25,24 @@ public class BP_DataModelLasy<T extends ItfBeanSimples> extends LazyDataModel<T>
 
     private final List<T> listaCompleta;
     private final List<String> camposPesquisa;
+    private final boolean iniciarMostrandoTodos;
 
     public BP_DataModelLasy(List<T> listaCompleta) {
+        this(listaCompleta, null, false);
+    }
+
+    public BP_DataModelLasy(List<T> listaCompleta, boolean pIniciarMostrandoTodos) {
+        this(listaCompleta, null, pIniciarMostrandoTodos);
+    }
+
+    public BP_DataModelLasy(List<T> listaCompleta, List<String> camposPesquisa, boolean iniciarMostrandoTodos) {
         this.listaCompleta = listaCompleta;
-        camposPesquisa = null;
+        this.camposPesquisa = camposPesquisa;
+        this.iniciarMostrandoTodos = iniciarMostrandoTodos;
     }
 
     public BP_DataModelLasy(List<T> listaCompleta, List<String> pCampoPesquisa) {
-        this.listaCompleta = listaCompleta;
-        camposPesquisa = pCampoPesquisa;
+        this(listaCompleta, null, false);
     }
 
     @Override
@@ -55,7 +64,15 @@ public class BP_DataModelLasy<T extends ItfBeanSimples> extends LazyDataModel<T>
         ConcurrentLinkedQueue lista = new ConcurrentLinkedQueue();
 
         if (filters.isEmpty()) {
-            return new ArrayList();
+            if (iniciarMostrandoTodos) {
+                List listac = new ArrayList();
+
+                listaCompleta.forEach(listac::add);
+                setRowCount(listaCompleta.size());
+                return listac;
+            } else {
+                return new ArrayList();
+            }
         }
         String parametro = filters.values().iterator().next().toString().toUpperCase();
         boolean pesquisaNumerica = UtilSBCoreStringValidador.isContemApenasNumero(parametro);
@@ -96,6 +113,7 @@ public class BP_DataModelLasy<T extends ItfBeanSimples> extends LazyDataModel<T>
         this.setRowCount(listaOrdenada.size());
         long streamEndTime = System.currentTimeMillis();
         SBCore.enviarAvisoAoUsuario("Tempo Total: " + (streamEndTime - streamStartTime));
+
         if (listaOrdenada.size() > pageSize) {
             try {
                 return listaOrdenada.subList(first, first + pageSize);
