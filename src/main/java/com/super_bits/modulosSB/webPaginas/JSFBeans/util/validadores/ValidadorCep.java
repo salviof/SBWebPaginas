@@ -29,7 +29,12 @@ public class ValidadorCep implements Validator<String> {
         ItfCampoInstanciado campoInstanciado = UtilSBWP_JSFTools.getInputGenericoDoComponente(uic).getRegistro();
 //        SBCore.getServicoLocalizacao().getImplementacaoPadraoApiCep().
 //UtilSBCoreCEP.cepExiste(pCep);
-
+        if (UtilSBCoreStringValidador.isNuloOuEmbranco(pCep)) {
+            return;
+        }
+        if (!pCep.replace("-", "").matches("\\d{8}")) {
+            throw new ValidatorException(UtilSBWPMensagensJSF.criarMensagemJSF(FacesMessage.SEVERITY_WARN, "Cep inválido"));
+        }
         if (!SBCore.getServicoLocalizacao().getImplementacaoPadraoApiCep().getImplementacaoDoContexto().cepExiste(pCep)) {
             if (campoInstanciado != null) {
                 if (campoInstanciado.isObrigatorio() || UtilSBCoreStringValidador.isNAO_NuloNemBranco(pCep)) {
