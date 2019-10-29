@@ -24,6 +24,9 @@
             <p:panel  styleClass="Container12" rendered="#{!desabilitarEdicao}">
 
                 <p:pickList
+                    showSourceFilter="true"
+                    showTargetFilter="true"
+                    filterMatchMode="contains"
                     value="#{registro.comoSeltorItens.campoSeletorItens.dualListPrime}"
                     var="item"
                     itemValue="#{item}"

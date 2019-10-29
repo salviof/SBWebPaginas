@@ -28,15 +28,29 @@ public class BP_PickList<T extends ItfBeanSimplesSomenteLeitura> extends B_lista
      */
     public BP_PickList(List<T> pLista, List<T> pOrigem) {
         super(pLista, pOrigem);
+        ajuste(false);
         dualListPrime = new DualListModel<>((List) getOrigem(), (List) getListaObjetosSelecionados());
     }
 
     public BP_PickList(ItfCampoInstanciado pCampoInstanciado) {
         super(pCampoInstanciado);
-        dualListPrime = new DualListModel<>((List) getOrigem(), (List) getListaObjetosSelecionados());
+
+    }
+
+    @Override
+    public List<T> getOrigem() {
+        return super.getOrigem(); //chamada super do metodo (implementação classe pai)
     }
 
     public DualListModel<T> getDualListPrime() {
+        if (dualListPrime == null) {
+            dualListPrime = new DualListModel<>((List) getOrigem(), (List) getListaObjetosSelecionados());
+        }
+        if (getOrigem().isEmpty() && getListaObjetosSelecionados().isEmpty()) {
+
+            reloadOrigem();
+            atualizaPickListViewContexto();
+        }
         return dualListPrime;
     }
 

@@ -94,6 +94,7 @@
                         <c:if test="#{possuiMetodoOnChange}">
                             <p:ajax rendered="#{possuiMetodoOnChange}"
                                     global="true"
+
                                     event="dialogReturn"
                                     listener="#{prMetodo}"/>
                         </c:if>

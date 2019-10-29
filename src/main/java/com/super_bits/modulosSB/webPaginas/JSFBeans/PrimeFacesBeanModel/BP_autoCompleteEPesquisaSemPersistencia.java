@@ -20,16 +20,6 @@ public class BP_autoCompleteEPesquisaSemPersistencia<T extends ItfBeanSimplesSom
     }
 
     @Override
-    public void atualizaPickListViewContexto() {
-        // nada a fazer
-    }
-
-    @Override
-    protected void carregaOrigemFromDataBase() {
-        campoInstanciado.getListaDeOpcoes().forEach(origem::add);
-    }
-
-    @Override
     public void limparSelecao() {
         setObjetoSelecionado(null);
     }

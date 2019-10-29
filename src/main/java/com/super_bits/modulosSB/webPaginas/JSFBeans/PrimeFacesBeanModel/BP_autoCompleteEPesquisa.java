@@ -22,21 +22,6 @@ public class BP_autoCompleteEPesquisa<T extends ItfBeanSimplesSomenteLeitura> ex
     }
 
     @Override
-    public void atualizaPickListViewContexto() {
-        // nada a fazer
-        if (getOrigem().isEmpty()) {
-            campoInstanciado.getListaDeOpcoes().forEach(getOrigem()::add);
-        }
-
-    }
-
-    @Override
-    protected void carregaOrigemFromDataBase() {
-        origem.clear();
-        campoInstanciado.getListaDeOpcoes().forEach(origem::add);
-    }
-
-    @Override
     public void limparSelecao() {
         setObjetoSelecionado(null);
     }

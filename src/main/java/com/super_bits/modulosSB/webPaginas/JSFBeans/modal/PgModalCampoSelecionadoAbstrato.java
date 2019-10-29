@@ -44,7 +44,7 @@ public class PgModalCampoSelecionadoAbstrato extends PgModalAbstrato implements 
 
     @Override
     public void fecharModal() {
-        PrimeFaces.current().dialog().closeDynamic(null);
+        PrimeFaces.current().dialog().closeDynamic(campoinstanciado.getValor());
 
     }
 

@@ -5,11 +5,13 @@ import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreReflexao;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringValidador;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringsMaiuculoMinusculo;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.permissoes.ItfAcaoGerenciarEntidade;
+import com.super_bits.modulosSB.webPaginas.JSFBeans.modal.PgModalSBJSF;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.interfaces.ItfB_PaginaSimples;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.interfaces.ItfSiteMapa;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.reflexao.anotacoes.InfoPagina;
 import com.super_bits.modulosSB.webPaginas.controller.servletes.servletWebPaginas.EstruturaDeFormulario;
 import com.super_bits.modulosSB.webPaginas.util.UtilSBWPServletTools;
+import com.super_bits.modulosSB.webPaginas.util.UtilSBWP_JSFTools;
 import java.util.List;
 import org.coletivojava.fw.api.tratamentoErros.FabErro;
 
@@ -36,8 +38,13 @@ public abstract class MB_SiteMapa implements ItfSiteMapa {
     @Override
     public ItfB_PaginaSimples getPaginaNoContexto(String xhtmlGerenciarPG) throws UnsupportedOperationException {
         try {
-
-            ItfAcaoGerenciarEntidade acaoGestao = MapaDeFormularios.getEstruturaByXHTMLDeGestao(xhtmlGerenciarPG).getAcaoGestaoVinculada().getAcaoDeGestaoEntidade();
+            EstruturaDeFormulario estruturaFormulario = MapaDeFormularios.getEstruturaByXHTMLDeGestao(xhtmlGerenciarPG);
+            if (estruturaFormulario == null) {
+                if (xhtmlGerenciarPG.equals(UtilSBWP_JSFTools.FORMULARIO_MODAL_PESQUISA_ITEM_AVANCADO)) {
+                    return (ItfB_PaginaSimples) UtilSBWPServletTools.getBeanByNamed(UtilSBCoreStringsMaiuculoMinusculo.getPrimeiraLetraMinuscula(PgModalSBJSF.class.getSimpleName()), PgModalSBJSF.class);
+                }
+            }
+            ItfAcaoGerenciarEntidade acaoGestao = estruturaFormulario.getAcaoGestaoVinculada().getAcaoDeGestaoEntidade();
 
             String xhtml = acaoGestao.getXhtml();
 

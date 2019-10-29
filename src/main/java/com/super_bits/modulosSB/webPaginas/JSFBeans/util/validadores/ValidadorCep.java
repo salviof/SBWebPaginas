@@ -7,6 +7,7 @@ package com.super_bits.modulosSB.webPaginas.JSFBeans.util.validadores;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringValidador;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campoInstanciado.CampoInstanciadoGenerico;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campoInstanciado.ItfCampoInstanciado;
 import com.super_bits.modulosSB.webPaginas.JSFBeans.util.UtilSBWPMensagensJSF;
 import com.super_bits.modulosSB.webPaginas.util.UtilSBWP_JSFTools;
@@ -35,8 +36,10 @@ public class ValidadorCep implements Validator<String> {
         if (!pCep.replace("-", "").matches("\\d{8}")) {
             throw new ValidatorException(UtilSBWPMensagensJSF.criarMensagemJSF(FacesMessage.SEVERITY_WARN, "Cep inválido"));
         }
-        if (!SBCore.getServicoLocalizacao().getImplementacaoPadraoApiCep().getImplementacaoDoContexto().cepExiste(pCep)) {
+        if (!SBCore.getServicoLocalizacao().getImplementacaoPadraoApiCep().getImplementacaoDoContexto().isCepExiste(pCep)) {
             if (campoInstanciado != null) {
+                CampoInstanciadoGenerico cp = (CampoInstanciadoGenerico) campoInstanciado;
+
                 if (campoInstanciado.isObrigatorio() || UtilSBCoreStringValidador.isNAO_NuloNemBranco(pCep)) {
                     if (campoInstanciado.getComoCampoLocalizacao().isCepEncontradoObrigatorio()) {
                         throw new ValidatorException(UtilSBWPMensagensJSF.criarMensagemJSF(FacesMessage.SEVERITY_ERROR, "O cep não foi encontrado"));
