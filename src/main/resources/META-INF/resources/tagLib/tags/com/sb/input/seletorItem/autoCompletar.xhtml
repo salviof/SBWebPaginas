@@ -46,8 +46,8 @@
                                 global="true"
                                 event="itemSelect"
                                 listener="#{pgUtil.atualizaTelaPorID(idAtualizarOnChange)}"
-                                onstart="PF('#{pgUtil.getIdInputSBComponentePai(component)}').show();"
-                                oncomplete="PF('#{pgUtil.getIdInputSBComponentePai(component)}').hide();"
+                                onstart="bloquearArea('#{idAtualizarOnChange}')"
+                                oncomplete="bloquearArea('#{idAtualizarOnChange}')"
                                 />
                             <p:blockUI  block="#{idAtualizarOnChange}"   rendered="#{possuiIDOnChange}" widgetVar="#{pgUtil.getIdInputSBComponentePai(component)}"  >
                                 <h:panelGrid columns="2">
