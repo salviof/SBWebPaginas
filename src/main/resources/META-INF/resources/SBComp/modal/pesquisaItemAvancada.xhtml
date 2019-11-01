@@ -76,10 +76,8 @@
                                          actionListener="#{pgModalSBJSF.fecharModal()}"
                                          process="@this"
                                          >
-                            <f:setPropertyActionListener
-                                target="#{pgModalSBJSF.campoInstanciado.valor}"
-                                value="#{item}"
-                                />
+                            <f:setPropertyActionListener target="#{pgModalSBJSF.campoInstanciado.valor}" value="#{item}"
+                                                         />
                         </p:commandButton>
 
                     </p:column>
