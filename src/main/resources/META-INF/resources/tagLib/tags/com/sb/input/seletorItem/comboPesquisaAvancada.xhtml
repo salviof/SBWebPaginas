@@ -10,6 +10,7 @@
 
 
         <ui:define name="input">
+
             <h:panelGrid columns="2" style="width: 100%" columnClasses="colunaResponsiva,tamanhoIconePequeno" >
                 <p:selectOneMenu rendered="#{!desabilitarEdicao}"
                                  class=" seletorResponsivo colunaResponsiva  TexAlCenter #{componenteVisual.classeCSS}"
@@ -66,7 +67,7 @@
                             event="dialogReturn"
                             listener="#{pgUtil.atualizaTelaPorID(idAtualizarOnChange)}" />
                     </c:if>
-                    <f:setPropertyActionListener target="#{paginaAtual.infoPagina.modalDados.campoSelecionado}"
+                    <f:setPropertyActionListener target="#{paginaAtual.infoPagina.comoFormularioWeb.modalDados.campoSelecionado}"
                                                  value="#{registro}" />
 
                 </p:commandButton>

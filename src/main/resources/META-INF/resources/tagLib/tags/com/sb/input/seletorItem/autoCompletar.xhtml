@@ -46,8 +46,8 @@
                                 global="true"
                                 event="itemSelect"
                                 listener="#{pgUtil.atualizaTelaPorID(idAtualizarOnChange)}"
-                                onstart="PF('#{pgUtil.getIdInputSBComponentePai(component)}').show();"
-                                oncomplete="PF('#{pgUtil.getIdInputSBComponentePai(component)}').hide();"
+                                onstart="bloquearArea('#{idAtualizarOnChange}')"
+                                oncomplete="desbloquearArea('#{idAtualizarOnChange}')"
                                 />
                             <p:blockUI  block="#{idAtualizarOnChange}"   rendered="#{possuiIDOnChange}" widgetVar="#{pgUtil.getIdInputSBComponentePai(component)}"  >
                                 <h:panelGrid columns="2">
@@ -71,7 +71,7 @@
                 <h:panelGroup >
 
                     <p:commandButton
-                        icon="#{acoesPaginasDoSistema_PaginaPesquisaAvancadaMbPadrao.paginaPesquisaAvancadaMbPadrao.icone}"
+                        icon="#{acoesPaginasDoSistema_PaginaPesquisaAvancadaMbPadrao.paginaPesquisaAvancadaMbPadrao.iconeAcao}"
                         rendered="#{!desabilitarEdicao}"
                         actionListener="#{pgUtil.exibirModalImportacaoPesquisaAvancada()}"
                         partialSubmit="true"
@@ -94,7 +94,6 @@
                         <c:if test="#{possuiMetodoOnChange}">
                             <p:ajax rendered="#{possuiMetodoOnChange}"
                                     global="true"
-
                                     event="dialogReturn"
                                     listener="#{prMetodo}"/>
                         </c:if>
