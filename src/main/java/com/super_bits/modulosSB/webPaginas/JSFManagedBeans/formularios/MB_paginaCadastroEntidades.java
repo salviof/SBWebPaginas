@@ -734,7 +734,9 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
                 ItfBeanSimplesSomenteLeitura entidadeComoBeanSimples = (ItfBeanSimplesSomenteLeitura) getEntidadeSelecionada();
 
                 renovarEMPagina();
-                setEntidadeSelecionada(UtilSBPersistencia.loadEntidade(entidadeComoBeanSimples, getEMPagina()));
+                if (entidadeComoBeanSimples.getId() != 0) {
+                    setEntidadeSelecionada(UtilSBPersistencia.loadEntidade(entidadeComoBeanSimples, getEMPagina()));
+                }
             }
         } catch (ClassCastException t) {
 
