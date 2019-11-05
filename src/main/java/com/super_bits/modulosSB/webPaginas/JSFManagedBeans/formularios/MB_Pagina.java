@@ -5,6 +5,8 @@ import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.ControllerAppAbstratoSBCore;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ItfAcaoDoSistema;
 import com.super_bits.modulosSB.SBCore.modulos.fabrica.ItfFabricaAcoes;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campoInstanciado.CampoInstanciadoGenerico;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campoInstanciado.ItfAtributoObjetoEditavel;
 import com.super_bits.modulosSB.webPaginas.controller.sessao.SessaoAtualSBWP;
 import java.util.HashMap;
 import java.util.Map;
@@ -124,6 +126,19 @@ public abstract class MB_Pagina extends B_Pagina {
             SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "Erro obendo titulo da pagina", t);
         }
         return -1;
+    }
+
+    /**
+     *
+     * Permite editar atributos de um campo, do bean selecionado em tempo de
+     * execução ( Caso de uso: tornar um campo somenteLeitura no formulário de
+     * maneira condicional)
+     *
+     * @param pAtributo
+     * @return
+     */
+    protected ItfAtributoObjetoEditavel getAtributoEditavelBeanSelecionado(String pAtributo) {
+        return ((ItfAtributoObjetoEditavel) ((CampoInstanciadoGenerico) getBeanSelecionado().getCPinst(pAtributo)).getAtributosDoObjeto());
     }
 
 }
