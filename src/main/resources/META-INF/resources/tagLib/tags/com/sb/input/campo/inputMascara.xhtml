@@ -12,8 +12,6 @@
         <ui:define name="input">
             <p:outputLabel value="#{valor}" rendered="#{desabilitarEdicao}"/>
             <p:inputMask
-
-
                 mask="#{mascara}"
                 class=" campoResponsivo  TexAlCenter #{componente.classeCSS}"
                 disabled="#{desabilitarEdicao}"
@@ -44,8 +42,10 @@
                 <c:if test="#{atualizarGrupoOnChange}" >
                     <p:ajax
                         rendered="#{atualizarGrupoOnChange}"
-
                         event="valueChange"
+                        onstart="bloquearArea('#{pgUtil.getNomeIdPFieldSetPai(component)}')"
+                        oncomplete="desbloquearArea('#{pgUtil.getNomeIdPFieldSetPai(component)}')"
+                        process="#{pgUtil.getIdInputSBComponentePai(component)}"
                         update="#{pgUtil.getNomeIdPFieldSetPai(component)}"/>
                 </c:if>
 

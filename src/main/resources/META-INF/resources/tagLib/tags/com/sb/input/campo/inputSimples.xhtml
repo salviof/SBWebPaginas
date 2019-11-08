@@ -29,7 +29,9 @@
                     <p:ajax
                         rendered="#{atualizarGrupoOnChange}"
                         event="valueChange"
-
+                        onstart="bloquearArea('#{pgUtil.getNomeIdPFieldSetPai(component)}')"
+                        oncomplete="desbloquearArea('#{pgUtil.getNomeIdPFieldSetPai(component)}')"
+                        process="#{pgUtil.getIdInputSBComponentePai(component)}"
                         update="#{pgUtil.getNomeIdPFieldSetPai(component)}"/>
                 </c:if>
                 <c:if test="#{atualizarFormOnChange}" >

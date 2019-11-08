@@ -64,7 +64,7 @@
                 </h:panelGroup>
 
 
-                <h:panelGroup styleClass="Fright" layout="block" >
+                <h:panelGroup styleClass="Fright BotaoIncluirItemGenerico" layout="block" >
 
                     <p:commandButton
                         icon="fa fa-plus-square-o"
@@ -105,6 +105,7 @@
                                                     layout="#{cc.attrs.tipoVisualizacaoLabel}"
                                                     idAtualizarOnChange="@this"
                                                     transient="false"
+                                                    desabilitarEdicao="#{itemDaLista.getCampoByNomeOuAnotacao(cpItem.caminhoCampoRelativoAListaPai).somenteLeitura}"
                                                     />
                                             </p:fragment>
 
