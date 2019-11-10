@@ -8,7 +8,9 @@ import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campo.seletore
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campoInstanciado.ItfCampoInstanciado;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfBeanSimplesSomenteLeitura;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
+import jersey.repackaged.com.google.common.collect.Lists;
 import org.primefaces.model.DualListModel;
 
 /**
@@ -42,15 +44,18 @@ public class BP_PickList<T extends ItfBeanSimplesSomenteLeitura> extends B_lista
         return super.getOrigem(); //chamada super do metodo (implementação classe pai)
     }
 
+    @Override
+    public void atualizarListaCompleta() {
+        super.atualizarListaCompleta();
+
+    }
+
     public DualListModel<T> getDualListPrime() {
         if (dualListPrime == null) {
-            dualListPrime = new DualListModel<>((List) getOrigem(), (List) getListaObjetosSelecionados());
-        }
-        if (getOrigem().isEmpty() && getListaObjetosSelecionados().isEmpty()) {
-
-            reloadOrigem();
+            dualListPrime = new DualListModel<>(Lists.newLinkedList(), (List) getListaObjetosSelecionados());
             atualizaPickListViewContexto();
         }
+
         return dualListPrime;
     }
 
@@ -66,24 +71,24 @@ public class BP_PickList<T extends ItfBeanSimplesSomenteLeitura> extends B_lista
     @Override
     public void atualizaPickListViewContexto() {
         if (dualListPrime != null) {
-            dualListPrime.setSource((List) getOrigem());
-            dualListPrime.setTarget((List) getListaObjetosSelecionados());
+
+            if (!dualListPrime.getTarget().isEmpty()) {
+                dualListPrime.getTarget().stream().filter(it -> !getListaObjetosSelecionados().contains(it)).
+                        forEach(getListaObjetosSelecionados()::add);
+                dualListPrime.setTarget(getListaObjetosSelecionados());
+            }
+            ajuste(true);
+            dualListPrime.getSource().clear();
+            getOrigem().stream()
+                    .filter(it -> !dualListPrime.getTarget().contains(it))
+                    .forEach(dualListPrime.getSource()::add);
+
         }
     }
 
     @Override
     public void atualizaOrigemPelaSelecao() {
 
-        if (dualListPrime != null) {
-            getOrigem().clear();
-            getListaObjetosSelecionados().clear();
-            for (T itemSrc : dualListPrime.getSource()) {
-                getOrigem().add((T) itemSrc);
-            }
-            for (T itemLista : dualListPrime.getTarget()) {
-                getListaObjetosSelecionados().add((T) itemLista);
-            }
-        }
         atualizaPickListViewContexto();
 
     }

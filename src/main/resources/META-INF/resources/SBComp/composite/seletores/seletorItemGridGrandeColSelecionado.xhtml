@@ -33,6 +33,7 @@
                       shortDescription="Atributo para armazenamento do filtro de pesquisa"
                       />
         <cc:attribute name="metodoAoSelecionar" type="javax.el.MethodExpression" />
+        <cc:attribute name="metodoJsSelecionar" />
         <cc:attribute name="grupoCampos" type="com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campo.ItfGrupoCampos"/>
 
     </cc:interface>
@@ -58,6 +59,7 @@
                                                      frasePesquisa="#{cc.attrs.frasePesquisa}"
                                                      grupoCampos="#{cc.attrs.grupoCampos}"
                                                      label="#{cc.attrs.label}"
+                                                     metodoJsSelecionar="#{cc.attrs.metodoJsSelecionar}"
                                                      mensagemSemRegistros="#{cc.attrs.mensagemSemRegistros}"
                                                      rendered="#{cc.attrs.itemSelecionado==null}"
                                                      />
