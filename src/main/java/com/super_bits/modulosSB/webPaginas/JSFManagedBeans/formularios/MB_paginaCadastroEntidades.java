@@ -502,7 +502,12 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
     public void setAcaoSelecionada(ItfAcaoDoSistema acaoSelecionada) {
 
         this.acaoSelecionada = acaoSelecionada;
+        if (acaoSelecionada != null && acaoSelecionada.isUmaAcaoFormulario()) {
+            if (!acaoSelecionada.getComoFormulario().getEstadoFormulario().equals(FabEstadoFormulario.INDEFINIDO)) {
+                atualizaInformacoesDeEdicao(acaoSelecionada.getComoFormulario().getEstadoFormulario());
+            }
 
+        }
     }
 
     @Override
@@ -1166,10 +1171,7 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
                     atualizaInformacoesDeEdicao(FabEstadoFormulario.VISUALIZAR);
                     break;
                 case FORMULARIO_LISTAR:
-                    if (SBCore.getEstadoAPP() != SBCore.ESTADO_APP.PRODUCAO) {
-                        System.out.println("Definindo modo somente leitura e Atualizando os dados da lista");
 
-                    }
                     if (fecharEntityManagerAoListar) {
                         renovarEMPagina();
                     }

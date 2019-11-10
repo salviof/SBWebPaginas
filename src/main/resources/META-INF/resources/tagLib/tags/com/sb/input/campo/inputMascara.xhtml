@@ -10,7 +10,7 @@
 
     <ui:decorate template="#{layout.xhtmlJsfCaminhoRelativo}">
         <ui:define name="input">
-            <p:outputLabel value="#{valor}" rendered="#{desabilitarEdicao}"/>
+
             <p:inputMask
                 mask="#{mascara}"
                 class=" campoResponsivo  TexAlCenter #{componente.classeCSS}"
@@ -18,7 +18,7 @@
                 rendered="#{!desabilitarEdicao}"
                 required="#{obrigatorio}"
                 value="#{valor}"
-                validatorMessage="O campo #{label} não é um valor válido"
+
                 requiredMessage="O campo #{label} não foi informado! "
                 autoClear="false"
                 validator="org.super_bits.view.validadores.generico"
@@ -79,7 +79,7 @@
 
 
             </p:inputMask>
-
+            <p:outputLabel value="#{valor}" rendered="#{desabilitarEdicao}"/>
 
         </ui:define>
     </ui:decorate>
