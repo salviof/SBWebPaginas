@@ -52,7 +52,13 @@ public class BP_PickList<T extends ItfBeanSimplesSomenteLeitura> extends B_lista
 
     public DualListModel<T> getDualListPrime() {
         if (dualListPrime == null) {
-            dualListPrime = new DualListModel<>(Lists.newLinkedList(), (List) getListaObjetosSelecionados());
+            dualListPrime = new DualListModel<>(Lists.newLinkedList(), Lists.newLinkedList());
+            getListaObjetosSelecionados().forEach(dualListPrime.getTarget()::add);
+            atualizaPickListViewContexto();
+        }
+        if (dualListPrime.getSource().isEmpty()
+                && dualListPrime.getTarget().isEmpty()) {
+            atualizarListaCompleta();
             atualizaPickListViewContexto();
         }
 
@@ -73,9 +79,10 @@ public class BP_PickList<T extends ItfBeanSimplesSomenteLeitura> extends B_lista
         if (dualListPrime != null) {
 
             if (!dualListPrime.getTarget().isEmpty()) {
+                getListaObjetosSelecionados().clear();
                 dualListPrime.getTarget().stream().filter(it -> !getListaObjetosSelecionados().contains(it)).
                         forEach(getListaObjetosSelecionados()::add);
-                dualListPrime.setTarget(getListaObjetosSelecionados());
+
             }
             ajuste(true);
             dualListPrime.getSource().clear();
