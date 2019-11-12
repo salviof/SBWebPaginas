@@ -74,20 +74,22 @@
                         icon="#{acoesPaginasDoSistema_PaginaPesquisaAvancadaMbPadrao.paginaPesquisaAvancadaMbPadrao.iconeAcao}"
                         rendered="#{!desabilitarEdicao}"
                         actionListener="#{pgUtil.exibirModalImportacaoPesquisaAvancada()}"
+                        update="#{pgUtil.getIdInputPai(component)}"
                         partialSubmit="true"
                         process="@this"
                         >
 
 
                         <p:ajax event="dialogReturn"
-                                update="@form"
 
-                                listener="#{pgUtil.atualizaTelaPorID(pgUtil.getIdDoComponenteAtual(component))}" />
+                                update="#{pgUtil.getIdInputPai(component)}"
+                                listener="#{pgUtil.atualizaTelaPorID(pgUtil.getIdInputPai(component))}" />
 
                         <c:if test="#{possuiIDOnChange}" >
                             <p:ajax
                                 rendered="#{possuiIDOnChange}"
                                 global="true"
+                                update="#{pgUtil.getIdInputPai(component)}"
                                 event="dialogReturn"
                                 listener="#{pgUtil.atualizaTelaPorID(idAtualizarOnChange)}"
                                 />
