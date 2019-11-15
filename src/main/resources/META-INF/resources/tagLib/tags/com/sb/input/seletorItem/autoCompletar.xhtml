@@ -73,17 +73,16 @@
                     <p:commandButton
                         icon="#{acoesPaginasDoSistema_PaginaPesquisaAvancadaMbPadrao.paginaPesquisaAvancadaMbPadrao.iconeAcao}"
                         rendered="#{!desabilitarEdicao}"
-                        actionListener="#{pgUtil.exibirModalImportacaoPesquisaAvancada()}"
                         update="#{pgUtil.getIdInputPai(component)}"
+                        actionListener="#{pgUtil.exibirModalImportacaoPesquisaAvancada()}"
                         partialSubmit="true"
                         process="@this"
                         >
 
 
                         <p:ajax event="dialogReturn"
-
-                                update="#{pgUtil.getIdInputPai(component)}"
-                                listener="#{pgUtil.atualizaTelaPorID(pgUtil.getIdInputPai(component))}" />
+                                update="@form"
+                                listener="#{pgUtil.atualizaTelaPorID(pgUtil.getIdDoComponenteAtual(component))}" />
 
                         <c:if test="#{possuiIDOnChange}" >
                             <p:ajax

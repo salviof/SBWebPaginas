@@ -30,9 +30,7 @@
                       shortDescription="Atributo para armazenamento do filtro de pesquisa"
                       />
         <cc:attribute name="metodoAoSelecionar" type="javax.el.MethodExpression" />
-        <cc:attribute name="metodoJsSelecionar" />
         <cc:attribute name="grupoCampos" type="com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campo.ItfGrupoCampos"/>
-
 
     </cc:interface>
 
@@ -98,7 +96,9 @@
                                filterStyleClass="listaComOcoesOcultaFitro"
                                width="#{layoutListagem.getColunaByNomeCompleto(coluna.caminhoCompletoComGrupoCampo).porcentagemCalculada}%"
                                >
+
                         <f:facet name="header">
+
                             <h:outputText value= "#{coluna.label}"/>
                         </f:facet>
                         <center>
@@ -116,14 +116,12 @@
                         </center>
                     </p:columns>
                     <p:column headerText="" width="50">
-                        <p:commandButton icon="fa fa-hand-pointer-o"
-                                         action="#{metodoEscolha}"
+
+                        <p:commandButton icon="fa fa-hand-pointer-o" actionListener="#{metodoEscolha}"
                                          update="#{pgUtil.getNomeIdPainelDoComponente(component)}"
-                                         process="#{pgUtil.getNomeIdPainelDoComponente(component)}"
-                                         oncomplete="#{cc.attrs.metodoJsSelecionar}"
+                                         process="@this"
                                          >
-                            <f:setPropertyActionListener target="#{cc.attrs.itemSelecionado}"
-                                                         value="#{item}"
+                            <f:setPropertyActionListener target="#{cc.attrs.itemSelecionado}" value="#{item}"
                                                          />
                         </p:commandButton>
 

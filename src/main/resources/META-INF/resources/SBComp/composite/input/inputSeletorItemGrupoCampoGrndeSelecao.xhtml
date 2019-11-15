@@ -13,7 +13,7 @@
                       default="#{pgUtil.campoNaoImplementado}"
                       shortDescription="Exibe um atributo de um Objeto para insersão de dados do usuário (Ou Visualização)"
                       />
-        <cc:attribute name="metodoJsSelecionar" />
+
         <cc:attribute name="titulo"  default="Pesquisa de  #{cc.attrs.campoInstanciado.label}"/>
         <cc:attribute name="metodoAoSelecionar" type="javax.el.MethodExpression" />
     </cc:interface>
@@ -29,7 +29,7 @@
                 atributoBeanFriltro="#{cc.attrs.campoInstanciado.comoCampoSeltorItem.filtro}"
                 lista="#{cc.attrs.campoInstanciado.comoCampoSeltorItem.seletor.origem}"
                 frasePesquisa="Pesquise por #{cc.attrs.campoInstanciado.nomeDoObjetoPlural} cadastrados"
-                metodoJsSelecionar='#{cc.attrs.metodoJsSelecionar}'
+
                 grupoCampos="#{cc.attrs.campoInstanciado.comoCampoSeltorItem.grupoCampoExibicao}"
                 mensagemSemRegistros="Nenhum #{cc.attrs.campoInstanciado.nomeDoObjeto} Encontrado"
                 label="#{cc.attrs.titulo}"
