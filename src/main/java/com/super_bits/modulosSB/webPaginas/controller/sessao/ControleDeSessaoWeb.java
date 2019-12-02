@@ -4,6 +4,7 @@
  */
 package com.super_bits.modulosSB.webPaginas.controller.sessao;
 
+import com.sun.faces.config.InitFacesContext;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreEmail;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.permissoes.token.ItfTokenRecuperacaoEmail;
@@ -58,7 +59,8 @@ public class ControleDeSessaoWeb extends ControleDeSessaoAbstratoSBCore implemen
     public ItfSessao getSessaoAtual() {
 
         if (sessaoAtual == null) {
-            if (FacesContext.getCurrentInstance() != null) {
+            Object instanciaFaces = FacesContext.getCurrentInstance();
+            if (instanciaFaces != null && !(instanciaFaces instanceof InitFacesContext)) {
                 sessaoAtual = UtilSBWPServletTools.getSessaoAtual();
 
             } else {
