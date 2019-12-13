@@ -7,7 +7,7 @@ package com.super_bits.modulosSB.webPaginas.JSFBeans.modal;
 import com.google.gson.Gson;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.arquivosConfiguracao.ConfigModulo;
-import com.super_bits.modulosSB.SBCore.modulos.Controller.WS.RespostaWebService;
+import com.super_bits.modulosSB.SBCore.integracao.libRestClient.WS.RespostaWebService;
 import com.super_bits.modulosSB.SBCore.modulos.requisito.ComentarioRequisitoEnvioNovo;
 import com.super_bits.modulosSB.SBCore.modulos.requisito.FabConfigModuloJiraRequisitos;
 import com.super_bits.modulosSB.SBCore.modulos.requisito.Requisito;

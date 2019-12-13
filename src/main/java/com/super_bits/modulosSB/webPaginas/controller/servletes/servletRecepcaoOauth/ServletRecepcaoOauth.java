@@ -6,9 +6,9 @@ package com.super_bits.modulosSB.webPaginas.controller.servletes.servletRecepcao
 
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringValidador;
-import com.super_bits.modulosSB.SBCore.modulos.Controller.WS.oauth.MapaInfoOauthEmAndamento;
-import com.super_bits.modulosSB.SBCore.modulos.Controller.WS.oauth.Oath2Conexao;
-import com.super_bits.modulosSB.SBCore.modulos.Controller.WS.oauth.TipoClienteOauth;
+import com.super_bits.modulosSB.SBCore.integracao.libRestClient.api.implementacao.MapaInfoOauthEmAndamento;
+import com.super_bits.modulosSB.SBCore.integracao.libRestClient.implementacao.Oath2Conexao;
+import com.super_bits.modulosSB.SBCore.integracao.libRestClient.implementacao.TipoClienteOauth;
 import com.super_bits.modulosSB.webPaginas.ConfigGeral.SBWebPaginas;
 import com.super_bits.modulosSB.webPaginas.controller.servletes.ServletArquivosSBWPGenerico;
 import com.super_bits.modulosSB.webPaginas.controller.servletes.urls.UrlInterpretada;

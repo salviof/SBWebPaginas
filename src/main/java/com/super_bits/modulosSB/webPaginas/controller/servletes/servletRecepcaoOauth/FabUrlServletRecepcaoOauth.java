@@ -5,8 +5,8 @@
 package com.super_bits.modulosSB.webPaginas.controller.servletes.servletRecepcaoOauth;
 
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.TIPO_PARTE_URL;
-import com.super_bits.modulosSB.SBCore.modulos.Controller.WS.oauth.FabTipoClienteOauth;
-import com.super_bits.modulosSB.SBCore.modulos.Controller.WS.oauth.TipoClienteOauth;
+import com.super_bits.modulosSB.SBCore.integracao.libRestClient.api.implementacao.FabTipoClienteOauth;
+import com.super_bits.modulosSB.SBCore.integracao.libRestClient.implementacao.TipoClienteOauth;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.reflexao.anotacoes.beans.InfoParametroURL;
 import com.super_bits.modulosSB.webPaginas.controller.servletes.urls.ItfFabUrlServletSBFW;
 import java.io.Serializable;
