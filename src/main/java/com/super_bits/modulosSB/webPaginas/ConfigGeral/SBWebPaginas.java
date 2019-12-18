@@ -5,8 +5,9 @@ import com.super_bits.modulosSB.SBCore.ConfigGeral.arquivosConfiguracao.ArquivoC
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringValidador;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.permissoes.ItfAcaoFormulario;
 import com.super_bits.modulosSB.SBCore.modulos.ManipulaArquivo.UtilSBCoreArquivos;
-import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.siteMap.parametrosURL.ParametroURL;
+
 import com.super_bits.modulosSB.webPaginas.controller.servletes.WebPaginasServlet;
+import com.super_bits.modulosSB.webPaginas.controller.servletes.urls.parametrosURL.ParametroURL;
 import java.util.List;
 import javax.servlet.ServletContext;
 import org.coletivojava.fw.api.tratamentoErros.FabErro;

@@ -10,7 +10,8 @@ import com.super_bits.modulosSB.SBCore.modulos.ManipulaArquivo.acessoArquivo.Tip
 import com.super_bits.modulosSB.webPaginas.ConfigGeral.SBWebPaginas;
 import com.super_bits.modulosSB.webPaginas.controller.servletes.ServletArquivosSBWPGenerico;
 import com.super_bits.modulosSB.webPaginas.controller.servletes.urls.UrlInterpretada;
-import com.super_bits.modulosSB.webPaginas.controller.servletes.urls.UtilFabUrlServlet;
+import com.super_bits.modulosSB.webPaginas.controller.servletes.util.UtilFabUrlServlet;
+
 import com.super_bits.modulosSB.webPaginas.controller.sessao.QlSessaoFacesContext;
 import com.super_bits.modulosSB.webPaginas.controller.sessao.SessaoAtualSBWP;
 import com.super_bits.modulosSB.webPaginas.util.UtilSBWP_JSFTools;

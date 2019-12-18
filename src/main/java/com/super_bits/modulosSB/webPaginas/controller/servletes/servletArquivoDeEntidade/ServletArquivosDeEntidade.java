@@ -6,7 +6,6 @@ package com.super_bits.modulosSB.webPaginas.controller.servletes.servletArquivoD
 
 import com.super_bits.modulosSB.Persistencia.dao.UtilSBPersistencia;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
-import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringBuscaTrecho;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringValidador;
 import com.super_bits.modulosSB.SBCore.modulos.ManipulaArquivo.TipoRecurso;
 import com.super_bits.modulosSB.SBCore.modulos.ManipulaArquivo.acessoArquivo.FabTipoAcessoArquivo;
@@ -22,7 +21,8 @@ import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.ItemSimplesOffil
 import com.super_bits.modulosSB.webPaginas.ConfigGeral.SBWebPaginas;
 import com.super_bits.modulosSB.webPaginas.controller.servletes.ServletArquivosSBWPGenerico;
 import com.super_bits.modulosSB.webPaginas.controller.servletes.urls.UrlInterpretada;
-import com.super_bits.modulosSB.webPaginas.controller.servletes.urls.UtilFabUrlServlet;
+import com.super_bits.modulosSB.webPaginas.controller.servletes.util.UtilFabUrlServlet;
+
 import com.super_bits.modulosSB.webPaginas.controller.sessao.QlSessaoFacesContext;
 import com.super_bits.modulosSB.webPaginas.controller.sessao.SessaoAtualSBWP;
 import com.super_bits.modulosSB.webPaginas.util.UtilSBWP_JSFTools;

@@ -18,6 +18,7 @@ import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.siteMap.MB_SiteMapa;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.siteMap.MapaDeFormularios;
 import com.super_bits.modulosSB.webPaginas.controller.servletes.servletWebPaginas.ConfiguracoesDeFormularioPorUrl;
 import com.super_bits.modulosSB.webPaginas.controller.servletes.servletWebPaginas.EstruturaDeFormulario;
+import com.super_bits.modulosSB.webPaginas.controller.servletes.util.UtilFabUrlServlet;
 import com.super_bits.modulosSB.webPaginas.controller.sessao.ControleDeSessaoWeb;
 import com.super_bits.modulosSB.webPaginas.util.UtilSBWPServletTools;
 import com.super_bits.modulosSB.webPaginas.util.UtilSBWP_JSFTools;
@@ -199,7 +200,7 @@ public class WebPaginasServlet extends HttpServlet implements Serializable {
         ItfUsuario usuario = controleDeSessao.getSessaoAtual().getUsuario();
         String recurso = null;
         try {
-            List<String> partes = UtilSBWPServletTools.getSlugsDeUrl(requisicao);
+            List<String> partes = UtilFabUrlServlet.getSlugsDeUrl(requisicao);
             //String recurso = "/resources/SBComp/SBSystemPages/paginaNaoEncontrada.xhtml";
 
             for (String parteUrl : partes) {

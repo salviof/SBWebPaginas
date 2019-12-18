@@ -6,7 +6,8 @@ package com.super_bits.modulosSB.webPaginas.ConfigGeral;
 
 import com.super_bits.modulosSB.SBCore.ConfigGeral.arquivosConfiguracao.ConfigModulo;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringValidador;
-import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.siteMap.parametrosURL.ParametroURL;
+import com.super_bits.modulosSB.webPaginas.controller.servletes.urls.parametrosURL.ParametroURL;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -57,11 +58,6 @@ public abstract class ConfiguradorWPPadraoArquivoConfiguracao implements ItfConf
             }
         }
         return urlbase;
-    }
-
-    @Override
-    public List<ParametroURL> parametrosDeAplicacao() {
-        return new ArrayList<>();
     }
 
     @Override

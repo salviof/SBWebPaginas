@@ -4,11 +4,13 @@ import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreReflexao;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.permissoes.ItfAcaoGerenciarEntidade;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.interfaces.ItfB_Pagina;
-import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.reflexao.anotacoes.beans.InfoParametroURL;
+
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.siteMap.MapaDeFormularios;
-import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.siteMap.parametrosURL.ParametroURL;
-import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.siteMap.parametrosURL.ParametroUrlInstanciado;
+
 import com.super_bits.modulosSB.webPaginas.controller.servletes.servletWebPaginas.EstruturaDeFormulario;
+import com.super_bits.modulosSB.webPaginas.controller.servletes.util.UtilFabUrlServlet;
+import com.super_bits.modulosSB.webPaginas.controller.servletes.urls.parametrosURL.ParametroURL;
+import com.super_bits.modulosSB.webPaginas.controller.servletes.urls.parametrosURL.ParametroUrlInstanciado;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
@@ -86,7 +88,7 @@ public abstract class UtillSBWPReflexoesWebpaginas {
 
                     //System.out.println("Lista Auto Instanciada" + campo.getName());
                 } catch (Throwable ex) {
-                    SBCore.RelatarErro(FabErro.SOLICITAR_REPARO,"Não foi possível simular a Injeção do campo" + campo.getName(), ex);
+                    SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "Não foi possível simular a Injeção do campo" + campo.getName(), ex);
                 }
             }
         }
@@ -102,7 +104,7 @@ public abstract class UtillSBWPReflexoesWebpaginas {
         List<Field> lista = UtilSBCoreReflexao.procuraCamposPorTipo(pClasseFormulario, ParametroURL.class);
         List<ParametroURL> parametrosDaPagina = new ArrayList<>();
         for (Field cp : lista) {
-            ParametroURL novoParametro = new ParametroUrlInstanciado(UtillSBWPReflexoesWebpaginas.getInfoParametroDeUrl(cp));
+            ParametroURL novoParametro = new ParametroUrlInstanciado(UtilFabUrlServlet.getInfoParametroDeUrl(cp));
             parametrosDaPagina.add(novoParametro);
         }
         return parametrosDaPagina;
@@ -115,11 +117,4 @@ public abstract class UtillSBWPReflexoesWebpaginas {
 
     }
 
-    public static InfoParametroURL getInfoParametroDeUrl(Field cp) {
-        InfoParametroURL infoPr = cp.getDeclaredAnnotation(InfoParametroURL.class);
-        if (infoPr == null) {
-            throw new UnsupportedOperationException("Erro o parametro " + cp.getName() + " não foi anotado com @InfoParametro em" + cp.getDeclaringClass().getSimpleName());
-        }
-        return infoPr;
-    }
 }

@@ -75,36 +75,6 @@ public class UtilSBWPServletTools {
         }
     }
 
-    /**
-     *
-     * Retorna as slugs da url utilizada na requisição em um array
-     *
-     * Ex:
-     * www.portalLegalPraBctaQueDesenvolvi.com.br/arquivos/imagens/imagem.jpg
-     *
-     * Retronaria: um array: [arquivos,imagens,imagem.jpg]
-     *
-     * @param requisicao
-     * @return
-     */
-    public static List<String> getSlugsDeUrl(HttpServletRequest requisicao) {
-        String caminhoCOmpleto = "";
-        try {
-
-            String caminhoSemURL = requisicao.getRequestURI();
-            if (caminhoSemURL.startsWith("/")) {
-                caminhoSemURL = caminhoSemURL.substring(1);
-            }
-            if (caminhoSemURL == null) {
-                return new ArrayList<>();
-            }
-            return Lists.newArrayList(Arrays.asList(caminhoSemURL.split("/")));
-        } catch (Throwable t) {
-            SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "Erro obtendo parametros da url, requisicao " + requisicao + " url=" + caminhoCOmpleto, t);
-            return null;
-        }
-    }
-
     public static String geCaminhoRecursoDoUrl(HttpServletRequest requisicao) {
         String caminhoCOmpleto = "nãoDefinido";
         try {
