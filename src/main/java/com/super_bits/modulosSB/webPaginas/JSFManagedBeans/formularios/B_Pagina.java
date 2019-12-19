@@ -73,9 +73,9 @@ import javax.annotation.PreDestroy;
 import javax.faces.component.UIViewRoot;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
+import org.primefaces.event.SelectEvent;
 import javax.persistence.EntityManager;
 import org.coletivojava.fw.api.tratamentoErros.FabErro;
-import org.primefaces.event.SelectEvent;
 
 public abstract class B_Pagina implements Serializable, ItfB_Pagina {
 
