@@ -124,7 +124,7 @@
             <artifactId>SBRestClient</artifactId>
             <version>1.0.0-RC-SNAPSHOT</version>
         </dependency>
-        
+
 
         <dependency>
             <groupId>org.jboss.weld.servlet</groupId>
@@ -182,22 +182,22 @@
         <dependency>
             <groupId>org.primefaces.extensions</groupId>
             <artifactId>resources-codemirror</artifactId>
-            <version>6.1.1</version>
+            <version>6.2.11</version>
         </dependency>
         <dependency>
             <groupId>org.primefaces.extensions</groupId>
             <artifactId>resources-ckeditor</artifactId>
-            <version>6.2</version>
+            <version>6.2.11</version>
         </dependency>
         <dependency>
             <groupId>org.primefaces.extensions</groupId>
             <artifactId>primefaces-extensions</artifactId>
-            <version>6.2</version>
+            <version>6.2.11</version>
         </dependency>
         <dependency>
             <groupId>org.primefaces</groupId>
             <artifactId>primefaces</artifactId>
-            <version>6.2</version>
+            <version>6.2.11</version>
         </dependency>
         <dependency>
             <groupId>commons-fileupload</groupId>
