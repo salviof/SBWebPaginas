@@ -29,11 +29,11 @@ public class ContainerResponsivo {
     }
 
     private int calcularNumeroMaximoColunasPorPesoComponente(double peso, int pContainerPai) {
-        int colunasNaTela = tela.getTipoTela().getColunas().getQuantidade();
+        int colunasNaTela = tela.getNumeroMaximoColunas();
 
-        int containerPaiTransformado = pContainerPai;
+        int containerPaiTransformado = colunasNaTela;
         if (colunasNaTela < 12) {
-            double porcentagem = 100 / 12 * pContainerPai; // 12/ 9
+            double porcentagem = 100 / colunasNaTela * pContainerPai; // 12/ 9
             Double novoValor = (containerPaiTransformado / 100D) * porcentagem;
             containerPaiTransformado = novoValor.intValue();
 

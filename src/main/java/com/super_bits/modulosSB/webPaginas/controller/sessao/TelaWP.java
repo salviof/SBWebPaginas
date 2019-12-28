@@ -72,8 +72,14 @@ public class TelaWP implements ItfTelaUsuario, Serializable {
                 numeroMaximoColunas = 6;
             } else if (x >= 960 && x < 1140) {
                 numeroMaximoColunas = 9;
-            } else if (x >= 1140) {
+            } else if (x >= 1140 && x < 1200) {
+                numeroMaximoColunas = 9;
+            } else if (x >= 1200 && x < 1400) {
                 numeroMaximoColunas = 12;
+            } else if (x >= 1400 && x < 1600) {
+                numeroMaximoColunas = 15;
+            } else if (x >= 1600) {
+                numeroMaximoColunas = 18;
             }
 
         } catch (Throwable e) {
