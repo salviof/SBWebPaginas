@@ -11,6 +11,7 @@ import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreValidacao;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campoInstanciado.ItfCampoInstanciado;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.validador.ErroValidacao;
 import com.super_bits.modulosSB.SBCore.modulos.view.telas.LayoutTelaAreaConhecida;
+import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.declarados.util.PgUtil;
 import com.super_bits.modulosSB.webPaginas.util.UtilSBWP_JSFTools;
 import java.util.List;
 import javax.faces.application.FacesMessage;
@@ -19,6 +20,8 @@ import javax.faces.context.FacesContext;
 import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
 import org.coletivojava.fw.api.tratamentoErros.FabErro;
+import org.primefaces.PrimeFaces;
+import org.primefaces.context.RequestContext;
 
 /**
  *
@@ -37,6 +40,7 @@ public abstract class ValidadorGenericoAbstrato<T> implements Validator<T> {
         } catch (Throwable t) {
 
         }
+
         if (campoInstanciado == null) {
             campoInstanciado = UtilSBWP_JSFTools.getInputGenericoDoComponente(component).getRegistro();
         }
@@ -51,6 +55,23 @@ public abstract class ValidadorGenericoAbstrato<T> implements Validator<T> {
                     } else {
                         campoInstanciado.getValidacaoLogica().validarModoEdicao(value);
                     }
+                    if (campoInstanciado.getValidacaoLogica().isAtualizarTelaGrupoFieldSetDoCampo()) {
+                        try {
+                            String nome = new PgUtil().getNomeIdPainelDoComponente(component);
+                            if (!UtilSBCoreStringValidador.isNuloOuEmbranco(nome)) {
+                                PrimeFaces.current().ajax().update(nome);
+                            }
+                        } catch (Throwable t) {
+
+                        }
+                    }
+                    if (campoInstanciado.getValidacaoLogica().atualizarTelaCampoEspecifico().length > 0) {
+                        throw new ErroValidacao("Update de campos específicos ainda não foi implementado no Framework");
+                    }
+                    if (!UtilSBCoreStringValidador.isNuloOuEmbranco(campoInstanciado.getValidacaoLogica().getJavscriptPosValidacao())) {
+                        PrimeFaces.current().executeScript(campoInstanciado.getValidacaoLogica().getJavscriptPosValidacao());
+                    }
+
                 } catch (ErroValidacao tt) {
                     validacao.add(tt.getMensagemAoUsuario());
                 } catch (Throwable t) {
