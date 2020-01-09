@@ -30,9 +30,14 @@
 
                 <div class="quebraBlocoComEspacoVertical3"></div>
                 <div class="Card SoftGrayBack">
-                    <p:inputText id="email" label="E-Mail"  requiredMessage="O E-Mail é obrigatório" validatorMessage="O e-mail não parece ser válido" placeholder="E-mail" required="true" value="#{controleDeSessaoWeb.usuarioLogar}"  styleClass="Wid100 TexAlCenter">
-                        <f:validateLength minimum="4" />
-                    </p:inputText>
+                    <p:fragment>
+                        <p:inputText id="email" label="E-Mail"
+
+                                     requiredMessage="O E-Mail é obrigatório" validatorMessage="O e-mail não parece ser válido" placeholder="E-mail" required="true" value="#{controleDeSessaoWeb.usuarioLogar}"  styleClass="Wid100 TexAlCenter">
+                            <f:validateLength minimum="4" />
+                        </p:inputText>
+                        <p:remoteCommand name="esqueceuASenha" actionListener="#{controleDeSessaoWeb.esqueceuaSenha()}" update="@form" />
+                    </p:fragment>
                     <p:message for="email" />
                     <div class="quebraBlocoComEspacoVertical10"></div>
                     <p:inputText type="password" id="senha" placeholder="Senha" requiredMessage="A Senha é Obrigatória" required="true" value="#{controleDeSessaoWeb.senhaLogar}" styleClass="Wid100 TexAlCenter"/>
@@ -41,10 +46,12 @@
 
                     <div class="quebraBlocoComEspacoVertical4"></div>
                     <p:commandButton value="Esqueci minha Senha" partialSubmit="true"
-                                     process="#{pgUtil.gerarCaminhoCompletoID('email')} @this"
+                                     id="botaoEsqueciMinhaSenha"
+                                     process="#{pgUtil.gerarCaminhoCompletoID('email')}"
                                      icon="fa fa-exclamation"
                                      styleClass="RedButton"
-                                     actionListener="#{controleDeSessaoWeb.esqueceuaSenha()}"
+                                     action="#{pgUtil.enviaMensagem('..')}"
+                                     oncomplete="esqueceuASenha();"
                                      update="@form" />
 
                     <div class="quebraBlocoComEspacoVertical10 somenteMobile"></div>
