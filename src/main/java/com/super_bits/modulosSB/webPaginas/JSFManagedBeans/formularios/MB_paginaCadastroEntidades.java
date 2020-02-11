@@ -240,7 +240,9 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
         acoesRegistros = new ArrayList<>();
 
         acaoNovoRegistro = pAcaoNovoRegistro;
+
         acaoListarRegistros = pAcaoListar;
+
         acaoSalvarAlteracoes = pAcaoSalvar;
 
         try {
@@ -471,10 +473,15 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
     }
 
     @Override
-    public ItfAcaoFormularioEntidade getAcaoListarRegistros() {
+    public final ItfAcaoFormularioEntidade getAcaoListarRegistros() {
 
-        if (acaoListarRegistros == null) {
-            acaoListarRegistros = getAcaoVinculada().getAcaoFormularioListarPadrao();
+        if (getAcaoUltimaDesteTipo(FabTipoAcaoSistemaGenerica.FORMULARIO_LISTAR) != null) {
+            acaoListarRegistros = getAcaoUltimaDesteTipo(FabTipoAcaoSistemaGenerica.FORMULARIO_LISTAR).getComoFormularioEntidade();
+        } else {
+            if (acaoListarRegistros == null) {
+                acaoListarRegistros = getAcaoVinculada().getAcaoFormularioListarPadrao();
+            }
+
         }
 
         return acaoListarRegistros;
@@ -761,6 +768,13 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
      */
     protected void autoexecEntidadeNova() {
         try {
+            if (getAcaoSelecionada() != null) {
+                if (!getComoFormularioWeb().getAcaoVinculada().equals(getAcaoSelecionada().getAcaoDeGestaoEntidade())) {
+
+                    return;
+                }
+            }
+
             Class classeDaEntidade = null;
             if (getAcaoSelecionada() instanceof ItfAcaoEntidade) {
                 ItfAcaoEntidade acao = (ItfAcaoEntidade) getAcaoSelecionada();
@@ -770,6 +784,7 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
                 classeDaEntidade = getAcaoVinculada().getClasseRelacionada();
             }
             getPaginaDoDominio().setEntidadeSelecionada((T) classeDaEntidade.newInstance());
+
             InfoPreparacaoObjeto infoPreparacao = UtilSBCoreReflexaoObjeto.getInfoPreparacaoObjeto(classeDaEntidade);
             if (infoPreparacao != null) {
                 if (infoPreparacao.classesPrConstructorPrincipal().length == 0) {
@@ -805,10 +820,11 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
         switch (getAcaoSelecionada().getTipoAcaoGenerica()) {
 
             case FORMULARIO_NOVO_REGISTRO:
+                if (getComoFormularioWeb().getAcaoVinculada().equals(getAcaoSelecionada().getAcaoDeGestaoEntidade())) {
+                    autoexecEntidadeNova();
+                    break;
+                }
 
-                autoexecEntidadeNova();
-
-                break;
             case FORMULARIO_EDITAR:
             case FORMULARIO_VISUALIZAR:
             case FORMULARIO_PERSONALIZADO:

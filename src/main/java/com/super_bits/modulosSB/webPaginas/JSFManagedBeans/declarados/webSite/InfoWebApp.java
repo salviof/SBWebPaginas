@@ -59,7 +59,7 @@ public class InfoWebApp implements Serializable {
 
                 }
 
-                System.out.println("ação secundaria, retornando url para" + pAcao.getComoSecundaria().getAcaoPrincipal().getNomeUnico());
+                //       System.out.println("ação secundaria, retornando url para" + pAcao.getComoSecundaria().getAcaoPrincipal().getNomeUnico());
                 return new AcaoComLink(pAcao, acaoGestao);
             }
         } catch (Throwable t) {

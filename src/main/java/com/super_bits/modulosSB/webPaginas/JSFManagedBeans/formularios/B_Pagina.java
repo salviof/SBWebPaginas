@@ -404,12 +404,8 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
             configEstruturaFormulario();
             SBCore.soutInfoDebug("Configurando Anotações de Bean");
 
-            System.out.println("Configurando Anotações de Parametros");
-
-            SBCore.soutInfoDebug("Aplicando valores");
             nomeMB = "#{" + this.getClass().getSimpleName() + "}";
             SBCore.soutInfoDebug("Configurando Anotações de Pagnia");
-
             SBCore.soutInfoDebug("Constructor da pagina " + this.getClass().getName() + " finalizado");
         } catch (Throwable t) {
             SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "Erro aplicando anotações da pagina" + this.getClass().getName(), t);
@@ -616,7 +612,7 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
     public String getUrlPadrao() {
         //if (!permitirUsarObjetoInjetadoIgualANulo)	verificaAbriuPagina();
         if (SBCore.isEmModoDesenvolvimento()) {
-            System.out.println("Acesso a URL padrao da pagina" + this.getClass().getSimpleName());
+            //    System.out.println("Acesso a URL padrao da pagina" + this.getClass().getSimpleName());
             return "http://www." + this.getClass().getSimpleName() + ".com.br";
         } else {
             return estruturaFormulario.getUrlPadrao();
@@ -735,7 +731,7 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
 
         try {
             estruturaFormulario = MapaDeFormularios.getEstruturaByClasseMB(this.getClass());
-            System.out.println("Constructor da pagina " + this.getClass().getName() + " iniciado");
+
             aplicarAnotacoes();
             titulo = defineTitulo();
             descricao = defineDescricao();
@@ -745,8 +741,6 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
                 paginaUtil = new PgUtil();
             }
 
-            System.out.println("Executou post construct interno para" + this.getClass().getSimpleName());
-
             configParametros();
 
             try {
@@ -754,12 +748,12 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
                     ConfiguracoesDeFormularioPorUrl configuracoesDeUrl = (ConfiguracoesDeFormularioPorUrl) UtilSBWPServletTools.getRequestBean(WebPaginasServlet.NOME_BEAN_REQUEST_CONFIG_URL);
 
                     if (configuracoesDeUrl == null) {
-                        System.out.println("Abandonando ações de abertura de pagina (Informações de Url que deveriam estar no request não foram encontradas)");
+                        //       System.out.println("Abandonando ações de abertura de pagina (Informações de Url que deveriam estar no request não foram encontradas)");
                         //     return;
                         // Verificação de configurações de URL ignoradas aguardando adequação do servlet com objeto de estrutura de formulario
                         //   throw new UnsupportedOperationException("A configuração de URL não foi encontrado no escopo de requisição");
                     } else {
-                        System.out.println("As informações de url serão determinadas");
+                        //        System.out.println("As informações de url serão determinadas");
                         aplicarUrlDeAcesso(configuracoesDeUrl);
                     }
                 }
@@ -855,6 +849,9 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
     }
 
     public ItfAcaoDoSistema getAcaoUltimaDesteTipo(FabTipoAcaoSistemaGenerica pTipo) {
+        if (historico_acoes_Executadas == null) {
+            return null;
+        }
         List<Integer> lista = Lists.newArrayList(historico_acoes_Executadas.keySet());
         Collections.reverse(lista);
         Optional<Integer> indice = lista.stream().filter(posicao -> historico_acoes_Executadas.get(posicao).getTipoAcaoGenerica().equals(pTipo)).findFirst();
@@ -901,7 +898,7 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
                         SBCore.soutInfoDebug("Xhtml alterado para" + xhtmlAcaoAtual + " Solicitado alteração Ajax Area:" + idAreaExbicaoAcaoSelecionada);
                     }
                 } else {
-                    System.out.println("Info: O Managebean já estava no estado da ação:" + acaoSelecionada.getNomeUnico());
+                    //        System.out.println("Info: O Managebean já estava no estado da ação:" + acaoSelecionada.getNomeUnico());
                 }
             } else {
                 xhtmlAcaoAtual = FabAcaoPaginasDoSistema.PAGINA_NATIVA_ACESSO_NEGADO_FRM_SUB_FORM.getRegistro().getComoFormulario().getXhtml();
@@ -1101,7 +1098,7 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
 
             // DEFININDO OS VALORES DE PARAMETROS POR URL
             if (!isParametrosDeUrlPreenchido()) {
-                System.out.println("Os parametros não estavam preenchidos, redirecionando a pagina");
+                //    System.out.println("Os parametros não estavam preenchidos, redirecionando a pagina");
                 //UtilSBWP_JSFTools.vaParaPagina(getUrlPadrao());
             } else {
 
