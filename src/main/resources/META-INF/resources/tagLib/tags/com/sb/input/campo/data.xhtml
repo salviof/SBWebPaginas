@@ -23,10 +23,12 @@
                 required="#{obrigatorio}"
                 value="#{valor}"
                 styleClass="campoResponsivo  TexAlCenter #{componente.classeCSS}"
-                validatorMessage="O valor informado no campo #{label} não é valido! "
+
                 requiredMessage="O campo #{label} não foi informado! "
                 disabled="#{desabilitarEdicao}"
                 >
+
+
                 <f:passThroughAttribute name="caminhoCampo" value="#{registro.nomeCompostoIdentificador}" />
                 <f:passThroughAttribute name="dominio" value="#{registro.nomeClasseOrigemAtributo}" />
                 <f:passThroughAttribute name="campoInstanciado" value="#{registro}" />
@@ -44,6 +46,17 @@
                         rendered="#{possuiIDOnChange}"
                         process="#{pgUtil.getIdInputSBComponentePai(component)}"
                         event="valueChange"
+                        update="#{idAtualizarOnChange}"
+                        onstart="bloquearArea('#{idAtualizarOnChange}')"
+                        oncomplete="desbloquearArea('#{idAtualizarOnChange}')"
+                        />
+
+                </c:if>
+                <c:if test="#{possuiIDOnChange}" >
+                    <p:ajax
+                        rendered="#{possuiIDOnChange}"
+                        process="#{pgUtil.getIdInputSBComponentePai(component)}"
+                        event="dateSelect"
                         update="#{idAtualizarOnChange}"
                         onstart="bloquearArea('#{idAtualizarOnChange}')"
                         oncomplete="desbloquearArea('#{idAtualizarOnChange}')"

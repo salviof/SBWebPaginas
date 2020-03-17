@@ -313,13 +313,13 @@ function focarComSelacaoAposAjax() {
             }
         }
         if (!contemClientID) {
-
-            if ($(PrimeFaces.escapeClientId(document.activeElement.id)).attr('data-p-hl') === "inputnumber") {
-                $(PrimeFaces.escapeClientId(document.activeElement.id)).select();
-            } else {
-
+         
+            if ($(PrimeFaces.escapeClientId(document.activeElement.id)).attr('data-p-hl') === "inputnumber"){
+                 $(PrimeFaces.escapeClientId(document.activeElement.id)).select();    
+            }else {
+                
             }
-
+            
         }
     } catch (o) {
 
@@ -524,8 +524,4 @@ function desbloquearArea(idArea) {
     }
 
 
-}
-
-function copiarValoresInput(idOrigem, idDestino) {
-    (document.getElementById(idDestino)).value = (document.getElementById(idOrigem)).value;
 }

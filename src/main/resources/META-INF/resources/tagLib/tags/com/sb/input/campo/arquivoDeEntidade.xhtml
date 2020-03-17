@@ -22,9 +22,7 @@
                                      partialSubmit="true"
                                      process="#{pgUtil.getNomeIdPainelDoComponente(component)}"
                                      >
-                        <p:ajax event="dialogReturn" process="#{pgUtil.getNomeIdPFieldSetPai(component)}" update="#{pgUtil.getNomeIdPFieldSetPai(component)}"
-                                listener="#{pgUtil.getNomeIdPFieldSetPai(component)}"
-                                />
+                        <p:ajax event="dialogReturn" listener="#{pgUtil.atualizaTelaPorID(pgUtil.getNomeIdPFieldSetPai(component))}"  update="#{pgUtil.getNomeIdPFieldSetPai(component)}"/>
 
                         <f:setPropertyActionListener target="#{paginaAtual.infoPagina.comoPaginaDeGestao.campoInstSelecionado}"
                                                      value="#{registro}" />

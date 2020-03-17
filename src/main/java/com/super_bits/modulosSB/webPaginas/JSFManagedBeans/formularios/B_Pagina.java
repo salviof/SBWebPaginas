@@ -303,7 +303,7 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
                 }
 
             } catch (Throwable t) {
-                SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "Erro renovando Entitymanager da PAgina", t);
+                SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "Erro renovando Entitymanager da PAgina talvez você tenha encerrado o entity manager manualmente..", t);
             }
 
             emPagina = null;
