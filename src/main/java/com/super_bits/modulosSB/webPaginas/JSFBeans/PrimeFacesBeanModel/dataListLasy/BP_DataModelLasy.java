@@ -5,6 +5,8 @@
 package com.super_bits.modulosSB.webPaginas.JSFBeans.PrimeFacesBeanModel.dataListLasy;
 
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
+import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreListas;
+import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreListasObjeto;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringValidador;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfBeanSimples;
 import java.util.ArrayList;
@@ -80,25 +82,37 @@ public class BP_DataModelLasy<T extends ItfBeanSimples> extends LazyDataModel<T>
         long streamStartTime = System.currentTimeMillis();
         if (camposPesquisa != null) {
 
-            camposPesquisa.stream().forEach(campo
-                    -> {
-                lista.addAll(listaCompleta.stream().filter(item
-                        -> item.getCampoInstanciadoByNomeOuAnotacao(campo).contem(parametro)
-                ).collect(Collectors.toList()));
-            });
+            lista.addAll(UtilSBCoreListasObjeto.filtrarOrdenandoMaisParecidos(listaCompleta, parametro, 15));
+            //camposPesquisa.stream().forEach(campo
+            //         -> {
+            //     lista.addAll(listaCompleta.stream().filter(item
+            //               -> item.getCampoInstanciadoByNomeOuAnotacao(campo).contem(parametro)
+            //      ).collect(Collectors.toList()));
+            //   });
 
         } else {
             if (filters.size() == 1 && filters.keySet().iterator().next().equals("globalFilter")) {
 
                 if (!pesquisaNumerica) {
-                    lista.addAll(listaCompleta.stream().filter(item
-                            -> item.getNome().toUpperCase().contains(parametro)
-                    ).collect(Collectors.toList()));
+                    lista.addAll(UtilSBCoreListasObjeto.filtrarOrdenandoMaisParecidos(listaCompleta, parametro, 15));
+                    //lista.addAll(listaCompleta.stream().filter(item
+                    //      -> item.getNome().toUpperCase().contains(parametro)
+                    //).collect(Collectors.toList()));
                 } else {
-                    final int parmetroNumerico = Integer.valueOf(parametro);
-                    lista.addAll(listaCompleta.stream().filter(item
-                            -> (item.getId() == parmetroNumerico)
-                    ).collect(Collectors.toList()));
+                    final long parmetroNumerico = Long.valueOf(parametro);
+                    if (!listaCompleta.isEmpty()) {
+                        if (listaCompleta.get(0).getClass().getSimpleName().contains("Produto")
+                                && !listaCompleta.get(0).getCPinst("codigoDeBarras").isCampoNaoInstanciado()) {
+                            lista.addAll(listaCompleta.stream().filter(item
+                                    -> (item.getCPinst("codigoDeBarras").getValor().toString().contains(parametro))
+                            ).collect(Collectors.toList()));
+                        } else {
+                            lista.addAll(listaCompleta.stream().filter(item
+                                    -> (item.getId() == parmetroNumerico)
+                            ).collect(Collectors.toList()));
+                        }
+                    }
+
                 }
 
             } else {
