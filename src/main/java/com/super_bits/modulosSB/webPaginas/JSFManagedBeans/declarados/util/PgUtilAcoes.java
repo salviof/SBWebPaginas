@@ -34,16 +34,6 @@ public class PgUtilAcoes implements Serializable {
 
     /**
      *
-     * @param pAcao do formulário
-     * @return o Url para a ação, caso a pagina tenha parametros, adicione os
-     * parametros na sequencia
-     */
-    public String getUrlAcao(ItfAcaoFormulario pAcao) {
-        return MapaDeFormularios.getUrlFormulario(pAcao);
-    }
-
-    /**
-     *
      * @param pAcao
      * @param pParametros Parametros de Url para construção da URL
      * @return A url para acesso a ação de formulário

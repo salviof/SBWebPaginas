@@ -111,7 +111,7 @@ public class ConversorGenerico extends ConversorSB {
                     return valorEmString;
                 }
             }
-            System.out.println("OBJETO IMPROPRIO PARA CONVERSÃO" + value);
+            //System.out.println("OBJETO IMPROPRIO PARA CONVERSÃO" + value);
             return "";
 
         } catch (Exception e) {

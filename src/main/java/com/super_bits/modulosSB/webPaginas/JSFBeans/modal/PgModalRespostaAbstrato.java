@@ -8,6 +8,7 @@ import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ItfComunicacao;
 import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ItfRespostaComunicacao;
 import org.coletivojava.fw.api.tratamentoErros.FabErro;
+import org.primefaces.PrimeFaces;
 
 /**
  *
@@ -64,10 +65,10 @@ public abstract class PgModalRespostaAbstrato extends PgModalAbstrato implements
                     }
                 }
             } else {
-                getPaginaVinculada().metodoRespostaModal();
+                // getPaginaVinculada().metodoRespostaModal();
             }
 
-            fecharModal();
+            PrimeFaces.current().dialog().closeDynamic(getRespostaSelecionada());
         } catch (Throwable t) {
             SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "Erro enviando resposta para formulario principal", t);
         }

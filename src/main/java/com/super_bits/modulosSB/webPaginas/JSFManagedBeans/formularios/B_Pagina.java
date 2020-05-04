@@ -23,6 +23,7 @@ import com.super_bits.modulosSB.SBCore.modulos.Controller.fabricas.FabTipoAcaoSi
 import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ComunicacaoAcaoSistema;
 import com.super_bits.modulosSB.SBCore.modulos.comunicacao.FabTipoRespostaComunicacao;
 import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ItfComunicacao;
+import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ItfRespostaComunicacao;
 import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ItfTipoRespostaComunicacao;
 import com.super_bits.modulosSB.SBCore.modulos.fabrica.ItfFabricaAcoes;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campo.FabTipoAtributoObjeto;
@@ -32,6 +33,7 @@ import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.reflexao.Refle
 import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfBeanSimples;
 import com.super_bits.modulosSB.webPaginas.JSFBeans.SBBeanModel.DEPRECIADO.InfoMBBean;
 import com.super_bits.modulosSB.webPaginas.JSFBeans.SBBeanModel.InfoMBAcao;
+import com.super_bits.modulosSB.webPaginas.JSFBeans.modal.ItfModalRespostaComComunicacao;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.declarados.util.PgUtil;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.declarados.util.PgUtilModalControle;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.interfaces.ItfB_Modal;
@@ -75,6 +77,7 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import org.primefaces.event.SelectEvent;
 import javax.persistence.EntityManager;
+import org.coletivojava.fw.api.objetoNativo.comunicacao.RespostaComunicacao;
 import org.coletivojava.fw.api.tratamentoErros.FabErro;
 
 public abstract class B_Pagina implements Serializable, ItfB_Pagina {
@@ -1174,6 +1177,14 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
             for (Object p : pParametros) {
                 if (p instanceof ItfTipoRespostaComunicacao) {
                     setTipoRespostaParaAcaoAtual((ItfTipoRespostaComunicacao) p);
+                }
+            }
+        }
+
+        if (pParametros != null) {
+            for (Object p : pParametros) {
+                if (p instanceof ItfRespostaAcaoDoSistema) {
+                    setTipoRespostaParaAcaoAtual(((ItfRespostaComunicacao) p).getTipoResposta());
                 }
             }
         }

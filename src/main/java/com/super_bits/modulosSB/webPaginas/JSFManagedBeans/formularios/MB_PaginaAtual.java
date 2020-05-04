@@ -6,6 +6,7 @@ import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basic
 import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfSessao;
 import com.super_bits.modulosSB.SBCore.modulos.servicosCore.ItfControleDeSessao;
 import com.super_bits.modulosSB.webPaginas.ConfigGeral.SBWebPaginas;
+import com.super_bits.modulosSB.webPaginas.JSFBeans.modal.PgModalRespostaAcaoTransient;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.declarados.Paginas.ErroCritico.InfoErroCritico;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.interfaces.ItfB_PaginaSimples;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.siteMap.AcaoDeContexto;
@@ -57,7 +58,10 @@ public abstract class MB_PaginaAtual implements Serializable {
                 }
 
                 try {
-
+                    if (viewId.endsWith("comunicacaoAcaoTransiente.xhtml")) {
+                        PgModalRespostaAcaoTransient modal = contexto.getApplication().evaluateExpressionGet(contexto, "#{pgModalRespostaAcaoTransient}", PgModalRespostaAcaoTransient.class);
+                        viewId = modal.getPaginaVinculada().getAcaoVinculada().getXhtml();
+                    }
                     setInfoPagina(getSiteMap().getPaginaNoContexto(viewId));
 
                 } catch (Throwable e) {

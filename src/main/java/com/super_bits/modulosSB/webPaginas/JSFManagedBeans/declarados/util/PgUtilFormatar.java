@@ -65,10 +65,6 @@ public class PgUtilFormatar {
         }
     }
 
-    public String moeda(long pValor) {
-        return UtilSBCoreNumeros.converterMoeda(pValor);
-    }
-
     public String gerarDataHoraSegundoJavascript(Date pDataHora) {
         if (pDataHora == null) {
             return null;
