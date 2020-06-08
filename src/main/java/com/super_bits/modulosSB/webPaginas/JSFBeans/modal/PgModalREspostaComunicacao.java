@@ -9,7 +9,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import org.coletivojava.fw.api.tratamentoErros.FabErro;
-import org.primefaces.context.RequestContext;
+import org.primefaces.PrimeFaces;
 
 /**
  *
@@ -33,7 +33,7 @@ public class PgModalREspostaComunicacao extends PgModalRespostaAbstrato {
             }
             SBCore.getCentralComunicacao().responderComunicacao(getComunicacao(), getRespostaSelecionada());
 
-            RequestContext.getCurrentInstance().closeDialog(getRespostaSelecionada());
+            PrimeFaces.current().dialog().closeDynamic(getRespostaSelecionada());
         } catch (Throwable t) {
             SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "Erro enviando resposta para pagina", t);
         }

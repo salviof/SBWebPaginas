@@ -9,7 +9,8 @@ import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campoInstancia
 import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfBeanSimples;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.interfaces.ItfModalDados;
 import org.coletivojava.fw.api.tratamentoErros.FabErro;
-import org.primefaces.context.RequestContext;
+import org.primefaces.PrimeFaces;
+
 import org.primefaces.event.FileUploadEvent;
 
 /**
@@ -32,8 +33,9 @@ public class PgModalDados extends PgModalRespostaAbstrato implements ItfModalDad
         try {
             nomeArquivo = event.getFile().getFileName();
 
-            if (getCampoSelecionado().getComoArquivoDeEntidade().uploadArquivo(nomeArquivo, event.getFile().getContents()));
-            RequestContext.getCurrentInstance().closeDialog(this);
+            if (getCampoSelecionado().getComoArquivoDeEntidade().uploadArquivo(nomeArquivo, event.getFile().getContent()));
+            PrimeFaces.current().dialog().closeDynamic(this);
+
         } catch (Throwable t) {
             SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "Erro enviando arquivo" + nomeArquivo, t);
 

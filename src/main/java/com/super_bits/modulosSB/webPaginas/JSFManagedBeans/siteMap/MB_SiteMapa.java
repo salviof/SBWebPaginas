@@ -1,9 +1,11 @@
 package com.super_bits.modulosSB.webPaginas.JSFManagedBeans.siteMap;
 
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
+import com.super_bits.modulosSB.SBCore.UtilGeral.MapaAcoesSistema;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreReflexao;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringValidador;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringsMaiuculoMinusculo;
+import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ItfAcaoDoSistema;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.permissoes.ItfAcaoGerenciarEntidade;
 import com.super_bits.modulosSB.webPaginas.JSFBeans.modal.PgModalSBJSF;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.interfaces.ItfB_PaginaSimples;
@@ -17,7 +19,6 @@ import org.coletivojava.fw.api.tratamentoErros.FabErro;
 
 public abstract class MB_SiteMapa implements ItfSiteMapa {
 
-    private ItfSiteMapa siteMapa;
     private static boolean siteMapaCriado = false;
 
     public MB_SiteMapa() {
@@ -39,12 +40,18 @@ public abstract class MB_SiteMapa implements ItfSiteMapa {
     public ItfB_PaginaSimples getPaginaNoContexto(String xhtmlGerenciarPG) throws UnsupportedOperationException {
         try {
             EstruturaDeFormulario estruturaFormulario = MapaDeFormularios.getEstruturaByXHTMLDeGestao(xhtmlGerenciarPG);
+            ItfAcaoGerenciarEntidade acaoGestao = null;
             if (estruturaFormulario == null) {
                 if (xhtmlGerenciarPG.equals(UtilSBWP_JSFTools.FORMULARIO_MODAL_PESQUISA_ITEM_AVANCADO)) {
                     return (ItfB_PaginaSimples) UtilSBWPServletTools.getBeanByNamed(UtilSBCoreStringsMaiuculoMinusculo.getPrimeiraLetraMinuscula(PgModalSBJSF.class.getSimpleName()), PgModalSBJSF.class);
+                } else {
+                    ItfAcaoDoSistema acao = MapaAcoesSistema.getAcaoDoSistemaByFormulario(xhtmlGerenciarPG);
+
+                    acaoGestao = MapaDeFormularios.getEstruturaByXHTMLDeGestao(acao.getAcaoDeGestaoEntidade().getXhtml()).getAcaoGestaoVinculada();
                 }
+            } else {
+                acaoGestao = estruturaFormulario.getAcaoGestaoVinculada().getAcaoDeGestaoEntidade();
             }
-            ItfAcaoGerenciarEntidade acaoGestao = estruturaFormulario.getAcaoGestaoVinculada().getAcaoDeGestaoEntidade();
 
             String xhtml = acaoGestao.getXhtml();
 

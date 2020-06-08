@@ -105,6 +105,20 @@ public interface ItfB_PaginaSimples {
 
     }
 
+    public default ItfB_PaginaComEntityManager getComoPaginaComEntityManager() {
+        try {
+            if (this instanceof ItfB_PaginaComEntityManager) {
+                return (ItfB_PaginaComEntityManager) this;
+            } else {
+                throw new UnsupportedOperationException(this.getClass().getSimpleName() + " Não implementa " + ItfB_Pagina.class.getSimpleName());
+            }
+        } catch (Throwable t) {
+            SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "Erro obtendo pagina como pagnina com entity manager", t);
+            return null;
+        }
+
+    }
+
     public default ItfB_Pagina getComoFormularioWeb() {
         try {
             if (isPaginaDeGestao()) {

@@ -3,7 +3,6 @@ package com.super_bits.modulosSB.webPaginas.JSFBeans.util.depreciado;
 import com.super_bits.editorImagem.util.UtilSBImagemEdicao;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringFiltros;
-import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringValidador;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campo.FabTipoAtributoObjeto;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfBeanSimples;
 import com.super_bits.modulosSB.webPaginas.ConfigGeral.SBWebPaginas;
@@ -18,7 +17,7 @@ import java.util.List;
 import javax.imageio.ImageIO;
 import org.apache.commons.io.FilenameUtils;
 import org.coletivojava.fw.api.tratamentoErros.FabErro;
-import org.primefaces.model.UploadedFile;
+import org.primefaces.model.file.UploadedFile;
 
 @Deprecated
 public abstract class ArquivosDeRegistrosJPA {
@@ -137,12 +136,12 @@ public abstract class ArquivosDeRegistrosJPA {
             try {
                 // criando arquivo Original
 
-                criaArquivo(caminho, "ori_" + nomeArquivo + FilenameUtils.getExtension(foto.getFileName()), foto.getInputstream());
+                criaArquivo(caminho, "ori_" + nomeArquivo + FilenameUtils.getExtension(foto.getFileName()), foto.getInputStream());
 
                 // redimencionando imagem média
-                criaArquivo(caminho, prefixosIMG.peq_ + nomeArquivo.replace(" ", "_") + ".jpg", UtilSBImagemEdicao.redimencionaImagem(ImageIO.read(foto.getInputstream()), 43, 43));
-                criaArquivo(caminho, prefixosIMG.med_ + nomeArquivo.replace(" ", "_") + ".jpg", UtilSBImagemEdicao.redimencionaImagem(ImageIO.read(foto.getInputstream()), 150, 43));
-                criaArquivo(caminho, prefixosIMG.grande_ + nomeArquivo.replace(" ", "_") + ".jpg", UtilSBImagemEdicao.redimencionaImagem(ImageIO.read(foto.getInputstream()), 462, 133));
+                criaArquivo(caminho, prefixosIMG.peq_ + nomeArquivo.replace(" ", "_") + ".jpg", UtilSBImagemEdicao.redimencionaImagem(ImageIO.read(foto.getInputStream()), 43, 43));
+                criaArquivo(caminho, prefixosIMG.med_ + nomeArquivo.replace(" ", "_") + ".jpg", UtilSBImagemEdicao.redimencionaImagem(ImageIO.read(foto.getInputStream()), 150, 43));
+                criaArquivo(caminho, prefixosIMG.grande_ + nomeArquivo.replace(" ", "_") + ".jpg", UtilSBImagemEdicao.redimencionaImagem(ImageIO.read(foto.getInputStream()), 462, 133));
 
             } catch (IOException e) {
                 SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "erro salvando imagem ", e);
@@ -155,7 +154,7 @@ public abstract class ArquivosDeRegistrosJPA {
             String nomeArquivo = entidade.getNomeCurto() + String.valueOf(qtd + 1) + "." + FilenameUtils.getExtension(foto.getFileName());
 
             try {
-                criaArquivo(caminho, nomeArquivo, foto.getInputstream());
+                criaArquivo(caminho, nomeArquivo, foto.getInputStream());
             } catch (IOException e) {
                 SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "erro salvando imagem ", e);
             }

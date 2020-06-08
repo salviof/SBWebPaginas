@@ -15,8 +15,10 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.stream.Collectors;
 import jersey.repackaged.com.google.common.collect.Lists;
+import org.primefaces.model.FilterMeta;
 import org.primefaces.model.LazyDataModel;
 import org.primefaces.model.SortMeta;
+import org.primefaces.model.SortOrder;
 
 /**
  *
@@ -62,7 +64,7 @@ public class BP_DataModelLasy<T extends ItfBeanSimples> extends LazyDataModel<T>
     }
 
     @Override
-    public List<T> load(int first, int pageSize, List<SortMeta> multiSortMeta, Map<String, Object> filters) {
+    public List<T> load(int first, int pageSize, String sortField, SortOrder multiSortMeta, Map<String, FilterMeta> filters) {
         ConcurrentLinkedQueue lista = new ConcurrentLinkedQueue();
 
         if (filters.isEmpty()) {
@@ -137,7 +139,6 @@ public class BP_DataModelLasy<T extends ItfBeanSimples> extends LazyDataModel<T>
         } else {
             return listaOrdenada;
         }
-
     }
 
 }

@@ -6,7 +6,6 @@ package com.super_bits.modulosSB.webPaginas.JSFBeans.modal;
 
 import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ItfComunicacaoAcaoVinculada;
 import javax.annotation.PostConstruct;
-import org.primefaces.context.RequestContext;
 
 /**
  *

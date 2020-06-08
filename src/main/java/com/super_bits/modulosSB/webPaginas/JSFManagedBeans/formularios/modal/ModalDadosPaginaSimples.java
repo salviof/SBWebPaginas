@@ -5,8 +5,6 @@
 package com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.modal;
 
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
-import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringFiltros;
-import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringValidador;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringsMaiuculoMinusculo;
 import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ItfComunicacao;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campoInstanciado.ItfCampoInstanciado;
@@ -20,7 +18,8 @@ import java.util.List;
 import java.util.Map;
 import javax.faces.component.UIViewRoot;
 import org.coletivojava.fw.api.tratamentoErros.FabErro;
-import org.primefaces.context.RequestContext;
+import org.primefaces.PrimeFaces;
+
 import org.primefaces.event.FileUploadEvent;
 
 /**
@@ -62,8 +61,8 @@ public class ModalDadosPaginaSimples implements ItfModalDados {
         try {
             nomeArquivo = event.getFile().getFileName();
 
-            if (getCampoSelecionado().getComoArquivoDeEntidade().uploadArquivo(nomeArquivo, event.getFile().getContents()));
-            RequestContext.getCurrentInstance().closeDialog(this);
+            if (getCampoSelecionado().getComoArquivoDeEntidade().uploadArquivo(nomeArquivo, event.getFile().getContent()));
+            PrimeFaces.current().dialog().closeDynamic(this);
         } catch (Throwable t) {
             SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "Erro enviando arquivo" + nomeArquivo, t);
 

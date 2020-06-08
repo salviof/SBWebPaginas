@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import javax.faces.FacesException;
 import javax.faces.component.UIComponent;
+import javax.faces.component.UIForm;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 import org.primefaces.component.api.AjaxSource;
@@ -201,9 +202,17 @@ public class AdamantiumMenuRenderer
                     idParams.add(menuitem.getId());
                     params.put(menuClientId + "_menuid", idParams);
 
-                    command = menuitem.isAjax() ? buildAjaxRequest(context, menu, (AjaxSource) menuitem, form, params) : buildNonAjaxRequest(context, menu, form, menuClientId, params, true);
+                    command = menuitem.isAjax() ? buildAjaxRequest(context, menu, (AjaxSource) menuitem, (UIForm) form, params) : buildNonAjaxRequest(context, menu, form, menuClientId, params, true);
                 } else {
-                    command = menuitem.isAjax() ? buildAjaxRequest(context, (AjaxSource) menuitem, form) : buildNonAjaxRequest(context, (UIComponent) menuitem, form, ((UIComponent) menuitem).getClientId(context), true);
+
+                    if (menuitem.isAjax()) {
+
+                        Map<String, List<String>> params = menuitem.getParams();
+                        command = buildAjaxRequest(context, menu, (AjaxSource) menuitem, (UIForm) form, params);
+                    } else {
+                        command = buildNonAjaxRequest(context, (UIComponent) menuitem, form, ((UIComponent) menuitem).getClientId(context), true);
+                    }
+
                 }
                 onclick = onclick + ";" + command;
             }

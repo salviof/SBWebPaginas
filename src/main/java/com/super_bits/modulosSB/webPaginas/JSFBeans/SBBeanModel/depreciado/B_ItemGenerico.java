@@ -5,7 +5,9 @@ import com.super_bits.modulosSB.SBCore.UtilGeral.ClasseTipada;
 import com.super_bits.modulosSB.webPaginas.JSFBeans.util.UtilSBWPMensagensJSF;
 import java.lang.reflect.ParameterizedType;
 import org.coletivojava.fw.api.tratamentoErros.FabErro;
-import org.primefaces.context.RequestContext;
+import org.jboss.weld.context.RequestContext;
+import org.primefaces.context.PrimeFacesContext;
+import org.primefaces.context.PrimeRequestContext;
 
 public abstract class B_ItemGenerico<T> extends ClasseTipada {
 
@@ -70,15 +72,16 @@ public abstract class B_ItemGenerico<T> extends ClasseTipada {
     }
 
     protected void fecharCaixaDeDialogo() {
-        getRequestContext().addCallbackParam(DEIXAR_CX_DIALOGO_ABERTA, false);
+        PrimeRequestContext.getCurrentInstance().getCallbackParams().put(DEIXAR_CX_DIALOGO_ABERTA, false);
+
     }
 
     protected void manterCaixaDeDialogo() {
-        getRequestContext().addCallbackParam(DEIXAR_CX_DIALOGO_ABERTA, true);
+        PrimeRequestContext.getCurrentInstance().getCallbackParams().put(DEIXAR_CX_DIALOGO_ABERTA, true);
     }
 
-    protected RequestContext getRequestContext() {
-        return RequestContext.getCurrentInstance();
+    protected PrimeRequestContext getRequestContext() {
+        return PrimeRequestContext.getCurrentInstance();
     }
 
     protected void setTipo(Class<T> tipo) {

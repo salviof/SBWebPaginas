@@ -72,12 +72,12 @@ public class PgServicoImagensSB implements Serializable {
                     InputStream arquivo;
                     if (!UtilSBCoreStringNomeArquivosEDiretorios.getExtencaoNomeArquivo(event.getFile().getFileName()).equals("png")) {
 
-                        BufferedImage imagem = UtilSBImagemEdicao.converterPNGParaJpg(ImageIO.read(event.getFile().getInputstream()), Color.white);
+                        BufferedImage imagem = UtilSBImagemEdicao.converterPNGParaJpg(ImageIO.read(event.getFile().getInputStream()), Color.white);
                         ByteArrayOutputStream os = new ByteArrayOutputStream();
                         ImageIO.write(imagem, "jpg", os);
                         arquivo = new ByteArrayInputStream(os.toByteArray());
                     } else {
-                        arquivo = event.getFile().getInputstream();
+                        arquivo = event.getFile().getInputStream();
                     }
                     entidadeImagem.uploadFotoTamanhoMedio(arquivo);
                 } catch (Throwable t) {
@@ -102,12 +102,12 @@ public class PgServicoImagensSB implements Serializable {
                     InputStream arquivo;
                     if (!UtilSBCoreStringNomeArquivosEDiretorios.getExtencaoNomeArquivo(event.getFile().getFileName()).equals("png")) {
 
-                        BufferedImage imagem = UtilSBImagemEdicao.converterPNGParaJpg(ImageIO.read(event.getFile().getInputstream()), Color.white);
+                        BufferedImage imagem = UtilSBImagemEdicao.converterPNGParaJpg(ImageIO.read(event.getFile().getInputStream()), Color.white);
                         ByteArrayOutputStream os = new ByteArrayOutputStream();
                         ImageIO.write(imagem, "jpg", os);
                         arquivo = new ByteArrayInputStream(os.toByteArray());
                     } else {
-                        arquivo = event.getFile().getInputstream();
+                        arquivo = event.getFile().getInputStream();
                     }
 
                     entidadeAtualizada.uploadFotoTamanhoPequeno(arquivo);
@@ -134,12 +134,12 @@ public class PgServicoImagensSB implements Serializable {
                     InputStream arquivo;
                     if (!UtilSBCoreStringNomeArquivosEDiretorios.getExtencaoNomeArquivo(event.getFile().getFileName()).equals("png")) {
 
-                        BufferedImage imagem = UtilSBImagemEdicao.converterPNGParaJpg(ImageIO.read(event.getFile().getInputstream()), Color.white);
+                        BufferedImage imagem = UtilSBImagemEdicao.converterPNGParaJpg(ImageIO.read(event.getFile().getInputStream()), Color.white);
                         ByteArrayOutputStream os = new ByteArrayOutputStream();
                         ImageIO.write(imagem, "jpg", os);
                         arquivo = new ByteArrayInputStream(os.toByteArray());
                     } else {
-                        arquivo = event.getFile().getInputstream();
+                        arquivo = event.getFile().getInputStream();
                     }
 
                     entidadeAtualizada.uploadFotoTamanhoGrande(arquivo);

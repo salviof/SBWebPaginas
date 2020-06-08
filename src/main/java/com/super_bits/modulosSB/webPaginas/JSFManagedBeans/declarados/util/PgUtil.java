@@ -1041,19 +1041,20 @@ public class PgUtil implements Serializable {
     }
 
     private String exibirModal(Map<String, Object> pOpcoesPrimefaces, Map<String, List<String>> parametrosModalRequestGet, String pFormularioModal) {
-        List<String> parametrosRequestModal = new ArrayList<>();
-        parametrosModalRequestGet.put("chaveAcesso", parametrosRequestModal);
         String idView = paginaAtual.getInfoPagina().toString();
-        //FacesContext.getCurrentInstance().getViewRoot().toString();
+        List<String> parametrosRequestModal = new ArrayList<>();
         parametrosRequestModal.add(idView);
+        parametrosModalRequestGet.put(UtilSBWP_JSFTools.NOME_PARAMETRO_CHAVE_ACESSO, parametrosRequestModal);
 
         pFormularioModal = pFormularioModal.replace(".xhtml", "");
         controleModal.adicionarAoMapa(paginaAtual.getInfoPagina().getComoPaginaDeGestao());
+        // O formato do primefaces para enviar parametros para o modal é Um Map de String por lista
+        // Mais informações em https://primefaces.github.io/primefaces/8_0/#/core/dialogframework
         PrimeFaces.current().dialog().openDynamic(pFormularioModal, pOpcoesPrimefaces, parametrosModalRequestGet);
         return idView;
     }
 
-    private String exibirModal(Map<String, Object> pOpcoesPrimefaces, String pFormularioModal) {
+    public String exibirModal(Map<String, Object> pOpcoesPrimefaces, String pFormularioModal) {
         return exibirModal(pOpcoesPrimefaces, new HashMap<>(), pFormularioModal);
     }
 
@@ -1365,6 +1366,14 @@ public class PgUtil implements Serializable {
         }
     }
 
+    public String gerarHoraTextoSimples(Date pDataHora) {
+        if (pDataHora == null) {
+            return null;
+        }
+        SimpleDateFormat formatador = new SimpleDateFormat("HH':'mm");
+        return formatador.format(pDataHora);
+    }
+
     public String gerarHoraTexto(Date pDataHora) {
         if (pDataHora == null) {
             return null;
@@ -1545,7 +1554,7 @@ public class PgUtil implements Serializable {
 
     public void enviarImagemPequenaUpload(FileUploadEvent event) {
         try {
-            paginaAtual.getInfoPagina().getComoFormularioWeb().getBeanSelecionado().uploadFotoTamanhoPequeno(event.getFile().getInputstream());
+            paginaAtual.getInfoPagina().getComoFormularioWeb().getBeanSelecionado().uploadFotoTamanhoPequeno(event.getFile().getInputStream());
         } catch (Throwable t) {
             SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "Erro enviando imagem tamanho curto", t);
         }

@@ -34,7 +34,7 @@ public class ServletArquivosSBWPGenerico extends HttpServlet {
         resp.setHeader("Content-Disposition", "attachment; filename=\"" + pNomeArquivoDownload + "\"");;
         resp.setContentType("application/force-download");
         resp.setHeader("Content-Transfer-Encoding", "binary");
-        realizarStreamDoArquivo(resp, pcaminhoArquivo);
+        realizarStreamDeArquivoLocal(resp, pcaminhoArquivo);
     }
 
     protected void definirHeaderPorNomeDeArquivo(String pCaminhoArquivo, HttpServletResponse resp) {
@@ -53,8 +53,12 @@ public class ServletArquivosSBWPGenerico extends HttpServlet {
             case IMAGEM_WEB:
                 break;
             case IMAGE_REPRESENTATIVA_ENTIDADE_PEQUENO:
-                if (!new File(pCaminhoArquivo).exists()) {
-                    pCaminhoArquivo = SBWebPaginas.getCaminhoRealJavaWebAppContexto() + "/resources/img/SBPequeno.jpg";
+                if (pCaminhoArquivo.startsWith("https")) {
+
+                } else {
+                    if (!new File(pCaminhoArquivo).exists()) {
+                        pCaminhoArquivo = SBWebPaginas.getCaminhoRealJavaWebAppContexto() + "/resources/img/SBPequeno.jpg";
+                    }
                 }
                 break;
             case IMAGE_REPRESENTATIVA_ENTIDADE_MEDIO:
@@ -85,7 +89,15 @@ public class ServletArquivosSBWPGenerico extends HttpServlet {
                 throw new AssertionError(pArquivoConhecido.name());
 
         }
-        realizarStreamDoArquivo(resp, pCaminhoArquivo);
+        if (pCaminhoArquivo.startsWith("https")) {
+            try {
+                realizarStreamDeArquivoRemoto(resp, pCaminhoArquivo);
+            } catch (Throwable t) {
+                abrirArquivo("/arquivonaoExistente", pNomeArquivoDownload, requisicao, resp, pArquivoConhecido);
+            }
+        } else {
+            realizarStreamDeArquivoLocal(resp, pCaminhoArquivo);
+        }
     }
 
     protected void realizarStreamDoArquivo(HttpServletResponse resp, byte[] pDadosArquivo) {
@@ -94,6 +106,7 @@ public class ServletArquivosSBWPGenerico extends HttpServlet {
             try (ServletOutputStream ouputStream = resp.getOutputStream()) {
                 ouputStream.write(pDadosArquivo, 0, pDadosArquivo.length);
                 ouputStream.flush();
+                ouputStream.close();
             }
         } catch (Exception t) {
             SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "Erro enviando stream para o cliente", t);
@@ -105,7 +118,18 @@ public class ServletArquivosSBWPGenerico extends HttpServlet {
         }
     }
 
-    protected void realizarStreamDoArquivo(HttpServletResponse resp, String pCaminhoLocalArquivo) {
+    protected void realizarStreamDeArquivoRemoto(HttpServletResponse resp, String pUrlArquivo) {
+
+        byte[] bytes = UtilSBCoreBytes.gerarBytePorUrltream(pUrlArquivo);
+        if (bytes != null) {
+            realizarStreamDoArquivo(resp, bytes);
+        } else {
+            throw new UnsupportedOperationException("Erro acessando url remota" + pUrlArquivo);
+        }
+
+    }
+
+    protected void realizarStreamDeArquivoLocal(HttpServletResponse resp, String pCaminhoLocalArquivo) {
         try {
             realizarStreamDoArquivo(resp, UtilSBCoreBytes.gerarBytesPorArquivo(new File(pCaminhoLocalArquivo)));
         } catch (Throwable t) {

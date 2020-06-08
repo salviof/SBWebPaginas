@@ -19,14 +19,13 @@ import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.InfoDesig
 import com.super_bits.modulosSB.webPaginas.controller.servletes.servletWebPaginas.ConfiguracoesDeFormularioPorUrl;
 import java.util.List;
 import java.util.Map;
-import javax.persistence.EntityManager;
 import org.primefaces.event.SelectEvent;
 
 /**
  *
  * @author Salvio
  */
-public interface ItfB_Pagina extends ItfB_PaginaSimples {
+public interface ItfB_Pagina extends ItfB_PaginaSimples, ItfB_PaginaComEntityManager {
 
     public void fecharPagina();
 
@@ -249,8 +248,6 @@ public interface ItfB_Pagina extends ItfB_PaginaSimples {
      * @param pParametros
      */
     public void metodoRespostaModal(Object... pParametros);
-
-    public EntityManager getEMPagina();
 
     public ItfComunicacao getComunincacaoAguardandoResposta();
 

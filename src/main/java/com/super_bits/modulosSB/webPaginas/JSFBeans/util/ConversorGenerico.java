@@ -1,5 +1,6 @@
 package com.super_bits.modulosSB.webPaginas.JSFBeans.util;
 
+import com.sun.faces.facelets.el.TagValueExpression;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campoInstanciado.ItfCampoInstanciado;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfBeanSimplesSomenteLeitura;
@@ -37,11 +38,22 @@ public class ConversorGenerico extends ConversorSB {
                     //ItfCampoInstanciado objeto = ctx.getApplication().evaluateExpressionGet(ctx, "#{registro}", ItfCampoInstanciado.class);
                     System.out.println(component + "objeto não Encontrado tentando converter string para objeto, executando alternativa 2.0 >" + value);
                     //Em alguns casos os atributos adicionados no componentes são perdidos, a tecnica abaixo é um alternativa em versão beta.
-                    InputGenerico componente = UtilSBWP_JSFTools.getInputGenericoDoComponente(component);
-                    if (componente == null) {
-                        throw new UnsupportedOperationException("Erro criando ");
+                    ItfCampoInstanciado campoInstanciado = null;
+
+                    try {
+                        TagValueExpression tag = (TagValueExpression) component.getPassThroughAttributes().get("campoInstanciado");
+                        campoInstanciado = (ItfCampoInstanciado) tag.getValue(ctx.getELContext());
+
+                    } catch (Throwable t) {
+                        InputGenerico componente = UtilSBWP_JSFTools.getInputGenericoDoComponente(component);
+                        if (componente == null) {
+                            throw new UnsupportedOperationException("Erro obtendo campo instanciado do input para o conversorgenerico");
+                        }
+                        campoInstanciado = componente.getRegistro();
                     }
-                    ItfCampoInstanciado campoInstanciado = componente.getRegistro();
+                    if (campoInstanciado == null) {
+                        throw new UnsupportedOperationException("Erro obtendo campo instanciado do input para o conversorgenerico");
+                    }
 
                     if (campoInstanciado.getValor() != null) {
                         if (campoInstanciado.getValor().toString().equals(value)) {

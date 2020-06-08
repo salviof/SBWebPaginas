@@ -162,6 +162,9 @@ function copiarValoresCKEditor(idOrigem, idDestino) {
     document.getElementById(idDestino).value = conteudo;
 
 }
+function copiarValoresInput(idOrigem, idDestino) {
+    document.getElementById(idDestino).value = document.getElementById(idOrigem).value;
+}
 
 function adicionarChamadaComDelay(idElemento, metodo) {
 
@@ -313,13 +316,13 @@ function focarComSelacaoAposAjax() {
             }
         }
         if (!contemClientID) {
-         
-            if ($(PrimeFaces.escapeClientId(document.activeElement.id)).attr('data-p-hl') === "inputnumber"){
-                 $(PrimeFaces.escapeClientId(document.activeElement.id)).select();    
-            }else {
-                
+
+            if ($(PrimeFaces.escapeClientId(document.activeElement.id)).attr('data-p-hl') === "inputnumber") {
+                $(PrimeFaces.escapeClientId(document.activeElement.id)).select();
+            } else {
+
             }
-            
+
         }
     } catch (o) {
 

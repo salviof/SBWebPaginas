@@ -4,12 +4,10 @@
  */
 package com.super_bits.modulosSB.webPaginas.arquivosDoProjeto;
 
-import com.super_bits.modulosSB.Persistencia.registro.persistidos.EntidadeGenerica;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.FabTipoEmpacotamento;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreOutputs;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringFiltros;
-import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringValidador;
 import com.super_bits.modulosSB.SBCore.UtilGeral.stringSubstituicao.MapaSubstituicao;
 import com.super_bits.modulosSB.SBCore.modulos.ManipulaArquivo.CentralDeArquivosAbstrata;
 import com.super_bits.modulosSB.SBCore.modulos.ManipulaArquivo.CentralPermissaoArquivoTudoLiberado;
@@ -269,6 +267,7 @@ public class CentralDeArquivosWebAppServidorSB extends CentralDeArquivosAbstrata
     }
 
     @Override
+    @Deprecated
     public boolean baixarArquivo(ItfBeanSimplesSomenteLeitura entidade, InputStream arqivo, String pNomeCampoOuCategoria, String pNomeArquivo, MapaSubstituicao mapaSubistituicao) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

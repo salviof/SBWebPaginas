@@ -27,13 +27,16 @@ public interface ItfModalDados extends ItfModalWebApp {
 
     /**
      *
+     * Primefaces 7.0 ou anterior
+     *
      * @param event
      */
+    @Deprecated
     public void enviarArquivoDoCampoUpload(FileUploadEvent event);
 
     public default void enviarImagemPequenaUpload(FileUploadEvent event) {
         try {
-            getEntidadeSelecionada().uploadFotoTamanhoPequeno(event.getFile().getInputstream());
+            getEntidadeSelecionada().uploadFotoTamanhoPequeno(event.getFile().getInputStream());
         } catch (Throwable t) {
             SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "Erro enviando imagem tamanho curto", t);
         }

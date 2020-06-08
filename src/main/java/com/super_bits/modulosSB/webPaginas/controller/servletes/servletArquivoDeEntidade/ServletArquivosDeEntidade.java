@@ -85,10 +85,10 @@ public class ServletArquivosDeEntidade extends ServletArquivosSBWPGenerico imple
                 case IMAGE_REPRESENTATIVA_ENTIDADE_GRANDE:
                 default:
                     try {
-                        beanNovoItemTemporario = (ItfBeanSimples) MapaObjetosProjetoAtual.getClasseDoObjetoByNome(pNomeEntidade).newInstance();
-                    } catch (Throwable t) {
-                        SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "Erro criando nova instancia de entidade para obtenção de arquivo temporario", t);
-                    }
+                    beanNovoItemTemporario = (ItfBeanSimples) MapaObjetosProjetoAtual.getClasseDoObjetoByNome(pNomeEntidade).newInstance();
+                } catch (Throwable t) {
+                    SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "Erro criando nova instancia de entidade para obtenção de arquivo temporario", t);
+                }
             }
             switch (pTipoRecurso.getFabipoArquivo()) {
 
@@ -139,19 +139,19 @@ public class ServletArquivosDeEntidade extends ServletArquivosSBWPGenerico imple
                 case IMAGE_REPRESENTATIVA_ENTIDADE_MEDIO:
                 case IMAGE_REPRESENTATIVA_ENTIDADE_PEQUENO:
                     try {
-                        entidade = (ItfBeanSimples) classeEntidade.newInstance();
-                        String[] partes = pSlugObjeto.split("-");
-                        for (String parte : partes) {
-                            if (UtilSBCoreStringValidador.isContemApenasNumero(parte)) {
-                                entidade.setId(Integer.valueOf(parte));
-                            } else {
-                                entidade.setNome(parte);
-                            }
+                    entidade = (ItfBeanSimples) classeEntidade.newInstance();
+                    String[] partes = pSlugObjeto.split("-");
+                    for (String parte : partes) {
+                        if (UtilSBCoreStringValidador.isContemApenasNumero(parte)) {
+                            entidade.setId(Integer.valueOf(parte));
+                        } else {
+                            entidade.setNome(parte);
                         }
-                    } catch (Throwable t) {
-                        entidade = null;
                     }
-                    break;
+                } catch (Throwable t) {
+                    entidade = null;
+                }
+                break;
             }
 
             if (entidade == null) {
@@ -191,12 +191,13 @@ public class ServletArquivosDeEntidade extends ServletArquivosSBWPGenerico imple
             }
 
         }
-
-        File arquivo = new File(caminhoLocal);
-        if (!arquivo.exists()) {
-            caminhoLocal = SBWebPaginas.getPastaBaseImagens() + "/imagempadrao.jpg";
-            arquivo = new File(caminhoLocal);
+        if (!caminhoLocal.startsWith("https")) {
+            File arquivo = new File(caminhoLocal);
+            if (!arquivo.exists()) {
+                caminhoLocal = SBWebPaginas.getPastaBaseImagens() + "/imagempadrao.jpg";
+            }
         }
+
         FabTipoAcessoArquivo tipoAcesso = (FabTipoAcessoArquivo) pTipoAcesso.getFabricaObjeto();
         switch (tipoAcesso) {
             case VISUALIZAR:

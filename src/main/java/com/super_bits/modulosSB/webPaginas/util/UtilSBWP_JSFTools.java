@@ -4,10 +4,13 @@
  */
 package com.super_bits.modulosSB.webPaginas.util;
 
+import com.sun.faces.component.visit.FullVisitContext;
+import com.sun.faces.facelets.el.TagValueExpression;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringValidador;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.permissoes.ItfAcaoFormulario;
 import com.super_bits.modulosSB.SBCore.modulos.Mensagens.FabMensagens;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campoInstanciado.ItfCampoInstanciado;
 
 import com.super_bits.modulosSB.webPaginas.ConfigGeral.SBWebPaginas;
 import com.super_bits.modulosSB.webPaginas.JSFBeans.modal.PgModalSBJSF;
@@ -22,12 +25,18 @@ import java.util.List;
 import javax.faces.component.NamingContainer;
 import javax.faces.component.UIComponent;
 import javax.faces.component.UINamingContainer;
+import javax.faces.component.UIViewRoot;
+import javax.faces.component.visit.VisitCallback;
+import javax.faces.component.visit.VisitContext;
+import javax.faces.component.visit.VisitResult;
 import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.servlet.http.HttpSession;
 import org.coletivojava.fw.api.tratamentoErros.FabErro;
 import org.jboss.weld.interceptor.util.proxy.TargetInstanceProxy;
-import org.primefaces.context.RequestContext;
+import org.primefaces.PrimeFaces;
+import org.primefaces.context.PrimeFacesContext;
+
 import org.super_bits.tags.inputGenerico.InputGenerico;
 
 /**
@@ -232,7 +241,8 @@ public abstract class UtilSBWP_JSFTools {
             }
 
             try {
-                RequestContext context = RequestContext.getCurrentInstance();
+
+                PrimeFaces contextoPrime = PrimeFaces.current();
                 String caminhoCompleto = null;
                 try {
                     caminhoCompleto = getIDSCaminhoAbsoluto(pId);
@@ -266,7 +276,7 @@ public abstract class UtilSBWP_JSFTools {
                 }
 
                 if (lista != null) {
-                    context.update(lista);
+                    contextoPrime.ajax().update(lista);
 
                 }
             } catch (UnsupportedOperationException e) {
@@ -296,14 +306,15 @@ public abstract class UtilSBWP_JSFTools {
                 FacesContext.getCurrentInstance().getExternalContext().responseReset();
                 FacesContext.getCurrentInstance().getExternalContext().redirect(pURL);
             } catch (IllegalStateException paginaJaReinderizada) {
-                RequestContext context = RequestContext.getCurrentInstance();
+                PrimeFaces contextPrime = PrimeFaces.current();
                 //execute javascript oncomplete
-                context.execute("window.location.replace('" + pURL + "');");
+
+                contextPrime.executeScript("window.location.replace('" + pURL + "');");
             } catch (Throwable t) {
                 SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "Erro Reiniciando resposta e redirecionando, javascript de redurecionamento será enviado", t);
-                RequestContext context = RequestContext.getCurrentInstance();
+
                 //execute javascript oncomplete
-                context.execute("window.location.replace('" + pURL + "');");
+                PrimeFaces.current().executeScript("window.location.replace('" + pURL + "');");
             }
             //FacesContext.getCurrentInstance().getEx //Timer t=Timer.getInstance();
             //  FacesContext.getCurrentInstance().responseComplete();
@@ -351,8 +362,8 @@ public abstract class UtilSBWP_JSFTools {
     }
 
     public static void executarJavaScript(String pcomando) {
-        RequestContext requestContext = RequestContext.getCurrentInstance();
-        requestContext.execute(pcomando);
+        PrimeFaces requestContext = PrimeFaces.current();
+        requestContext.executeScript(pcomando);
 
     }
 
@@ -410,7 +421,7 @@ public abstract class UtilSBWP_JSFTools {
 
     public static EntityManager getEntityManagerDaPaginaAtual() {
         ItfPaginaAtual paginaAtual = (ItfPaginaAtual) UtilSBWPServletTools.getBeanByNamed("paginaAtual", ItfPaginaAtual.class);
-        return paginaAtual.getInfoPagina().getComoPaginaDeGestao().getEMPagina();
+        return paginaAtual.getInfoPagina().getComoPaginaComEntityManager().getEMPagina();
     }
 
     public static InputGenerico getInputGenericoDoComponente(UIComponent pComponente) {
@@ -427,6 +438,52 @@ public abstract class UtilSBWP_JSFTools {
                 componente = componente.getParent();
             }
 
+        }
+
+    }
+
+    /**
+     * Retorna o primeior componente com o id do componente
+     *
+     * @param id
+     * @return
+     */
+    public static UIComponent getComponenteByIdDoContextoAtual(final String id) {
+
+        FacesContext context = FacesContext.getCurrentInstance();
+        UIViewRoot root = context.getViewRoot();
+        final UIComponent[] found = new UIComponent[1];
+
+        root.visitTree(new FullVisitContext(context), new VisitCallback() {
+            @Override
+            public VisitResult visit(VisitContext context, UIComponent component) {
+                if (component != null
+                        && component.getId() != null
+                        && component.getId().equals(id)) {
+                    found[0] = component;
+                    return VisitResult.COMPLETE;
+                }
+                return VisitResult.ACCEPT;
+            }
+        });
+
+        return found[0];
+
+    }
+
+    public static ItfCampoInstanciado getCampoInstanciadoByIdNoCOntextoAtual(String idFinalDoCOmponente) {
+        ItfCampoInstanciado campoInstanciado = null;
+        PrimeFacesContext.getCurrentInstance().getViewRoot().getComponentResources(PrimeFacesContext.getCurrentInstance());
+
+        UIComponent componente = UtilSBWP_JSFTools.getComponenteByIdDoContextoAtual(idFinalDoCOmponente);
+        try {
+
+            TagValueExpression tag = (TagValueExpression) componente.getPassThroughAttributes().get("campoInstanciado");
+            campoInstanciado = (ItfCampoInstanciado) tag.getValue(PrimeFacesContext.getCurrentInstance().getELContext());
+            return campoInstanciado;
+        } catch (Throwable t) {
+            SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "Erro obtendo o campo instanciado pelo UiComponent que deveria existir no contexto de execução, o id pesquisado foi: " + idFinalDoCOmponente, t);
+            return null;
         }
 
     }

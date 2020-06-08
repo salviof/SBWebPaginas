@@ -23,7 +23,7 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import org.coletivojava.fw.api.tratamentoErros.FabErro;
 import org.primefaces.event.FileUploadEvent;
-import org.primefaces.model.UploadedFile;
+import org.primefaces.model.file.UploadedFile;
 
 /**
  *
@@ -127,7 +127,7 @@ public class PgCentralArquivos implements Serializable {
                         SBCore.enviarMensagemUsuario("O arquivo já foi enviado para o sistema \n" + caminhoSalvarArquivo, FabMensagens.AVISO);
                         throw new UnsupportedOperationException("Este arquivo já existe");
                     }
-                    if (UtilSBCoreOutputs.salvarArquivoInput(pArquivo.getInputstream(), caminhoSalvarArquivo)) {
+                    if (UtilSBCoreOutputs.salvarArquivoInput(pArquivo.getInputStream(), caminhoSalvarArquivo)) {
                         SBCore.enviarAvisoAoUsuario("Arquivo armezenado com sucesso");
                     }
                     break;
@@ -157,7 +157,7 @@ public class PgCentralArquivos implements Serializable {
 
     public void salvarImagens(FileUploadEvent event) {
         try {
-            UtilSBPersistenciaArquivosDeEntidade.SalvaIMAGEM(entidadeRelacionada, event.getFile().getInputstream());
+            UtilSBPersistenciaArquivosDeEntidade.SalvaIMAGEM(entidadeRelacionada, event.getFile().getInputStream());
         } catch (IOException ex) {
             SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "Erro salvando imagem para" + entidadeRelacionada, ex);
             Logger.getLogger(PgCentralArquivos.class.getName()).log(Level.SEVERE, null, ex);

@@ -6,14 +6,11 @@ package com.super_bits.modulosSB.webPaginas.JSFManagedBeans.declarados.util;
 
 import com.super_bits.modulosSB.Persistencia.dao.UtilSBPersistencia;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
-import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreOutputs;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campo.FabTipoAtributoObjeto;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campoInstanciado.ItfCampoInstanciado;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfBeanSimples;
 import java.io.Serializable;
 import java.util.List;
-import javax.enterprise.context.RequestScoped;
-import javax.faces.annotation.ViewMap;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import org.apache.commons.io.IOUtils;
@@ -52,13 +49,13 @@ public class PgUtilUploadDeArquivo implements Serializable {
                     campoArquivo.setValor(event.getFile().getFileName());
                     arquivoAtualizado.setNome(event.getFile().getFileName());
                     UtilSBPersistencia.mergeRegistro(arquivoAtualizado);
-                    campoArquivo.getComoArquivoDeEntidade().uploadArquivo(event.getFile().getFileName(), IOUtils.toByteArray(event.getFile().getInputstream()));
+                    campoArquivo.getComoArquivoDeEntidade().uploadArquivo(event.getFile().getFileName(), IOUtils.toByteArray(event.getFile().getInputStream()));
 
                 } else {
                     throw new UnsupportedOperationException("O tipo de atributo em " + caminhoCampo + "Ainda não 'ecompatível com este componente");
                 }
             } else {
-                cp.getComoArquivoDeEntidade().uploadArquivo(caminhoCampo, IOUtils.toByteArray(event.getFile().getInputstream()));
+                cp.getComoArquivoDeEntidade().uploadArquivo(caminhoCampo, IOUtils.toByteArray(event.getFile().getInputStream()));
             }
         } catch (Throwable t) {
             SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "Erro enviando imagem tamanho curto", t);

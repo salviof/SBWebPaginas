@@ -50,11 +50,11 @@ public abstract class ValidadorGenericoAbstrato<T> implements Validator<T> {
             if (campoInstanciado.isTemValidadacaoLogica()) {
                 try {
                     if (umNovoRegistro) {
-                        campoInstanciado.getValidacaoLogica().validarModoNovo(value);
+                        campoInstanciado.getValidacaoLogicaEstrategia().validarModoNovo(value);
                     } else {
-                        campoInstanciado.getValidacaoLogica().validarModoEdicao(value);
+                        campoInstanciado.getValidacaoLogicaEstrategia().validarModoEdicao(value);
                     }
-                    if (campoInstanciado.getValidacaoLogica().isAtualizarTelaGrupoFieldSetDoCampo()) {
+                    if (campoInstanciado.getValidacaoLogicaEstrategia().isAtualizarTelaGrupoFieldSetDoCampo()) {
                         try {
                             String nome = new PgUtil().getNomeIdPainelDoComponente(component);
                             if (!UtilSBCoreStringValidador.isNuloOuEmbranco(nome)) {
@@ -64,11 +64,11 @@ public abstract class ValidadorGenericoAbstrato<T> implements Validator<T> {
 
                         }
                     }
-                    if (campoInstanciado.getValidacaoLogica().atualizarTelaCampoEspecifico().length > 0) {
+                    if (campoInstanciado.getValidacaoLogicaEstrategia().atualizarTelaCampoEspecifico().length > 0) {
                         throw new ErroValidacao("Update de campos específicos ainda não foi implementado no Framework");
                     }
-                    if (!UtilSBCoreStringValidador.isNuloOuEmbranco(campoInstanciado.getValidacaoLogica().getJavscriptPosValidacao())) {
-                        PrimeFaces.current().executeScript(campoInstanciado.getValidacaoLogica().getJavscriptPosValidacao());
+                    if (!UtilSBCoreStringValidador.isNuloOuEmbranco(campoInstanciado.getValidacaoLogicaEstrategia().getJavscriptPosValidacao())) {
+                        PrimeFaces.current().executeScript(campoInstanciado.getValidacaoLogicaEstrategia().getJavscriptPosValidacao());
                     }
 
                 } catch (ErroValidacao tt) {

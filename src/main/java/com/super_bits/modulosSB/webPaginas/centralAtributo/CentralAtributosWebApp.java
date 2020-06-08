@@ -14,6 +14,7 @@ import com.super_bits.modulosSB.webPaginas.JSFBeans.PrimeFacesBeanModel.BP_PickL
 import com.super_bits.modulosSB.webPaginas.JSFBeans.PrimeFacesBeanModel.BP_autoCompleteEPesquisa;
 import com.super_bits.modulosSB.webPaginas.JSFBeans.SBBeanModel.lista.B_ListaItemEditavelJsf;
 import com.super_bits.modulosSB.webPaginas.util.UtilSBWP_JSFTools;
+import javax.persistence.EntityManager;
 
 /**
  *
@@ -22,8 +23,6 @@ import com.super_bits.modulosSB.webPaginas.util.UtilSBWP_JSFTools;
 public class CentralAtributosWebApp extends CentralAtributosSBPersistencia {
 
     public CentralAtributosWebApp() {
-
-        super(UtilSBWP_JSFTools.getEntityManagerDaPaginaAtual());
 
     }
 
@@ -45,6 +44,11 @@ public class CentralAtributosWebApp extends CentralAtributosSBPersistencia {
     @Override
     public Class<? extends ItfListagemItensSomenteLeitura> getClasseListaRegistrosSomenteLeitura() {
         return B_ListaItemEditavelJsf.class;
+    }
+
+    @Override
+    public EntityManager obterEntityManagerLasyMode() {
+        return UtilSBWP_JSFTools.getEntityManagerDaPaginaAtual();
     }
 
 }

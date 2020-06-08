@@ -114,13 +114,13 @@ public class SessaoAtualSBWP extends SessaoOffline implements ItfSessao, Seriali
             InputStream arquivo;
             if (!UtilSBCoreStringNomeArquivosEDiretorios.getExtencaoNomeArquivo(event.getFile().getFileName()).equals("png")) {
 
-                BufferedImage imagem = UtilSBImagemEdicao.converterPNGParaJpg(ImageIO.read(event.getFile().getInputstream()), Color.white);
+                BufferedImage imagem = UtilSBImagemEdicao.converterPNGParaJpg(ImageIO.read(event.getFile().getInputStream()), Color.white);
                 UtilSBImagemEdicao.reduzirProporcionalAlturaMaxima(imagem, 85, "jpg");
                 ByteArrayOutputStream os = new ByteArrayOutputStream();
                 ImageIO.write(imagem, "jpg", os);
                 arquivo = new ByteArrayInputStream(os.toByteArray());
             } else {
-                arquivo = event.getFile().getInputstream();
+                arquivo = event.getFile().getInputStream();
             }
 
             usuario.uploadFotoTamanhoPequeno(arquivo);
@@ -149,13 +149,13 @@ public class SessaoAtualSBWP extends SessaoOffline implements ItfSessao, Seriali
             InputStream arquivo;
             if (!UtilSBCoreStringNomeArquivosEDiretorios.getExtencaoNomeArquivo(event.getFile().getFileName()).equals("png")) {
 
-                BufferedImage imagem = UtilSBImagemEdicao.converterPNGParaJpg(ImageIO.read(event.getFile().getInputstream()), Color.white);
+                BufferedImage imagem = UtilSBImagemEdicao.converterPNGParaJpg(ImageIO.read(event.getFile().getInputStream()), Color.white);
                 UtilSBImagemEdicao.reduzirProporcionalAlturaMaxima(imagem, 85, "jpg");
                 ByteArrayOutputStream os = new ByteArrayOutputStream();
                 ImageIO.write(imagem, "jpg", os);
                 arquivo = new ByteArrayInputStream(os.toByteArray());
             } else {
-                arquivo = event.getFile().getInputstream();
+                arquivo = event.getFile().getInputStream();
             }
 
             usuario.uploadFotoTamanhoPequeno(arquivo);
