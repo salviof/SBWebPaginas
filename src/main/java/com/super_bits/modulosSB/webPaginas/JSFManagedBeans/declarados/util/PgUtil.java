@@ -8,6 +8,7 @@ package com.super_bits.modulosSB.webPaginas.JSFManagedBeans.declarados.util;
 import com.google.common.collect.Lists;
 import com.sun.faces.facelets.el.TagValueExpression;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
+import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreDataHora;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreNumeros;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringFiltros;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringGerador;
@@ -46,6 +47,7 @@ import com.super_bits.modulosSB.webPaginas.util.UtilSBWP_JSFTools;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -1402,8 +1404,13 @@ public class PgUtil implements Serializable {
             return null;
         }
         Locale local = new Locale("pt", "BR");
+        String diaDasemana = UtilSBCoreDataHora.getDiaDaSemana(pDataHora);
 
-        SimpleDateFormat formatador = new SimpleDateFormat("'dia' dd 'de' MMM 'de' yy 'às' HH:mm", local);
+        Calendar c = Calendar.getInstance();
+        //objeto d foi atribuido a Calendar
+        c.setTime(pDataHora);
+
+        SimpleDateFormat formatador = new SimpleDateFormat("'" + diaDasemana + "' dd 'de' MMM 'de' yy 'às' HH:mm", local);
         return formatador.format(pDataHora);
     }
 
