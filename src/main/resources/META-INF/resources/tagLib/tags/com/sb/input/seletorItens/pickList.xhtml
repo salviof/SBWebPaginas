@@ -14,14 +14,16 @@
             <h:panelGroup styleClass="Container12" layout="block" rendered="#{desabilitarEdicao}">
                 <p:dataList value="#{registro.valor}"
 
-                            var="item"   emptyMessage="nenhum selecionado" styleClass="inputItensDataListSomenteLeituraResponsivo">
-                    #{item.nome}
+                            var="item"
+                            emptyMessage="nenhum selecionado"
+                            styleClass="inputItensDataListSomenteLeituraResponsivo">
+                    <h:outputText value="#{item.nome}"/>
                 </p:dataList>
             </h:panelGroup>
 
 
 
-            <p:panel  styleClass="Container12" rendered="#{!desabilitarEdicao}">
+            <h:panelGroup  layout="bock" styleClass="Container12" rendered="#{!desabilitarEdicao}">
 
                 <p:pickList
                     value="#{registro.comoSeltorItens.campoSeletorItens.dualListPrime}"
@@ -52,7 +54,7 @@
                 </p:pickList>
                 <div class="quebraBlocoComEspacoVertical10"/>
 
-            </p:panel>
+            </h:panelGroup>
 
 
 

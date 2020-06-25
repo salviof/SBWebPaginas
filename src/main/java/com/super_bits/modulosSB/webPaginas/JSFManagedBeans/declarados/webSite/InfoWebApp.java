@@ -40,7 +40,7 @@ public class InfoWebApp implements Serializable {
             }
 
             if (pAcao.isUmaAcaoGestaoDominio()) {
-                System.out.println("ação de dominio, retornando url para" + pAcao.getNomeUnico());
+                //System.out.println("ação de dominio, retornando url para" + pAcao.getNomeUnico());
                 String chaveLocalizacao = pAcao.getNomeUnico();
                 AcaoComLink acao = MAPA_ACOESMANAGED_BEAN.get(chaveLocalizacao);
                 if (acao == null) {
