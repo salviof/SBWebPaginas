@@ -83,6 +83,7 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
     private boolean temNovo = true;
     private boolean temAlterarStatus = true;
     private boolean temVisualizar = true;
+    protected boolean listarEntidadesLasyMode = true;
 
     private final List<ItfAcaoDoSistema> acoesRegistros;
     protected ItfAcaoFormularioEntidade acaoListarRegistros;
@@ -96,7 +97,8 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
     private boolean podeEditar;
     private boolean novoRegistro;
     private boolean fecharEntityManagerAoListar = true;
-    private boolean mostarApenasORegistroCriadoAoListar = false;
+    protected boolean listarApenasRegistroCriadoAoListar = false;
+    protected boolean listarApenasRegistrosAtivos = false;
     private Boolean umaEntidadePersistivel;
     private GestaoDeDominioEmPagina<T> gestaoDominio;
     private ItfRespostaAcaoDoSistema ultimaRespostaControllerRecebida;
@@ -150,7 +152,7 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
     }
 
     protected void configmostarApenasORegistroCriadoAoListar(boolean pOpcao) {
-        mostarApenasORegistroCriadoAoListar = pOpcao;
+        listarApenasRegistroCriadoAoListar = pOpcao;
     }
 
     private boolean isUmaEntidadePersistivel() {
@@ -238,11 +240,8 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
         super();
         tipoFormulario = FabTipoFormulario.GESTAO_DE_ENTIDADE;
         acoesRegistros = new ArrayList<>();
-
         acaoNovoRegistro = pAcaoNovoRegistro;
-
         acaoListarRegistros = pAcaoListar;
-
         acaoSalvarAlteracoes = pAcaoSalvar;
 
         try {
@@ -256,8 +255,7 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
                 }
             }
 
-            entidadesListadas = new ArrayList<>();
-
+            entidadesListadas = null;
             if (SBCore.getEstadoAPP() == SBCore.ESTADO_APP.DESENVOLVIMENTO) {
                 paginaUtil = new PgUtil();
             }
@@ -557,18 +555,31 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
 
     @Override
     public List<T> getEntidadesListadas() {
+
         try {
-            return entidadesListadas;
+            if (entidadesListadas == null) {
+                listarDados(listarApenasRegistrosAtivos);
+                return entidadesListadas;
+            }
+            if (entidadesListadas != null && entidadesListadas.isEmpty()) {
+                entidadesListadas = null;
+                return entidadesListadas;
+            }
+
         } catch (Throwable t) {
 
             SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "Erro selecionando entidades listadas", t);
             return new ArrayList<>();
         }
+
+        return entidadesListadas;
+
     }
 
     @Override
     public void setEntidadesListadas(List<T> entidadesListadas) {
         this.entidadesListadas = entidadesListadas;
+
     }
 
     @Override
@@ -692,14 +703,14 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
     }
 
     @Override
-    public void listarDados() {
+    public final void listarDados() {
         listarDados(false);
 
     }
 
     protected void listarDados(boolean mostrarInativos) {
         try {
-            if (mostarApenasORegistroCriadoAoListar && isNovoRegistro() && getEntidadeSelecionada() != null && getEntidadeSelecionadaComoBeanSimples().getId() == 0) {
+            if (listarApenasRegistroCriadoAoListar && isNovoRegistro() && getEntidadeSelecionada() != null && getEntidadeSelecionadaComoBeanSimples().getId() == 0) {
                 if (getEntidadesListadas() != null) {
                     getEntidadesListadas().clear();
                     getEntidadesListadas().add(entidadeSelecionada);
@@ -1040,6 +1051,7 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
 
         } catch (Throwable t) {
             SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "Erro determinando url para execução de ação em outro formulário", t);
+
         }
     }
 
@@ -1131,37 +1143,37 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
                 case ACAO_ENTIDADE_CONTROLLER:
                 case ACAO_CONTROLLER:
                     try {
-                        if (acaoSelecionada.getComoController().isTemComunicacaoTransiente()) {
-                            if (!isRespostaComunicacaoTransientPreAcaoEnviada()) {
-                                exibeModalComunicacaoTransientPreAcaoAtual();
-                            } else {
-                                FabTipoRespostaComunicacao respComunicacao = mapaRespostasComunicacaoTransienteDeAcaoByAcoes.get(getAcaoSelecionada().getNomeUnico());
-                                if (respComunicacao != null) {
-                                    if (respComunicacao.isRespostaPositiva()) {
-                                        ItfRespostaAcaoDoSistema respAcao = autoExecAcaoController((T) pEntidadeSelecionada);
-                                        ultimaRespostaControllerRecebida = respAcao;
-                                        autoExecProximaAcaoAposController((ItfAcaoController) acaoSelecionada, respAcao);
-                                    } else {
-                                        ultimaRespostaControllerRecebida = null;
-                                        autoExecProximaAcaoAposController((ItfAcaoController) acaoSelecionada, null);
-                                    }
+                    if (acaoSelecionada.getComoController().isTemComunicacaoTransiente()) {
+                        if (!isRespostaComunicacaoTransientPreAcaoEnviada()) {
+                            exibeModalComunicacaoTransientPreAcaoAtual();
+                        } else {
+                            FabTipoRespostaComunicacao respComunicacao = mapaRespostasComunicacaoTransienteDeAcaoByAcoes.get(getAcaoSelecionada().getNomeUnico());
+                            if (respComunicacao != null) {
+                                if (respComunicacao.isRespostaPositiva()) {
+                                    ItfRespostaAcaoDoSistema respAcao = autoExecAcaoController((T) pEntidadeSelecionada);
+                                    ultimaRespostaControllerRecebida = respAcao;
+                                    autoExecProximaAcaoAposController((ItfAcaoController) acaoSelecionada, respAcao);
+                                } else {
+                                    ultimaRespostaControllerRecebida = null;
+                                    autoExecProximaAcaoAposController((ItfAcaoController) acaoSelecionada, null);
                                 }
                             }
-                        } else {
-                            PrimeFaces.current().executeScript("acoesPosAjax()");
-                            ItfRespostaAcaoDoSistema respAcao = autoExecAcaoController((T) pEntidadeSelecionada);
-                            if (respAcao != null) {
-                                respAcao.dispararMensagens();
-                            }
-                            autoExecProximaAcaoAposController((ItfAcaoController) acaoSelecionada, respAcao);
                         }
-
-                    } catch (Throwable t) {
-                        SBCore.enviarAvisoAoUsuario("Houve um erro inesperado!, entre em contato com o suporte");
-                        SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "Erro executando ação de controler padrão, a resposta não foi obtida para:" + acaoSelecionada, t);
-                        autoExecProximaAcaoAposController((ItfAcaoController) acaoSelecionada, null);
+                    } else {
+                        PrimeFaces.current().executeScript("acoesPosAjax()");
+                        ItfRespostaAcaoDoSistema respAcao = autoExecAcaoController((T) pEntidadeSelecionada);
+                        if (respAcao != null) {
+                            respAcao.dispararMensagens();
+                        }
+                        autoExecProximaAcaoAposController((ItfAcaoController) acaoSelecionada, respAcao);
                     }
-                    break;
+
+                } catch (Throwable t) {
+                    SBCore.enviarAvisoAoUsuario("Houve um erro inesperado!, entre em contato com o suporte");
+                    SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "Erro executando ação de controler padrão, a resposta não foi obtida para:" + acaoSelecionada, t);
+                    autoExecProximaAcaoAposController((ItfAcaoController) acaoSelecionada, null);
+                }
+                break;
 
                 case ACAO_SELECAO_DE_ACAO:
                     break;
@@ -1189,8 +1201,11 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
                     if (fecharEntityManagerAoListar) {
                         renovarEMPagina();
                     }
-
-                    listarDados();
+                    if (listarEntidadesLasyMode) {
+                        setEntidadesListadas(null);
+                    } else {
+                        listarDados();
+                    }
                     setEntidadeSelecionada(null);
                     atualizaInformacoesDeEdicao(FabEstadoFormulario.VISUALIZAR);
                     atualizarIdAreaExibicaoAcaoSelecionada();

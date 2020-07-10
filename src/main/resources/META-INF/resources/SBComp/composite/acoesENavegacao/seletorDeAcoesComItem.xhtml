@@ -1,6 +1,6 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:cc="http://java.sun.com/jsf/composite"
-                xmlns:sb="http://superbitsframework/ui" 
+                xmlns:sb="http://superbitsframework/ui"
 
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
@@ -67,13 +67,13 @@
                         <f:setPropertyActionListener
                             target="#{cc.attrs.opcaoSelecionada}"
                             value="#{opc}"
-                            >
+                            />
 
-                            <p:ajax event="dialogReturn" listener="#{paginaAtual.infoPagina.metodoRespostaModal}"
-                                    rendered="#{opc.acaoTemModal}"
-                                    />
+                        <p:ajax event="dialogReturn" listener="#{paginaAtual.infoPagina.metodoRespostaModal}"
+                                rendered="#{opc.acaoTemModal}"
+                                />
 
-                            <p:tooltip for="@parent" value="#{opc.nomeAcao}" trackMouse="true" />
+                        <p:tooltip for="@parent" value="#{opc.nomeAcao}" trackMouse="true" />
                     </p:commandButton>
 
                 </c:when>

@@ -811,6 +811,9 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
     }
 
     protected void adicionarAcaoNoHistorico(ItfAcaoDoSistema pAcao) {
+        if (pAcao == null) {
+            return;
+        }
         if (historico_acoes_Executadas == null) {
             historico_acoes_Executadas = new HashMap<>();
         }

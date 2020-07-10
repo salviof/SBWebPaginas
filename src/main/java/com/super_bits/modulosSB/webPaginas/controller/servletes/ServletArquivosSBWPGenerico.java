@@ -34,7 +34,12 @@ public class ServletArquivosSBWPGenerico extends HttpServlet {
         resp.setHeader("Content-Disposition", "attachment; filename=\"" + pNomeArquivoDownload + "\"");;
         resp.setContentType("application/force-download");
         resp.setHeader("Content-Transfer-Encoding", "binary");
-        realizarStreamDeArquivoLocal(resp, pcaminhoArquivo);
+
+        if (pcaminhoArquivo.startsWith("http")) {
+            realizarStreamDeArquivoRemoto(resp, pcaminhoArquivo);
+        } else {
+            realizarStreamDeArquivoLocal(resp, pcaminhoArquivo);
+        }
     }
 
     protected void definirHeaderPorNomeDeArquivo(String pCaminhoArquivo, HttpServletResponse resp) {

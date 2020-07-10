@@ -81,8 +81,9 @@
 
 
                         <p:ajax event="dialogReturn"
-                                update="@form"
-                                listener="#{pgUtil.atualizaTelaPorID(pgUtil.getIdDoComponenteAtual(component))}" />
+                                update="#{pgUtil.getNomeIdHPanelPai(component)}"
+                                listener="#{pgUtil.atualizaTelaPorID(pgUtil.getNomeIdHPanelPai(component))}"
+                                />
 
                         <c:if test="#{possuiIDOnChange}" >
                             <p:ajax
