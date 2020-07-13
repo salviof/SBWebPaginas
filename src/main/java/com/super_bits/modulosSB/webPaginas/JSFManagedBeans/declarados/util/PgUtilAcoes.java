@@ -39,7 +39,19 @@ public class PgUtilAcoes implements Serializable {
      * @return A url para acesso a ação de formulário
      */
     public String getUrlAcao(ItfAcaoFormulario pAcao, ItfBeanSimplesSomenteLeitura... pParametros) {
+        if (pParametros != null) {
+            if (pParametros.length == 1) {
+                if (pParametros[0] == null) {
+
+                    return MapaDeFormularios.getUrlFormulario(pAcao);
+                }
+            }
+        }
         return MapaDeFormularios.getUrlFormulario(pAcao, pParametros);
+    }
+
+    public String getUrlAcao(ItfAcaoFormulario pAcao) {
+        return MapaDeFormularios.getUrlFormulario(pAcao);
     }
 
 }
