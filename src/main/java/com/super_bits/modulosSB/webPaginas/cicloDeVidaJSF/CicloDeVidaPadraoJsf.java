@@ -106,7 +106,7 @@ public class CicloDeVidaPadraoJsf implements PhaseListener {
                 if (idFoco != null) {
                     UIComponent componente = event.getFacesContext().getViewRoot().findComponent(idFoco);
                     if (componente instanceof HtmlInputText) {
-                        PrimeFaces.current().executeScript("setTimeout(function(){$(PrimeFaces.escapeClientId('" + idFoco + "')).focus();},1000)");
+                        PrimeFaces.current().executeScript("setTimeout(function(){$(PrimeFaces.escapeClientId('" + idFoco + "')).focus();},2000)");
                         break;
                     }
                 }

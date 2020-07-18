@@ -559,6 +559,10 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
         try {
             if (entidadesListadas == null) {
                 listarDados(listarApenasRegistrosAtivos);
+                //proteção de  stackoverflow, chamando getEntidadesListadas dentro do listar(dados)
+                if (entidadesListadas == null) {
+                    entidadesListadas = new ArrayList<>();
+                }
                 return entidadesListadas;
             }
             if (entidadesListadas != null && entidadesListadas.isEmpty()) {
@@ -568,7 +572,6 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
 
         } catch (Throwable t) {
 
-            SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "Erro selecionando entidades listadas", t);
             return new ArrayList<>();
         }
 

@@ -8,6 +8,7 @@ import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ItfAcaoController;
 import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ComunicacaoAcaoSistema;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campoInstanciado.ItfCampoInstanciado;
+import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.interfaces.ItfB_PaginaComEntityManager;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.interfaces.ItfModalDados;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.reflexao.anotacoes.InfoPagina;
 import com.super_bits.modulosSB.webPaginas.controller.paginasDoSistema.FabAcaoPaginasDoSistema;
@@ -82,6 +83,11 @@ public class PgModalJustificativa extends PgModalDados implements ItfModalDados 
             SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "Erro obtendo campo " + campoSTR + " em:" + getPaginaVinculada().getBeanSelecionado(), t);
         }
         return null;
+    }
+
+    @Override
+    public ItfB_PaginaComEntityManager getComoPaginaComEntityManager() {
+        return getPaginaVinculada();
     }
 
 }
