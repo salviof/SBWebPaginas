@@ -39,6 +39,7 @@ public class PgModalAbstrato implements Serializable, ItfModalWebApp {
     @PostConstruct
     public void inicio() {
         try {
+
             chaveAcesso = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get(UtilSBWP_JSFTools.NOME_PARAMETRO_CHAVE_ACESSO);
             if (chaveAcesso == null) {
                 throw new UnsupportedOperationException("A chave de acesso utilizada para identificar a view que chamou o modal não foi encontrada");

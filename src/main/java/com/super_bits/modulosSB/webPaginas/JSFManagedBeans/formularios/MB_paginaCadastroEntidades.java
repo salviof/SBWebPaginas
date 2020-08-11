@@ -471,7 +471,7 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
     }
 
     @Override
-    public final ItfAcaoFormularioEntidade getAcaoListarRegistros() {
+    public ItfAcaoFormularioEntidade getAcaoListarRegistros() {
 
         if (getAcaoUltimaDesteTipo(FabTipoAcaoSistemaGenerica.FORMULARIO_LISTAR) != null) {
             acaoListarRegistros = getAcaoUltimaDesteTipo(FabTipoAcaoSistemaGenerica.FORMULARIO_LISTAR).getComoFormularioEntidade();
@@ -706,7 +706,7 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
     }
 
     @Override
-    public final void listarDados() {
+    public void listarDados() {
         listarDados(false);
 
     }

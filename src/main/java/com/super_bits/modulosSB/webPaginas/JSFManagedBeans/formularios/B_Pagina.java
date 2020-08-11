@@ -289,7 +289,6 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
     }
 
     private void renovarEMPagina(boolean segundaExcucao) {
-
         try {
             if (!SBPersistencia.isConfigurado()) {
                 return;

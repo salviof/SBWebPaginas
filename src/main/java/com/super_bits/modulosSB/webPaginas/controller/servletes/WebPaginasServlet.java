@@ -172,7 +172,7 @@ public class WebPaginasServlet extends HttpServlet implements Serializable {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        super.doGet(req, resp); //To change body of generated methods, choose Tools | Templates.
+        super.doPost(req, resp); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override

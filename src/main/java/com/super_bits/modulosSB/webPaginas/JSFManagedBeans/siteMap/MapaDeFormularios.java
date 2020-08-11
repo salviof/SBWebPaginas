@@ -6,6 +6,8 @@ package com.super_bits.modulosSB.webPaginas.JSFManagedBeans.siteMap;
 
 import com.google.common.collect.Lists;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
+import com.super_bits.modulosSB.SBCore.UtilGeral.MapaAcoesSistema;
+import com.super_bits.modulosSB.SBCore.UtilGeral.MapaDeAcoes;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringFiltros;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringValidador;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ItfAcaoDoSistema;
@@ -151,8 +153,9 @@ public class MapaDeFormularios {
 
     public static String getUrlFormulario(ItfAcaoDoSistema pAcao, Object... parametros) {
         try {
-            EstruturaDeFormulario strtura = mapaFormulariosByXhtmlPrincipal.get(pAcao.getAcaoDeGestaoEntidade().getXhtml());
-            String url = strtura.gerarUrlPorValorParametro(pAcao, null, parametros);
+            ItfAcaoDoSistema acao = MapaAcoesSistema.getAcaoDoSistema(pAcao.getEnumAcaoDoSistema());
+            EstruturaDeFormulario strtura = mapaFormulariosByXhtmlPrincipal.get(acao.getAcaoDeGestaoEntidade().getXhtml());
+            String url = strtura.gerarUrlPorValorParametro(acao, null, parametros);
             return url;
         } catch (Throwable t) {
             SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "Erro determinando url de formulario para ação" + pAcao + " com parametros" + parametros, t);

@@ -347,4 +347,24 @@ public class CentralDeArquivosWebAppServidorSB extends CentralDeArquivosAbstrata
         return getEndrRemotoServletPastaTemporaria() + "/" + pTipoArquivo.getSlugUrl() + "/" + FabTipoAcessoArquivo.VISUALIZAR.getSlugUrl() + "/" + pNomeArquivo;
     }
 
+    @Override
+    public boolean isExisteArquivo(ItfCampoInstanciado pCampo) {
+        return super.isExisteArquivo(pCampo); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean excluirArquivo(ItfCampoInstanciado pCampo) {
+        try {
+            String arquivo = SBCore.getCentralDeArquivos().getEndrLocalArquivoCampoInstanciado(pCampo);
+
+            File novoFile = new File(arquivo);
+            novoFile.delete();
+            pCampo.setValor(null);
+            return true;
+        } catch (Throwable t) {
+            SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "Falha excluindo" + pCampo, t);
+            return false;
+        }
+    }
+
 }

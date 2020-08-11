@@ -5,16 +5,9 @@
 package com.super_bits.modulosSB.webPaginas.controller.servletes.servletRecepcaoOauth;
 
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
-import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringValidador;
-import com.super_bits.modulosSB.SBCore.integracao.libRestClient.api.token.ItfTokenGestaoOauth;
-
-import com.super_bits.modulosSB.SBCore.integracao.libRestClient.implementacao.TipoClienteOauth;
 import com.super_bits.modulosSB.SBCore.integracao.libRestClient.implementacao.UtilSBApiRestClient;
-import com.super_bits.modulosSB.SBCore.integracao.libRestClient.implementacao.gestaoToken.MapaTokensGerenciados;
 import com.super_bits.modulosSB.webPaginas.ConfigGeral.SBWebPaginas;
 import com.super_bits.modulosSB.webPaginas.controller.servletes.ServletArquivosSBWPGenerico;
-import com.super_bits.modulosSB.webPaginas.controller.servletes.urls.UrlInterpretada;
-import com.super_bits.modulosSB.webPaginas.controller.servletes.util.UtilFabUrlServlet;
 
 import com.super_bits.modulosSB.webPaginas.util.UtilSBWP_JSFTools;
 import java.io.IOException;
