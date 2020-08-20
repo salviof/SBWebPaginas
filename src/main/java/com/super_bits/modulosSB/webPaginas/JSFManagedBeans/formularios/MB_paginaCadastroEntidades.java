@@ -539,6 +539,7 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
     @Override
     public T getEntidadeSelecionada() {
         try {
+
             return entidadeSelecionada;
         } catch (Throwable t) {
 
@@ -808,7 +809,7 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
                         Class classeParametro = infoPreparacao.classesPrConstructorPrincipal()[0];
                         if (isTemParametrobyTipoEntidade(classeParametro.getSimpleName())) {
                             ItfParametroRequisicaoInstanciado pr = getParametrobyTipoEntidade(classeParametro.getSimpleName());
-                            getEntidadeSelecionada().prepararNovoObjeto(pr.getValor());
+                            getEntidadeSelecionada().prepararNovoObjeto(UtilSBPersistencia.loadEntidade((ItfBeanSimplesSomenteLeitura) pr.getValor(), getEMPagina()));
                         } else {
 
                             throw new UnsupportedOperationException("Impossível encontrar parametros do tipo " + classeParametro.getSimpleName() + " para preparar objeto do tipo " + classeDaEntidade.getSimpleName());
@@ -1172,7 +1173,7 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
                     }
 
                 } catch (Throwable t) {
-                    SBCore.enviarAvisoAoUsuario("Houve um erro inesperado!, entre em contato com o suporte");
+                    SBCore.enviarMensagemUsuario("Houve um erro inesperado!, entre em contato com o suporte", FabMensagens.ALERTA);
                     SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "Erro executando ação de controler padrão, a resposta não foi obtida para:" + acaoSelecionada, t);
                     autoExecProximaAcaoAposController((ItfAcaoController) acaoSelecionada, null);
                 }

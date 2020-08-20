@@ -151,7 +151,20 @@ public class PgUtilLayout implements Serializable {
         }
         return numeroMaximotela;
     }
-    ContainerResponsivo calculosContainerResponsivo;
+
+    public boolean isUmaTelaMobile() {
+        return paginaUtil.getSessao().getTelaUsuario().isUmMobile();
+    }
+
+    public boolean isUmaTelaDesktopReduzida() {
+        return paginaUtil.getSessao().getTelaUsuario().getNumeroMaximoColunas() < 13;
+    }
+
+    public boolean isUmaTelaTablet() {
+        return paginaUtil.getSessao().getTelaUsuario().isUmMobile();
+    }
+
+    private ContainerResponsivo calculosContainerResponsivo;
 
     public ContainerResponsivo getContainerResponsivo() {
         if (calculosContainerResponsivo == null) {

@@ -245,6 +245,9 @@ and open the template in the editor.
     width: 100%!important;
 
 }
+.autoCompleteResponsivo .ui-autocomplete-multiple-container{
+    width: 100%!important;
+}
 
 .estiloDataHora{
     display: flex!important;

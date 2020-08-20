@@ -90,6 +90,14 @@ function acoesPosAjax() {
 
 }
 
+function atualizarAreaByID(idAreaAtualizada) {
+    bloquearArea(idAreaAtualizada);
+    (document.getElementById('formAjaxBasico:prAtualizarAreaID')).value = idAreaAtualizada;
+
+    atualizarAreaByIDRC();
+    desbloquearArea(idAreaAtualizada);
+}
+
 /**
  * ->
  * O enviarInf
@@ -491,6 +499,21 @@ function acoesBotaoMenuHorizontal(menuhorizontalresponsivo, parafrente, semefeit
     }
 }
 
+function bloquearAreaOitoSegundos(idArea) {
+    try {
+        bloquearArea(idArea);
+
+        setTimeout(function () {
+            desbloquearArea(idArea);
+        }, 8000);
+
+
+    } catch (t) {
+        console.log("Erro bloqueando area");
+        console.log(t);
+    }
+}
+
 function bloquearArea(idArea) {
     try {
         var areas = idArea.split(" ");
@@ -508,6 +531,9 @@ function bloquearArea(idArea) {
         console.log(t);
     }
 }
+
+
+
 function desbloquearArea(idArea) {
 
     try {

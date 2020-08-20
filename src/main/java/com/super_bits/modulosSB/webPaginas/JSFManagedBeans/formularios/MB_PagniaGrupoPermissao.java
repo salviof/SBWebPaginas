@@ -6,6 +6,7 @@ package com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios;
 
 import com.super_bits.modulos.SBAcessosModel.model.GrupoUsuarioSB;
 import com.super_bits.modulos.SBAcessosModel.model.PermissaoSB;
+import com.super_bits.modulos.SBAcessosModel.model.acoes.AcaoDoSistema;
 import com.super_bits.modulos.SBAcessosModel.model.quadroPermissao.QuadroPermissaoGrupo;
 import com.super_bits.modulosSB.Persistencia.dao.UtilSBPersistencia;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
@@ -37,7 +38,7 @@ public class MB_PagniaGrupoPermissao<T extends ItfGrupoUsuaioEditavel> extends M
     public void inicio() {
         try {
             List<PermissaoSB> permissoes = UtilSBPersistencia.getListaTodos(PermissaoSB.class, getEMPagina());
-            gestoesPermissionaveis = new HashMap<>();
+            gestoesPermissionaveis = new HashMap<String, ItfAcaoGerenciarEntidade>();
 
             setEntidadesListadas(UtilSBPersistencia.getListaTodos(GrupoUsuarioSB.class));
 
@@ -50,6 +51,15 @@ public class MB_PagniaGrupoPermissao<T extends ItfGrupoUsuaioEditavel> extends M
 
                 }
             }
+            //List<ItfAcaoDoSistema> acoes = MapaAcoesSistema.getListaTodasAcoes();
+            List<ItfAcaoGerenciarEntidade> acoesGEstao = MapaAcoesSistema.getListaTodasGestao();
+            acoesGEstao.stream().filter(acao -> acao.isPrecisaPermissao() || acao.getAcoesVinculadas().stream().filter(ac -> ac.isPrecisaPermissao()).findFirst().isPresent())
+                    .forEach(acao -> {
+                        if (!gestoesPermissionaveis.containsKey(acao.getNomeUnico())) {
+                            gestoesPermissionaveis.put(acao.getNomeUnico(), acao);
+                        }
+
+                    });
 
         } catch (Throwable t) {
             SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "Erro executando ações Iniciais", t);

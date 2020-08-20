@@ -6,12 +6,17 @@
 
     <div style="position: absolute;top: 0;">
 
-
+        <h:form id="formAjaxBasico" style="visibility: hidden; " >
+            <p:remoteCommand name="atualizarAreaByIDRC"
+                             onstart="bloquearArea((document.getElementById('formAjaxBasico:prAtualizarAreaID')).value);"
+                             actionListener="#{pgUtilAjax.atualizarArea()}"  />
+            <p:inputText  id="prAtualizarAreaID"  value="#{pgUtilAjax.idarea}" style="visibility: hidden;"/>
+        </h:form>
         <!-- CODIGO QUE ENVIA INFORMACOES SOBRE A TELA DA SESSÃO DO USUÁRIO -->
         <h:panelGroup rendered="#{!sessaoAtualSBWP.tipoViewDefinido}" style="visibility: hidden; " >
             <h:form id="contactfrm"  >
                 <p:remoteCommand name="enviarInfoTela"  actionListener="#{sessaoAtualSBWP.defineInfoTela}"  />
-                <p:inputText  id="clientinfo" />
+                <p:inputText  id="clientinfo"  style="visibility: hidden;"/>
             </h:form>
 
             <script >

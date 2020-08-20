@@ -55,7 +55,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import javax.el.ELContext;
-import javax.faces.bean.RequestScoped;
+import javax.enterprise.context.RequestScoped;
+
 import javax.faces.component.UIComponent;
 import javax.faces.component.UIInput;
 import javax.faces.component.UINamingContainer;

@@ -1,5 +1,6 @@
 package com.super_bits.modulosSB.webPaginas.controller.listenners;
 
+import com.super_bits.modulos.SBAcessosModel.controller.UtilSBControllerAcessosModel;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreReflexao;
 import com.super_bits.modulosSB.webPaginas.ConfigGeral.ConfiguradorCoreDeProjetoWebWarAbstrato;
@@ -45,12 +46,13 @@ public class ContextoWebPaginas implements ServletContextListener {
                 System.out.println("Os seguintes resources foram encontrados:");
                 ServletContext contexto = sce.getServletContext();
                 System.out.println(contexto.getClass().getCanonicalName());
-                URL recursoTEste = sce.getServletContext().getResource("/site/modulos/gestaoRequisitos/gerenciarRequisitosSolicitados.xhtml");
+                //    URL recursoTEste = sce.getServletContext().getResource("/site/modulos/gestaoRequisitos/gerenciarRequisitosSolicitados.xhtml");
 
                 for (String caminho : ConfiguradorCoreDeProjetoWebWarAbstrato.contextoDoServlet.getResourcePaths("/")) {
                     System.out.println(caminho);
                 }
             }
+            UtilSBControllerAcessosModel.criarPermissoesDeAcao(false);
             // ServiceLoader<ItfInicioFimAppWP> services = ServiceLoader.load(ItfInicioFimAppWP.class);
 
             // if (!services.iterator().hasNext()) {

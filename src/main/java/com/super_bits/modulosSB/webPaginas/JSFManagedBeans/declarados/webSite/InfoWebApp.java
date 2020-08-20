@@ -14,7 +14,8 @@ import static com.super_bits.modulosSB.webPaginas.controller.servletes.WebPagina
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import javax.faces.bean.ApplicationScoped;
+import javax.enterprise.context.ApplicationScoped;
+
 import javax.inject.Named;
 import org.coletivojava.fw.api.tratamentoErros.FabErro;
 
