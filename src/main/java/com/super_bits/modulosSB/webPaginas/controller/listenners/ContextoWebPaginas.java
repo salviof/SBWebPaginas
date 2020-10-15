@@ -52,7 +52,10 @@ public class ContextoWebPaginas implements ServletContextListener {
                     System.out.println(caminho);
                 }
             }
-            UtilSBControllerAcessosModel.criarPermissoesDeAcao(false);
+            //Atualizando permissões
+            if (!SBCore.isIgnorarPermissoes()) {
+                UtilSBControllerAcessosModel.criarPermissoesDeAcao(false);
+            }
             // ServiceLoader<ItfInicioFimAppWP> services = ServiceLoader.load(ItfInicioFimAppWP.class);
 
             // if (!services.iterator().hasNext()) {

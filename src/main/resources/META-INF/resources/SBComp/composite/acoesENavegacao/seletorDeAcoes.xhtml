@@ -88,11 +88,10 @@
                                         rendered="#{opc.acaoTemModal}"
                                         update="#{pgUtil.gerarCaminhoCompletoID(paginaAtual.infoPagina.idAreaExbicaoAcaoSelecionada)}"
                                         oncomplete="acoesPosAjax()"
+                                        listener="#{paginaAtual.infoPagina.metodoRespostaModal}"
 
                                         />
-                                <p:ajax event="dialogReturn"
-                                        listener="#{paginaAtual.infoPagina.comoFormularioWeb.selAcaoDeCtrParaUltimoFrm()}"
-                                        />
+
 
 
 
@@ -204,13 +203,3 @@
 
     </cc:implementation>
 </ui:composition>
-
-
-
-
-
-
-
-
-
-

@@ -809,7 +809,14 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
                         Class classeParametro = infoPreparacao.classesPrConstructorPrincipal()[0];
                         if (isTemParametrobyTipoEntidade(classeParametro.getSimpleName())) {
                             ItfParametroRequisicaoInstanciado pr = getParametrobyTipoEntidade(classeParametro.getSimpleName());
-                            getEntidadeSelecionada().prepararNovoObjeto(UtilSBPersistencia.loadEntidade((ItfBeanSimplesSomenteLeitura) pr.getValor(), getEMPagina()));
+
+                            if (pr.getValor() == null) {
+                                if (pr.isParametroObrigatorio()) {
+                                    throw new UnsupportedOperationException("Impossível encontrar valor de  parametro de url obrigatorio do tipo " + classeParametro.getSimpleName() + " para preparar objeto do tipo " + classeDaEntidade.getSimpleName());
+                                }
+                            } else {
+                                getEntidadeSelecionada().prepararNovoObjeto(UtilSBPersistencia.loadEntidade((ItfBeanSimplesSomenteLeitura) pr.getValor(), getEMPagina()));
+                            }
                         } else {
 
                             throw new UnsupportedOperationException("Impossível encontrar parametros do tipo " + classeParametro.getSimpleName() + " para preparar objeto do tipo " + classeDaEntidade.getSimpleName());

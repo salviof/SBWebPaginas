@@ -1021,7 +1021,7 @@ public class PgUtil implements Serializable {
             options.put("height", sessao.getTelaUsuario().getY() + "px");
         } else {
 
-            options.put("height", "150px");
+            options.put("height", "200px");
         }
         options.put("contentWidth", "100%");
         options.put("contentHeight", "100%");
@@ -1071,7 +1071,7 @@ public class PgUtil implements Serializable {
             opcoes.put("height", sessao.getTelaUsuario().getY() - 200 + "px");
             opcoes.put("width", "90%");
         } else {
-            opcoes.put("height", "100px");
+            opcoes.put("height", "250px");
             opcoes.put("width", "50%");
         }
 
