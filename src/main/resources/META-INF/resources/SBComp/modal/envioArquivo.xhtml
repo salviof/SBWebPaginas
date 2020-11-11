@@ -13,12 +13,12 @@
                 PF('enviarArquivo').show();
             }
         </script>
-        <h:form rendered="false">
-            <p:remoteCommand actionListener="#{pgModalArquivoDeEntidade.fecharPaginaMatandoViewScoped()}"
-                             name="fecharModal"
+        <h:form >
+            <p:remoteCommand actionListener="#{pgModalArquivoDeEntidade.fecharModal()}"
+                             name="fecharModalFileupdate"
                              autoRun="false"
                              />
-            <p:commandButton value="Teste Fechar" update="@form" oncomplete="fecharModal();" />
+            <p:commandButton value="Teste Fechar" update="@form" rendered="false" oncomplete="fecharModalFileupdate();" />
         </h:form>
 
         <h:form>
@@ -39,8 +39,11 @@
                         mode="advanced"
                         label="Escolher #{pgModalArquivoDeEntidade.paginaVinculada.modalAtual.comoModalDados.campoSelecionado.label}"
                         listener="#{pgModalArquivoDeEntidade.paginaVinculada.modalAtual.comoModalDados.enviarArquivoDoCampoUpload}"
+                        oncomplete="fecharModalFileupdate();"
                         auto="true"
                         styleClass="estiloBotoaoEnviarArquivo"
+
+
                         />
                 </div>
             </div>

@@ -34,7 +34,6 @@ public class PgModalDados extends PgModalRespostaAbstrato implements ItfModalDad
             nomeArquivo = event.getFile().getFileName();
 
             if (getCampoSelecionado().getComoArquivoDeEntidade().uploadArquivo(nomeArquivo, event.getFile().getContent()));
-            PrimeFaces.current().dialog().closeDynamic(this);
 
         } catch (Throwable t) {
             SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "Erro enviando arquivo" + nomeArquivo, t);

@@ -362,4 +362,9 @@ public class CentralDeArquivosWebAppPastaREsources extends CentralDeArquivosAbst
         }
     }
 
+    @Override
+    public String getHashArquivoDeEntidadeRegistrado(ItfCampoInstanciado pCampo) {
+        return null;
+    }
+
 }

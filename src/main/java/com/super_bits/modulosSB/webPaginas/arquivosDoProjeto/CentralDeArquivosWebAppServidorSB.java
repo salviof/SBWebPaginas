@@ -367,4 +367,9 @@ public class CentralDeArquivosWebAppServidorSB extends CentralDeArquivosAbstrata
         }
     }
 
+    @Override
+    public String getHashArquivoDeEntidadeRegistrado(ItfCampoInstanciado ici) {
+        return null;
+    }
+
 }

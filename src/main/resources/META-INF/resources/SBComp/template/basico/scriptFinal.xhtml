@@ -17,7 +17,7 @@
         </h:form>
         <h:form>
             <p:remoteCommand actionListener="#{pgUtilComunicacao.removerNotificacoes()}" name="removerNotificacoes"
-                             update="#{pgUtil.atualizaTelaPorID(layoutIdsAreasConhecidas.AREA_TOPO_ITERNFACES)}"
+                             update="#{pgUtil.gerarCaminhoCompletoID(layoutIdsAreasConhecidas.AREA_TOPO_ITERNFACES)}"
                              />
         </h:form>
         <h:form id="formularioComunicacaoRespostaRapida" >
@@ -25,7 +25,7 @@
             <h:inputHidden  id="codigoSeloCMRespostaRapida" value="#{pgUtilComunicacao.codigoComunicacao}" class="codigoSeloCMRespostaRapida" />
             <h:inputHidden  id="codigoRespostaRapida" value="#{pgUtilComunicacao.idTipoResposta}" class="codigoRespostaRapida" />
             <p:commandButton   widgetVar="respostaRapidaAct"
-                               update="#{pgUtil.atualizaTelaPorID(layoutIdsAreasConhecidas.AREA_TOPO_ITERNFACES)}"
+                               update="#{pgUtil.gerarCaminhoCompletoID(layoutIdsAreasConhecidas.AREA_TOPO_ITERNFACES)}"
                                style="display:none"  actionListener="#{pgUtilComunicacao.respostaRapida()}">
 
             </p:commandButton>

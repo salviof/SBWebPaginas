@@ -32,7 +32,7 @@
 
             <h:inputHidden converter="conversorGenerico" value=""  />
             <p:fileUpload  allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
-                           fileUploadListener="#{paginaAtual.infoPagina.modalDados.enviarImagemPequenaUpload}"
+                           listener="#{paginaAtual.infoPagina.modalDados.enviarImagemPequenaUpload}"
                            multiple="false"
                            onstart="atualizarEntidadeAtual();"
 

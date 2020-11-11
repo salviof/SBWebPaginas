@@ -853,6 +853,17 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
 
     }
 
+    protected List<ItfAcaoDoSistema> getAcoesHistoricoOrdemUltimaExecucao() {
+        if (historico_acoes_Executadas == null) {
+            return null;
+        }
+        List<Integer> lista = Lists.newArrayList(historico_acoes_Executadas.keySet());
+
+        List<ItfAcaoDoSistema> acoes = new ArrayList<>();
+        lista.forEach(index -> acoes.add(historico_acoes_Executadas.get(index)));
+        return acoes;
+    }
+
     public ItfAcaoDoSistema getAcaoUltimaDesteTipo(FabTipoAcaoSistemaGenerica pTipo) {
         if (historico_acoes_Executadas == null) {
             return null;

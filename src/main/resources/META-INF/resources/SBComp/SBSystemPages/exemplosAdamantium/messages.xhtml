@@ -8,9 +8,9 @@
     <ui:define name="subheader">
         Messages
     </ui:define>
-    
+
     <ui:define name="content">
-        
+
         <div class="Container12">
             <div class="ContainerIndent">
                 <div class="Card">
@@ -21,7 +21,7 @@
                             <p:tooltip />
 
                             <h:form>
-                                <p:messages showDetail="true" autoUpdate="true" closable="true" />
+                                <p:messages showDetail="true"  closable="true" />
 
                                 <p:commandButton value="Info" actionListener="#{messagesView.info}" styleClass="RaisedButton"/>
                                 <p:commandButton value="Warn" actionListener="#{messagesView.warn}" styleClass="OrangeButton RaisedButton"/>
@@ -32,7 +32,7 @@
                             <div class="quebraBlocoComEspacoVertical3"></div>
 
                             <h:form>
-                                <p:growl id="growl" showDetail="true" sticky="true" /> 
+                                <p:growl id="growl" showDetail="true" sticky="true" />
 
                                 <h:panelGrid id="grid" columns="3" cellpadding="5">
                                     <p:outputLabel for="default" value="Default:" />

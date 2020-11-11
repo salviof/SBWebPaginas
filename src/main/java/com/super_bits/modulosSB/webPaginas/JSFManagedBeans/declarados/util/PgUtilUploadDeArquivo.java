@@ -6,7 +6,9 @@ package com.super_bits.modulosSB.webPaginas.JSFManagedBeans.declarados.util;
 
 import com.super_bits.modulosSB.Persistencia.dao.UtilSBPersistencia;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
+import com.super_bits.modulosSB.SBCore.modulos.ManipulaArquivo.UtilSBCoreArquivos;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campo.FabTipoAtributoObjeto;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campoInstanciado.ItfCampoInstArquivoEntidade;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campoInstanciado.ItfCampoInstanciado;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfBeanSimples;
 import java.io.Serializable;
@@ -39,17 +41,32 @@ public class PgUtilUploadDeArquivo implements Serializable {
             ItfCampoInstanciado cp = entidade.getCPinst(caminhoCampo);
             if (cp.getValor() instanceof List) {
                 if (cp.isUmaListagemParticular()) {
+
+                    byte[] arquivoByteArray = IOUtils.toByteArray(event.getFile().getInputStream());
+                    String hashArquivoNovo = UtilSBCoreArquivos.getHashDoByteArray(arquivoByteArray);
+                    //todo impedir envio arquivo duplicado
+                    List<ItfBeanSimples> arquivos = (List) cp.getValor();
+                    for (ItfBeanSimples arquivo : arquivos) {
+                        ItfCampoInstanciado campoArquivo = (ItfCampoInstanciado) arquivo.getCampoInstanciadoByAnotacao(FabTipoAtributoObjeto.ARQUIVO_DE_ENTIDADE);
+                        String hashDoArquivo = SBCore.getServicoArquivosDeEntidade().getHashArquivoDeEntidadeRegistrado(campoArquivo);
+                        if (hashDoArquivo != null) {
+                            if (hashDoArquivo.startsWith(hashArquivoNovo)) {
+                                throw new ErroEnviandoArquivoDeEntidade("Este arquivo já existe em " + entidade.getCPinst(caminhoCampo).getLabel());
+                            }
+                        }
+                    }
+
                     cp.getComoSubItens().getSubItens().adicionarItem();
                     ItfBeanSimples item = cp.getComoSubItens().getSubItens().getListaObjetosSelecionados().get(cp.getComoSubItens().getSubItens().getListaObjetosSelecionados().size() - 1);
                     ItfCampoInstanciado campoArquivo = item.getCampoInstanciadoByAnotacao(FabTipoAtributoObjeto.ARQUIVO_DE_ENTIDADE);
                     campoArquivo.getComoArquivoDeEntidade();
-                    //todo impedir envio arquivo duplicado
+
                     ItfBeanSimples arquivoAtualizado = UtilSBPersistencia.mergeRegistro(cp.getComoSubItens().getSubItens().getListaObjetosSelecionados().get(cp.getComoSubItens().getSubItens().getListaObjetosSelecionados().size() - 1));
                     campoArquivo = arquivoAtualizado.getCampoInstanciadoByAnotacao(FabTipoAtributoObjeto.ARQUIVO_DE_ENTIDADE);
                     campoArquivo.setValor(event.getFile().getFileName());
                     arquivoAtualizado.setNome(event.getFile().getFileName());
                     UtilSBPersistencia.mergeRegistro(arquivoAtualizado);
-                    campoArquivo.getComoArquivoDeEntidade().uploadArquivo(event.getFile().getFileName(), IOUtils.toByteArray(event.getFile().getInputStream()));
+                    campoArquivo.getComoArquivoDeEntidade().uploadArquivo(event.getFile().getFileName(), arquivoByteArray);
 
                 } else {
                     throw new UnsupportedOperationException("O tipo de atributo em " + caminhoCampo + "Ainda não 'ecompatível com este componente");
@@ -57,8 +74,11 @@ public class PgUtilUploadDeArquivo implements Serializable {
             } else {
                 cp.getComoArquivoDeEntidade().uploadArquivo(caminhoCampo, IOUtils.toByteArray(event.getFile().getInputStream()));
             }
+        } catch (ErroEnviandoArquivoDeEntidade erro) {
+            throw new UnsupportedOperationException(erro.getMessage());
         } catch (Throwable t) {
-            SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "Erro enviando imagem tamanho curto", t);
+            SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "Erro enviando imagem " + t.getMessage(), t);
+
         }
     }
 

@@ -22,7 +22,9 @@
                                      partialSubmit="true"
                                      process="#{pgUtil.getNomeIdPainelDoComponente(component)}"
                                      >
-                        <p:ajax event="dialogReturn" listener="#{pgUtil.atualizaTelaPorID(pgUtil.getNomeIdPFieldSetPai(component))}"  update="#{pgUtil.getNomeIdPFieldSetPai(component)}"/>
+                        <p:ajax event="dialogReturn"
+                                listener="#{pgUtil.atualizaTelaPorID(pgUtil.getNomeIdPFieldSetPai(component))}"
+                                update="#{pgUtil.getNomeIdPFieldSetPai(component)}"/>
 
                         <f:setPropertyActionListener target="#{paginaAtual.infoPagina.comoPaginaDeGestao.campoInstSelecionado}"
                                                      value="#{registro}" />
@@ -76,7 +78,9 @@
                                                              process="#{pgUtil.getNomeIdPainelDoComponente(component)}"
                                                              icon="#{iconeIconeFontAwesome.REG_ATUALIZAR.tagHtml}"
                                                              >
-                                                <p:ajax event="dialogReturn"  update="@namingcontainer" />
+                                                <p:ajax event="dialogReturn"
+                                                        listener="#{pgUtil.atualizaTelaPorID(pgUtil.getNomeIdPFieldSetPai(component))}"
+                                                        update="#{pgUtil.getNomeIdPFieldSetPai(component)}"/>
                                                 <f:setPropertyActionListener target="#{paginaAtual.infoPagina.comoPaginaDeGestao.campoInstSelecionado}"
                                                                              value="#{registro}" />
 

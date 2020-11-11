@@ -34,7 +34,7 @@
 
                 <h:inputHidden converter="conversorGenerico" value=""  />
                 <p:fileUpload  allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
-                               fileUploadListener="#{pgUtil.enviarImagemPequenaUpload}"
+                               listener="#{pgUtil.enviarImagemPequenaUpload}"
                                multiple="false"
                                auto="true"
                                uploadLabel="Enviar imagem"

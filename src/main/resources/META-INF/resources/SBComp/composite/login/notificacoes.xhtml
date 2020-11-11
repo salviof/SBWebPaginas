@@ -49,7 +49,7 @@
                         </h:form>
                     </span>
                 </c:forEach>
-                <li>     <h:form><p:commandLink onclick="removerNotificacoes()"  rendered="#{sessaoAtualSBWP.comunicacaoAguardandoRespostaUsuarioSesso.size()>4}" hreflang="#"><i class="fa fa-times Fs18 Fleft MarRight10"></i> <span class="FontAdamantiumBold"> Remover notificações </span></p:commandLink></h:form></li>
+                <li>     <h:form><p:commandLink oncomplete="removerNotificacoes();" rendered="#{sessaoAtualSBWP.comunicacaoAguardandoRespostaUsuarioSesso.size()>4}" hreflang="#"><i class="fa fa-times Fs18 Fleft MarRight10"></i> <span class="FontAdamantiumBold"> Remover notificações </span></p:commandLink></h:form></li>
                 <li> <h:form><p:commandLink hreflang="#" rendered="#{sessaoAtualSBWP.comunicacaoAguardandoRespostaUsuarioSesso.size()>5}"  > ... mais (#{sessaoAtualSBWP.comunicacaoAguardandoRespostaUsuarioSesso.size()-7})</p:commandLink> </h:form></li>
             </ul>
         </li>
