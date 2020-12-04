@@ -43,14 +43,14 @@ public class ContextoWebPaginas implements ServletContextListener {
             inicio.inicio();
 
             if (!SBCore.isEmModoProducao()) {
-                System.out.println("Os seguintes resources foram encontrados:");
-                ServletContext contexto = sce.getServletContext();
-                System.out.println(contexto.getClass().getCanonicalName());
+                //System.out.println("Os seguintes resources foram encontrados:");
+                // ServletContext contexto = sce.getServletContext();
+                //  System.out.println(contexto.getClass().getCanonicalName());
                 //    URL recursoTEste = sce.getServletContext().getResource("/site/modulos/gestaoRequisitos/gerenciarRequisitosSolicitados.xhtml");
 
-                for (String caminho : ConfiguradorCoreDeProjetoWebWarAbstrato.contextoDoServlet.getResourcePaths("/")) {
-                    System.out.println(caminho);
-                }
+                // for (String caminho : ConfiguradorCoreDeProjetoWebWarAbstrato.contextoDoServlet.getResourcePaths("/")) {
+                //     System.out.println(caminho);
+                // }
             }
             //Atualizando permissões
             if (!SBCore.isIgnorarPermissoes()) {

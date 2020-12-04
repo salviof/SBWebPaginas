@@ -6,6 +6,7 @@ package com.super_bits.modulosSB.webPaginas.controller.servletes.servletRecepcao
 
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 import com.super_bits.modulosSB.SBCore.integracao.libRestClient.implementacao.UtilSBApiRestClient;
+import com.super_bits.modulosSB.SBCore.integracao.libRestClient.implementacao.UtilSBApiRestClientOauth2;
 import com.super_bits.modulosSB.webPaginas.ConfigGeral.SBWebPaginas;
 import com.super_bits.modulosSB.webPaginas.controller.servletes.ServletArquivosSBWPGenerico;
 
@@ -31,14 +32,21 @@ public class ServletRecepcaoOauth extends ServletArquivosSBWPGenerico implements
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         try {
-            if (UtilSBApiRestClient.receberCodigoSolicitacaoOauth(req)) {
+            if (req.getRequestURI().contains(UtilSBApiRestClientOauth2.PATH_TESTE_DE_VIDA_SERVICO_RECEPCAO)) {
+                resp.setStatus(200);
+                resp.getWriter().append("EUTÔVIVO");
+                resp.getWriter().close();
+                return;
+            };
+            if (!UtilSBApiRestClient.receberCodigoSolicitacaoOauth(req)) {
                 throw new UnsupportedOperationException("falha recebendo codigo de solictação de token Oauth");
             }
+            resp.getWriter().append("Chave de Aceso gerada com sucesso");
         } catch (Throwable t) {
             RequestDispatcher wp = req.getRequestDispatcher(UtilSBWP_JSFTools.FORMULARIO_PARAMETRO_URL_INVALIDO);
             SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "Erro obtendo parametros de URL", t);
             wp.forward(req, resp);
-            return;
+
         }
 
     }

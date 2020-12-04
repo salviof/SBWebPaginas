@@ -241,6 +241,7 @@ function mesclarOnChangeComDelayCkEditor(idElementoDigitacao, idElementoPersiste
                                 // console.log('data');
 
                                 setTimeout(function () {
+
                                     window.elemento.metodoOnchangeComDelay();
 
                                 }, 1000);
@@ -273,6 +274,8 @@ function mesclarOnChangeComDelay(idElementoDigitacao) {
     try {
         elemento = document.getElementById(idElementoDigitacao);
         console.log(elemento);
+        idelementoJquery = PrimeFaces.escapeClientId(elemento.id);
+        $(idelementoJquery).putCursorAtEnd();
 
         var timeout = null;
         if (elemento.onchange) {
@@ -297,11 +300,18 @@ function mesclarOnChangeComDelay(idElementoDigitacao) {
 
 
                             try {
+                                idelementoJquery = PrimeFaces.escapeClientId(elemento.id);
+                                $(idelementoJquery).disabled = true;
+                                bloquearArea(elemento.id);
+
                                 elemento.metodoOnchangeComDelay();
+                                desbloquearArea(elemento.id);
+                                $(idelementoJquery).disabled = false;
+
                             } catch (t) {
 
                             }
-                        }, 800);
+                        }, 1200);
                     }
                 } catch (t) {
 
@@ -312,7 +322,6 @@ function mesclarOnChangeComDelay(idElementoDigitacao) {
 
     }
 }
-
 function focarComSelacaoAposAjax() {
     try {
         contemClientID = false;
@@ -324,7 +333,6 @@ function focarComSelacaoAposAjax() {
             }
         }
         if (!contemClientID) {
-
             if ($(PrimeFaces.escapeClientId(document.activeElement.id)).attr('data-p-hl') === "inputnumber") {
                 $(PrimeFaces.escapeClientId(document.activeElement.id)).select();
             } else {
@@ -336,7 +344,6 @@ function focarComSelacaoAposAjax() {
 
     }
 }
-
 
 
 
@@ -410,7 +417,6 @@ function initBotaoMenuHorizontal(menuhorizontalresponsivo) {
             } else {
                 acoesBotaoMenuHorizontal(menuhorizontalresponsivo, false, true);
             }
-
         });
     }
     var pixelScrolAtual = $(menuhorizontalresponsivo).scrollLeft();
@@ -468,7 +474,6 @@ function acoesBotaoMenuHorizontal(menuhorizontalresponsivo, parafrente, semefeit
             $(botaoScrollEsquerda).removeClass('hidden-botao-lateral');
         } else {
             if (novoScroll <= 0) {
-
                 $(botaoScrollDireita).removeClass('hidden-botao-lateral');
                 $(botaoScrollEsquerda).addClass('hidden-botao-lateral');
 
@@ -551,6 +556,45 @@ function desbloquearArea(idArea) {
         console.log("Erro bloqueando area");
         console.log(t);
     }
-
-
 }
+
+
+jQuery.fn.putCursorAtEnd = function () {
+
+    return this.each(function () {
+
+        // Cache references
+        var $el = $(this),
+                el = this;
+
+        // Only focus if input isn't already
+        if (!$el.is(":focus")) {
+            $el.focus();
+        }
+
+        // If this function exists... (IE 9+)
+        if (el.setSelectionRange) {
+
+            // Double the length because Opera is inconsistent about whether a carriage return is one character or two.
+            var len = $el.val().length * 2;
+
+            // Timeout seems to be required for Blink
+            setTimeout(function () {
+                el.setSelectionRange(len, len);
+            }, 1);
+
+        } else {
+
+            // As a fallback, replace the contents with itself
+            // Doesn't work in Chrome, but Chrome supports setSelectionRange
+            $el.val($el.val());
+
+        }
+
+        // Scroll to the bottom, in case we're in a tall textarea
+        // (Necessary for Firefox and Chrome)
+        this.scrollTop = 999999;
+
+    });
+
+};

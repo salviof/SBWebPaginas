@@ -69,12 +69,11 @@
                     </p:autoComplete>
                 </h:panelGroup>
                 <h:panelGroup >
-
                     <p:commandButton
                         icon="#{acoesPaginasDoSistema_PaginaPesquisaAvancadaMbPadrao.paginaPesquisaAvancadaMbPadrao.iconeAcao}"
                         rendered="#{!desabilitarEdicao}"
                         update="#{pgUtil.getIdInputPai(component)}"
-                        actionListener="#{pgUtil.exibirModalImportacaoPesquisaAvancada()}"
+                        action="#{pgUtil.exibirModalImportacaoPesquisaAvancada()}"
                         partialSubmit="true"
                         process="@this"
                         >

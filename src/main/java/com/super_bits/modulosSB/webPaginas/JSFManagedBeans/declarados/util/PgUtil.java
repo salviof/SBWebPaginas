@@ -65,6 +65,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.servlet.http.HttpServletRequest;
 import org.coletivojava.fw.api.tratamentoErros.FabErro;
 import org.coletivojava.fw.utilCoreBase.UtilSBCoreComunicacao;
 import org.primefaces.PrimeFaces;
@@ -1152,6 +1153,15 @@ public class PgUtil implements Serializable {
         options.put("contentWidth", "100%");
         options.put("contentHeight", "100%");
         options.put("headerElement", "customheader");
+
+        if (paginaAtual.getInfoPagina().getComoFormularioWeb().getCampoInstSelecionado() != null) {
+
+            ItfCampoInstanciado campoinstanciado = paginaAtual.getInfoPagina().getComoFormularioWeb().getCampoInstSelecionado();
+            if (campoinstanciado.isUmValorComLista()) {
+                campoinstanciado.getComoCampoSeltorItem().atualizarListaCompleta();
+            }
+        }
+
         exibirModal(options, UtilSBWP_JSFTools.FORMULARIO_MODAL_PESQUISA_ITEM_AVANCADO);
     }
 
