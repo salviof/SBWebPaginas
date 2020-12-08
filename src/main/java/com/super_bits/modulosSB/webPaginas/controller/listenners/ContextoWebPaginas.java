@@ -1,13 +1,13 @@
 package com.super_bits.modulosSB.webPaginas.controller.listenners;
 
+import com.google.common.collect.UnmodifiableIterator;
 import com.super_bits.modulos.SBAcessosModel.controller.UtilSBControllerAcessosModel;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreReflexao;
 import com.super_bits.modulosSB.webPaginas.ConfigGeral.ConfiguradorCoreDeProjetoWebWarAbstrato;
 import com.super_bits.modulosSB.webPaginas.ConfigGeral.ItfInicioFimAppWP;
 import com.super_bits.modulosSB.webPaginas.ConfigGeral.SBWebPaginas;
-import java.net.URL;
-import javax.servlet.ServletContext;
+import java.util.ServiceLoader;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import org.coletivojava.fw.api.tratamentoErros.FabErro;
@@ -28,14 +28,21 @@ public class ContextoWebPaginas implements ServletContextListener {
     public void contextInitialized(ServletContextEvent sce) {
         System.out.println("Iniciando contexto");
         try {
-            Class classeInicioFim = UtilSBCoreReflexao.getClasseQueEstendeIsto(ItfInicioFimAppWP.class, "com.super_bits.config.webPaginas");
 
-            System.out.println("A classe de inicio e fim de contexto encontrada foi" + classeInicioFim.getName());
+            ServiceLoader<ItfInicioFimAppWP> services = ServiceLoader.load(ItfInicioFimAppWP.class);
 
-            ItfInicioFimAppWP inicio = (ItfInicioFimAppWP) classeInicioFim.newInstance();
+            ItfInicioFimAppWP inicio = services.iterator().next();
+            //   inicio.inicio();
 
-            System.out.println("Sistema Iniciado em " + sce.getServletContext().getVirtualServerName());
+            if (inicio == null) {
+                Class classeInicioFim = UtilSBCoreReflexao.getClasseQueEstendeIsto(ItfInicioFimAppWP.class, "com.super_bits.config.webPaginas");
+                com.google.common.collect.Sets teste = null;
+                System.out.println("A classe de inicio e fim de contexto encontrada foi" + classeInicioFim.getName());
 
+                inicio = (ItfInicioFimAppWP) classeInicioFim.newInstance();
+
+                System.out.println("Sistema Iniciado em " + sce.getServletContext().getVirtualServerName());
+            }
             ConfiguradorCoreDeProjetoWebWarAbstrato.contextoDoServlet = sce.getServletContext();
             SBWebPaginas.configurarContexto(sce.getServletContext());
             //   String webDir = this.getClass().getClassLoader().getResource("com/company/project/mywebdir").toExternalForm();
@@ -56,13 +63,7 @@ public class ContextoWebPaginas implements ServletContextListener {
             if (!SBCore.isIgnorarPermissoes()) {
                 UtilSBControllerAcessosModel.criarPermissoesDeAcao(false);
             }
-            // ServiceLoader<ItfInicioFimAppWP> services = ServiceLoader.load(ItfInicioFimAppWP.class);
 
-            // if (!services.iterator().hasNext()) {
-            //        FabErro.PARA_TUDO.paraSistema("classe de especificada em service para início e fim não foi encontrada", null);
-            //    }
-            //   ItfInicioFimAppWP inicio = services.iterator().next().getValue();
-            //   inicio.inicio();
         } catch (Throwable ex) {
             SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "Erro carregando Classe de inicio e fim de contexto", ex);
 
