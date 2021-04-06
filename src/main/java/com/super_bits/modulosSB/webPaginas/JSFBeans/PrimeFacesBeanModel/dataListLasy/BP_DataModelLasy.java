@@ -9,6 +9,7 @@ import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreListas;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreListasObjeto;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringValidador;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfBeanSimples;
+import com.super_bits.modulosSB.webPaginas.util.UtilSBWPServletTools;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -64,6 +65,11 @@ public class BP_DataModelLasy<T extends ItfBeanSimples> extends LazyDataModel<T>
     }
 
     @Override
+    public List<T> load(int first, int pageSize, Map<String, SortMeta> sortBy, Map<String, FilterMeta> filterBy) {
+        return load(first, pageSize, null, SortOrder.ASCENDING, filterBy);
+    }
+
+    @Override
     public List<T> load(int first, int pageSize, String sortField, SortOrder multiSortMeta, Map<String, FilterMeta> filters) {
         ConcurrentLinkedQueue lista = new ConcurrentLinkedQueue();
 
@@ -80,20 +86,22 @@ public class BP_DataModelLasy<T extends ItfBeanSimples> extends LazyDataModel<T>
         }
         String parametro = filters.values().iterator().next().toString().toUpperCase();
         boolean pesquisaNumerica = UtilSBCoreStringValidador.isContemApenasNumero(parametro);
-
+        Map<String, String[]> parametrosreq = UtilSBWPServletTools.getRequestAtual().getParameterMap();
         long streamStartTime = System.currentTimeMillis();
         if (camposPesquisa != null) {
 
-            lista.addAll(UtilSBCoreListasObjeto.filtrarOrdenandoMaisParecidos(listaCompleta, parametro, 15));
-            //camposPesquisa.stream().forEach(campo
-            //         -> {
-            //     lista.addAll(listaCompleta.stream().filter(item
-            //               -> item.getCampoInstanciadoByNomeOuAnotacao(campo).contem(parametro)
-            //      ).collect(Collectors.toList()));
-            //   });
+            //    lista.addAll(UtilSBCoreListasObjeto.filtrarOrdenandoMaisParecidos(listaCompleta, parametro, 15));
+            camposPesquisa.stream().forEach(campo
+                    -> {
+                lista.addAll(listaCompleta.stream().filter(item
+                        -> item.getCampoInstanciadoByNomeOuAnotacao(campo).contem(parametro)
+                ).collect(Collectors.toList()));
+            });
 
         } else {
-            if (filters.size() == 1 && filters.keySet().iterator().next().equals("globalFilter")) {
+            UtilSBWPServletTools.getRequestAtual().getParameter("globalFilter");
+            if (true
+                    || filters.size() == 1 && filters.keySet().iterator().next().equals("globalFilter")) {
 
                 if (!pesquisaNumerica) {
                     lista.addAll(UtilSBCoreListasObjeto.filtrarOrdenandoMaisParecidos(listaCompleta, parametro, 15));

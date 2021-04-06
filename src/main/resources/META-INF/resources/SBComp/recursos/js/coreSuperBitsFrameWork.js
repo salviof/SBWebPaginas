@@ -4,15 +4,24 @@
  * Limpa todos os Tooltips do Primefaces
  */
 function esconderTooltips() {
+    try{
     $(".ui-tooltip").hide();
+    }catch(erro){
+        
+    }
 }
 
 function liberarBloqueios() {
     var i;
+        try{
+
     for (i in PrimeFaces.widgets) {
         if (PrimeFaces.widgets[i].show && PrimeFaces.widgets[i].blocker) {
             PrimeFaces.widgets[i].hide();
         }
+    }
+       }catch(erro){
+        
     }
 }
 

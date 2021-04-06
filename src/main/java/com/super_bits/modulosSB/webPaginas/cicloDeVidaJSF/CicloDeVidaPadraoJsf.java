@@ -107,8 +107,14 @@ public class CicloDeVidaPadraoJsf implements PhaseListener {
                     UIComponent componente = event.getFacesContext().getViewRoot().findComponent(idFoco);
                     if (componente instanceof HtmlInputText) {
                         PrimeFaces.current().executeScript("setTimeout(function(){$(PrimeFaces.escapeClientId('" + idFoco + "')).focus();},2000)");
+                      //  PrimeFaces.current().executeScript(" $([document.documentElement, document.body]).animate({\n" +
+                        //                                   "scrollTop: $(PrimeFaces.escapeClientId('" + idFoco + "')).offset().top\n" +
+                          //                                 "    }, 2000);");
+                         //PrimeFaces.current().executeScript("alert('" + idFoco + "')");
                         break;
                     }
+                    
+                    
                 }
 
             }
@@ -119,6 +125,8 @@ public class CicloDeVidaPadraoJsf implements PhaseListener {
     public PhaseId getPhaseId() {
         return PhaseId.ANY_PHASE;
     }
+    
+    
 
     private void depurarArvoreComponentes(UIComponent component) {
 

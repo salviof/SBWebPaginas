@@ -14,6 +14,7 @@ import com.super_bits.modulosSB.SBCore.modulos.ManipulaArquivo.CentralPermissaoA
 import com.super_bits.modulosSB.SBCore.modulos.ManipulaArquivo.FabTipoArquivoConhecido;
 import com.super_bits.modulosSB.SBCore.modulos.ManipulaArquivo.TIPO_ESTRUTURA_LOCAL_XHTML_PADRAO;
 import com.super_bits.modulosSB.SBCore.modulos.ManipulaArquivo.acessoArquivo.FabTipoAcessoArquivo;
+import com.super_bits.modulosSB.SBCore.modulos.ManipulaArquivo.interfaces.ItfCentralDeArquivos;
 import com.super_bits.modulosSB.SBCore.modulos.ManipulaArquivo.interfaces.ItfCentralPermissaoArquivo;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campo.FabTipoAtributoObjeto;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campoInstanciado.ItfCampoInstanciado;
@@ -63,6 +64,19 @@ public class CentralDeArquivosWebAppServidorSB extends CentralDeArquivosAbstrata
         return endrLocaResource;
 
     }
+
+    @Override
+    public String getEndrLocalArquivoCampoInstanciado(ItfCampoInstanciado pCampo) {
+        
+        String caminhoArquivo = getEndrLocalArquivoItem((ItfBeanSimplesSomenteLeitura) pCampo.getObjetoDoAtributo(), (String) pCampo.getValor(), ItfCentralDeArquivos.CATEGORIA_PADRAO_ARQUIVO_DE_REGISTRO);
+        // todo resolver caminho legado de outra forma, sem precisar verficar a existencia do arquivo no caminho legado
+        if (!new File(caminhoArquivo).exists()){
+        caminhoArquivo = getEndrLocalArquivoItem((ItfBeanSimplesSomenteLeitura) pCampo.getObjetoDoAtributo(), (String) pCampo.getValor(), pCampo.getNomeCamponaClasse());    
+        }
+        return caminhoArquivo;
+    }
+    
+    
 
     @Override
     public String getEndrLocalResources() {
