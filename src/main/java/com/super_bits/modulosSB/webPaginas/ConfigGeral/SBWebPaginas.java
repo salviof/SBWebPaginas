@@ -53,6 +53,7 @@ public abstract class SBWebPaginas {
         URLBASE = config.URLBASE();
         siteMap = config.mapaSite();
         parametros = config.parametrosDeAplicacao();
+        System.out.println("Módulo Webpaginas Configurado");
         configurado = true;
         acaoPaginaInicial = config.getAcaoPaginaInicial();
 
