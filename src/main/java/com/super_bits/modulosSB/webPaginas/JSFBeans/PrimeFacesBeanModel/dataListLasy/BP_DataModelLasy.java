@@ -60,16 +60,11 @@ public class BP_DataModelLasy<T extends ItfBeanSimples> extends LazyDataModel<T>
     }
 
     @Override
-    public Object getRowKey(T object) {
-        return object.getId();
-    }
-
-    @Override
     public List<T> load(int first, int pageSize, Map<String, SortMeta> sortBy, Map<String, FilterMeta> filterBy) {
         return load(first, pageSize, null, SortOrder.ASCENDING, filterBy);
     }
 
-    @Override
+    // KD O LOAD?
     public List<T> load(int first, int pageSize, String sortField, SortOrder multiSortMeta, Map<String, FilterMeta> filters) {
         ConcurrentLinkedQueue lista = new ConcurrentLinkedQueue();
 

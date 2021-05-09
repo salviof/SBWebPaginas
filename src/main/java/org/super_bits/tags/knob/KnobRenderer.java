@@ -94,7 +94,8 @@ public class KnobRenderer extends CoreRenderer {
 
         WidgetBuilder wb = getWidgetBuilder(context);
 
-        wb.initWithDomReady("Knob", widgetVar, clientId);
+        //Depreciado atualização primefaces 8 para 10
+        //wb.initWithComponentLoad("Knob", widgetVar, clientId);
         wb.attr("labelTemplate", component.getLabelTemplate());
         wb.callback("onchange", "function(value)", component.getOnchange());
 

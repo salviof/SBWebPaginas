@@ -18,6 +18,7 @@ import org.primefaces.model.menu.MenuElement;
 import org.primefaces.model.menu.MenuItem;
 import org.primefaces.model.menu.Separator;
 import org.primefaces.model.menu.Submenu;
+import org.primefaces.util.ComponentTraversalUtils;
 import org.primefaces.util.ComponentUtils;
 
 public class AdamantiumMenuRenderer extends BaseMenuRenderer {
@@ -202,7 +203,7 @@ public class AdamantiumMenuRenderer extends BaseMenuRenderer {
             else {
                 writer.writeAttribute("href", "#", null);
 
-                UIComponent form = ComponentUtils.findParentForm(context, menu);
+                UIComponent form = ComponentTraversalUtils.closestForm(context, menu);
                 if (form == null) {
                     throw new FacesException("MenuItem must be inside a form element");
                 }

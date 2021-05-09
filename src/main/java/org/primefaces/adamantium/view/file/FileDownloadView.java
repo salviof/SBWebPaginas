@@ -24,13 +24,13 @@ import org.primefaces.model.StreamedContent;
 
 @ManagedBean
 public class FileDownloadView {
-    
+
     private StreamedContent file;
-	
-	public FileDownloadView() {        
-        InputStream stream = ((ServletContext)FacesContext.getCurrentInstance().getExternalContext().getContext()).getResourceAsStream("/resources/demo/images/optimus.jpg");
-		file = new DefaultStreamedContent(stream, "image/jpg", "downloaded_optimus.jpg");
-	}
+
+    public FileDownloadView() {
+        InputStream stream = ((ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext()).getResourceAsStream("/resources/demo/images/optimus.jpg");
+        //file = new DefaultStreamedContent(stream, "image/jpg", "downloaded_optimus.jpg");
+    }
 
     public StreamedContent getFile() {
         return file;
