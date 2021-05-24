@@ -25,7 +25,7 @@ public abstract class GeradorClasseEscopoApp extends GeradorClasseGenerico {
     }
 
     public GeradorClasseEscopoApp(String pNomePacote, String pNomeClasse, String pDiretorioAlternativo) {
-        super(pNomePacote, pNomeClasse, pDiretorioAlternativo);
+        super(pNomePacote, pNomeClasse, pDiretorioAlternativo, TIPO_PACOTE.IMPLEMENTACAO);
         adicionarAnotacoesEInterfaces();
     }
 

@@ -10,11 +10,11 @@
     <ui:decorate template="#{layout.xhtmlJsfCaminhoRelativo}">
         <ui:define name="input">
 
-            <p:editor height="300" style="width: 100%"
-                      rendered="#{desabilitarEdicao}"
-
-                      disabled="true"
-                      />
+            <p:textEditor height="300" style="width: 100%"
+                          rendered="#{desabilitarEdicao}"
+                          secure="false"
+                          disabled="true"
+                          />
             <h:panelGroup styleClass="Container12 Responsive" style="#{sessaoAtualSBWP.telaUsuario.umMobile?'height: 400px;':'height: 300px;'}  "
                           rendered="#{!desabilitarEdicao}"
 

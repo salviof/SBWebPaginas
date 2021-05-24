@@ -24,7 +24,9 @@
 
         </h:panelGroup>
         <h:panelGroup styleClass="Avatar" rendered="#{!sessaoAtualSBWP.usuario.temImagemPequenaAdicionada}">
-            <pe:gravatar value="#{sessaoAtualSBWP.usuario.email}"   notFound="mm" />
+
+
+            <p:avatar gravatar="#{sessaoAtualSBWP.usuario.email}" gravatarConfig="mm" />
         </h:panelGroup>
 
 

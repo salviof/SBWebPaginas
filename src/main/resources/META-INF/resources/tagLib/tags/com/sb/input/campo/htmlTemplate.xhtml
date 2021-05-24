@@ -9,11 +9,12 @@
     <ui:decorate template="#{layout.xhtmlJsfCaminhoRelativo}">
         <ui:define name="input">
 
-            <p:editor height="300" style="width: 100%"
-                      rendered="#{desabilitarEdicao}"
-                      value="#{valor}"
-                      disabled="true"
-                      />
+            <p:textEditor height="300" style="width: 100%"
+                          rendered="#{desabilitarEdicao}"
+                          value="#{valor}"
+                          secure="false"
+                          disabled="true"
+                          />
             <p:fieldset styleClass="Container12 Responsive" style="height: 300px; "
                         rendered="#{!desabilitarEdicao}"
                         >
