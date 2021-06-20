@@ -15,6 +15,7 @@ import com.super_bits.modulosSB.webPaginas.ConfigGeral.SBWebPaginas;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.MB_PaginaAtual;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.interfaces.ItfPaginaAtual;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.siteMap.MB_SiteMapa;
+import com.super_bits.modulosSB.webPaginas.controller.servletes.tratamentoErro.ErroSBGenericoWeb;
 import com.super_bits.modulosSB.webPaginas.controller.sessao.ControleDeSessaoWeb;
 import com.super_bits.modulosSB.webPaginas.controller.sessao.SessaoAtualSBWP;
 import java.lang.reflect.Field;
@@ -24,6 +25,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.enterprise.inject.spi.BeanManager;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
@@ -297,13 +300,26 @@ public class UtilSBWPServletTools {
      * valor (Utiliza facesContext para obter a requisição)
      *
      * @param pNomeBean Nome do parametro
-     * @return valor do parametro
+     * @return valor do parametro ou nulo se parametro não encontrado
      */
     public static Object getRequestParametro(String pNomeBean) {
+
+        try {
+            return getRequestParametro(pNomeBean, true);
+        } catch (ErroSBGenericoWeb ex) {
+            Logger.getLogger(UtilSBWPServletTools.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+
+    }
+
+    public static Object getRequestParametro(String pNomeBean, boolean ignorarAusencia) throws ErroSBGenericoWeb {
         Map<String, String> parametros = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
         Object resposta = parametros.get(pNomeBean);
         if (resposta == null) {
-            SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "Parametro de requisição: " + pNomeBean + " não enviado", null);
+            if (!ignorarAusencia) {
+                throw new ErroSBGenericoWeb("Parametro de requisição " + pNomeBean + " não enviado");
+            }
         }
         return resposta;
     }

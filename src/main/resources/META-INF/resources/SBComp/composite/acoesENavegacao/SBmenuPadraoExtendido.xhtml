@@ -19,11 +19,11 @@
 
         <div class="layout-menu-cover-top  Animated05 ManterNoTopo" id="layout-menu-cover">
             <h:form>
-                <pm:menu>
+                <pm:menu  >
                     <c:forEach items="#{sessaoAtualSBWP.menusDaSessao.menuAvancado.sessoes}" var="sessao" >
 
 
-                        <p:submenu label="#{sessao.nomeAcao}" icon="#{sessao.iconeAcao}">
+                        <p:submenu label="#{sessao.nomeAcao}" icon="#{sessao.iconeAcao}" >
                             <c:forEach items="#{sessao.acoes}" var="acao" >
                                 <c:if test="#{acao.umaAcaoSessaoMenu}" >
                                     <p:submenu label="#{acao.nomeAcao}"   icon="#{acao.iconeAcao}">

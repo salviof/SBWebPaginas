@@ -1044,7 +1044,7 @@ public class PgUtil implements Serializable {
         return options;
     }
 
-    private String exibirModal(Map<String, Object> pOpcoesPrimefaces, Map<String, List<String>> parametrosModalRequestGet, String pFormularioModal) {
+    public String exibirModal(Map<String, Object> pOpcoesPrimefaces, Map<String, List<String>> parametrosModalRequestGet, String pFormularioModal) {
         String idView = paginaAtual.getInfoPagina().toString();
         List<String> parametrosRequestModal = new ArrayList<>();
         parametrosRequestModal.add(idView);

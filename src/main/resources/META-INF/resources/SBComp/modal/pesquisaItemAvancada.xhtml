@@ -75,6 +75,7 @@
                         <p:commandButton icon="fa fa-hand-pointer-o"
                                          actionListener="#{pgModalSBJSF.fecharModal()}"
                                          process="@this"
+                                         onsuccess=""
                                          >
                             <f:setPropertyActionListener target="#{pgModalSBJSF.campoInstanciado.valor}" value="#{item}"
                                                          />
