@@ -143,7 +143,7 @@ public class ControleDeSessaoWeb extends ControleDeSessaoAbstratoSBCore implemen
                             getUrlFormulario(FabAcaoPaginasDoSistema.PAGINA_NATIVA_RECUPERACAO_SENHA_MB.getRegistro(), token)
                     + "\" > este link,</a> para recuperar sua senha.",
                     "Recuperação de senha")) {
-                SBCore.enviarAvisoAoUsuario("Um e-mail com a senha foi enviado para " + pEmail);
+                SBCore.enviarAvisoAoUsuario("Um e-mail com um link para alterar a senha foi  enviado para " + pEmail);
             } else {
                 SBCore.enviarMensagemUsuario("Um erro ocorreu ao tentar enviar o e-mail com a senha para: " + pEmail + " entre em contato conosco para recuperar a senha", FabMensagens.ALERTA);
             }

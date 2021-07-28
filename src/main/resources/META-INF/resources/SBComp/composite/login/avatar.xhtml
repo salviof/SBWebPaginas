@@ -11,6 +11,8 @@
     <!-- INTERFACE -->
     <cc:interface>
         <cc:attribute name="ocultarFormulario" type="java.lang.Boolean" default="true"/>
+        <cc:attribute name="porcentagemTamanhoFoto" default="15%"/>
+
     </cc:interface>
     <!-- IMPLEMENTATION -->
     <cc:implementation >
@@ -19,14 +21,14 @@
         <h:panelGroup styleClass="Avatar" rendered="#{sessaoAtualSBWP.usuario.temImagemPequenaAdicionada}">
 
             <img class="w3-round w3-margin-right" src="#{sessaoAtualSBWP.usuario.imgPequena}"
-                 style="width:15%;" />
+                 style="width:#{cc.attrs.porcentagemTamanhoFoto};" />
             <span class="w3-opacity w3-large"> #{sessaoAtualSBWP.usuario.nome}</span>
 
         </h:panelGroup>
         <h:panelGroup styleClass="Avatar" rendered="#{!sessaoAtualSBWP.usuario.temImagemPequenaAdicionada}">
 
 
-            <p:avatar gravatar="#{sessaoAtualSBWP.usuario.email}" gravatarConfig="mm" />
+            <p:avatar gravatar="#{sessaoAtualSBWP.usuario.email}"  size="xlarge"   />
         </h:panelGroup>
 
 

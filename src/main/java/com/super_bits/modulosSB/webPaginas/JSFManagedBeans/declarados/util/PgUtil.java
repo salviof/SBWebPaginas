@@ -1425,6 +1425,21 @@ public class PgUtil implements Serializable {
         return formatador.format(pDataHora);
     }
 
+    public String gerarDataTextoExtenso(Date pDataHora) {
+        if (pDataHora == null) {
+            return null;
+        }
+        Locale local = new Locale("pt", "BR");
+        String diaDasemana = UtilSBCoreDataHora.getDiaDaSemana(pDataHora);
+
+        Calendar c = Calendar.getInstance();
+        //objeto d foi atribuido a Calendar
+        c.setTime(pDataHora);
+
+        SimpleDateFormat formatador = new SimpleDateFormat("'" + diaDasemana + "' dd 'de' MMMMMM", local);
+        return formatador.format(pDataHora);
+    }
+
     public String gerarDataTexto(Date pDataHora) {
         if (pDataHora == null) {
             return null;

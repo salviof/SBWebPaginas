@@ -46,8 +46,20 @@ public class BP_PickList<T extends ItfBeanSimplesSomenteLeitura> extends B_lista
 
     @Override
     public void atualizarListaCompleta() {
-        super.atualizarListaCompleta();
 
+        super.atualizarListaCompleta();
+        if (dualListPrime != null) {
+            atualizaPickListViewContexto();
+        }
+
+    }
+
+    @Override
+    public void limparSelecao() {
+        super.limparSelecao(); //To change body of generated methods, choose Tools | Templates.
+        if (dualListPrime != null) {
+            dualListPrime.getTarget().clear();
+        }
     }
 
     public DualListModel<T> getDualListPrime() {
@@ -58,7 +70,7 @@ public class BP_PickList<T extends ItfBeanSimplesSomenteLeitura> extends B_lista
         }
         if (dualListPrime.getSource().isEmpty()
                 && dualListPrime.getTarget().isEmpty()) {
-            atualizarListaCompleta();
+            super.atualizarListaCompleta();
             atualizaPickListViewContexto();
         }
 

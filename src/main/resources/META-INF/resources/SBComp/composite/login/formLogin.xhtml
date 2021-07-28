@@ -30,35 +30,41 @@
 
                 <div class="quebraBlocoComEspacoVertical3"></div>
                 <div class="Card SoftGrayBack">
-                    <p:fragment>
-                        <p:inputText id="email" label="E-Mail"
 
-                                     requiredMessage="O E-Mail é obrigatório" validatorMessage="O e-mail não parece ser válido" placeholder="E-mail" required="true" value="#{controleDeSessaoWeb.usuarioLogar}"  styleClass="Wid100 TexAlCenter">
-                            <f:validateLength minimum="4" />
-                        </p:inputText>
-                        <p:remoteCommand name="esqueceuASenha" actionListener="#{controleDeSessaoWeb.esqueceuaSenha()}" update="@form" />
-                    </p:fragment>
-                    <p:message for="email" />
+                    <p:inputText id="emaillogin" label="E-Mail"
+
+                                 requiredMessage="O E-Mail é obrigatório"
+                                 validatorMessage="O e-mail não parece ser válido
+                                 " placeholder="E-mail" required="true"
+                                 value="#{controleDeSessaoWeb.usuarioLogar}"  styleClass="Wid100 TexAlCenter">
+                        <f:validateLength minimum="4" />
+                    </p:inputText>
+
+
+                    <p:message for="emaillogin" />
                     <div class="quebraBlocoComEspacoVertical10"></div>
                     <p:inputText type="password" id="senha" placeholder="Senha" requiredMessage="A Senha é Obrigatória" required="true" value="#{controleDeSessaoWeb.senhaLogar}" styleClass="Wid100 TexAlCenter"/>
                     <p:message for="senha" />
                     <div class="quebraBlocoComEspacoVertical4"></div>
 
                     <div class="quebraBlocoComEspacoVertical4"></div>
-                    <p:commandButton value="Esqueci minha Senha" partialSubmit="true"
+                    <p:commandButton value="Esqueci minha Senha"
                                      id="botaoEsqueciMinhaSenha"
-                                     process="#{pgUtil.gerarCaminhoCompletoID('email')}"
+                                     process="@this,emaillogin"
                                      icon="fa fa-exclamation"
                                      styleClass="RedButton"
-                                     action="#{pgUtil.enviaMensagem('..')}"
-                                     oncomplete="esqueceuASenha();"
-                                     update="@form" />
+
+                                     actionListener="#{controleDeSessaoWeb.esqueceuaSenha()}"
+                                     partialSubmit="true"
+
+
+                                     />
 
                     <div class="quebraBlocoComEspacoVertical10 somenteMobile"></div>
                     <p:commandButton value="Entrar" icon="fa fa-sign-in"
                                      id="botaoEntrarSec"
                                      actionListener="#{controleDeSessaoWeb.efetuarLogIn()}"
-                                     update="@form" />
+                                     update="emaillogin" />
                     <p:defaultCommand target="botaoEntrarSec"  />
 
                 </div>

@@ -559,7 +559,7 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
 
         try {
             if (entidadesListadas == null) {
-                listarDados(listarApenasRegistrosAtivos);
+                listarDados(!listarApenasRegistrosAtivos);
                 //proteção de  stackoverflow, chamando getEntidadesListadas dentro do listar(dados)
                 if (entidadesListadas == null) {
                     entidadesListadas = new ArrayList<>();
