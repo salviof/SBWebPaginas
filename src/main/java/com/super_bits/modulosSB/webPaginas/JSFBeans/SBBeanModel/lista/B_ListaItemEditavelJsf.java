@@ -24,9 +24,13 @@ public class B_ListaItemEditavelJsf extends B_ListaItemEditavel {
         boolean parametroEnviado = false;
         for (String parametro : FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().keySet()) {
             if (parametro.contains("indiceSubformulario")) {
-                indice = Integer.parseInt(FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get(parametro));
-                setIndiceItemSelecionado(indice);
-                parametroEnviado = true;
+                try {
+                    indice = Integer.parseInt(FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get(parametro));
+                    setIndiceItemSelecionado(indice);
+                    parametroEnviado = true;
+                } catch (Throwable t) {
+                    parametroEnviado = false;
+                }
                 break;
             }
         }

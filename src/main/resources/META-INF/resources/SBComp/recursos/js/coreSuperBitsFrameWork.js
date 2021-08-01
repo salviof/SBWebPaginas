@@ -4,24 +4,24 @@
  * Limpa todos os Tooltips do Primefaces
  */
 function esconderTooltips() {
-    try{
-    $(".ui-tooltip").hide();
-    }catch(erro){
-        
+    try {
+        $(".ui-tooltip").hide();
+    } catch (erro) {
+
     }
 }
 
 function liberarBloqueios() {
     var i;
-        try{
+    try {
 
-    for (i in PrimeFaces.widgets) {
-        if (PrimeFaces.widgets[i].show && PrimeFaces.widgets[i].blocker) {
-            PrimeFaces.widgets[i].hide();
+        for (i in PrimeFaces.widgets) {
+            if (PrimeFaces.widgets[i].show && PrimeFaces.widgets[i].blocker) {
+                PrimeFaces.widgets[i].hide();
+            }
         }
-    }
-       }catch(erro){
-        
+    } catch (erro) {
+
     }
 }
 
@@ -605,5 +605,7 @@ jQuery.fn.putCursorAtEnd = function () {
         this.scrollTop = 999999;
 
     });
+
+
 
 };

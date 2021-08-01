@@ -10,6 +10,8 @@ import com.super_bits.modulosSB.Persistencia.dao.UtilSBPersistencia;
 import com.super_bits.modulosSB.Persistencia.dao.consultaDinamica.ConsultaDinamicaDeEntidade;
 import com.super_bits.modulosSB.Persistencia.registro.persistidos.EntidadeSimples;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
+import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreListas;
+import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreListasObjeto;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreReflexao;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreReflexaoObjeto;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.ItfParametroRequisicaoInstanciado;
@@ -51,6 +53,7 @@ import java.io.Serializable;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -733,6 +736,8 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
                     } else {
                         setEntidadesListadas(UtilSBPersistencia.getListaTodos(getAcaoSelecionada().getComoAcaoDeEntidade().getClasseRelacionada(), getEMPagina()));
                     }
+                    UtilSBCoreListasObjeto.ordernarPorCampoReverso(getEntidadesListadas(), "id");
+
                 } catch (Throwable t) {
                     setEntidadesListadas(UtilSBPersistencia.getListaTodos(getAcaoVinculada().getClasseRelacionada(), getEMPagina()));
                 }

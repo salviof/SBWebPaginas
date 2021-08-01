@@ -14,16 +14,19 @@
             <p:outputLabel value="#{valor}" rendered="#{desabilitarEdicao}" />
 
             <p:inputText   class=" campoResponsivo  TexAlCenter #{componente.classeCSS}"
-                           validatorMessage="E-mail Inválido"
+
                            required="#{obrigatorio}"
                            disabled="#{desabilitarEdicao}"
                            rendered="#{!desabilitarEdicao}"
                            value="#{valor}"
                            autocomplete="false"
                            >
+                <f:passThroughAttribute name="caminhoCampo" value="#{registro.nomeCompostoIdentificador}" />
+                <f:passThroughAttribute name="dominio" value="#{registro.nomeClasseOrigemAtributo}" />
+                <f:passThroughAttribute name="campoInstanciado" value="#{registro}" />
 
                 <p:clientValidator/>
-
+                <f:validator  validatorId="org.super_bits.view.validadores.generico"/>
 
                 <c:if test="#{registro.temValidacaoRegex}">
                     <f:validateRegex pattern="#{regex}"/>
