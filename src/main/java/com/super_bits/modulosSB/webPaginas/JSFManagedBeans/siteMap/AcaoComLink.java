@@ -339,6 +339,7 @@ public class AcaoComLink extends ItemGenerico implements ItfAcaoDoSistema {
     }
 
     public String getUrlParcialGestao() {
+
         return urlParcialGestao;
     }
 

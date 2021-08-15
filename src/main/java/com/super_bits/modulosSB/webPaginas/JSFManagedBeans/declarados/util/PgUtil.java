@@ -39,6 +39,7 @@ import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.interface
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.reflexao.anotacoes.beans.InfoMB_Acao;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.siteMap.AcaoComLink;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.siteMap.AcaoDeContexto;
+import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.siteMap.MapaDeFormularios;
 import com.super_bits.modulosSB.webPaginas.controller.servletes.WebPaginasServlet;
 import com.super_bits.modulosSB.webPaginas.controller.sessao.QlSessaoFacesContext;
 import com.super_bits.modulosSB.webPaginas.controller.sessao.SessaoAtualSBWP;
@@ -844,8 +845,9 @@ public class PgUtil implements Serializable {
                 }
                 AcaoComLink acaoComLinkVinculada = infoWeb.getAcaoComLink(pAcao);
                 if (acaoComLinkVinculada != null) {
-                    String url = acaoComLinkVinculada.getUrlDeAcesso();
+                    String url = MapaDeFormularios.getUrlFormulario(pAcao);
 
+                    //acaoComLinkVinculada.getUrlDeAcesso();
                     irParaURL(url);
                 } else {
                     throw new UnsupportedOperationException("Não foi possível Localizar uma ação com link a partir de " + pAcao.getNomeUnico());

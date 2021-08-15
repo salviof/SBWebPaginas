@@ -1,6 +1,8 @@
 package com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios;
 
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
+import com.super_bits.modulosSB.SBCore.UtilGeral.MapaAcoesSistema;
+import com.super_bits.modulosSB.SBCore.UtilGeral.MapaDeAcoes;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ItfAcaoDoSistema;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfBeanSimples;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfSessao;
@@ -11,6 +13,7 @@ import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.declarados.Paginas.Er
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.interfaces.ItfB_PaginaSimples;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.siteMap.AcaoDeContexto;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.siteMap.MB_SiteMapa;
+import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.siteMap.MapaDeFormularios;
 import com.super_bits.modulosSB.webPaginas.controller.servletes.WebPaginasServlet;
 import com.super_bits.modulosSB.webPaginas.controller.sessao.ControleDeSessaoWeb;
 import com.super_bits.modulosSB.webPaginas.util.UtilSBWPServletTools;
@@ -83,7 +86,10 @@ public abstract class MB_PaginaAtual implements Serializable {
                                                 getPaginaInicial().getRegistro().getComoFormulario().getXhtml();
 
                                 if (paginaInicialDoGrupo != null && !paginaInicialDoGrupo.equals("/site/home.xhtml")) {
-                                    UtilSBWP_JSFTools.vaParaPagina(WebPaginasServlet.getAcaoComLinkByXHTML(paginaInicialDoGrupo).getUrlDeAcesso());
+                                    ItfAcaoDoSistema acao = MapaAcoesSistema.getAcaoDoSistemaByFormulario(paginaInicialDoGrupo);
+                                    String url = MapaDeFormularios.getUrlFormulario(acao);
+                                    UtilSBWP_JSFTools.vaParaPagina(url);
+                                    //UtilSBWP_JSFTools.vaParaPagina(WebPaginasServlet.getAcaoComLinkByXHTML(paginaInicialDoGrupo).getUrlDeAcesso());
                                 }
                             } else {
 

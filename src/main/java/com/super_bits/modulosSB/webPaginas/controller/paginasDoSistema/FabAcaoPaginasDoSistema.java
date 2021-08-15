@@ -9,6 +9,7 @@ import com.super_bits.modulos.SBAcessosModel.controller.InfoModulosSistemaSB;
 import com.super_bits.modulos.SBAcessosModel.model.acoes.AcaoDoSistema;
 import com.super_bits.modulos.SBAcessosModel.model.acoes.UtilFabricaDeAcoesAcessosModel;
 import com.super_bits.modulos.SBAcessosModel.model.tokens.TokenAcesso;
+import com.super_bits.modulos.SBAcessosModel.model.tokens.tokenLoginDinamico.TokenAcessoDinamico;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.anotacoes.InfoTipoAcaoFormulario;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.anotacoes.InfoTipoAcaoGestaoEntidade;
 import com.super_bits.modulosSB.SBCore.modulos.fabrica.ItfFabricaAcoes;
@@ -43,6 +44,8 @@ public enum FabAcaoPaginasDoSistema implements ItfFabricaAcoes {
     PAGINA_NATIVA_LOGIN_MB_PADRAO,
     @InfoTipoAcaoGestaoEntidade(icone = "fa fa-key", precisaPermissao = false, xhtmlDaAcao = UtilSBWP_JSFTools.FORMULARIO_RECUPERACAO_DE_SENHA, entidade = TokenAcesso.class)
     PAGINA_NATIVA_RECUPERACAO_SENHA_MB,
+    @InfoTipoAcaoGestaoEntidade(icone = "fa fa-key", precisaPermissao = false, xhtmlDaAcao = UtilSBWP_JSFTools.FORMULARIO_ACESSO_DINAMICO_VIA_TOKEN, entidade = TokenAcessoDinamico.class)
+    PAGINA_NATIVA_TOKEN_DINAMICO_MB,
     @InfoTipoAcaoFormulario(icone = "fa fa-key", precisaPermissao = false, xhtmlDaAcao = UtilSBWP_JSFTools.FORMULARIO_RECUPERACAO_DE_SENHA_GERAR_SENHA)
     PAGINA_NATIVA_RECUPERACAO_SENHA_FRM_GERAR_NOVA_SENHA,
     @InfoTipoAcaoGestaoEntidade(icone = "fa fa-key", precisaPermissao = false, xhtmlDaAcao = UtilSBWP_JSFTools.FORMULARIO_ERRO_CRITICO)

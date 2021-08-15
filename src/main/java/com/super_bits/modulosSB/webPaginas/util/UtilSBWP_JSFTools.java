@@ -15,6 +15,7 @@ import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campoInstancia
 import com.super_bits.modulosSB.webPaginas.ConfigGeral.SBWebPaginas;
 import com.super_bits.modulosSB.webPaginas.JSFBeans.modal.PgModalSBJSF;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.interfaces.ItfPaginaAtual;
+import com.super_bits.modulosSB.webPaginas.controller.sessao.SessaoAtualSBWP;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -92,6 +93,7 @@ public abstract class UtilSBWP_JSFTools {
     public final static String FORMULARIO_PARAMETRO_URL_INVALIDO = "/resources/SBComp/SBSystemPages/parametroURLInvalido.xhtml";
 
     public final static String FORMULARIO_RECUPERACAO_DE_SENHA = "/resources/SBComp/SBSystemPages/recSenhaGestao.xhtml";
+    public final static String FORMULARIO_ACESSO_DINAMICO_VIA_TOKEN = "/resources/SBComp/SBSystemPages/acessoTokenExclusivoDinamico.xhtml";
     public final static String FORMULARIO_RECUPERACAO_DE_SENHA_GERAR_SENHA = "/resources/SBComp/SBSystemPages/recSenhaGerar.xhtml";
     public final static String FORMULARIO_LOGIN = "/resources/SBComp/SBSystemPages/login.xhtml";
     public final static String FORMULARIO_SESSAO_EXPIROU = "/resources/SBComp/SBSystemPages/viewExpirou.xhtml";
@@ -348,8 +350,13 @@ public abstract class UtilSBWP_JSFTools {
     }
 
     public static void vaParaPaginaInicial() {
-        vaParaPagina(SBWebPaginas.getSiteURL());
-
+        SessaoAtualSBWP sessao = UtilSBWPServletTools.getSessaoAtual(true);
+        if (sessao != null) {
+            sessao.getUrlHostDaSessao();
+            vaParaPagina(sessao.getUrlHostDaSessao());
+        } else {
+            vaParaPagina(SBWebPaginas.getSiteURL());
+        }
     }
 
     public static void vaParaPaginadeLogin() {

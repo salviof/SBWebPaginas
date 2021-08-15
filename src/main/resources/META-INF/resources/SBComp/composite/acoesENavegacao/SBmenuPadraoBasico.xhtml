@@ -31,7 +31,7 @@
 
                     </a>
                 </h:panelGroup>
-                <a href="#{infoWebApp.urlPagina}">
+                <a href="#{sessaoAtualSBWP.urlHostDaSessao}">
                     <h:graphicImage url="#{infoWebApp.urlPagina}" name="logoHorizontal.png" id="logo"  styleClass="menu-logoHorizontal" library="img" />
                 </a>
                 <a id="topmenu-button" class="Animated1">
@@ -45,7 +45,7 @@
                                 <c:forEach items="#{sessao.acoes}" var="acaoSessao" >
 
                                     <li>
-                                        <a href="#{infoWebApp.getAcaoComLink(acaoSessao).urlDeAcesso}">
+                                        <a href="#{infoWebApp.getUrlDaAcao(acaoSessao)}">
                                             <i class="#{acaoSessao.iconeAcao} Fs18 Fleft Blue MarRight10"></i>
                                             <span class="FontAdamantiumBold"> #{acaoSessao.nome}</span>
                                         </a>

@@ -24,6 +24,9 @@ public abstract class SBWebPaginas {
     private static String SITE_URL;
     private static String TituloAppWeb;
     private static String URLBASE = "";
+
+    private static List<String> URLS_HOSTS_PERMITIDOS;
+
     private static boolean configurado = false;
     private static Class siteMap;
 
@@ -56,7 +59,7 @@ public abstract class SBWebPaginas {
         System.out.println("Módulo Webpaginas Configurado");
         configurado = true;
         acaoPaginaInicial = config.getAcaoPaginaInicial();
-
+        URLS_HOSTS_PERMITIDOS = config.getSitesHostsAutorizados();
         ArquivoConfiguracaoDistribuicao distribuicao = SBCore.getArquivoDistribuicao();
 
         if (distribuicao == null) {
@@ -123,6 +126,11 @@ public abstract class SBWebPaginas {
     public static String getURLBase() {
         validaConfigurado();
         return URLBASE;
+    }
+
+    public static List<String> getURLSHostsPermitidos() {
+        validaConfigurado();
+        return URLS_HOSTS_PERMITIDOS;
     }
 
     /**

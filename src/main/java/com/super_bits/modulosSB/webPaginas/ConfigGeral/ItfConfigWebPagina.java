@@ -7,6 +7,7 @@ package com.super_bits.modulosSB.webPaginas.ConfigGeral;
 
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.permissoes.ItfAcaoFormulario;
 import com.super_bits.modulosSB.webPaginas.controller.servletes.urls.parametrosURL.ParametroURL;
+import java.util.ArrayList;
 
 import java.util.List;
 
@@ -26,6 +27,12 @@ public interface ItfConfigWebPagina {
      * @return
      */
     public abstract String SITE_HOST();
+
+    public default List<String> getSitesHostsAutorizados() {
+        List<String> hostsAutorizados = new ArrayList<>();
+        hostsAutorizados.add(SITE_HOST());
+        return hostsAutorizados;
+    }
 
     /**
      * Diretorio base principal onde ficarão os jpgs

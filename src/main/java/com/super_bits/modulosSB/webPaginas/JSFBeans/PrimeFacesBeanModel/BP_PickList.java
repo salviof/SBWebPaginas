@@ -4,6 +4,7 @@
  */
 package com.super_bits.modulosSB.webPaginas.JSFBeans.PrimeFacesBeanModel;
 
+import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campo.seletores.seletorMultiplo.B_listaComOrigemAbs;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campoInstanciado.ItfCampoInstanciado;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfBeanSimplesSomenteLeitura;
@@ -11,6 +12,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import jersey.repackaged.com.google.common.collect.Lists;
+import org.coletivojava.fw.api.tratamentoErros.FabErro;
 import org.primefaces.model.DualListModel;
 
 /**
@@ -63,18 +65,26 @@ public class BP_PickList<T extends ItfBeanSimplesSomenteLeitura> extends B_lista
     }
 
     public DualListModel<T> getDualListPrime() {
-        if (dualListPrime == null) {
-            dualListPrime = new DualListModel<>(Lists.newLinkedList(), Lists.newLinkedList());
-            getListaObjetosSelecionados().forEach(dualListPrime.getTarget()::add);
-            atualizaPickListViewContexto();
-        }
-        if (dualListPrime.getSource().isEmpty()
-                && dualListPrime.getTarget().isEmpty()) {
-            super.atualizarListaCompleta();
-            atualizaPickListViewContexto();
-        }
+        try {
+            if (dualListPrime == null) {
+                dualListPrime = new DualListModel<>(Lists.newLinkedList(), Lists.newLinkedList());
+                getListaObjetosSelecionados().forEach(dualListPrime.getTarget()::add);
+                atualizaPickListViewContexto();
+            }
+            if (dualListPrime.getSource().isEmpty()
+                    && dualListPrime.getTarget().isEmpty()) {
+                super.atualizarListaCompleta();
+                atualizaPickListViewContexto();
+            }
 
-        return dualListPrime;
+            return dualListPrime;
+        } catch (Throwable t) {
+            SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "Erro criando " + DualListModel.class.getSimpleName() + " "
+                    + t.getMessage(),
+                     t
+            );
+            return null;
+        }
     }
 
     public void setDualListPrime(DualListModel<T> dualListPrime) {

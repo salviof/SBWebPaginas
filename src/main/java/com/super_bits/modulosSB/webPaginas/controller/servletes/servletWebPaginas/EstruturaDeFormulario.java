@@ -23,6 +23,8 @@ import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.interface
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.reflexao.anotacoes.InfoPagina;
 import com.super_bits.modulosSB.webPaginas.controller.servletes.urls.parametrosURL.ParametroURL;
 import com.super_bits.modulosSB.webPaginas.controller.servletes.urls.parametrosURL.ParametroUrlInstanciado;
+import com.super_bits.modulosSB.webPaginas.controller.sessao.SessaoAtualSBWP;
+import com.super_bits.modulosSB.webPaginas.util.UtilSBWPServletTools;
 
 import com.super_bits.modulosSB.webPaginas.util.UtillSBWPReflexoesWebpaginas;
 import java.util.ArrayList;
@@ -137,13 +139,19 @@ public class EstruturaDeFormulario {
     }
 
     private String gerarBaseURL(String tagUsada) {
-        String url = SBWebPaginas.getURLBase();
+        SessaoAtualSBWP sessaoAtual = UtilSBWPServletTools.getSessaoAtual(true);
+        String urlBase;
+        if (sessaoAtual != null) {
+            urlBase = sessaoAtual.getUrlHostDaSessao();
+        } else {
+            urlBase = SBWebPaginas.getURLBase();
+        }
         String tagURL = tagUsada;
         if (tagURL == null) {
             tagURL = tagsPalavraChave.get(0);
         }
 
-        return url + "/" + UtilSBCoreStringFiltros.gerarUrlAmigavel(tagURL);
+        return urlBase + "/" + UtilSBCoreStringFiltros.gerarUrlAmigavel(tagURL);
     }
 
     public String gerarUrlPorParametro(List<ItfParametroRequisicaoInstanciado> parametros, ItfAcaoDoSistema pAcao, String tagUsada) {

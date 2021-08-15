@@ -4,6 +4,7 @@
  */
 package com.super_bits.modulosSB.webPaginas.controller.sessao;
 
+import com.sun.jndi.toolkit.url.UrlUtil;
 import com.super_bits.editorImagem.util.UtilSBImagemEdicao;
 import com.super_bits.modulos.SBAcessosModel.model.UsuarioSB;
 import com.super_bits.modulosSB.Persistencia.dao.UtilSBPersistencia;
@@ -21,15 +22,22 @@ import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import com.super_bits.modulosSB.SBCore.modulos.view.telas.ItfTelaUsuario;
+import com.super_bits.modulosSB.webPaginas.ConfigGeral.SBWebPaginas;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.annotation.PostConstruct;
 import javax.imageio.ImageIO;
 import javax.inject.Inject;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
+import javax.servlet.http.HttpServletRequest;
 import org.coletivojava.fw.api.tratamentoErros.FabErro;
 import org.primefaces.event.FileUploadEvent;
 
@@ -47,9 +55,49 @@ public class SessaoAtualSBWP extends SessaoOffline implements ItfSessao, Seriali
     private ItfModuloAcaoSistema moduloSelecionado;
     @Inject
     private EntityManager entidadePrincipal;
+    private String urlHostDaSessao;
 
     public SessaoAtualSBWP() {
         super();
+    }
+
+    public String getUrlHostDaSessao() {
+        return urlHostDaSessao;
+    }
+
+    @PostConstruct
+    public void inicio() {
+
+        URL enderecoAnalise;
+        try {
+            HttpServletRequest origRequest = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+            String url = origRequest.getRequestURL().toString();
+            String urlDigitada = url;
+            System.out.println("URLDIGITADA:" + urlDigitada);
+            enderecoAnalise = new URL(url);
+            String host = enderecoAnalise.getHost();
+            String protocolo = enderecoAnalise.getProtocol();
+            int porta = enderecoAnalise.getPort();
+            boolean portaPadrao = false;
+            if (porta == 80 || porta == 443) {
+                portaPadrao = true;
+            }
+            if (SBCore.isEmModoProducao()) {
+                urlHostDaSessao = "https" + "://" + host;
+            } else {
+                urlHostDaSessao = protocolo + "://" + host + ":" + String.valueOf(porta);
+            }
+            System.out.println("URL host construida como: " + urlHostDaSessao);
+            System.out.println("URLS permitidas=" + SBWebPaginas.getURLSHostsPermitidos());
+            if (!SBWebPaginas.getURLSHostsPermitidos().contains(urlHostDaSessao)) {
+                urlHostDaSessao = SBWebPaginas.getSiteURL();
+            }
+            System.out.println("A url foi definida como " + urlHostDaSessao);
+
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(SessaoAtualSBWP.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 
     public void defineInfoTela() {

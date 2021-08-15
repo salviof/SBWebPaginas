@@ -1,0 +1,116 @@
+/*
+ *  Desenvolvido pela equipe Super-Bits.com CNPJ 20.019.971/0001-90
+
+ */
+package com.super_bits.modulosSB.webPaginas.JSFManagedBeans.declarados.Paginas;
+
+import com.super_bits.modulos.SBAcessosModel.model.UsuarioSB;
+import com.super_bits.modulos.SBAcessosModel.model.tokens.tokenLoginDinamico.TokenAcessoDinamico;
+import com.super_bits.modulosSB.Persistencia.dao.UtilSBPersistencia;
+import com.super_bits.modulosSB.Persistencia.dao.consultaDinamica.ConsultaDinamicaDeEntidade;
+import com.super_bits.modulosSB.SBCore.UtilGeral.MapaAcoesSistema;
+import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.TIPO_PARTE_URL;
+import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ItfAcaoDoSistema;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.MapaObjetosProjetoAtual;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfBeanSimples;
+import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.MB_PaginaConversation;
+import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.reflexao.anotacoes.InfoPagina;
+import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.siteMap.MapaDeFormularios;
+import com.super_bits.modulosSB.webPaginas.controller.paginasDoSistema.FabAcaoPaginasDoSistema;
+import com.super_bits.modulosSB.webPaginas.controller.paginasDoSistema.InfoAcaoPaginaDoSistema;
+import com.super_bits.modulosSB.webPaginas.controller.servletes.urls.parametrosURL.InfoParametroURL;
+import com.super_bits.modulosSB.webPaginas.controller.servletes.urls.parametrosURL.ParametroURL;
+import com.super_bits.modulosSB.webPaginas.controller.sessao.QlSessaoFacesContext;
+import com.super_bits.modulosSB.webPaginas.controller.sessao.SessaoAtualSBWP;
+import com.super_bits.modulosSB.webPaginas.util.UtilSBWP_JSFTools;
+import java.util.List;
+import javax.annotation.PostConstruct;
+import javax.faces.view.ViewScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
+
+/**
+ *
+ * @author sfurbino
+ */
+@InfoAcaoPaginaDoSistema(acao = FabAcaoPaginasDoSistema.PAGINA_NATIVA_TOKEN_DINAMICO_MB)
+@Named
+@ViewScoped
+@InfoPagina(nomeCurto = "acessoExclusivo", tags = "acessoExclusivo")
+public class PgAcessoViaTokenDinamico extends MB_PaginaConversation {
+
+    @InfoParametroURL(nome = "Código de acesso", tipoParametro = TIPO_PARTE_URL.ENTIDADE,
+            tipoEntidade = TokenAcessoDinamico.class, representaEntidadePrincipalMB = true
+    )
+    private ParametroURL prCodigoDeAcesso;
+
+    private TokenAcessoDinamico tokenDinamico;
+
+    private boolean acessonegado = false;
+
+    @Inject
+    @QlSessaoFacesContext
+    private SessaoAtualSBWP sessaoAtual;
+
+    @Override
+    public ItfBeanSimples getBeanSelecionado() {
+        return tokenDinamico;
+    }
+
+    private void acessonegado() {
+        acessonegado = true;
+        setAcaoSelecionada(FabAcaoPaginasDoSistema.PAGINA_NATIVA_ACESSO_NEGADO_FRM_SUB_FORM.getRegistro());
+        xhtmlAcaoAtual = FabAcaoPaginasDoSistema.PAGINA_NATIVA_ACESSO_NEGADO_FRM_SUB_FORM.getRegistro().getComoFormulario().getXhtml();
+    }
+
+    @PostConstruct
+    public void inicio() {
+        if (tokenDinamico == null) {
+            acessonegado();
+        }
+
+    }
+
+    public String getUrlAcaoDoToken() {
+        if (tokenDinamico.getEntidadeDoAcesso() != null) {
+            Class tipoEntidade = MapaObjetosProjetoAtual.getClasseDoObjetoByNome(tokenDinamico.getEntidadeDoAcesso());
+            ItfBeanSimples entidade = (ItfBeanSimples) UtilSBPersistencia.getRegistroByID(tipoEntidade, Integer.valueOf(tokenDinamico.getCodigoEntidade()), getEMPagina());
+            String slugAcao = tokenDinamico.getSlugAcaoFormulario();
+            ItfAcaoDoSistema acao = MapaAcoesSistema.getAcaoDoSistemaByNomeUnico(slugAcao);
+            ConsultaDinamicaDeEntidade consultaUsuario = new ConsultaDinamicaDeEntidade(UsuarioSB.class, getEMPagina());
+            consultaUsuario.addcondicaoCampoIgualA("email", tokenDinamico.getEmail());
+            List<UsuarioSB> usuarios = consultaUsuario.resultadoRegistros();
+            sessaoAtual.setUsuario(usuarios.get(0));
+            String url = MapaDeFormularios.getUrlFormulario(acao.getComoFormulario(), entidade);
+            UtilSBWP_JSFTools.vaParaPagina(url);
+            return url;
+        } else {
+            String url = MapaDeFormularios.getUrlFormulario(MapaAcoesSistema.getAcaoDoSistemaByNomeUnico(tokenDinamico.getSlugAcaoFormulario()).getComoFormulario());
+            UtilSBWP_JSFTools.vaParaPagina(url);
+            return url;
+        }
+
+    }
+
+    @Override
+    public void setBeanSelecionado(ItfBeanSimples pBeanSimples) {
+        tokenDinamico = (TokenAcessoDinamico) pBeanSimples;
+    }
+
+    public ParametroURL getPrCodigoDeAcesso() {
+        return prCodigoDeAcesso;
+    }
+
+    public void setPrCodigoDeAcesso(ParametroURL prCodigoDeAcesso) {
+        this.prCodigoDeAcesso = prCodigoDeAcesso;
+    }
+
+    public TokenAcessoDinamico getTokenDinamico() {
+        return tokenDinamico;
+    }
+
+    public void setTokenDinamico(TokenAcessoDinamico tokenDinamico) {
+        this.tokenDinamico = tokenDinamico;
+    }
+
+}

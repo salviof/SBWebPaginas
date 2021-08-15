@@ -57,7 +57,7 @@ public class UtilSBWPServletTools {
      * @param pClasse
      * @return
      */
-    public static Object getBeanByNamed(String pNomeBean, Class pClasse) {
+    public static Object getBeanByNamed(String pNomeBean, Class pClasse, boolean pIgnorarErro) {
 
         try {
 
@@ -73,9 +73,16 @@ public class UtilSBWPServletTools {
                 return objeto;
             }
         } catch (Throwable t) {
-            SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "erro Tentando obter objeto [" + pNomeBean + " ]de contexto injetado manualmento por evalutionExpressionGet", t);
+            if (!pIgnorarErro) {
+                SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "erro Tentando obter objeto [" + pNomeBean + " ]de contexto injetado manualmento por evalutionExpressionGet", t);
+            }
+
             return null;
         }
+    }
+
+    public static Object getBeanByNamed(String pNomeBean, Class pClasse) {
+        return getBeanByNamed(pNomeBean, pClasse, false);
     }
 
     public static String geCaminhoRecursoDoUrl(HttpServletRequest requisicao) {
@@ -100,16 +107,21 @@ public class UtilSBWPServletTools {
      * @return
      */
     public static SessaoAtualSBWP getSessaoAtual() {
+        return getSessaoAtual(false);
+    }
+
+    public static SessaoAtualSBWP getSessaoAtual(boolean pIgnorarErro) {
         try {
             if (SBCore.getEstadoAPP() == SBCore.ESTADO_APP.DESENVOLVIMENTO) {
                 return new SessaoAtualSBWP();
             }
 
-            SessaoAtualSBWP sessao = (SessaoAtualSBWP) getBeanByNamed("sessaoAtualSBWP", SessaoAtualSBWP.class);
+            SessaoAtualSBWP sessao = (SessaoAtualSBWP) getBeanByNamed("sessaoAtualSBWP", SessaoAtualSBWP.class, pIgnorarErro);
             return sessao;
         } catch (Exception e) {
-
-            SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "Erro Tentando obter sesao atual por el", e);
+            if (!pIgnorarErro) {
+                SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "Erro Tentando obter sesao atual por el", e);
+            }
             return null;
         }
     }
@@ -439,7 +451,7 @@ public class UtilSBWPServletTools {
      */
     public static String getUrlDigitada() {
         HttpServletRequest origRequest = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
-        origRequest.getRequestURL().toString();
+        String urlVerdadeira = origRequest.getRequestURL().toString();
 
         return (String) SBWebPaginas.getSiteHost() + origRequest.getAttribute("javax.servlet.forward.request_uri");
     }
