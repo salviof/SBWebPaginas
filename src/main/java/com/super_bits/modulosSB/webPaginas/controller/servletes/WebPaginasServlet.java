@@ -34,6 +34,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.coletivojava.fw.api.tratamentoErros.FabErro;
+import org.jboss.weld.context.RequestContext;
+import org.jboss.weld.context.http.Http;
 
 /**
  *
@@ -196,8 +198,8 @@ public class WebPaginasServlet extends HttpServlet implements Serializable {
                     + "e os composite-componentes do projeto na pasta SBComp, serão atualizados", t);
         }
 
-        ItfUsuario usuario = controleDeSessao.getSessaoAtual().getUsuario();
         String recurso = null;
+        ItfUsuario usuario = controleDeSessao.getSessaoAtual().getUsuario();
         try {
             List<String> partes = UtilFabUrlServlet.getSlugsDeUrl(requisicao);
             //String recurso = "/resources/SBComp/SBSystemPages/paginaNaoEncontrada.xhtml";
@@ -216,6 +218,7 @@ public class WebPaginasServlet extends HttpServlet implements Serializable {
                             AcaoGestaoEntidade acaoGestVinculada = pagina.getAcaoGestaoVinculada();
                             recurso = MapaAcoesSistema.getAcaoDoSistemaByNomeUnico(acaoGestVinculada.getNomeUnico()).getComoFormulario().getXhtml();
                             if (pagina.getAcaoGestaoVinculada().isPrecisaPermissao()) {
+
                                 if (!SBCore.getCentralPermissao().isAcaoPermitidaUsuario(usuario, pagina.getAcaoGestaoVinculada())) {
                                     carregarFormulario(UtilSBWP_JSFTools.FORMULARIO_ACESSO_NEGADO, requisicao, resposta);
                                     return;

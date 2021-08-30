@@ -158,6 +158,11 @@ public abstract class UtilSBWP_JSFTools {
      * @see #resolveList(String)
      */
     public static String getIDSCaminhoAbsoluto(String pId) throws UnsupportedOperationException {
+        return getIDSCaminhoAbsoluto(pId, false);
+
+    }
+
+    public static String getIDSCaminhoAbsoluto(String pId, boolean ignorarErro) {
         if (UtilSBCoreStringValidador.isNuloOuEmbranco(pId)) {
             return "";
         }
@@ -171,16 +176,18 @@ public abstract class UtilSBWP_JSFTools {
         List<UIComponent> components = resolveList(pId);
 
         if (components.isEmpty()) {
-            if (!SBCore.isEmModoProducao()) {
-                System.out.println("nenhum componente foi reiderizado ainda, sistema ");
+            if (!ignorarErro) {
+                if (!SBCore.isEmModoProducao()) {
+                    System.out.println("nenhum componente foi reiderizado ainda, sistema ");
+                }
+
+                throw new UnsupportedOperationException("Nenhum componente com o id [" + pId + "] foi encontrado");
             }
-
-            throw new UnsupportedOperationException("Nenhum componente com o id [" + pId + "] foi encontrado");
-
         } else {
 
             return getAbsoluteComponentPaths(components);
         }
+        return null;
     }
 
     /**

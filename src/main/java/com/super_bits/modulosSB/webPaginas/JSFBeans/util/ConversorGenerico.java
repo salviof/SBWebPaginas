@@ -1,6 +1,8 @@
 package com.super_bits.modulosSB.webPaginas.JSFBeans.util;
 
 import com.sun.faces.facelets.el.TagValueExpression;
+import com.sun.faces.renderkit.html_basic.MenuRenderer;
+import com.super_bits.modulosSB.Persistencia.dao.UtilSBPersistencia;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campoInstanciado.ItfCampoInstanciado;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfBeanSimplesSomenteLeitura;
@@ -10,7 +12,9 @@ import java.util.Optional;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.FacesConverter;
+import javax.persistence.EntityManager;
 import org.coletivojava.fw.api.tratamentoErros.FabErro;
+import org.primefaces.component.selectmanymenu.SelectManyMenuRenderer;
 
 import org.super_bits.tags.inputGenerico.InputGenerico;
 
@@ -31,10 +35,11 @@ public class ConversorGenerico extends ConversorSB {
                 // getAttributesFrom(component).get(value);
                 // System.out.println(entity.getNomeCurto());
                 // System.out.println("Convertido OBJ:" +value
+                EntityManager em = UtilSBPersistencia.getEMDoContexto();
 
                 Object resposta = this.getAttributosEmComponente(component).get(value);
-                if (resposta == null) {
 
+                if (resposta == null) {
                     //ItfCampoInstanciado objeto = ctx.getApplication().evaluateExpressionGet(ctx, "#{registro}", ItfCampoInstanciado.class);
                     System.out.println(component + "objeto não Encontrado tentando converter string para objeto, executando alternativa 2.0 >" + value);
                     //Em alguns casos os atributos adicionados no componentes são perdidos, a tecnica abaixo é um alternativa em versão beta.
@@ -88,6 +93,11 @@ public class ConversorGenerico extends ConversorSB {
                         }
                     }
 
+                }
+                if (em != null) {
+                    if (resposta != null) {
+                        //   resposta = UtilSBPersistencia.loadEntidade((ItfBeanSimplesSomenteLeitura) resposta, em);
+                    }
                 }
                 return resposta;
 

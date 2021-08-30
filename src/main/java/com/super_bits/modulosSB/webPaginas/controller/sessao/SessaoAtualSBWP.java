@@ -38,7 +38,11 @@ import javax.inject.Inject;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.servlet.http.HttpServletRequest;
+import org.apache.http.protocol.RequestContent;
 import org.coletivojava.fw.api.tratamentoErros.FabErro;
+import org.jboss.weld.context.RequestContext;
+import org.jboss.weld.context.http.Http;
+import org.jboss.weld.context.http.HttpRequestContextImpl;
 import org.primefaces.event.FileUploadEvent;
 
 /**
@@ -57,6 +61,10 @@ public class SessaoAtualSBWP extends SessaoOffline implements ItfSessao, Seriali
     private EntityManager entidadePrincipal;
     private String urlHostDaSessao;
 
+    @Inject
+    @Http
+    private RequestContext requestContext;
+
     public SessaoAtualSBWP() {
         super();
     }
@@ -70,7 +78,16 @@ public class SessaoAtualSBWP extends SessaoOffline implements ItfSessao, Seriali
 
         URL enderecoAnalise;
         try {
-            HttpServletRequest origRequest = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+            FacesContext contextoJSF = FacesContext.getCurrentInstance();
+
+            HttpServletRequest origRequest = null;
+            if (contextoJSF != null) {
+                origRequest = (HttpServletRequest) contextoJSF.getExternalContext().getRequest();
+
+            } else {
+                HttpRequestContextImpl teste = (HttpRequestContextImpl) requestContext;
+                origRequest = teste.getHttpServletRequest();
+            }
             String url = origRequest.getRequestURL().toString();
             String urlDigitada = url;
             System.out.println("URLDIGITADA:" + urlDigitada);
@@ -78,15 +95,13 @@ public class SessaoAtualSBWP extends SessaoOffline implements ItfSessao, Seriali
             String host = enderecoAnalise.getHost();
             String protocolo = enderecoAnalise.getProtocol();
             int porta = enderecoAnalise.getPort();
-            boolean portaPadrao = false;
-            if (porta == 80 || porta == 443) {
-                portaPadrao = true;
-            }
+
             if (SBCore.isEmModoProducao()) {
                 urlHostDaSessao = "https" + "://" + host;
             } else {
                 urlHostDaSessao = protocolo + "://" + host + ":" + String.valueOf(porta);
             }
+
             System.out.println("URL host construida como: " + urlHostDaSessao);
             System.out.println("URLS permitidas=" + SBWebPaginas.getURLSHostsPermitidos());
             if (!SBWebPaginas.getURLSHostsPermitidos().contains(urlHostDaSessao)) {
@@ -144,10 +159,17 @@ public class SessaoAtualSBWP extends SessaoOffline implements ItfSessao, Seriali
 
     @Override
     public void encerrarSessao() {
-        super.encerrarSessao();
 
+        encerrarSessao(true);
+
+    }
+
+    public void encerrarSessao(boolean pRedirecionarPagina) {
+        super.encerrarSessao();
         UtilSBWP_JSFTools.encerrarSessaoJSessionId();
-        UtilSBWP_JSFTools.vaParaPaginaInicial();
+        if (pRedirecionarPagina) {
+            UtilSBWP_JSFTools.vaParaPaginaInicial();
+        }
     }
 
     private void atualizarAvatar() {

@@ -8,6 +8,8 @@ import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 import com.super_bits.modulosSB.webPaginas.ConfigGeral.SBWebPaginas;
 import com.super_bits.modulosSB.webPaginas.controller.servletes.FabTipoInformacaoUrl;
 import com.super_bits.modulosSB.webPaginas.util.UtilSBWP_JSFTools;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
@@ -49,12 +51,31 @@ public class ConfiguracoesDeFormularioPorUrl {
         }
     }
 
+    private static String buildUrlBaseByHttpServeletResquest(HttpServletRequest pRequest) {
+        String dominio = null;
+        try {
+            URL url = new URL(pRequest.getRequestURL().toString());
+            dominio = url.getHost();
+        } catch (MalformedURLException t) {
+
+        }
+
+        StringBuilder urlBaseBuilder = new StringBuilder();
+        if (SBCore.isEmModoProducao()) {
+            urlBaseBuilder.append("https://");
+            urlBaseBuilder.append(dominio);
+        } else {
+            urlBaseBuilder.append(SBWebPaginas.getURLBase());
+        }
+        return urlBaseBuilder.toString();
+    }
+
     public ConfiguracoesDeFormularioPorUrl(HttpServletRequest pRequisicao) {
-        this(pRequisicao.getRequestURL().toString());
+        this(pRequisicao.getRequestURL().toString(), buildUrlBaseByHttpServeletResquest(pRequisicao));
 
     }
 
-    public ConfiguracoesDeFormularioPorUrl(String pURL) {
+    public ConfiguracoesDeFormularioPorUrl(String pURL, String urlDominio) {
 
         try {
 
@@ -62,7 +83,7 @@ public class ConfiguracoesDeFormularioPorUrl {
                 throw new UnsupportedOperationException("Parametro em subdominio ainda não foi implementado");
             } else {
 
-                String urlPagina = SBWebPaginas.getURLBase();
+                String urlPagina = urlDominio;// SBWebPaginas.getURLBase();
                 adicionarInformacao(urlPagina);
                 int inicioParametro = urlPagina.length() + 1;
 

@@ -18,12 +18,14 @@ import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.reflexao.
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.siteMap.MapaDeFormularios;
 import com.super_bits.modulosSB.webPaginas.controller.paginasDoSistema.FabAcaoPaginasDoSistema;
 import com.super_bits.modulosSB.webPaginas.controller.paginasDoSistema.InfoAcaoPaginaDoSistema;
+import com.super_bits.modulosSB.webPaginas.controller.servletes.servletWebPaginas.EstruturaDeFormulario;
 import com.super_bits.modulosSB.webPaginas.controller.servletes.urls.parametrosURL.InfoParametroURL;
 import com.super_bits.modulosSB.webPaginas.controller.servletes.urls.parametrosURL.ParametroURL;
 import com.super_bits.modulosSB.webPaginas.controller.sessao.QlSessaoFacesContext;
 import com.super_bits.modulosSB.webPaginas.controller.sessao.SessaoAtualSBWP;
 import com.super_bits.modulosSB.webPaginas.util.UtilSBWP_JSFTools;
 import java.util.List;
+import java.util.Optional;
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -77,11 +79,33 @@ public class PgAcessoViaTokenDinamico extends MB_PaginaConversation {
             ItfBeanSimples entidade = (ItfBeanSimples) UtilSBPersistencia.getRegistroByID(tipoEntidade, Integer.valueOf(tokenDinamico.getCodigoEntidade()), getEMPagina());
             String slugAcao = tokenDinamico.getSlugAcaoFormulario();
             ItfAcaoDoSistema acao = MapaAcoesSistema.getAcaoDoSistemaByNomeUnico(slugAcao);
-            ConsultaDinamicaDeEntidade consultaUsuario = new ConsultaDinamicaDeEntidade(UsuarioSB.class, getEMPagina());
-            consultaUsuario.addcondicaoCampoIgualA("email", tokenDinamico.getEmail());
-            List<UsuarioSB> usuarios = consultaUsuario.resultadoRegistros();
-            sessaoAtual.setUsuario(usuarios.get(0));
-            String url = MapaDeFormularios.getUrlFormulario(acao.getComoFormulario(), entidade);
+            String emailUsuario = tokenDinamico.getEmail();
+            if (emailUsuario != null) {
+                ConsultaDinamicaDeEntidade consultaUsuario = new ConsultaDinamicaDeEntidade(UsuarioSB.class, getEMPagina());
+                consultaUsuario.addcondicaoCampoIgualA("email", tokenDinamico.getEmail());
+                List<UsuarioSB> usuarios = consultaUsuario.resultadoRegistros();
+
+                if (!usuarios.isEmpty()) {
+                    sessaoAtual.setUsuario(usuarios.get(0));
+                } else {
+                    if (sessaoAtual.isIdentificado()) {
+                        sessaoAtual.encerrarSessao();
+                    }
+                }
+            } else {
+                sessaoAtual.encerrarSessao();
+            }
+
+            EstruturaDeFormulario estrutura = MapaDeFormularios.getEstruturaByNomeAcao(acao.getAcaoDeGestaoEntidade().getNomeUnico());
+            List<ParametroURL> parametros = estrutura.getParametrosURL();
+            Optional<ParametroURL> parametroToken = parametros.stream().filter(pr -> pr.getTipoEntidade().equals(TokenAcessoDinamico.class)).findFirst();
+            String url = "";
+            if (parametroToken.isPresent()) {
+                url = MapaDeFormularios.getUrlFormulario(acao.getComoFormulario(), entidade, tokenDinamico);
+            } else {
+                url = MapaDeFormularios.getUrlFormulario(acao.getComoFormulario(), entidade);
+            }
+
             UtilSBWP_JSFTools.vaParaPagina(url);
             return url;
         } else {
