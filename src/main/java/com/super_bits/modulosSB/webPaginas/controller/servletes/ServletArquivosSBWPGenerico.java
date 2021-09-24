@@ -94,7 +94,7 @@ public class ServletArquivosSBWPGenerico extends HttpServlet {
                 throw new AssertionError(pArquivoConhecido.name());
 
         }
-        if (pCaminhoArquivo.startsWith("https")) {
+        if (pCaminhoArquivo.startsWith("http")) {
             try {
                 realizarStreamDeArquivoRemoto(resp, pCaminhoArquivo);
             } catch (Throwable t) {

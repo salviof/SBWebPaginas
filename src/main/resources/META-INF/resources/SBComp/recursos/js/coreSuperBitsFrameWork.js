@@ -173,11 +173,30 @@ function modificarIntputEclicar(idBotao, idInputEnvio, valor) {
     }
 }
 
+function copiarValoresCKEditorByClasseEstilo(idOrigem, classeDestino) {
+
+    try {
+        var conteudo = CKEDITOR.instances[idOrigem].getData();
+        if (conteudo !== null) {
+            document.getElementsByClassName(classeDestino)[0].value = conteudo;
+
+        }
+    } catch (erro) {
+        alert(idOrigem + ' destino:' + classeDestino + erro);
+    }
+
+}
+
 function copiarValoresCKEditor(idOrigem, idDestino) {
     // console.log("etapa Cópia");
-    var conteudo = CKEDITOR.instances[idOrigem].getData();
-    document.getElementById(idDestino).value = conteudo;
-
+    try {
+        var conteudo = CKEDITOR.instances[idOrigem].getData();
+        if (conteudo !== null) {
+            document.getElementById(idDestino).value = conteudo;
+        }
+    } catch (erro) {
+        alert(idOrigem + ' destino:' + idDestino + erro);
+    }
 }
 function copiarValoresInput(idOrigem, idDestino) {
     document.getElementById(idDestino).value = document.getElementById(idOrigem).value;
@@ -567,45 +586,48 @@ function desbloquearArea(idArea) {
     }
 }
 
+try {
+    jQuery.fn.putCursorAtEnd = function () {
 
-jQuery.fn.putCursorAtEnd = function () {
+        return this.each(function () {
 
-    return this.each(function () {
+            // Cache references
+            var $el = $(this),
+                    el = this;
 
-        // Cache references
-        var $el = $(this),
-                el = this;
+            // Only focus if input isn't already
+            if (!$el.is(":focus")) {
+                $el.focus();
+            }
 
-        // Only focus if input isn't already
-        if (!$el.is(":focus")) {
-            $el.focus();
-        }
+            // If this function exists... (IE 9+)
+            if (el.setSelectionRange) {
 
-        // If this function exists... (IE 9+)
-        if (el.setSelectionRange) {
+                // Double the length because Opera is inconsistent about whether a carriage return is one character or two.
+                var len = $el.val().length * 2;
 
-            // Double the length because Opera is inconsistent about whether a carriage return is one character or two.
-            var len = $el.val().length * 2;
+                // Timeout seems to be required for Blink
+                setTimeout(function () {
+                    el.setSelectionRange(len, len);
+                }, 1);
 
-            // Timeout seems to be required for Blink
-            setTimeout(function () {
-                el.setSelectionRange(len, len);
-            }, 1);
+            } else {
 
-        } else {
+                // As a fallback, replace the contents with itself
+                // Doesn't work in Chrome, but Chrome supports setSelectionRange
+                $el.val($el.val());
 
-            // As a fallback, replace the contents with itself
-            // Doesn't work in Chrome, but Chrome supports setSelectionRange
-            $el.val($el.val());
+            }
 
-        }
+            // Scroll to the bottom, in case we're in a tall textarea
+            // (Necessary for Firefox and Chrome)
+            this.scrollTop = 999999;
 
-        // Scroll to the bottom, in case we're in a tall textarea
-        // (Necessary for Firefox and Chrome)
-        this.scrollTop = 999999;
-
-    });
+        });
 
 
 
-};
+    };
+} catch (erroPosicionandoCursor) {
+    console.log(erroPosicionandoCursor);
+}

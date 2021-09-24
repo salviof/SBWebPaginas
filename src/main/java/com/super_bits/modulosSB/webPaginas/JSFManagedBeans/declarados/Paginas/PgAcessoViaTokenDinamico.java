@@ -89,11 +89,11 @@ public class PgAcessoViaTokenDinamico extends MB_PaginaConversation {
                     sessaoAtual.setUsuario(usuarios.get(0));
                 } else {
                     if (sessaoAtual.isIdentificado()) {
-                        sessaoAtual.encerrarSessao();
+                        sessaoAtual.encerrarSessao(false);
                     }
                 }
             } else {
-                sessaoAtual.encerrarSessao();
+                sessaoAtual.encerrarSessao(false);
             }
 
             EstruturaDeFormulario estrutura = MapaDeFormularios.getEstruturaByNomeAcao(acao.getAcaoDeGestaoEntidade().getNomeUnico());
