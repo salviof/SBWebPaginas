@@ -16,7 +16,7 @@ import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campoInstancia
 import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfBeanSimples;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.B_Pagina;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.InfoDesignFormulario;
-import com.super_bits.modulosSB.webPaginas.controller.servletes.servletWebPaginas.ConfiguracoesDeFormularioPorUrl;
+import com.super_bits.modulosSB.webPaginas.controller.servlets.servletWebPaginas.ConfiguracoesDeFormularioPorUrl;
 import java.util.List;
 import java.util.Map;
 import org.primefaces.event.SelectEvent;

@@ -2,13 +2,13 @@
  *  Desenvolvido pela equipe Super-Bits.com CNPJ 20.019.971/0001-90
 
  */
-package com.super_bits.modulosSB.webPaginas.controller.servletes.servletProxyImagem;
+package com.super_bits.modulosSB.webPaginas.controller.servlets.servletProxyImagem;
 
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 import com.super_bits.modulosSB.SBCore.modulos.ManipulaArquivo.FabTipoArquivoConhecido;
 import com.super_bits.modulosSB.webPaginas.ConfigGeral.SBWebPaginas;
-import com.super_bits.modulosSB.webPaginas.controller.servletes.ServletArquivosSBWPGenerico;
-import com.super_bits.modulosSB.webPaginas.controller.servletes.servletArquivoDeEntidade.FabUrlArquivoDeEntidade;
+import com.super_bits.modulosSB.webPaginas.controller.servlets.ServletArquivosSBWPGenerico;
+import com.super_bits.modulosSB.webPaginas.controller.servlets.servletArquivoDeEntidade.FabUrlArquivoDeEntidade;
 import com.super_bits.modulosSB.webPaginas.controller.servletes.urls.UrlInterpretada;
 import com.super_bits.modulosSB.webPaginas.controller.servletes.util.UtilFabUrlServlet;
 import com.super_bits.modulosSB.webPaginas.controller.sessao.QlSessaoFacesContext;
@@ -55,9 +55,19 @@ public class ServletProxyImagem extends ServletArquivosSBWPGenerico implements S
         }
 
         String urlRequisicao = requisicao.getRequestURI();
-
+        String referencia = requisicao.getHeader("Referer");
+        if (referencia != null) {
+            if (referencia.contains("ac-Encontrar_Logo_da_Empresa")) {
+                resp.addHeader("Cache-Control", "no-cache");
+            } else {
+                resp.addHeader("Cache-Control", "max-age=500");
+            }
+        } else {
+            resp.addHeader("Cache-Control", "max-age=500");
+        }
         String urlimagem = urlRequisicao.replaceAll("/proxyImagem/", "");
         String nomearquivo = urlimagem.substring(urlimagem.lastIndexOf("/") + 1, urlimagem.length());
+
         abrirArquivo(urlimagem, nomearquivo, requisicao, resp, FabTipoArquivoConhecido.IMAGEM_WEB);
     }
 

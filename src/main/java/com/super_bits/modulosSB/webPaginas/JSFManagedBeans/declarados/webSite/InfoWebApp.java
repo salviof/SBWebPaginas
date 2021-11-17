@@ -9,8 +9,8 @@ import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ItfAc
 import com.super_bits.modulosSB.webPaginas.ConfigGeral.SBWebPaginas;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.siteMap.AcaoComLink;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.siteMap.MapaDeFormularios;
-import com.super_bits.modulosSB.webPaginas.controller.servletes.WebPaginasServlet;
-import static com.super_bits.modulosSB.webPaginas.controller.servletes.WebPaginasServlet.MAPA_ACOESMANAGED_BEAN;
+import com.super_bits.modulosSB.webPaginas.controller.servlets.WebPaginasServlet;
+import static com.super_bits.modulosSB.webPaginas.controller.servlets.WebPaginasServlet.MAPA_ACOESMANAGED_BEAN;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;

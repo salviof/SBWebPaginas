@@ -11,11 +11,11 @@
 
             <h:panelGroup rendered="#{desabilitarEdicao}">
                 <h:panelGroup rendered="#{valor}" >
-                    <i class="fa fa-check text-success fa-2x" ></i>
+                    <i class="#{registro.comoCampoVerdadeiroOuFalso.iconePositivo}  fa-2x" ></i>
                 </h:panelGroup>
 
                 <h:panelGroup rendered="#{!valor}" >
-                    <i class="fa fa-times  text-danger  fa-2x" ></i>
+                    <i class="#{registro.comoCampoVerdadeiroOuFalso.iconeNegativo}   fa-2x" ></i>
                 </h:panelGroup>
             </h:panelGroup>
 
@@ -23,7 +23,8 @@
                 rendered="#{!desabilitarEdicao}"
                 class="campoResponsivo  TexAlCenter #{componente.classeCSS}"
                 offLabel="Não" onLabel="Sim"
-                offIcon="fa fa-check text-danger" onIcon="fa fa-check text-success"
+                offIcon="#{registro.comoCampoVerdadeiroOuFalso.iconeNegativo}"
+                onIcon="#{registro.comoCampoVerdadeiroOuFalso.iconePositivo}"
                 value="#{registro.valor}" disabled="#{desabilitarEdicao}">
                 <f:validator  validatorId="org.super_bits.view.validadores.genericoBoolean"/>
 

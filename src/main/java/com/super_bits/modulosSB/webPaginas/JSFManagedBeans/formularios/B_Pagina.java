@@ -50,9 +50,9 @@ import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.siteMap.MapaDeFormula
 
 import com.super_bits.modulosSB.webPaginas.controller.servletes.tratamentoErro.ErroSBCriticoWeb;
 import com.super_bits.modulosSB.webPaginas.controller.paginasDoSistema.FabAcaoPaginasDoSistema;
-import com.super_bits.modulosSB.webPaginas.controller.servletes.WebPaginasServlet;
-import com.super_bits.modulosSB.webPaginas.controller.servletes.servletWebPaginas.ConfiguracoesDeFormularioPorUrl;
-import com.super_bits.modulosSB.webPaginas.controller.servletes.servletWebPaginas.EstruturaDeFormulario;
+import com.super_bits.modulosSB.webPaginas.controller.servlets.WebPaginasServlet;
+import com.super_bits.modulosSB.webPaginas.controller.servlets.servletWebPaginas.ConfiguracoesDeFormularioPorUrl;
+import com.super_bits.modulosSB.webPaginas.controller.servlets.servletWebPaginas.EstruturaDeFormulario;
 import com.super_bits.modulosSB.webPaginas.controller.servletes.util.UtilFabUrlServlet;
 import com.super_bits.modulosSB.webPaginas.controller.servletes.urls.parametrosURL.ParametroURL;
 import com.super_bits.modulosSB.webPaginas.controller.servletes.urls.parametrosURL.ParametroUrlInstanciado;

@@ -22,8 +22,8 @@ import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basic
 import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfBeanSimplesSomenteLeitura;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfSessao;
 import com.super_bits.modulosSB.webPaginas.ConfigGeral.SBWebPaginas;
-import com.super_bits.modulosSB.webPaginas.controller.servletes.servletArquivoDeEntidade.ServletArquivosDeEntidade;
-import com.super_bits.modulosSB.webPaginas.controller.servletes.servletArquivoDeSessao.ServletArquivoDeSessao;
+import com.super_bits.modulosSB.webPaginas.controller.servlets.servletArquivoDeEntidade.ServletArquivosDeEntidade;
+import com.super_bits.modulosSB.webPaginas.controller.servlets.servletArquivoDeSessao.ServletArquivoDeSessao;
 import java.io.File;
 import java.io.InputStream;
 import java.util.ArrayList;

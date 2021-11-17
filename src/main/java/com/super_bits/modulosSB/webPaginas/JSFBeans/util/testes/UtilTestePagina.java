@@ -141,10 +141,11 @@ public abstract class UtilTestePagina {
         if (icone.startsWith("fa ")) {
 
             String iconeSemInicio = icone.substring(3);
+            String iconeClassFOntAnsome = iconeSemInicio.split(" ")[0];
             String arquivoCSSFOntAnsome = SBWebPaginas.DIRETORIO_PADRAO_MODULO_WEBAPP_FW_DESENVOLVIMENTO + "/src/main/resources/META-INF/resources/fontAwesome/css/font-awesome.css";
             Assert.assertTrue("O arquivo font-awesome.css não foi encontrado no sistema", UtilSBCoreArquivos.isArquivoExiste(arquivoCSSFOntAnsome));
 
-            if (!UtilSBCoreArquivoTexto.isTemPalavraNoArquivo(arquivoCSSFOntAnsome, iconeSemInicio)) {
+            if (!UtilSBCoreArquivoTexto.isTemPalavraNoArquivo(arquivoCSSFOntAnsome, iconeClassFOntAnsome)) {
 
                 throw new UnsupportedOperationException("O ícone  da ação " + pAcaoDoSistema.getRegistro().getNomeUnico() + " com nome [" + iconeSemInicio + "] não foi encontrado no arquivo css do FontAswome e");
             }

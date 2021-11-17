@@ -3,7 +3,7 @@
 
  */ 
  
-package com.super_bits.modulosSB.webPaginas.controller.servletes.servletAlteracaoDeSenha;
+package com.super_bits.modulosSB.webPaginas.controller.servlets.servletAlteracaoDeSenha;
 
     /**
      *

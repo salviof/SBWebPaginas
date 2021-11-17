@@ -7,6 +7,8 @@ package com.super_bits.modulosSB.webPaginas.JSFBeans.SBBeanModel.DEPRECIADO;
 
 import com.super_bits.modulosSB.Persistencia.dao.UtilSBPersistencia;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
+import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreReflexao;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.UtilSBCoreReflexaoAtributoDeObjeto;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.MapaObjetosProjetoAtual;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.reflexao.anotacoes.beans.InfoMB_Bean;
 import java.io.Serializable;
@@ -37,13 +39,16 @@ public class InfoMBBean implements Serializable {
 
     public InfoMBBean(Field campo) {
         InfoMB_Bean infoBean = campo.getAnnotation(InfoMB_Bean.class);
-        classe = campo.getType().getSimpleName();
+        Class classeObjeto = UtilSBCoreReflexaoAtributoDeObjeto.getClassePrincipalDoCampo(campo);
+        classe = classeObjeto.getSimpleName();
+        //classe = campo.getType().getSimpleName();
         if (infoBean != null) {
             descricao = infoBean.descricao();
             exemplo = infoBean.exemplo();
         }
         chamada = "#{" + campo.getDeclaringClass().getSimpleName() + "." + campo.getName() + "}";
-        formularioVisualizacao = MapaObjetosProjetoAtual.getVisualizacaoDoObjeto(campo.getType());
+
+        formularioVisualizacao = MapaObjetosProjetoAtual.getVisualizacaoDoObjeto(classeObjeto);
 
     }
 

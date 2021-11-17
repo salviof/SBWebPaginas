@@ -77,6 +77,11 @@
 
 
     <dependencies>
+
+        
+
+
+
         <dependency>
             <groupId>br.org.coletivoJava.utilitarios</groupId>
             <artifactId>clienteRest</artifactId>

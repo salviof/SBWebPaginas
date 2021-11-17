@@ -2,13 +2,13 @@
  *  Desenvolvido pela equipe Super-Bits.com CNPJ 20.019.971/0001-90
 
  */
-package com.super_bits.modulosSB.webPaginas.controller.servletes.servletArquivoDeSessao;
+package com.super_bits.modulosSB.webPaginas.controller.servlets.servletArquivoDeSessao;
 
 import com.super_bits.modulosSB.SBCore.modulos.ManipulaArquivo.TipoRecurso;
 import com.super_bits.modulosSB.SBCore.modulos.ManipulaArquivo.acessoArquivo.FabTipoAcessoArquivo;
 import com.super_bits.modulosSB.SBCore.modulos.ManipulaArquivo.acessoArquivo.TipoAcessoArquivo;
 import com.super_bits.modulosSB.webPaginas.ConfigGeral.SBWebPaginas;
-import com.super_bits.modulosSB.webPaginas.controller.servletes.ServletArquivosSBWPGenerico;
+import com.super_bits.modulosSB.webPaginas.controller.servlets.ServletArquivosSBWPGenerico;
 import com.super_bits.modulosSB.webPaginas.controller.servletes.urls.UrlInterpretada;
 import com.super_bits.modulosSB.webPaginas.controller.servletes.util.UtilFabUrlServlet;
 

@@ -2,13 +2,13 @@
  *  Desenvolvido pela equipe Super-Bits.com CNPJ 20.019.971/0001-90
 
  */
-package com.super_bits.modulosSB.webPaginas.controller.servletes;
+package com.super_bits.modulosSB.webPaginas.controller.servlets;
 
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreBytes;
 import com.super_bits.modulosSB.SBCore.modulos.ManipulaArquivo.FabTipoArquivoConhecido;
 import com.super_bits.modulosSB.webPaginas.ConfigGeral.SBWebPaginas;
-import com.super_bits.modulosSB.webPaginas.controller.servletes.servletArquivoDeEntidade.ServletArquivosDeEntidade;
+import com.super_bits.modulosSB.webPaginas.controller.servlets.servletArquivoDeEntidade.ServletArquivosDeEntidade;
 import com.super_bits.modulosSB.webPaginas.util.UtilSBWP_JSFTools;
 import java.io.File;
 import java.io.IOException;
@@ -31,7 +31,7 @@ public class ServletArquivosSBWPGenerico extends HttpServlet {
 
     protected void baixarArquivo(String pcaminhoArquivo, String pNomeArquivoDownload,
             HttpServletRequest requisicao, HttpServletResponse resp) {
-        resp.setHeader("Content-Disposition", "attachment; filename=\"" + pNomeArquivoDownload + "\"");;
+        resp.setHeader("Content-Disposition", "attachment; filename=\"" + pNomeArquivoDownload + "\"");
         resp.setContentType("application/force-download");
         resp.setHeader("Content-Transfer-Encoding", "binary");
 

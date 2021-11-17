@@ -1,5 +1,5 @@
 //Sistema desenvolvido sob encomenda para processamento de placas veiculares em tempo real pela Super Bits Sistemas sob encomnda da Sphera Secucurity
-package com.super_bits.modulosSB.webPaginas.controller.servletes;
+package com.super_bits.modulosSB.webPaginas.controller.servlets;
 
 import com.super_bits.modulosSB.SBCore.UtilGeral.UTilSBCoreInputs;
 import com.super_bits.modulosSB.webPaginas.ConfigGeral.SBWebPaginas;

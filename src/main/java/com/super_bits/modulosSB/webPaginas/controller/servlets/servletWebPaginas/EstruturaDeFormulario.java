@@ -2,7 +2,7 @@
  *  Desenvolvido pela equipe Super-Bits.com CNPJ 20.019.971/0001-90
 
  */
-package com.super_bits.modulosSB.webPaginas.controller.servletes.servletWebPaginas;
+package com.super_bits.modulosSB.webPaginas.controller.servlets.servletWebPaginas;
 
 import com.google.common.collect.Lists;
 import com.super_bits.modulos.SBAcessosModel.model.acoes.acaoDeEntidade.AcaoGestaoEntidade;

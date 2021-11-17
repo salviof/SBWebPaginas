@@ -2,11 +2,11 @@
  *  Desenvolvido pela equipe Super-Bits.com CNPJ 20.019.971/0001-90
 
  */
-package com.super_bits.modulosSB.webPaginas.controller.servletes.servletWebPaginas;
+package com.super_bits.modulosSB.webPaginas.controller.servlets.servletWebPaginas;
 
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 import com.super_bits.modulosSB.webPaginas.ConfigGeral.SBWebPaginas;
-import com.super_bits.modulosSB.webPaginas.controller.servletes.FabTipoInformacaoUrl;
+import com.super_bits.modulosSB.webPaginas.controller.servlets.FabTipoInformacaoUrl;
 import com.super_bits.modulosSB.webPaginas.util.UtilSBWP_JSFTools;
 import java.net.MalformedURLException;
 import java.net.URL;

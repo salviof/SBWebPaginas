@@ -35,9 +35,9 @@ ui-datatable-header.ui-widget-header.ui-corner-top{
     word-break: break-word;
 }
 
-/* Colocando modal de dialogo por cima de tudo*/
+/* Colocando modal de dialogo por cima de tudo -> analizar, pois está colocando acima do popup do calendar*/
 .ui-dialog{
-    z-index: 20000!important;
+    z-index: 1006;
 }
 
 .invisivel{
