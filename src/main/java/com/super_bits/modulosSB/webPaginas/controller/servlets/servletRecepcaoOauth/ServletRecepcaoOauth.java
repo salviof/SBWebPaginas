@@ -37,7 +37,7 @@ public class ServletRecepcaoOauth extends ServletArquivosSBWPGenerico implements
                 resp.getWriter().append("EUTÔVIVO");
                 resp.getWriter().close();
                 return;
-            };
+            }
             if (!UtilSBApiRestClient.receberCodigoSolicitacaoOauth(req)) {
                 throw new UnsupportedOperationException("falha recebendo codigo de solictação de token Oauth");
             }

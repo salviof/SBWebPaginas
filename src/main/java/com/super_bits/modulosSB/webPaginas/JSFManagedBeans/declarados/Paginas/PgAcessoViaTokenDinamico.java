@@ -14,6 +14,7 @@ import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ItfAc
 import com.super_bits.modulosSB.SBCore.modulos.objetos.MapaObjetosProjetoAtual;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfBeanSimples;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.MB_PaginaConversation;
+import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.MB_paginaCadastroEntidades;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.reflexao.anotacoes.InfoPagina;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.siteMap.MapaDeFormularios;
 import com.super_bits.modulosSB.webPaginas.controller.paginasDoSistema.FabAcaoPaginasDoSistema;
@@ -39,7 +40,7 @@ import javax.inject.Named;
 @Named
 @ViewScoped
 @InfoPagina(nomeCurto = "acessoExclusivo", tags = "acessoExclusivo")
-public class PgAcessoViaTokenDinamico extends MB_PaginaConversation {
+public class PgAcessoViaTokenDinamico extends MB_paginaCadastroEntidades<TokenAcessoDinamico> {
 
     @InfoParametroURL(nome = "Código de acesso", tipoParametro = TIPO_PARTE_URL.ENTIDADE,
             tipoEntidade = TokenAcessoDinamico.class, representaEntidadePrincipalMB = true
@@ -61,19 +62,32 @@ public class PgAcessoViaTokenDinamico extends MB_PaginaConversation {
 
     private void acessonegado() {
         acessonegado = true;
+        tokenDinamico = null;
+        getParametroInstanciado(prCodigoDeAcesso).setValor(null);
+        
         setAcaoSelecionada(FabAcaoPaginasDoSistema.PAGINA_NATIVA_ACESSO_NEGADO_FRM_SUB_FORM.getRegistro());
         xhtmlAcaoAtual = FabAcaoPaginasDoSistema.PAGINA_NATIVA_ACESSO_NEGADO_FRM_SUB_FORM.getRegistro().getComoFormulario().getXhtml();
     }
 
     @PostConstruct
     public void inicio() {
+        tokenDinamico = getTokenDinamico();
+
+        if (getParametroInstanciado(prCodigoDeAcesso).isValorDoParametroFoiConfigurado()) {
+            System.out.println("Vai!");
+        }
         if (tokenDinamico == null) {
+
             acessonegado();
         }
 
     }
 
     public String getUrlAcaoDoToken() {
+        if (getTokenDinamico() == null) {
+            acessonegado();
+            return "";
+        }
         if (tokenDinamico.getEntidadeDoAcesso() != null) {
             Class tipoEntidade = MapaObjetosProjetoAtual.getClasseDoObjetoByNome(tokenDinamico.getEntidadeDoAcesso());
             ItfBeanSimples entidade = (ItfBeanSimples) UtilSBPersistencia.getRegistroByID(tipoEntidade, Integer.valueOf(tokenDinamico.getCodigoEntidade()), getEMPagina());
@@ -121,15 +135,25 @@ public class PgAcessoViaTokenDinamico extends MB_PaginaConversation {
         tokenDinamico = (TokenAcessoDinamico) pBeanSimples;
     }
 
-    public ParametroURL getPrCodigoDeAcesso() {
-        return prCodigoDeAcesso;
-    }
-
     public void setPrCodigoDeAcesso(ParametroURL prCodigoDeAcesso) {
         this.prCodigoDeAcesso = prCodigoDeAcesso;
     }
 
     public TokenAcessoDinamico getTokenDinamico() {
+        try {
+            if (getParametroInstanciado(prCodigoDeAcesso).isValorDoParametroFoiConfigurado()) {
+                String chaveAcessoUtilizada = getParametroInstanciado(prCodigoDeAcesso).getTextoEnviadoUrl();
+                chaveAcessoUtilizada = chaveAcessoUtilizada.substring(0, chaveAcessoUtilizada.lastIndexOf("-"));
+                TokenAcessoDinamico token = (TokenAcessoDinamico) getParametroInstanciado(prCodigoDeAcesso).getValor();
+                if (!chaveAcessoUtilizada.equals(token.getCodigo())) {
+                    acessonegado();
+                    return null;
+                }
+                tokenDinamico = token;
+            }
+        } catch (Throwable t) {
+            acessonegado();
+        }
         return tokenDinamico;
     }
 

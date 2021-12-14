@@ -103,7 +103,7 @@ public class ConfiguracoesDeFormularioPorUrl {
                         String valor = pr;
                         if (i == 0) {
                             tipoInformacao = FabTipoInformacaoUrl.GESTAO;
-                        } else if (pr.contains("ac-")) {
+                        } else if (pr.startsWith("ac-")) {
                             valor = pr.split("-")[1];
                             tipoInformacao = FabTipoInformacaoUrl.ACAO;
 
