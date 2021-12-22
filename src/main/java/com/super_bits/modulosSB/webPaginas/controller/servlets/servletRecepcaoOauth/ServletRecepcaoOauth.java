@@ -38,7 +38,8 @@ public class ServletRecepcaoOauth extends ServletArquivosSBWPGenerico implements
                 resp.getWriter().close();
                 return;
             }
-            if (!UtilSBApiRestClient.receberCodigoSolicitacaoOauth(req)) {
+            String tipoAplicacao = req.getParameter("tipoAplicacao");
+            if (!UtilSBApiRestClient.receberCodigoSolicitacaoOauth(req, tipoAplicacao)) {
                 throw new UnsupportedOperationException("falha recebendo codigo de solictação de token Oauth");
             }
             resp.getWriter().append("Chave de Aceso gerada com sucesso");
