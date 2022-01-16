@@ -26,10 +26,9 @@ import org.coletivojava.fw.api.tratamentoErros.FabErro;
 public class ServletRecepcaoOauth extends ServletArquivosSBWPGenerico implements Serializable {
 
     public static final String NOME_URL_SERVLET = "solicitacaoAuth2Recept";
-    public static final String URL_SERVLET = SBWebPaginas.getSiteURL() + "/" + NOME_URL_SERVLET;
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         try {
             if (req.getRequestURI().contains(UtilSBApiRestClientOauth2.PATH_TESTE_DE_VIDA_SERVICO_RECEPCAO)) {

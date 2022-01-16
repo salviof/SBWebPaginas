@@ -40,7 +40,7 @@ public class MB_PagniaGrupoPermissao<T extends ItfGrupoUsuaioEditavel> extends M
             List<PermissaoSB> permissoes = UtilSBPersistencia.getListaTodos(PermissaoSB.class, getEMPagina());
             gestoesPermissionaveis = new HashMap<String, ItfAcaoGerenciarEntidade>();
 
-            setEntidadesListadas(UtilSBPersistencia.getListaTodos(GrupoUsuarioSB.class));
+            setEntidadesListadas((List) UtilSBPersistencia.getListaTodos(GrupoUsuarioSB.class));
 
             for (PermissaoSB p : permissoes) {
                 ItfAcaoDoSistema acao = MapaAcoesSistema.getAcaoDoSistema(p.getAcao().getEnumAcaoDoSistema());
