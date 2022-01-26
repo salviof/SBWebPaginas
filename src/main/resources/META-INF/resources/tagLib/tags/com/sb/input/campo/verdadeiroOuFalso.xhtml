@@ -22,7 +22,7 @@
             <p:selectBooleanButton
                 rendered="#{!desabilitarEdicao}"
                 class="campoResponsivo  TexAlCenter #{componente.classeCSS}"
-                offLabel="Não" onLabel="Sim"
+                offLabel="#{registro.comoCampoVerdadeiroOuFalso.textoNegativo}" onLabel="#{registro.comoCampoVerdadeiroOuFalso.textoPositivo}"
                 offIcon="#{registro.comoCampoVerdadeiroOuFalso.iconeNegativo}"
                 onIcon="#{registro.comoCampoVerdadeiroOuFalso.iconePositivo}"
                 value="#{registro.valor}" disabled="#{desabilitarEdicao}">
