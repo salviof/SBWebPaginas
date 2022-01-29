@@ -13,6 +13,7 @@ import com.super_bits.modulosSB.SBCore.ConfigGeral.ItfConfiguracaoCoreCustomizav
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.arquivosConfiguracao.ArquivoConfiguracaoBase;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.arquivosConfiguracao.ArquivoConfiguracaoDistribuicao;
+import com.super_bits.modulosSB.SBCore.modulos.Controller.ServicoControllerExecucaoLocal;
 import com.super_bits.modulosSB.SBCore.modulos.Mensagens.CentramMensagemProgramadorMsgStop;
 import com.super_bits.modulosSB.SBCore.modulos.TratamentoDeErros.InfoErroSBCoreDeveloperSopMessagem;
 import com.super_bits.modulosSB.SBCore.modulos.TratamentoDeErros.InfoErroSBCoreFW;
@@ -81,6 +82,7 @@ public abstract class ConfiguradorCoreDeProjetoWebWarAbstrato extends Configurad
         pConfiguracao.setCentralAtributoDados(CentralAtributosSBPersistencia.class);
         pConfiguracao.setCentralDeLocalizacao(CentraLocalizacaoSBPersistenciaPadrao.class);
         pConfiguracao.setTipoProjeto(FabTipoProjeto.WEB_APP);
+        pConfiguracao.setServicoController(ServicoControllerExecucaoLocal.class);
         switch (pConfiguracao.getEstadoApp()) {
             case DESENVOLVIMENTO:
                 pConfiguracao.setCentralMEnsagens(CentramMensagemProgramadorMsgStop.class);
