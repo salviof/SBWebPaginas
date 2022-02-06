@@ -64,7 +64,7 @@ public class PgAcessoViaTokenDinamico extends MB_paginaCadastroEntidades<TokenAc
         acessonegado = true;
         tokenDinamico = null;
         getParametroInstanciado(prCodigoDeAcesso).setValor(null);
-        
+
         setAcaoSelecionada(FabAcaoPaginasDoSistema.PAGINA_NATIVA_ACESSO_NEGADO_FRM_SUB_FORM.getRegistro());
         xhtmlAcaoAtual = FabAcaoPaginasDoSistema.PAGINA_NATIVA_ACESSO_NEGADO_FRM_SUB_FORM.getRegistro().getComoFormulario().getXhtml();
     }
@@ -117,7 +117,9 @@ public class PgAcessoViaTokenDinamico extends MB_paginaCadastroEntidades<TokenAc
             if (parametroToken.isPresent()) {
                 url = MapaDeFormularios.getUrlFormulario(acao.getComoFormulario(), entidade, tokenDinamico);
             } else {
+
                 url = MapaDeFormularios.getUrlFormulario(acao.getComoFormulario(), entidade);
+
             }
 
             UtilSBWP_JSFTools.vaParaPagina(url);
