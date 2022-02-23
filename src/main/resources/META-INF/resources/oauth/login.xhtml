@@ -1,0 +1,88 @@
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+
+    xmlns:SBLogin="http://xmlns.jcp.org/jsf/composite/SBComp/composite/login"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <p:fieldset legend="Requisição de acesso via api" >
+
+        Ao clicar em ok, você está vincuculando suas credencias do sistema #{pgAutenticacaoOauth.sistemaRequisitante.nome}, com este sistema,
+        sua credencial será capaz de utilizar os seguintes recursos:
+
+
+        <c:forEach items="#{pgAutenticacaoOauth.acoesEscopoUsuario}" var="acao" >
+            #{acao.nomeAcao}
+        </c:forEach>
+
+    </p:fieldset>
+
+
+    <div class="OrganizadorContainer Container12">
+        <div class="Container3">
+            <h:form>
+
+
+
+
+                <div class="TexAlCenter" >
+
+
+
+                    <div class="quebraBlocoComEspacoVertical3"></div>
+                    <div class="Card SoftGrayBack">
+
+                        <p:inputText id="emaillogin" label="E-Mail"
+                                     readonly="true"
+                                     requiredMessage="O E-Mail é obrigatório"
+                                     validatorMessage="O e-mail não parece ser válido
+                                     " placeholder="E-mail" required="true"
+                                     value="#{controleDeSessaoWeb.usuarioLogar}"  styleClass="Wid100 TexAlCenter">
+                            <f:validateLength minimum="4" />
+                        </p:inputText>
+
+
+                        <p:message for="emaillogin" />
+                        <div class="quebraBlocoComEspacoVertical10"></div>
+                        <p:inputText type="password" id="senha" placeholder="Senha" requiredMessage="A Senha é Obrigatória" required="true" value="#{controleDeSessaoWeb.senhaLogar}" styleClass="Wid100 TexAlCenter"/>
+                        <p:message for="senha" />
+                        <div class="quebraBlocoComEspacoVertical4"></div>
+
+                        <div class="quebraBlocoComEspacoVertical4"></div>
+                        <p:commandButton value="Esqueci minha Senha"
+                                         id="botaoEsqueciMinhaSenha"
+                                         process="@this,emaillogin"
+                                         icon="fa fa-exclamation"
+                                         styleClass="RedButton"
+
+                                         actionListener="#{controleDeSessaoWeb.esqueceuaSenha()}"
+                                         partialSubmit="true"
+
+
+                                         />
+
+                        <div class="quebraBlocoComEspacoVertical10 somenteMobile"></div>
+                        <p:commandButton value="Entrar" icon="fa fa-sign-in"
+                                         id="botaoEntrarSec"
+                                         actionListener="#{controleDeSessaoWeb.efetuarLogIn()}"
+                                         update="emaillogin" />
+                        <p:defaultCommand target="botaoEntrarSec"  />
+                        <p:captcha language="pt-BR" required="true" requiredMessage="Validação Captcha nescessária"
+                                   rendered="false"
+                                   validatorMessage="Validação Captcha nescessária" />
+                    </div>
+
+                </div>
+
+
+            </h:form>
+        </div>
+    </div>
+
+
+
+
+</ui:composition>

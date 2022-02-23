@@ -24,7 +24,7 @@ import com.super_bits.modulosSB.webPaginas.controller.servletes.util.UtilFabUrlS
 import com.super_bits.modulosSB.webPaginas.controller.servlets.ErroRequisicaoServlet;
 import com.super_bits.modulosSB.webPaginas.controller.servlets.FabTipoErroRequisicao;
 
-import com.super_bits.modulosSB.webPaginas.controller.sessao.QlSessaoFacesContext;
+import com.super_bits.modulosSB.SBCore.modulos.Controller.qualificadoresCDI.sessao.QlSessaoFacesContext;
 import com.super_bits.modulosSB.webPaginas.controller.sessao.SessaoAtualSBWP;
 import com.super_bits.modulosSB.webPaginas.util.UtilSBWP_JSFTools;
 import java.io.File;

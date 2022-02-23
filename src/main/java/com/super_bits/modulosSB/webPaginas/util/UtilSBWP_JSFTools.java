@@ -91,6 +91,8 @@ public abstract class UtilSBWP_JSFTools {
     public final static String FORMULARIO_MODAL_ENVIO_ARQUIVO = "/resources/SBComp/modal/envioArquivo";
     public final static String FORMULARIO_ACESSO_NEGADO = "/resources/SBComp/SBSystemPages/acessoNegado.xhtml";
 
+    public final static String FORMULARIO_OAUTH_LOGIN = "/resources/oauth/login.xhtml";
+
     public final static String FORMULARIO_ACESSO_NEGADO_SUB_FORM = "/resources/SBComp/SBSystemPages/acessoNegadoSubForm.xhtml";
     public final static String FORMULARIO_PARAMETRO_URL_INVALIDO = "/resources/SBComp/SBSystemPages/parametroURLInvalido.xhtml";
 

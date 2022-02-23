@@ -4,6 +4,7 @@
  */
 package com.super_bits.modulosSB.webPaginas.controller.sessao;
 
+import com.super_bits.modulosSB.SBCore.modulos.Controller.qualificadoresCDI.sessao.QlSessaoFacesContext;
 import com.sun.jndi.toolkit.url.UrlUtil;
 import com.super_bits.editorImagem.util.UtilSBImagemEdicao;
 import com.super_bits.modulos.SBAcessosModel.model.UsuarioSB;

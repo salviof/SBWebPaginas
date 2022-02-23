@@ -13,7 +13,7 @@ import com.super_bits.modulosSB.SBCore.modulos.view.telas.ColunaTela;
 import com.super_bits.modulosSB.SBCore.modulos.view.telas.LayoutComponentesEmTela;
 import com.super_bits.modulosSB.SBCore.modulos.view.telas.LayoutComponentesEmTelaComGrupoDeAcoes;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.interfaces.ItfPaginaAtual;
-import com.super_bits.modulosSB.webPaginas.controller.sessao.QlSessaoFacesContext;
+import com.super_bits.modulosSB.SBCore.modulos.Controller.qualificadoresCDI.sessao.QlSessaoFacesContext;
 import java.io.Serializable;
 import java.util.List;
 import javax.enterprise.context.RequestScoped;

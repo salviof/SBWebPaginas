@@ -34,8 +34,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.coletivojava.fw.api.tratamentoErros.FabErro;
-import org.jboss.weld.context.RequestContext;
-import org.jboss.weld.context.http.Http;
 
 /**
  *

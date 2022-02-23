@@ -7,7 +7,6 @@ package com.super_bits.modulosSB.webPaginas.controller.servlets.servletRecepcaoO
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 import com.super_bits.modulosSB.SBCore.integracao.libRestClient.implementacao.UtilSBApiRestClient;
 import com.super_bits.modulosSB.SBCore.integracao.libRestClient.implementacao.UtilSBApiRestClientOauth2;
-import com.super_bits.modulosSB.webPaginas.ConfigGeral.SBWebPaginas;
 import com.super_bits.modulosSB.webPaginas.controller.servlets.ServletArquivosSBWPGenerico;
 
 import com.super_bits.modulosSB.webPaginas.util.UtilSBWP_JSFTools;
@@ -38,6 +37,7 @@ public class ServletRecepcaoOauth extends ServletArquivosSBWPGenerico implements
                 return;
             }
             String tipoAplicacao = req.getParameter("tipoAplicacao");
+
             if (!UtilSBApiRestClient.receberCodigoSolicitacaoOauth(req, tipoAplicacao)) {
                 throw new UnsupportedOperationException("falha recebendo codigo de solictação de token Oauth");
             }
@@ -52,8 +52,9 @@ public class ServletRecepcaoOauth extends ServletArquivosSBWPGenerico implements
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doPost(req, resp); //To change body of generated methods, choose Tools | Templates.
+    public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        System.out.println("Recebendo token de acesso");
+        System.out.println("");
     }
 
 }

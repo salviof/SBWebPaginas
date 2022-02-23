@@ -4,6 +4,7 @@
  */
 package com.super_bits.modulosSB.webPaginas.controller.sessao;
 
+import com.super_bits.modulosSB.SBCore.modulos.Controller.qualificadoresCDI.sessao.QlSessaoFacesContext;
 import com.sun.faces.config.InitFacesContext;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreEmail;
