@@ -36,10 +36,10 @@
                     <div class="Card SoftGrayBack">
 
                         <p:inputText id="emaillogin" label="E-Mail"
-                                     readonly="true"
+
                                      requiredMessage="O E-Mail é obrigatório"
-                                     validatorMessage="O e-mail não parece ser válido
-                                     " placeholder="E-mail" required="true"
+                                     validatorMessage="O e-mail não parece ser válido"
+                                     placeholder="E-mail" required="true"
                                      value="#{controleDeSessaoWeb.usuarioLogar}"  styleClass="Wid100 TexAlCenter">
                             <f:validateLength minimum="4" />
                         </p:inputText>
@@ -52,21 +52,12 @@
                         <div class="quebraBlocoComEspacoVertical4"></div>
 
                         <div class="quebraBlocoComEspacoVertical4"></div>
-                        <p:commandButton value="Esqueci minha Senha"
-                                         id="botaoEsqueciMinhaSenha"
-                                         process="@this,emaillogin"
-                                         icon="fa fa-exclamation"
-                                         styleClass="RedButton"
 
-                                         actionListener="#{controleDeSessaoWeb.esqueceuaSenha()}"
-                                         partialSubmit="true"
-
-
-                                         />
 
                         <div class="quebraBlocoComEspacoVertical10 somenteMobile"></div>
                         <p:commandButton value="Entrar" icon="fa fa-sign-in"
                                          id="botaoEntrarSec"
+
                                          actionListener="#{controleDeSessaoWeb.efetuarLogIn()}"
                                          update="emaillogin" />
                         <p:defaultCommand target="botaoEntrarSec"  />
