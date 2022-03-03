@@ -15,18 +15,16 @@ import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basic
 import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfSessao;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfUsuario;
 import com.super_bits.modulosSB.SBCore.modulos.sessao.ControleDeSessaoAbstratoSBCore;
-import com.super_bits.modulosSB.webPaginas.ConfigGeral.SBWebPaginas;
-import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.siteMap.AcaoComLink;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.siteMap.MapaDeFormularios;
 import com.super_bits.modulosSB.webPaginas.controller.paginasDoSistema.FabAcaoPaginasDoSistema;
 import com.super_bits.modulosSB.webPaginas.util.UtilSBWPServletTools;
 import com.super_bits.modulosSB.webPaginas.util.UtilSBWP_JSFTools;
-import com.super_bits.modulosSB.webPaginas.util.UtillSBWPReflexoesWebpaginas;
 import java.io.File;
 import java.io.Serializable;
 import javax.annotation.PreDestroy;
 import javax.enterprise.context.RequestScoped;
-import javax.enterprise.inject.Default;
+
+import javax.enterprise.inject.Instance;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -49,6 +47,9 @@ public class ControleDeSessaoWeb extends ControleDeSessaoAbstratoSBCore implemen
     @QlSessaoFacesContext
     private ItfSessao sessaoAtual;
 
+    @Inject
+    private Instance<ItfSessao> sessaoProgramatic;
+
     private String usuarioLogar;
     private String senhaLogar;
 
@@ -64,10 +65,19 @@ public class ControleDeSessaoWeb extends ControleDeSessaoAbstratoSBCore implemen
             if (instanciaFaces != null && !(instanciaFaces instanceof InitFacesContext)) {
                 sessaoAtual = UtilSBWPServletTools.getSessaoAtual();
 
-            } else {
-                sessaoAtual = new SessaoAtualWebDoApllicativo();
-
             }
+            if (sessaoProgramatic != null) {
+
+            } else {
+                if (sessaoAtual == null) {
+
+                }
+            }
+
+            if (sessaoAtual == null) {
+                sessaoAtual = new SessaoAtualWebDoApllicativo();
+            }
+
             if (sessaoAtual != null) {
                 return sessaoAtual;
             }

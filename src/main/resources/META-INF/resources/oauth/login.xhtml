@@ -11,7 +11,7 @@
     <p:fieldset legend="Requisição de acesso via api" >
 
         Ao clicar em ok, você está vincuculando suas credencias do sistema #{pgAutenticacaoOauth.sistemaRequisitante.nome}, com este sistema,
-        sua credencial será capaz de utilizar os seguintes recursos:
+        sua credencial será capaz de utilizar os seguintes recursos: #{pgAutenticacaoOauth.usuarioAutenticado}
 
 
         <c:forEach items="#{pgAutenticacaoOauth.acoesEscopoUsuario}" var="acao" >
@@ -24,56 +24,33 @@
     <div class="OrganizadorContainer Container12">
         <div class="Container3">
             <h:form>
-
-
-
-
                 <div class="TexAlCenter" >
-
-
-
                     <div class="quebraBlocoComEspacoVertical3"></div>
                     <div class="Card SoftGrayBack">
-
-                        <p:inputText id="emaillogin" label="E-Mail"
-
-                                     requiredMessage="O E-Mail é obrigatório"
-                                     validatorMessage="O e-mail não parece ser válido"
-                                     placeholder="E-mail" required="true"
-                                     value="#{controleDeSessaoWeb.usuarioLogar}"  styleClass="Wid100 TexAlCenter">
-                            <f:validateLength minimum="4" />
-                        </p:inputText>
+                        <p:outputLabel
+                            value="#{pgAutenticacaoOauth.usuarioLogin}"  styleClass="Wid100 TexAlCenter"
+                            />
 
 
-                        <p:message for="emaillogin" />
                         <div class="quebraBlocoComEspacoVertical10"></div>
-                        <p:inputText type="password" id="senha" placeholder="Senha" requiredMessage="A Senha é Obrigatória" required="true" value="#{controleDeSessaoWeb.senhaLogar}" styleClass="Wid100 TexAlCenter"/>
+                        <p:inputText type="password" id="senha" placeholder="Senha"
+                                     requiredMessage="A Senha é Obrigatória" required="true"
+                                     value="#{pgAutenticacaoOauth.senhaLogin}" styleClass="Wid100 TexAlCenter"/>
                         <p:message for="senha" />
                         <div class="quebraBlocoComEspacoVertical4"></div>
-
                         <div class="quebraBlocoComEspacoVertical4"></div>
-
-
                         <div class="quebraBlocoComEspacoVertical10 somenteMobile"></div>
                         <p:commandButton value="Entrar" icon="fa fa-sign-in"
                                          id="botaoEntrarSec"
-
-                                         actionListener="#{controleDeSessaoWeb.efetuarLogIn()}"
-                                         update="emaillogin" />
+                                         actionListener="#{pgAutenticacaoOauth.logar()}"
+                                         update="@form" />
                         <p:defaultCommand target="botaoEntrarSec"  />
                         <p:captcha language="pt-BR" required="true" requiredMessage="Validação Captcha nescessária"
                                    rendered="false"
                                    validatorMessage="Validação Captcha nescessária" />
                     </div>
-
                 </div>
-
-
             </h:form>
         </div>
     </div>
-
-
-
-
 </ui:composition>

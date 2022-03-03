@@ -284,12 +284,12 @@ public class UtilSBWPServletTools {
 
     /**
      *
-     * Busca um objeto armazenado no request scoped atravez do nome do atributo
+     * Busca um artibuto armazenado em uma requisição
      *
      * @param pNomeBean nome do Atributo
      * @return Objeto armazenado
      */
-    public static Object getRequestBean(String pNomeBean) {
+    public static Object getRequestAtribute(String pNomeBean) {
 
         try {
             HttpServletRequest request = (HttpServletRequest) FacesContext

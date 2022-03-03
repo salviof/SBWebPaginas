@@ -158,7 +158,7 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
         if (SBCore.isEmModoDesenvolvimento()) {
             return false;
         }
-        return (UtilSBWPServletTools.getRequestBean("CfgURLFrm") != null);
+        return (UtilSBWPServletTools.getRequestAtribute("CfgURLFrm") != null);
     }
 
     protected PgUtil getPaginaUtil() {
@@ -747,7 +747,7 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
 
             try {
                 if (!SBCore.isEmModoDesenvolvimento()) {
-                    ConfiguracoesDeFormularioPorUrl configuracoesDeUrl = (ConfiguracoesDeFormularioPorUrl) UtilSBWPServletTools.getRequestBean(WebPaginasServlet.NOME_BEAN_REQUEST_CONFIG_URL);
+                    ConfiguracoesDeFormularioPorUrl configuracoesDeUrl = (ConfiguracoesDeFormularioPorUrl) UtilSBWPServletTools.getRequestAtribute(WebPaginasServlet.NOME_BEAN_REQUEST_CONFIG_URL);
 
                     if (configuracoesDeUrl == null) {
                         //       System.out.println("Abandonando ações de abertura de pagina (Informações de Url que deveriam estar no request não foram encontradas)");

@@ -93,6 +93,8 @@ public abstract class UtilSBWP_JSFTools {
 
     public final static String FORMULARIO_OAUTH_LOGIN = "/resources/oauth/login.xhtml";
 
+    public final static String FORMULARIO_API_RESTFUL_CONTROLLER = "/resources/restful/respostaController.xhtml";
+
     public final static String FORMULARIO_ACESSO_NEGADO_SUB_FORM = "/resources/SBComp/SBSystemPages/acessoNegadoSubForm.xhtml";
     public final static String FORMULARIO_PARAMETRO_URL_INVALIDO = "/resources/SBComp/SBSystemPages/parametroURLInvalido.xhtml";
 

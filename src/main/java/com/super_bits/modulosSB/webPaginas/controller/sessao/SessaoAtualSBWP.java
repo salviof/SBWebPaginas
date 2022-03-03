@@ -5,7 +5,6 @@
 package com.super_bits.modulosSB.webPaginas.controller.sessao;
 
 import com.super_bits.modulosSB.SBCore.modulos.Controller.qualificadoresCDI.sessao.QlSessaoFacesContext;
-import com.sun.jndi.toolkit.url.UrlUtil;
 import com.super_bits.editorImagem.util.UtilSBImagemEdicao;
 import com.super_bits.modulos.SBAcessosModel.model.UsuarioSB;
 import com.super_bits.modulosSB.Persistencia.dao.UtilSBPersistencia;
@@ -39,7 +38,6 @@ import javax.inject.Inject;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.servlet.http.HttpServletRequest;
-import org.apache.http.protocol.RequestContent;
 import org.coletivojava.fw.api.tratamentoErros.FabErro;
 import org.jboss.weld.context.RequestContext;
 import org.jboss.weld.context.http.Http;

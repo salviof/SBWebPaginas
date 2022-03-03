@@ -111,7 +111,7 @@ public class PgUtil implements Serializable {
         if (SBCore.isEmModoDesenvolvimento()) {
             return true;
         }
-        if (UtilSBWPServletTools.getRequestBean(WebPaginasServlet.NOME_BEAN_REQUEST_CONFIG_URL) == null) {
+        if (UtilSBWPServletTools.getRequestAtribute(WebPaginasServlet.NOME_BEAN_REQUEST_CONFIG_URL) == null) {
             loadDaPaginaRealizado = true;
             return true;
         } else {

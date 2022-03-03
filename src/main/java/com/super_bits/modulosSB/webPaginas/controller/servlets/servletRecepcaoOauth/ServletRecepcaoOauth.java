@@ -7,11 +7,14 @@ package com.super_bits.modulosSB.webPaginas.controller.servlets.servletRecepcaoO
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 import com.super_bits.modulosSB.SBCore.integracao.libRestClient.implementacao.UtilSBApiRestClient;
 import com.super_bits.modulosSB.SBCore.integracao.libRestClient.implementacao.UtilSBApiRestClientOauth2;
+import com.super_bits.modulosSB.SBCore.modulos.Controller.qualificadoresCDI.sessao.QlSessaoFacesContext;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfSessao;
 import com.super_bits.modulosSB.webPaginas.controller.servlets.ServletArquivosSBWPGenerico;
 
 import com.super_bits.modulosSB.webPaginas.util.UtilSBWP_JSFTools;
 import java.io.IOException;
 import java.io.Serializable;
+import javax.inject.Inject;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -26,6 +29,10 @@ public class ServletRecepcaoOauth extends ServletArquivosSBWPGenerico implements
 
     public static final String NOME_URL_SERVLET = "solicitacaoAuth2Recept";
 
+    @Inject
+    @QlSessaoFacesContext
+    private ItfSessao sessaoAtual;
+
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
@@ -37,6 +44,9 @@ public class ServletRecepcaoOauth extends ServletArquivosSBWPGenerico implements
                 return;
             }
             String tipoAplicacao = req.getParameter("tipoAplicacao");
+            if (sessaoAtual != null) {
+                req.setAttribute("usuario", sessaoAtual.getUsuario());
+            }
 
             if (!UtilSBApiRestClient.receberCodigoSolicitacaoOauth(req, tipoAplicacao)) {
                 throw new UnsupportedOperationException("falha recebendo codigo de solictação de token Oauth");

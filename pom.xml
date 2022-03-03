@@ -78,6 +78,12 @@
 
     <dependencies>
 
+        <dependency>
+
+            <groupId>br.org.coletivoJava.fw.api.erp.SBErpIntegracaoSistemas</groupId>
+            <artifactId>SBErpIntegracaoSistemas</artifactId>
+            <version>1.0.0-RC-SNAPSHOT</version>
+        </dependency>
 
 
 

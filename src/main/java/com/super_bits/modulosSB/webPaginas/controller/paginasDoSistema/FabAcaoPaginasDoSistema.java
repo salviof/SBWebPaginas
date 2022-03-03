@@ -59,7 +59,9 @@ public enum FabAcaoPaginasDoSistema implements ItfFabricaAcoes {
     @InfoTipoAcaoGestaoEntidade(iconeFonteAnsowame = FabIconeFontAwesome.REG_PESQUISA_AVANCADA, precisaPermissao = false, xhtmlDaAcao = UtilSBWP_JSFTools.FORMULARIO_MODAL_COMUNICACAO_ACAO_TRANSIENTE)
     PAGINA_NATIVA_MODAL_COMUNICACAO_ACAO_TRANSIENT_MB,
     @InfoTipoAcaoGestaoEntidade(iconeFonteAnsowame = FabIconeFontAwesome.SISTEMA_CARTAO_DE_ACESSO, precisaPermissao = false, xhtmlDaAcao = UtilSBWP_JSFTools.FORMULARIO_OAUTH_LOGIN)
-    PAGINA_NATIVA_LOGIN_OAUTH_MB,;
+    PAGINA_NATIVA_LOGIN_OAUTH_MB,
+    @InfoTipoAcaoGestaoEntidade(iconeFonteAnsowame = FabIconeFontAwesome.SISTEMA_ENGRENAGEM, precisaPermissao = false, xhtmlDaAcao = UtilSBWP_JSFTools.FORMULARIO_API_RESTFUL_CONTROLLER)
+    PAGINA_NATIVA_RESTFUL_RESP_MB_GESTAO;
 
     @Override
     public Class getEntidadeDominio() {
