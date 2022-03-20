@@ -24,6 +24,7 @@ public class PgModalREspostaComunicacao extends PgModalRespostaAbstrato {
         comunicacao = getPaginaVinculada().getComunincacaoAguardandoResposta();
     }
 
+    @Override
     public void enviarRespostaEExecutarAcao() {
 
         try {

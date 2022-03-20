@@ -5,6 +5,7 @@
 package com.super_bits.modulosSB.webPaginas.JSFManagedBeans.declarados.util;
 
 import com.super_bits.modulosSB.SBCore.modulos.Controller.AcaoTransient;
+import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ItfAcaoController;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ItfAcaoDoSistema;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.permissoes.ItfAcaoFormulario;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfBeanSimplesSomenteLeitura;
@@ -38,6 +39,18 @@ public class PgUtilAcoes implements Serializable {
      * @param pParametros Parametros de Url para construção da URL
      * @return A url para acesso a ação de formulário
      */
+    public String getUrlAcao(ItfAcaoController pAcao, ItfBeanSimplesSomenteLeitura... pParametros) {
+        if (pParametros != null) {
+            if (pParametros.length == 1) {
+                if (pParametros[0] == null) {
+
+                    return MapaDeFormularios.getUrlFormulario(pAcao);
+                }
+            }
+        }
+        return MapaDeFormularios.getUrlFormulario(pAcao, pParametros);
+    }
+
     public String getUrlAcao(ItfAcaoFormulario pAcao, ItfBeanSimplesSomenteLeitura... pParametros) {
         if (pParametros != null) {
             if (pParametros.length == 1) {
@@ -51,6 +64,10 @@ public class PgUtilAcoes implements Serializable {
     }
 
     public String getUrlAcao(ItfAcaoFormulario pAcao) {
+        return MapaDeFormularios.getUrlFormulario(pAcao);
+    }
+
+    public String getUrlAcao(ItfAcaoController pAcao) {
         return MapaDeFormularios.getUrlFormulario(pAcao);
     }
 

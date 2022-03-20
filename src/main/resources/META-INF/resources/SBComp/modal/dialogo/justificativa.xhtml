@@ -23,14 +23,16 @@
             </h:panelGroup>
             <h:panelGroup   layout="block"  styleClass="Container12" style="" >
 
-                <p:inputTextarea value="#{pgModalJustificativa.justificativa}"
-                                 style="width: 100%!important;margin-top: 10px; "
-                                 placeholder="Justifique esta alteração"
-                                 required="true"
-                                 id="justificativa"
-                                 validatorMessage="Escreva mais sobre esssa justificativa"
-                                 requiredMessage="Você precisa justificar esta alteração."
-                                 >
+                <p:inputTextarea
+
+                    value="#{pgModalJustificativa.justificativa}"
+                    style="width: 100%!important;margin-top: 10px; "
+                    placeholder="Justifique esta alteração"
+                    required="true"
+                    id="justificativa"
+                    validatorMessage="Escreva mais sobre esssa justificativa"
+                    requiredMessage="Você precisa justificar esta alteração."
+                    >
                     <f:validateLength minimum="10" />
                 </p:inputTextarea>
                 <p:message for="justificativa"/>

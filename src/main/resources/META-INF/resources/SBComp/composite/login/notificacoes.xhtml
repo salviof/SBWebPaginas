@@ -15,7 +15,7 @@
 
         <li>
             <a class="menulink Animated05 ">
-                <i class="fa #{sessaoAtualSBWP.comunicacaoAguardandoRespostaUsuarioSesso.isEmpty() ? 'fa-bell-o' : 'fa-bell' } #{sessaoAtualSBWP.comunicacaoAguardandoRespostaUsuarioSesso.isEmpty() ? '' : 'animated swing' }  " style="" >
+                <i class="fa #{sessaoAtualSBWP.comunicacaoAguardandoRespostaUsuarioSesso.isEmpty() ? 'fa-bell-o' : 'fa-bell animated swing' }}  " style="" >
                     <h:panelGroup styleClass="#{sessaoAtualSBWP.comunicacaoAguardandoRespostaUsuarioSesso.size()>=10 ? 'sinoNotificacaoDezena' : 'sinoNotificacao' }"
                                   rendered="#{!sessaoAtualSBWP.comunicacaoAguardandoRespostaUsuarioSesso.isEmpty()}" >
                         #{sessaoAtualSBWP.comunicacaoAguardandoRespostaUsuarioSesso.size()}

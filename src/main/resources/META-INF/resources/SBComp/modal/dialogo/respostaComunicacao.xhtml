@@ -14,7 +14,9 @@
 
     <h:body>
         <h:form>
-            <p:textEditor toolbarVisible="false" readonly="true" value="#{pgModalREspostaComunicacao.comunicacao.mensagem}" />
+            <p:textEditor toolbarVisible="false" secure="false" readonly="true"  value="#{pgModalREspostaComunicacao.comunicacao.mensagem}"
+                          height="250"
+                          />
             <div class=" OrganizadorContainer" style="width: 100%">
                 <ui:repeat value="#{pgModalREspostaComunicacao.comunicacao.repostasPossiveis}" var="resp" >
                     <h:panelGroup layout="block" styleClass="Container1" >

@@ -1304,13 +1304,17 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
     }
 
     public boolean isAcaoAtualAcaoControllerPadrao() {
-        if (getBeanSelecionado() == null) {
-            return false;
-        }
+
         if (!getAcaoSelecionada().isUmaAcaoController()) {
             return false;
         }
         Method metodo = UtilSBController.getMetodoByAcaoController(getAcaoSelecionada().getComoController());
+        if (metodo.getParameterCount() > 0) {
+            if (getBeanSelecionado() == null) {
+                return false;
+            }
+        }
+
         if (metodo == null) {
             throw new UnsupportedOperationException("Nenhum método foi encontrado vinculado a ação" + getAcaoSelecionada().getNomeUnico());
         }
@@ -1323,21 +1327,26 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
 
             return false;
         }
-        String tipoMetodoParametro = metodo.getParameterTypes()[0].getSimpleName();
-        String tipoEntidadeSelecionada = getBeanSelecionado().getClass().getSimpleName();
-
-        if (tipoMetodoParametro.equals(tipoEntidadeSelecionada)) {
+        if (metodo.getParameterCount() == 0) {
             return true;
-        } else {
-            try {
-                return metodo.getParameterTypes()[0].isInstance(getBeanSelecionado());
-
-            } catch (Throwable t) {
-                return false;
-            }
-
         }
+        if (metodo.getParameterCount() == 1) {
+            String tipoMetodoParametro = metodo.getParameterTypes()[0].getSimpleName();
+            String tipoEntidadeSelecionada = getBeanSelecionado().getClass().getSimpleName();
 
+            if (tipoMetodoParametro.equals(tipoEntidadeSelecionada)) {
+                return true;
+            } else {
+                try {
+                    return metodo.getParameterTypes()[0].isInstance(getBeanSelecionado());
+
+                } catch (Throwable t) {
+                    return false;
+                }
+
+            }
+        }
+        return false;
     }
 
     /**
@@ -1357,7 +1366,8 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
 
         ItfRespostaAcaoDoSistema respExecucao = null;
         if (pEntidade == null || getBeanSelecionado() == null) {
-            throw new UnsupportedOperationException("Bean  selecionado é nulo durante chamada de método controller padrão: " + acaoSelecionada.getNomeUnico());
+
+            //    throw new UnsupportedOperationException("Bean  selecionado é nulo durante chamada de método controller padrão: " + acaoSelecionada.getNomeUnico());
         }
         if (isAcaoAtualAcaoControllerPadrao()) {
             try {
@@ -1385,8 +1395,13 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
         try {
 
             Method metodo = UtilSBController.getMetodoByAcaoController(pAcaoController);
-
-            ItfRespostaAcaoDoSistema resp = (ItfRespostaAcaoDoSistema) metodo.invoke(null, getBeanSelecionado());
+            ItfRespostaAcaoDoSistema resp = null;
+            if (metodo.getParameterCount() == 1) {
+                resp = (ItfRespostaAcaoDoSistema) metodo.invoke(null, getBeanSelecionado());
+            }
+            if (metodo.getParameterCount() == 0) {
+                resp = (ItfRespostaAcaoDoSistema) metodo.invoke(null);
+            }
             if (pExecutarPosAcaoPadrao) {
 
                 autoExecProximaAcaoAposController(pAcaoController, resp);

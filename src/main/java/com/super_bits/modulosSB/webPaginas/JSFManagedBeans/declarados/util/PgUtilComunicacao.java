@@ -34,7 +34,7 @@ public class PgUtilComunicacao implements Serializable {
 
     public void exibirModalComunicacaoCodigo() {
         try {
-            if (codigoComunicacao == null) {
+            if (codigoComunicacao == null || codigoComunicacao.equals("undefined")) {
                 throw new UnsupportedOperationException("Defina o Código de comunicação para exeção deste método");
             }
             paginaAtual.getInfoPagina().getComoPaginaDeGestao().adicionarCodigoCoversa(codigoComunicacao);

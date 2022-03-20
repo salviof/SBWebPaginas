@@ -21,7 +21,7 @@
 
                 <h:form>
                     <p:selectOneMenu  value="#{pgTestesCampo.acaoGestaoSelecionada}"
-                                      effect="fold"
+
                                       converter="conversorGenerico"
 
                                       label="#{acaoGestao.nomeAcao}"
@@ -55,7 +55,7 @@
 
                 <h:form>
                     <p:selectOneMenu  value="#{pgTestesCampo.acaoFormularioSelecionada}"
-                                      effect="fold"
+
                                       converter="conversorGenerico"
                                       var="acaoFormulario"
                                       style="width:125px!important;"
@@ -90,7 +90,7 @@
 
                 <h:form>
                     <p:selectOneMenu  value="#{pgTestesCampo.grupoSelecionado}"
-                                      effect="fold" converter="conversorGenerico"
+                                      converter="conversorGenerico"
                                       var="grupo"
                                       label="#{grupo.nomeGrupo}"
                                       styleClass="campoResponsivo"
@@ -115,7 +115,8 @@
 
 
                 <h:form>
-                    <p:selectOneMenu  value="#{pgTestesCampo.campoSelecionado}"  effect="fold" converter="conversorGenerico"
+                    <p:selectOneMenu  value="#{pgTestesCampo.campoSelecionado}"
+                                      converter="conversorGenerico"
                                       var="campo"
                                       style="width:125px!important;"
                                       >

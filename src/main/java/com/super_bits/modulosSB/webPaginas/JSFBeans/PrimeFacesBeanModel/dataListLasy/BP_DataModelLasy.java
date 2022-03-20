@@ -144,4 +144,8 @@ public class BP_DataModelLasy<T extends ItfBeanSimples> extends LazyDataModel<T>
         }
     }
 
+    @Override
+    public int count(Map<String, FilterMeta> map) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
