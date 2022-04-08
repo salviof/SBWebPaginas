@@ -101,7 +101,7 @@ function acoesPosAjax() {
 
 function atualizarAreaByID(idAreaAtualizada) {
     bloquearArea(idAreaAtualizada);
-    (document.getElementById('formAjaxBasico:prAtualizarAreaID')).value = idAreaAtualizada;
+    (document.getElementById('formAtualizacao:prAtualizarAreaID')).value = idAreaAtualizada;
 
     atualizarAreaByIDRC();
     desbloquearArea(idAreaAtualizada);
@@ -129,6 +129,8 @@ function getClientInfo()
     clientinfo += "tamanhoY:" + window.innerHeight;
     (document.getElementById('contactfrm:clientinfo')).value = clientinfo;
 }
+
+
 
 function baixarArquivo(fileURL, fileName) {
 // for non-IE
@@ -631,3 +633,5 @@ try {
 } catch (erroPosicionandoCursor) {
     console.log(erroPosicionandoCursor);
 }
+
+

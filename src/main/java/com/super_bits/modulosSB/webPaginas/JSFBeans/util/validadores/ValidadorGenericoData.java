@@ -34,7 +34,7 @@ public class ValidadorGenericoData extends ValidadorGenericoAbstrato<Date> {
 
                 if (campo.isAnnotationPresent(Future.class)) {
                     if (value.getTime() < new Date().getTime()) {
-                        exibirMensagemValidacao(component, "A data precisa ser superior a data atual");
+                        exibirMensagemValidacao(component, "A data precisa ser superior a data atual", false);
                     }
                 }
             }

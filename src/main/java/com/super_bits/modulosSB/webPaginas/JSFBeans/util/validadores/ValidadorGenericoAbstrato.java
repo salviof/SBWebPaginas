@@ -49,11 +49,27 @@ public abstract class ValidadorGenericoAbstrato<T> implements Validator<T> {
 
             if (campoInstanciado.isTemValidadacaoLogica()) {
                 try {
+                    Object pValorPosValidacao;
                     if (umNovoRegistro) {
-                        campoInstanciado.getValidacaoLogicaEstrategia().validarModoNovo(value);
+                        pValorPosValidacao = campoInstanciado.getValidacaoLogicaEstrategia().validarModoNovo(value);
                     } else {
-                        campoInstanciado.getValidacaoLogicaEstrategia().validarModoEdicao(value);
+                        pValorPosValidacao = campoInstanciado.getValidacaoLogicaEstrategia().validarModoEdicao(value);
                     }
+                } catch (ErroValidacao tt) {
+                    validacao.add(tt.getMensagemAoUsuario());
+                    exibirMensagemValidacao(component, tt.getMensagemAoUsuario(), campoInstanciado.getValidacaoLogicaEstrategia().isApagarErroFormulario());
+
+                } catch (Throwable t) {
+                    SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "Erro validando " + campoInstanciado.getNomeCompostoIdentificador(), t);
+                }
+
+                if (!validacao.isEmpty()) {
+                    exibirMensagemValidacao(component, validacao.get(0), false);
+                    return;
+                }
+                // Codigo legado
+                if (false) {
+                    boolean atualizarAreaDoCampo = campoInstanciado.getValidacaoLogicaEstrategia().isAtualizarTelaGrupoFieldSetDoCampo();
                     if (campoInstanciado.getValidacaoLogicaEstrategia().isAtualizarTelaGrupoFieldSetDoCampo()) {
                         try {
                             String nome = new PgUtil().getNomeIdPainelDoComponente(component);
@@ -65,33 +81,30 @@ public abstract class ValidadorGenericoAbstrato<T> implements Validator<T> {
                         }
                     }
                     if (campoInstanciado.getValidacaoLogicaEstrategia().atualizarTelaCampoEspecifico().length > 0) {
-                        throw new ErroValidacao("Update de campos específicos ainda não foi implementado no Framework");
+                        //   throw new ErroValidacao("Update de campos específicos ainda não foi implementado no Framework");
                     }
                     if (!UtilSBCoreStringValidador.isNuloOuEmbranco(campoInstanciado.getValidacaoLogicaEstrategia().getJavscriptPosValidacao())) {
                         PrimeFaces.current().executeScript(campoInstanciado.getValidacaoLogicaEstrategia().getJavscriptPosValidacao());
                     }
-
-                } catch (ErroValidacao tt) {
-                    validacao.add(tt.getMensagemAoUsuario());
-                } catch (Throwable t) {
-                    SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "Erro validando " + campoInstanciado.getNomeCompostoIdentificador(), t);
                 }
 
             }
 
-            if (!validacao.isEmpty()) {
-
-                exibirMensagemValidacao(component, validacao.get(0));
-            }
         }
     }
 
-    public void exibirMensagemValidacao(UIComponent component, String pMmensagem) {
+    public void exibirMensagemValidacao(UIComponent component, String pMmensagem, boolean pApagarErro) throws ValidatorException {
         FacesMessage mensagemErro = new FacesMessage();
         mensagemErro.setSummary(pMmensagem);
         mensagemErro.setSeverity(FacesMessage.SEVERITY_ERROR);
         // PgUtil paninaUtil = new PgUtil();
         // String idCompoentePai = paninaUtil.getNomeIdPainelGroupInputSB(component);
+        //
+
+        // pRIMEFACES.UPDATE NÃO FUNCIONA NESTE EVENTO, USAR CHAMADA JAVASCRIPT COMO NO EXEMPLO:
+        if (pApagarErro) {
+            PrimeFaces.current().executeScript("atualizarAreaByID('" + component.getClientId() + "');");
+        }
         if (!UtilSBCoreStringValidador.isNuloOuEmbranco(true)) {
             //         PrimeFaces.current().ajax().update(idCompoentePai);
             //PrimeFaces.current().scrollTo(idCompoentePai);

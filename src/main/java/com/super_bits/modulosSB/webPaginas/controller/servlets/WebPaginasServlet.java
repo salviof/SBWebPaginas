@@ -30,6 +30,7 @@ import java.util.Map;
 import javax.inject.Inject;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -52,6 +53,7 @@ public class WebPaginasServlet extends HttpServlet implements Serializable {
     private InfoErroCritico erroCritico;
 
     public static final String NOME_BEAN_REQUEST_CONFIG_URL = "CfgURLFrm";
+    public static final String NOME_PARAMETRO_REFERENCIA = "REF";
 
     public final static Map<String, AcaoComLink> MAPA_ACOESMANAGED_BEAN = new HashMap<>();
 
@@ -135,6 +137,7 @@ public class WebPaginasServlet extends HttpServlet implements Serializable {
             }
             return MAPA_ACOESMANAGED_BEAN.get(paginaVinculada.getAcaoGestaoVinculada().getNomeUnico());
         } catch (Throwable t) {
+
             SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "Erro Obtendo ação com link para xhtml[" + pXhtml + "]", t);
             return null;
         }

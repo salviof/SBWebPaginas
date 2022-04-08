@@ -4,8 +4,11 @@
  */
 package com.super_bits.modulosSB.webPaginas.JSFManagedBeans.declarados.webSite;
 
+import com.super_bits.modulos.SBAcessosModel.model.GrupoUsuarioSB;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ItfAcaoDoSistema;
+import com.super_bits.modulosSB.SBCore.modulos.fabrica.ItfFabricaAcoes;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfGrupoUsuario;
 import com.super_bits.modulosSB.webPaginas.ConfigGeral.SBWebPaginas;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.siteMap.AcaoComLink;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.siteMap.MapaDeFormularios;
@@ -121,6 +124,17 @@ public class InfoWebApp implements Serializable {
 
     public String getUrlPagina() {
         return SBWebPaginas.getSiteURL();
+    }
+
+    public String getUrlPaginaPrincipalUsuario() {
+        if (!SBCore.getServicoSessao().getSessaoAtual().isIdentificado()) {
+            return getUrlPagina();
+        }
+        ItfGrupoUsuario grupo = SBCore.getUsuarioLogado().getGrupo();
+        ItfFabricaAcoes paginaPrincipal = grupo
+                .getPaginaInicial();
+        String paginaInicial = MapaDeFormularios.getUrlFormulario(paginaPrincipal.getRegistro());
+        return paginaInicial;
     }
 
     public String getFormularioPaginaInicial() {

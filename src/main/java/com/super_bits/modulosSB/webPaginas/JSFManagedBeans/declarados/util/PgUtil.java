@@ -1180,7 +1180,7 @@ public class PgUtil implements Serializable {
         exibirModal(options, UtilSBWP_JSFTools.FORMULARIO_MODAL_REQUISITO);
     }
 
-    private boolean isComponentPainel(UIComponent comp) {
+    private boolean isComponentFieldSetPainel(UIComponent comp) {
         if (comp == null || comp.getRendererType() == null) {
             return false;
         }
@@ -1213,7 +1213,7 @@ public class PgUtil implements Serializable {
         boolean encontrou = false;
         UIComponent componente = pComponente;
         while (!encontrou) {
-            if (isComponentPainel(componente)) {
+            if (isComponentFieldSetPainel(componente)) {
                 return componente.getClientId();
             } else {
                 componente = componente.getParent();

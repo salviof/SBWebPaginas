@@ -542,6 +542,9 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
     @Override
     public T getEntidadeSelecionada() {
         try {
+            if (entidadeSelecionada != null && entidadeSelecionada.getId() > 0) {
+                entidadeSelecionada = UtilSBPersistencia.loadEntidade(entidadeSelecionada, getEMPagina());
+            }
 
             return entidadeSelecionada;
         } catch (Throwable t) {
@@ -1026,8 +1029,8 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
             if (prs.isEmpty()) {
                 UtilSBWP_JSFTools.vaParaPagina(MapaDeFormularios.getUrlFormulario(acaoSelecionada));
             } else {
-                long quantidade = prs.stream().filter(pr -> pr.isParametroObrigatorio()).count();
-                if (quantidade > 1) {
+                long quantidadeParametrosObrigatorios = prs.stream().filter(pr -> pr.isParametroObrigatorio()).count();
+                if (quantidadeParametrosObrigatorios > 1) {
                     throw new UnsupportedOperationException("A página " + estruturaForm.getAcaoGestaoVinculada().getNomeUnico() + " contem mais de um parametro obrigatório , extenda autoExecMBAlternativoExterno() na classe " + this.getClass().getSimpleName() + " e configure esta ação manualmente");
                 }
 
@@ -1062,7 +1065,11 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
                             }
                         }
                     }
-
+                } else {
+                    if (quantidadeParametrosObrigatorios == 0) {
+                        String url = MapaDeFormularios.getUrlFormulario(acaoSelecionada);
+                        UtilSBWP_JSFTools.vaParaPagina(url);
+                    }
                 }
             }
 
