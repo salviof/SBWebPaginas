@@ -5,12 +5,16 @@
                 xmlns:h="http://xmlns.jcp.org/jsf/html">
     <!-- INTERFACE -->
     <cc:interface>
+        <cc:attribute name="classeEstilo"
+                      default="#{null}"
+                      shortDescription="Especifica uma classe para estilizar o botão"
+                      />
     </cc:interface>
     <!-- IMPLEMENTATION -->
     <cc:implementation>
         <h:panelGroup layout="block" styleClass="Fright">
             <SBAcaoNav:botaoDeAcao
-
+                classeEstilo="#{cc.attrs.classeEstilo}"
                 metodo="#{paginaAtual.infoPagina.comoPaginaEntidade.executarAcao(paginaAtual.infoPagina.comoPaginaEntidade.entidadeSelecionada)}"
                 acao="#{paginaAtual.infoPagina.comoPaginaEntidade.acaoVinculada.acaoSalvarNovo}"
                 armazenamentoAcaoExecutada="#{paginaAtual.infoPagina.comoPaginaEntidade.acaoSelecionada}"

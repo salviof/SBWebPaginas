@@ -44,8 +44,10 @@ public class ServletRecepcaoOauth extends ServletArquivosSBWPGenerico implements
                 return;
             }
             String tipoAplicacao = req.getParameter("tipoAplicacao");
-            if (sessaoAtual != null) {
+            if (!SBCore.isEmModoDesenvolvimento()) {
                 req.setAttribute("usuario", sessaoAtual.getUsuario());
+            } else {
+                req.setAttribute("usuario", SBCore.getServicoSessao().getSessaoAtual().getUsuario());
             }
 
             if (!UtilSBApiRestClient.receberCodigoSolicitacaoOauth(req, tipoAplicacao)) {

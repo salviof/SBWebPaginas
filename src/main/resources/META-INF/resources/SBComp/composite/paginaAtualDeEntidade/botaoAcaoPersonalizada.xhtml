@@ -10,9 +10,14 @@
                       default="#{cc.attrs.acao.nomeAcao}"
                       type="java.lang.String"
                       />
+        <cc:attribute name="classeEstilo"
+                      default="#{null}"
+                      shortDescription="Especifica uma classe para estilizar o botão"
+                      />
     </cc:interface>
     <cc:implementation>
         <SBAcaoNav:botaoDeAcao
+            classeEstilo="#{cc.attrs.classeEstilo}"
             label="#{cc.attrs.label}"
             metodo="#{paginaAtual.infoPagina.comoPaginaEntidade.executarAcao(paginaAtual.infoPagina.comoPaginaEntidade.entidadeSelecionada)}"
             acao="#{cc.attrs.acao}"

@@ -10,6 +10,7 @@ import com.super_bits.modulosSB.SBCore.modulos.servicosCore.ItfControleDeSessao;
 import com.super_bits.modulosSB.webPaginas.ConfigGeral.SBWebPaginas;
 import com.super_bits.modulosSB.webPaginas.JSFBeans.modal.PgModalRespostaAcaoTransient;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.declarados.Paginas.ErroCritico.InfoErroCritico;
+import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.interfaces.ItfB_Pagina;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.interfaces.ItfB_PaginaSimples;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.siteMap.AcaoDeContexto;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.siteMap.MB_SiteMapa;
@@ -110,6 +111,10 @@ public abstract class MB_PaginaAtual implements Serializable {
             }
 
         }
+    }
+
+    public ItfB_Pagina getFormulario() {
+        return infoPagina.getComoFormularioWeb();
     }
 
     public AcaoDeContexto getAcaoNoCotexto(ItfAcaoDoSistema pAcao) {

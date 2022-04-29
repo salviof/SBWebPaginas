@@ -1061,7 +1061,12 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
                             if (pesquisaParametroCompativel.isPresent()) {
                                 UtilSBWP_JSFTools.vaParaPagina(MapaDeFormularios.getUrlFormulario(acaoSelecionada, pesquisaParametroCompativel.get()));
                             } else {
-                                throw new UnsupportedOperationException("Impossível determinar uma entidade ou parametro compatível nesta pagina para abrir " + estruturaForm.getAcaoGestaoVinculada().getNomeUnico() + " , extenda autoExecMBAlternativoExterno() na classe " + this.getClass().getSimpleName() + " e configure esta ação manualmente");
+                                if (quantidadeParametrosObrigatorios == 0) {
+                                    String url = MapaDeFormularios.getUrlFormulario(acaoSelecionada);
+                                    UtilSBWP_JSFTools.vaParaPagina(url);
+                                } else {
+                                    throw new UnsupportedOperationException("Impossível determinar uma entidade ou parametro compatível nesta pagina para abrir " + estruturaForm.getAcaoGestaoVinculada().getNomeUnico() + " , extenda autoExecMBAlternativoExterno() na classe " + this.getClass().getSimpleName() + " e configure esta ação manualmente");
+                                }
                             }
                         }
                     }
@@ -1069,6 +1074,8 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
                     if (quantidadeParametrosObrigatorios == 0) {
                         String url = MapaDeFormularios.getUrlFormulario(acaoSelecionada);
                         UtilSBWP_JSFTools.vaParaPagina(url);
+                    } else {
+                        throw new UnsupportedOperationException("Impossível determinar uma entidade ou parametro obrigatório compatível nesta pagina para abrir " + estruturaForm.getAcaoGestaoVinculada().getNomeUnico() + " , extenda autoExecMBAlternativoExterno() na classe " + this.getClass().getSimpleName() + " e configure esta ação manualmente");
                     }
                 }
             }

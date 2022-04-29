@@ -7,7 +7,10 @@
 
     <!-- INTERFACE -->
     <cc:interface>
-
+        <cc:attribute name="classeEstilo"
+                      default="#{null}"
+                      shortDescription="Especifica uma classe para estilizar o botão"
+                      />
 
     </cc:interface>
 
@@ -16,7 +19,7 @@
         <h:panelGroup layout="block" styleClass="Fright">
 
             <SBAcaoNav:botaoDeAcao
-
+                classeEstilo="#{cc.attrs.classeEstilo}"
                 metodo="#{paginaAtual.infoPagina.comoPaginaEntidade.executarAcao(paginaAtual.infoPagina.comoPaginaEntidade.entidadeSelecionada)}"
                 acao="#{paginaAtual.infoPagina.comoPaginaEntidade.acaoSalvarAlteracoes}"
                 armazenamentoAcaoExecutada="#{paginaAtual.infoPagina.comoPaginaEntidade.acaoSelecionada}"

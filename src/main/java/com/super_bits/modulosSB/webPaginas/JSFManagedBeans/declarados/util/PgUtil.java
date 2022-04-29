@@ -1404,7 +1404,7 @@ public class PgUtil implements Serializable {
             }
             Locale local = new Locale("pt", "BR");
 
-            SimpleDateFormat formatador = new SimpleDateFormat("EE, dd, 'de' MMMM 'às' HH:mm", local);
+            SimpleDateFormat formatador = new SimpleDateFormat("EE, dd 'de' MMMM 'às' HH:mm", local);
             return formatador.format(pDataHora);
         } catch (Throwable t) {
             SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "Erro formantando data", t);

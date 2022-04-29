@@ -1455,7 +1455,7 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
                     xhtmlAcaoAtual = ultimaAcaoForm.getXhtml();
                     return;
                 } else {
-
+                    xhtmlAcaoAtual = null;
                     throw new UnsupportedOperationException("Ultima ação de formulário não encontrada");
                 }
 

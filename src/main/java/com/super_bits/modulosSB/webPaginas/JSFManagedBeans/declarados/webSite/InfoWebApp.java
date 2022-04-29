@@ -59,7 +59,7 @@ public class InfoWebApp implements Serializable {
 
                 if (acaoGestao == null) {
 
-                    throw new UnsupportedOperationException("Certifique a ação de gestão não foi encontrada pelo nome unico " + aux + " CErtifique que existe um PG vinculado a ele e que este PG esteja no SITEMAP");
+                    throw new UnsupportedOperationException("Certifique a ação de gestão não foi encontrada pelo nome unico " + aux + " CErtifique que existe una PaGina de gestão vinculada a ação de gestão");
 
                 }
 
