@@ -543,6 +543,7 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
     public T getEntidadeSelecionada() {
         try {
             if (entidadeSelecionada != null && entidadeSelecionada.getId() > 0) {
+
                 entidadeSelecionada = UtilSBPersistencia.loadEntidade(entidadeSelecionada, getEMPagina());
             }
 
