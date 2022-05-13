@@ -171,8 +171,11 @@ public class ControleDeSessaoWeb extends ControleDeSessaoAbstratoSBCore implemen
         return usuarioLogar;
     }
 
-    public void setUsuarioLogar(String usuario) {
-        this.usuarioLogar = usuario;
+    public void setUsuarioLogar(String pUsuario) {
+        if (pUsuario != null) {
+            pUsuario = pUsuario.replace(" ", "");
+        }
+        this.usuarioLogar = pUsuario;
     }
 
     public String getSenhaLogar() {

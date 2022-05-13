@@ -53,7 +53,8 @@ public class ServletRecepcaoOauth extends ServletArquivosSBWPGenerico implements
             if (!UtilSBApiRestClient.receberCodigoSolicitacaoOauth(req, tipoAplicacao)) {
                 throw new UnsupportedOperationException("falha recebendo codigo de solictação de token Oauth");
             }
-            resp.getWriter().append("Chave de Aceso gerada com sucesso");
+
+            resp.getWriter().append("Chave de Aceso armazenada com sucesso, você está conectado com a aplicação.");
         } catch (Throwable t) {
             RequestDispatcher wp = req.getRequestDispatcher(UtilSBWP_JSFTools.FORMULARIO_PARAMETRO_URL_INVALIDO);
             SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "Erro obtendo parametros de URL", t);

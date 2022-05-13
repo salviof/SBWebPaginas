@@ -44,8 +44,9 @@
                                            layout="#{cc.attrs.tipoVisualizacaoLabel}"
                                            desabilitarEdicao="#{(cc.attrs.somenteLeitura) or (cc.attrs.registro.getCampoByNomeOuAnotacao(coluna.componenteVinculado.caminhoCampo.caminhoSemNomeClasse).somenteLeitura) or coluna.componenteVinculado.campoExibicaoFormulario.somenteLeitura}"
                                            atualizarFormOnChange="#{cc.attrs.grupoCampos.campos.get(numCol.index).atualizarFormAoAlterar}"
-                                           idAtualizarOnChange="#{pgUtil.gerarIdAtualizacaoPadraoInput(cc.attrs.grupoCampos.campos.get(numCol.index).idAtualizacao, cc.attrs.registro.getCampoByNomeOuAnotacao(coluna.componenteVinculado.caminhoCampo.caminhoSemNomeClasse))}"
+                                           idAtualizarOnChange="#{pgUtil.gerarIdAtualizacaoPadraoInput(cc.attrs.grupoCampos.campos.get(numCol.index).idAtualizacao, cc.attrs.registro.getCampoByNomeOuAnotacao(coluna.componenteVinculado.caminhoCampo.caminhoSemNomeClasse))} @this"
                                            atualizarGrupoOnChange="#{cc.attrs.grupoCampos.campos.get(numCol.index).atualizarGrupoAoAlterar}"
+
                                            label="#{coluna.componenteVinculado.campoExibicaoFormulario.labelAlternativo}"
                                            />
 
