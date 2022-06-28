@@ -59,6 +59,7 @@ public class SessaoAtualSBWP extends SessaoOffline implements ItfSessao, Seriali
     @Inject
     private EntityManager entidadePrincipal;
     private String urlHostDaSessao;
+    private UserAgent agente;
 
     @Inject
     @Http
@@ -88,6 +89,14 @@ public class SessaoAtualSBWP extends SessaoOffline implements ItfSessao, Seriali
                 origRequest = teste.getHttpServletRequest();
             }
             String url = origRequest.getRequestURL().toString();
+            try {
+            String agenteFullStr=origRequest.getHeader("User-Agent");
+            agente=new UserAgent(agenteFullStr);
+            }catch(Throwable t){
+                System.out.println("ATENÇÃO O AGENTE DE ACESSO NÃO FOI DETECTADO");
+            }
+            System.out.println(agente.getDevice());
+            System.out.println(agente.getOS());
             String urlDigitada = url;
             System.out.println("URLDIGITADA:" + urlDigitada);
             enderecoAnalise = new URL(url);
@@ -234,5 +243,13 @@ public class SessaoAtualSBWP extends SessaoOffline implements ItfSessao, Seriali
         }
 
     }
+
+    public UserAgent getAgente() {
+        return agente;
+    }
+
+    
+    
+    
 
 }
