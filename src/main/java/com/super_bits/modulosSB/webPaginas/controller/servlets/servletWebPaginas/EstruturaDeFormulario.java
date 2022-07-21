@@ -179,7 +179,7 @@ public class EstruturaDeFormulario {
             }
         }
 
-        return url + urlAcao + "/.wp";
+        return url + urlAcao + ".html";
 
     }
 

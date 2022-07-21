@@ -42,7 +42,6 @@ import org.coletivojava.fw.api.tratamentoErros.FabErro;
  *
  * @author Salvio
  */
-//@WebServlet("*.wp")
 public class WebPaginasServlet extends HttpServlet implements Serializable {
 
     @Inject

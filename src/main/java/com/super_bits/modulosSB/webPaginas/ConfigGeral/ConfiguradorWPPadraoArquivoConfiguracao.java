@@ -25,6 +25,7 @@ public abstract class ConfiguradorWPPadraoArquivoConfiguracao implements ItfConf
 
     @Override
     public String SITE_HOST() {
+
         return configModulo.getPropriedade(FabConfigModuloWebAppGenerico.URL_DOMINIO_APLICACAO);
     }
 
