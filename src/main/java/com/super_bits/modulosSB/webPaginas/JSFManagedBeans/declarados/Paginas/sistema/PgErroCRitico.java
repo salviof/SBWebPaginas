@@ -4,6 +4,7 @@
  */
 package com.super_bits.modulosSB.webPaginas.JSFManagedBeans.declarados.Paginas.sistema;
 
+import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreJson;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.TIPO_PARTE_URL;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfBeanSimples;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.MB_PaginaConversation;
@@ -13,8 +14,11 @@ import com.super_bits.modulosSB.webPaginas.controller.paginasDoSistema.FabAcaoPa
 import com.super_bits.modulosSB.webPaginas.controller.paginasDoSistema.InfoAcaoPaginaDoSistema;
 import com.super_bits.modulosSB.webPaginas.controller.servletes.urls.parametrosURL.InfoParametroURL;
 import com.super_bits.modulosSB.webPaginas.controller.servletes.urls.parametrosURL.ParametroURL;
+import com.super_bits.modulosSB.webPaginas.util.UtilSBWPServletTools;
+import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  *
@@ -27,7 +31,18 @@ import javax.inject.Named;
 public class PgErroCRitico extends MB_PaginaConversation {
 
     @InfoParametroURL(nome = "TituloErro", tipoParametro = TIPO_PARTE_URL.TEXTO)
-    ParametroURL prTitulo;
+    private ParametroURL prTitulo;
+
+    private boolean formatoJson;
+
+    @PostConstruct
+    public void inicio() {
+        HttpServletRequest requisicao = UtilSBWPServletTools.getRequestAtual();
+        String caminho = requisicao.getRequestURI();
+        if (caminho.endsWith(".json")) {
+            formatoJson = true;
+        }
+    }
 
     @Override
     public ItfBeanSimples getBeanSelecionado() {
@@ -45,6 +60,10 @@ public class PgErroCRitico extends MB_PaginaConversation {
         } catch (Throwable t) {
             return "Titulo não enviado";
         }
+    }
+
+    public boolean isFormatoJson() {
+        return formatoJson;
     }
 
 }

@@ -54,7 +54,16 @@ public class AcaoComLink extends ItemGenerico implements ItfAcaoDoSistema {
     public AcaoComLink(EstruturaDeFormulario pPagina) {
         acaoOriginal = pPagina.getAcaoGestaoVinculada();
         urlDeAcesso = pPagina.getUrlPadrao();
-        urlParcialGestao = pPagina.getUrlPadrao().replace("/.wp", "");
+        String urlFull = pPagina.getUrlPadrao();
+        if (urlFull.endsWith("./wp")) {
+            urlParcialGestao = pPagina.getUrlPadrao().replace("/.wp", "");
+        } else {
+            if (urlFull.endsWith(".html")) {
+                urlParcialGestao = pPagina.getUrlPadrao().replace("/.wp", "");
+            } else {
+                urlParcialGestao = pPagina.getUrlPadrao();
+            }
+        }
 
     }
 

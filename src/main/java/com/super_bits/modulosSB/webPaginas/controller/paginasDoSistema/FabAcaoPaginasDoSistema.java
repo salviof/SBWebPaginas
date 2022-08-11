@@ -10,6 +10,7 @@ import com.super_bits.modulos.SBAcessosModel.model.acoes.AcaoDoSistema;
 import com.super_bits.modulos.SBAcessosModel.model.acoes.UtilFabricaDeAcoesAcessosModel;
 import com.super_bits.modulos.SBAcessosModel.model.tokens.TokenAcesso;
 import com.super_bits.modulos.SBAcessosModel.model.tokens.tokenLoginDinamico.TokenAcessoDinamico;
+import com.super_bits.modulosSB.SBCore.modulos.Controller.anotacoes.InfoTipoAcaoController;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.anotacoes.InfoTipoAcaoFormulario;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.anotacoes.InfoTipoAcaoGestaoEntidade;
 import com.super_bits.modulosSB.SBCore.modulos.fabrica.ItfFabricaAcoes;
@@ -63,7 +64,9 @@ public enum FabAcaoPaginasDoSistema implements ItfFabricaAcoes {
     @InfoTipoAcaoGestaoEntidade(iconeFonteAnsowame = FabIconeFontAwesome.SISTEMA_ENGRENAGEM, precisaPermissao = false, xhtmlDaAcao = UtilSBWP_JSFTools.FORMULARIO_API_RESTFUL_CONTROLLER)
     PAGINA_NATIVA_RESTFUL_RESP_MB_GESTAO,
     @InfoTipoAcaoGestaoEntidade(iconeFonteAnsowame = FabIconeFontAwesome.SISTEMA_ENGRENAGEM, precisaPermissao = false, xhtmlDaAcao = UtilSBWP_JSFTools.FORMULARIO_API_JSON_WEB_VIEW)
-    PAGINA_NATIVA_JSON_WEBVIEW_MB_GESTAO,;
+    PAGINA_NATIVA_JSON_WEBVIEW_MB_GESTAO,
+    @InfoTipoAcaoController(icone = "fa fa-laptop", nomeAcao = "registrar")
+    PAGINA_NATIVA_JSON_WEBVIEW_CTR_REGISTRAR_DISPOSITIVO,;
 
     @Override
     public Class getEntidadeDominio() {

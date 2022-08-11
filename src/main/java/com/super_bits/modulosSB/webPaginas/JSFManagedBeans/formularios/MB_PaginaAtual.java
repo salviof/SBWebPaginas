@@ -2,7 +2,6 @@ package com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios;
 
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 import com.super_bits.modulosSB.SBCore.UtilGeral.MapaAcoesSistema;
-import com.super_bits.modulosSB.SBCore.UtilGeral.MapaDeAcoes;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ItfAcaoDoSistema;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfBeanSimples;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfSessao;
@@ -11,11 +10,11 @@ import com.super_bits.modulosSB.webPaginas.ConfigGeral.SBWebPaginas;
 import com.super_bits.modulosSB.webPaginas.JSFBeans.modal.PgModalRespostaAcaoTransient;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.declarados.Paginas.ErroCritico.InfoErroCritico;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.interfaces.ItfB_Pagina;
+import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.interfaces.ItfB_PaginaRecepcaoPush;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.interfaces.ItfB_PaginaSimples;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.siteMap.AcaoDeContexto;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.siteMap.MB_SiteMapa;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.siteMap.MapaDeFormularios;
-import com.super_bits.modulosSB.webPaginas.controller.servlets.WebPaginasServlet;
 import com.super_bits.modulosSB.webPaginas.controller.sessao.ControleDeSessaoWeb;
 import com.super_bits.modulosSB.webPaginas.util.UtilSBWPServletTools;
 import com.super_bits.modulosSB.webPaginas.util.UtilSBWP_JSFTools;
@@ -216,6 +215,14 @@ public abstract class MB_PaginaAtual implements Serializable {
             }
         } catch (Throwable t) {
             return false;
+        }
+    }
+
+    public void recepcaoNotificacaoPush() {
+        if (getInfoPagina() instanceof ItfB_PaginaRecepcaoPush) {
+
+            ItfB_PaginaRecepcaoPush pagina = (ItfB_PaginaRecepcaoPush) getInfoPagina();
+            pagina.recepcaoNotificacaoPush();
         }
     }
 

@@ -6,11 +6,14 @@ package com.super_bits.modulosSB.webPaginas.TratamentoDeErros;
 
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 import com.super_bits.modulosSB.SBCore.modulos.TratamentoDeErros.UtilSBCoreErros;
+import com.super_bits.modulosSB.webPaginas.util.UtilSBWPServletTools;
+import com.super_bits.modulosSB.webPaginas.util.UtilSBWP_JSFTools;
 import java.util.Iterator;
 import javax.faces.FacesException;
 import javax.faces.context.ExceptionHandler;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ExceptionQueuedEvent;
+import javax.servlet.http.HttpServletRequest;
 import org.coletivojava.fw.api.tratamentoErros.FabErro;
 import org.primefaces.application.exceptionhandler.PrimeExceptionHandler;
 
@@ -38,9 +41,9 @@ public class ManipuladorErrosSBJSF extends PrimeExceptionHandler {
             Iterator<ExceptionQueuedEvent> unhandledExceptionQueuedEvents = getUnhandledExceptionQueuedEvents().iterator();
 
             if (unhandledExceptionQueuedEvents.hasNext()) {
+                Throwable throwable = unhandledExceptionQueuedEvents.next().getContext().getException();
                 try {
 
-                    Throwable throwable = unhandledExceptionQueuedEvents.next().getContext().getException();
                     String mensagemErro = "Erro processando JSF" + throwable.getMessage();
                     Throwable causaraiz = UtilSBCoreErros.getCausaRaiz(throwable);
                     if (causaraiz != null) {
@@ -50,6 +53,16 @@ public class ManipuladorErrosSBJSF extends PrimeExceptionHandler {
 
                 } catch (Exception ex) {
                     SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "Erro manipulando mensagem de erro JSF!", ex);
+                }
+
+                HttpServletRequest requisicao = UtilSBWPServletTools.getRequestAtual();
+                if (requisicao != null) {
+                    String caminho = requisicao.getRequestURI();
+                    if (caminho.endsWith("jsonwebview.xhtml")) {
+                        requisicao.setAttribute("erro", throwable);
+
+                        throw new ErroGenericoProcessandoRespostaJson(throwable);
+                    }
                 }
             }
 

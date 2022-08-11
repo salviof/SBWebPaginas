@@ -7,6 +7,7 @@ package com.super_bits.modulosSB.webPaginas.controller.servlets.servletWebPagina
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 import com.super_bits.modulosSB.webPaginas.ConfigGeral.SBWebPaginas;
 import com.super_bits.modulosSB.webPaginas.controller.servlets.FabTipoInformacaoUrl;
+import com.super_bits.modulosSB.webPaginas.util.UtilSBWPServletTools;
 import com.super_bits.modulosSB.webPaginas.util.UtilSBWP_JSFTools;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -27,6 +28,7 @@ public class ConfiguracoesDeFormularioPorUrl {
     private String stringGestao;
     private String sTringUrlAcesso;
     private String sTringUrlOrgem;
+    private String corpo;
 
     private void adicionarInformacao(String informacao) {
         switch (tipoInformacao) {
@@ -72,10 +74,13 @@ public class ConfiguracoesDeFormularioPorUrl {
 
     public ConfiguracoesDeFormularioPorUrl(HttpServletRequest pRequisicao) {
         this(pRequisicao.getRequestURL().toString(), buildUrlBaseByHttpServeletResquest(pRequisicao));
+        if (pRequisicao.getMethod().equals("POST") || pRequisicao.getMethod().equals("PUT")) {
+            corpo = UtilSBWPServletTools.getCorpoRequisicaoI(pRequisicao);
+        }
 
     }
 
-    public ConfiguracoesDeFormularioPorUrl(String pURL, String urlDominio) {
+    public ConfiguracoesDeFormularioPorUrl(final String pURLReqsuisicao, final String urlDominio) {
 
         try {
 
@@ -85,18 +90,17 @@ public class ConfiguracoesDeFormularioPorUrl {
 
                 String urlPagina = urlDominio;// SBWebPaginas.getURLBase();
                 adicionarInformacao(urlPagina);
-                int inicioParametro = urlPagina.length() + 1;
+                int inicioParametro = pURLReqsuisicao.substring(9).indexOf("/") + 10;
 
-                if (pURL.length() <= inicioParametro) {
-                    throw new UnsupportedOperationException("Ipossível determinar os parametros de urla para " + pURL);
+                if (pURLReqsuisicao.length() <= inicioParametro) {
+                    throw new UnsupportedOperationException("Ipossível determinar os parametros de urla para " + pURLReqsuisicao);
                 }
-                int indiceInicioStrExtencao = pURL.lastIndexOf(".");
-                String fimUrl = pURL.substring(indiceInicioStrExtencao, pURL.length() - 1);
+                int indiceInicioStrExtencao = pURLReqsuisicao.lastIndexOf(".");
 
-                pURL = pURL.substring(0, indiceInicioStrExtencao);
+                String urlSemExtencao = pURLReqsuisicao.substring(0, indiceInicioStrExtencao);
 
                 try {
-                    String parametrosStr = pURL.substring(inicioParametro);
+                    String parametrosStr = urlSemExtencao.substring(inicioParametro);
                     String[] parametros = parametrosStr.split("/");
                     int i = 0;
                     for (String pr : parametros) {
@@ -120,7 +124,7 @@ public class ConfiguracoesDeFormularioPorUrl {
 
             }
         } catch (Throwable t) {
-            SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "erro obtendo parametros da pagina atravéz da utl" + pURL, t);
+            SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "erro obtendo parametros da pagina atravéz da utl" + pURLReqsuisicao, t);
 
         }
 
@@ -144,6 +148,10 @@ public class ConfiguracoesDeFormularioPorUrl {
 
     public String getsTringUrlOrgem() {
         return sTringUrlOrgem;
+    }
+
+    public String getCorpo() {
+        return corpo;
     }
 
 }

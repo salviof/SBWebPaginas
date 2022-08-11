@@ -61,4 +61,20 @@ public class PgUtilTelefone implements Serializable {
 
     }
 
+    public String gerarUrlWhasapp(String pNumero, String texto) {
+        try {
+            String textoCodificado = URLEncoder.encode(texto, StandardCharsets.UTF_8.toString());
+            StringBuilder comandoJS = new StringBuilder();
+            comandoJS.append("https://api.whatsapp.com/send?phone=");
+            comandoJS.append(gerarNumeroInternacional(gerarNumeroInternacional(pNumero)));
+            comandoJS.append("&text=");
+            comandoJS.append(textoCodificado);
+
+            return comandoJS.toString();
+        } catch (UnsupportedEncodingException ex) {
+            Logger.getLogger(PgUtilTelefone.class.getName()).log(Level.SEVERE, null, ex);
+            return "";
+        }
+    }
+
 }

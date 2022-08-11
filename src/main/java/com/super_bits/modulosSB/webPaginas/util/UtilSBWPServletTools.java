@@ -4,23 +4,25 @@
  */
 package com.super_bits.modulosSB.webPaginas.util;
 
-import com.google.common.collect.Lists;
-import com.super_bits.modulosSB.SBCore.ConfigGeral.ControleDeSessaoPadrao;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringFiltros;
-import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringValidador;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.ItfParametroRequisicaoInstanciado;
+import com.super_bits.modulosSB.SBCore.modulos.erp.ErroJsonInterpredador;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfBeanSimples;
 import com.super_bits.modulosSB.webPaginas.ConfigGeral.SBWebPaginas;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.MB_PaginaAtual;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.interfaces.ItfPaginaAtual;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.siteMap.MB_SiteMapa;
+import com.super_bits.modulosSB.webPaginas.TratamentoDeErros.ErroGenericoProcessandoRespostaJson;
 import com.super_bits.modulosSB.webPaginas.controller.servletes.tratamentoErro.ErroSBGenericoWeb;
 import com.super_bits.modulosSB.webPaginas.controller.sessao.ControleDeSessaoWeb;
 import com.super_bits.modulosSB.webPaginas.controller.sessao.SessaoAtualSBWP;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -81,6 +83,60 @@ public class UtilSBWPServletTools {
         }
     }
 
+    public static Object getObjetoByInstanciadoViewScopedByExpressao(String pExpressao, Class pClasse) throws ErroGenericoProcessandoRespostaJson {
+        try {
+            if (!pExpressao.startsWith("#{") && !pExpressao.endsWith("}")) {
+                throw new ErroGenericoProcessandoRespostaJson("Expressão " + pExpressao + " não foi encontrada");
+            }
+            FacesContext context = FacesContext.getCurrentInstance();
+            if (context == null) {
+                throw new UnsupportedOperationException("Impossivel determinar o FacesContext neste momento");
+            }
+            Object objeto = context.getApplication().evaluateExpressionGet(context, pExpressao, pClasse);
+
+            if (objeto == null) {
+                throw new UnsupportedOperationException("Objeto via getEvaluteExpression retornou null");
+            } else {
+                return objeto;
+            }
+        } catch (Throwable t) {
+
+            throw new ErroGenericoProcessandoRespostaJson(t);
+
+        }
+
+    }
+
+    public static String getCorpoRequisicaoI(HttpServletRequest pRequisicao) {
+        StringBuilder stringBuilder = new StringBuilder();
+        BufferedReader bufferedReader = null;
+        try {
+            InputStream inputStream = pRequisicao.getInputStream();
+            if (inputStream != null) {
+                bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+                char[] charBuffer = new char[128];
+                int bytesRead = -1;
+                while ((bytesRead = bufferedReader.read(charBuffer)) > 0) {
+                    stringBuilder.append(charBuffer, 0, bytesRead);
+                }
+            } else {
+                stringBuilder.append("");
+            }
+        } catch (IOException ex) {
+            SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "Falha processando corpor da resicao" + ex.getMessage(), ex);
+        } finally {
+            if (bufferedReader != null) {
+                try {
+                    bufferedReader.close();
+                } catch (IOException ex) {
+                    SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "Falha processando corpor da resicao" + ex.getMessage(), ex);
+                }
+            }
+        }
+        //Store request pody content in 'body' variable
+        return stringBuilder.toString();
+    }
+
     public static Object getBeanByNamed(String pNomeBean, Class pClasse) {
         return getBeanByNamed(pNomeBean, pClasse, false);
     }
@@ -97,7 +153,12 @@ public class UtilSBWPServletTools {
     }
 
     public static HttpServletRequest getRequestAtual() {
-        return (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+        try {
+            return (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+        } catch (Throwable t) {
+            SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "Falha obtendo requisição do contecto atual", t);
+            return null;
+        }
     }
 
     /**
