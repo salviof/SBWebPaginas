@@ -521,4 +521,16 @@ public abstract class UtilSBWP_JSFTools {
         return true;
     }
 
+    public static String getIDJsession() {
+        FacesContext fCtx = FacesContext.getCurrentInstance();
+        HttpSession session = (HttpSession) fCtx.getExternalContext().getSession(false);
+        String sessionId = session.getId();
+        return sessionId;
+    }
+
+    public static String getIDViewFeceScoped() {
+        String idViewState = FacesContext.getCurrentInstance().getApplication().getStateManager().getViewState(FacesContext.getCurrentInstance());
+        return idViewState;
+    }
+
 }

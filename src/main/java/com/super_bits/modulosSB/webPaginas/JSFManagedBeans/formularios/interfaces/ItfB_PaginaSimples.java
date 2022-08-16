@@ -9,8 +9,10 @@ import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreJson;
 import com.super_bits.modulosSB.SBCore.UtilGeral.json.ErroProcessandoJson;
 import com.super_bits.modulosSB.webPaginas.JSFBeans.SBBeanModel.InfoMBAcao;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.B_Pagina;
+import com.super_bits.modulosSB.webPaginas.util.UtilSBWPJson;
 import groovy.json.JsonBuilder;
 import jakarta.json.Json;
+import jakarta.json.JsonObject;
 import jakarta.json.JsonObjectBuilder;
 import java.math.BigDecimal;
 import java.util.List;
@@ -167,54 +169,15 @@ public interface ItfB_PaginaSimples {
         return (this instanceof ItfPaginaGerenciarEntidade);
     }
 
-    public default JsonObjectBuilder getJsonBuilderPaginaPadrao() {
-        JsonObjectBuilder jsonPadrao = Json.createObjectBuilder();
-
-        FacesContext fCtx = FacesContext.getCurrentInstance();
-        HttpSession session = (HttpSession) fCtx.getExternalContext().getSession(false);
-        String sessionId = session.getId();
-        String idViewState = FacesContext.getCurrentInstance().getApplication().getStateManager().getViewState(FacesContext.getCurrentInstance());
-
-        String idRootviewState = idViewState.split(":")[0];
-
-        String emailUsuario = SBCore.getServicoSessao().getSessaoAtual().getUsuario().getEmail();
-        Boolean logado = SBCore.getServicoSessao().getSessaoAtual().isIdentificado();
-
-        try {
-            JsonObjectBuilder jsonDadosSessao = UtilSBCoreJson.getJsonBuilderBySequenciaChaveValor(
-                    "jsessionId", sessionId,
-                    "viewStateId", idViewState,
-                    "idViewStateRoot", idRootviewState,
-                    "emailUsuario", emailUsuario,
-                    "nomeParametroViewState", "javax.faces.ViewState",
-                    "nomeParametroSessao", "JSESSIONID"
-            );
-            jsonDadosSessao.add("logado", logado);
-            jsonPadrao.add("dadosSessao", jsonDadosSessao.build());
-        } catch (ErroProcessandoJson ex) {
-            SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "Erro gerando json com iformações básicas da pagina", ex);
-        }
-
-        try {
-            String strJsonAcaoSelecionada = null;
-            if (getComoFormularioWeb().getAcaoSelecionada() != null) {
-                strJsonAcaoSelecionada = getComoFormularioWeb().getAcaoSelecionada().getNomeUnico();
-            }
-            JsonObjectBuilder jsonInfoPagina = UtilSBCoreJson.getJsonBuilderBySequenciaChaveValor(
-                    "titulo", getTitulo(),
-                    "acaoVinculada", getComoFormularioWeb().getAcaoVinculada().getNomeUnico(),
-                    "subAcaoSelecionada", strJsonAcaoSelecionada
-            );
-            jsonPadrao.add("infoPagina", jsonInfoPagina.build());
-        } catch (ErroProcessandoJson ex) {
-            SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "Erro gerando json com iformações básicas da pagina", ex);
-        }
-        return jsonPadrao;
-    }
-
     public default String getJsonPagina() {
-        JsonObjectBuilder jsonPagina = getJsonBuilderPaginaPadrao();
-        return UtilSBCoreJson.getTextoByJsonObjeect(jsonPagina.build());
+        JsonObjectBuilder jsonPagina;
+        try {
+            jsonPagina = UtilSBWPJson.getJsonBuilderPaginaPadrao(this);
+            return UtilSBCoreJson.getTextoByJsonObjeect(jsonPagina.build());
+        } catch (ErroProcessandoJson ex) {
+            return UtilSBCoreJson.getTextoByJsonObjeect(UtilSBWPJson.JSON_FALHA_OBTENDO_CONTEXTO);
+        }
+
     }
 
 }

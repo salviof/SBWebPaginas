@@ -4,6 +4,7 @@
  */
 package com.super_bits.modulosSB.webPaginas.controller.servlets.servletJsonWebPaginas;
 
+import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreJson;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfSessao;
 import com.super_bits.modulosSB.webPaginas.controller.servlets.ServletArquivosSBWPGenerico;
 import static com.super_bits.modulosSB.webPaginas.controller.servlets.WebPaginasServlet.NOME_BEAN_REQUEST_CONFIG_URL;
@@ -17,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.qualificadoresCDI.sessao.QlSessaoFacesContext;
 import com.super_bits.modulosSB.SBCore.modulos.TratamentoDeErros.UtilSBCoreErros;
 import com.super_bits.modulosSB.webPaginas.TratamentoDeErros.ErroGenericoProcessandoRespostaJson;
+import com.super_bits.modulosSB.webPaginas.util.UtilSBWPJson;
 
 /**
  *
@@ -40,10 +42,27 @@ public class ServletJsonWebPaginas extends ServletArquivosSBWPGenerico {
 
         } catch (ServletException t) {
             resposta.setStatus(500);
+            StringBuilder mensagemErro = new StringBuilder();
             Throwable causa = UtilSBCoreErros.getCausaRaiz(t);
-            resposta.getWriter().append("{erro: 'Falha processando json webview " + t.getMessage() + "-" + causa.getMessage() + "'}");
+            mensagemErro.append("FALHA PROCESSANDO JSON WEBVIEW  ");
+            String strmensagemErro = t.getMessage();
+            mensagemErro.append(t.getMessage());
+            mensagemErro.append("\n");
+
+            if (causa != null) {
+                if (strmensagemErro != null && causa.getMessage() != null) {
+                    if (!strmensagemErro.equals(causa.getMessage())) {
+                        mensagemErro.append("Causa: ");
+                        mensagemErro.append(causa.getMessage());
+                    }
+                }
+
+            }
+
+            resposta.getWriter().append(UtilSBCoreJson.getTextoByJsonObjeect(UtilSBWPJson.BUILD_FALHA_GERANDO_JSONVIEW(mensagemErro.toString())));
         } catch (Throwable t) {
-            Throwable causa = UtilSBCoreErros.getCausaRaiz(t);
+
+            resposta.getWriter().append(UtilSBCoreJson.getTextoByJsonObjeect(UtilSBWPJson.BUILD_FALHA_GERANDO_JSONVIEW("Erro inesperado Servelet JsonWebpaginas")));
             throw new ServletException("Erro inesperado no " + ServletJsonWebPaginas.class.getSimpleName() + " | " + t.getMessage());
         }
 

@@ -14,6 +14,8 @@ import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import org.coletivojava.fw.api.tratamentoErros.FabErro;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.qualificadoresCDI.sessao.QlSessaoFacesContext;
+import com.super_bits.modulosSB.webPaginas.util.UtilSBWP_JSFTools;
+import javax.faces.context.FacesContext;
 
 public abstract class MB_Pagina extends B_Pagina {
 
@@ -32,6 +34,8 @@ public abstract class MB_Pagina extends B_Pagina {
     private void initBean() {
         try {
             System.out.println("Iniciando InitBeanDePagina" + this.getClass().getSimpleName());
+            String identificadorVire = UtilSBWP_JSFTools.getIDViewFeceScoped();
+            FacesContext.getCurrentInstance().getExternalContext().addResponseHeader("javax.faces.ViewState", identificadorVire);
             configParametros();
 
         } catch (Throwable t) {

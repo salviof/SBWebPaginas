@@ -153,6 +153,7 @@ public class WebPaginasServlet extends HttpServlet implements Serializable {
 
         try {
             despachadorDeRespostaParaRequisicao.forward(requisicao, resposta);
+
             Enumeration<String> parametros = requisicao.getParameterNames();
             while (parametros.hasMoreElements()) {
                 String pr = parametros.nextElement();
