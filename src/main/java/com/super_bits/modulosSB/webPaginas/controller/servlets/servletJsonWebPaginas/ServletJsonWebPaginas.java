@@ -59,10 +59,10 @@ public class ServletJsonWebPaginas extends ServletArquivosSBWPGenerico {
 
             }
 
-            resposta.getWriter().append(UtilSBCoreJson.getTextoByJsonObjeect(UtilSBWPJson.BUILD_FALHA_GERANDO_JSONVIEW(mensagemErro.toString())));
+            resposta.getWriter().append(UtilSBCoreJson.getTextoByJsonObjeect(UtilSBWPJson.JSON_FALHA_GERANDO_JSONVIEW(mensagemErro.toString())));
         } catch (Throwable t) {
 
-            resposta.getWriter().append(UtilSBCoreJson.getTextoByJsonObjeect(UtilSBWPJson.BUILD_FALHA_GERANDO_JSONVIEW("Erro inesperado Servelet JsonWebpaginas")));
+            resposta.getWriter().append(UtilSBCoreJson.getTextoByJsonObjeect(UtilSBWPJson.JSON_FALHA_GERANDO_JSONVIEW("Erro inesperado Servelet JsonWebpaginas")));
             throw new ServletException("Erro inesperado no " + ServletJsonWebPaginas.class.getSimpleName() + " | " + t.getMessage());
         }
 

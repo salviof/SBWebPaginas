@@ -29,6 +29,9 @@
                     itemValue="#{item}"
                     itemLabel="#{item.nome}"
                     responsive="true"
+                    showSourceFilter="#{comoSeltorItens.origem.size()>8}"
+                    showTargetFilter="#{comoSeltorItens.valor.size()>8}"
+                    styleClass="#{comoSeltorItens.origem.size()>10?'SeletorItensGrande':'SeletorItensSimples'}"
                     converter="conversorGenerico"
                     style="margin-left: 0.5%"
                     >

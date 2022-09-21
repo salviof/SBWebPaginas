@@ -34,8 +34,14 @@ public abstract class MB_Pagina extends B_Pagina {
     private void initBean() {
         try {
             System.out.println("Iniciando InitBeanDePagina" + this.getClass().getSimpleName());
-            String identificadorVire = UtilSBWP_JSFTools.getIDViewFeceScoped();
-            FacesContext.getCurrentInstance().getExternalContext().addResponseHeader("javax.faces.ViewState", identificadorVire);
+            try {
+                //  String identificadorVire = UtilSBWP_JSFTools.getIDViewFeceScoped();
+                // if (identificadorVire != null) {
+                //  FacesContext.getCurrentInstance().getExternalContext().addResponseHeader("estadoSessaoViewScoped", identificadorVire);
+                // }
+            } catch (Throwable t) {
+
+            }
             configParametros();
 
         } catch (Throwable t) {

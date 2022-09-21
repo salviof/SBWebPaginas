@@ -89,7 +89,7 @@ public class PgJsonWebView implements Serializable {
         String viewSessaoID = FacesContext.getCurrentInstance().getApplication().getStateManager().getViewState(FacesContext.getCurrentInstance());
         formulario = MapaDeFormularios.getPaginaBySlug(configuracoesDeUrl.getStringGestao());
         if (formulario == null) {
-            return UtilSBCoreJson.getTextoByJsonObjeect(UtilSBWPJson.BUILD_FALHA_GERANDO_JSONVIEW("falha identificando chamada, utilizando tag: " + configuracoesDeUrl.getStringGestao()));
+            return UtilSBCoreJson.getTextoByJsonObjeect(UtilSBWPJson.JSON_FALHA_GERANDO_JSONVIEW("falha identificando chamada, utilizando tag: " + configuracoesDeUrl.getStringGestao()));
         }
 
         acaoVinculada = formulario.getAcaoGestaoVinculada();
@@ -101,7 +101,7 @@ public class PgJsonWebView implements Serializable {
                 String parametros = configuracoesDeUrl.getCorpo();
                 try {
                     if (!UtilSBWPServletTools.getRequestAtual().getMethod().equals("POST")) {
-                        return UtilSBCoreJson.getTextoByJsonObjeect(UtilSBWPJson.BUILD_FALHA_GERANDO_JSONVIEW("Esperado um método post"));
+                        return UtilSBCoreJson.getTextoByJsonObjeect(UtilSBWPJson.JSON_FALHA_GERANDO_JSONVIEW("Esperado um método post"));
 
                     }
                     ItfResposta resposta = SBCore.getServicoController().getResposta(acao.getEnumAcaoDoSistema(), parametros);
@@ -111,7 +111,7 @@ public class PgJsonWebView implements Serializable {
                             return UtilSBCoreJson.getTextoByJsonObjeect(UtilSBWPJson.getJsonRespostaPadrao(resposta));
                         } catch (ErroProcessandoJson ex) {
                             FacesContext.getCurrentInstance().getExternalContext().setResponseStatus(418);
-                            return UtilSBCoreJson.getTextoByJsonObjeect(UtilSBWPJson.BUILD_FALHA_GERANDO_JSONVIEW("ação foi executada, mas houve um erro gerando json de resposta"));
+                            return UtilSBCoreJson.getTextoByJsonObjeect(UtilSBWPJson.JSON_FALHA_GERANDO_JSONVIEW("ação foi executada, mas houve um erro gerando json de resposta"));
                         }
                     } else {
                         FacesContext.getCurrentInstance().getExternalContext().setResponseStatus(403);
@@ -119,13 +119,13 @@ public class PgJsonWebView implements Serializable {
                             return UtilSBCoreJson.getTextoByJsonObjeect(UtilSBWPJson.getJsonRespostaPadrao(resposta));
                         } catch (ErroProcessandoJson ex) {
                             FacesContext.getCurrentInstance().getExternalContext().setResponseStatus(418);
-                            return UtilSBCoreJson.getTextoByJsonObjeect(UtilSBWPJson.BUILD_FALHA_GERANDO_JSONVIEW("ação foi executada, mas houve um erro gerando json de resposta"));
+                            return UtilSBCoreJson.getTextoByJsonObjeect(UtilSBWPJson.JSON_FALHA_GERANDO_JSONVIEW("ação foi executada, mas houve um erro gerando json de resposta"));
                         }
                     }
 
                 } catch (ErroChamadaController ex) {
                     FacesContext.getCurrentInstance().getExternalContext().setResponseStatus(403);
-                    return UtilSBCoreJson.getTextoByJsonObjeect(UtilSBWPJson.BUILD_FALHA_GERANDO_JSONVIEW("Erro localizando implementação da ação " + acao.getEnumAcaoDoSistema()));
+                    return UtilSBCoreJson.getTextoByJsonObjeect(UtilSBWPJson.JSON_FALHA_GERANDO_JSONVIEW("Erro localizando implementação da ação " + acao.getEnumAcaoDoSistema()));
                 }
 
             } else {
@@ -148,7 +148,7 @@ public class PgJsonWebView implements Serializable {
                 ItfB_PaginaSimples paginaDoContexto = (ItfB_PaginaSimples) UtilSBWPServletTools.getObjetoByInstanciadoViewScopedByExpressao(expressaoBean, classeMB);
                 return paginaDoContexto.getJsonPagina();
             } catch (ErroGenericoProcessandoRespostaJson pErro) {
-                return UtilSBCoreJson.getTextoByJsonObjeect(UtilSBWPJson.BUILD_FALHA_GERANDO_JSONVIEW("Erro acessando: #{" + classeMB.getSimpleName() + "}\n causa:" + pErro.getMessage()));
+                return UtilSBCoreJson.getTextoByJsonObjeect(UtilSBWPJson.JSON_FALHA_GERANDO_JSONVIEW("Erro acessando: #{" + classeMB.getSimpleName() + "}\n causa:" + pErro.getMessage()));
 
             }
             //= (ItfB_PaginaSimples) UtilSBWPServletTools.getBeanByNamed(UtilSBCoreStringsMaiuculoMinusculo.getPrimeiraLetraMinuscula(classeMB.getSimpleName()), classeMB);

@@ -132,17 +132,21 @@ public class UtilSBWPJson {
     public static final JsonObject JSON_FALHA_OBTENDO_CONTEXTO = BUILD_FALHA_GERANDO_REPRESENTACAO_VIEW();
 
     private static JsonObject BUILD_FALHA_GERANDO_REPRESENTACAO_VIEW() {
-        return BUILD_FALHA_GERANDO_JSONVIEW(FRASE_ERRO_PADRAO);
+        return JSON_FALHA_GERANDO_JSONVIEW(FRASE_ERRO_PADRAO);
     }
 
-    public static JsonObject BUILD_FALHA_GERANDO_JSONVIEW(String pDescricaoErro) {
+    public static JsonObject JSON_FALHA_GERANDO_JSONVIEW(String pDescricaoErro) {
+        return JSON_BUILDER_FALHA_GERANDO_JSONVIEW(pDescricaoErro).build();
 
+    }
+
+    public static JsonObjectBuilder JSON_BUILDER_FALHA_GERANDO_JSONVIEW(String pDescricaoErro) {
         JsonObjectBuilder jsonDadosSessao = Json.createObjectBuilder();
         jsonDadosSessao.add("sucesso", false);
         jsonDadosSessao.add("erro", pDescricaoErro);
         JsonObjectBuilder jsonPadraoFalha = Json.createObjectBuilder();
         jsonPadraoFalha.add(ATRIBUTO_JSON_SESSAO, jsonDadosSessao.build());
-        return jsonPadraoFalha.build();
+        return jsonPadraoFalha;
     }
 
 }

@@ -23,7 +23,7 @@
                         rendered="#{registro.umItemDeUmaLista}"
                         converter="conversorGenerico"
                         itemLabel="#{item.nome}"
-
+                        validator="org.super_bits.view.validadores.beanSimples"
                         itemValue="#{item}"
                         forceSelection="true"
                         emptyMessage="Nada Selecionado"
@@ -34,6 +34,9 @@
                         queryDelay="300"
                         completeMethod="#{registro.comoCampoSeltorItem.filtrarPorAutoComplet}"
                         >
+                        <f:passThroughAttribute name="caminhoCampo" value="#{registro.nomeCompostoIdentificador}" />
+                        <f:passThroughAttribute name="dominio" value="#{registro.nomeClasseOrigemAtributo}" />
+                        <f:passThroughAttribute name="campoInstanciado" value="#{registro}" />
                         <c:if test="#{possuiMetodoOnChange}">
                             <p:ajax rendered="#{possuiMetodoOnChange}"
                                     global="true"
@@ -67,8 +70,10 @@
 
 
                     </p:autoComplete>
+
                 </h:panelGroup>
                 <h:panelGroup >
+
                     <p:commandButton
                         icon="#{acoesPaginasDoSistema_PaginaPesquisaAvancadaMbPadrao.paginaPesquisaAvancadaMbPadrao.iconeAcao}"
                         rendered="#{!desabilitarEdicao}"

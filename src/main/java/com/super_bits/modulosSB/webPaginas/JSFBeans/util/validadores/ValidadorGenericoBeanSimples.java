@@ -5,7 +5,9 @@
 package com.super_bits.modulosSB.webPaginas.JSFBeans.util.validadores;
 
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campoInstanciado.ItfCampoInstanciado;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfBeanSimples;
+import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.FacesValidator;
@@ -25,9 +27,34 @@ public class ValidadorGenericoBeanSimples extends ValidadorGenericoAbstrato<Obje
         if (value instanceof ItfBeanSimples) {
             super.validate(context, component, value); //To change body of generated methods, choose Tools | Templates.
         } else {
-            if (!SBCore.isEmModoProducao()) {
-                System.out.println("Validando como String");
+            if (value == null) {
+                ItfCampoInstanciado campoInstanciado = getCampoInstanciadoByComponent(context, component);
+                if (campoInstanciado != null) {
+                    switch (campoInstanciado.getTipoPrimitivoDoValor()) {
+
+                        case ENTIDADE:
+                        case OUTROS_OBJETOS:
+
+                            boolean umNovoRegistro = campoInstanciado.getObjetoDoAtributo().getId() == 0;
+                            validar(campoInstanciado, umNovoRegistro, value);
+                            break;
+                        default:
+                            lancarMensagemValidacao("O Tipo de atributo não é compatível com este tipo de validação");
+                    }
+                } else {
+                    if (!SBCore.isEmModoProducao()) {
+                        FacesMessage mensagemErro = new FacesMessage();
+                        mensagemErro.setSummary("O atributo campo instanciado não foi encontrado");
+                        mensagemErro.setSeverity(FacesMessage.SEVERITY_ERROR);
+                    }
+                }
+
+            } else {
+                FacesMessage mensagemErro = new FacesMessage();
+                mensagemErro.setSummary("O tipo de objeto não é compatvel com este tipo de validação");
+                mensagemErro.setSeverity(FacesMessage.SEVERITY_ERROR);
             }
+
         }
     }
 

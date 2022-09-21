@@ -23,8 +23,11 @@
                                  styleClass="seletorResponsivo #{componente.classeCSS}"
                                  converter="conversorGenerico"
                                  var="it"
+                                 validator="org.super_bits.view.validadores.beanSimples"
                                  converterMessage="Erro ao converter objeto" >
-
+                    <f:passThroughAttribute name="caminhoCampo" value="#{registro.nomeCompostoIdentificador}" />
+                    <f:passThroughAttribute name="dominio" value="#{registro.nomeClasseOrigemAtributo}" />
+                    <f:passThroughAttribute name="campoInstanciado" value="#{registro}" />
                     <f:selectItem
                         itemLabel=" não Selecionado"  />
 

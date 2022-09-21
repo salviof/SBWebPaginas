@@ -551,10 +551,10 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
     @Override
     @PreDestroy
     public void fecharPagina() {
-        if (emPagina != null) {
-            if (emPagina.isOpen()) {
-                emPagina.close();
-            }
+        try {
+            UtilSBPersistencia.fecharEM(emPagina);
+        } catch (Throwable t) {
+
         }
         SBCore.soutInfoDebug("Bean de escopo" + this.getClass().getSimpleName() + " Encerrado (B_Pagina.FecharPagina)");
     }
@@ -902,14 +902,22 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
         }
     }
 
-    protected void autoExecAlterarFormulario(ItfAcaoFormulario pAcao) {
+    protected void autoExecAlterarFormulario(ItfAcaoFormulario pAcao, boolean alterouBeanSelecionado) {
         try {
             if (isPermitidoAbrirFormulario()) {
 
                 if (!acaoSelecionada.getComoFormulario().getXhtml().equals(xhtmlAcaoAtual)) {
                     xhtmlAcaoAtual = acaoSelecionada.getComoFormulario().getXhtml();
-
-                    atualizarIdAreaExibicaoAcaoSelecionada();
+                    EstruturaDeFormulario estrutura = MapaDeFormularios.getEstruturaByNomeAcao(pAcao.getAcaoDeGestaoEntidade().getNomeUnico());
+                    if (estrutura.getParametrosURL().stream().filter(pr -> pr.isUmParametoEntidadeMBPrincipal()).findFirst().isPresent()
+                            && getBeanSelecionado() != null
+                            && getBeanSelecionado().getId() > 0
+                            && alterouBeanSelecionado) {
+                        String url = MapaDeFormularios.getUrlFormulario(pAcao, getBeanSelecionado());
+                        UtilSBWP_JSFTools.vaParaPagina(url);
+                    } else {
+                        atualizarIdAreaExibicaoAcaoSelecionada();
+                    }
                     if (!SBCore.isEmModoProducao()) {
                         SBCore.soutInfoDebug("Xhtml alterado para" + xhtmlAcaoAtual + " Solicitado alteração Ajax Area:" + idAreaExbicaoAcaoSelecionada);
                     }
@@ -985,7 +993,7 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
             adicionarAcaoNoHistorico(acaoSelecionada);
 
             if (acaoSelecionada.isUmaAcaoFormulario()) {
-                autoExecAlterarFormulario(acaoSelecionada.getComoFormulario());
+                autoExecAlterarFormulario(acaoSelecionada.getComoFormulario(), false);
             }
 
             if (acaoSelecionada.isUmaAcaoController()) {

@@ -1612,4 +1612,15 @@ public class PgUtil implements Serializable {
         return condicao ? valorPositivo : valorNegativo;
     }
 
+    public List<ItfAcaoDoSistema> getAcoesEntidade(ItfBeanSimples pItem, List<ItfAcaoDoSistema> pAcoes) {
+        if (pItem != null) {
+            List<ItfAcaoDoSistema> acoesItem = pItem.getAcoesDisponiveis();
+            if (acoesItem != null && !acoesItem.isEmpty()) {
+                return acoesItem;
+            }
+        }
+        return pAcoes;
+
+    }
+
 }

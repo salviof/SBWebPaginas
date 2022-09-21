@@ -534,8 +534,23 @@ function acoesBotaoMenuHorizontal(menuhorizontalresponsivo, parafrente, semefeit
     }
 }
 
+function atualizarAreaCampoSeVisivel(pAreaCampo) {
+
+    nodePesquisa = document.querySelectorAll("[campoinstanciado=\"" + pAreaCampo + "\"]");
+    qtdElementosEncontrados = nodePesquisa.length;
+    if (qtdElementosEncontrados > 0) {
+        atualizarAreaByID(nodePesquisa[0].parentElement.id);
+    }
+    if (qtdElementosEncontrados > 1) {
+        console.log("Atenção a atualizção da area do campo se visivel ainda não suporta atualização de multiplos elementos");
+    }
+
+}
+
 function bloquearAreaOitoSegundos(idArea) {
     try {
+
+
         bloquearArea(idArea);
 
         setTimeout(function () {

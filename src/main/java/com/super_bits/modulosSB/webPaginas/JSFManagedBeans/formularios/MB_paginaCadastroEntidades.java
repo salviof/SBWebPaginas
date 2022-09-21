@@ -965,9 +965,9 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
     }
 
     @Override
-    protected void autoExecAlterarFormulario(final ItfAcaoFormulario pAcao) {
+    protected void autoExecAlterarFormulario(final ItfAcaoFormulario pAcao, boolean pAlterouEntidadeSelecionada) {
 
-        super.autoExecAlterarFormulario(pAcao);
+        super.autoExecAlterarFormulario(pAcao, pAlterouEntidadeSelecionada);
         try {
             FabEstadoFormulario statusModoForm = pAcao.getComoFormulario().getEstadoFormulario();
 
@@ -1123,7 +1123,18 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
         }
 
         public void executarAcao(TT pEntidadeSelecionada) {
-
+            boolean alterouEntidade = false;
+            if (pEntidadeSelecionada != null) {
+                if (getBeanSelecionado() == null) {
+                    alterouEntidade = true;
+                } else {
+                    alterouEntidade = !pEntidadeSelecionada.equals(getBeanSelecionado());
+                }
+            } else {
+                if (getBeanSelecionado() != null) {
+                    alterouEntidade = true;
+                }
+            }
             if (acaoSelecionada == null) {
 
                 try {
@@ -1161,7 +1172,7 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
                 case ACAO_ENTIDADE_FORMULARIO:
                 case ACAO_FORMULARIO:
 
-                    autoExecAlterarFormulario(acaoSelecionada.getComoFormulario());
+                    autoExecAlterarFormulario(acaoSelecionada.getComoFormulario(), alterouEntidade);
 
                     break;
                 case ACAO_ENTIDADE_FORMULARIO_MODAL:

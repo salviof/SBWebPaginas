@@ -137,7 +137,7 @@
 
                             <SBAcaoNav:seletorDeAcoes
                                 metodo="#{cc.attrs.metodo}"
-                                opcoes="#{cc.attrs.opcoes}"
+                                opcoes="#{pgUtil.getAcoesEntidade(item, cc.attrs.opcoes)}"
                                 visualizacaoBotao="#{layoutsComponenteSB.layoutBotoes.icone}"
                                 opcaoSelecionada="#{cc.attrs.armazenamentoAcaoSelecionada}"
                                 />
