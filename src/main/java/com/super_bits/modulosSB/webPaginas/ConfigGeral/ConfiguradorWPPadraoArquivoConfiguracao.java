@@ -18,15 +18,22 @@ import java.io.IOException;
 public abstract class ConfiguradorWPPadraoArquivoConfiguracao implements ItfConfigWebPagina {
 
     private final ConfigModulo configModulo;
+    private final String siteHost;
 
     public ConfiguradorWPPadraoArquivoConfiguracao() throws IOException {
         this.configModulo = new ConfigModulo(FabConfigModuloWebAppGenerico.class);
+        String pParametroDominioAplicacao = configModulo.getPropriedade(FabConfigModuloWebAppGenerico.URL_DOMINIO_APLICACAO);
+        if (!pParametroDominioAplicacao.startsWith("http")) {
+            siteHost = "https://" + pParametroDominioAplicacao;
+        } else {
+            siteHost = pParametroDominioAplicacao;
+        }
     }
 
     @Override
     public String SITE_HOST() {
 
-        return configModulo.getPropriedade(FabConfigModuloWebAppGenerico.URL_DOMINIO_APLICACAO);
+        return siteHost;
     }
 
     @Override

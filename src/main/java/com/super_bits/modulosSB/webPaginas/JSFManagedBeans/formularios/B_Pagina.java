@@ -5,7 +5,9 @@ import com.super_bits.modulos.SBAcessosModel.model.acoes.acaoDeEntidade.AcaoGest
 import com.super_bits.modulosSB.Persistencia.ConfigGeral.SBPersistencia;
 import com.super_bits.modulosSB.Persistencia.dao.UtilSBPersistencia;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
+import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreObjetoSB;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreReflexao;
+import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreReflexaoObjeto;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringFiltros;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringValidador;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.ItfParametroRequisicao;
@@ -909,8 +911,14 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
                 if (!acaoSelecionada.getComoFormulario().getXhtml().equals(xhtmlAcaoAtual)) {
                     xhtmlAcaoAtual = acaoSelecionada.getComoFormulario().getXhtml();
                     EstruturaDeFormulario estrutura = MapaDeFormularios.getEstruturaByNomeAcao(pAcao.getAcaoDeGestaoEntidade().getNomeUnico());
+                    boolean temFormularioComParametro = false;
+                    if (alterouBeanSelecionado && getBeanSelecionado() != null) {
+                        temFormularioComParametro = estrutura.getParametrosURL().stream()
+                                .filter(pr -> pr.getTipoEntidade().equals(UtilSBCoreReflexaoObjeto.getClassExtraindoProxy(getBeanSelecionado().getClass().getSimpleName()))).findFirst().isPresent();
+                    }
                     if (estrutura.getParametrosURL().stream().filter(pr -> pr.isUmParametoEntidadeMBPrincipal()).findFirst().isPresent()
                             && getBeanSelecionado() != null
+                            && temFormularioComParametro
                             && getBeanSelecionado().getId() > 0
                             && alterouBeanSelecionado) {
                         String url = MapaDeFormularios.getUrlFormulario(pAcao, getBeanSelecionado());
@@ -997,9 +1005,7 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
             }
 
             if (acaoSelecionada.isUmaAcaoController()) {
-
-                exibeModalComunicacaoTransientPreAcaoAtual();
-
+                autoExecAcaoController(getBeanSelecionado());
             }
 
         } catch (Throwable t) {
@@ -1383,6 +1389,8 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
 
                 if (respExecucao.isSucesso()) {
                     renovarEMPagina();
+                } else {
+                    respExecucao.dispararMensagens();
                 }
 
             } catch (Throwable t) {

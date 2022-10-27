@@ -33,7 +33,9 @@ import com.super_bits.modulosSB.SBCore.modulos.fabrica.ItfFabricaAcoes;
 import com.super_bits.modulosSB.SBCore.modulos.geradorCodigo.model.EstruturaDeEntidade;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.anotacoes.InfoPreparacaoObjeto;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campo.FabTipoAtributoObjeto;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campo.TIPO_PRIMITIVO;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.MapaObjetosProjetoAtual;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.estrutura.ItfEstruturaCampoEntidade;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.estrutura.ItfLigacaoMuitosParaUm;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfBeanGenerico;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfBeanSimples;
@@ -729,18 +731,37 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
             } else {
                 try {
                     ItfBeanSimples bean = null;
+                    Class calssePesquisa = getAcaoSelecionada().getComoFormularioEntidade().getClasseRelacionada();
                     if (getAcaoSelecionada().isUmaAcaoFormulario() && getAcaoSelecionada().isUmaAcaoDeEntidade()) {
                         bean = (ItfBeanSimples) getAcaoSelecionada().getComoFormularioEntidade().getClasseRelacionada().newInstance();
                     } else {
                         bean = (ItfBeanSimples) getAcaoVinculada().getClasseRelacionada().newInstance();
                     }
-                    if (!mostrarInativos && bean.isTemCampoAnotado(FabTipoAtributoObjeto.REG_ATIVO_INATIVO)) {
-                        setEntidadesListadas(new ConsultaDinamicaDeEntidade(bean.getClass(), getEMPagina()).addCondicaoPositivo(bean.getNomeCampo(FabTipoAtributoObjeto.REG_ATIVO_INATIVO))
-                                .resultadoRegistros());
+                    ConsultaDinamicaDeEntidade novaConsulta = new ConsultaDinamicaDeEntidade(calssePesquisa, getEMPagina());
+                    if (getParametrosURL().size() > 1) {
 
-                    } else {
-                        setEntidadesListadas(UtilSBPersistencia.getListaTodos(getAcaoSelecionada().getComoAcaoDeEntidade().getClasseRelacionada(), getEMPagina()));
+                        EstruturaDeEntidade estruturaEntidadeListada = MapaObjetosProjetoAtual.getEstruturaObjeto(calssePesquisa);
+
+                        for (ItfParametroRequisicaoInstanciado pr : getParametrosURL()) {
+
+                            if (pr.isUmParametroDeEntidade() && pr.isValorDoParametroFoiConfigurado()) {
+
+                                Optional<ItfEstruturaCampoEntidade> pesquisaCampoTipoParametro = estruturaEntidadeListada.getCampos()
+                                        .stream().filter(cp -> cp.getTipoPrimitivoDoValor().equals(TIPO_PRIMITIVO.ENTIDADE) && cp.getClasseCampoDeclaradoOuTipoLista().equals(pr.getClasseObjetoValor().toString())).findFirst();
+                                if (pesquisaCampoTipoParametro.isPresent()) {
+                                    ItfEstruturaCampoEntidade campoMesmoTipoParametro = pesquisaCampoTipoParametro.get();
+                                    novaConsulta.addCondicaoManyToOneIgualA(campoMesmoTipoParametro.getNomeDeclarado(), (ItfBeanSimples) pr.getValor());
+                                }
+
+                            }
+                        }
+
                     }
+                    if (!mostrarInativos && bean.isTemCampoAnotado(FabTipoAtributoObjeto.REG_ATIVO_INATIVO)) {
+                        novaConsulta.addCondicaoPositivo(bean.getNomeCampo(FabTipoAtributoObjeto.REG_ATIVO_INATIVO));
+
+                    }
+                    setEntidadesListadas(novaConsulta.resultadoRegistros());
                     UtilSBCoreListasObjeto.ordernarPorCampoReverso(getEntidadesListadas(), "id");
 
                 } catch (Throwable t) {
@@ -1235,6 +1256,7 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
                     atualizaInformacoesDeEdicao(FabEstadoFormulario.EDITAR);
                     break;
                 case FORMULARIO_PERSONALIZADO:
+
                     break;
                 case FORMULARIO_VISUALIZAR:
                     atualizaInformacoesDeEdicao(FabEstadoFormulario.VISUALIZAR);

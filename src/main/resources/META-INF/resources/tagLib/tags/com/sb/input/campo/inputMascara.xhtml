@@ -13,13 +13,13 @@
 
             <p:inputMask
                 mask="#{mascara}"
-                
+
                 class=" campoResponsivo  TexAlCenter #{componente.classeCSS}"
                 disabled="#{desabilitarEdicao}"
                 rendered="#{!desabilitarEdicao}"
                 required="#{obrigatorio}"
                 value="#{valor}"
-                
+
                 requiredMessage="O campo #{label} não foi informado! "
                 autoClear="false"
                 validator="org.super_bits.view.validadores.generico"
@@ -36,7 +36,6 @@
 
                 <c:if test="#{registro.temValidacaoRegex}">
                     <f:validateRegex pattern="#{regex}" />
-
                 </c:if>
 
 
