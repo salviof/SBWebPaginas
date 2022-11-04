@@ -9,8 +9,10 @@ import com.sun.faces.facelets.el.TagValueExpression;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringJson;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringValidador;
+import com.super_bits.modulosSB.SBCore.integracao.libRestClient.api.token.ItfTokenGestaoOauth;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.permissoes.ItfAcaoFormulario;
 import com.super_bits.modulosSB.SBCore.modulos.Mensagens.FabMensagens;
+import com.super_bits.modulosSB.SBCore.modulos.erp.ItfSistemaERP;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campoInstanciado.ItfCampoInstanciado;
 
 import com.super_bits.modulosSB.webPaginas.ConfigGeral.SBWebPaginas;
@@ -531,6 +533,22 @@ public abstract class UtilSBWP_JSFTools {
     public static String getIDViewFeceScoped() {
         String idViewState = FacesContext.getCurrentInstance().getApplication().getStateManager().getViewState(FacesContext.getCurrentInstance());
         return idViewState;
+    }
+
+    public static boolean abrirJanelaConexaoAplicativo(ItfTokenGestaoOauth pSistema) {
+        try {
+            String script = "var a = document.createElement(\"a\");\n"
+                    + "    \n"
+                    + "    a.setAttribute(\"href\", \"#\");\n"
+                    + "    a.setAttribute(\"onClick\",\"window.open('" + pSistema.getUrlObterCodigoSolicitacao() + "','pagename','resizable,height=260,width=370')\");\n"
+                    + "    a.style.display = \"none\";\n"
+                    + "    document.body.appendChild(a);\n"
+                    + "    a.click();";
+            UtilSBWP_JSFTools.executarJavaScript(script);
+            return true;
+        } catch (Throwable t) {
+            return false;
+        }
     }
 
 }

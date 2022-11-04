@@ -16,7 +16,7 @@
             </h:panelGroup>
 
             <h:panelGrid columns="3" style="width: 100%;" columnClasses="colunaResponsiva,tamanhoIconePequeno,tamanhoIconePequeno" rendered="#{!desabilitarEdicao}" >
-                <h:panelGroup >
+                <h:panelGroup  >
                     <p:autoComplete
 
                         styleClass="autoCompleteResponsivo"
@@ -48,7 +48,9 @@
                                 rendered="#{possuiIDOnChange}"
                                 global="true"
                                 event="itemSelect"
-                                listener="#{pgUtil.atualizaTelaPorID(idAtualizarOnChange)}"
+                                process="@this"
+                                update="#{idAtualizarOnChange eq '@this'?pgUtil.getIdInputSBComponentePai(component):idAtualizarOnChange}"
+
                                 onstart="bloquearArea('#{idAtualizarOnChange}')"
                                 oncomplete="desbloquearArea('#{idAtualizarOnChange}')"
                                 />
@@ -83,20 +85,12 @@
                         process="@this"
                         >
 
-
-                        <p:ajax event="dialogReturn"
-                                update="@form"
-                                listener="#{pgUtil.atualizaTelaPorID(pgUtil.getIdDoComponenteAtual(component))}" />
-
-                        <c:if test="#{possuiIDOnChange}" >
-                            <p:ajax
-                                rendered="#{possuiIDOnChange}"
-                                global="true"
-                                update="#{pgUtil.getIdInputPai(component)}"
-                                event="dialogReturn"
-                                listener="#{pgUtil.atualizaTelaPorID(idAtualizarOnChange)}"
-                                />
+                        <c:if test="#{!possuiMetodoOnChange}">
+                            <p:ajax event="dialogReturn"
+                                    update="#{possuiIDOnChange?idAtualizarOnChange:pgUtil.getIdInputSBComponentePai(component)}"
+                                    listener="#{pgUtil.atualizaTelaPorID(pgUtil.getIdDoComponenteAtual(component))}" />
                         </c:if>
+
                         <c:if test="#{possuiMetodoOnChange}">
                             <p:ajax rendered="#{possuiMetodoOnChange}"
                                     global="true"
