@@ -15,8 +15,11 @@
                 <p:outputLabel value="#{valor.nome}" rendered="#{desabilitarEdicao}" />
             </h:panelGroup>
 
-            <h:panelGrid columns="3" style="width: 100%;" columnClasses="colunaResponsiva,tamanhoIconePequeno,tamanhoIconePequeno" rendered="#{!desabilitarEdicao}" >
+            <h:panelGrid columns="2" style="width: 100%;" columnClasses="colunaResponsiva,tamanhoIconePequeno,tamanhoIconePequeno" rendered="#{!desabilitarEdicao}" >
                 <h:panelGroup  >
+                    <p:commandButton label="submit" id="validarAlteracoesItemChanged"
+                                     styleClass="Invisivel"
+                                     process="@parent:@parent" update="#{pgUtil.getNomeIdComponenteInput(component)}" />
                     <p:autoComplete
 
                         styleClass="autoCompleteResponsivo"
@@ -30,6 +33,7 @@
                         placeholder="Pesquise por um #{label}"
                         var="item"
                         value="#{registro.valor}"
+
                         minQueryLength="4"
                         queryDelay="300"
                         completeMethod="#{registro.comoCampoSeltorItem.filtrarPorAutoComplet}"
@@ -50,9 +54,10 @@
                                 event="itemSelect"
                                 process="@this"
                                 update="#{idAtualizarOnChange eq '@this'?pgUtil.getIdInputSBComponentePai(component):idAtualizarOnChange}"
-
+                                listener="#{pgUtil.atualizaTelaPorID(idAtualizarOnChange eq '@this'?pgUtil.getIdInputSBComponentePai(component):idAtualizarOnChange)}"
                                 onstart="bloquearArea('#{idAtualizarOnChange}')"
-                                oncomplete="desbloquearArea('#{idAtualizarOnChange}')"
+                                onsuccess="desbloquearArea('#{idAtualizarOnChange}')"
+                                oncomplete="document.getElementById('#{pgUtil.getIdByPrimefacesSearch('@parent:@child(0)',component)}').click();"
                                 />
                             <p:blockUI  block="#{idAtualizarOnChange}"   rendered="#{possuiIDOnChange}" widgetVar="#{pgUtil.getIdInputSBComponentePai(component)}"  >
                                 <h:panelGrid columns="2">
@@ -71,36 +76,36 @@
                         </ui:repeat>
 
 
+
                     </p:autoComplete>
 
                 </h:panelGroup>
                 <h:panelGroup >
 
-                    <p:commandButton
-                        icon="#{acoesPaginasDoSistema_PaginaPesquisaAvancadaMbPadrao.paginaPesquisaAvancadaMbPadrao.iconeAcao}"
-                        rendered="#{!desabilitarEdicao}"
-                        update="#{pgUtil.getIdInputPai(component)}"
-                        action="#{pgUtil.exibirModalImportacaoPesquisaAvancada()}"
-                        partialSubmit="true"
-                        process="@this"
-                        >
+                    <p:commandButton label="submit" id="validarAlteracoes"
 
-                        <c:if test="#{!possuiMetodoOnChange}">
-                            <p:ajax event="dialogReturn"
-                                    update="#{possuiIDOnChange?idAtualizarOnChange:pgUtil.getIdInputSBComponentePai(component)}"
-                                    listener="#{pgUtil.atualizaTelaPorID(pgUtil.getIdDoComponenteAtual(component))}" />
-                        </c:if>
+                                     process="@parent:@parent" styleClass="Invisivel" update="#{pgUtil.getNomeIdComponenteInput(component)}" />
 
-                        <c:if test="#{possuiMetodoOnChange}">
-                            <p:ajax rendered="#{possuiMetodoOnChange}"
-                                    global="true"
-                                    event="dialogReturn"
-                                    listener="#{prMetodo}"/>
-                        </c:if>
-                        <f:setPropertyActionListener target="#{paginaAtual.infoPagina.comoFormularioWeb.campoInstSelecionado}"
-                                                     value="#{registro}" />
+                    <p:fragment>
+                        <p:commandButton
+                            icon="#{acoesPaginasDoSistema_PaginaPesquisaAvancadaMbPadrao.paginaPesquisaAvancadaMbPadrao.iconeAcao}"
+                            rendered="#{!desabilitarEdicao}"
+                            action="#{pgUtil.exibirModalImportacaoPesquisaAvancada()}"
 
-                    </p:commandButton>
+
+                            >
+
+                            <p:ajax
+                                event="dialogReturn"
+                                update="#{pgUtil.getIdInputSBComponentePai(component)}"
+                                oncomplete="document.getElementById('#{pgUtil.getIdByPrimefacesSearch('@parent:@parent:@child(0)',component)}').click();"
+                                listener="#{paginaAtual.infoPagina.comoFormularioWeb.metodoRespostaModalPrimefaces}" />
+
+                            <f:setPropertyActionListener target="#{paginaAtual.infoPagina.comoFormularioWeb.campoInstSelecionado}"
+                                                         value="#{registro}" />
+
+                        </p:commandButton>
+                    </p:fragment>
                 </h:panelGroup>
 
             </h:panelGrid>

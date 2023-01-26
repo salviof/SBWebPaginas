@@ -17,6 +17,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import org.coletivojava.fw.api.tratamentoErros.FabErro;
@@ -52,6 +53,13 @@ public class PgModalAbstrato implements Serializable, ItfModalWebApp {
             paginaVinculada.setModalAtual(this);
         }
 
+    }
+
+    @PreDestroy
+    public void fim() {
+        if (paginaVinculada != null) {
+            modalControle.removerReferencia(paginaVinculada);
+        }
     }
 
     @Override

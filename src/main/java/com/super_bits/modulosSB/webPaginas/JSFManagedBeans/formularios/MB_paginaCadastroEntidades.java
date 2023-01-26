@@ -29,6 +29,7 @@ import com.super_bits.modulosSB.SBCore.modulos.Controller.UtilFabricaDeAcoesBasi
 import com.super_bits.modulosSB.SBCore.modulos.Controller.fabricas.FabTipoAcaoSistemaGenerica;
 import com.super_bits.modulosSB.SBCore.modulos.Mensagens.FabMensagens;
 import com.super_bits.modulosSB.SBCore.modulos.comunicacao.FabTipoRespostaComunicacao;
+import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ItfTipoRespostaComunicacao;
 import com.super_bits.modulosSB.SBCore.modulos.fabrica.ItfFabricaAcoes;
 import com.super_bits.modulosSB.SBCore.modulos.geradorCodigo.model.EstruturaDeEntidade;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.anotacoes.InfoPreparacaoObjeto;
@@ -731,7 +732,12 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
             } else {
                 try {
                     ItfBeanSimples bean = null;
-                    Class calssePesquisa = getAcaoSelecionada().getComoFormularioEntidade().getClasseRelacionada();
+                    Class calssePesquisa = null;
+                    if (getAcaoSelecionada().isUmaAcaoDeEntidade()) {
+                        calssePesquisa = getAcaoSelecionada().getComoAcaoDeEntidade().getClasseRelacionada();
+                    } else {
+                        calssePesquisa = getAcaoSelecionada().getAcaoDeGestaoEntidade().getClasseRelacionada();
+                    }
                     if (getAcaoSelecionada().isUmaAcaoFormulario() && getAcaoSelecionada().isUmaAcaoDeEntidade()) {
                         bean = (ItfBeanSimples) getAcaoSelecionada().getComoFormularioEntidade().getClasseRelacionada().newInstance();
                     } else {
@@ -776,10 +782,13 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
 
     @Override
     public void metodoRespostaModalPrimefaces(SelectEvent event) {
+        //TODO melhorar, validar se é uma resposta de confirmação
         if (!mapaRespostasComunicacaoTransienteDeAcaoByAcoes.isEmpty()) {
             executarAcao(entidadeSelecionada);
             mapaRespostasComunicacaoTransienteDeAcaoByAcoes.clear();
             mapaComunicacaoTransienteDeAcaoByIdModal.clear();
+        } else {
+            super.metodoRespostaModalPrimefaces(event);
         }
     }
 

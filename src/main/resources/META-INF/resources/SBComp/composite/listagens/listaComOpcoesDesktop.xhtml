@@ -57,8 +57,6 @@
     <cc:implementation>
 
         <c:set var="layoutListagem" value="#{pgUtilLayout.gerarLayout(cc.attrs.grupoCampos, cc.attrs.opcoes)}" />
-
-
         <h:panelGroup>
             <h:form>
                 <p:dataTable sortMode="multiple"
@@ -80,17 +78,12 @@
                                     #{cc.attrs.titulo}
                                 </div>
                                 <div class="col-md-4 " style="margin-top: 5px; margin-bottom: 5px; " >
-
-
                                     <p:inputText
                                         onfocus="pesquisaDataSetComDelay(this.id, '#{pgUtil.gerarNomeSlug(cc.attrs.titulo)}')"
                                         id="globalFilter"
 
                                         style="width:100%; height: 35px;"
                                         placeholder="Pesquise aqui:"/>
-
-
-
                                 </div>
                             </div>
                         </div>
@@ -131,24 +124,15 @@
                               width="#{layoutListagem.pixelPorNumeroDeAcoes}"
 
                               >
-
-
                         <center>
-
                             <SBAcaoNav:seletorDeAcoes
                                 metodo="#{cc.attrs.metodo}"
                                 opcoes="#{pgUtil.getAcoesEntidade(item, cc.attrs.opcoes)}"
                                 visualizacaoBotao="#{layoutsComponenteSB.layoutBotoes.icone}"
                                 opcaoSelecionada="#{cc.attrs.armazenamentoAcaoSelecionada}"
                                 />
-
-
                         </center>
-
                     </p:column>
-
-
-
                 </p:dataTable>
             </h:form>
 

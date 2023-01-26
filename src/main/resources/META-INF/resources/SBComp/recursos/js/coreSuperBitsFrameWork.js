@@ -99,13 +99,7 @@ function acoesPosAjax() {
 
 }
 
-function atualizarAreaByID(idAreaAtualizada) {
-    bloquearArea(idAreaAtualizada);
-    (document.getElementById('formAtualizacao:prAtualizarAreaID')).value = idAreaAtualizada;
 
-    atualizarAreaByIDRC();
-    desbloquearArea(idAreaAtualizada);
-}
 
 /**
  * ->
@@ -534,36 +528,6 @@ function acoesBotaoMenuHorizontal(menuhorizontalresponsivo, parafrente, semefeit
     }
 }
 
-function atualizarAreaCampoSeVisivel(pAreaCampo) {
-
-    nodePesquisa = document.querySelectorAll("[campoinstanciado=\"" + pAreaCampo + "\"]");
-    qtdElementosEncontrados = nodePesquisa.length;
-    if (qtdElementosEncontrados > 0) {
-        atualizarAreaByID(nodePesquisa[0].parentElement.id);
-    }
-    if (qtdElementosEncontrados > 1) {
-        console.log("Atenção a atualizção da area do campo se visivel ainda não suporta atualização de multiplos elementos");
-    }
-
-}
-
-function bloquearAreaOitoSegundos(idArea) {
-    try {
-
-
-        bloquearArea(idArea);
-
-        setTimeout(function () {
-            desbloquearArea(idArea);
-        }, 8000);
-
-
-    } catch (t) {
-        console.log("Erro bloqueando area");
-        console.log(t);
-    }
-}
-
 function bloquearArea(idArea) {
     try {
         var areas = idArea.split(" ");
@@ -587,12 +551,17 @@ function bloquearArea(idArea) {
 function desbloquearArea(idArea) {
 
     try {
+        console.log("Splite de [" + idArea + "]");
         var areas = idArea.split(" ");
         for (i = 0; i < areas.length; i++) {
             try {
-                $(PrimeFaces.escapeClientId(areas[i])).unblock();
+                console.log("atualizando" + areas[i]);
+                console.log(areas[i].length);
+                if (areas[i].length > 0) {
+                    $(PrimeFaces.escapeClientId(areas[i])).unblock();
+                }
             } catch (t) {
-                console.log("Erro bloqueando area");
+                console.log("Erro bloqueando area [" + areas[i] + " ");
                 console.log(t);
             }
         }
@@ -602,6 +571,124 @@ function desbloquearArea(idArea) {
         console.log(t);
     }
 }
+
+function atualizarAreaByID(idAreaAtualizada) {
+    bloquearArea(idAreaAtualizada);
+    (document.getElementById('formAtualizacao:prAtualizarAreaID')).value = idAreaAtualizada;
+
+    atualizarAreaByIDRC();
+    desbloquearArea(idAreaAtualizada);
+}
+
+function getIdMaisProximo(elemento) {
+    if (elemento.parentElement.id.length > 0) {
+        return elemento.id;
+    } else {
+        if (!elemento.hasParent()) {
+            return "";
+        } else {
+            getIdMaisProximo(elemento.parentElement);
+        }
+
+    }
+}
+
+
+
+async function myFunction() {
+    return "Hello";
+}
+
+async function  atualizarAreaCampoByCssEstilo(pClasse) {
+
+    const delay = t => new Promise(resolve => setTimeout(resolve, t));
+
+    const promessaAtualizacaoCamposSecundarios = new Promise(function (resolve, reject) {
+// "Producing Code" (May take some time)
+        try {
+            $('.' + pClasse).each(function (i, obj) {
+                bloquearArea(obj.id);
+            });
+        } catch (r) {
+            console.log("Erro bloqueando campos com a classe " + pClasse);
+
+        }
+
+
+        try {
+            window.PrimeFaces.ab({s: "", f: "formAjaxUpdateClientSide", u: "@(." + pClasse + ")", fp: ""});
+            console.log("primefaces ok" + pClasse);
+        } catch (t) {
+            reject(new Error('Falha executando update primefaces'));
+        }
+        delay(3000).then(() => {
+            $('.' + pClasse).each(function (i, obj) {
+                desbloquearArea(obj.id);
+            });
+        });
+
+
+    });
+    return promessaAtualizacaoCamposSecundarios;
+}
+
+function atualizarAreaCampoSeVisivel(pAreaCampo) {
+    try {
+
+        console.log("Atualizando " + pAreaCampo);
+        //document.querySelectorAll("[campoinstanciado='NegociacaoDividaPagamento.valorTotalDivida']");
+        nodePesquisa = document.querySelectorAll("[campoinstanciado='" + pAreaCampo + "']");
+        qtdElementosEncontrados = nodePesquisa.length;
+
+        if (qtdElementosEncontrados > 0) {
+            nodePesquisa.forEach(elemento => {
+                console.log("Atualizando" + elemento.parentElement.id);
+                if (elemento.parentElement.id.length > 0) {
+
+                } else {
+                    if (elemento.id.length > 0) {
+                        atualizarAreaByID(elemento.id);
+                    } else {
+                        idMaisProximo = getIdMaisProximo(elemento);
+
+                        if (idMaisProximo.length > 0) {
+                            atualizarAreaByID(idMaisProximo);
+                        }
+                    }
+                }
+                atualizarAreaByID(elemento.parentElement.id);
+
+            });
+
+
+        }
+        if (qtdElementosEncontrados > 1) {
+            console.log("Atenção a atualizção da area do campo se visivel ainda não suporta atualização de multiplos elementos");
+        }
+    } catch (t) {
+        console.log("Erro buscando area de visão do campo " + pAreaCampo);
+    }
+
+}
+
+function bloquearAreaOitoSegundos(idArea) {
+    try {
+
+
+        bloquearArea(idArea);
+
+        setTimeout(function () {
+            desbloquearArea(idArea);
+        }, 8000);
+
+
+    } catch (t) {
+        console.log("Erro bloqueando area");
+        console.log(t);
+    }
+}
+
+
 
 try {
     jQuery.fn.putCursorAtEnd = function () {
@@ -646,7 +733,5 @@ try {
 
     };
 } catch (erroPosicionandoCursor) {
-    console.log(erroPosicionandoCursor);
+    //  console.log(erroPosicionandoCursor);
 }
-
-

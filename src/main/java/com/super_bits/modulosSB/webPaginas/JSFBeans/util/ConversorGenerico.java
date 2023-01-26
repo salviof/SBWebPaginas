@@ -73,7 +73,8 @@ public class ConversorGenerico extends ConversorSB {
                             if (campoInstanciado.isUmValorComLista()) {
                                 valor = campoInstanciado.getComoCampoSeltorItem().getSeletor().getOrigem().stream().filter(item -> item.toString().equals(value)).findFirst();
                                 if (valor == null || !valor.isPresent()) {
-                                    campoInstanciado.getComoCampoSeltorItem().getSeletor().limparSelecao();
+                                    //As vezes o Value vem com a string pesquisada no auto complete não é permitido limpar a seleção neste caso, ou podemos encontrar bugs relacionado a validação de compo obrigatório
+                                    // campoInstanciado.getComoCampoSeltorItem().getSeletor().limparSelecao();
                                     campoInstanciado.getComoCampoSeltorItem().getSeletor().reloadOrigem();
                                     valor = campoInstanciado.getComoCampoSeltorItem().getSeletor().getOrigem().stream().filter(item -> item.toString().equals(value)).findFirst();
                                 }
@@ -85,7 +86,8 @@ public class ConversorGenerico extends ConversorSB {
                         } else {
                             if (campoInstanciado.getComponenteVisualPadrao().equals(FabCompVisualSeletorItem.AUTO_COMPLETE.getRegistro())) {
                                 /// TODO buscar autocomplete no  objeto UIComponent
-                                return null;
+                                Object valorCampoInst = campoInstanciado.getValor();
+                                return valorCampoInst;
                             } else {
 
                                 throw new UnsupportedOperationException("O Conversor de string para BeanSimples falhou mizeravelmente" + "na lista origem existiam " + campoInstanciado.getComoCampoSeltorItem().getSeletor().getOrigem().size());
@@ -126,7 +128,7 @@ public class ConversorGenerico extends ConversorSB {
                     this.addAtributoEmComponente(component, valorEmString, item);
 
                     if (item.getId() != 0) {
-                        System.out.println(valorEmString);
+                        // System.out.println(valorEmString);
                         return valorEmString;
                     }
                     System.out.println("ExisteValor, mas o nome cuto é nulo");

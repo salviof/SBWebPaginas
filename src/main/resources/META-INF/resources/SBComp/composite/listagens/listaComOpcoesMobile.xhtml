@@ -58,7 +58,8 @@
                     var="item"
                     value="#{cc.attrs.itens}"
                     layout="grid"
-                    columns="3"
+                    columns="1"
+                    paginator="true"
                     widgetVar="#{pgUtil.gerarNomeSlug(cc.attrs.titulo)}"
                     emptyMessage="#{cc.attrs.mensagemSemRegistro}"
                     paginatorTemplate=" {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
@@ -71,6 +72,7 @@
                         #{cc.attrs.titulo}
 
                         <p:inputText
+
                             id="globalFilter"
                             onkeyup="PF('#{pgUtil.gerarNomeSlug(cc.attrs.titulo)}').filter()"
                             style="width:100%; height: 35px;"
@@ -82,15 +84,11 @@
 
                         <ui:repeat value="#{cc.attrs.grupoCampos.campos}"
                                    var="campo">
-
                             <SBInput:input
                                 registro="#{item.getCampoByNomeOuAnotacao(campo.caminhoSemNomeClasse)}"
                                 desabilitarEdicao="true"
                                 layout="#{layoutsComponenteSB.layoutCampo.esquerda}"
-
-
                                 />
-
                         </ui:repeat>
 
                         <center>

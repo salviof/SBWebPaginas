@@ -8,9 +8,13 @@
     <ui:decorate template="#{layout.xhtmlJsfCaminhoRelativo}">
 
         <ui:define name="input">
-            <p:outputLabel value="#{pgUtil.gerarMoeda(valor)}"
+            <p:outputLabel value="#{pgUtil.gerarMoeda(registro.valor)}"
                            rendered="#{desabilitarEdicao or valor==null}"
-                           />
+                           >
+                <f:passThroughAttribute name="caminhoCampo" value="#{registro.nomeCompostoIdentificador}" />
+                <f:passThroughAttribute name="dominio" value="#{registro.nomeClasseOrigemAtributo}" />
+                <f:passThroughAttribute name="campoInstanciado" value="#{registro}" />
+            </p:outputLabel>
             <p:inputNumber
                 disabled="#{desabilitarEdicao}"
                 rendered="#{!desabilitarEdicao}"

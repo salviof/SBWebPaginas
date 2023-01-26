@@ -540,7 +540,7 @@ public abstract class UtilSBWP_JSFTools {
             String script = "var a = document.createElement(\"a\");\n"
                     + "    \n"
                     + "    a.setAttribute(\"href\", \"#\");\n"
-                    + "    a.setAttribute(\"onClick\",\"window.open('" + pSistema.getUrlObterCodigoSolicitacao() + "','pagename','resizable,height=260,width=370')\");\n"
+                    + "    a.setAttribute(\"onClick\",\"window.open('" + pSistema.getUrlObterCodigoSolicitacao() + "','" + pSistema.getComoGestaoOauth().getComoGestaoOauth().getClass().getSimpleName() + "','resizable,height=260,width=370')\");\n"
                     + "    a.style.display = \"none\";\n"
                     + "    document.body.appendChild(a);\n"
                     + "    a.click();";

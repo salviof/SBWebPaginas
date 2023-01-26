@@ -8,8 +8,6 @@
     xmlns:h="http://xmlns.jcp.org/jsf/html"
     xmlns:f="http://xmlns.jcp.org/jsf/core">
     <ui:decorate template="#{layout.xhtmlJsfCaminhoRelativo}">
-
-
         <ui:define name="input">
 
             <p:outputLabel value="#{pgUtil.gerarDataHoraTexto(registro.valor)}"
@@ -35,7 +33,7 @@
                 disabled="#{desabilitarEdicao}"
                 showHour="true"
                 showMinute="true"
-                pattern="dd/MM/yyyy HH:mm:ss"
+                pattern="dd/MM/yyyy HH:mm"
                 styleClass="estiloDataHora  #{componente.classeCSS} "
 
 

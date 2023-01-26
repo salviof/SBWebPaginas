@@ -1,16 +1,18 @@
 <ui:composition
     xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
     xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:sb="http://superbitsframework/ui"
     xmlns:p="http://primefaces.org/ui"
     xmlns:f="http://xmlns.jcp.org/jsf/core">
 
 
-    <p:button href="#{infoWebApp.getAcaoComLink(acao).urlDeAcesso}"
-              styleClass="btnIconeENome botao #{classeEstilo}"
-              icon="#{acao.iconeAcao}"
-              value="#{label}"
-              target="_parent"
-              />
+    <sb:botaoGenerico
+        href="#{infoWebApp.getAcaoComLink(acao).urlDeAcesso}"
+        styleClass="btnIconeENome botao #{classeEstilo}"
+        icon="#{acao.iconeAcao}"
+        value="#{label}"
+
+        />
 
 
 </ui:composition>

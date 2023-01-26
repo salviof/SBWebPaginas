@@ -19,15 +19,18 @@ public abstract class ConfiguradorWPPadraoArquivoConfiguracao implements ItfConf
 
     private final ConfigModulo configModulo;
     private final String siteHost;
+    private final String urlBase;
 
     public ConfiguradorWPPadraoArquivoConfiguracao() throws IOException {
         this.configModulo = new ConfigModulo(FabConfigModuloWebAppGenerico.class);
         String pParametroDominioAplicacao = configModulo.getPropriedade(FabConfigModuloWebAppGenerico.URL_DOMINIO_APLICACAO);
+
         if (!pParametroDominioAplicacao.startsWith("http")) {
             siteHost = "https://" + pParametroDominioAplicacao;
         } else {
             siteHost = pParametroDominioAplicacao;
         }
+        urlBase = siteHost;
     }
 
     @Override
@@ -51,18 +54,9 @@ public abstract class ConfiguradorWPPadraoArquivoConfiguracao implements ItfConf
         return configModulo.getPropriedade(FabConfigModuloWebAppGenerico.NOME_APLICACAO);
     }
 
-    private static String urlbase;
-
     @Override
     public String URLBASE() {
-        if (urlbase == null) {
-            if (UtilSBCoreStringValidador.isNuloOuEmbranco(nomePacoteProjeto())) {
-                urlbase = SITE_HOST();
-            } else {
-                urlbase = SITE_HOST() + "/" + nomePacoteProjeto();
-            }
-        }
-        return urlbase;
+        return urlBase;
     }
 
     @Override

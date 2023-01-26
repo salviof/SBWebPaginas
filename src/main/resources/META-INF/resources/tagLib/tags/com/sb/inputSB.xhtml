@@ -2,9 +2,12 @@
     xmlns:ui="http://java.sun.com/jsf/facelets"
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:sb="http://superbitsframework/ui"
-    xmlns:h="http://xmlns.jcp.org/jsf/html">
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
-    <h:panelGroup  layout="block"  id="inputFormPadrao"   >
+    <h:panelGroup  layout="block"
+                   id="InputFormPadrao"
+                   styleClass="#{registro.nomeClasseAtributoDeclarado}#{registro.nomeCamponaClasse}"   >
 
         <sb:parametroMetodo nome="prMetodo" valor="#{metodoOnChange}" rendered="#{possuiMetodoOnChange}" />
         <ui:param name="xhtmlINPUT" value="#{registro.getComponenteDiferenciado(layoutCampoEspecial).xhtmlJsfCaminhoRelativo}" />
@@ -35,7 +38,7 @@
         </ui:fragment>
         <ui:fragment
             rendered="#{xhtmlINPUT==compSBCompVisualInputs.texto_multiplas_Linhas.xhtmlJsfCaminhoRelativo}">
-            <sb:inputSBTextDEscritivo />
+            <sb:inputSBTextDEscritivo  />
         </ui:fragment>
 
         <ui:fragment  rendered="#{xhtmlINPUT==compSBCompVisualInputs.moeda.xhtmlJsfCaminhoRelativo}"  >
@@ -58,6 +61,11 @@
         <ui:fragment  rendered="#{xhtmlINPUT==compSBCompVisualInputs.data_Hora.xhtmlJsfCaminhoRelativo}"  >
             <sb:inputSBDataHora />
         </ui:fragment>
+
+        <ui:fragment  rendered="#{xhtmlINPUT==compSBCompVisualInputs.hora.xhtmlJsfCaminhoRelativo}"  >
+            <sb:inputSBHora />
+        </ui:fragment>
+
         <ui:fragment  rendered="#{xhtmlINPUT==compSBCompVisualInputs.senha.xhtmlJsfCaminhoRelativo}"  >
             <sb:inputSBSenha />
         </ui:fragment>
@@ -164,7 +172,6 @@
         </ui:fragment>
         <ui:fragment  rendered="#{xhtmlINPUT==compSBCompVisualInputs.imagem_grande_de_Entidade.xhtmlJsfCaminhoRelativo}"  >
             <sb:inputSBImagemGrandeDeEntidade />
-
         </ui:fragment>
 
 

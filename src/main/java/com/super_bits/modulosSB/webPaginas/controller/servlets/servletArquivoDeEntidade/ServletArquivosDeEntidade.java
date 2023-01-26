@@ -219,7 +219,7 @@ public class ServletArquivosDeEntidade extends ServletArquivosSBWPGenerico imple
         if (!dados.getCaminhoLocal().startsWith("https")) {
             File arquivo = new File(dados.getCaminhoLocal());
             if (!arquivo.exists()) {
-                dados.setCaminhoLocal(SBWebPaginas.getPastaBaseImagens() + "/imagempadrao.jpg");
+                dados.setCaminhoLocal(SBWebPaginas.getCaminhoRealJavaWebAppContexto() + "/resources/img/imagempadrao.jpg");
             }
         }
 

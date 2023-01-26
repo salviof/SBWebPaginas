@@ -27,15 +27,14 @@ public class InputSBRender extends CoreRenderer {
     }
 
     private void encodeMarkup(FacesContext context, InputSB inputSB) throws IOException {
-
-        ResponseWriter writer = context.getResponseWriter();
-
+        // O componente é reinderizadno pelo inputSB.xhtml
+        // ResponseWriter writer = context.getResponseWriter();
         //Object value = inputSB.getValue() != null ? inputSB.getValue() : 0;
         // writer.startElement(RENDERER_TYPE,);
-        writer.startElement("input", inputSB);
-        writer.writeAttribute("id", inputSB.getClientId(), null);
-        writer.writeAttribute("name", inputSB.getClientId(), null);
-        writer.writeAttribute("disabled", true, null);
+        //  writer.startElement("input", inputSB);
+        //  writer.writeAttribute("id", inputSB.getClientId() + inputSB.getCampoInstanciado().toString(), "id");
+        //  writer.writeAttribute("name", inputSB.getClientId(), null);
+        //  writer.writeAttribute("disabled", true, null);
         //  writer.writeAttribute("value", value.toString(), null);
         //   writer.writeAttribute("data-min", inputSB.getMin(), null);
         //   writer.writeAttribute("data-step", inputSB.getStep(), null);
@@ -43,17 +42,14 @@ public class InputSBRender extends CoreRenderer {
         //writer.writeAttribute("data-displayInput", Boolean.toString(inputSB.isShowLabel()), null);
         // writer.writeAttribute("data-readOnly", Boolean.toString(inputSB.isDisabled()), null);
         //  writer.writeAttribute("data-cursor", Boolean.toString(inputSB.isCursor()), null);
-
-        writer.writeAttribute("class", "knob", null);
-
-        writer.endElement("input");
-
-        writer.startElement("input", null);
-        writer.writeAttribute("id", inputSB.getClientId() + "_hidden", null);
-        writer.writeAttribute("name", inputSB.getClientId() + "_hidden", null);
-        writer.writeAttribute("type", "hidden", null);
+        //  writer.writeAttribute("class", "knob", null);
+        // writer.endElement("input");
+        //writer.startElement("input", null);
+        //  writer.writeAttribute("id", inputSB.getClientId() + "_hidden", null);
+        //  writer.writeAttribute("name", inputSB.getClientId() + "_hidden", null);
+        //  writer.writeAttribute("type", "hidden", null);
         // writer.writeAttribute("value", value.toString(), null);
-        writer.endElement("input");
+        //   writer.endElement("input");
     }
 
     @Override

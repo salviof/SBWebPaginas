@@ -48,7 +48,7 @@ public class PgUtilTelefone implements Serializable {
         try {
             String textoCodificado = URLEncoder.encode(texto, StandardCharsets.UTF_8.toString());
             StringBuilder comandoJS = new StringBuilder();
-            comandoJS.append("window.open('https://api.whatsapp.com/send?phone=");
+            comandoJS.append("window.open('https://web.whatsapp.com/send?phone=");
             comandoJS.append(gerarNumeroInternacional(gerarNumeroInternacional(pNumero)));
             comandoJS.append("&text=");
             comandoJS.append(textoCodificado);

@@ -68,15 +68,18 @@ public abstract class SBWebPaginas {
         //  URLBASE = urlDesenvolvimento + "/" + config.nomePacoteProjeto();
         if (SBCore.isEmModoProducao()) {
             SITE_HOST = config.SITE_HOST();
-            SITE_URL = SITE_HOST;
-            URLBASE = SITE_HOST;
+            SITE_URL = config.URLBASE();
+            URLBASE = config.URLBASE();
         } else {
-            if (UtilSBCoreStringValidador.isNuloOuEmbranco(config.nomePacoteProjeto())) {
+            if (UtilSBCoreStringValidador.isNuloOuEmbranco(config.SITE_HOST())) {
                 URLBASE = urlDesenvolvimento;
+                SITE_HOST = urlDesenvolvimento;
             } else {
-                URLBASE = urlDesenvolvimento + "/" + config.nomePacoteProjeto();
+                URLBASE = config.URLBASE();
+                SITE_HOST = config.SITE_HOST();
             }
-            SITE_HOST = urlDesenvolvimento;
+            //URLBASE = urlDesenvolvimento + "/" + config.nomePacoteProjeto();
+
             SITE_URL = URLBASE;
         }
         if (SBCore.isEmModoDesenvolvimento()) {

@@ -18,6 +18,7 @@ import static com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.TIPO
 import static com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.TIPO_PARTE_URL.TEXTO;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ItfAcaoController;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ItfAcaoDoSistema;
+import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ItfAcaoSecundaria;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.permissoes.ItfAcaoFormulario;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.permissoes.ItfAcaoGerenciarEntidade;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.UtilSBController;
@@ -33,9 +34,11 @@ import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campo.TIPO_PRI
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campoInstanciado.ItfCampoInstanciado;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.reflexao.ReflexaoCampo;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfBeanSimples;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.validador.ErroValidacao;
 import com.super_bits.modulosSB.webPaginas.JSFBeans.SBBeanModel.DEPRECIADO.InfoMBBean;
 import com.super_bits.modulosSB.webPaginas.JSFBeans.SBBeanModel.InfoMBAcao;
 import com.super_bits.modulosSB.webPaginas.JSFBeans.modal.ItfModalRespostaComComunicacao;
+import com.super_bits.modulosSB.webPaginas.JSFBeans.util.UtilSBWPMensagensJSF;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.declarados.util.PgUtil;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.declarados.util.PgUtilModalControle;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.interfaces.ItfB_Modal;
@@ -72,6 +75,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.faces.component.UIViewRoot;
@@ -1202,6 +1207,21 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
 
         if (pParametros != null) {
             for (Object p : pParametros) {
+                if (p instanceof ItfBeanSimples) {
+                    if (getCampoInstSelecionado() != null) {
+                        try {
+                            getCampoInstSelecionado().setValorSeValido(p);
+                            //Update?
+                        } catch (ErroValidacao ex) {
+                            UtilSBWPMensagensJSF.erroMensagem(ex.getMessage());
+                        }
+                    }
+                }
+            }
+        }
+
+        if (pParametros != null) {
+            for (Object p : pParametros) {
                 if (p instanceof ItfTipoRespostaComunicacao) {
                     setTipoRespostaParaAcaoAtual((ItfTipoRespostaComunicacao) p);
                 }
@@ -1223,6 +1243,7 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
             }
 
         }
+
     }
 
     @Override
@@ -1430,6 +1451,47 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
         }
     }
 
+    protected void autoExecDefineFormularioPadrao() {
+        if (getBeanSelecionado() == null) {
+            Optional<ItfAcaoSecundaria> acaoListagem = getAcaoVinculada().getAcoesVinculadas().stream().filter(ac -> ac.getTipoAcaoGenerica().equals(FabTipoAcaoSistemaGenerica.FORMULARIO_LISTAR)).findFirst();
+            if (acaoListagem.isPresent()) {
+                setAcaoSelecionada(acaoListagem.get());
+                executarAcaoSelecionada();
+            } else {
+                throw new UnsupportedOperationException("Impossível determinar a ação padrão");
+            }
+        } else {
+            Optional<ItfAcaoSecundaria> pesquisaAcaoSelecaoAcao = getAcaoVinculada().getAcoesVinculadas().stream().filter(ac -> ac.getTipoAcaoGenerica().equals(FabTipoAcaoSistemaGenerica.SELECAO_DE_ACAO)
+                    && ac.isUmaAcaoDeEntidade()
+                    && ac.getComoAcaoDeEntidade().getClasseRelacionada().equals(getBeanSelecionado().getClass())
+            ).findFirst();
+            if (pesquisaAcaoSelecaoAcao.isPresent()) {
+                setAcaoSelecionada(pesquisaAcaoSelecaoAcao.get());
+                executarAcaoSelecionada();
+                return;
+            }
+
+            Optional<ItfAcaoSecundaria> pesquisaAcaoVisualizar = getAcaoVinculada().getAcoesVinculadas().stream().filter(ac -> ac.getTipoAcaoGenerica().equals(FabTipoAcaoSistemaGenerica.FORMULARIO_VISUALIZAR)
+                    && ac.isUmaAcaoDeEntidade()
+                    && ac.getComoAcaoDeEntidade().getClasseRelacionada().equals(getBeanSelecionado().getClass())
+            ).findFirst();
+            if (pesquisaAcaoVisualizar.isPresent()) {
+                setAcaoSelecionada(pesquisaAcaoVisualizar.get());
+                executarAcaoSelecionada();
+                return;
+            }
+
+            Optional<ItfAcaoSecundaria> pesquisaAcaoListagem = getAcaoVinculada().getAcoesVinculadas().stream().filter(ac -> ac.getTipoAcaoGenerica().equals(FabTipoAcaoSistemaGenerica.FORMULARIO_LISTAR)).findFirst();
+            if (pesquisaAcaoListagem.isPresent()) {
+                setAcaoSelecionada(pesquisaAcaoListagem.get());
+                executarAcaoSelecionada();
+                return;
+            } else {
+                throw new UnsupportedOperationException("Impossível determinar a ação padrão");
+            }
+        }
+    }
+
     protected void autoExecProximaAcaoAposController(ItfAcaoController pAcaoController, ItfRespostaAcaoDoSistema pResposta) {
 
         if ((pResposta == null)) {
@@ -1438,7 +1500,11 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
                 setAcaoSelecionada(ultimoForm);
                 executarAcaoSelecionada();
             } else {
-                throw new UnsupportedOperationException("Ultima ação de formulário não encontrada");
+                xhtmlAcaoAtual = null;
+                autoExecDefineFormularioPadrao();
+                if (xhtmlAcaoAtual == null) {
+                    throw new UnsupportedOperationException("Ultima ação de formulário não encontrada");
+                }
             }
         } else {
             if (pResposta.isTemUrlDestino()) {
@@ -1472,7 +1538,10 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
                     return;
                 } else {
                     xhtmlAcaoAtual = null;
-                    throw new UnsupportedOperationException("Ultima ação de formulário não encontrada");
+                    autoExecDefineFormularioPadrao();
+                    if (xhtmlAcaoAtual == null) {
+                        throw new UnsupportedOperationException("Ultima ação de formulário não encontrada");
+                    }
                 }
 
             } else {
@@ -1513,10 +1582,12 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
                                 setAcaoSelecionada(ultimaAcaoForm);
                                 executarAcaoSelecionada();
                             } else {
-                                ItfAcaoFormulario acaoGEstao = pAcaoController.getAcaoDeGestaoEntidade();
-                                throw new UnsupportedOperationException("Ultima ação de formulário não encontrada");
-                                //    setAcaoSelecionada(acaoGEstao);
-                                //  executarAcaoSelecionada();
+
+                                autoExecDefineFormularioPadrao();
+                                if (xhtmlAcaoAtual == null) {
+                                    throw new UnsupportedOperationException("Ultima ação de formulário não encontrada");
+                                }
+
                             }
                         }
                 }

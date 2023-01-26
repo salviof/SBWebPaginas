@@ -1,0 +1,45 @@
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:decorate template="#{layout.xhtmlJsfCaminhoRelativo}">
+        <ui:define name="input">
+
+            <p:outputLabel value="#{pgUtil.gerarHoraTextoSimples(valor)}"
+                           rendered="#{desabilitarEdicao}"
+                           />
+
+            <p:datePicker value="#{registro.valor}"
+                          locale="pt_BR"
+                          rendered="#{!desabilitarEdicao}"
+                          timeInput="true"
+                          showTime="true"
+                          showButtonBar="true"
+                          timeOnly="true"
+                          converter="conversorHora"
+                          hourFormat="24"
+                          disabled="#{desabilitarEdicao}"
+                          required="#{obrigatorio}"
+                          styleClass="seletorHorario #{componente.classeCSS}"
+                          pattern="HH:mm">
+
+                <f:passThroughAttribute name="caminhoCampo" value="#{registro.nomeCompostoIdentificador}" />
+                <f:passThroughAttribute name="dominio" value="#{registro.nomeClasseOrigemAtributo}" />
+                <f:passThroughAttribute name="campoInstanciado" value="#{registro}" />
+
+                <p:clientValidator/>
+
+
+            </p:datePicker>
+
+            <h:outputScript
+                name="recursos/js/traducaoDatasPrime.js" library="SBComp"  target="body"
+                />
+
+        </ui:define>
+    </ui:decorate>
+</ui:composition>

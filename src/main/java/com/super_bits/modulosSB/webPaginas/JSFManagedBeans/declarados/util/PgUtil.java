@@ -565,6 +565,7 @@ public class PgUtil implements Serializable {
                 || comp.getRendererType().contains("FileUpload")
                 || comp.getRendererType().contains("TextEditor")
                 || comp.getRendererType().contains("CKEditor")
+                || comp.getRendererType().contains("DatePicker")
                 || comp.getRendererType().contains("CkEditor");
 
     }
@@ -604,74 +605,6 @@ public class PgUtil implements Serializable {
             Object next = iterator.next();
             if (next instanceof UIInput) {
                 return componente;
-            }
-        }
-        return null;
-
-    }
-
-    public String getNomeIdComponenteInput(UIComponent componente) {
-        return getNomeIdComponenteInput(componente, true);
-    }
-
-    public UIComponent getComponentInputFormPadraoChildRecursivo(UIComponent componente) {
-        if (componente.getClientId().endsWith(LayoutTelaAreaConhecida.AREA_INPUT_GENERICO)) {
-            return componente;
-        }
-        for (Iterator iterator = componente.getFacetsAndChildren(); iterator.hasNext();) {
-            UIComponent comp = (UIComponent) iterator.next();
-            if (comp.getClientId().endsWith(LayoutTelaAreaConhecida.AREA_INPUT_GENERICO)) {
-                return comp;
-            } else {
-                UIComponent compRec = getComponentInputFormPadraoChildRecursivo(comp);
-                if (compRec != null) {
-                    return compRec;
-                }
-            }
-        }
-        return null;
-    }
-
-    public String getNomeIdComponenteInputParaCompositeComp(UIComponent componente) {
-
-        UIComponent componenteInput = componente.findComponent(LayoutTelaAreaConhecida.AREA_INPUT_GENERICO);
-        for (UIComponent cp : componenteInput.getChildren()) {
-            if (cp.isRendered()) {
-                return getNomeIdComponenteInput(cp, false);
-            }
-        }
-        return getNomeIdComponenteInput(componente, false);
-    }
-
-    private UIComponent getComponenteRecursivoIntput(UIComponent componente) {
-
-        if (componente == null) {
-            return null;
-        }
-        if (isComponentDeInput(componente)) {
-            return componente;
-        } else {
-            if (componente.getChildCount() == 0) {
-                return null;
-            }
-            UIComponent compEncontrado = null;
-            Iterator<UIComponent> componentes = componente.getFacetsAndChildren();
-            UIComponent comp;
-            while (componentes.hasNext()) {
-                comp = componentes.next();
-                if (isComponentDeInput(comp)) {
-                    return comp;
-                } else {
-                    if (comp != null) {
-                        compEncontrado = getComponenteRecursivoIntput(comp);
-                        if (compEncontrado != null) {
-                            return compEncontrado;
-                        }
-
-                    } else {
-                        return compEncontrado;
-                    }
-                }
             }
         }
         return null;
@@ -720,6 +653,73 @@ public class PgUtil implements Serializable {
         }
     }
 
+    public String getNomeIdComponenteInput(UIComponent componente) {
+        return getNomeIdComponenteInput(componente, true);
+    }
+
+    public UIComponent getComponentInputFormPadraoChildRecursivo(UIComponent componente) {
+        if (componente.getClientId().endsWith(LayoutTelaAreaConhecida.AREA_INPUT_GENERICO)) {
+            return componente;
+        }
+        for (Iterator iterator = componente.getFacetsAndChildren(); iterator.hasNext();) {
+            UIComponent comp = (UIComponent) iterator.next();
+            if (comp.getClientId().endsWith(LayoutTelaAreaConhecida.AREA_INPUT_GENERICO)) {
+                return comp;
+            } else {
+                UIComponent compRec = getComponentInputFormPadraoChildRecursivo(comp);
+                if (compRec != null) {
+                    return compRec;
+                }
+            }
+        }
+        return null;
+    }
+
+    private UIComponent getComponenteRecursivoIntput(UIComponent componente) {
+
+        if (componente == null) {
+            return null;
+        }
+        if (isComponentDeInput(componente)) {
+            return componente;
+        } else {
+            if (componente.getChildCount() == 0) {
+                return null;
+            }
+            UIComponent compEncontrado = null;
+            Iterator<UIComponent> componentes = componente.getFacetsAndChildren();
+            UIComponent comp;
+            while (componentes.hasNext()) {
+                comp = componentes.next();
+                if (isComponentDeInput(comp)) {
+                    return comp;
+                } else {
+                    if (comp != null) {
+                        compEncontrado = getComponenteRecursivoIntput(comp);
+                        if (compEncontrado != null) {
+                            return compEncontrado;
+                        }
+
+                    } else {
+                        return compEncontrado;
+                    }
+                }
+            }
+        }
+        return null;
+
+    }
+
+    public String getIdByPrimefacesSearch(String pParametro, UIComponent pCmponente) {
+        try {
+            String id = SearchExpressionUtils.resolveClientId(pParametro, pCmponente);
+            return id;
+        } catch (Throwable t) {
+            SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "Erro localizando compoente via search expression", t);
+        }
+        return null;
+    }
+
     public String getIDComponenteFilhoPorCordenada(UIComponent componente, int... indices) {
         if (componente == null) {
             System.out.println("Enviado componente nulo buscando id por cordenada");
@@ -748,12 +748,6 @@ public class PgUtil implements Serializable {
         System.out.println(comp.getRendererType());
 
         return "Ainda não Implmentado mas o id é:" + comp.getClientId();
-    }
-
-    public void preencherEndereco(String pcep) {
-        System.out.println("CEP ENVIADO:" + pcep);
-
-        // UtilSBCoreCEP.configuraEndereco(pcep, pLocal);
     }
 
     public String buscaFilhoComEsteID(UIComponent componente, String atributo) {
@@ -1244,7 +1238,7 @@ public class PgUtil implements Serializable {
 
             case H_PANEL_GROUP_INPUTSB:
                 if (comp instanceof HtmlPanelGroup) {
-                    return comp.getId().equals("inputFormPadrao");
+                    return comp.getId().endsWith(LayoutTelaAreaConhecida.AREA_INPUT_GENERICO);
 
                 } else {
                     return false;

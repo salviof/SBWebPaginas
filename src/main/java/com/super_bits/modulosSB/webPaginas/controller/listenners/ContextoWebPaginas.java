@@ -1,9 +1,14 @@
 package com.super_bits.modulosSB.webPaginas.controller.listenners;
 
-import com.google.common.collect.UnmodifiableIterator;
+import br.org.coletivojava.fw.utils.agendador.UtilSBAgendadorTarefas;
 import com.super_bits.modulos.SBAcessosModel.controller.UtilSBControllerAcessosModel;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
+import com.super_bits.modulosSB.SBCore.UtilGeral.MapaAcoesSistema;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreReflexao;
+import com.super_bits.modulosSB.SBCore.modulos.Controller.ErroChamadaController;
+import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.ItfRespostaAcaoDoSistema;
+import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ItfAcaoControllerAutoExecucao;
+import com.super_bits.modulosSB.SBCore.modulos.Controller.acoesAutomatizadas.FabTipoAutoExecucaoAcao;
 import com.super_bits.modulosSB.webPaginas.ConfigGeral.ConfiguradorCoreDeProjetoWebWarAbstrato;
 import com.super_bits.modulosSB.webPaginas.ConfigGeral.ItfInicioFimAppWP;
 import com.super_bits.modulosSB.webPaginas.ConfigGeral.SBWebPaginas;
@@ -13,11 +18,6 @@ import javax.servlet.ServletContextListener;
 import org.coletivojava.fw.api.tratamentoErros.FabErro;
 
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-/**
  *
  *
  * @author Salvio
@@ -36,11 +36,8 @@ public class ContextoWebPaginas implements ServletContextListener {
 
             if (inicio == null) {
                 Class classeInicioFim = UtilSBCoreReflexao.getClasseQueEstendeIsto(ItfInicioFimAppWP.class, "com.super_bits.config.webPaginas");
-                com.google.common.collect.Sets teste = null;
                 System.out.println("A classe de inicio e fim de contexto encontrada foi" + classeInicioFim.getName());
-
                 inicio = (ItfInicioFimAppWP) classeInicioFim.newInstance();
-
                 System.out.println("Sistema Iniciado em " + sce.getServletContext().getVirtualServerName());
             }
             ConfiguradorCoreDeProjetoWebWarAbstrato.contextoDoServlet = sce.getServletContext();
@@ -48,16 +45,36 @@ public class ContextoWebPaginas implements ServletContextListener {
             //   String webDir = this.getClass().getClassLoader().getResource("com/company/project/mywebdir").toExternalForm();
 
             inicio.inicio();
+            System.out.println("Listando autoexecuções");
+            for (ItfAcaoControllerAutoExecucao acao : MapaAcoesSistema.getListaAcoesAutomatizadas()) {
+                System.out.println("Programando " + acao.getNomeUnico());
+                switch (acao.getTipoAutoExecucao().getEstrategia()) {
+                    case GATILHO:
+                        if (acao.getTipoAutoExecucao().equals(FabTipoAutoExecucaoAcao.SISTEMA_BOOT)) {
+                            ItfRespostaAcaoDoSistema resposta = SBCore.getServicoController().getResposta(acao.getEnumAcaoDoSistema());
+                            if (!resposta.isSucesso()) {
+                                try {
 
+                                } catch (Throwable t) {
+                                    SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "Erro executando ação de boot:  " + acao.getNomeUnico() + " -> " + resposta.getMensagens().get(0).getMenssagem(), t);
+                                }
+                            }
+                        }
+                        break;
+                    case DIARIO:
+                    case MENSAL:
+                    case LOOP:
+                    case MINUTOS:
+                    case HORAS:
+                        UtilSBAgendadorTarefas.agendarAutoExecucaoAcaoProxima(acao);
+                        break;
+                    default:
+                        throw new AssertionError(acao.getTipoAutoExecucao().getEstrategia().name());
+
+                }
+            }
             if (!SBCore.isEmModoProducao()) {
-                //System.out.println("Os seguintes resources foram encontrados:");
-                // ServletContext contexto = sce.getServletContext();
-                //  System.out.println(contexto.getClass().getCanonicalName());
-                //    URL recursoTEste = sce.getServletContext().getResource("/site/modulos/gestaoRequisitos/gerenciarRequisitosSolicitados.xhtml");
 
-                // for (String caminho : ConfiguradorCoreDeProjetoWebWarAbstrato.contextoDoServlet.getResourcePaths("/")) {
-                //     System.out.println(caminho);
-                // }
             }
             //Atualizando permissões
             if (!SBCore.isIgnorarPermissoes()) {
@@ -76,6 +93,30 @@ public class ContextoWebPaginas implements ServletContextListener {
     @Override
     public void contextDestroyed(ServletContextEvent sce) {
         System.out.println("Finalizando contexto");
+
+        for (ItfAcaoControllerAutoExecucao acao : MapaAcoesSistema.getListaAcoesAutomatizadas()) {
+            switch (acao.getTipoAutoExecucao().getEstrategia()) {
+                case GATILHO:
+                    if (acao.getTipoAutoExecucao().equals(FabTipoAutoExecucaoAcao.SISTEMA_FINAL)) {
+                        ItfRespostaAcaoDoSistema resposta;
+                        try {
+                            resposta = SBCore.getServicoController().getResposta(acao.getEnumAcaoDoSistema());
+                            if (!resposta.isSucesso()) {
+                                try {
+
+                                } catch (Throwable t) {
+                                    SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "Erro executando ação de boot:  " + acao.getNomeUnico() + " -> " + resposta.getMensagens().get(0).getMenssagem(), t);
+                                }
+                            }
+                        } catch (ErroChamadaController ex) {
+                            SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "Falha executando ação final do bookt", ex);
+                        }
+
+                    }
+                    break;
+
+            }
+        }
     }
 
 }

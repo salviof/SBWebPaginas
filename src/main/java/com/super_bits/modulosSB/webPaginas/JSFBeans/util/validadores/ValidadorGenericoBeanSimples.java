@@ -36,7 +36,7 @@ public class ValidadorGenericoBeanSimples extends ValidadorGenericoAbstrato<Obje
                         case OUTROS_OBJETOS:
 
                             boolean umNovoRegistro = campoInstanciado.getObjetoDoAtributo().getId() == 0;
-                            validar(campoInstanciado, umNovoRegistro, value);
+                            validar(campoInstanciado, component, umNovoRegistro, value);
                             break;
                         default:
                             lancarMensagemValidacao("O Tipo de atributo não é compatível com este tipo de validação");

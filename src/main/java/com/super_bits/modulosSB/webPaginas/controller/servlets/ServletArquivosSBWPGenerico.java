@@ -10,11 +10,8 @@ import com.super_bits.modulosSB.SBCore.modulos.ManipulaArquivo.FabTipoArquivoCon
 import com.super_bits.modulosSB.webPaginas.ConfigGeral.SBWebPaginas;
 import com.super_bits.modulosSB.webPaginas.controller.servlets.servletArquivoDeEntidade.ServletArquivosDeEntidade;
 import com.super_bits.modulosSB.webPaginas.util.UtilSBWP_JSFTools;
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;

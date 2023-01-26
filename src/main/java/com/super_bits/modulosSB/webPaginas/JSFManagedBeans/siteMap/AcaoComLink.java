@@ -59,7 +59,7 @@ public class AcaoComLink extends ItemGenerico implements ItfAcaoDoSistema {
             urlParcialGestao = pPagina.getUrlPadrao().replace("/.wp", "");
         } else {
             if (urlFull.endsWith(".html")) {
-                urlParcialGestao = pPagina.getUrlPadrao().replace("/.wp", "");
+                urlParcialGestao = pPagina.getUrlPadrao().replace("/.html", "");
             } else {
                 urlParcialGestao = pPagina.getUrlPadrao();
             }
@@ -88,6 +88,7 @@ public class AcaoComLink extends ItemGenerico implements ItfAcaoDoSistema {
         }
         String slugurlAcao = "/ac-" + UtilSBCoreStringFiltros.gerarUrlAmigavel(pAcao.getNomeAcao());
         urlDeAcesso = pAcaoGestaoLink.getUrlParcialGestao() + slugurlAcao + "/.html";
+
         urlParcialGestao = pAcaoGestaoLink.getUrlParcialGestao();
     }
 

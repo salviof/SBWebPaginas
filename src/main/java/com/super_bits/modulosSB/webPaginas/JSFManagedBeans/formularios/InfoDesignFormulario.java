@@ -76,6 +76,9 @@ public class InfoDesignFormulario {
     }
 
     public LayoutComponentesEmTela gerarLayoutGrid(ItfGrupoCampos pGrupoCampo) {
+        if (pGrupoCampo == null) {
+            return null;
+        }
         return gerarLayout(pGrupoCampo);
     }
 

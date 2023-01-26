@@ -27,6 +27,8 @@
                     value="#{registro.comoSeltorItens.campoSeletorItens.dualListPrime}"
                     var="item"
                     itemValue="#{item}"
+                    validator="org.super_bits.view.validadores.listaBeanSimplesPickPrimer"
+                    validatorMessage="O valor informado  #{label} é invalido!"
                     itemLabel="#{item.nome}"
                     responsive="true"
                     showSourceFilter="#{comoSeltorItens.origem.size()>8}"
@@ -35,14 +37,18 @@
                     converter="conversorGenerico"
                     style="margin-left: 0.5%"
                     >
-
+                    <f:passThroughAttribute name="caminhoCampo" value="#{registro.nomeCompostoIdentificador}" />
+                    <f:passThroughAttribute name="dominio" value="#{registro.nomeClasseOrigemAtributo}" />
+                    <f:passThroughAttribute name="campoInstanciado" value="#{registro}" />
                     <c:if test="#{atualizarFormOnChange}" >
                         <p:ajax event="transfer" listener="#{registro.comoSeltorItens.atualizarListaCompleta()}" update="@form"  />
                     </c:if>
 
                     <c:if test="#{possuiIDOnChange}" >
                         <p:ajax event="transfer"
-
+                                global="true"
+                                update="#{idAtualizarOnChange}"
+                                process="@this"
                                 onstart="bloquearArea('#{idAtualizarOnChange}')"
                                 oncomplete="desbloquearArea('#{idAtualizarOnChange}')"
                                 />

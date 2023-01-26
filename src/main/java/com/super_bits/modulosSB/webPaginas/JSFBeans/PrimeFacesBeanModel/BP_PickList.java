@@ -81,7 +81,7 @@ public class BP_PickList<T extends ItfBeanSimplesSomenteLeitura> extends B_lista
         } catch (Throwable t) {
             SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "Erro criando " + DualListModel.class.getSimpleName() + " "
                     + t.getMessage(),
-                     t
+                    t
             );
             return null;
         }
@@ -104,6 +104,9 @@ public class BP_PickList<T extends ItfBeanSimplesSomenteLeitura> extends B_lista
                 getListaObjetosSelecionados().clear();
                 dualListPrime.getTarget().stream().filter(it -> !getListaObjetosSelecionados().contains(it)).
                         forEach(getListaObjetosSelecionados()::add);
+
+            } else {
+                limparSelecao();
 
             }
             ajuste(true);

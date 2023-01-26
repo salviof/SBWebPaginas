@@ -91,18 +91,19 @@ public class CentralComunicaoWebPadrao extends CentralComunicaoAbstrato implemen
     public FabTipoRespostaComunicacao aguardarRespostaComunicacao(ItfTipoTransporteComunicacao pTransporte,
             ItfComunicacao pComunicacao, int tempoAguardar, FabTipoRespostaComunicacao pTipoRespostaTempoFinal) {
         FabTipoComunicacao tipocomunicacao = pComunicacao.getTipoComunicacao().getFabTipoComunicacao();
-
-        int dialogResult
-                = JOptionPane.showConfirmDialog(null, pComunicacao.getMensagem(),
-                        "Deseja continuar?", JOptionPane.YES_OPTION);
-        if (dialogResult
-                == JOptionPane.YES_OPTION) {
-            return FabTipoRespostaComunicacao.SIM;
-        } else {
-            System.out.println("não");
-            return FabTipoRespostaComunicacao.NAO;
+        if (SBCore.isEmModoDesenvolvimento()) {
+            int dialogResult
+                    = JOptionPane.showConfirmDialog(null, pComunicacao.getMensagem(),
+                            "Deseja continuar?", JOptionPane.YES_OPTION);
+            if (dialogResult
+                    == JOptionPane.YES_OPTION) {
+                return FabTipoRespostaComunicacao.SIM;
+            } else {
+                System.out.println("não");
+                return FabTipoRespostaComunicacao.NAO;
+            }
         }
-
+        throw new UnsupportedOperationException("aguardar resposta comunicação web não foi implementado");
     }
 
     @Override

@@ -18,6 +18,7 @@ public enum FabConfigModuloWebAppGenerico implements ItfFabConfigModulo {
     URL_DOMINIO_APLICACAO,
     NOME_APLICACAO,
     PREFIXO_PATHURL,
+    @Deprecated
     DOMINIO_MASTER,
     @Deprecated
     ROCKET_CHAT_SERVER,
