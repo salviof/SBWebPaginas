@@ -97,7 +97,7 @@
                                                              icon="#{iconeIconeFontAwesome.REG_REMOVER.tagHtml}"
                                                              action="#{registro.comoArquivoDeEntidade.excluirArquivo()}"
                                                              update="#{pgUtil.getNomeIdPainelDoComponente(component)}"
-                                                             rendered="#{!somenteLeitura}"
+                                                             rendered="#{!somenteLeitura and registro.objetoDoAtributo.id >0}"
                                                              />
                                         </td>
                                     </h:column>

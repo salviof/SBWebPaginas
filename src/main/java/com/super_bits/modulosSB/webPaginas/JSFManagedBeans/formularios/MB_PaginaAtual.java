@@ -218,6 +218,21 @@ public abstract class MB_PaginaAtual implements Serializable {
         }
     }
 
+    public boolean isUmaPaginaNovoRegistro() {
+        try {
+            if (!getInfoPagina().isPaginaDeGestao()) {
+                return false;
+            }
+            if (!getInfoPagina().getComoPaginaDeGestao().isUmaPaginaGestaoEntidade()) {
+                return false;
+            } else {
+                return getInfoPagina().getComoPaginaDeGestao().getComoPaginaEntidade().isNovoRegistro();
+            }
+        } catch (Throwable t) {
+            return false;
+        }
+    }
+
     public void recepcaoNotificacaoPush() {
         if (getInfoPagina() instanceof ItfB_PaginaRecepcaoPush) {
 

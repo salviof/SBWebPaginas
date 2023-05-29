@@ -29,7 +29,7 @@
                     itemValue="#{item}"
                     validator="org.super_bits.view.validadores.listaBeanSimplesPickPrimer"
                     validatorMessage="O valor informado  #{label} é invalido!"
-                    itemLabel="#{item.nome}"
+                    itemLabel="#{item.getCampoInstanciadoByNomeOuAnotacao('AAA_NOME').valor}"
                     responsive="true"
                     showSourceFilter="#{comoSeltorItens.origem.size()>8}"
                     showTargetFilter="#{comoSeltorItens.valor.size()>8}"

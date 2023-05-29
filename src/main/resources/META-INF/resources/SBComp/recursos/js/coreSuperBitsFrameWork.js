@@ -580,24 +580,23 @@ function atualizarAreaByID(idAreaAtualizada) {
     desbloquearArea(idAreaAtualizada);
 }
 
-function getIdMaisProximo(elemento) {
-    if (elemento.parentElement.id.length > 0) {
-        return elemento.id;
-    } else {
-        if (!elemento.hasParent()) {
-            return "";
-        } else {
-            getIdMaisProximo(elemento.parentElement);
-        }
 
+
+
+
+function getIdSuperiorMaisProximo(pElemento) {
+    if (pElemento === null) {
+        return null;
     }
+    if (pElemento.id.length > 0) {
+        return pElemento.id;
+    }
+    if (pElemento.parentElement === null) {
+        return null;
+    }
+    return getIdMaisProximo(pElemento.parentElement);
 }
 
-
-
-async function myFunction() {
-    return "Hello";
-}
 
 async function  atualizarAreaCampoByCssEstilo(pClasse) {
 
@@ -607,7 +606,7 @@ async function  atualizarAreaCampoByCssEstilo(pClasse) {
 // "Producing Code" (May take some time)
         try {
             $('.' + pClasse).each(function (i, obj) {
-                bloquearArea(obj.id);
+                bloquearArea(getIdSuperiorMaisProximo(obj));
             });
         } catch (r) {
             console.log("Erro bloqueando campos com a classe " + pClasse);
@@ -623,7 +622,7 @@ async function  atualizarAreaCampoByCssEstilo(pClasse) {
         }
         delay(3000).then(() => {
             $('.' + pClasse).each(function (i, obj) {
-                desbloquearArea(obj.id);
+                desbloquearArea(getIdSuperiorMaisProximo(obj));
             });
         });
 

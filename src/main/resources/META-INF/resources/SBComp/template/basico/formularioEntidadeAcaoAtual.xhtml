@@ -17,6 +17,7 @@
             <h:panelGroup styleClass="Fright" layout="block">
                 <h:form>
                     <SBAcaoNav:botaoDeAcao_Pagina_Entidade
+                        rendered="#{paginaAtual.infoPagina.comoPaginaEntidade.acaoListarRegistros!=null}"
                         registro="#{paginaAtual.infoPagina.comoPaginaEntidade.entidadeSelecionada}"
                         acao="#{paginaAtual.infoPagina.comoPaginaEntidade.acaoListarRegistros}"
                         tipoVisualizacao="#{layoutsComponenteSB.layoutBotoes.iconeENome}"

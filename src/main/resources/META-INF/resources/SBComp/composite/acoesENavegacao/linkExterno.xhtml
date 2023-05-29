@@ -1,36 +1,46 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:cc="http://java.sun.com/jsf/composite"
-      xmlns:h="http://java.sun.com/jsf/html"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:cc="http://java.sun.com/jsf/composite"
 
-      >
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+                xmlns:p="http://primefaces.org/ui">
 
     <!-- INTERFACE -->
     <cc:interface>
         <cc:attribute name="endereco"
                       type="java.lang.String"   required="true"/>
+        <cc:attribute name="target" default="sblinkExterno" />
+        <cc:attribute name="classeEstilo" type="java.lang.String" shortDescription="Classe para estilização personalizada de botão" required="false" />
+        <cc:attribute name="abrirEmNovaJanela" default="false" type="java.lang.Boolean" />
+        <cc:attribute name="titulo"  default="#{cc.attrs.endereco}" />
+        <cc:attribute name="icone" />
+
 
     </cc:interface>
     <!-- IMPLEMENTATION -->
     <cc:implementation>
 
 
+        <c:if test="#{cc.attrs.abrirEmNovaJanela}" >
+            <p:button
+                styleClass="btnIconeENome botao #{cc.attrs.classeEstilo}"
+                href="#{cc.attrs.endereco}"
+                target="#{cc.attrs.target}"
+                value="#{cc.attrs.titulo}"
+                icon="#{cc.attrs.icone}"
+                />
 
-
-        <a href="http://#{cc.attrs.endereco}"  target="sbexterno"     > #{cc.attrs.endereco} </a>
-
+        </c:if>
+        <c:if test="#{!cc.attrs.abrirEmNovaJanela}" >
+            <p:button
+                styleClass="btnIconeENome botao #{cc.attrs.classeEstilo}"
+                href="#{cc.attrs.endereco}"
+                target="#{cc.attrs.target}"
+                value="#{cc.attrs.titulo}"
+                icon="#{cc.attrs.icone}"
+                />
+        </c:if>
 
 
     </cc:implementation>
-</html>
-
-
-
-
-
-
-
-
-
-
+</ui:composition>

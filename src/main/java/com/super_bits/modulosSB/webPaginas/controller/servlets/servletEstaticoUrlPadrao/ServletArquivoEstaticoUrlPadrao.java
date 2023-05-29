@@ -31,6 +31,7 @@ public class ServletArquivoEstaticoUrlPadrao extends ServletArquivosSBWPGenerico
     protected void doGet(HttpServletRequest requisicao, HttpServletResponse resp) throws ServletException, IOException {
         try {
             String caminhoRecurso = UtilSBWPServletTools.geCaminhoRecursoDoUrl(requisicao);
+
             caminhoRecurso = caminhoRecurso.replace("libUrlPadrao/", "");
             resp.addHeader("Cache-Control", "max-age=2592000");
             String caminhoLocal = requisicao.getServletContext().getRealPath("/") + "/resources/SBComp/recursos/urlPadrao/" + caminhoRecurso;

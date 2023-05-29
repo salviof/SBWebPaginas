@@ -46,6 +46,7 @@ import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.interface
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.interfaces.ItfB_PaginaComEtapaVinculada;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.interfaces.ItfPaginaGerenciarEntidade;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.modal.ModalDadosPaginaSimples;
+import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.modal.TipoRespostaModal;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.reflexao.ItfBeanDeclarado;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.reflexao.anotacoes.beans.InfoMBIdComponente;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.reflexao.anotacoes.beans.InfoMB_Acao;
@@ -85,7 +86,9 @@ import javax.inject.Inject;
 import org.primefaces.event.SelectEvent;
 import javax.persistence.EntityManager;
 import org.coletivojava.fw.api.objetoNativo.comunicacao.RespostaComunicacao;
+import org.coletivojava.fw.api.objetoNativo.comunicacao.TipoRespostaComunicacao;
 import org.coletivojava.fw.api.tratamentoErros.FabErro;
+import org.primefaces.component.commandbutton.CommandButton;
 
 public abstract class B_Pagina implements Serializable, ItfB_Pagina {
 
@@ -947,6 +950,61 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
 
     /**
      *
+     * @return True se redirecionou para nova Rota, False se permaneceu no mesmo
+     * URL
+     */
+    protected boolean autoExecNovaRotaUrlAcaoSelecionada() {
+        if (acaoSelecionada != null) {
+            if (!acaoSelecionada.getAcaoDeGestaoEntidade().equals(getAcaoVinculada())) {
+                try {
+                    EstruturaDeFormulario estrutura = MapaDeFormularios.getEstruturaByNomeAcao(acaoSelecionada.getAcaoDeGestaoEntidade().getNomeUnico(), true);
+                    if (estrutura.getParametrosURL().isEmpty() || getBeanSelecionado() == null) {
+                        //sem parametro ou sem entidade selecionada, não muda o url
+
+                    } else {
+                        //Caso hajá possibilidade de alterar o URL
+                        Optional<ParametroURL> p = estrutura.getParametrosURL().stream().
+                                filter(pr -> pr.getTipoEntidade().equals(UtilSBCoreReflexaoObjeto.getClassExtraindoProxy(getBeanSelecionado().getClass().getSimpleName()))).findFirst();
+                        if (p.isPresent()) {
+                            // Se tem um parametro da entidade principal da página, então atualiza a URL
+                            String url = MapaDeFormularios.getUrlFormulario(acaoSelecionada, getBeanSelecionado());
+                            UtilSBWP_JSFTools.vaParaPagina(url);
+                            return true;
+                        } else {
+
+                            ItfCampoInstanciado cpprvinculo = null;
+                            for (ParametroURL pr : estrutura.getParametrosURL()) {
+                                Optional<ItfCampoInstanciado> cp = getBeanSelecionado().getCamposInstanciados().stream()
+                                        .filter(cpinst -> cpinst.getTipoCampoSTR().equals(FabTipoAtributoObjeto.OBJETO_DE_UMA_LISTA.toString())
+                                        && cpinst.getValor() != null
+                                        && UtilSBCoreReflexao.isClasseIgualOuExetende(cpinst.getValor().getClass(), pr.getTipoEntidade())
+                                        ).findFirst();
+                                if (cp.isPresent()) {
+                                    cpprvinculo = cp.get();
+                                    break;
+                                }
+
+                            }
+                            if (cpprvinculo != null) {
+                                String urlAutoRedirecionamento = MapaDeFormularios.getUrlFormulario(acaoSelecionada, cpprvinculo.getValor());
+                                UtilSBWP_JSFTools.vaParaPagina(urlAutoRedirecionamento);
+                                return true;
+                            } else {
+                                UtilSBWP_JSFTools.vaParaPagina(MapaDeFormularios.getUrlFormulario(acaoSelecionada));
+                                return true;
+                            }
+                        }
+                    }
+                } catch (Throwable t) {
+                    UtilSBWP_JSFTools.vaParaPagina(MapaDeFormularios.getUrlFormulario(acaoSelecionada));
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
+     *
      * Este metodo por padrão troca o xhtml atual caso nescessário, e atualiza o
      * conteudo, normalmente é substituído por um método superior, mas pode ser
      * utilizado de forma combinada (Chamando super.executarAcaoSelecionada)
@@ -962,48 +1020,12 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
             if (acaoSelecionada == null) {
                 throw new UnsupportedOperationException("A ação selecionada não pode ser nula");
             }
+            adicionarAcaoNoHistorico(acaoSelecionada);
             if (tipoFormulario.equals(FabTipoFormulario.PAGINA_SIMPLES)) {
-                if (!acaoSelecionada.getAcaoDeGestaoEntidade().equals(getAcaoVinculada())) {
-                    try {
-                        EstruturaDeFormulario estrutura = MapaDeFormularios.getEstruturaByNomeAcao(acaoSelecionada.getAcaoDeGestaoEntidade().getNomeUnico(), true);
-                        if (estrutura.getParametrosURL().isEmpty() || getBeanSelecionado() == null) {
-
-                            UtilSBWP_JSFTools.vaParaPagina(MapaDeFormularios.getUrlFormulario(acaoSelecionada));
-                        } else {
-
-                            Optional<ParametroURL> p = estrutura.getParametrosURL().stream().
-                                    filter(pr -> pr.getTipoEntidade().getSimpleName().equals(getBeanSelecionado().getClass().getSimpleName())).findFirst();
-                            if (p.isPresent()) {
-                                MapaDeFormularios.getUrlFormulario(acaoSelecionada, getBeanSelecionado());
-                            } else {
-
-                                ItfCampoInstanciado cpprvinculo = null;
-                                for (ParametroURL pr : estrutura.getParametrosURL()) {
-                                    Optional<ItfCampoInstanciado> cp = getBeanSelecionado().getCamposInstanciados().stream()
-                                            .filter(cpinst -> cpinst.getTipoCampoSTR().equals(FabTipoAtributoObjeto.OBJETO_DE_UMA_LISTA.toString())
-                                            && cpinst.getValor() != null
-                                            && UtilSBCoreReflexao.isClasseIgualOuExetende(cpinst.getValor().getClass(), pr.getTipoEntidade())
-                                            ).findFirst();
-                                    if (cp.isPresent()) {
-                                        cpprvinculo = cp.get();
-                                        break;
-                                    }
-
-                                }
-                                if (cpprvinculo != null) {
-                                    String urlAutoRedirecionamento = MapaDeFormularios.getUrlFormulario(acaoSelecionada, cpprvinculo.getValor());
-                                    UtilSBWP_JSFTools.vaParaPagina(urlAutoRedirecionamento);
-                                } else {
-                                    UtilSBWP_JSFTools.vaParaPagina(MapaDeFormularios.getUrlFormulario(acaoSelecionada));
-                                }
-                            }
-                        }
-                    } catch (Throwable t) {
-                        UtilSBWP_JSFTools.vaParaPagina(MapaDeFormularios.getUrlFormulario(acaoSelecionada));
-                    }
+                if (autoExecNovaRotaUrlAcaoSelecionada()) {
+                    return;
                 }
             }
-            adicionarAcaoNoHistorico(acaoSelecionada);
 
             if (acaoSelecionada.isUmaAcaoFormulario()) {
                 autoExecAlterarFormulario(acaoSelecionada.getComoFormulario(), false);
@@ -1203,45 +1225,73 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
     }
 
     @Override
-    public void metodoRespostaModal(Object... pParametros) {
+    public synchronized void metodoRespostaModal(Object... pParametros) {
+        TipoRespostaModal tipoREspostaMordal = TipoRespostaModal.INDEFINIDO;
+        TipoRespostaComunicacao tipoREspostacomunicacaoModal = null;
+        if (pParametros == null) {
+            return;
+        }
+        Object paraMetroPrincipal = pParametros[0];
+        if (paraMetroPrincipal instanceof SelectEvent) {
+            paraMetroPrincipal = ((SelectEvent) paraMetroPrincipal).getObject();
+        }
+        if (paraMetroPrincipal instanceof ItfBeanSimples) {
+            tipoREspostaMordal = TipoRespostaModal.ENTIDADE_SELECAO_ITEM;
+        }
+        if (paraMetroPrincipal instanceof ItfTipoRespostaComunicacao) {
+            tipoREspostaMordal = TipoRespostaModal.RESPOSTA_TRANSIENTE;
 
-        if (pParametros != null) {
-            for (Object p : pParametros) {
-                if (p instanceof ItfBeanSimples) {
-                    if (getCampoInstSelecionado() != null) {
-                        try {
-                            getCampoInstSelecionado().setValorSeValido(p);
-                            //Update?
-                        } catch (ErroValidacao ex) {
-                            UtilSBWPMensagensJSF.erroMensagem(ex.getMessage());
-                        }
+            tipoREspostacomunicacaoModal = (TipoRespostaComunicacao) paraMetroPrincipal;
+        }
+
+        if (paraMetroPrincipal instanceof ItfRespostaComunicacao) {
+            tipoREspostaMordal = TipoRespostaModal.RESPOSTA_ACAOsISTEMA;
+            tipoREspostacomunicacaoModal = (TipoRespostaComunicacao) ((ItfRespostaComunicacao) paraMetroPrincipal).getTipoResposta();
+        }
+
+        if (paraMetroPrincipal instanceof CommandButton) {
+            CommandButton botaoSelecionado = (CommandButton) paraMetroPrincipal;
+            tipoREspostaMordal = TipoRespostaModal.RESPOSTA_ACAOsISTEMA;
+            Object resposta = botaoSelecionado.getValue();
+        }
+        if (paraMetroPrincipal instanceof ItfRespostaAcaoDoSistema) {
+            tipoREspostaMordal = TipoRespostaModal.RESPOSTA_ACAOsISTEMA;
+        }
+
+        if (tipoREspostaMordal == tipoREspostaMordal.INDEFINIDO) {
+            return;
+        }
+
+        switch (tipoREspostaMordal) {
+
+            case ENTIDADE_SELECAO_ITEM:
+                if (getCampoInstSelecionado() != null) {
+                    try {
+                        getCampoInstSelecionado().setValorSeValido(paraMetroPrincipal);
+                        //Update?
+                    } catch (ErroValidacao ex) {
+                        UtilSBWPMensagensJSF.erroMensagem(ex.getMessage());
                     }
                 }
-            }
-        }
+                break;
+            case RESPOSTA_TRANSIENTE:
+                setTipoRespostaParaAcaoAtual((ItfTipoRespostaComunicacao) paraMetroPrincipal);
+                break;
+            case RESPOSTA_ACAOsISTEMA:
+                setTipoRespostaParaAcaoAtual((ItfTipoRespostaComunicacao) tipoREspostacomunicacaoModal);
+                if (!mapaRespostasComunicacaoTransienteDeAcaoByAcoes.isEmpty()) {
+                    if (mapaRespostasComunicacaoTransienteDeAcaoByAcoes.containsKey(getAcaoSelecionada().getNomeUnico())) {
+                        if (tipoREspostacomunicacaoModal.isRespostasPosiva()) {
+                            executarAcaoSelecionada();
+                        }
+                        mapaRespostasComunicacaoTransienteDeAcaoByAcoes.clear();
+                        mapaComunicacaoTransienteDeAcaoByIdModal.clear();
+                    }
 
-        if (pParametros != null) {
-            for (Object p : pParametros) {
-                if (p instanceof ItfTipoRespostaComunicacao) {
-                    setTipoRespostaParaAcaoAtual((ItfTipoRespostaComunicacao) p);
                 }
-            }
-        }
-
-        if (pParametros != null) {
-            for (Object p : pParametros) {
-                if (p instanceof ItfRespostaAcaoDoSistema) {
-                    setTipoRespostaParaAcaoAtual(((ItfRespostaComunicacao) p).getTipoResposta());
-                }
-            }
-        }
-        if (!mapaRespostasComunicacaoTransienteDeAcaoByAcoes.isEmpty()) {
-            if (mapaRespostasComunicacaoTransienteDeAcaoByAcoes.containsKey(getAcaoSelecionada().getNomeUnico())) {
-                executarAcaoSelecionada();
-                mapaRespostasComunicacaoTransienteDeAcaoByAcoes.clear();
-                mapaComunicacaoTransienteDeAcaoByIdModal.clear();
-            }
-
+                break;
+            default:
+                throw new AssertionError();
         }
 
     }
@@ -1511,6 +1561,7 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
                 UtilSBWP_JSFTools.vaParaPagina(pResposta.getUrlDestino());
                 return;
             }
+
             if (pResposta.isSucesso()) {
                 if (pResposta.getTipoRetorno().isInstance(getBeanSelecionado())) {
                     try {
@@ -1566,6 +1617,7 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
                                 setAcaoSelecionada(acaoListagemPadrao);
                                 executarAcaoSelecionada();
                                 return;
+
                             }
                         }
 

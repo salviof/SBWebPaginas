@@ -10,7 +10,6 @@ import com.super_bits.modulosSB.Persistencia.dao.UtilSBPersistencia;
 import com.super_bits.modulosSB.Persistencia.dao.consultaDinamica.ConsultaDinamicaDeEntidade;
 import com.super_bits.modulosSB.Persistencia.registro.persistidos.EntidadeSimples;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
-import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreListas;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreListasObjeto;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreReflexao;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreReflexaoObjeto;
@@ -29,7 +28,6 @@ import com.super_bits.modulosSB.SBCore.modulos.Controller.UtilFabricaDeAcoesBasi
 import com.super_bits.modulosSB.SBCore.modulos.Controller.fabricas.FabTipoAcaoSistemaGenerica;
 import com.super_bits.modulosSB.SBCore.modulos.Mensagens.FabMensagens;
 import com.super_bits.modulosSB.SBCore.modulos.comunicacao.FabTipoRespostaComunicacao;
-import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ItfTipoRespostaComunicacao;
 import com.super_bits.modulosSB.SBCore.modulos.fabrica.ItfFabricaAcoes;
 import com.super_bits.modulosSB.SBCore.modulos.geradorCodigo.model.EstruturaDeEntidade;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.anotacoes.InfoPreparacaoObjeto;
@@ -56,7 +54,6 @@ import java.io.Serializable;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -878,79 +875,83 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
     }
 
     protected void autoExecEntidadeLoad(T pEnTidade) {
-
-        switch (getAcaoSelecionada().getTipoAcaoGenerica()) {
-
-            case FORMULARIO_NOVO_REGISTRO:
-                if (getComoFormularioWeb().getAcaoVinculada().equals(getAcaoSelecionada().getAcaoDeGestaoEntidade())) {
-                    autoexecEntidadeNova();
+        if (getAcaoSelecionada().isUmaAcaoFormulario()) {
+            switch (getAcaoSelecionada().getComoFormulario().getEstadoFormulario()) {
+                case NOVO:
+                    if (getEntidadeSelecionada() == null || getEntidadeSelecionada().getId() != 0) {
+                        if (getComoFormularioWeb().getAcaoVinculada().equals(getAcaoSelecionada().getAcaoDeGestaoEntidade())) {
+                            autoexecEntidadeNova();
+                            break;
+                        }
+                    }
                     break;
-                }
-
-            case FORMULARIO_EDITAR:
-            case FORMULARIO_VISUALIZAR:
-            case FORMULARIO_PERSONALIZADO:
-                boolean mesmoentreEntidadeEAcaoAtual = true;
-                if (getAcaoSelecionada().isUmaAcaoFormulario()) {
-                    if (getAcaoSelecionada() instanceof ItfAcaoEntidade) {
-                        if (pEnTidade != null) {
-                            if (getAcaoSelecionada().getComoAcaoDeEntidade()
-                                    .getClasseRelacionada().getSimpleName().
-                                    equals(pEnTidade.getClass().getSimpleName())) {
-                                mesmoentreEntidadeEAcaoAtual = false;
+                case EDITAR:
+                case VISUALIZAR:
+                case INDEFINIDO:
+                    boolean mesmoentreEntidadeEAcaoAtual = true;
+                    if (getAcaoSelecionada().isUmaAcaoFormulario()) {
+                        if (getAcaoSelecionada() instanceof ItfAcaoEntidade) {
+                            if (pEnTidade != null) {
+                                if (getAcaoSelecionada().getComoAcaoDeEntidade()
+                                        .getClasseRelacionada().getSimpleName().
+                                        equals(pEnTidade.getClass().getSimpleName())) {
+                                    mesmoentreEntidadeEAcaoAtual = false;
+                                }
                             }
                         }
                     }
-                }
-                // Atualizando EntityManager da Entidade Selecionada
-                if (pEnTidade != null) {
+                    // Atualizando EntityManager da Entidade Selecionada
+                    if (pEnTidade != null) {
 
-                    /// caso não se trate de um novo registro
-                    if (((ItfBeanSimplesSomenteLeitura) pEnTidade).getId() != 0) {
-                        // Caso ESteja mudando de registro selecionado
-                        if (getEntidadeSelecionada() == null
-                                || ((ItfBeanSimplesSomenteLeitura) getEntidadeSelecionada()).getId() != ((ItfBeanSimplesSomenteLeitura) pEnTidade).getId()) {
-                            //Atualiza o REgsitro Selecionado
-                            if (isUmaEntidadePersistivel()) {
-                                renovarEMPagina();
-                                if (!getAcaoSelecionada().isUmaAcaoController()) {
-                                    if (mesmoentreEntidadeEAcaoAtual) {
-                                        getPaginaDoDominio().setEntidadeSelecionada((T) UtilSBPersistencia.loadEntidade((ItfBeanSimples) pEnTidade, getEMPagina()));
-                                    } else {
-                                        String strClasseEntidade = UtilSBCoreReflexaoObjeto.getClasseDiscriminatoriaPolimorfismoDeEntidade(pEnTidade);
-                                        if (strClasseEntidade != null) {
-                                            try {
-                                                pEnTidade = (T) UtilSBPersistencia.getRegistroByID(MapaObjetosProjetoAtual.getClasseDoObjetoByNome(strClasseEntidade), pEnTidade.getId(), getEMPagina());
-                                                setEntidadeSelecionada(pEnTidade);
-                                            } catch (Throwable t) {
+                        /// caso não se trate de um novo registro
+                        if (((ItfBeanSimplesSomenteLeitura) pEnTidade).getId() != 0) {
+                            // Caso ESteja mudando de registro selecionado
+                            if (getEntidadeSelecionada() == null
+                                    || ((ItfBeanSimplesSomenteLeitura) getEntidadeSelecionada()).getId() != ((ItfBeanSimplesSomenteLeitura) pEnTidade).getId()) {
+                                //Atualiza o REgsitro Selecionado
+                                if (isUmaEntidadePersistivel()) {
+                                    renovarEMPagina();
+                                    if (!getAcaoSelecionada().isUmaAcaoController()) {
+                                        if (mesmoentreEntidadeEAcaoAtual) {
+                                            getPaginaDoDominio().setEntidadeSelecionada((T) UtilSBPersistencia.loadEntidade((ItfBeanSimples) pEnTidade, getEMPagina()));
+                                        } else {
+                                            String strClasseEntidade = UtilSBCoreReflexaoObjeto.getClasseDiscriminatoriaPolimorfismoDeEntidade(pEnTidade);
+                                            if (strClasseEntidade != null) {
+                                                try {
+                                                    pEnTidade = (T) UtilSBPersistencia.getRegistroByID(MapaObjetosProjetoAtual.getClasseDoObjetoByNome(strClasseEntidade), pEnTidade.getId(), getEMPagina());
+                                                    setEntidadeSelecionada(pEnTidade);
+                                                } catch (Throwable t) {
+                                                    getPaginaDoDominio().setEntidadeSelecionada((T) UtilSBPersistencia.loadEntidade((ItfBeanSimples) pEnTidade, getEMPagina()));
+                                                }
+                                            } else {
                                                 getPaginaDoDominio().setEntidadeSelecionada((T) UtilSBPersistencia.loadEntidade((ItfBeanSimples) pEnTidade, getEMPagina()));
                                             }
-                                        } else {
+                                        }
+
+                                    } else {
+                                        if (getEntidadeSelecionada() == null || !getEntidadeSelecionada().equals(pEnTidade)) {
+
                                             getPaginaDoDominio().setEntidadeSelecionada((T) UtilSBPersistencia.loadEntidade((ItfBeanSimples) pEnTidade, getEMPagina()));
+                                        } else {
+                                            getPaginaDoDominio().setEntidadeSelecionada(pEnTidade);
                                         }
                                     }
 
                                 } else {
-                                    if (getEntidadeSelecionada() == null || !getEntidadeSelecionada().equals(pEnTidade)) {
-
-                                        getPaginaDoDominio().setEntidadeSelecionada((T) UtilSBPersistencia.loadEntidade((ItfBeanSimples) pEnTidade, getEMPagina()));
-                                    } else {
-                                        getPaginaDoDominio().setEntidadeSelecionada(pEnTidade);
-                                    }
+                                    getPaginaDoDominio().setEntidadeSelecionada(pEnTidade);
                                 }
 
-                            } else {
-                                getPaginaDoDominio().setEntidadeSelecionada(pEnTidade);
-                            }
+                            }// se a entidadeSelecionada anteriormente for nula, ou se a nova entidade for diferente dela
 
-                        }// se a entidadeSelecionada anteriormente for nula, ou se a nova entidade for diferente dela
+                        }//se a nova entidade  a ser selecionada(pEntidade) não for um novo registro (com id 0)
 
-                    }//se a nova entidade  a ser selecionada(pEntidade) não for um novo registro (com id 0)
+                    }// se a nova entidade  a ser selecionada(pEntidade) for diferente de nulo
 
-                }// se a nova entidade  a ser selecionada(pEntidade) for diferente de nulo
-                break;
-            default:
-                getPaginaDoDominio().setEntidadeSelecionada(pEnTidade);
+                default:
+                    getPaginaDoDominio().setEntidadeSelecionada(pEnTidade);
+            }
+        } else {
+            getPaginaDoDominio().setEntidadeSelecionada(pEnTidade);
         }
 
     }
@@ -1203,7 +1204,9 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
                 case ACAO_FORMULARIO:
 
                     autoExecAlterarFormulario(acaoSelecionada.getComoFormulario(), alterouEntidade);
-
+                    if (autoExecNovaRotaUrlAcaoSelecionada()) {
+                        return;
+                    }
                     break;
                 case ACAO_ENTIDADE_FORMULARIO_MODAL:
                     if (!isPermitidoAbrirFormulario()) {
@@ -1222,12 +1225,15 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
                         } else {
                             FabTipoRespostaComunicacao respComunicacao = mapaRespostasComunicacaoTransienteDeAcaoByAcoes.get(getAcaoSelecionada().getNomeUnico());
                             if (respComunicacao != null) {
+
                                 if (respComunicacao.isRespostaPositiva()) {
                                     ItfRespostaAcaoDoSistema respAcao = autoExecAcaoController((T) pEntidadeSelecionada);
+                                    respAcao.dispararMensagens();
                                     ultimaRespostaControllerRecebida = respAcao;
                                     autoExecProximaAcaoAposController((ItfAcaoController) acaoSelecionada, respAcao);
                                 } else {
                                     ultimaRespostaControllerRecebida = null;
+
                                     autoExecProximaAcaoAposController((ItfAcaoController) acaoSelecionada, null);
                                 }
                             }
