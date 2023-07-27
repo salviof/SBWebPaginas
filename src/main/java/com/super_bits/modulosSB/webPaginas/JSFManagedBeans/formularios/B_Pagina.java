@@ -1224,13 +1224,31 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
         modalAtual = pModal;
     }
 
+    public synchronized void metodoRespostaModal() {
+        System.out.println("Chamou metodo resposta modal sem parametro");
+        System.out.println("Entidade=");
+        System.out.println(getBeanSelecionado());
+        if (getRespostaAcaoAtual() != null) {
+            System.out.println("Resposta foi detectada");
+
+            System.out.println(getRespostaAcaoAtual().getRegistro().getNome());
+            metodoRespostaModal(getRespostaAcaoAtual());
+
+        }
+    }
+
     @Override
     public synchronized void metodoRespostaModal(Object... pParametros) {
+        System.out.println("Processando parametros método modal:" + pParametros);
         TipoRespostaModal tipoREspostaMordal = TipoRespostaModal.INDEFINIDO;
         TipoRespostaComunicacao tipoREspostacomunicacaoModal = null;
         if (pParametros == null) {
             return;
         }
+        if (pParametros.length == 0) {
+            return;
+        }
+
         Object paraMetroPrincipal = pParametros[0];
         if (paraMetroPrincipal instanceof SelectEvent) {
             paraMetroPrincipal = ((SelectEvent) paraMetroPrincipal).getObject();
@@ -1245,6 +1263,7 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
         }
 
         if (paraMetroPrincipal instanceof ItfRespostaComunicacao) {
+            System.out.println("Parametro tipo resposta ItfRespostaComunicacao  ItfRespostaComunicacao");
             tipoREspostaMordal = TipoRespostaModal.RESPOSTA_ACAOsISTEMA;
             tipoREspostacomunicacaoModal = (TipoRespostaComunicacao) ((ItfRespostaComunicacao) paraMetroPrincipal).getTipoResposta();
         }
@@ -1254,6 +1273,15 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
             tipoREspostaMordal = TipoRespostaModal.RESPOSTA_ACAOsISTEMA;
             Object resposta = botaoSelecionado.getValue();
         }
+
+        if (paraMetroPrincipal instanceof FabTipoRespostaComunicacao) {
+            if (!((FabTipoRespostaComunicacao) paraMetroPrincipal).equals(FabTipoRespostaComunicacao.FECHAR)) {
+                tipoREspostacomunicacaoModal = ((FabTipoRespostaComunicacao) paraMetroPrincipal).getRegistro();
+                tipoREspostaMordal = tipoREspostaMordal = TipoRespostaModal.RESPOSTA_ACAOsISTEMA;;
+            }
+
+        }
+
         if (paraMetroPrincipal instanceof ItfRespostaAcaoDoSistema) {
             tipoREspostaMordal = TipoRespostaModal.RESPOSTA_ACAOsISTEMA;
         }
@@ -1261,7 +1289,8 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
         if (tipoREspostaMordal == tipoREspostaMordal.INDEFINIDO) {
             return;
         }
-
+        System.out.println("interpretando tipo resposta");
+        System.out.println(tipoREspostaMordal);
         switch (tipoREspostaMordal) {
 
             case ENTIDADE_SELECAO_ITEM:
@@ -1282,12 +1311,17 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
                 if (!mapaRespostasComunicacaoTransienteDeAcaoByAcoes.isEmpty()) {
                     if (mapaRespostasComunicacaoTransienteDeAcaoByAcoes.containsKey(getAcaoSelecionada().getNomeUnico())) {
                         if (tipoREspostacomunicacaoModal.isRespostasPosiva()) {
+                            System.out.println("Executando acao");
                             executarAcaoSelecionada();
                         }
                         mapaRespostasComunicacaoTransienteDeAcaoByAcoes.clear();
                         mapaComunicacaoTransienteDeAcaoByIdModal.clear();
+                    } else {
+                        System.out.println("Não encontrada resposta para comunicação com " + getAcaoSelecionada());
                     }
 
+                } else {
+                    System.out.println("Mapa de respostas transiente é nulo");
                 }
                 break;
             default:
