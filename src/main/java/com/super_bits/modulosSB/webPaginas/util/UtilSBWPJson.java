@@ -12,6 +12,7 @@ import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.ItfResposta
 import com.super_bits.modulosSB.SBCore.modulos.Mensagens.ItfMensagem;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.interfaces.ItfB_PaginaSimples;
 import jakarta.json.Json;
+import jakarta.json.JsonArray;
 import jakarta.json.JsonArrayBuilder;
 import jakarta.json.JsonObject;
 import jakarta.json.JsonObjectBuilder;
@@ -96,17 +97,19 @@ public class UtilSBWPJson {
 
         }
 
-        JsonArrayBuilder mensagensJsonArray = Json.createArrayBuilder();
+        JsonArrayBuilder mensagensJsonArrayBuilder = Json.createArrayBuilder();
         for (ItfMensagem mensagem : pResposta.getMensagens()) {
             JsonObjectBuilder mensagemJson = Json.createObjectBuilder();
             mensagemJson.add("texto", mensagem.getMenssagem());
             mensagemJson.add("tipo", mensagem.getTipoDeMensagem().toString());
             mensagemJson.add("agenteDestino", mensagem.getTipoDestinatario().toString());
-            mensagensJsonArray.add(mensagemJson);
+            mensagensJsonArrayBuilder.add(mensagemJson.build());
         }
-        if (!mensagensJsonArray.build().isEmpty()) {
+        JsonArray mensagensJsonArray = mensagensJsonArrayBuilder.build();
+        if (!mensagensJsonArray.isEmpty()) {
             jsonPadrao.add("mensagens", mensagensJsonArray);
         }
+
         return jsonPadrao;
     }
 

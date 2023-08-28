@@ -177,6 +177,13 @@
             <artifactId>javax.faces</artifactId>
             <version>2.4.0</version>
         </dependency>
+        <!-- Nessessário para encontrar dependência de leitor Json -->
+        <dependency>
+            <groupId>org.glassfish</groupId>
+            <artifactId>javax.json</artifactId>
+            <version>1.1.4</version>
+        </dependency>
+        <!-- FIM -->
         <dependency>
             <groupId>javax.faces</groupId>
             <artifactId>javax.faces-api</artifactId>

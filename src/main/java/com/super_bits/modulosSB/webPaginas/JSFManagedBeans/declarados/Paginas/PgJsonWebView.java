@@ -4,21 +4,15 @@
  */
 package com.super_bits.modulosSB.webPaginas.JSFManagedBeans.declarados.Paginas;
 
-import com.sun.tools.internal.ws.wsdl.document.http.HTTPConstants;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
-import com.super_bits.modulosSB.SBCore.UtilGeral.MapaAcoesSistema;
-import com.super_bits.modulosSB.SBCore.UtilGeral.MapaDeAcoes;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreJson;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringsMaiuculoMinusculo;
 import com.super_bits.modulosSB.SBCore.UtilGeral.json.ErroProcessandoJson;
-import com.super_bits.modulosSB.SBCore.integracao.libRestClient.WS.RespostaWebServiceAcaoDoSistema;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.ErroChamadaController;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.ItfResposta;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ItfAcaoDoSistema;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.qualificadoresCDI.sessao.QlSessaoFacesContext;
-import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfBeanSimples;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfSessao;
-import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.MB_PaginaConversation;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.interfaces.ItfB_PaginaSimples;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.reflexao.anotacoes.InfoPagina;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.siteMap.MapaDeFormularios;
@@ -33,16 +27,9 @@ import com.super_bits.modulosSB.webPaginas.util.UtilSBWPJson;
 import static com.super_bits.modulosSB.webPaginas.util.UtilSBWPJson.ATRIBUTO_JSON_SESSAO;
 import static com.super_bits.modulosSB.webPaginas.util.UtilSBWPJson.getJsonBuilderSessao;
 import com.super_bits.modulosSB.webPaginas.util.UtilSBWPServletTools;
-import com.super_bits.modulosSB.webPaginas.util.UtilSBWP_JSFTools;
 import jakarta.json.Json;
 import jakarta.json.JsonObjectBuilder;
-import jakarta.json.JsonValue;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
@@ -50,8 +37,6 @@ import javax.enterprise.context.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.servlet.http.HttpServletRequest;
-import org.coletivojava.fw.api.tratamentoErros.FabErro;
 
 /**
  *
@@ -116,6 +101,11 @@ public class PgJsonWebView implements Serializable {
                     } else {
                         FacesContext.getCurrentInstance().getExternalContext().setResponseStatus(403);
                         try {
+                            if (!resposta.getMensagens().isEmpty()) {
+                                System.out.println("Erro de regra de negocio obtendo dados de sessao");
+                                System.out.println(resposta.getMensagens().get(0).getMenssagem());
+                            }
+
                             return UtilSBCoreJson.getTextoByJsonObjeect(UtilSBWPJson.getJsonRespostaPadrao(resposta));
                         } catch (ErroProcessandoJson ex) {
                             FacesContext.getCurrentInstance().getExternalContext().setResponseStatus(418);

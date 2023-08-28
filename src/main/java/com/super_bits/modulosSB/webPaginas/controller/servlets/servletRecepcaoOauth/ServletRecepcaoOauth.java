@@ -6,12 +6,12 @@ package com.super_bits.modulosSB.webPaginas.controller.servlets.servletRecepcaoO
 
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 import com.super_bits.modulosSB.SBCore.integracao.libRestClient.implementacao.UtilSBApiRestClient;
-import com.super_bits.modulosSB.SBCore.integracao.libRestClient.implementacao.UtilSBApiRestClientOauth2;
+import com.super_bits.modulosSB.SBCore.integracao.libRestClient.implementacao.erro.ErroRecebendoCodigoDeAcesso;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.qualificadoresCDI.sessao.QlSessaoFacesContext;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfSessao;
 import com.super_bits.modulosSB.webPaginas.controller.servlets.ServletArquivosSBWPGenerico;
-
 import com.super_bits.modulosSB.webPaginas.util.UtilSBWP_JSFTools;
+
 import java.io.IOException;
 import java.io.Serializable;
 import javax.inject.Inject;
@@ -33,41 +33,33 @@ public class ServletRecepcaoOauth extends ServletArquivosSBWPGenerico implements
     @QlSessaoFacesContext
     private ItfSessao sessaoAtual;
 
+    private String respostaTestReader;
+
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+        ItfSessao sessao = null;
+        if (!SBCore.isEmModoDesenvolvimento()) {
+            sessao = sessaoAtual;
+        } else {
+            sessao = SBCore.getServicoSessao().getSessaoAtual();
+        }
         try {
-            if (req.getRequestURI().contains(UtilSBApiRestClientOauth2.PATH_TESTE_DE_VIDA_SERVICO_RECEPCAO)) {
-                resp.setStatus(200);
-                resp.getWriter().append("EUTÔVIVO");
-                resp.getWriter().close();
-                return;
-            }
-            String tipoAplicacao = req.getParameter("tipoAplicacao");
-            if (!SBCore.isEmModoDesenvolvimento()) {
-                req.setAttribute("usuario", sessaoAtual.getUsuario());
-            } else {
-                req.setAttribute("usuario", SBCore.getServicoSessao().getSessaoAtual().getUsuario());
-            }
-
-            if (!UtilSBApiRestClient.receberCodigoSolicitacaoOauth(req, tipoAplicacao)) {
-                throw new UnsupportedOperationException("falha recebendo codigo de solictação de token Oauth");
-            }
-
-            resp.getWriter().append("Chave de Aceso armazenada com sucesso, você está conectado com a aplicação.");
-        } catch (Throwable t) {
+            UtilSBApiRestClient.servletReceberCodigoConcessao(req, resp, sessao);
+        } catch (ErroRecebendoCodigoDeAcesso pErro) {
             RequestDispatcher wp = req.getRequestDispatcher(UtilSBWP_JSFTools.FORMULARIO_PARAMETRO_URL_INVALIDO);
-            SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "Erro obtendo parametros de URL", t);
+            SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "Erro obtendo parametros de URL", pErro);
             wp.forward(req, resp);
 
         }
+    }
 
+    public String getRespostaTestReader() {
+        return respostaTestReader;
     }
 
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("Recebendo token de acesso");
-        System.out.println("");
+        resp.getWriter().print("Oq você está fazendo da sua vida dando um post aqui?");
     }
 
 }
