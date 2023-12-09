@@ -23,7 +23,10 @@ import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basic
 import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfSessao;
 import com.super_bits.modulosSB.webPaginas.ConfigGeral.SBWebPaginas;
 import com.super_bits.modulosSB.webPaginas.controller.servlets.servletArquivoDeEntidade.ServletArquivosDeEntidade;
+import static com.super_bits.modulosSB.webPaginas.controller.servlets.servletArquivoDeEntidade.ServletArquivosDeEntidade.NOME_URL_SERVLET;
 import com.super_bits.modulosSB.webPaginas.controller.servlets.servletArquivoDeSessao.ServletArquivoDeSessao;
+import com.super_bits.modulosSB.webPaginas.controller.sessao.SessaoAtualSBWP;
+import com.super_bits.modulosSB.webPaginas.util.UtilSBWPServletTools;
 import java.io.File;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -51,6 +54,22 @@ public class CentralDeArquivosWebAppServidorSB extends CentralDeArquivosAbstrata
         //UtilSBPersistenciaArquivosDeEntidade.getEndrRemotoImagem(item, FabTipoAtributoObjeto.ID)
     }
 
+    private String getUrlSErviletSEssao() {
+        try {
+            SessaoAtualSBWP sessaoAtual = UtilSBWPServletTools.getSessaoAtual(true);
+            String urlBase;
+            if (sessaoAtual != null) {
+                urlBase = sessaoAtual.getUrlHostDaSessao();
+            } else {
+                urlBase = SBWebPaginas.getURLBase();
+            }
+            urlBase = urlBase + "/" + NOME_URL_SERVLET;
+            return urlBase;
+        } catch (Throwable t) {
+            return ServletArquivosDeEntidade.URL_SERVLET;
+        }
+    }
+
     @Override
     public String getEntrLocalArquivosFormulario() {
         // if (endrLocaResource != null) {
@@ -67,16 +86,14 @@ public class CentralDeArquivosWebAppServidorSB extends CentralDeArquivosAbstrata
 
     @Override
     public String getEndrLocalArquivoCampoInstanciado(ItfCampoInstanciado pCampo) {
-        
+
         String caminhoArquivo = getEndrLocalArquivoItem((ItfBeanSimplesSomenteLeitura) pCampo.getObjetoDoAtributo(), (String) pCampo.getValor(), ItfCentralDeArquivos.CATEGORIA_PADRAO_ARQUIVO_DE_REGISTRO);
         // todo resolver caminho legado de outra forma, sem precisar verficar a existencia do arquivo no caminho legado
-        if (!new File(caminhoArquivo).exists()){
-        caminhoArquivo = getEndrLocalArquivoItem((ItfBeanSimplesSomenteLeitura) pCampo.getObjetoDoAtributo(), (String) pCampo.getValor(), pCampo.getNomeCamponaClasse());    
+        if (!new File(caminhoArquivo).exists()) {
+            caminhoArquivo = getEndrLocalArquivoItem((ItfBeanSimplesSomenteLeitura) pCampo.getObjetoDoAtributo(), (String) pCampo.getValor(), pCampo.getNomeCamponaClasse());
         }
         return caminhoArquivo;
     }
-    
-    
 
     @Override
     public String getEndrLocalResources() {
@@ -97,7 +114,7 @@ public class CentralDeArquivosWebAppServidorSB extends CentralDeArquivosAbstrata
 
         try {
 
-            return ServletArquivosDeEntidade.URL_SERVLET;
+            return getUrlSErviletSEssao();
 
         } catch (Throwable t) {
             SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "Erro definindo endereço remoto para REsource", t);
@@ -108,7 +125,8 @@ public class CentralDeArquivosWebAppServidorSB extends CentralDeArquivosAbstrata
 
     @Override
     public String getEndrRemotoResourcesObjeto() {
-        return ServletArquivosDeEntidade.URL_SERVLET;
+
+        return getUrlSErviletSEssao();
     }
 
     @Override

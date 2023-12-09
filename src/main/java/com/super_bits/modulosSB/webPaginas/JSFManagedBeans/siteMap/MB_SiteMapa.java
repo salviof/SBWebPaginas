@@ -18,23 +18,8 @@ import org.coletivojava.fw.api.tratamentoErros.FabErro;
 
 public abstract class MB_SiteMapa implements ItfSiteMapa {
 
-    private static boolean siteMapaCriado = false;
-
     public MB_SiteMapa() {
-        System.out.println("");
-        if (!siteMapaCriado) {
-            try {
 
-                List<Class> paginasEncontradas = UtilSBCoreReflexao.getClassesComEstaAnotacao(InfoPagina.class, "com.super_bits");
-                List<Class> paginasPlugins = UtilSBCoreReflexao.getClassesComEstaAnotacao(InfoPagina.class, "org.coletivoJava.superBitsFW.webPaginas.plugin");
-                paginasPlugins.forEach(paginasEncontradas::add);
-                MapaDeFormularios.buildEstrutura(paginasEncontradas);
-
-            } catch (Throwable t) {
-                SBCore.RelatarErro(FabErro.PARA_TUDO, "Erro construindo o mapa de paginas do Sitemap", t);
-            }
-        }
-        siteMapaCriado = true;
     }
 
     @Override

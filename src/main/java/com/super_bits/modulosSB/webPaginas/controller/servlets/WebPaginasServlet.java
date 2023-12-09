@@ -95,23 +95,6 @@ public class WebPaginasServlet extends HttpServlet implements Serializable {
 
             }
 
-            switch (SBCore.getEstadoAPP()) {
-                case DESENVOLVIMENTO:
-                    break;
-                case PRODUCAO:
-                    getServletConfig().getServletContext().setInitParameter("javax.faces.PROJECT_STAGE", "Production");
-                    getServletConfig().getServletContext().setInitParameter("FACELETS_REFRESH_PERIOD", "-1");
-
-                    break;
-                case HOMOLOGACAO:
-                    getServletConfig().getServletContext().setInitParameter("javax.faces.PROJECT_STAGE", "Development");
-                    getServletConfig().getServletContext().setInitParameter("FACELETS_REFRESH_PERIOD", "0");
-                    break;
-                default:
-                    throw new AssertionError(SBCore.getEstadoAPP().name());
-
-            }
-
         } catch (Throwable t) {
             SBCore.RelatarErro(FabErro.PARA_TUDO, "Erro Criando Ações MB", t);
         }
@@ -259,6 +242,26 @@ public class WebPaginasServlet extends HttpServlet implements Serializable {
         ConfiguracoesDeFormularioPorUrl configuracoes = new ConfiguracoesDeFormularioPorUrl(requisicao);
         requisicao.setAttribute(NOME_BEAN_REQUEST_CONFIG_URL, configuracoes);
         carregarFormulario(recurso, requisicao, resposta);
+    }
+
+    private void todoBeforeBuild() {
+        //TODO
+        switch (SBCore.getEstadoAPP()) {
+            case DESENVOLVIMENTO:
+                break;
+            case PRODUCAO:
+                getServletConfig().getServletContext().setInitParameter("javax.faces.PROJECT_STAGE", "Production");
+                getServletConfig().getServletContext().setInitParameter("FACELETS_REFRESH_PERIOD", "-1");
+
+                break;
+            case HOMOLOGACAO:
+                getServletConfig().getServletContext().setInitParameter("javax.faces.PROJECT_STAGE", "Development");
+                getServletConfig().getServletContext().setInitParameter("FACELETS_REFRESH_PERIOD", "0");
+                break;
+            default:
+                throw new AssertionError(SBCore.getEstadoAPP().name());
+
+        }
     }
 
 }

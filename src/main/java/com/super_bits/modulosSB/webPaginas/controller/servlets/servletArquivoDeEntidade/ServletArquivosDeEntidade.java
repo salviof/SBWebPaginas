@@ -32,6 +32,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import javax.inject.Inject;
 import javax.persistence.Entity;
+import javax.persistence.EntityManager;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -69,7 +70,7 @@ public class ServletArquivosDeEntidade extends ServletArquivosSBWPGenerico imple
         prDadosREquisicaoArquivoEntidade.setTipoRecurso((TipoRecurso) prDadosREquisicaoArquivoEntidade.getParametrosDeUrl().getValorComoBeanSimples(FabUrlArquivoDeEntidade.TIPO_ARQUIVO));
         prDadosREquisicaoArquivoEntidade.setTipoAcesso((TipoAcessoArquivo) prDadosREquisicaoArquivoEntidade.getParametrosDeUrl().getValorComoBeanSimples(FabUrlArquivoDeEntidade.TIPO_ACESSO));
         prDadosREquisicaoArquivoEntidade.setNomeArquivoDownload(prDadosREquisicaoArquivoEntidade.getParametrosDeUrl().getValorComoString(FabUrlArquivoDeEntidade.NOME_DO_ARQUIVO));
-
+        prDadosREquisicaoArquivoEntidade.setCategoria(pCategoria);
         ItemSimplesOffilineApartirDeSlugDeObjeto itemEnviado = new ItemSimplesOffilineApartirDeSlugDeObjeto(pSlugObjeto);
 
         if (itemEnviado.getId() == 0) {
@@ -129,7 +130,31 @@ public class ServletArquivosDeEntidade extends ServletArquivosSBWPGenerico imple
                 }
 
             } else {
-                prDadosREquisicaoArquivoEntidade.setEntidade((ItfBeanSimples) UtilSBPersistencia.getRegistroByNomeSlug(classeEntidade, pSlugObjeto, UtilSBPersistencia.getNovoEM()));
+
+                switch (prDadosREquisicaoArquivoEntidade.getTipoRecurso().getFabipoArquivo()) {
+                    case IMAGE_REPRESENTATIVA_ENTIDADE_GRANDE:
+                    case IMAGE_REPRESENTATIVA_ENTIDADE_MEDIO:
+                    case IMAGE_REPRESENTATIVA_ENTIDADE_PEQUENO:
+                        break;
+                    default: {
+                        EntityManager em = UtilSBPersistencia.getEMPadraoNovo();
+                        try {
+                            prDadosREquisicaoArquivoEntidade.setEntidade((ItfBeanSimples) UtilSBPersistencia.getRegistroByNomeSlug(classeEntidade, pSlugObjeto, UtilSBPersistencia.getNovoEM()));
+                            if (prDadosREquisicaoArquivoEntidade.getEntidade() != null) {
+                                if (prDadosREquisicaoArquivoEntidade.getEntidade().getId() > 0) {
+                                    String nomeobj = prDadosREquisicaoArquivoEntidade.getEntidade().getNome();
+                                    if (!SBCore.getServicoPermissao().isObjetoPermitidoUsuario(sessaoAtual.getUsuario(), prDadosREquisicaoArquivoEntidade.getEntidade())) {
+                                        throw new ErroRequisicaoServlet(FabTipoErroRequisicao.ACESSO_NEGADO, "Usuário não tem acesso ao objeto" + nomeobj);
+                                    }
+                                }
+                            }
+                        } finally {
+                            UtilSBPersistencia.fecharEM(em);
+                        }
+                    }
+
+                }
+
             }
 
             switch (prDadosREquisicaoArquivoEntidade.getTipoRecurso().getFabipoArquivo()) {
@@ -224,16 +249,42 @@ public class ServletArquivosDeEntidade extends ServletArquivosSBWPGenerico imple
         }
 
         FabTipoAcessoArquivo tipoAcesso = (FabTipoAcessoArquivo) dados.getTipoAcesso().getFabricaObjeto();
-        switch (tipoAcesso) {
-            case VISUALIZAR:
-                abrirArquivo(dados.getCaminhoLocal(), dados.getNomeArquivoDownload(), requisicao, resp, dados.getTipoRecurso().getFabipoArquivo());
-                break;
-            case BAIXAR:
-                baixarArquivo(dados.getCaminhoLocal(), dados.getNomeArquivoDownload(), requisicao, resp);
-                break;
-            default:
-                throw new AssertionError(tipoAcesso.name());
+        boolean tentarCaminhoAlternativo = false;
+        tentarCaminhoAlternativo = dados.getCaminhoLocal().contains("http");
+        if (dados.getNomeArquivoDownload() != null) {
+            if (dados.getNomeArquivoDownload().endsWith("zip") || dados.getNomeArquivoDownload().endsWith("rar")) {
+                tipoAcesso = FabTipoAcessoArquivo.BAIXAR;
+            }
+        }
+        try {
+            switch (tipoAcesso) {
+                case VISUALIZAR:
+                    abrirArquivo(dados.getCaminhoLocal(), dados.getNomeArquivoDownload(), requisicao, resp, dados.getTipoRecurso().getFabipoArquivo());
+                    break;
+                case BAIXAR:
+                    baixarArquivo(dados.getCaminhoLocal(), dados.getNomeArquivoDownload(), requisicao, resp);
+                    break;
+                default:
+                    throw new AssertionError(tipoAcesso.name());
 
+            }
+        } catch (Throwable t) {
+            if (tentarCaminhoAlternativo) {
+                String caminhoLocal = SBCore.getServicoArquivosDeEntidade().getEnderecoLocalAlternativo(dados.getEntidade(), dados.getCategoria(), dados.getNomeArquivoDownload());
+                switch (tipoAcesso) {
+                    case VISUALIZAR:
+                        abrirArquivo(caminhoLocal, dados.getNomeArquivoDownload(), requisicao, resp, dados.getTipoRecurso().getFabipoArquivo());
+                        break;
+                    case BAIXAR:
+                        baixarArquivo(caminhoLocal, dados.getNomeArquivoDownload(), requisicao, resp);
+                        break;
+                    default:
+                        throw new AssertionError(tipoAcesso.name());
+
+                }
+            } else {
+                throw new ServletException("Falha obtendo recurso do arquivo" + t.getMessage());
+            }
         }
 
     }

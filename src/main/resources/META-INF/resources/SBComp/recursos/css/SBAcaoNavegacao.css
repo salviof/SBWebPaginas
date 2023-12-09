@@ -91,6 +91,7 @@ div[class^="btnSeletor"]{
     min-height: 120px;
     min-width: 120px;
     border:1px!important;
+    background-color:  #c3cdcbd1;
 }
 .btnSeletor-small{
     width: 95px;
@@ -230,7 +231,9 @@ div[class^="btnSeletor"]:active{
 
 }
 
-.btn:hover {opacity: 1}
+.btn:hover {
+    opacity: 1
+}
 
 .botao-lateral-menu-horizontal-responsivo:hover{
     opacity: 0.7;

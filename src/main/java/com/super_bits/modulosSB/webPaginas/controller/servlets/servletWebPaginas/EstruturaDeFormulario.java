@@ -9,6 +9,7 @@ import com.super_bits.modulos.SBAcessosModel.model.acoes.acaoDeEntidade.AcaoGest
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreReflexao;
+import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreReflexaoObjeto;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringBuscaTrecho;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringFiltros;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringValidador;
@@ -18,6 +19,7 @@ import static com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.TIPO
 import static com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.TIPO_PARTE_URL.TEXTO;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ItfAcaoDoSistema;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.UtilSBController;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.MapaObjetosProjetoAtual;
 import com.super_bits.modulosSB.webPaginas.ConfigGeral.SBWebPaginas;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.interfaces.ItfPaginaGerenciarEntidade;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.reflexao.anotacoes.InfoPagina;
@@ -199,12 +201,17 @@ public class EstruturaDeFormulario {
                             nomeClasse = obj.getClass().getSimpleName();
                         }
                         mapaParametrosEnviados.put(nomeClasse, new ArrayList());
+
                     }
                     if (nomeClasse == null) {
                         nomeClasse = obj.getClass().getSimpleName();
                     }
+                    List<Class> classesHerenca = UtilSBCoreReflexaoObjeto.getClassesEntidadeComHeranca(MapaObjetosProjetoAtual.getClasseDoObjetoByNome(nomeClasse));
+                    for (Class classe : classesHerenca) {
+                        mapaParametrosEnviados.put(classe.getSimpleName(), new ArrayList<>());
+                        mapaParametrosEnviados.get(classe.getSimpleName()).add(obj);
+                    }
 
-                    mapaParametrosEnviados.get(nomeClasse).add(obj);
                 }
             }
 

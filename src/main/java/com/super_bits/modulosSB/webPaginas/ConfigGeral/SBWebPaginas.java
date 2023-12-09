@@ -1,10 +1,12 @@
 package com.super_bits.modulosSB.webPaginas.ConfigGeral;
 
+import com.super_bits.modulosSB.webPaginas.controller.listenners.ContextoWebPaginas;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.arquivosConfiguracao.ArquivoConfiguracaoDistribuicao;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringValidador;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.permissoes.ItfAcaoFormulario;
 import com.super_bits.modulosSB.SBCore.modulos.ManipulaArquivo.UtilSBCoreArquivos;
+import com.super_bits.modulosSB.SBCore.modulos.TratamentoDeErros.UtilSBCoreErros;
 
 import com.super_bits.modulosSB.webPaginas.controller.servlets.WebPaginasServlet;
 import com.super_bits.modulosSB.webPaginas.controller.servletes.urls.parametrosURL.ParametroURL;
@@ -45,7 +47,12 @@ public abstract class SBWebPaginas {
         return caminhoRealJavaWebAppContexto;
     }
 
+    public static boolean isAmbienteConfigurado() {
+        return configurado;
+    }
+
     public static void configurar(ItfConfigWebPagina config) {
+        System.out.println("INICIANDO CONFIGURADOR WEBPAGINAS");
         String urlDesenvolvimento = "http://localhost:8080";
         SITE_HOST = config.SITE_HOST();
         pastaImagens = config.pastaImagens();
@@ -54,9 +61,9 @@ public abstract class SBWebPaginas {
         System.out.println("siteURL=" + SITE_URL);
         TituloAppWeb = config.TituloAppWeb();
         URLBASE = config.URLBASE();
-        siteMap = config.mapaSite();
         parametros = config.parametrosDeAplicacao();
         System.out.println("Módulo Webpaginas Configurado");
+        siteMap = config.mapaSite();
         configurado = true;
         acaoPaginaInicial = config.getAcaoPaginaInicial();
         URLS_HOSTS_PERMITIDOS = config.getSitesHostsAutorizados();
@@ -88,8 +95,9 @@ public abstract class SBWebPaginas {
                 if (SBCore.getNomeProjeto().equals("webApp")) {
                     UtilSBCoreArquivos.copiarArquivoResourceJar(config.getClass(), "SBProjeto.prop", SBCore.getCaminhoGrupoProjetoSource() + "/SBProjeto.prop");
                 }
-
+                ContextoWebPaginas.buildSisteMap();
                 WebPaginasServlet construindoSiteMap = new WebPaginasServlet();
+
             } catch (Throwable t) {
 
             }
@@ -105,9 +113,9 @@ public abstract class SBWebPaginas {
                 "CONFIG DO SBWEBPAGINAS NAO DEFINIDO", null);
 
         try {
-            throw new UnsupportedOperationException("CONFIG DO CORE NAO DEFINIDO");
+            throw new UnsupportedOperationException("CONFIG webapp NAO DEFINIDO");
         } catch (Exception e) {
-            e.printStackTrace();
+            UtilSBCoreErros.getResumoErro(e);
         }
         System.exit(0);
 

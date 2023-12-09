@@ -1,0 +1,50 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+                xmlns:pe="http://primefaces.org/ui/extensions">
+
+    <h:panelGroup layout="block" style="height: 800px;" >
+        OI!
+
+
+        Cookies
+        <p:panelGrid columns="2" >
+            <c:forEach items="#{infoRequest.cookies}" var="biscoito" >
+                <p:outputLabel value="#{biscoito.chave}" />  <p:outputLabel value="#{biscoito.valor}" />
+
+            </c:forEach>
+        </p:panelGrid>
+        <br/><br/>
+        Parametros
+        <p:panelGrid columns="2" >
+            <c:forEach items="#{infoRequest.parametros}" var="pr" >
+                <p:outputLabel value="#{pr.chave}" />  <p:outputLabel value="#{pr.valor}" />
+
+            </c:forEach>
+        </p:panelGrid>
+        <br/><br/>
+        Headers
+        <p:panelGrid columns="2" >
+            <c:forEach items="#{infoRequest.headers}" var="header" >
+                <p:outputLabel value="#{header.chave}" />  <p:outputLabel value="#{header.valor}" />
+
+            </c:forEach>
+        </p:panelGrid>
+
+
+        <p:panelGrid columns="2" >
+
+            <p:outputLabel value="URI" />  <p:outputLabel value="#{infoRequest.uri}" />
+            <p:outputLabel value="servletPath" />  <p:outputLabel value="#{infoRequest.servletPath}" />
+            <p:outputLabel value="URL" />  <p:outputLabel value="#{infoRequest.url}" />
+
+            <h:outputText value="dispatcherType" /><p:outputLabel value="#{request.dispatcherType}"/>
+            <h:outputText value="Cliente ip" /><p:outputLabel value="#{infoRequest.ipCliente}"/>
+            <h:outputText value="Cliente Host" /><p:outputLabel value="#{infoRequest.hostCliente}"/>
+        </p:panelGrid>
+    </h:panelGroup>
+</ui:composition>
+

@@ -1,0 +1,20 @@
+#btnScrollToTop,
+#btnScrollToBottom {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    height: 60px;
+    width: 60px;
+    background-color: #65b765f2;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+}
+#btnScrollToTop {
+    top: 120px;
+}
+#btnScrollToBottom {
+    bottom: 20px;
+}

@@ -1582,8 +1582,27 @@ public class PgUtil implements Serializable {
     }
 
     public void enviarImagemPequenaUpload(FileUploadEvent event) {
+        ItfCampoInstanciado campoInstanciado = null;
         try {
-            paginaAtual.getInfoPagina().getComoFormularioWeb().getBeanSelecionado().uploadFotoTamanhoPequeno(event.getFile().getInputStream());
+            TagValueExpression tag = (TagValueExpression) event.getComponent().getPassThroughAttributes().get("campoInstanciado");
+            campoInstanciado = (ItfCampoInstanciado) tag.getValue(event.getFacesContext().getELContext());
+
+        } catch (Throwable t) {
+
+        }
+
+        ItfBeanSimples itemSimples = null;
+        if (campoInstanciado != null) {
+            itemSimples = campoInstanciado.getObjetoDoAtributo();
+        } else {
+            itemSimples = paginaAtual.getInfoPagina().getComoFormularioWeb().getBeanSelecionado();
+        }
+        try {
+            if (itemSimples != null) {
+                itemSimples.uploadFotoTamanhoPequeno(event.getFile().getInputStream());
+            } else {
+                SBCore.enviarMensagemUsuario("Objeto referente a imagem não foi enviado", FabMensagens.AVISO);
+            }
         } catch (Throwable t) {
             SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "Erro enviando imagem tamanho curto", t);
         }

@@ -81,7 +81,22 @@ public class PgUtilDataHoraFormato implements Serializable {
         }
     }
 
-    public String getMesHorario(Date pDiaDaSemana) {
+    public String getMesAnoExtenso(Date pDiaDaSemana) {
+        try {
+            if (pDiaDaSemana == null) {
+                return null;
+            }
+            Locale local = new Locale("pt", "BR");
+
+            SimpleDateFormat formatador = new SimpleDateFormat("MMMM yy", local);
+            return formatador.format(pDiaDaSemana);
+        } catch (Throwable t) {
+            SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "Erro formantando data", t);
+            return null;
+        }
+    }
+
+    public String getHorarioSimples(Date pDiaDaSemana) {
         try {
             if (pDiaDaSemana == null) {
                 return null;
@@ -104,6 +119,21 @@ public class PgUtilDataHoraFormato implements Serializable {
             Locale local = new Locale("pt", "BR");
 
             SimpleDateFormat formatador = new SimpleDateFormat("yyyy", local);
+            return formatador.format(pDiaDaSemana);
+        } catch (Throwable t) {
+            SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "Erro formantando data", t);
+            return null;
+        }
+    }
+
+    public String getAnoResumido(Date pDiaDaSemana) {
+        try {
+            if (pDiaDaSemana == null) {
+                return null;
+            }
+            Locale local = new Locale("pt", "BR");
+
+            SimpleDateFormat formatador = new SimpleDateFormat("yy", local);
             return formatador.format(pDiaDaSemana);
         } catch (Throwable t) {
             SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "Erro formantando data", t);

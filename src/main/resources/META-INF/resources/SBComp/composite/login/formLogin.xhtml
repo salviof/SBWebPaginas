@@ -32,7 +32,6 @@
                 <div class="Card SoftGrayBack">
 
                     <p:inputText id="emaillogin" label="E-Mail"
-
                                  requiredMessage="O E-Mail é obrigatório"
                                  validatorMessage="O e-mail não parece ser válido" placeholder="E-mail" required="true"
                                  value="#{controleDeSessaoWeb.usuarioLogar}"  styleClass="Wid100 TexAlCenter">
@@ -52,11 +51,8 @@
                                      process="@this,emaillogin"
                                      icon="fa fa-exclamation"
                                      styleClass="RedButton"
-
                                      actionListener="#{controleDeSessaoWeb.esqueceuaSenha()}"
                                      partialSubmit="true"
-
-
                                      />
 
                     <div class="quebraBlocoComEspacoVertical10 somenteMobile"></div>

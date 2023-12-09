@@ -24,6 +24,7 @@ public class PgAcessoNegado extends MB_PaginaConversation {
 
     @Override
     public ItfBeanSimples getBeanSelecionado() {
+
         return null;
     }
 

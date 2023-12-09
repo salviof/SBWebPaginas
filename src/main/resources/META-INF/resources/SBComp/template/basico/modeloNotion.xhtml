@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+
+      xmlns:pe="http://primefaces.org/ui/extensions"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <f:facet name="first">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+            <meta name="apple-mobile-web-app-capable" content="yes" />
+
+
+
+
+        </f:facet>
+        <title>Notion widget 1.0</title>
+
+        <h:outputStylesheet  name="recursos/css/SBlayoutResponsivo.css" library="SBComp"  />
+        <h:outputStylesheet  name="recursos/css/SBAcaoNavegacao.css" library="SBComp"  />
+        <h:outputStylesheet  name="recursos/css/primeAjustes.css" library="SBComp"   />
+        <h:outputScript      name="recursos/js/coreSuperBitsFrameWork.js?versao=2" library="SBComp"   target="head"   />
+
+        <h:outputScript      name="recursos/js/blockui.js" library="SBComp"  target="body"  />
+        <h:outputStylesheet  name="recursos/css/SBInputs.css" library="SBComp" />
+
+
+
+        <h:outputScript      name="fontAwesome.js" library="fontAwesome"  target="body"  />
+
+        <h:outputStylesheet  name="css/core-layout.css" library="primefaces-adamantium"  />
+        <h:outputStylesheet  name="css/animate.css" library="primefaces-adamantium" />
+        <h:outputStylesheet name="css/adamantium-font.css" library="primefaces-adamantium" />
+        <h:outputStylesheet name="css/ripple-effect.css" library="primefaces-adamantium" />
+        <h:outputScript name="js/ripple-effect.js" library="primefaces-adamantium"  target="body"/>
+        <h:outputStylesheet name="css/perfect-scrollbar.css" library="primefaces-adamantium" />
+        <h:outputScript      name="js/perfect-scrollbar.js" library="primefaces-adamantium"  target="body"  />
+        <h:outputStylesheet name="css/adamantium-layout.css" library="primefaces-adamantium" />
+        <h:outputStylesheet  name="layoutAplicacao.css?versao=2" library="css" />
+        <h:outputStylesheet  name = "css/bootstrap.css"  library="bootstrap" />
+        <h:outputScript  name = "js/bootstrap.js"  library="bootstrap" />
+        <h:outputStylesheet  name="w3.css" library="w3"  />
+
+
+
+        <h:outputScript      name="aplicacao.js" library="js"  target="head"  />
+        <ui:insert name="head" />
+    </h:head>
+    <h:body>
+
+
+
+
+        <h:panelGroup id="#{layoutIdsAreasConhecidas.AREA_MENSAGEM_INTERFACE}">
+            <p:growl class="mensagemGrowl"  widgetVar="#{layoutIdsAreasConhecidas.AREA_MENSAGEM_INTERFACE}" />
+        </h:panelGroup>
+
+        <div style="margin-top: 80px">
+            <h:panelGroup id="#{layoutIdsAreasConhecidas.AREA_CONTEUDO}" layout="block"  >
+                <ui:insert name="divConteudo" />
+                <ui:insert name="conteudo" />
+                <ui:insert name="content"/>
+            </h:panelGroup>
+        </div>
+
+        <h:panelGroup id="#{layoutIdsAreasConhecidas.AREA_RODAPE}">
+
+        </h:panelGroup>
+
+
+
+
+
+
+
+
+
+
+    </h:body>
+
+</html>

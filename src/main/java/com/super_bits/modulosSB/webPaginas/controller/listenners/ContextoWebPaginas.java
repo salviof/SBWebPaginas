@@ -12,6 +12,9 @@ import com.super_bits.modulosSB.SBCore.modulos.Controller.acoesAutomatizadas.Fab
 import com.super_bits.modulosSB.webPaginas.ConfigGeral.ConfiguradorCoreDeProjetoWebWarAbstrato;
 import com.super_bits.modulosSB.webPaginas.ConfigGeral.ItfInicioFimAppWP;
 import com.super_bits.modulosSB.webPaginas.ConfigGeral.SBWebPaginas;
+import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.reflexao.anotacoes.InfoPagina;
+import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.siteMap.MapaDeFormularios;
+import java.util.List;
 import java.util.ServiceLoader;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -23,6 +26,21 @@ import org.coletivojava.fw.api.tratamentoErros.FabErro;
  * @author Salvio
  */
 public class ContextoWebPaginas implements ServletContextListener {
+
+    public static void buildSisteMap() {
+
+        try {
+
+            List<Class> paginasEncontradas = UtilSBCoreReflexao.getClassesComEstaAnotacao(InfoPagina.class, "com.super_bits");
+            List<Class> paginasPlugins = UtilSBCoreReflexao.getClassesComEstaAnotacao(InfoPagina.class, "org.coletivoJava.superBitsFW.webPaginas.plugin");
+            paginasPlugins.forEach(paginasEncontradas::add);
+            MapaDeFormularios.buildEstrutura(paginasEncontradas);
+
+        } catch (Throwable t) {
+            SBCore.RelatarErro(FabErro.PARA_TUDO, "Erro construindo o mapa de paginas do Sitemap", t);
+        }
+
+    }
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {
@@ -45,6 +63,9 @@ public class ContextoWebPaginas implements ServletContextListener {
             //   String webDir = this.getClass().getClassLoader().getResource("com/company/project/mywebdir").toExternalForm();
 
             inicio.inicio();
+            System.out.println("Construindo SiteMap");
+            buildSisteMap();
+            System.out.println("Fim Construção");
             System.out.println("Listando autoexecuções");
             for (ItfAcaoControllerAutoExecucao acao : MapaAcoesSistema.getListaAcoesAutomatizadas()) {
                 System.out.println("Programando " + acao.getNomeUnico());

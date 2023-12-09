@@ -21,6 +21,7 @@ public class DadosRequisicaoArquivoDeEntidade {
     private String nomeArquivoDownload = null;
     private TipoAcessoArquivo tipoAcesso;
     private TipoRecurso tipoRecurso;
+    private String categoria;
 
     public UrlInterpretada getParametrosDeUrl() {
         return parametrosDeUrl;
@@ -68,6 +69,14 @@ public class DadosRequisicaoArquivoDeEntidade {
 
     public void setTipoRecurso(TipoRecurso tipoRecurso) {
         this.tipoRecurso = tipoRecurso;
+    }
+
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
     }
 
 }

@@ -69,6 +69,7 @@ import com.super_bits.modulosSB.webPaginas.visualizacao.ServicoVisuaslizacaoWebR
 import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -433,10 +434,6 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
 
     }
 
-    public void processarURL(String url) {
-
-    }
-
     protected void aplicaValoresURLEmParametros(Map<String, String> valorStringPorParametro) {
 
         try {
@@ -635,7 +632,15 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
     public ItfParametroRequisicaoInstanciado getParametroInstanciado(ItfParametroRequisicao pParametro) {
         try {
             if (pParametro == null) {
-                throw new UnsupportedOperationException("Enviou parametro nulo na tentativa de obter o parametro instanciado getParametrroInstanciado");
+                if (!SBCore.isEmModoDesenvolvimento()) {
+
+                    throw new UnsupportedOperationException("Enviou parametro nulo na tentativa de obter o parametro instanciado getParametrroInstanciado");
+                } else {
+                    if (getMapaParametros() == null) {
+                        aplicaValoresDeParametrosModoDesenvolvimento(new HashMap<>());
+                    }
+
+                }
             }
             return getParametroByNome(pParametro.getNome());
         } catch (Throwable t) {

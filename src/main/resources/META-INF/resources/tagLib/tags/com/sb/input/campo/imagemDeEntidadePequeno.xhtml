@@ -2,19 +2,35 @@
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 
-    xmlns:p="http://primefaces.org/ui">
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:f="http://xmlns.jcp.org/jsf/core">
     <ui:decorate template="#{layout.xhtmlJsfCaminhoRelativo}">
         <ui:define name="input">
 
 
 
 
+            <p:graphicImage url="#{registro.objetoDoAtributo.imgPequena}"  style="max-width: 60px;max-height: 60px;"    />
+            <p:fragment >
+
+
+                <p:fileUpload  allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
+                               listener="#{pgUtil.enviarImagemPequenaUpload}"
+                               multiple="false"
+
+                               rendered="#{!desabilitarEdicao}"
+                               >
+
+                    <f:passThroughAttribute name="caminhoCampo" value="#{registro.nomeCompostoIdentificador}" />
+                    <f:passThroughAttribute name="dominio" value="#{registro.nomeClasseOrigemAtributo}" />
+                    <f:passThroughAttribute name="campoInstanciado" value="#{registro}" />
+                </p:fileUpload>
+
+            </p:fragment>
 
 
 
-            sdfasdfasdfsadfasdfasd
-            <p:inputText/>
-            imagem pequena
+
 
         </ui:define>
     </ui:decorate>

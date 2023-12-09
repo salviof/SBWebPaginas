@@ -36,7 +36,9 @@ public class ServletArquivosSBWPGenerico extends HttpServlet {
         resp.setHeader("Content-Transfer-Encoding", "binary");
 
         if (pcaminhoArquivo.startsWith("http")) {
+
             realizarStreamDeArquivoRemoto(resp, pcaminhoArquivo);
+
         } else {
             realizarStreamDeArquivoLocal(resp, pcaminhoArquivo);
         }
@@ -109,9 +111,9 @@ public class ServletArquivosSBWPGenerico extends HttpServlet {
         try {
             resp.setContentLength(pDadosArquivo.length);
             try ( ServletOutputStream ouputStream = resp.getOutputStream()) {
-                ouputStream.write(pDadosArquivo, 0, pDadosArquivo.length);
-                ouputStream.flush();
-                ouputStream.close();
+                ouputStream.write(pDadosArquivo);
+                //ouputStream.flush();
+                //ouputStream.close();
             }
         } catch (Exception t) {
             SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "Erro enviando stream para o cliente", t);

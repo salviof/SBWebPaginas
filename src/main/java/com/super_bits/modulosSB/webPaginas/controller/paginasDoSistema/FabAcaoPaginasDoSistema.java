@@ -66,7 +66,11 @@ public enum FabAcaoPaginasDoSistema implements ItfFabricaAcoes {
     @InfoTipoAcaoGestaoEntidade(iconeFonteAnsowame = FabIconeFontAwesome.SISTEMA_ENGRENAGEM, precisaPermissao = false, xhtmlDaAcao = UtilSBWP_JSFTools.FORMULARIO_API_JSON_WEB_VIEW)
     PAGINA_NATIVA_JSON_WEBVIEW_MB_GESTAO,
     @InfoTipoAcaoController(icone = "fa fa-laptop", nomeAcao = "registrar")
-    PAGINA_NATIVA_JSON_WEBVIEW_CTR_REGISTRAR_DISPOSITIVO,;
+    PAGINA_NATIVA_JSON_WEBVIEW_CTR_REGISTRAR_DISPOSITIVO,
+    @InfoTipoAcaoGestaoEntidade(precisaPermissao = false, xhtmlDaAcao = UtilSBWP_JSFTools.FORMULARIO_API_JSON_WEB_VIEW, icone = "fa fa-link")
+    PAGINA_NATIVA_LINK_RAPIDO_MB_GESTAO;
+
+    ;
 
     @Override
     public Class getEntidadeDominio() {

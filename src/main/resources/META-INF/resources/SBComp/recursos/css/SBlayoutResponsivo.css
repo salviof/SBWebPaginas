@@ -1138,3 +1138,12 @@ h1, h2, h3, h4, h5, h6{
     display: none;
 
 }
+
+
+ui-message-info-summary{
+    font-style: italic;
+}
+
+.ui-message-info-summary {
+    font-size: large;
+}

@@ -150,6 +150,13 @@ public class MapaDeFormularios {
     }
 
     public static String getUrlFormulario(ItfAcaoDoSistema pAcao, Object... parametros) {
+        if (parametros != null) {
+            if (parametros.length == 1) {
+                if (parametros[0] instanceof Object[]) {
+                    parametros = (Object[]) parametros[0];
+                }
+            }
+        }
         try {
             ItfAcaoDoSistema acao = MapaAcoesSistema.getAcaoDoSistema(pAcao.getEnumAcaoDoSistema());
             EstruturaDeFormulario strtura = mapaFormulariosByXhtmlPrincipal.get(acao.getAcaoDeGestaoEntidade().getXhtml());

@@ -91,6 +91,7 @@ public abstract class MB_PaginaAtual implements Serializable {
                                     UtilSBWP_JSFTools.vaParaPagina(url);
                                     //UtilSBWP_JSFTools.vaParaPagina(WebPaginasServlet.getAcaoComLinkByXHTML(paginaInicialDoGrupo).getUrlDeAcesso());
                                 }
+
                             } else {
 
                             }

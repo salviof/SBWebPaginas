@@ -43,6 +43,7 @@ public class ServletRecepcaoOauth extends ServletArquivosSBWPGenerico implements
         } else {
             sessao = SBCore.getServicoSessao().getSessaoAtual();
         }
+
         try {
             UtilSBApiRestClient.servletReceberCodigoConcessao(req, resp, sessao);
         } catch (ErroRecebendoCodigoDeAcesso pErro) {

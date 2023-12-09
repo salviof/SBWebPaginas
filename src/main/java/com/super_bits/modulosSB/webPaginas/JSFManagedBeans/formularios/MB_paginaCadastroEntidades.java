@@ -796,6 +796,7 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
                 ItfBeanSimplesSomenteLeitura entidadeComoBeanSimples = (ItfBeanSimplesSomenteLeitura) getEntidadeSelecionada();
 
                 renovarEMPagina();
+
                 if (entidadeComoBeanSimples.getId() != 0) {
                     setEntidadeSelecionada(UtilSBPersistencia.loadEntidade(entidadeComoBeanSimples, getEMPagina()));
                 }
@@ -860,7 +861,7 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
                         }
                     } else {
                         // todo Erro buscar em beans declarados
-                        throw new UnsupportedOperationException("Impossível encontrar parametros para prepara objeto");
+                        throw new UnsupportedOperationException("Impossível encontrar parametros para preparar objeto");
                     }
                 }
             } else {
