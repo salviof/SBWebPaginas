@@ -90,9 +90,9 @@ public class SessaoAtualSBWP extends SessaoOffline implements ItfSessao, Seriali
             }
             String url = origRequest.getRequestURL().toString();
             try {
-            String agenteFullStr=origRequest.getHeader("User-Agent");
-            agente=new UserAgent(agenteFullStr);
-            }catch(Throwable t){
+                String agenteFullStr = origRequest.getHeader("User-Agent");
+                agente = new UserAgent(agenteFullStr);
+            } catch (Throwable t) {
                 System.out.println("ATENÇÃO O AGENTE DE ACESSO NÃO FOI DETECTADO");
             }
             System.out.println(agente.getDevice());
@@ -113,7 +113,7 @@ public class SessaoAtualSBWP extends SessaoOffline implements ItfSessao, Seriali
             System.out.println("URL host construida como: " + urlHostDaSessao);
             System.out.println("URLS permitidas=" + SBWebPaginas.getURLSHostsPermitidos());
             if (!SBWebPaginas.getURLSHostsPermitidos().contains(urlHostDaSessao)) {
-                urlHostDaSessao = SBWebPaginas.getSiteURL();
+                // urlHostDaSessao = SBWebPaginas.getSiteURL();
             }
             System.out.println("A url foi definida como " + urlHostDaSessao);
 
@@ -176,7 +176,7 @@ public class SessaoAtualSBWP extends SessaoOffline implements ItfSessao, Seriali
         super.encerrarSessao();
         UtilSBWP_JSFTools.encerrarSessaoJSessionId();
         if (pRedirecionarPagina) {
-            UtilSBWP_JSFTools.vaParaPaginaInicial();
+            UtilSBWP_JSFTools.vaParaPagina(urlHostDaSessao);
         }
     }
 
@@ -247,9 +247,5 @@ public class SessaoAtualSBWP extends SessaoOffline implements ItfSessao, Seriali
     public UserAgent getAgente() {
         return agente;
     }
-
-    
-    
-    
 
 }

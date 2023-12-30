@@ -122,14 +122,24 @@ public class PgAcessoViaTokenDinamico extends MB_paginaCadastroEntidades<TokenAc
 
             }
 
-            UtilSBWP_JSFTools.vaParaPagina(url);
-            return url;
+            //UtilSBWP_JSFTools.vaParaPagina(url);
+            return replaceURL(url);
+
         } else {
             String url = MapaDeFormularios.getUrlFormulario(MapaAcoesSistema.getAcaoDoSistemaByNomeUnico(tokenDinamico.getSlugAcaoFormulario()).getComoFormulario());
-            UtilSBWP_JSFTools.vaParaPagina(url);
-            return url;
+            // UtilSBWP_JSFTools.vaParaPagina(url);
+            return replaceURL(url);
+
         }
 
+    }
+
+    private String replaceURL(String pUrl) {
+        if (sessaoAtual.getUsuario().getClass().getSimpleName().contains("Cliente")) {
+            return pUrl.replace("crm.", "atendimento.");
+        } else {
+            return pUrl;
+        }
     }
 
     @Override

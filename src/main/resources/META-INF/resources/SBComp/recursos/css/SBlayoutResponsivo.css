@@ -1139,11 +1139,26 @@ h1, h2, h3, h4, h5, h6{
 
 }
 
+.ui-messages-warn, .ui-message-warn {
+    color: #BD8B25 !important;
+}
+.ui-message-info-summary {
+    font-size: large;
+}
 
-ui-message-info-summary{
+ui-message-warn-summary{
+    font-style: italic;
+    font-size: large;
+}
+
+.ui-message-fatal-summary {
+    font-size: large;
+}
+
+ui-message-warn-summary{
     font-style: italic;
 }
 
-.ui-message-info-summary {
+.ui-message-warn-summary {
     font-size: large;
 }
