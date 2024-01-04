@@ -22,6 +22,7 @@ public abstract class MB_Pagina extends B_Pagina {
     protected Map<String, String> idsGerenciaveis = new HashMap<>();
 
     private String urlAcessada;
+
     @Inject
     @QlSessaoFacesContext
     private SessaoAtualSBWP sessaoAtual;

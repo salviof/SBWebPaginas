@@ -988,6 +988,12 @@ public class PgUtil implements Serializable {
         exibirModal(opcoes, xhtml);
     }
 
+    public void exibirModalComBotaoFecharEParametros(String xhtml, Map<String, List<String>> pParametros) {
+        Map<String, Object> opcoes = getOpcoesModalPrimePadrao();
+        opcoes.put("closable", true);
+        exibirModal(opcoes, pParametros, xhtml);
+    }
+
     public String exibirModalRetornandoIdModal(String xhtml) {
         return exibirModal(getOpcoesModalPrimePadrao(), xhtml);
     }

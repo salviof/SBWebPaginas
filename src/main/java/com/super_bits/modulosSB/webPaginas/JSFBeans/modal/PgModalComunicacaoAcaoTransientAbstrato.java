@@ -15,7 +15,7 @@ public abstract class PgModalComunicacaoAcaoTransientAbstrato extends PgModalRes
 
     @PostConstruct
     public void defineConversa() {
-        comunicacao = getPaginaVinculada().getComunicacaoTransientAcaoByIdModal(getChaveAcesso());
+        comunicacao = getPaginaVinculada().getComunicacaoTransientAcaoByIdModal(chaveIdentificacaoViewOrigem);
     }
 
     @Override

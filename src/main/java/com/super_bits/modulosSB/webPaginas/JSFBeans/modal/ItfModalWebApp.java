@@ -16,5 +16,4 @@ public interface ItfModalWebApp extends ItfB_Modal {
 
     public ItfB_Pagina getPaginaVinculada();
 
-    public ItfComunicacao getComunincacaoAguardandoResposta();
 }

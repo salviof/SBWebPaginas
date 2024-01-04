@@ -4,7 +4,6 @@
  */
 package com.super_bits.modulosSB.webPaginas.JSFManagedBeans.declarados.webSite;
 
-import com.super_bits.modulos.SBAcessosModel.model.GrupoUsuarioSB;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ItfAcaoDoSistema;
 import com.super_bits.modulosSB.SBCore.modulos.fabrica.ItfFabricaAcoes;
