@@ -127,11 +127,6 @@ public class ModalDadosPaginaSimples implements ItfModalDados {
     }
 
     @Override
-    public ItfComunicacao getComunincacaoAguardandoResposta() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public void fecharModal() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

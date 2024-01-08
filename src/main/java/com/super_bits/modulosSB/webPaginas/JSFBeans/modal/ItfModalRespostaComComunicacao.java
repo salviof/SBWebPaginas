@@ -12,6 +12,8 @@ import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ItfComunicacao;
  */
 public interface ItfModalRespostaComComunicacao extends ItfModalComResposta {
 
+    @Deprecated
     ItfComunicacao getComunicacao();
 
+    public ItfComunicacao getComunincacaoAguardandoResposta();
 }

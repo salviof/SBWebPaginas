@@ -2,13 +2,12 @@
  *  Desenvolvido pela equipe Super-Bits.com CNPJ 20.019.971/0001-90
 
  */
-package com.super_bits.modulosSB.webPaginas.JSFBeans.modal;
+package com.super_bits.modulosSB.webPaginas.JSFBeans.modal.abstrato;
 
-import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ItfComunicacao;
 import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ItfComunicacaoAcaoVinculada;
 import com.super_bits.modulosSB.webPaginas.JSFBeans.SBBeanModel.InfoMBAcao;
-import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.declarados.util.PgUtilModalControle;
+import com.super_bits.modulosSB.webPaginas.JSFBeans.modal.ItfModalWebApp;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.B_Pagina;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.interfaces.ItfB_Pagina;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.interfaces.ItfModalDados;
@@ -16,87 +15,31 @@ import com.super_bits.modulosSB.webPaginas.util.UtilSBWP_JSFTools;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
 import javax.faces.context.FacesContext;
-import javax.inject.Inject;
-import org.coletivojava.fw.api.tratamentoErros.FabErro;
 import org.primefaces.PrimeFaces;
 
 /**
  *
  * @author desenvolvedor
  */
-public class PgModalAbstrato implements Serializable, ItfModalWebApp {
+public abstract class PgModalPaginaAtual extends PgModalBaseAbs implements Serializable, ItfModalWebApp {
 
-    private String chaveAcesso;
-    private ItfB_Pagina paginaVinculada;
-    @Inject
-    private PgUtilModalControle modalControle;
-
-    public PgModalAbstrato() {
+    public PgModalPaginaAtual() {
     }
 
-    @PostConstruct
-    public void inicio() {
-        try {
-
-            chaveAcesso = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get(UtilSBWP_JSFTools.NOME_PARAMETRO_CHAVE_ACESSO);
-            if (chaveAcesso == null) {
-                throw new UnsupportedOperationException("A chave de acesso utilizada para identificar a view que chamou o modal não foi encontrada");
-            }
-            paginaVinculada = modalControle.getPaginaByID(chaveAcesso);
-
-        } catch (Throwable t) {
-            SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, chaveAcesso, t);
-        } finally {
-            paginaVinculada.setModalAtual(this);
-        }
-
-    }
-
-    @PreDestroy
-    public void fim() {
-        if (paginaVinculada != null) {
-            modalControle.removerReferencia(paginaVinculada);
-        }
-    }
-
-    @Override
     public ItfComunicacao getComunincacaoAguardandoResposta() {
         return getPaginaVinculada().getComunincacaoAguardandoResposta();
     }
 
     public ItfComunicacaoAcaoVinculada getComunicacaoTransienteDeAcaoDoModal() {
 
-        return getPaginaVinculada().getComunicacaoTransientAcaoByIdModal(chaveAcesso);
+        return getPaginaVinculada().getComunicacaoTransientAcaoByIdModal(chaveIdentificacaoViewOrigem);
 
-    }
-
-    public String getChaveAcesso() {
-        return chaveAcesso;
-    }
-
-    @Override
-    public ItfB_Pagina getPaginaVinculada() {
-        return paginaVinculada;
-    }
-
-    public void setPaginaVinculada(ItfB_Pagina paginaVinculada) {
-        this.paginaVinculada = paginaVinculada;
     }
 
     public void fecharPaginaMatandoViewScoped() {
 
         FacesContext.getCurrentInstance().getViewRoot().getViewMap().clear();
-    }
-
-    public PgUtilModalControle getModalControle() {
-        return modalControle;
-    }
-
-    public void setModalControle(PgUtilModalControle modalControle) {
-        this.modalControle = modalControle;
     }
 
     @Override
@@ -131,22 +74,23 @@ public class PgModalAbstrato implements Serializable, ItfModalWebApp {
 
     @Override
     public void executarAcaoSelecionada() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        getPaginaVinculada().executarAcaoSelecionada();
     }
 
     @Override
+    @Deprecated
     public List<InfoMBAcao> getInfoAcoes() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return getPaginaVinculada().getInfoAcoes();
     }
 
     @Override
     public List<B_Pagina.BeanDeclarado> getInfoBeans() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return getPaginaVinculada().getInfoBeans();
     }
 
     @Override
     public Map<String, String> getInfoIds() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return getPaginaVinculada().getInfoIds();
     }
 
     @Override

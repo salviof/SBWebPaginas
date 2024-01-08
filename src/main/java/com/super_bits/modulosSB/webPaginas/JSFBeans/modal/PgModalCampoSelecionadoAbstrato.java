@@ -12,12 +12,13 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.coletivojava.fw.api.tratamentoErros.FabErro;
 import org.primefaces.PrimeFaces;
+import com.super_bits.modulosSB.webPaginas.JSFBeans.modal.abstrato.PgModalPaginaAtual;
 
 /**
  *
  * @author SalvioF
  */
-public class PgModalCampoSelecionadoAbstrato extends PgModalAbstrato implements ItfModalCampoInstanciado {
+public class PgModalCampoSelecionadoAbstrato extends PgModalPaginaAtual implements ItfModalCampoInstanciado {
 
     private ItfCampoInstanciado campoinstanciado;
 

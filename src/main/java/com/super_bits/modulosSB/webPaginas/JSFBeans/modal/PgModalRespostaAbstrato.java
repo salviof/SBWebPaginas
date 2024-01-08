@@ -9,12 +9,13 @@ import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ItfComunicacao;
 import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ItfRespostaComunicacao;
 import org.coletivojava.fw.api.tratamentoErros.FabErro;
 import org.primefaces.PrimeFaces;
+import com.super_bits.modulosSB.webPaginas.JSFBeans.modal.abstrato.PgModalPaginaAtual;
 
 /**
  *
  * @author SalvioF
  */
-public abstract class PgModalRespostaAbstrato extends PgModalAbstrato implements ItfModalRespostaComComunicacao {
+public abstract class PgModalRespostaAbstrato extends PgModalPaginaAtual implements ItfModalRespostaComComunicacao {
 
     private ItfRespostaComunicacao respostaSelecionada;
     protected ItfComunicacao comunicacao;
@@ -29,8 +30,19 @@ public abstract class PgModalRespostaAbstrato extends PgModalAbstrato implements
         this.respostaSelecionada = respostaSelecionada;
     }
 
+    /**
+     *
+     * @return @deprecated Utilze comunicaçãoAguardandoREsposta
+     */
     @Override
+    @Deprecated
     public ItfComunicacao getComunicacao() {
+        return getComunincacaoAguardandoResposta();
+
+    }
+
+    @Override
+    public ItfComunicacao getComunincacaoAguardandoResposta() {
         try {
             if (comunicacao != null) {
                 return comunicacao;
@@ -41,7 +53,6 @@ public abstract class PgModalRespostaAbstrato extends PgModalAbstrato implements
             SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "Erro obtendo comunicação vinculada ao modal.", t);
             return null;
         }
-
     }
 
     @Override

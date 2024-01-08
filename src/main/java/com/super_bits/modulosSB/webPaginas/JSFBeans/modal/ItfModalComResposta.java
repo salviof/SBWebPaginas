@@ -4,6 +4,7 @@
  */
 package com.super_bits.modulosSB.webPaginas.JSFBeans.modal;
 
+import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ItfComunicacao;
 import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ItfRespostaComunicacao;
 
 /**
@@ -18,4 +19,5 @@ public interface ItfModalComResposta extends ItfModalWebApp {
 
     public void enviarRespostaEExecutarAcao();
 
+    public ItfComunicacao getComunincacaoAguardandoResposta();
 }

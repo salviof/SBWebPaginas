@@ -16,6 +16,7 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import org.coletivojava.fw.api.tratamentoErros.FabErro;
 import requisito.ClienteComentarioRequisito;
+import com.super_bits.modulosSB.webPaginas.JSFBeans.modal.abstrato.PgModalPaginaAtual;
 
 /**
  *
@@ -23,7 +24,7 @@ import requisito.ClienteComentarioRequisito;
  */
 @ViewScoped
 @Named
-public class PgModalRequisito extends PgModalAbstrato {
+public class PgModalRequisito extends PgModalPaginaAtual {
 
     private String nomeUnicoAcao;
     private Requisito requisitoVinculadoAcao;
