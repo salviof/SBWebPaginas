@@ -33,6 +33,7 @@ import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import javax.imageio.ImageIO;
 import javax.inject.Inject;
 import javax.persistence.Entity;
@@ -57,7 +58,7 @@ public class SessaoAtualSBWP extends SessaoOffline implements ItfSessao, Seriali
     private ItfTelaUsuario tipoView;
     private ItfModuloAcaoSistema moduloSelecionado;
     @Inject
-    private EntityManager entidadePrincipal;
+    private EntityManager gestaoEntidadePrincipal;
     private String urlHostDaSessao;
     private UserAgent agente;
 
@@ -158,7 +159,7 @@ public class SessaoAtualSBWP extends SessaoOffline implements ItfSessao, Seriali
         ItfUsuario usuario = (ItfUsuario) UtilSBWP_JSFTools.retirarProxyDeVisualizacaoDoBean(super.getUsuario());
 
         if (usuario.getClass().getAnnotation(Entity.class) != null) {
-            usuario = UtilSBPersistencia.loadEntidade(usuario, entidadePrincipal);
+            usuario = UtilSBPersistencia.loadEntidade(usuario, gestaoEntidadePrincipal);
 
         }
         return usuario;
@@ -166,8 +167,9 @@ public class SessaoAtualSBWP extends SessaoOffline implements ItfSessao, Seriali
     }
 
     @Override
+    @PreDestroy
     public void encerrarSessao() {
-
+        UtilSBPersistencia.fecharEM(gestaoEntidadePrincipal);
         encerrarSessao(true);
 
     }
