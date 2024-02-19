@@ -9,6 +9,7 @@ import com.sun.faces.facelets.el.TagValueExpression;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringValidador;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreValidacao;
+import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.ItfValidacao;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campoInstanciado.ItfCampoInstanciado;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.validador.ErroValidacao;
 import com.super_bits.modulosSB.SBCore.modulos.view.telas.LayoutTelaAreaConhecida;
@@ -67,11 +68,19 @@ public abstract class ValidadorGenericoAbstrato<T> implements Validator<T> {
         }
         if (campoInstanciado.isTemValidadacaoLogica()) {
             try {
-                List<WidgetsFormulario> areasAtualizacao;
+                List<WidgetsFormulario> areasAtualizacao = null;
+                ItfValidacao validacaoLogica = null;
                 if (umNovoRegistro) {
-                    areasAtualizacao = campoInstanciado.getValidacaoLogicaEstrategia().validarModoNovo(value);
+                    validacaoLogica = campoInstanciado.getValidacaoLogicaEstrategia();
+                    if (validacaoLogica != null) {
+                        areasAtualizacao = validacaoLogica.validarModoNovo(value);
+                    }
+
                 } else {
-                    areasAtualizacao = campoInstanciado.getValidacaoLogicaEstrategia().validarModoEdicao(value);
+                    validacaoLogica = campoInstanciado.getValidacaoLogicaEstrategia();
+                    if (validacaoLogica != null) {
+                        areasAtualizacao = validacaoLogica.validarModoEdicao(value);
+                    }
                 }
                 if (areasAtualizacao != null) {
                     for (WidgetsFormulario areaAtualizar : areasAtualizacao) {

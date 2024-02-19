@@ -147,7 +147,7 @@ public class ControleDeSessaoWeb extends ControleDeSessaoAbstratoSBCore implemen
                 SBCore.enviarMensagemUsuario("Erro gerando token de acesso", FabMensagens.ERRO);
                 return;
             }
-            if (UtilSBCoreEmail.enviarPorServidorPadrao(
+            if (UtilSBCoreEmail.enviarPorServidorPadraoV2(
                     pEmail,
                     UtilSBCoreComunicacao.getSaudacao() + ", " + usuarioEncontrado.getNome()
                     + ", utilize <a href=\" " + MapaDeFormularios.

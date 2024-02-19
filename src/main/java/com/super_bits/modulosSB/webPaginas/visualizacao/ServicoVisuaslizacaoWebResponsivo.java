@@ -6,6 +6,7 @@ package com.super_bits.modulosSB.webPaginas.visualizacao;
 
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.siteMap.MapaDeFormularios;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
+import com.super_bits.modulosSB.SBCore.UtilGeral.MapaAcoesSistema;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.permissoes.ItfAcaoFormulario;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.permissoes.ItfAcaoGerenciarEntidade;
 import com.super_bits.modulosSB.SBCore.modulos.fabrica.ItfFabricaAcoes;
@@ -155,6 +156,11 @@ public class ServicoVisuaslizacaoWebResponsivo extends ServicoVisualizacaoAbstra
     @Override
     public String getEndrRemotoFormulario(ItfFabricaAcoes pAcao, Object... paramentros) {
         return MapaDeFormularios.getUrlFormulario(pAcao.getRegistro().getComoFormulario(), paramentros);
+    }
+
+    @Override
+    public String getEndrRemotoFormulario(String pAcaoNomeUnico, Object... paramentros) {
+        return MapaDeFormularios.getUrlFormulario(MapaAcoesSistema.getAcaoDoSistemaByNomeUnico(pAcaoNomeUnico), paramentros);
     }
 
 }

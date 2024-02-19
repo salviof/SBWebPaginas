@@ -81,6 +81,22 @@ public class PgUtilDataHoraFormato implements Serializable {
         }
     }
 
+    public String getMesAtualExtenso() {
+        try {
+            Date pDiaDaSemana = new Date();
+            if (pDiaDaSemana == null) {
+                return null;
+            }
+            Locale local = new Locale("pt", "BR");
+
+            SimpleDateFormat formatador = new SimpleDateFormat("MMMM", local);
+            return formatador.format(pDiaDaSemana);
+        } catch (Throwable t) {
+            SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "Erro formantando data", t);
+            return null;
+        }
+    }
+
     public String getMesAnoExtenso(Date pDiaDaSemana) {
         try {
             if (pDiaDaSemana == null) {
