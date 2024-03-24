@@ -86,7 +86,7 @@ public class PgAcessoViaTokenDinamico extends MB_paginaCadastroEntidades<TokenAc
     public String getUrlAcaoDoToken() {
         if (getTokenDinamico() == null) {
             acessonegado();
-            return "";
+            return sessaoAtual.getUrlHostDaSessao();
         }
         if (tokenDinamico.getEntidadeDoAcesso() != null) {
             Class tipoEntidade = MapaObjetosProjetoAtual.getClasseDoObjetoByNome(tokenDinamico.getEntidadeDoAcesso());

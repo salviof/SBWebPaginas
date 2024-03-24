@@ -7,6 +7,7 @@ package com.super_bits.modulosSB.webPaginas;
 import com.super_bits.modulos.SBAcessosModel.fabricas.FabAcaoProjetoSB;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.ItfConfiguracaoCoreCustomizavel;
 import com.super_bits.modulosSB.webPaginas.ConfigGeral.ConfiguradorCoreDeProjetoWebWarAbstrato;
+import com.super_bits.modulosSB.webPaginas.controller.paginasDoSistema.FabAcaoPaginasDoSistema;
 
 /**
  *
@@ -23,7 +24,7 @@ public class ConfiguradorSBCoreWebPaginaTestes extends ConfiguradorCoreDeProjeto
 
     @Override
     public void defineFabricasDeACao(ItfConfiguracaoCoreCustomizavel pConfig) {
-        pConfig.setFabricaDeAcoes(new Class[]{FabAcaoProjetoSB.class});
+        pConfig.setFabricaDeAcoes(new Class[]{FabAcaoProjetoSB.class, FabAcaoPaginasDoSistema.class});
     }
 
 }
