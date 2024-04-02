@@ -721,6 +721,7 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
 
     protected void listarDados(boolean mostrarInativos) {
         try {
+
             if (listarApenasRegistroCriadoAoListar && isNovoRegistro() && getEntidadeSelecionada() != null && getEntidadeSelecionadaComoBeanSimples().getId() == 0) {
                 if (getEntidadesListadas() != null) {
                     getEntidadesListadas().clear();

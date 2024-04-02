@@ -19,7 +19,7 @@
                         for="#{pgUtil.getNomeIdComponenteInput(component)}"
                         >
             <h:panelGroup rendered="#{registro.temDescricao}">
-                <i class="fa fa-question-circle fa-1x"></i>
+                <i class="#{registro.temDescricao?'fa fa-question-circle fa-1x':''}"></i>
             </h:panelGroup>
             <p:tooltip
                 for="@parent"

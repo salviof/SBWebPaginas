@@ -64,9 +64,9 @@ and open the template in the editor.
     width: 99%;
 }
 .InputSBEsquerdaLabel{
-    text-align: center;
+    text-align: right;
     width: 120px;
-
+    padding-right: 15px;
 }
 
 .InputSBEsquerdaLabel label{
@@ -123,26 +123,37 @@ and open the template in the editor.
 }
 .campoMascara{
 }
-.campoGrande{}
-.campoMultiplasLinhas{}
-.camoMinimoEMaximo{}
-.campoSenha{}
-.campoCEP{}
-.campoCor{}
-.campoHTML{}
+.campoGrande{
+}
+.campoMultiplasLinhas{
+}
+.camoMinimoEMaximo{
+}
+.campoSenha{
+}
+.campoCEP{
+}
+.campoCor{
+}
+.campoHTML{
+}
 .campoQuantidade{
     width: 10% !important;
 }
 .campoMoeda{
     width: 10%  !important;
 }
-.campoEmail{}
+.campoEmail{
+}
 .campoData{
     width: 15%  !important;
 }
-.campoDataHora{}
-.campoLigadoDesligado{}
-.campoEntidadeSimples{}
+.campoDataHora{
+}
+.campoLigadoDesligado{
+}
+.campoEntidadeSimples{
+}
 
 
 /* CSS OLD APENAS PARA COMPATIBILIDADE MOMENTANEA, SERÁ EXCLUIDO  */
