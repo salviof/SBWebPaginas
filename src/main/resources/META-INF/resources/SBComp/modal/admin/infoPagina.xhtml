@@ -92,6 +92,8 @@
                         </p:link>
                     </p:panelGrid>
                 </p:tab>
+
+
                 <p:tab title="Pagina Gestão de Entidade" rendered="#{pgModalSBJSF.paginaVinculada.umaPaginaGestaoEntidade}" >
                     <p:panelGrid columns="2">
                         <p:outputLabel value="Ações De Registros:" rendered="#{pgModalSBJSF.paginaVinculada.umaPaginaGestaoEntidade}"/>
@@ -140,14 +142,15 @@
                             </c:forEach>
                         </p:panelGrid>
                         <p:panel header="INFOBEAN"  >
-                            <p:panelGrid columns="5" >
-
+                            <p:panelGrid columns="6" >
+                                <p:outputLabel value="-" />
                                 <p:outputLabel value="Tipo"/>
                                 <p:outputLabel value="acesso ([chamada])"/>
                                 <p:outputLabel value="Descricao"/>
                                 <p:outputLabel value="aplicacao"/>
                                 <p:outputLabel value="Visualizacao padrão"/>
                                 <c:forEach items="#{pgModalSBJSF.paginaVinculada.infoBeans}" var="bean" >
+                                    <p:outputLabel value="-" />
                                     <p:outputLabel value="#{bean.infoBean.classe}"/>
                                     <p:outputLabel value="#{bean.infoBean.chamada}"/>
                                     <p:outputLabel value="#{bean.infoBean.descricao}"/>

@@ -7,12 +7,13 @@ import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basic
 import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.charts.ItfBeanSimpleChart;
 import java.util.ArrayList;
 import java.util.List;
-import org.primefaces.model.chart.CartesianChartModel;
-import org.primefaces.model.chart.ChartSeries;
+import org.apache.poi.ss.usermodel.charts.ChartSeries;
+import org.primefaces.model.charts.line.LineChartDataSet;
+import org.primefaces.model.charts.line.LineChartModel;
 
 public class BP_ChartLinear<T extends ItfBeanSimples> {
 
-    private CartesianChartModel dadosGrafico;
+    private LineChartModel dadosGrafico;
     private String nomeGrafico = "";
     private double minimo = 0;
     private double maximo = 0;
@@ -22,7 +23,7 @@ public class BP_ChartLinear<T extends ItfBeanSimples> {
             Class<? extends ItfBeanSimpleChart> tipo) {
         classe = tipo;
         nomeGrafico = pNome;
-        setDadosGrafico(new CartesianChartModel());
+        setDadosGrafico(new LineChartModel());
         for (List<ItfBeanSimpleChart> lista : listas) {
             adcionaSerie(lista);
         }
@@ -32,13 +33,16 @@ public class BP_ChartLinear<T extends ItfBeanSimples> {
             Class<? extends ItfBeanSimpleChart> tipo) {
         classe = tipo;
         nomeGrafico = pNome;
-        setDadosGrafico(new CartesianChartModel());
+        setDadosGrafico(new LineChartModel());
     }
 
     public void adcionaSerie(List<? extends ItfBeanSimpleChart> listacat) {
         if (listacat != null & listacat.size() > 0) {
-            ChartSeries serie = new ChartSeries();
+            LineChartDataSet serie = new LineChartDataSet();
+
             serie.setLabel(listacat.get(0).getCategoria());
+            List<Object> valores = new ArrayList<>();
+            List<Object> nomes = new ArrayList<>();
             for (ItfBeanSimpleChart item : listacat) {
                 if (item.getValor() < getMinimo()) {
                     setMinimo(item.getValor());
@@ -46,9 +50,11 @@ public class BP_ChartLinear<T extends ItfBeanSimples> {
                 if (item.getValor() > getMaximo()) {
                     setMaximo(item.getValor());
                 }
-                serie.set(item.getLabel(), item.getValor());
+                valores.add(item.getValor());
+                nomes.add(item.getLabel());
             }// para cada registro
-            getDadosGrafico().addSeries(serie);
+            serie.setData(valores);
+            getDadosGrafico().getData().addChartDataSet(serie);
         }// se tiver algo na lista
     }
 
@@ -92,7 +98,7 @@ public class BP_ChartLinear<T extends ItfBeanSimples> {
     public BP_ChartLinear(String pNome, SBNQ[] dados,
             Class<? extends ItfBeanSimpleChart> tipo) {
         classe = tipo;
-        setDadosGrafico(new CartesianChartModel());
+        setDadosGrafico(new LineChartModel());
         nomeGrafico = pNome;
 
         for (SBNQ qr : dados) {
@@ -100,11 +106,11 @@ public class BP_ChartLinear<T extends ItfBeanSimples> {
         }
     }
 
-    public CartesianChartModel getDadosGrafico() {
+    public LineChartModel getDadosGrafico() {
         return dadosGrafico;
     }
 
-    public void setDadosGrafico(CartesianChartModel dadosGrafico) {
+    public void setDadosGrafico(LineChartModel dadosGrafico) {
         this.dadosGrafico = dadosGrafico;
     }
 

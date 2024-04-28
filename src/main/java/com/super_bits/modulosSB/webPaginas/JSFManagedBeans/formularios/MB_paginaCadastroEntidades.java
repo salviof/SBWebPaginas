@@ -751,7 +751,10 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
                             if (pr.isUmParametroDeEntidade() && pr.isValorDoParametroFoiConfigurado()) {
 
                                 Optional<ItfEstruturaCampoEntidade> pesquisaCampoTipoParametro = estruturaEntidadeListada.getCampos()
-                                        .stream().filter(cp -> cp.getTipoPrimitivoDoValor().equals(TIPO_PRIMITIVO.ENTIDADE) && cp.getClasseCampoDeclaradoOuTipoLista().equals(pr.getClasseObjetoValor().toString())).findFirst();
+                                        .stream().filter(cp -> cp.getTipoPrimitivoDoValor().equals(TIPO_PRIMITIVO.ENTIDADE)
+                                        && MapaObjetosProjetoAtual.isNomeEntidadeRegistrada(cp.getClasseCampoDeclaradoOuTipoLista())
+                                        && cp.getClasseCampoDeclaradoOuTipoLista().equals(pr.getClasseObjetoValor().getSimpleName()))
+                                        .findFirst();
                                 if (pesquisaCampoTipoParametro.isPresent()) {
                                     ItfEstruturaCampoEntidade campoMesmoTipoParametro = pesquisaCampoTipoParametro.get();
                                     novaConsulta.addCondicaoManyToOneIgualA(campoMesmoTipoParametro.getNomeDeclarado(), (ItfBeanSimples) pr.getValor());
