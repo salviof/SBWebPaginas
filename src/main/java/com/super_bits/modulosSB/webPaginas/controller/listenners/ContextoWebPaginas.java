@@ -63,8 +63,9 @@ public class ContextoWebPaginas implements ServletContextListener {
             //   String webDir = this.getClass().getClassLoader().getResource("com/company/project/mywebdir").toExternalForm();
 
             inicio.inicio();
-            System.out.println("Construindo SiteMap");
             buildSisteMap();
+            System.out.println("Construindo SiteMap");
+
             System.out.println("Fim Construção");
             System.out.println("Listando autoexecuções");
             for (ItfAcaoControllerAutoExecucao acao : MapaAcoesSistema.getListaAcoesAutomatizadas()) {

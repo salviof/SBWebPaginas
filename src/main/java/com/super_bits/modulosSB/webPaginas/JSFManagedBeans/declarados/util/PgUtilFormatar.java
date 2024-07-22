@@ -73,4 +73,9 @@ public class PgUtilFormatar {
         return formatador.format(pDataHora);
     }
 
+    public int arredondarParaBaixo(Double pValor) {
+        Double v = UtilSBCoreNumeros.doubleArredondamentoMetadeParaBaixo(pValor, 0);
+        return v.intValue();
+    }
+
 }

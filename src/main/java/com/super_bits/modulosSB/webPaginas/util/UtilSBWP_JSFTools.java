@@ -7,14 +7,11 @@ package com.super_bits.modulosSB.webPaginas.util;
 import com.sun.faces.component.visit.FullVisitContext;
 import com.sun.faces.facelets.el.TagValueExpression;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
-import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringJson;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringValidador;
 import com.super_bits.modulosSB.SBCore.integracao.libRestClient.api.token.ItfTokenGestaoOauth;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.permissoes.ItfAcaoFormulario;
 import com.super_bits.modulosSB.SBCore.modulos.Mensagens.FabMensagens;
-import com.super_bits.modulosSB.SBCore.modulos.erp.ItfSistemaERP;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campoInstanciado.ItfCampoInstanciado;
-import com.super_bits.modulosSB.webPaginas.util.UtilSBWP_JSFTools;
 import com.super_bits.modulosSB.webPaginas.ConfigGeral.SBWebPaginas;
 import com.super_bits.modulosSB.webPaginas.JSFBeans.modal.PgModalSBJSF;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.declarados.util.PgUtilTelefone;
@@ -524,9 +521,17 @@ public abstract class UtilSBWP_JSFTools {
     }
 
     public static String getIDJsession() {
-        FacesContext fCtx = FacesContext.getCurrentInstance();
-        HttpSession session = (HttpSession) fCtx.getExternalContext().getSession(false);
-        String sessionId = session.getId();
+        String sessionId = null;
+        try {
+            FacesContext fCtx = FacesContext.getCurrentInstance();
+            if (fCtx == null) {
+                return null;
+            }
+            HttpSession session = (HttpSession) fCtx.getExternalContext().getSession(false);
+            sessionId = session.getId();
+        } catch (Throwable t) {
+            return null;
+        }
         return sessionId;
     }
 

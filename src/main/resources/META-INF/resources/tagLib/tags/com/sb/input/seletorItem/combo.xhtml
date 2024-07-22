@@ -7,16 +7,12 @@
     xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
     xmlns:f="http://xmlns.jcp.org/jsf/core">
     <ui:decorate   template="#{layout.xhtmlJsfCaminhoRelativo}">
-
-
         <ui:define name="input">
-
             <h:panelGroup rendered="#{valor != null and desabilitarEdicao and registro.umValorComLista}"  >
                 <p:outputLabel value="#{valor.nome}" rendered="#{desabilitarEdicao}" />
             </h:panelGroup>
             <h:panelGrid styleClass="colunaResponsiva" rendered="#{!desabilitarEdicao}" >
                 <p:selectOneMenu rendered="#{!desabilitarEdicao}"
-
                                  disabled="#{desabilitarEdicao}"
                                  required="#{obrigatorio}"
                                  value="#{valor}"
@@ -66,7 +62,6 @@
                             oncomplete="desbloquearArea('#{pgUtil.getNomeIdPainelDoComponente(component)}')"
                             />
                     </c:if>
-
                     <c:if test="#{possuiIDOnChange}" >
                         <p:ajax
                             rendered="#{possuiIDOnChange}"
@@ -78,20 +73,13 @@
                             oncomplete="desbloquearArea('#{idAtualizarOnChange}')"
 
                             />
-
                     </c:if>
                     <p:column>
                         #{it.nome}
                     </p:column>
 
                 </p:selectOneMenu>
-
-
-
-
             </h:panelGrid>
-
-
         </ui:define>
     </ui:decorate>
 </ui:composition>

@@ -208,7 +208,6 @@ public class ServletArquivosDeEntidade extends ServletArquivosSBWPGenerico imple
                         throw new ErroRequisicaoServlet(FabTipoErroRequisicao.ACESSO_NEGADO, "O usuário não tem acesso ao arquivo");
 
                     }
-
                     prDadosREquisicaoArquivoEntidade.setCaminhoLocal(SBCore.getCentralDeArquivos().getEndrLocalArquivoCampoInstanciado(campoArquivo));
                     prDadosREquisicaoArquivoEntidade.setNomeArquivoDownload(campoArquivo.getValor().toString());
             }

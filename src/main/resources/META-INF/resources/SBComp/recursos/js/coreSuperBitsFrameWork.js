@@ -648,7 +648,7 @@ function atualizarAreaCampoSeVisivel(pAreaCampo) {
                     if (elemento.id.length > 0) {
                         atualizarAreaByID(elemento.id);
                     } else {
-                        idMaisProximo = getIdMaisProximo(elemento);
+                        idMaisProximo = getIdSuperiorMaisProximo(elemento);
 
                         if (idMaisProximo.length > 0) {
                             atualizarAreaByID(idMaisProximo);

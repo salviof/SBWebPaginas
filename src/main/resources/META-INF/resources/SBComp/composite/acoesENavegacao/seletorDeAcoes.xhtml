@@ -104,7 +104,7 @@
                         <c:when test="#{cc.attrs.visualizacaoBotao==layoutsComponenteSB.layoutBotoes.gigante}">
 
                             <p:commandLink
-
+                                rendered="#{opc ne paginaAtual.infoPagina.comoFormularioWeb.acaoSelecionada}"
                                 action="#{cc.attrs.metodo}"
                                 >
 

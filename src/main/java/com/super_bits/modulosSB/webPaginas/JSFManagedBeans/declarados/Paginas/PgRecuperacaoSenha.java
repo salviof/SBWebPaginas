@@ -59,11 +59,22 @@ public class PgRecuperacaoSenha extends MB_PaginaConversation {
         xhtmlAcaoAtual = FabAcaoPaginasDoSistema.PAGINA_NATIVA_ACESSO_NEGADO_FRM_SUB_FORM.getRegistro().getComoFormulario().getXhtml();
     }
 
-    public void alterarSenha() {
+    public UsuarioSB getUsuario() {
+        ItfParametroRequisicaoInstanciado pr = getParametroInstanciado(tokenAcesso);
+        if (!getParametroInstanciado(tokenAcesso).isValorDoParametroFoiConfigurado()) {
+            return null;
+        }
+        TokenRecuperacaoSenha token = (TokenRecuperacaoSenha) pr.getValor();
+        ItfUsuario usuario = SBCore.getServicoPermissao().getUsuarioByEmail(token.getEmail());
+        return (UsuarioSB) usuario;
+    }
+
+    public boolean alterarSenha() {
+
+        boolean senhaEsperada = false;
         try {
-            ItfParametroRequisicaoInstanciado pr = getParametroInstanciado(tokenAcesso);
-            TokenRecuperacaoSenha token = (TokenRecuperacaoSenha) pr.getValor();
-            ItfUsuario usuario = SBCore.getServicoPermissao().getUsuarioByEmail(token.getEmail());
+
+            UsuarioSB usuario = getUsuario();
             if (usuario == null) {
                 SBCore.enviarMensagemUsuario("Usuário não encontrado ", FabMensagens.ERRO);
             } else {
@@ -73,8 +84,10 @@ public class PgRecuperacaoSenha extends MB_PaginaConversation {
                 UsuarioSB usr = (UsuarioSB) usuario;
                 try {
                     usr.getCPinst("senha").setValorSeValido(novaSenha);
-                    UtilSBPersistencia.mergeRegistro(usr, getEMPagina());
-                    UtilSBPersistencia.exluirRegistro(pr.getValor());
+                    if (UtilSBPersistencia.mergeRegistro(usr, getEMPagina()) != null) {
+                        senhaEsperada = true;
+                    }
+                    UtilSBPersistencia.exluirRegistro(getParametroInstanciado(tokenAcesso).getValor());
                 } catch (ErroValidacao ex) {
                     SBCore.enviarMensagemUsuario(ex.getMessage(), FabMensagens.ALERTA);
                 }
@@ -85,6 +98,7 @@ public class PgRecuperacaoSenha extends MB_PaginaConversation {
         } catch (Throwable t) {
             SBCore.enviarMensagemUsuario("Erro alterando senha", FabMensagens.ERRO);
         }
+        return senhaEsperada;
     }
 
     @PostConstruct

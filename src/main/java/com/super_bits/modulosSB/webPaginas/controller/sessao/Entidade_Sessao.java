@@ -24,7 +24,7 @@ public class Entidade_Sessao implements ItfSessao, Serializable {
 
     protected static final int IDANONIMO = 0;
 
-    private int idSessao;
+    private String idSessao;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -148,9 +148,9 @@ public class Entidade_Sessao implements ItfSessao, Serializable {
     }
 
     @Override
-    public int getIdSessao() {
-        if (idSessao == 0) {
-            idSessao = Thread.currentThread().toString().hashCode();
+    public String getIdSessao() {
+        if (idSessao == null) {
+            idSessao = String.valueOf(Thread.currentThread().toString().hashCode());
         }
         return idSessao;
     }

@@ -1081,6 +1081,12 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
 
     @Override
     public String getXhtmlAcaoAtual() {
+        if (acaoSelecionada != null) {
+            if (acaoSelecionada.isUmaAcaoController()) {
+                ItfAcaoFormulario acaof = getAcaoUltimoFormularioExecutado();
+                xhtmlAcaoAtual = acaof.getXhtml();
+            }
+        }
         return xhtmlAcaoAtual;
     }
 

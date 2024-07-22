@@ -120,7 +120,7 @@ public class ConversorGenerico extends ConversorSB {
 
         try {
 
-            if (value != null && !"".equals(value)) {
+            if (value != null && value instanceof ItfBeanSimplesSomenteLeitura && !"".equals(value)) {
                 ItfBeanSimplesSomenteLeitura item = (ItfBeanSimplesSomenteLeitura) value;
                 String valorEmString = item.toString();
                 value.toString();

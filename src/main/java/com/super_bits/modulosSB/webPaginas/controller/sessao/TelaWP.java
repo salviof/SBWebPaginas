@@ -71,15 +71,15 @@ public class TelaWP implements ItfTelaUsuario, Serializable {
             } else if (x >= 720 && x < 960) {
                 numeroMaximoColunas = 6;
             } else if (x >= 960 && x < 1140) {
-                numeroMaximoColunas = 9;
+                numeroMaximoColunas = 6;
             } else if (x >= 1140 && x < 1200) {
-                numeroMaximoColunas = 9;
+                numeroMaximoColunas = 6;
             } else if (x >= 1200 && x < 1400) {
-                numeroMaximoColunas = 12;
+                numeroMaximoColunas = 6;
             } else if (x >= 1400 && x < 1600) {
-                numeroMaximoColunas = 15;
+                numeroMaximoColunas = 9;
             } else if (x >= 1600) {
-                numeroMaximoColunas = 18;
+                numeroMaximoColunas = 9;
             }
 
         } catch (Throwable e) {

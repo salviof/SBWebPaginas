@@ -1,0 +1,47 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:SBAcaoNav="http://xmlns.jcp.org/jsf/composite/SBComp/composite/acoesENavegacao"
+                xmlns:cc="http://xmlns.jcp.org/jsf/composite"
+                xmlns:sb="http://superbitsframework/ui"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <cc:interface>
+        <cc:attribute name="acao" type="com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ItfAcaoDoSistema" shortDescription="Ação que será realizada"/>
+        <cc:attribute name="label"
+                      shortDescription="Label do botão"
+                      default="#{cc.attrs.acao.nomeAcao}"
+                      type="java.lang.String"
+                      />
+        <cc:attribute name="classeEstilo"
+                      default="#{null}"
+                      shortDescription="Especifica uma classe para estilizar o botão"
+                      />
+        <cc:attribute name="idUpdate" default="@this" />
+        <cc:attribute name="target" default="" />
+        <cc:attribute name="valorTarget" default="" />
+        <cc:attribute name="metodo" default="#{paginaAtual.infoPagina.comoPaginaEntidade.executarAcao(paginaAtual.infoPagina.comoPaginaEntidade.entidadeSelecionada)}"/>
+    </cc:interface>
+    <cc:implementation>
+
+        <sb:parametroMetodo nome="prMetodo" valor="#{cc.attrs.metodo}" />
+        <p:commandButton onmousedown="esconderTooltips();"
+                         styleClass="btnIconeENome botao #{cc.attrs.classeEstilo}"
+                         icon="#{cc.attrs.acao.iconeAcao}"
+                         action="#{prMetodo}"
+                         update="#{pgUtil.makeCaminhoCompletoID(cc.attrs.idUpdate)}"
+                         value="#{cc.attrs.label}"
+                         oncomplete="#{javaScriptOncomplete}"
+
+                         >
+            <f:setPropertyActionListener target="#{paginaAtual.infoPagina.comoPaginaEntidade.acaoSelecionada}"
+                                         value="#{cc.attrs.acao}"  />
+
+            <f:setPropertyActionListener target="#{cc.attrs.target}"
+                                         value="#{cc.attrs.valorTarget}"  />
+        </p:commandButton>
+
+
+
+
+    </cc:implementation>
+</ui:composition>

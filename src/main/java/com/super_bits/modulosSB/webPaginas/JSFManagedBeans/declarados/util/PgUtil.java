@@ -1633,12 +1633,21 @@ public class PgUtil implements Serializable {
 
     public List<ItfAcaoDoSistema> getAcoesEntidade(ItfBeanSimples pItem, List<ItfAcaoDoSistema> pAcoes) {
         try {
+            List<ItfAcaoDoSistema> acoes = new ArrayList<>();
             if (pItem != null) {
                 if (pItem == null) {
                     return new ArrayList<>();
                 }
+
                 List<ItfAcaoDoSistema> acoesItem = pItem.getAcoesDisponiveis();
                 if (acoesItem != null && !acoesItem.isEmpty()) {
+                    // if (paginaAtual.getInfoPagina().isPaginaDeGestao()) {
+                    //    if (paginaAtual.getInfoPagina().getComoPaginaDeGestao().getAcaoSelecionada() != null) {
+                    //           if (acoesItem.contains(paginaAtual.getInfoPagina().getComoPaginaDeGestao().getAcaoSelecionada())) {
+                    //             acoesItem.remove(paginaAtual.getInfoPagina().getComoPaginaDeGestao().getAcaoSelecionada());
+                    //       }
+                    //   }
+                    //}
                     return acoesItem;
                 }
             }

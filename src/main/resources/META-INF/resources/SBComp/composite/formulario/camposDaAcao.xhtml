@@ -3,7 +3,8 @@
                 xmlns:SBForm="http://xmlns.jcp.org/jsf/composite/SBComp/composite/formulario"
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
-                xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html">
 
     <!-- INTERFACE -->
     <cc:interface>
@@ -21,17 +22,18 @@
     <cc:implementation>
         <c:forEach  var="grupo" items="#{cc.attrs.acao.gruposDeCampos}">
 
+            <h:panelGroup styleClass="Container8" layout="block" >
+                <p:fieldset style="margin: 2%" styleClass="" legend="#{grupo.nomeGrupo}">
 
-            <p:fieldset style="margin: 2%" styleClass="" legend="#{grupo.nomeGrupo}">
+                    <SBForm:camposDoGrupo registro="#{cc.attrs.registro}"
+                                          grupoCampos="#{grupo}"
 
-                <SBForm:camposDoGrupo registro="#{cc.attrs.registro}"
-                                      grupoCampos="#{grupo}"
+                                          somenteLeitura="#{cc.attrs.somenteLeitura}"
+                                          tipoVisualizacaoLabel="#{cc.attrs.tipoVisualizacaoLabel}"/>
 
-                                      somenteLeitura="#{cc.attrs.somenteLeitura}"
-                                      tipoVisualizacaoLabel="#{cc.attrs.tipoVisualizacaoLabel}"/>
-
-                <div class="quebraBlocoComEspacoVertical10"/>
-            </p:fieldset>
+                    <div class="quebraBlocoComEspacoVertical10"/>
+                </p:fieldset>
+            </h:panelGroup>
         </c:forEach>
 
     </cc:implementation>

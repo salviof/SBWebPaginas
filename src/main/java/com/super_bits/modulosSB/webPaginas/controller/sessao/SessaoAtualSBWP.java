@@ -117,7 +117,10 @@ public class SessaoAtualSBWP extends SessaoOffline implements ItfSessao, Seriali
                 // urlHostDaSessao = SBWebPaginas.getSiteURL();
             }
             System.out.println("A url foi definida como " + urlHostDaSessao);
-
+            idSessao = UtilSBWP_JSFTools.getIDJsession();
+            if (idSessao == null) {
+                idSessao = super.getIdSessao();
+            }
         } catch (MalformedURLException ex) {
             Logger.getLogger(SessaoAtualSBWP.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -248,6 +251,11 @@ public class SessaoAtualSBWP extends SessaoOffline implements ItfSessao, Seriali
 
     public UserAgent getAgente() {
         return agente;
+    }
+
+    @Override
+    public String getIdSessao() {
+        return idSessao;
     }
 
 }

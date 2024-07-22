@@ -43,7 +43,8 @@ public class CentralDeArquivosWebAppServidorSB extends CentralDeArquivosAbstrata
     private final String PASTA_IMAGEM = "img";
     private final String PASTA_ARQUIVOS_ENTIDADE = "arquivos";
     private final String PASTA_ARQUIVOS_DE_ENTIDADE_DO_SERVIDOR = "/home/servidorSBFW/arquivosDeEntidade/" + SBCore.getGrupoProjeto();
-    private final String PASTA_ARQUIVOS_DE_ENTIDADE_SERVIDOR_HOMOLOGACAO = SBCore.getCaminhoGrupoProjetoSource() + "/arquivosDeEntidade";
+    private final String PASTA_ARQUIVOS_DE_ENTIDADE_SERVIDOR_HOMOLOGACAO = "/home/superBits/desenvolvedor/configModuloTestes/HOMOLOGACAO/"
+            + SBCore.getGrupoProjeto();
     private ItfCentralPermissaoArquivo centralPermissao;
 
     private String endrLocaResource;
@@ -100,6 +101,7 @@ public class CentralDeArquivosWebAppServidorSB extends CentralDeArquivosAbstrata
         if (endrLocaResource == null) {
             if (SBCore.isEmModoProducao()) {
                 endrLocaResource = PASTA_ARQUIVOS_DE_ENTIDADE_DO_SERVIDOR;
+                ///home/servidorSBFW/arquivosDeEntidade
             } else {
                 endrLocaResource = PASTA_ARQUIVOS_DE_ENTIDADE_SERVIDOR_HOMOLOGACAO;
             }

@@ -11,6 +11,7 @@ import com.super_bits.modulosSB.Persistencia.dao.consultaDinamica.ConsultaDinami
 import com.super_bits.modulosSB.Persistencia.registro.persistidos.EntidadeSimples;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreListasObjeto;
+import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreObjetoSB;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreReflexao;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreReflexaoObjeto;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.ItfParametroRequisicaoInstanciado;
@@ -992,6 +993,11 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
         Class classeEntidadeSelecionada = pEntidade.getClass();
         if (getAcaoSelecionada().isUmaAcaoDeEntidade()
                 && !getAcaoSelecionada().getComoAcaoDeEntidade().getClasseRelacionada().equals(classeEntidadeSelecionada)) {
+            Class entidadeDaAcao = getAcaoSelecionada().getComoAcaoDeEntidade().getClasseRelacionada();
+            if (entidadeDaAcao.isInstance(pEntidade)) {
+                return;
+            }
+
             ItfAcaoDoSistema acoAlternativa = getAcaoVinculada().getAcaoCompativelEntidadeDivergente(acaoSelecionada, classeEntidadeSelecionada);
             if (acoAlternativa != null) {
                 acaoSelecionada = acoAlternativa;
