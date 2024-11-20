@@ -100,7 +100,7 @@ public class TipoCampos extends ConstantesWeb {
     }
 
     public String LONG() {
-        return getStrTipoCampoInput(FabTipoAtributoObjeto.Longitude);
+        return getStrTipoCampoInput(FabTipoAtributoObjeto.LONGITUDE);
     }
 
     public String getLCLOGRADOURO() {

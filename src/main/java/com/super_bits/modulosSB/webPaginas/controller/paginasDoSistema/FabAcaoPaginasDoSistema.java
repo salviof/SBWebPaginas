@@ -65,6 +65,8 @@ public enum FabAcaoPaginasDoSistema implements ItfFabricaAcoes {
     PAGINA_NATIVA_RESTFUL_RESP_MB_GESTAO,
     @InfoTipoAcaoGestaoEntidade(iconeFonteAnsowame = FabIconeFontAwesome.SISTEMA_ENGRENAGEM, precisaPermissao = false, xhtmlDaAcao = UtilSBWP_JSFTools.FORMULARIO_API_JSON_WEB_VIEW)
     PAGINA_NATIVA_JSON_WEBVIEW_MB_GESTAO,
+    @InfoTipoAcaoGestaoEntidade(iconeFonteAnsowame = FabIconeFontAwesome.SISTEMA_ENGRENAGEM, precisaPermissao = false, xhtmlDaAcao = UtilSBWP_JSFTools.FORMULARIO_API_JSON_WEB_VIEW)
+    PAGINA_NATIVA_JSON_WEBCONTROLLER_MB_GESTAO,
     @InfoTipoAcaoController(icone = "fa fa-laptop", nomeAcao = "registrar")
     PAGINA_NATIVA_JSON_WEBVIEW_CTR_REGISTRAR_DISPOSITIVO,
     @InfoTipoAcaoGestaoEntidade(precisaPermissao = false, xhtmlDaAcao = UtilSBWP_JSFTools.FORMULARIO_API_JSON_WEB_VIEW, icone = "fa fa-link")

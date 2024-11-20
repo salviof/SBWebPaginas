@@ -172,16 +172,29 @@ public class SessaoAtualSBWP extends SessaoOffline implements ItfSessao, Seriali
     @Override
     @PreDestroy
     public void encerrarSessao() {
-        UtilSBPersistencia.fecharEM(gestaoEntidadePrincipal);
-        encerrarSessao(true);
+        try {
+            UtilSBPersistencia.fecharEM(gestaoEntidadePrincipal);
+        } catch (Throwable t) {
+
+        }
+        try {
+            UtilSBPersistencia.fecharEM(gestaoEntidadePrincipal);
+            encerrarSessao(true);
+        } catch (Throwable t) {
+
+        }
 
     }
 
     public void encerrarSessao(boolean pRedirecionarPagina) {
-        super.encerrarSessao();
-        UtilSBWP_JSFTools.encerrarSessaoJSessionId();
-        if (pRedirecionarPagina) {
-            UtilSBWP_JSFTools.vaParaPagina(urlHostDaSessao);
+        try {
+            super.encerrarSessao();
+            UtilSBWP_JSFTools.encerrarSessaoJSessionId();
+            if (pRedirecionarPagina) {
+                UtilSBWP_JSFTools.vaParaPagina(urlHostDaSessao);
+            }
+        } catch (Throwable t) {
+
         }
     }
 
@@ -228,7 +241,8 @@ public class SessaoAtualSBWP extends SessaoOffline implements ItfSessao, Seriali
                 return;
             }
             EntityManager em = UtilSBPersistencia.getEntyManagerPadraoNovo();
-            UsuarioSB usuario = UtilSBPersistencia.getRegistroByID(UsuarioSB.class, id, em);
+            UsuarioSB usuario = UtilSBPersistencia.getRegistroByID(UsuarioSB.class,
+                    id, em);
             InputStream arquivo;
             if (!UtilSBCoreStringNomeArquivosEDiretorios.getExtencaoNomeArquivo(event.getFile().getFileName()).equals("png")) {
 

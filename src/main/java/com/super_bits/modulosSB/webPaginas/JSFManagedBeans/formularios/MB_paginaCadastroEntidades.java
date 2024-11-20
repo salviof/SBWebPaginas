@@ -881,6 +881,7 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
     }
 
     protected void autoExecEntidadeLoad(T pEnTidade) {
+
         if (getAcaoSelecionada().isUmaAcaoFormulario()) {
             switch (getAcaoSelecionada().getComoFormulario().getEstadoFormulario()) {
                 case NOVO:
@@ -1159,7 +1160,10 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
         }
 
         private void defineEntidadeSelecionada(TT pEntidadeSelecionada) {
-
+            if (!getAcaoSelecionada().getAcaoDeGestaoEntidade().equals(getAcaoVinculada())) {
+                setEntidadeSelecionada((T) pEntidadeSelecionada);
+                return;
+            }
             autoExecEntidadeLoad((T) pEntidadeSelecionada);
 
         }

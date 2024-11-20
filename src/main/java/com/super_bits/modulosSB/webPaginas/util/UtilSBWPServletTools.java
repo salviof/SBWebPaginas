@@ -63,7 +63,6 @@ public class UtilSBWPServletTools {
     public static Object getBeanByNamed(String pNomeBean, Class pClasse, boolean pIgnorarErro) {
 
         try {
-
             FacesContext context = FacesContext.getCurrentInstance();
             if (context == null) {
                 throw new UnsupportedOperationException("Impossivel determinar o FacesContext neste momento");

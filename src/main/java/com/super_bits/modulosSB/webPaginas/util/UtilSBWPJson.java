@@ -9,7 +9,10 @@ import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreJson;
 import com.super_bits.modulosSB.SBCore.UtilGeral.json.ErroProcessandoJson;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.ItfResposta;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.ItfRespostaAcaoDoSistema;
+import com.super_bits.modulosSB.SBCore.modulos.Mensagens.FabMensagens;
+import com.super_bits.modulosSB.SBCore.modulos.Mensagens.FabTipoAgenteDoSistema;
 import com.super_bits.modulosSB.SBCore.modulos.Mensagens.ItfMensagem;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfBeanSimples;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.interfaces.ItfB_PaginaSimples;
 import jakarta.json.Json;
 import jakarta.json.JsonArray;
@@ -91,6 +94,10 @@ public class UtilSBWPJson {
                 if (retorno instanceof String) {
                     jsonPadrao.add("retorno", retorno.toString());
                 }
+                if (retorno instanceof ItfBeanSimples) {
+                    int codigo = ((ItfBeanSimples) retorno).getId();
+                    jsonPadrao.add("retorno", UtilSBCoreJson.getJsonStringBySequenciaChaveValor("id", codigo));
+                }
             } catch (Throwable t) {
 
             }
@@ -105,6 +112,14 @@ public class UtilSBWPJson {
             mensagemJson.add("agenteDestino", mensagem.getTipoDestinatario().toString());
             mensagensJsonArrayBuilder.add(mensagemJson.build());
         }
+        if (pResposta.isSucesso() && pResposta.getMensagens().isEmpty()) {
+            JsonObjectBuilder mensagemJson = Json.createObjectBuilder();
+            mensagemJson.add("texto", "ok");
+            mensagemJson.add("tipo", FabMensagens.AVISO.toString());
+            mensagemJson.add("agenteDestino", FabTipoAgenteDoSistema.USUARIO.toString());
+            mensagensJsonArrayBuilder.add(mensagemJson.build());
+        }
+
         JsonArray mensagensJsonArray = mensagensJsonArrayBuilder.build();
         if (!mensagensJsonArray.isEmpty()) {
             jsonPadrao.add("mensagens", mensagensJsonArray);

@@ -45,7 +45,7 @@ import javax.inject.Named;
 @RequestScoped
 @Named
 @InfoAcaoPaginaDoSistema(acao = FabAcaoPaginasDoSistema.PAGINA_NATIVA_JSON_WEBVIEW_MB_GESTAO)
-@InfoPagina(tags = "sessao", nomeCurto = "sessao")
+@InfoPagina(tags = "pgJsonWebView", nomeCurto = "pgJsonWebView")
 public class PgJsonWebView implements Serializable {
 
     private ItfAcaoDoSistema acaoVinculada;

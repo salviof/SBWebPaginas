@@ -9,6 +9,7 @@ import com.sun.faces.config.InitFacesContext;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreEmail;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.permissoes.token.ItfTokenRecuperacaoEmail;
+import com.super_bits.modulosSB.SBCore.modulos.Controller.qualificadoresCDI.sessao.QlSessaoRequestScoped;
 import com.super_bits.modulosSB.SBCore.modulos.Mensagens.FabMensagens;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.ItensGenericos.basico.UsuarioSistemaRoot;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfGrupoUsuario;
@@ -61,6 +62,7 @@ public class ControleDeSessaoWeb extends ControleDeSessaoAbstratoSBCore implemen
     public ItfSessao getSessaoAtual() {
 
         if (sessaoAtual == null) {
+
             Object instanciaFaces = FacesContext.getCurrentInstance();
             if (instanciaFaces != null && !(instanciaFaces instanceof InitFacesContext)) {
                 sessaoAtual = UtilSBWPServletTools.getSessaoAtual();
@@ -83,6 +85,7 @@ public class ControleDeSessaoWeb extends ControleDeSessaoAbstratoSBCore implemen
             }
 
         } else {
+
             return sessaoAtual;
 
         }

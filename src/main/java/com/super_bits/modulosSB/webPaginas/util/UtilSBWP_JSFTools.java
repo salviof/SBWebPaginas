@@ -4,6 +4,7 @@
  */
 package com.super_bits.modulosSB.webPaginas.util;
 
+import com.super_bits.modulosSB.webPaginas.controller.servlets.WebPaginasServlet;
 import com.sun.faces.component.visit.FullVisitContext;
 import com.sun.faces.facelets.el.TagValueExpression;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
@@ -33,13 +34,17 @@ import javax.faces.component.visit.VisitContext;
 import javax.faces.component.visit.VisitResult;
 import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpSession;
 import org.coletivojava.fw.api.tratamentoErros.FabErro;
 import org.jboss.weld.interceptor.util.proxy.TargetInstanceProxy;
 import org.primefaces.PrimeFaces;
 import org.primefaces.context.PrimeFacesContext;
-
+import com.super_bits.modulosSB.webPaginas.JSFBeans.SBBeanModel.controller.PacoteExecucaoControllerJsonSimples;
+import javax.servlet.ServletException;
 import org.super_bits.tags.inputGenerico.InputGenerico;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  *
@@ -94,6 +99,8 @@ public abstract class UtilSBWP_JSFTools {
 
     public final static String FORMULARIO_API_RESTFUL_CONTROLLER = "/resources/restful/respostaController.xhtml";
     public final static String FORMULARIO_API_JSON_WEB_VIEW = "/resources/json-webview/jsonwebview.xhtml";
+
+    public final static String FORMULARIO_API_JSON_WEB_CONTROLLER = "/resources/json-webview/jsonwebviewController.xhtml";
 
     public final static String FORMULARIO_ACESSO_NEGADO_SUB_FORM = "/resources/SBComp/SBSystemPages/acessoNegadoSubForm.xhtml";
     public final static String FORMULARIO_PARAMETRO_URL_INVALIDO = "/resources/SBComp/SBSystemPages/parametroURLInvalido.xhtml";
@@ -554,6 +561,13 @@ public abstract class UtilSBWP_JSFTools {
         } catch (Throwable t) {
             return false;
         }
+    }
+
+    public static void dispacharRespostaController(PacoteExecucaoControllerJsonSimples pPacote, HttpServletRequest pRequisicao, HttpServletResponse pResposta) throws ServletException, IOException {
+
+        pRequisicao.setAttribute(WebPaginasServlet.NOME_BEAN_PACOTE_CONTROLLER_REQ, pPacote);
+        RequestDispatcher despachadorDeRespostaParaRequisicao = pRequisicao.getRequestDispatcher(UtilSBWP_JSFTools.FORMULARIO_API_JSON_WEB_CONTROLLER);
+        despachadorDeRespostaParaRequisicao.forward(pRequisicao, pResposta);
     }
 
 }

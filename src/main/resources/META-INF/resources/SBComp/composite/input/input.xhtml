@@ -25,6 +25,8 @@
 
         <cc:attribute name="atualizarGrupoOnChange" type="java.lang.Boolean" default="#{false}" />
 
+        <cc:attribute name="obrigatorio" type="java.lang.Boolean" default="#{cc.attrs.registro.obrigatorio}" />
+
         <cc:attribute name="metodoOnChange" required="false"   type="javax.el.MethodExpression"
                       shortDescription="Médodo que deve ser executado ao alterar um valor"
 
@@ -68,7 +70,7 @@
                     metodoOnChange="#{cc.attrs.metodoOnChange}"
                     atualizarFormOnChange="#{cc.attrs.atualizarFormOnChange}"
                     xhtmlVisualizacao="#{cc.attrs.layout.xhtmlJSF}"
-                    obrigatorio="#{cc.attrs.registro.obrigatorio}"
+                    obrigatorio="#{cc.attrs.obrigatorio}"
                     atualizarGrupoOnChange="#{cc.attrs.atualizarGrupoOnChange}"
 
                     />

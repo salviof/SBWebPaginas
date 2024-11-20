@@ -19,16 +19,13 @@ import com.super_bits.modulosSB.SBCore.modulos.Controller.qualificadoresCDI.sess
 import com.super_bits.modulosSB.SBCore.modulos.TratamentoDeErros.UtilSBCoreErros;
 import com.super_bits.modulosSB.webPaginas.TratamentoDeErros.ErroGenericoProcessandoRespostaJson;
 import com.super_bits.modulosSB.webPaginas.util.UtilSBWPJson;
+import com.super_bits.modulosSB.webPaginas.util.UtilSBWP_JSFTools;
 
 /**
  *
  * @author salvio
  */
 public class ServletJsonWebPaginas extends ServletArquivosSBWPGenerico {
-
-    @Inject
-    @QlSessaoFacesContext
-    private ItfSessao sessao;
 
     @Override
     protected void doGet(HttpServletRequest requisicao, HttpServletResponse resposta) throws ServletException, IOException {
@@ -88,7 +85,7 @@ public class ServletJsonWebPaginas extends ServletArquivosSBWPGenerico {
             // String codigoUnico = jsonCorpo.getString("codigoUnicoDispositivo");
             ConfiguracoesDeFormularioPorUrl configuracoes = new ConfiguracoesDeFormularioPorUrl(requisicao);
             requisicao.setAttribute(NOME_BEAN_REQUEST_CONFIG_URL, configuracoes);
-            RequestDispatcher despachadorDeRespostaParaRequisicao = requisicao.getRequestDispatcher("/resources/json-webview/jsonwebview.xhtml");
+            RequestDispatcher despachadorDeRespostaParaRequisicao = requisicao.getRequestDispatcher(UtilSBWP_JSFTools.FORMULARIO_API_JSON_WEB_VIEW);
             despachadorDeRespostaParaRequisicao.forward(requisicao, resposta);
 
             //   UtilSBCoreJson.UtilSBCoreJson.getValorApartirDoCaminho("codigoDispositivo", UtilSBCoreStringJson.gerarObjetoJsonByString(corpo));

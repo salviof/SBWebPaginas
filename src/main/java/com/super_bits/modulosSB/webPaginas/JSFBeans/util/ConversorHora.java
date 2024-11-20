@@ -18,7 +18,7 @@ import javax.faces.convert.FacesConverter;
 @FacesConverter(value = "conversorHora")
 public class ConversorHora extends ConversorSB {
 
-    private static final SimpleDateFormat FORMATADOR_DATA = new SimpleDateFormat("hh:mm");
+    private static final SimpleDateFormat FORMATADOR_DATA = new SimpleDateFormat("HH:mm");
 
     @Override
     public Object getAsObject(FacesContext context, UIComponent component, String value) {
@@ -43,7 +43,8 @@ public class ConversorHora extends ConversorSB {
     @Override
     public String getAsString(FacesContext context, UIComponent component, Object value) {
         Map<String, Object> atributos = component.getAttributes();
-        return FORMATADOR_DATA.format(value);
+        String strbuild = FORMATADOR_DATA.format(value);
+        return strbuild;
 
     }
 

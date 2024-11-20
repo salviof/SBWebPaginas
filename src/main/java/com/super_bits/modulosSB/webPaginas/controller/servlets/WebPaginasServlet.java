@@ -51,6 +51,8 @@ public class WebPaginasServlet extends HttpServlet implements Serializable {
     private InfoErroCritico erroCritico;
 
     public static final String NOME_BEAN_REQUEST_CONFIG_URL = "CfgURLFrm";
+
+    public static final String NOME_BEAN_PACOTE_CONTROLLER_REQ = "PacoteAcaoControlerReq";
     public static final String NOME_PARAMETRO_REFERENCIA = "REF";
 
     public final static Map<String, AcaoComLink> MAPA_ACOESMANAGED_BEAN = new HashMap<>();
