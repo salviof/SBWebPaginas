@@ -3,25 +3,26 @@
     xmlns:h="http://java.sun.com/jsf/html"
     xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
     >
-    <ui:param name="iconeConteudo" value="#{paginaAtual.infoPagina.comoFormularioWeb.acaoVinculada.iconeAcao}" />
     <ui:insert name="parametros" />
-    <h:panelGroup layout="block" >
-        <div class="CardTopic" style="min-height: 100px;padding: 10px;">
-            <ui:insert name="titulo"/>
-            <i class="#{iconeConteudo} Fs30 Fleft MarRight10"></i>
-            <br/>
-            <div class="quebraBlocoComEspacoVertical10 somenteMobile"></div>
-            <span class="CardSubTopic">
-                <ui:insert name="subtitulo" />
-            </span>
-            <h:panelGroup styleClass="Fright Container8" layout="block">
-                <ui:insert name="conteudoDireita" />
-            </h:panelGroup>
-        </div>
-        <div class="quebraBlocoComEspacoVertical10"></div>
+    <ui:param name="iconeConteudo" value="#{paginaAtual.infoPagina.comoFormularioWeb.acaoVinculada.iconeAcao}" />
 
-        <ui:insert name="conteudoCard" />
-        <ui:insert name="conteudo" />
-    </h:panelGroup>
+    <div class="CardTopic" style="min-height: 100px;padding: 10px">
+
+        <ui:insert name="titulo"/>
+        <i class="#{iconeConteudo} Fs30 Fleft MarRight10"></i>
+        <br/>
+        <div class="quebraBlocoComEspacoVertical10 somenteMobile"></div>
+        <span class="CardSubTopic">
+            <ui:insert name="subtitulo" />
+        </span>
+        <h:panelGroup styleClass="Fright Container8" layout="block">
+            <ui:insert name="conteudoDireita" />
+        </h:panelGroup>
+    </div>
+    <div class="quebraBlocoComEspacoVertical10"></div>
+
+    <ui:insert name="conteudoCard" />
+    <ui:insert name="conteudo" />
+
 
 </ui:composition>

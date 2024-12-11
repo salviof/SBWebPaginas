@@ -145,6 +145,14 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
         return abriuPagina;
     }
 
+    @Override
+    public void recarregarEntidadeSelecionada() {
+        if (getBeanSelecionado() != null) {
+            renovarEMPagina();
+            setBeanSelecionado(UtilSBPersistencia.loadEntidade(getBeanSelecionado(), getEMPagina()));
+        }
+    }
+
     /**
      * Configura se ao
      *
@@ -1686,4 +1694,5 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
             }
         }
     }
+
 }

@@ -5,40 +5,40 @@
                 xmlns:SBComp="http://xmlns.jcp.org/jsf/composite/resources/SBComp"
                 xmlns:p="http://primefaces.org/ui">
 
-    <div class="">
-        <div class="CardTopic"  style="margin-left: 10px; height: 100px;padding: 10px;">
-            #{paginaAtual.infoPagina.acaoSelecionada.nomeAcao}
-            <i class="#{paginaAtual.infoPagina.acaoSelecionada.iconeAcao} Fs30 Fleft MarRight10"></i>
-            <br/>
-            <div class="quebraBlocoComEspacoVertical10 somenteMobile"></div>
-            <span class="CardSubTopic">
-                #{paginaAtual.infoPagina.acaoSelecionada.descricao}
-            </span>
-            <h:panelGroup styleClass="Fright" layout="block">
-                <h:form>
-                    <SBAcaoNav:botaoDeAcao_Pagina_Entidade
-                        rendered="#{paginaAtual.infoPagina.comoPaginaEntidade.acaoListarRegistros!=null}"
-                        registro="#{paginaAtual.infoPagina.comoPaginaEntidade.entidadeSelecionada}"
-                        acao="#{paginaAtual.infoPagina.comoPaginaEntidade.acaoListarRegistros}"
-                        tipoVisualizacao="#{layoutsComponenteSB.layoutBotoes.iconeENome}"
-                        />
-                </h:form>
-            </h:panelGroup>
-        </div>
-        <div class="quebraBlocoComEspacoVertical10" ></div>
 
-        <h:form styleClass="Container12" >
-            <p:fieldset >
-
-                <ui:insert name="conteudo" />
-
-                <ui:insert name="botoesDeAcao" />
-
-            </p:fieldset>
-        </h:form>
-
-
+    <div class="CardTopic"  style="margin-left: 10px; height: 100px;padding: 10px;">
+        #{paginaAtual.infoPagina.acaoSelecionada.nomeAcao}
+        <i class="#{paginaAtual.infoPagina.acaoSelecionada.iconeAcao} Fs30 Fleft MarRight10"></i>
+        <br/>
+        <div class="quebraBlocoComEspacoVertical10 somenteMobile"></div>
+        <span class="CardSubTopic">
+            #{paginaAtual.infoPagina.acaoSelecionada.descricao}
+        </span>
+        <h:panelGroup styleClass="Fright" layout="block">
+            <h:form>
+                <SBAcaoNav:botaoDeAcao_Pagina_Entidade
+                    rendered="#{paginaAtual.infoPagina.comoPaginaEntidade.acaoListarRegistros!=null}"
+                    registro="#{paginaAtual.infoPagina.comoPaginaEntidade.entidadeSelecionada}"
+                    acao="#{paginaAtual.infoPagina.comoPaginaEntidade.acaoListarRegistros}"
+                    tipoVisualizacao="#{layoutsComponenteSB.layoutBotoes.iconeENome}"
+                    />
+            </h:form>
+        </h:panelGroup>
     </div>
+    <div class="quebraBlocoComEspacoVertical10" ></div>
+
+    <h:form  >
+        <p:fieldset  styleClass="Container12">
+
+            <ui:insert name="conteudo" />
+
+            <ui:insert name="botoesDeAcao" />
+
+        </p:fieldset>
+    </h:form>
+
+
+
 </ui:composition>
 
 

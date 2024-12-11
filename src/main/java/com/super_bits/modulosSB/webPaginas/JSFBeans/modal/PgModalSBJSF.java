@@ -24,4 +24,9 @@ public class PgModalSBJSF extends PgModalCampoSelecionadoAbstrato implements Ser
         return getPaginaVinculada().getEMPagina();
     }
 
+    @Override
+    public void recarregarEntidadeSelecionada() {
+        getPaginaVinculada().recarregarEntidadeSelecionada();
+    }
+
 }

@@ -85,7 +85,7 @@ public class WebPaginasServlet extends HttpServlet implements Serializable {
             for (EstruturaDeFormulario pagina : MapaDeFormularios.getTodasEstruturas()) {
                 if (pagina.getAcaoGestaoVinculada() != null) {
                     if (MAPA_ACOESMANAGED_BEAN.get(pagina.getAcaoGestaoVinculada().getNomeUnico()) != null) {
-                        throw new UnsupportedOperationException("Uma ação de gestão só pode ser vinculada a uma Pgina, no entando a pagina"
+                        throw new UnsupportedOperationException("Uma ação de gestão só pode ser vinculada a uma única Página, no entando a pagina"
                                 + pagina.getAcaoGestaoVinculada() + "está vinculada a "
                                 + MAPA_ACOESMANAGED_BEAN.get(pagina.getAcaoGestaoVinculada().getNomeUnico()).getUrlParcialGestao() + " e a"
                                 + pagina.getUrlPadrao());
