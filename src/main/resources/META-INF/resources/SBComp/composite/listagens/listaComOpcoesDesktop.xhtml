@@ -62,6 +62,7 @@
                 <p:dataTable sortMode="multiple"
                              value="#{cc.attrs.itens}"
                              var="item"
+                             globalFilterFunction="#{pgUtilFiltroOrdanacao.filtrarColuna}"
                              paginatorPosition="bottom"
                              emptyMessage="#{cc.attrs.mensagemSemRegistro}"
                              paginator="true"
@@ -91,9 +92,11 @@
 
 
                     <p:columns var="coluna" value="#{cc.attrs.grupoCampos.campos}"
-                               sortBy="#{item[coluna.primeiroCaminhoSemNomeClasse]}"
-                               filterBy="#{item[coluna.primeiroCaminhoSemNomeClasse]}"
-                               filterMatchMode="contains"
+                               sortBy="#{item[coluna.nomePrimeiroAtributo]}"
+
+                               sortFunction="#{pgUtilFiltroOrdanacao.ordernarPorColuna}"
+                               filterFunction="#{pgUtilFiltroOrdanacao.filtrarColuna}"
+
                                filterStyleClass="listaComOcoesOcultaFitro"
                                width="#{layoutListagem.getColunaByNomeCompleto(coluna.caminhoCompletoComGrupoCampo).porcentagemCalculada}%"
 

@@ -48,7 +48,7 @@ public class PgUtilAcoes implements Serializable {
                 }
             }
         }
-        return MapaDeFormularios.getUrlFormulario(pAcao, pParametros);
+        return MapaDeFormularios.getUrlFormulario(pAcao, (Object[]) pParametros);
     }
 
     public String getUrlAcao(ItfAcaoFormulario pAcao, ItfBeanSimplesSomenteLeitura... pParametros) {
@@ -60,7 +60,7 @@ public class PgUtilAcoes implements Serializable {
                 }
             }
         }
-        return MapaDeFormularios.getUrlFormulario(pAcao, pParametros);
+        return MapaDeFormularios.getUrlFormulario(pAcao, (Object[]) pParametros);
     }
 
     public String getUrlAcao(ItfAcaoFormulario pAcao) {
