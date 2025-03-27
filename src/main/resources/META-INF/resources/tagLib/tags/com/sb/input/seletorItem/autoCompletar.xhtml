@@ -2,17 +2,20 @@
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:h="http://java.sun.com/jsf/html"
     xmlns:SBItem="http://xmlns.jcp.org/jsf/composite/SBComp/composite/item"
+    xmlns:sb="http://superbitsframework/ui"
     xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
     xmlns:p="http://primefaces.org/ui"
     xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
-    xmlns:f="http://xmlns.jcp.org/jsf/core">
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:SBComp="jakarta.faces.composite/SBComp">
     <ui:decorate   template="#{layout.xhtmlJsfCaminhoRelativo}">
 
 
         <ui:define name="input">
 
             <h:panelGroup rendered="#{valor != null and desabilitarEdicao and registro.umValorComLista}"  >
-                <p:outputLabel value="#{valor.nome}" rendered="#{desabilitarEdicao}" />
+                <SBItem:itemCard objetoSimples="#{valor}" />
+
             </h:panelGroup>
 
             <h:panelGrid columns="2" style="width: 100%;" columnClasses="colunaResponsiva,tamanhoIconePequeno,tamanhoIconePequeno" rendered="#{!desabilitarEdicao}" >

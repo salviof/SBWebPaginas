@@ -95,7 +95,7 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
     private List<ItfParametroRequisicaoInstanciado> parametrosOrdenados;
     private boolean parametrosDeUrlPreenchido = false;
     @Inject()
-    protected PgUtil paginaUtil;
+    private PgUtil paginaUtil;
 
     protected abstract String defineTitulo();
 
@@ -165,6 +165,9 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
     public B_Pagina() {
         tipoFormulario = FabTipoFormulario.PAGINA_SIMPLES;
         UtilSBCoreReflexao.instanciarListas(this);
+        if (SBCore.getEstadoAPP() == SBCore.ESTADO_APP.DESENVOLVIMENTO) {
+            paginaUtil = new PgUtil();
+        }
     }
 
     private boolean isPaginaEmProcessoDeAberturaInicial() {
@@ -290,9 +293,9 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
         }
         try {
             if (emPagina == null) {
-                emPagina = UtilSBPersistencia.getNovoEM();
+                emPagina = UtilSBPersistencia.getEntyManagerPadraoNovo();
             } else if (!emPagina.isOpen()) {
-                emPagina = UtilSBPersistencia.getNovoEM();
+                emPagina = UtilSBPersistencia.getEntyManagerPadraoNovo();
             }
             return emPagina;
         } catch (Exception e) {

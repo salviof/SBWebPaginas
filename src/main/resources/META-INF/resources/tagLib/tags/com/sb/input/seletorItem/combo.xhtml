@@ -1,7 +1,7 @@
 <ui:composition
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:h="http://java.sun.com/jsf/html"
-
+    xmlns:SBItem="http://xmlns.jcp.org/jsf/composite/SBComp/composite/item"
     xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
     xmlns:p="http://primefaces.org/ui"
     xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
@@ -9,7 +9,8 @@
     <ui:decorate   template="#{layout.xhtmlJsfCaminhoRelativo}">
         <ui:define name="input">
             <h:panelGroup rendered="#{valor != null and desabilitarEdicao and registro.umValorComLista}"  >
-                <p:outputLabel value="#{valor.nome}" rendered="#{desabilitarEdicao}" />
+
+
             </h:panelGroup>
             <h:panelGrid styleClass="colunaResponsiva" rendered="#{!desabilitarEdicao}" >
                 <p:selectOneMenu rendered="#{!desabilitarEdicao}"

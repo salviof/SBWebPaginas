@@ -5,6 +5,7 @@
 package com.super_bits.modulosSB.webPaginas.JSFManagedBeans.declarados.util;
 
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreListasObjeto;
+import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreNumeros;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringComparador;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.comparacao.FabTipoPesquisaGenerica;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.comparacao.ItemSimilar;
@@ -68,9 +69,14 @@ public class PgUtilFiltroOrdenacao {
             ItfBeanSimples item2 = (ItfBeanSimples) comparacao2;
             return item.getNome().compareTo(item2.getNome());
         }
-
-        if (comparacao1 instanceof Util.Comparable) {
-            return ((Util.Comparable) comparacao1).compareTo((Util.Comparable) comparacao2);
+        if (comparacao1 instanceof Double) {
+            Double num1 = new Double(comparacao1.toString());
+            Double num2 = new Double(comparacao2.toString());
+            return num1.compareTo(num2);
+            //System.out.println("double");
+        }
+        if (comparacao1 instanceof Comparable) {
+            return ((Comparable) comparacao1).compareTo((Comparable) comparacao2);
         }
         return 0;
     }

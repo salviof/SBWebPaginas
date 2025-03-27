@@ -1,0 +1,48 @@
+<ui:component
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns="http://www.w3.org/1999/xhtml"
+
+    xmlns:cc="http://java.sun.com/jsf/composite"
+    xmlns:sb="http://superbitsframework/ui"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <!-- INTERFACE -->
+    <cc:interface componentType="inputGenerico"
+                  shortDescription="Exibe um atributo para edição ou visualizção do usuário"
+                  >
+        <cc:attribute name="status"
+                      required="true"
+                      type="com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfBeanStatus"
+                      default="#{pgUtil.campoNaoImplementado}"
+                      shortDescription="Exibe um atributo de um Objeto para insersão de dados do usuário (Ou Visualização)"
+                      />
+
+    </cc:interface>
+    <!-- IMPLEMENTATION -->
+    <cc:implementation>
+
+        <c:catch var ="catchException">
+            <h:panelGroup layout="block" styleClass="status-container">
+                <h:panelGroup styleClass="status-icon #{cc.attrs.status.icone} Fs24" style="color: #{cc.attrs.status.cor}"  >
+
+                </h:panelGroup>
+                <h:panelGroup styleClass="statusText Fs16"  >
+                    #{cc.attrs.status.nome}
+                </h:panelGroup>
+            </h:panelGroup>
+        </c:catch>
+        <c:if test = "${catchException != null}">
+            É POSSÍVEL QUE ESTE ERRO POSSA SER CONTORNADO CHAMANDO O nameSpace sb:input Direto
+            Ou que este componente esteja em desenvolvimento
+
+            <p>Erro reindeizando componente: ${catchException} <br />
+                There is an exception: ${catchException.message}</p>
+            <br/>
+            #{cc.attrs.registro.tipoCampoSTR}
+        </c:if>
+
+
+
+    </cc:implementation>
+
+</ui:component>

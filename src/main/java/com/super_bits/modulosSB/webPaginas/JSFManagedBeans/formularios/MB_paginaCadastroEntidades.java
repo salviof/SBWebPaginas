@@ -260,9 +260,6 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
             }
 
             entidadesListadas = null;
-            if (SBCore.getEstadoAPP() == SBCore.ESTADO_APP.DESENVOLVIMENTO) {
-                paginaUtil = new PgUtil();
-            }
 
             temPesquisa = pTempesquisa;
 
@@ -1234,40 +1231,40 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
                 case ACAO_ENTIDADE_CONTROLLER:
                 case ACAO_CONTROLLER:
                     try {
-                    if (acaoSelecionada.getComoController().isTemComunicacaoTransiente()) {
-                        if (!isRespostaComunicacaoTransientPreAcaoEnviada()) {
-                            exibeModalComunicacaoTransientPreAcaoAtual();
-                        } else {
-                            FabTipoRespostaComunicacao respComunicacao = mapaRespostasComunicacaoTransienteDeAcaoByAcoes.get(getAcaoSelecionada().getNomeUnico());
-                            if (respComunicacao != null) {
+                        if (acaoSelecionada.getComoController().isTemComunicacaoTransiente()) {
+                            if (!isRespostaComunicacaoTransientPreAcaoEnviada()) {
+                                exibeModalComunicacaoTransientPreAcaoAtual();
+                            } else {
+                                FabTipoRespostaComunicacao respComunicacao = mapaRespostasComunicacaoTransienteDeAcaoByAcoes.get(getAcaoSelecionada().getNomeUnico());
+                                if (respComunicacao != null) {
 
-                                if (respComunicacao.isRespostaPositiva()) {
-                                    ItfRespostaAcaoDoSistema respAcao = autoExecAcaoController((T) pEntidadeSelecionada);
-                                    respAcao.dispararMensagens();
-                                    ultimaRespostaControllerRecebida = respAcao;
-                                    autoExecProximaAcaoAposController((ItfAcaoController) acaoSelecionada, respAcao);
-                                } else {
-                                    ultimaRespostaControllerRecebida = null;
+                                    if (respComunicacao.isRespostaPositiva()) {
+                                        ItfRespostaAcaoDoSistema respAcao = autoExecAcaoController((T) pEntidadeSelecionada);
+                                        respAcao.dispararMensagens();
+                                        ultimaRespostaControllerRecebida = respAcao;
+                                        autoExecProximaAcaoAposController((ItfAcaoController) acaoSelecionada, respAcao);
+                                    } else {
+                                        ultimaRespostaControllerRecebida = null;
 
-                                    autoExecProximaAcaoAposController((ItfAcaoController) acaoSelecionada, null);
+                                        autoExecProximaAcaoAposController((ItfAcaoController) acaoSelecionada, null);
+                                    }
                                 }
                             }
+                        } else {
+                            PrimeFaces.current().executeScript("acoesPosAjax()");
+                            ItfRespostaAcaoDoSistema respAcao = autoExecAcaoController((T) pEntidadeSelecionada);
+                            if (respAcao != null) {
+                                respAcao.dispararMensagens();
+                            }
+                            autoExecProximaAcaoAposController((ItfAcaoController) acaoSelecionada, respAcao);
                         }
-                    } else {
-                        PrimeFaces.current().executeScript("acoesPosAjax()");
-                        ItfRespostaAcaoDoSistema respAcao = autoExecAcaoController((T) pEntidadeSelecionada);
-                        if (respAcao != null) {
-                            respAcao.dispararMensagens();
-                        }
-                        autoExecProximaAcaoAposController((ItfAcaoController) acaoSelecionada, respAcao);
-                    }
 
-                } catch (Throwable t) {
-                    SBCore.enviarMensagemUsuario("Houve um erro inesperado!, entre em contato com o suporte", FabMensagens.ALERTA);
-                    SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "Erro executando ação de controler padrão, a resposta não foi obtida para:" + acaoSelecionada, t);
-                    autoExecProximaAcaoAposController((ItfAcaoController) acaoSelecionada, null);
-                }
-                break;
+                    } catch (Throwable t) {
+                        SBCore.enviarMensagemUsuario("Houve um erro inesperado!, entre em contato com o suporte", FabMensagens.ALERTA);
+                        SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "Erro executando ação de controler padrão, a resposta não foi obtida para:" + acaoSelecionada, t);
+                        autoExecProximaAcaoAposController((ItfAcaoController) acaoSelecionada, null);
+                    }
+                    break;
 
                 case ACAO_SELECAO_DE_ACAO:
                     break;

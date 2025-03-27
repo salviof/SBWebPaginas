@@ -1,26 +1,37 @@
-<ui:composition xmlns="http://www.w3.org/1999/xhtml"
-                xmlns:cc="http://java.sun.com/jsf/composite"
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:cc="http://java.sun.com/jsf/composite"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:pe="http://primefaces.org/ui/extensions"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 
-                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
-                xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://xmlns.jcp.org/jsf/core">
     <!-- INTERFACE -->
     <cc:interface>
-        <cc:attribute name="item" type="com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.reflexao.ItfBeanDeclarado" />
-
-
+        <cc:attribute name="objetoSimples"
+                      type="com.super_bits.modulosSB.SBCore.modulos.objetos.registro.ItemGenerico" required="true"/>
 
     </cc:interface>
     <!-- IMPLEMENTATION -->
     <cc:implementation>
+        <h:panelGroup layout="block"
+                      styleClass="status-container" rendered="#{servicoVisualizacaoComponente.visualizarEstiloStatus(valor)}"
+                      >
+            <h:panelGroup styleClass="status-icon #{servicoVisualizacaoComponente.getIcone(valor)} Fs24" style="color: #{servicoVisualizacaoComponente.getCor(valor)}"  />
+            <h:panelGroup styleClass="statusText Fs16"  >
+                #{valor.nome}
+            </h:panelGroup>
+        </h:panelGroup>
 
+        <h:panelGroup rendered="#{servicoVisualizacaoComponente.visualizarEstiloNomeImagem(valor)}" >
+            com imagem servicoVisualizacaoComponente.getImagemURl(valor)
+        </h:panelGroup>
 
-        <c:set var="item" value="#{cc.attrs.item.valor}" />
-        <c:set var="beanItem" value="#{cc.attrs.item}" />
-
-        <ui:include  src="#{cc.attrs.item.visualizacaoItem}" />
-
-
+        <h:panelGroup rendered="#{servicoVisualizacaoComponente.visualizarEstiloNomeSimples(valor)}" styleClass="statusText Fs16">
+            #{valor.nome}
+        </h:panelGroup>
 
     </cc:implementation>
-
 </ui:composition>

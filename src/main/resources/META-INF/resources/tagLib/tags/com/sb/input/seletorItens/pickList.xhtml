@@ -15,7 +15,7 @@
                 <p:dataList value="#{registro.valor}"
 
                             var="item"   emptyMessage="nenhum selecionado" styleClass="inputItensDataListSomenteLeituraResponsivo">
-                    #{item.nome}
+                    #{item.getCampoInstanciadoByNomeOuAnotacao('AAA_NOME').valor}
                 </p:dataList>
             </h:panelGroup>
 

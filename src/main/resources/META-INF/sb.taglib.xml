@@ -493,6 +493,17 @@
 
 
     <tag>
+        <tag-name>objeto</tag-name>
+        <handler-class>org.super_bits.tags.objeto.ObjetoVisualizacaoHandler</handler-class>
+        <attribute>
+            <name>visualizacao</name>
+            <required>true</required>
+            <type>java.lang.String</type>
+            <description>Caminho para o arquivo XHTML a ser incluído dinamicamente</description>
+        </attribute>
+    </tag>
+
+    <tag>
         <tag-name>seletorItens</tag-name>
         <source>resources/tagLib/tags/com/sb/seletorItem.xhtml</source>
         <attribute>
