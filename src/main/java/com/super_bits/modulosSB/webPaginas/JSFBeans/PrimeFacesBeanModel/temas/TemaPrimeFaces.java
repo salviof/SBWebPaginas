@@ -10,7 +10,7 @@ public class TemaPrimeFaces extends EntidadeSimples implements Serializable {
     @InfoCampo(tipo = FabTipoAtributoObjeto.ID)
     private int id;
 
-    @InfoCampo(tipo = FabTipoAtributoObjeto.AAA_NOME)
+    @InfoCampo(tipo = FabTipoAtributoObjeto.NOME)
     private String name;
 
     @InfoCampo(tipo = FabTipoAtributoObjeto.IMG_PEQUENA)

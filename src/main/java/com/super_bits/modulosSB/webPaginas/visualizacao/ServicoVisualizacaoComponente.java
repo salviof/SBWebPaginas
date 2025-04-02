@@ -88,7 +88,7 @@ public class ServicoVisualizacaoComponente {
     }
 
     public String getItemSimplesNome(ItfBeanSimples pValor) {
-        return (String) pValor.getCampoInstanciadoByAnotacao(FabTipoAtributoObjeto.AAA_NOME).getValorTextoFormatado();
+        return (String) pValor.getCampoInstanciadoByAnotacao(FabTipoAtributoObjeto.NOME).getValorTextoFormatado();
     }
 
     public boolean isItemPossuiImagemPequena(ItfBeanSimples pItem) {

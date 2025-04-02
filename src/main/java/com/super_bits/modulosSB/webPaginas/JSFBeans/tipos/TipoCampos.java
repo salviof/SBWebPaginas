@@ -38,15 +38,15 @@ public class TipoCampos extends ConstantesWeb {
     }
 
     public String getNomeCurto() {
-        return getStrTipoCampoInput(FabTipoAtributoObjeto.AAA_NOME);
+        return getStrTipoCampoInput(FabTipoAtributoObjeto.NOME);
     }
 
     public String getNomeLongo() {
-        return getStrTipoCampoInput(FabTipoAtributoObjeto.AAA_NOME);
+        return getStrTipoCampoInput(FabTipoAtributoObjeto.NOME);
     }
 
     public String getLC_CEP() {
-        return getStrTipoCampoInput(FabTipoAtributoObjeto.AAA_DESCRITIVO);
+        return getStrTipoCampoInput(FabTipoAtributoObjeto.DESCRITIVO);
     }
 
     public String getID() {
@@ -62,15 +62,15 @@ public class TipoCampos extends ConstantesWeb {
     }
 
     public String getNOME_CURTO() {
-        return getStrTipoCampoInput(FabTipoAtributoObjeto.AAA_NOME);
+        return getStrTipoCampoInput(FabTipoAtributoObjeto.NOME);
     }
 
     public String getNOME_CURTO_LONGO() {
-        return getStrTipoCampoInput(FabTipoAtributoObjeto.AAA_NOME_LONGO);
+        return getStrTipoCampoInput(FabTipoAtributoObjeto.NOME_LONGO);
     }
 
     public String getDescritivo() {
-        return getStrTipoCampoInput(FabTipoAtributoObjeto.AAA_DESCRITIVO);
+        return getStrTipoCampoInput(FabTipoAtributoObjeto.DESCRITIVO);
     }
 
     public String getDataHora() {
@@ -203,16 +203,16 @@ public class TipoCampos extends ConstantesWeb {
         return getStrTipoCampoInput(FabTipoAtributoObjeto.INSCRIACAO_MUNICIPAL);
     }
 
-    public String getAAA_NOME_CURTO() {
-        return getStrTipoCampoInput(FabTipoAtributoObjeto.AAA_NOME);
+    public String getNOME_CURTO() {
+        return getStrTipoCampoInput(FabTipoAtributoObjeto.NOME);
     }
 
-    public String getAAA_NOME_LONGO() {
-        return getStrTipoCampoInput(FabTipoAtributoObjeto.AAA_NOME_LONGO);
+    public String getNOME_LONGO() {
+        return getStrTipoCampoInput(FabTipoAtributoObjeto.NOME_LONGO);
     }
 
-    public String getAAA_DESCRITIVO() {
-        return getStrTipoCampoInput(FabTipoAtributoObjeto.AAA_DESCRITIVO);
+    public String getDESCRITIVO() {
+        return getStrTipoCampoInput(FabTipoAtributoObjeto.DESCRITIVO);
     }
 
     public String getQUANTIDADE() {

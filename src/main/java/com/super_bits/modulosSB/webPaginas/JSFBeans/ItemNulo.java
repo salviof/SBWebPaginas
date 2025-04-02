@@ -7,7 +7,7 @@ import java.io.Serializable;
 
 public class ItemNulo extends ItemSimples implements Serializable {
 
-    @InfoCampo(tipo = FabTipoAtributoObjeto.AAA_NOME)
+    @InfoCampo(tipo = FabTipoAtributoObjeto.NOME)
     String nomeCurto = "RegistroNulo";
     @InfoCampo(tipo = FabTipoAtributoObjeto.ID)
     int id = 0;
