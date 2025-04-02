@@ -30,7 +30,7 @@
         </h:panelGroup>
 
         <h:panelGroup rendered="#{servicoVisualizacaoComponente.visualizarEstiloNomeSimples(valor)}" styleClass="statusText Fs16">
-            #{valor.nome}
+            #{servicoVisualizacaoComponente.getItemSimplesNome(valor)}
         </h:panelGroup>
 
     </cc:implementation>

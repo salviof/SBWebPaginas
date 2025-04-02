@@ -7,7 +7,7 @@ package com.super_bits.modulosSB.webPaginas;
 import com.super_bits.modulos.SBAcessosModel.fabricas.FabAcaoProjetoSB;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.ItfConfiguracaoCoreCustomizavel;
 import com.super_bits.modulosSB.webPaginas.ConfigGeral.ConfiguradorCoreDeProjetoWebWarAbstrato;
-import com.super_bits.modulosSB.webPaginas.controller.paginasDoSistema.FabAcaoPaginasDoSistema;
+import com.super_bits.modulos.SBAcessosModel.view.FabAcaoPaginasDoSistema;
 
 /**
  *

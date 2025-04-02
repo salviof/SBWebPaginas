@@ -10,7 +10,7 @@ import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.declarados.Paginas.Er
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.declarados.Paginas.ErroCritico.InfoErroCriticoSQL;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.siteMap.MapaDeFormularios;
 import com.super_bits.modulosSB.webPaginas.TratamentoDeErros.ErroSBCritico;
-import com.super_bits.modulosSB.webPaginas.controller.paginasDoSistema.FabAcaoPaginasDoSistema;
+import com.super_bits.modulos.SBAcessosModel.view.FabAcaoPaginasDoSistema;
 import javax.faces.context.FacesContext;
 
 public class CentralDeMensagensJSFAPP extends CentralDeMensagemAbstrata {

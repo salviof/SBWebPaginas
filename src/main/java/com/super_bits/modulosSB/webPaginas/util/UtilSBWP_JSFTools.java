@@ -13,6 +13,7 @@ import com.super_bits.modulosSB.SBCore.integracao.libRestClient.api.token.ItfTok
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.permissoes.ItfAcaoFormulario;
 import com.super_bits.modulosSB.SBCore.modulos.Mensagens.FabMensagens;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campoInstanciado.ItfCampoInstanciado;
+import com.super_bits.modulos.SBAcessosModel.view.FabAcaoPaginasDoSistema;
 import com.super_bits.modulosSB.webPaginas.ConfigGeral.SBWebPaginas;
 import com.super_bits.modulosSB.webPaginas.JSFBeans.modal.PgModalSBJSF;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.declarados.util.PgUtilTelefone;
@@ -70,48 +71,49 @@ public abstract class UtilSBWP_JSFTools {
      * primefaces não gosta de extenção
      *
      */
-    public final static String FORMULARIO_MODAL_COMUNICACAO_ACAO_TRANSIENTE = "/resources/SBComp/modal/dialogo/comunicacaoAcaoTransiente.xhtml";
-    public final static String FORMULARIO_MODAL_JUSTIFICATIVA = "/resources/SBComp/modal/dialogo/justificativa.xhtml";
-    public final static String FORMULARIO_MODAL_COMUNICACAO = "/resources/SBComp/modal/dialogo/respostaComunicacao.xhtml";
+    public final static String FORMULARIO_MODAL_COMUNICACAO_ACAO_TRANSIENTE = FabAcaoPaginasDoSistema.FORMULARIO_MODAL_COMUNICACAO_ACAO_TRANSIENTE;
+    public final static String FORMULARIO_MODAL_JUSTIFICATIVA = FabAcaoPaginasDoSistema.FORMULARIO_MODAL_JUSTIFICATIVA;
+    public final static String FORMULARIO_MODAL_COMUNICACAO = FabAcaoPaginasDoSistema.FORMULARIO_MODAL_COMUNICACAO;
 
     /**
      * opções Utilitárias do desenvolvedor
      */
-    public final static String FORMULARIO_MODAL_UTIL_DESENVOLVEDOR = "/resources/SBComp/modal/admin/adminUtil";
+    public final static String FORMULARIO_MODAL_UTIL_DESENVOLVEDOR = FabAcaoPaginasDoSistema.FORMULARIO_MODAL_UTIL_DESENVOLVEDOR;
 
     /**
      * Informações da pagina Atual
      */
-    public final static String FORMULARIO_MODAL_INFO_PAGINA = "/resources/SBComp/modal/admin/infoPagina";
+    public final static String FORMULARIO_MODAL_INFO_PAGINA = FabAcaoPaginasDoSistema.FORMULARIO_MODAL_INFO_PAGINA;
 
-    public final static String FORMULARIO_MODAL_PESQUISA_ITEM_AVANCADO = "/resources/SBComp/modal/pesquisaItemAvancada.xhtml";
+    public final static String FORMULARIO_MODAL_PESQUISA_ITEM_AVANCADO = FabAcaoPaginasDoSistema.FORMULARIO_MODAL_PESQUISA_ITEM_AVANCADO;
 
-    public final static String FORMULARIO_MODAL_REQUISITO = "/resources/SBComp/modal/admin/requisitarAlteracao.xhtml";
+    public final static String FORMULARIO_MODAL_REQUISITO = FabAcaoPaginasDoSistema.FORMULARIO_MODAL_REQUISITO;
 
     /**
      * Atenção: Caminho do arquivo sem extenção, o Framework de Dialogo do
      * primefaces não gosta de extenção
      */
-    public final static String FORMULARIO_MODAL_ENVIO_ARQUIVO = "/resources/SBComp/modal/envioArquivo";
-    public final static String FORMULARIO_ACESSO_NEGADO = "/resources/SBComp/SBSystemPages/acessoNegado.xhtml";
+    public final static String FORMULARIO_MODAL_ENVIO_ARQUIVO = FabAcaoPaginasDoSistema.FORMULARIO_MODAL_ENVIO_ARQUIVO;
+    public final static String FORMULARIO_ACESSO_NEGADO = FabAcaoPaginasDoSistema.FORMULARIO_ACESSO_NEGADO;
 
-    public final static String FORMULARIO_OAUTH_LOGIN = "/resources/oauth/login.xhtml";
+    public final static String FORMULARIO_OAUTH_LOGIN = FabAcaoPaginasDoSistema.FORMULARIO_OAUTH_LOGIN;
 
-    public final static String FORMULARIO_API_RESTFUL_CONTROLLER = "/resources/restful/respostaController.xhtml";
-    public final static String FORMULARIO_API_JSON_WEB_VIEW = "/resources/json-webview/jsonwebview.xhtml";
+    public final static String FORMULARIO_API_RESTFUL_CONTROLLER = FabAcaoPaginasDoSistema.FORMULARIO_API_RESTFUL_CONTROLLER;
 
-    public final static String FORMULARIO_API_JSON_WEB_CONTROLLER = "/resources/json-webview/jsonwebviewController.xhtml";
+    public final static String FORMULARIO_ACESSO_NEGADO_SUB_FORM = FabAcaoPaginasDoSistema.FORMULARIO_ACESSO_NEGADO_SUB_FORM;
 
-    public final static String FORMULARIO_ACESSO_NEGADO_SUB_FORM = "/resources/SBComp/SBSystemPages/acessoNegadoSubForm.xhtml";
-    public final static String FORMULARIO_PARAMETRO_URL_INVALIDO = "/resources/SBComp/SBSystemPages/parametroURLInvalido.xhtml";
+    public final static String FORMULARIO_RECUPERACAO_DE_SENHA = FabAcaoPaginasDoSistema.FORMULARIO_RECUPERACAO_DE_SENHA;
+    public final static String FORMULARIO_ACESSO_DINAMICO_VIA_TOKEN = FabAcaoPaginasDoSistema.FORMULARIO_ACESSO_DINAMICO_VIA_TOKEN;
+    public final static String FORMULARIO_RECUPERACAO_DE_SENHA_GERAR_SENHA = FabAcaoPaginasDoSistema.FORMULARIO_RECUPERACAO_DE_SENHA_GERAR_SENHA;
+    public final static String FORMULARIO_LOGIN = FabAcaoPaginasDoSistema.FORMULARIO_LOGIN;
+    public final static String FORMULARIO_SESSAO_EXPIROU = FabAcaoPaginasDoSistema.FORMULARIO_SESSAO_EXPIROU;
+    public final static String FORMULARIO_ERRO_CRITICO = FabAcaoPaginasDoSistema.FORMULARIO_ERRO_CRITICO;
 
-    public final static String FORMULARIO_RECUPERACAO_DE_SENHA = "/resources/SBComp/SBSystemPages/recSenhaGestao.xhtml";
-    public final static String FORMULARIO_ACESSO_DINAMICO_VIA_TOKEN = "/resources/SBComp/SBSystemPages/acessoTokenExclusivoDinamico.xhtml";
-    public final static String FORMULARIO_RECUPERACAO_DE_SENHA_GERAR_SENHA = "/resources/SBComp/SBSystemPages/recSenhaGerar.xhtml";
-    public final static String FORMULARIO_LOGIN = "/resources/SBComp/SBSystemPages/login.xhtml";
-    public final static String FORMULARIO_SESSAO_EXPIROU = "/resources/SBComp/SBSystemPages/viewExpirou.xhtml";
-    public final static String FORMULARIO_ERRO_CRITICO = "/resources/SBComp/SBSystemPages/erroGenerico.xhtml";
-    public final static String FORMULARIO_HOME = "/site/home.xhtml";
+    public final static String FORMULARIO_API_JSON_WEB_CONTROLLER = FabAcaoPaginasDoSistema.FORMULARIO_API_JSON_WEB_CONTROLLER;
+
+    public final static String FORMULARIO_HOME = FabAcaoPaginasDoSistema.FORMULARIO_HOME;
+    public final static String FORMULARIO_PARAMETRO_URL_INVALIDO = FabAcaoPaginasDoSistema.FORMULARIO_PARAMETRO_URL_INVALIDO;
+    public final static String FORMULARIO_API_JSON_WEB_VIEW = FabAcaoPaginasDoSistema.FORMULARIO_API_JSON_WEB_VIEW;
 
     /**
      * Retorna o caminho absoluto do componente exemplo:

@@ -17,8 +17,8 @@ import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.interface
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.reflexao.anotacoes.InfoPagina;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.siteMap.MapaDeFormularios;
 import com.super_bits.modulosSB.webPaginas.TratamentoDeErros.ErroGenericoProcessandoRespostaJson;
-import com.super_bits.modulosSB.webPaginas.controller.paginasDoSistema.FabAcaoPaginasDoSistema;
-import com.super_bits.modulosSB.webPaginas.controller.paginasDoSistema.InfoAcaoPaginaDoSistema;
+import com.super_bits.modulos.SBAcessosModel.view.FabAcaoPaginasDoSistema;
+import com.super_bits.modulos.SBAcessosModel.view.InfoAcaoPaginaDoSistema;
 import com.super_bits.modulosSB.webPaginas.controller.servlets.WebPaginasServlet;
 import com.super_bits.modulosSB.webPaginas.controller.servlets.servletWebPaginas.ConfiguracoesDeFormularioPorUrl;
 import com.super_bits.modulosSB.webPaginas.controller.servlets.servletWebPaginas.EstruturaDeFormulario;

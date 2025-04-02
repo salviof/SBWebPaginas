@@ -12,8 +12,8 @@ import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.ItfResposta
 import com.super_bits.modulosSB.SBCore.modulos.Controller.qualificadoresCDI.sessao.QlSessaoFacesContext;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfSessao;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.reflexao.anotacoes.InfoPagina;
-import com.super_bits.modulosSB.webPaginas.controller.paginasDoSistema.FabAcaoPaginasDoSistema;
-import com.super_bits.modulosSB.webPaginas.controller.paginasDoSistema.InfoAcaoPaginaDoSistema;
+import com.super_bits.modulos.SBAcessosModel.view.FabAcaoPaginasDoSistema;
+import com.super_bits.modulos.SBAcessosModel.view.InfoAcaoPaginaDoSistema;
 import com.super_bits.modulosSB.webPaginas.controller.servlets.WebPaginasServlet;
 import com.super_bits.modulosSB.webPaginas.util.UtilSBWPServletTools;
 import javax.annotation.PostConstruct;

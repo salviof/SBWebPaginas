@@ -54,7 +54,12 @@ public class ServicoVisualizacaoComponente {
     }
 
     public String getIcone(ItfBeanSimples pItem) {
+
         if (isItemPossuiIcone(pItem)) {
+
+            if (pItem.getCampoInstanciadoByAnotacao(FabTipoAtributoObjeto.ICONE).getValor() == null) {
+                return null;
+            }
             return pItem.getCampoInstanciadoByAnotacao(FabTipoAtributoObjeto.ICONE).getValor().toString();
         }
         return null;
@@ -62,6 +67,9 @@ public class ServicoVisualizacaoComponente {
 
     public String getCor(ItfBeanSimples pItem) {
         if (isItemPossuiCor(pItem)) {
+            if (pItem.getCampoInstanciadoByAnotacao(FabTipoAtributoObjeto.COR).getValor() == null) {
+                return null;
+            }
             return pItem.getCampoInstanciadoByAnotacao(FabTipoAtributoObjeto.COR).getValor().toString();
         }
         return null;
@@ -77,6 +85,10 @@ public class ServicoVisualizacaoComponente {
     public boolean isItemPossuiIcone(ItfBeanSimples pItem) {
 
         return pItem.isTemCampoAnotado(FabTipoAtributoObjeto.ICONE);
+    }
+
+    public String getItemSimplesNome(ItfBeanSimples pValor) {
+        return (String) pValor.getCampoInstanciadoByAnotacao(FabTipoAtributoObjeto.AAA_NOME).getValorTextoFormatado();
     }
 
     public boolean isItemPossuiImagemPequena(ItfBeanSimples pItem) {

@@ -4,6 +4,7 @@
  */
 package com.super_bits.modulosSB.webPaginas.controller.paginasDoSistema;
 
+import com.super_bits.modulos.SBAcessosModel.view.FabAcaoPaginasDoSistema;
 import com.super_bits.modulos.SBAcessosModel.model.acoes.AcaoDoSistema;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 import com.super_bits.modulosSB.webPaginas.ConfiguradorSBCoreWebPaginaTestes;
