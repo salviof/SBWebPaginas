@@ -203,7 +203,7 @@ public class TipoCampos extends ConstantesWeb {
         return getStrTipoCampoInput(FabTipoAtributoObjeto.INSCRIACAO_MUNICIPAL);
     }
 
-    public String getNOME_CURTO() {
+    public String getAAANOME_CURTO() {
         return getStrTipoCampoInput(FabTipoAtributoObjeto.NOME);
     }
 
