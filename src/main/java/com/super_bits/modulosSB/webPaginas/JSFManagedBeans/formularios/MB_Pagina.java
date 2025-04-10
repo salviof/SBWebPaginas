@@ -130,13 +130,13 @@ public abstract class MB_Pagina extends B_Pagina {
     }
 
     @Override
-    public int getId() {
+    public Long getId() {
         try {
             return getAcaoVinculada().getId();
         } catch (Throwable t) {
             SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "Erro obendo titulo da pagina", t);
         }
-        return -1;
+        return -1l;
     }
 
     /**

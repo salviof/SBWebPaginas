@@ -38,8 +38,8 @@ public class PaginaSimples extends B_Pagina {
     }
 
     @Override
-    public int getId() {
-        return 99;
+    public Long getId() {
+        return 99l;
     }
 
     @Override

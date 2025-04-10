@@ -54,7 +54,9 @@ public class PgUtilComunicacao implements Serializable {
                 throw new UnsupportedOperationException("Defina o id do tipo de resposta");
             }
             ItfComunicacao cm = SBCore.getCentralDeComunicacao().getComnunicacaoRegistrada(codigoComunicacao);
-            ItfRespostaComunicacao resposta = cm.getRepostasPossiveis().stream().filter(resp -> resp.getTipoResposta().getId() == Integer.valueOf(idTipoResposta)).findFirst().get();
+            ItfRespostaComunicacao resposta = cm.getRepostasPossiveis().stream()
+                    .filter(resp -> resp.getTipoResposta().getId() == Long.valueOf(idTipoResposta))
+                    .findFirst().get();
             SBCore.getCentralDeComunicacao().responderComunicacao(cm, resposta);
             paginaUtil.atualizaTelaPorID("idAreaSBTopoInterface");
         } catch (Throwable t) {

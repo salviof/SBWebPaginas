@@ -68,7 +68,7 @@ public class TemasDisponiveis implements Serializable {
 
         themesAsMap = new HashMap<String, TemaPrimeFaces>();
         themes = new ArrayList<TemaPrimeFaces>();
-        int i = 0;
+        Long i = 0l;
         for (String themeName : themeNames) {
             TemaPrimeFaces theme = new TemaPrimeFaces(i, themeName, "/resources/SBComp/template/themeswitcher/" + themeName + ".png");
             i++;

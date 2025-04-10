@@ -47,7 +47,7 @@ public abstract class PgModalSubAcao extends MB_Pagina implements Serializable, 
             if (FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().containsKey("tipoEntidade")) {
                 String tipoEntidade = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("tipoEntidade");
                 String codigoEntidade = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("codigoEntidade");
-                int codigo = Integer.valueOf(codigoEntidade);
+                Long codigo = Long.valueOf(codigoEntidade);
                 Class classeEntidade = MapaObjetosProjetoAtual.getClasseDoObjetoByNome(tipoEntidade);
                 ItfBeanSimples entidade = (ItfBeanSimples) UtilSBPersistencia.getRegistroByID(classeEntidade, codigo, getEMPagina());
                 setBeanSelecionado(entidade);

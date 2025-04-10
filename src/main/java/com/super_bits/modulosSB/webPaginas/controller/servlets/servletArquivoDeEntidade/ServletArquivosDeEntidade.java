@@ -81,10 +81,10 @@ public class ServletArquivosDeEntidade extends ServletArquivosSBWPGenerico imple
                 case IMAGE_REPRESENTATIVA_ENTIDADE_GRANDE:
                 default:
                     try {
-                    beanNovoItemTemporario = (ItfBeanSimples) MapaObjetosProjetoAtual.getClasseDoObjetoByNome(pNomeEntidade).newInstance();
-                } catch (Throwable t) {
-                    SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "Erro criando nova instancia de entidade para obtenção de arquivo temporario", t);
-                }
+                        beanNovoItemTemporario = (ItfBeanSimples) MapaObjetosProjetoAtual.getClasseDoObjetoByNome(pNomeEntidade).newInstance();
+                    } catch (Throwable t) {
+                        SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "Erro criando nova instancia de entidade para obtenção de arquivo temporario", t);
+                    }
             }
             switch (prDadosREquisicaoArquivoEntidade.getTipoRecurso().getFabipoArquivo()) {
 
@@ -162,19 +162,19 @@ public class ServletArquivosDeEntidade extends ServletArquivosSBWPGenerico imple
                 case IMAGE_REPRESENTATIVA_ENTIDADE_MEDIO:
                 case IMAGE_REPRESENTATIVA_ENTIDADE_PEQUENO:
                     try {
-                    prDadosREquisicaoArquivoEntidade.setEntidade((ItfBeanSimples) classeEntidade.newInstance());
-                    String[] partes = pSlugObjeto.split("-");
-                    for (String parte : partes) {
-                        if (UtilSBCoreStringValidador.isContemApenasNumero(parte)) {
-                            prDadosREquisicaoArquivoEntidade.getEntidade().setId(Integer.valueOf(parte));
-                        } else {
-                            prDadosREquisicaoArquivoEntidade.getEntidade().setNome(parte);
+                        prDadosREquisicaoArquivoEntidade.setEntidade((ItfBeanSimples) classeEntidade.newInstance());
+                        String[] partes = pSlugObjeto.split("-");
+                        for (String parte : partes) {
+                            if (UtilSBCoreStringValidador.isContemApenasNumero(parte)) {
+                                prDadosREquisicaoArquivoEntidade.getEntidade().setId(Long.valueOf(parte));
+                            } else {
+                                prDadosREquisicaoArquivoEntidade.getEntidade().setNome(parte);
+                            }
                         }
+                    } catch (Throwable t) {
+                        prDadosREquisicaoArquivoEntidade.setEntidade(null);
                     }
-                } catch (Throwable t) {
-                    prDadosREquisicaoArquivoEntidade.setEntidade(null);
-                }
-                break;
+                    break;
             }
 
             if (prDadosREquisicaoArquivoEntidade.getEntidade() == null) {

@@ -236,8 +236,8 @@ public class SessaoAtualSBWP extends SessaoOffline implements ItfSessao, Seriali
                 return;
             }
 
-            int id = Integer.parseInt(atributo.toString());
-            if (id == 0) {
+            Long id = Long.valueOf(atributo.toString());
+            if (id == null || id == 0) {
                 return;
             }
             EntityManager em = UtilSBPersistencia.getEntyManagerPadraoNovo();

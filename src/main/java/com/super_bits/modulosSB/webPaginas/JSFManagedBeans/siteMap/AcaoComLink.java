@@ -127,7 +127,7 @@ public class AcaoComLink extends ItemGenerico implements ItfAcaoDoSistema {
     }
 
     @Override
-    public void setId(int pId) {
+    public void setId(Long pId) {
         acaoOriginal.setId(pId);
     }
 
@@ -157,7 +157,7 @@ public class AcaoComLink extends ItemGenerico implements ItfAcaoDoSistema {
     }
 
     @Override
-    public int getId() {
+    public Long getId() {
         return acaoOriginal.getId();
     }
 

@@ -90,7 +90,7 @@ public class PgAcessoViaTokenDinamico extends MB_paginaCadastroEntidades<TokenAc
         }
         if (tokenDinamico.getEntidadeDoAcesso() != null) {
             Class tipoEntidade = MapaObjetosProjetoAtual.getClasseDoObjetoByNome(tokenDinamico.getEntidadeDoAcesso());
-            ItfBeanSimples entidade = (ItfBeanSimples) UtilSBPersistencia.getRegistroByID(tipoEntidade, Integer.valueOf(tokenDinamico.getCodigoEntidade()), getEMPagina());
+            ItfBeanSimples entidade = (ItfBeanSimples) UtilSBPersistencia.getRegistroByID(tipoEntidade, Long.valueOf(tokenDinamico.getCodigoEntidade()), getEMPagina());
             String slugAcao = tokenDinamico.getSlugAcaoFormulario();
             ItfAcaoDoSistema acao = MapaAcoesSistema.getAcaoDoSistemaByNomeUnico(slugAcao);
             String emailUsuario = tokenDinamico.getEmail();

@@ -19,7 +19,7 @@ import com.super_bits.modulosSB.webPaginas.ConfigGeral.SBWebPaginas;
 public class SistemaWebAtual extends ItemSimples {
 
     @InfoCampo(tipo = FabTipoAtributoObjeto.ID)
-    private int id = 0;
+    private Long id = 0l;
     @InfoCampo(tipo = FabTipoAtributoObjeto.NOME)
     private String nome;
     @InfoCampo(tipo = FabTipoAtributoObjeto.DESCRITIVO)
@@ -29,12 +29,12 @@ public class SistemaWebAtual extends ItemSimples {
     private String empresa;
 
     @Override
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
     @Override
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

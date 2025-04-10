@@ -68,7 +68,7 @@ public abstract class PgModalPaginaAtual extends PgModalBaseAbs implements Seria
     }
 
     @Override
-    public int getId() {
+    public Long getId() {
         return getPaginaVinculada().getId();
     }
 

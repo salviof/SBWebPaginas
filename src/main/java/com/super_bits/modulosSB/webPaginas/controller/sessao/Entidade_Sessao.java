@@ -28,7 +28,7 @@ public class Entidade_Sessao implements ItfSessao, Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date inicio;
@@ -39,7 +39,7 @@ public class Entidade_Sessao implements ItfSessao, Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date datahoraUltimaacao;
 
-    private int id_filtroFinal;
+    private Long id_filtroFinal;
 
     private List<ItfPermissao> acessos;
 
@@ -52,11 +52,11 @@ public class Entidade_Sessao implements ItfSessao, Serializable {
     public Entidade_Sessao() {
     }
 
-    public int getId() {
+    public Long getId() {
         return this.id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -68,11 +68,11 @@ public class Entidade_Sessao implements ItfSessao, Serializable {
         this.datahoraUltimaacao = datahoraUltimaacao;
     }
 
-    public int getId_filtroFinal() {
+    public Long getId_filtroFinal() {
         return this.id_filtroFinal;
     }
 
-    public void setId_filtroFinal(int id_filtroFinal) {
+    public void setId_filtroFinal(Long id_filtroFinal) {
         this.id_filtroFinal = id_filtroFinal;
     }
 

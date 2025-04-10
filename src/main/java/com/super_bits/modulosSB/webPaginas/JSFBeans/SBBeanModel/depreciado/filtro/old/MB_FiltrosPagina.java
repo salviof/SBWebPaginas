@@ -53,7 +53,7 @@ public abstract class MB_FiltrosPagina<T extends ItfBeanSimples> extends ClasseT
     private void setParametros() {
 
         for (MB_Filtro<?> filtro : filtros) {
-            List<Integer> teste
+            List<Long> teste
                     = filtro.getSelecaoSimples();
             parametros.put(filtro.getNomeParametroFiltroPagina(),
                     filtro.getSelecaoSimples());

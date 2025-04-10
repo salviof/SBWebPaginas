@@ -95,7 +95,7 @@ public class UtilSBWPJson {
                     jsonPadrao.add("retorno", retorno.toString());
                 }
                 if (retorno instanceof ItfBeanSimples) {
-                    int codigo = ((ItfBeanSimples) retorno).getId();
+                    Long codigo = ((ItfBeanSimples) retorno).getId();
                     jsonPadrao.add("retorno", UtilSBCoreJson.getJsonStringBySequenciaChaveValor("id", codigo));
                 }
             } catch (Throwable t) {

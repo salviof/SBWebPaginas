@@ -97,7 +97,7 @@ public class PgServicoImagensSB implements Serializable {
 
                 try {
                     Object atributo = event.getComponent().getAttributes().get("idProspecto");
-                    int id = Integer.parseInt(atributo.toString());
+                    Long id = Long.parseLong(atributo.toString());
                     ItfBeanSimples entidadeAtualizada = UtilSBPersistencia.getRegistroByID(entidadeSelecionada.getClass(), id, getEm());
                     InputStream arquivo;
                     if (!UtilSBCoreStringNomeArquivosEDiretorios.getExtencaoNomeArquivo(event.getFile().getFileName()).equals("png")) {
@@ -129,7 +129,7 @@ public class PgServicoImagensSB implements Serializable {
 
                 try {
                     Object atributo = event.getComponent().getAttributes().get("idProspecto");
-                    int id = Integer.parseInt(atributo.toString());
+                    Long id = Long.parseLong(atributo.toString());
                     ItfBeanSimples entidadeAtualizada = UtilSBPersistencia.getRegistroByID(entidadeSelecionada.getClass(), id, getEm());
                     InputStream arquivo;
                     if (!UtilSBCoreStringNomeArquivosEDiretorios.getExtencaoNomeArquivo(event.getFile().getFileName()).equals("png")) {

@@ -17,23 +17,24 @@ package org.primefaces.adamantium.domain;
 
 public class Theme {
 
-    private int id;    
-    private String displayName; 
+    private Long id;
+    private String displayName;
     private String name;
-    
-    public Theme() {}
 
-    public Theme(int id, String displayName, String name) {
+    public Theme() {
+    }
+
+    public Theme(Long id, String displayName, String name) {
         this.id = id;
         this.displayName = displayName;
         this.name = name;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -52,7 +53,7 @@ public class Theme {
     public void setName(String name) {
         this.name = name;
     }
-    
+
     @Override
     public String toString() {
         return name;

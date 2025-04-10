@@ -53,7 +53,7 @@ public class BP_DataModelLasy<T extends ItfBeanSimples> extends LazyDataModel<T>
     @Override
     public T getRowData(String rowKey) {
         try {
-            return listaCompleta.stream().filter(item -> item.getId() == Integer.getInteger(rowKey)).findFirst().get();
+            return listaCompleta.stream().filter(item -> item.getId() == Long.getLong(rowKey)).findFirst().get();
         } catch (Throwable t) {
             return null;
         }

@@ -89,7 +89,7 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
 
     @Deprecated
     public static final String PAGINAINICIALID = "inicial";
-    private int id;
+    private Long id;
     private Boolean abriuPagina = false;
     private Map<String, ParametroUrlInstanciado> parametrosURL;
     private List<ItfParametroRequisicaoInstanciado> parametrosOrdenados;

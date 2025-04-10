@@ -8,7 +8,7 @@ import java.io.Serializable;
 public class TemaPrimeFaces extends EntidadeSimples implements Serializable {
 
     @InfoCampo(tipo = FabTipoAtributoObjeto.ID)
-    private int id;
+    private Long id;
 
     @InfoCampo(tipo = FabTipoAtributoObjeto.NOME)
     private String name;
@@ -19,7 +19,7 @@ public class TemaPrimeFaces extends EntidadeSimples implements Serializable {
     public TemaPrimeFaces() {
     }
 
-    public TemaPrimeFaces(int pid, String name, String image) {
+    public TemaPrimeFaces(Long pid, String name, String image) {
         this.id = pid;
         this.name = name;
         this.image = image;

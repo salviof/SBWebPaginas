@@ -79,7 +79,7 @@ public enum FabModelosPagina implements ItfFabrica {
     @Override
     public ModeloPagina getRegistro() {
         ModeloPagina mp = new ModeloPagina();
-        mp.setId(this.ordinal());
+        mp.setId((long) this.ordinal());
         switch (this) {
             case MODELO_GERAL:
                 mp.setNome("Modelo Geral");

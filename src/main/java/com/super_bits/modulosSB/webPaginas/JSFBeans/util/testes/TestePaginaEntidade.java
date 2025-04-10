@@ -214,7 +214,7 @@ public abstract class TestePaginaEntidade<T> extends TesteJunitSBPersistencia {
 
             String nomeAntigo = ((ItfBeanSimples) pagina.getEntidadeSelecionada()).getNomeCurto();
             String nomenovo = "[EDIT]" + nomeAntigo;
-            int idEntidadeSelecionada = ((ItfBeanSimples) pagina.getEntidadeSelecionada()).getId();
+            Long idEntidadeSelecionada = ((ItfBeanSimples) pagina.getEntidadeSelecionada()).getId();
             try {
                 ((EntidadeSimples) pagina.getEntidadeSelecionada()).getCampoByNomeOuAnotacao(FabTipoAtributoObjeto.NOME.toString()).setValor(nomenovo);
                 nomenovo = ((ItfBeanSimples) pagina.getEntidadeSelecionada()).getNomeCurto();

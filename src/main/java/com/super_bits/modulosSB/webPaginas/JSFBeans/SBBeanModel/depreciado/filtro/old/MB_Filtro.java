@@ -49,16 +49,16 @@ public abstract class MB_Filtro<T extends ItfBeanSimples> extends ClasseTipada i
         opcaoAtual = opcoes.get(0);
     }
 
-    public List<Integer> getSelecaoSimples() {
-        List<Integer> respostatemp = new ArrayList<Integer>();
-        respostatemp.add(1);
-        respostatemp.add(2);
+    public List<Long> getSelecaoSimples() {
+        List<Long> respostatemp = new ArrayList<>();
+        respostatemp.add(1l);
+        respostatemp.add(2l);
 
         if (selecao == null || selecao.isEmpty()) {
             return respostatemp;
         }
 
-        List<Integer> resposta = new ArrayList<Integer>();;
+        List<Long> resposta = new ArrayList<>();;
 
         for (T item : selecao) {
             resposta.add(((ItfBeanSimples) item).getId());
@@ -142,7 +142,7 @@ public abstract class MB_Filtro<T extends ItfBeanSimples> extends ClasseTipada i
             for (T itemopcao : listaDeOpcoesdoFiltro) {
 
                 System.out.println(((ItfBeanSimples) itemopcao).getNomeCurto());
-                int idNovoItem = ((ItfBeanSimples) itemopcao).getId();
+                Long idNovoItem = ((ItfBeanSimples) itemopcao).getId();
                 Object[] paramtroID = {idNovoItem};
                 SBNQ qryItem = new SBNQ(pFiltro.getQrySelecao()
                         .getSql(), paramtroID);

@@ -32,7 +32,7 @@ import org.primefaces.event.FileUploadEvent;
 @RequestScoped
 public class Tema {
 
-    private static TemaPrimeFaces temaOficial = new TemaPrimeFaces(1, "blitzer", "blitzer");
+    private static TemaPrimeFaces temaOficial = new TemaPrimeFaces(1l, "blitzer", "blitzer");
 
     /**
      *

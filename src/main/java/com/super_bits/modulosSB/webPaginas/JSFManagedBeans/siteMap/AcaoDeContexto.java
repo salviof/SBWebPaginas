@@ -129,7 +129,7 @@ public class AcaoDeContexto implements ItfAcaoDeContexto {
     }
 
     @Override
-    public void setId(int pId) {
+    public void setId(Long pId) {
         acaoVinculada.setId(pId);
     }
 
@@ -299,7 +299,7 @@ public class AcaoDeContexto implements ItfAcaoDeContexto {
     }
 
     @Override
-    public int getId() {
+    public Long getId() {
         return acaoVinculada.getId();
     }
 
@@ -309,7 +309,7 @@ public class AcaoDeContexto implements ItfAcaoDeContexto {
     }
 
     @Override
-    public int configIDPeloNome() {
+    public Long configIDPeloNome() {
         return acaoVinculada.configIDPeloNome();
     }
 

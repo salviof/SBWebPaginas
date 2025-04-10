@@ -10,7 +10,7 @@ import java.io.Serializable;
 public class OpcaoFiltro extends EntidadeSimples implements Serializable {
 
     @InfoCampo(tipo = FabTipoAtributoObjeto.ID)
-    private int id;
+    private Long id;
     @InfoCampo(tipo = FabTipoAtributoObjeto.NOME)
     private String nome;
 
@@ -41,11 +41,11 @@ public class OpcaoFiltro extends EntidadeSimples implements Serializable {
         return nome;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

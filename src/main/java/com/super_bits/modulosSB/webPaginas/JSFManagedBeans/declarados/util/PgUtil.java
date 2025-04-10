@@ -1357,7 +1357,7 @@ public class PgUtil implements Serializable {
 
     public void removerItem(List<ItfBeanSimples> pLista, ItfBeanSimples pItem) {
         try {
-            int idremover = pItem.getId();
+            Long idremover = pItem.getId();
 
             int indiceRemocao = 0;
 

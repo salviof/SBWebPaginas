@@ -94,7 +94,7 @@ public interface ItfB_PaginaSimples {
      *
      * @return
      */
-    public int getId();
+    public Long getId();
 
     public void executarAcaoSelecionada();
 
