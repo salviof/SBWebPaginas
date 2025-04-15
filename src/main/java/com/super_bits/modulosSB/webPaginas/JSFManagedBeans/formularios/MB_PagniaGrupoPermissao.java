@@ -74,7 +74,7 @@ public class MB_PagniaGrupoPermissao<T extends ItfGrupoUsuaioEditavel> extends M
     @Override
     public void setEntidadeSelecionada(T pEntidadeSelecionada) {
 
-        if (pEntidadeSelecionada != null && pEntidadeSelecionada.getId() > 0) {
+        if (pEntidadeSelecionada != null && pEntidadeSelecionada.getId() != null && pEntidadeSelecionada.getId() > 0) {
             if (getEntidadeSelecionada() == null || !getEntidadeSelecionada().equals(pEntidadeSelecionada)) {
 
                 permissoesGrupo.clear();

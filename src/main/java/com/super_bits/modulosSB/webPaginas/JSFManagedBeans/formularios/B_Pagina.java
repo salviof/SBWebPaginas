@@ -937,7 +937,7 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
                     if (estrutura.getParametrosURL().stream().filter(pr -> pr.isUmParametoEntidadeMBPrincipal()).findFirst().isPresent()
                             && getBeanSelecionado() != null
                             && temFormularioComParametro
-                            && getBeanSelecionado().getId() > 0
+                            && getBeanSelecionado().getId() != null && getBeanSelecionado().getId() > 0
                             && alterouBeanSelecionado) {
                         String url = MapaDeFormularios.getUrlFormulario(pAcao, getBeanSelecionado());
                         UtilSBWP_JSFTools.vaParaPagina(url);

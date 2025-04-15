@@ -540,7 +540,7 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
     @Override
     public T getEntidadeSelecionada() {
         try {
-            if (entidadeSelecionada != null && entidadeSelecionada.getId() > 0) {
+            if (entidadeSelecionada != null && entidadeSelecionada.getId() != null && entidadeSelecionada.getId() > 0) {
 
                 entidadeSelecionada = UtilSBPersistencia.loadEntidade(entidadeSelecionada, getEMPagina());
             }
@@ -720,7 +720,7 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
     protected void listarDados(boolean mostrarInativos) {
         try {
 
-            if (listarApenasRegistroCriadoAoListar && isNovoRegistro() && getEntidadeSelecionada() != null && getEntidadeSelecionadaComoBeanSimples().getId() == 0) {
+            if (listarApenasRegistroCriadoAoListar && isNovoRegistro() && getEntidadeSelecionada() != null && getEntidadeSelecionadaComoBeanSimples().getId() == null) {
                 if (getEntidadesListadas() != null) {
                     getEntidadesListadas().clear();
                     getEntidadesListadas().add(entidadeSelecionada);

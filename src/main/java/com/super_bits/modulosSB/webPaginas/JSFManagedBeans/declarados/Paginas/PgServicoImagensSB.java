@@ -63,7 +63,7 @@ public class PgServicoImagensSB implements Serializable {
 
                     ItfBeanSimples entidadeImagem = (ItfBeanSimples) atributo;
 
-                    if (entidadeImagem.getId() == 0) {
+                    if (entidadeImagem.getId() == null) {
 
                     } else {
                         entidadeImagem = UtilSBPersistencia.loadEntidade(entidadeImagem, getEm());

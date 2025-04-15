@@ -73,7 +73,7 @@ public class ServletArquivosDeEntidade extends ServletArquivosSBWPGenerico imple
         prDadosREquisicaoArquivoEntidade.setCategoria(pCategoria);
         ItemSimplesOffilineApartirDeSlugDeObjeto itemEnviado = new ItemSimplesOffilineApartirDeSlugDeObjeto(pSlugObjeto);
 
-        if (itemEnviado.getId() == 0) {
+        if (itemEnviado.getId() == null) {
             ItfBeanSimples beanNovoItemTemporario = null;
             switch (prDadosREquisicaoArquivoEntidade.getTipoRecurso().getFabipoArquivo()) {
                 case IMAGE_REPRESENTATIVA_ENTIDADE_PEQUENO:
@@ -141,7 +141,7 @@ public class ServletArquivosDeEntidade extends ServletArquivosSBWPGenerico imple
                         try {
                             prDadosREquisicaoArquivoEntidade.setEntidade((ItfBeanSimples) UtilSBPersistencia.getRegistroByNomeSlug(classeEntidade, pSlugObjeto, UtilSBPersistencia.getNovoEM()));
                             if (prDadosREquisicaoArquivoEntidade.getEntidade() != null) {
-                                if (prDadosREquisicaoArquivoEntidade.getEntidade().getId() > 0) {
+                                if (prDadosREquisicaoArquivoEntidade.getEntidade().getId() != null && prDadosREquisicaoArquivoEntidade.getEntidade().getId() > 0) {
                                     String nomeobj = prDadosREquisicaoArquivoEntidade.getEntidade().getNome();
                                     if (!SBCore.getServicoPermissao().isObjetoPermitidoUsuario(sessaoAtual.getUsuario(), prDadosREquisicaoArquivoEntidade.getEntidade())) {
                                         throw new ErroRequisicaoServlet(FabTipoErroRequisicao.ACESSO_NEGADO, "Usuário não tem acesso ao objeto" + nomeobj);

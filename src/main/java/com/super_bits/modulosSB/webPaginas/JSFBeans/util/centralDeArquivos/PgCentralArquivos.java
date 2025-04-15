@@ -114,7 +114,7 @@ public class PgCentralArquivos implements Serializable {
                         throw new UnsupportedOperationException("A entidade Relacionada precisa ser configurada");
                     }
 
-                    //if (entidadeRelacionada.getId() == 0) {
+                    //if (entidadeRelacionada.getId() == null) {
                     //  throw new UnsupportedOperationException("O Id da entidade é igual a 0, salve a entidade primeiro, antes de enviar o arquivo relacionado");
                     //}
                     if (nomeArquivo == null) {

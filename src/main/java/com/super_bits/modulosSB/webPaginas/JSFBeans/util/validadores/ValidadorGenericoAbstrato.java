@@ -156,7 +156,7 @@ public abstract class ValidadorGenericoAbstrato<T> implements Validator<T> {
 
         if (campoInstanciado != null) {
 
-            boolean umNovoRegistro = campoInstanciado.getObjetoDoAtributo().getId() == 0;
+            boolean umNovoRegistro = campoInstanciado.getObjetoDoAtributo().getId() == null;
             validar(campoInstanciado, component, umNovoRegistro, value);
 
         }

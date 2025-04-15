@@ -101,6 +101,8 @@ public class CentralDeArquivosWebAppServidorSB extends CentralDeArquivosAbstrata
         if (endrLocaResource == null) {
             if (SBCore.isEmModoProducao()) {
                 endrLocaResource = PASTA_ARQUIVOS_DE_ENTIDADE_DO_SERVIDOR;
+
+
                 ///home/servidorSBFW/arquivosDeEntidade
             } else {
                 endrLocaResource = PASTA_ARQUIVOS_DE_ENTIDADE_SERVIDOR_HOMOLOGACAO;
@@ -309,7 +311,7 @@ public class CentralDeArquivosWebAppServidorSB extends CentralDeArquivosAbstrata
     @Override
     public String getEndrLocalImagem(ItfBeanSimplesSomenteLeitura item, FabTipoAtributoObjeto tipo, ItfSessao pSessao) {
         String diretorioBase = "ERRO";
-        if (item.getId() == 0) {
+        if (item.getId() == null || item.getId() == null) {
             diretorioBase = pSessao.getPastaTempDeSessao() + "/" + item.getClass().getSimpleName() + "/0/";
         } else {
             diretorioBase = getEndrLocalImagens() + "/" + item.getClass().getSimpleName() + "/" + item.getId() + "/";
@@ -331,7 +333,7 @@ public class CentralDeArquivosWebAppServidorSB extends CentralDeArquivosAbstrata
 
     @Override
     public String getEndrLocalImagem(ItfBeanSimplesSomenteLeitura item, FabTipoAtributoObjeto tipo) {
-        if (item.getId() == 0) {
+        if (item.getId() == null && item.getId() == null) {
             return getEndrLocalImagem(item, tipo, SBCore.getControleDeSessao().getSessaoAtual());
         } else {
             return getEndrLocalImagem(item, tipo, null);

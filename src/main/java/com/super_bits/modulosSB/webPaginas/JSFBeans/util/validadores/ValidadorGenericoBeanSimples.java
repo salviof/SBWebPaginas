@@ -35,7 +35,7 @@ public class ValidadorGenericoBeanSimples extends ValidadorGenericoAbstrato<Obje
                         case ENTIDADE:
                         case OUTROS_OBJETOS:
 
-                            boolean umNovoRegistro = campoInstanciado.getObjetoDoAtributo().getId() == 0;
+                            boolean umNovoRegistro = campoInstanciado.getObjetoDoAtributo().getId() == null;
                             validar(campoInstanciado, component, umNovoRegistro, value);
                             break;
                         default:
