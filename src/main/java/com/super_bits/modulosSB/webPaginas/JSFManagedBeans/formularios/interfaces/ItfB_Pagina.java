@@ -10,7 +10,6 @@ import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ItfAc
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.permissoes.ItfAcaoGerenciarEntidade;
 import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ComunicacaoAcaoSistema;
 import com.super_bits.modulosSB.SBCore.modulos.comunicacao.FabTipoRespostaComunicacao;
-import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ItfComunicacao;
 import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ItfTipoRespostaComunicacao;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campoInstanciado.ItfCampoInstanciado;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfBeanSimples;
@@ -20,6 +19,7 @@ import com.super_bits.modulosSB.webPaginas.controller.servlets.servletWebPaginas
 import java.util.List;
 import java.util.Map;
 import org.primefaces.event.SelectEvent;
+import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ItfDialogo;
 
 /**
  *
@@ -249,7 +249,7 @@ public interface ItfB_Pagina extends ItfB_PaginaSimples, ItfB_PaginaComEntityMan
      */
     public void metodoRespostaModal(Object... pParametros);
 
-    public ItfComunicacao getComunincacaoAguardandoResposta();
+    public ItfDialogo getComunincacaoAguardandoResposta();
 
     public void zerarDadosModal();
 

@@ -32,7 +32,7 @@ public class PgModalREspostaComunicacao extends PgModalRespostaAbstrato {
             if (getRespostaSelecionada() == null) {
                 throw new UnsupportedOperationException("A resposta não foi configurada");
             }
-            SBCore.getCentralComunicacao().responderComunicacao(getComunicacao(), getRespostaSelecionada());
+            SBCore.getServicoComunicacao().responderComunicacao(getComunicacao().getCodigoSelo(), getRespostaSelecionada());
 
             PrimeFaces.current().dialog().closeDynamic(getRespostaSelecionada());
         } catch (Throwable t) {

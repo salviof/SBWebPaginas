@@ -5,11 +5,11 @@
 package com.super_bits.modulosSB.webPaginas.JSFBeans.modal;
 
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
-import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ItfComunicacao;
 import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ItfRespostaComunicacao;
 import org.coletivojava.fw.api.tratamentoErros.FabErro;
 import org.primefaces.PrimeFaces;
 import com.super_bits.modulosSB.webPaginas.JSFBeans.modal.abstrato.PgModalPaginaAtual;
+import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ItfDialogo;
 
 /**
  *
@@ -18,7 +18,7 @@ import com.super_bits.modulosSB.webPaginas.JSFBeans.modal.abstrato.PgModalPagina
 public abstract class PgModalRespostaAbstrato extends PgModalPaginaAtual implements ItfModalRespostaComComunicacao {
 
     private ItfRespostaComunicacao respostaSelecionada;
-    protected ItfComunicacao comunicacao;
+    protected ItfDialogo comunicacao;
 
     @Override
     public ItfRespostaComunicacao getRespostaSelecionada() {
@@ -36,13 +36,13 @@ public abstract class PgModalRespostaAbstrato extends PgModalPaginaAtual impleme
      */
     @Override
     @Deprecated
-    public ItfComunicacao getComunicacao() {
+    public ItfDialogo getComunicacao() {
         return getComunincacaoAguardandoResposta();
 
     }
 
     @Override
-    public ItfComunicacao getComunincacaoAguardandoResposta() {
+    public ItfDialogo getComunincacaoAguardandoResposta() {
         try {
             if (comunicacao != null) {
                 return comunicacao;

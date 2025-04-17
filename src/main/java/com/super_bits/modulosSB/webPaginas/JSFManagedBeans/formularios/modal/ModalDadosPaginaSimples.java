@@ -6,7 +6,6 @@ package com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.modal;
 
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringsMaiuculoMinusculo;
-import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ItfComunicacao;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campoInstanciado.ItfCampoInstanciado;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfBeanSimples;
 import com.super_bits.modulosSB.webPaginas.JSFBeans.SBBeanModel.InfoMBAcao;
@@ -21,6 +20,7 @@ import org.coletivojava.fw.api.tratamentoErros.FabErro;
 import org.primefaces.PrimeFaces;
 
 import org.primefaces.event.FileUploadEvent;
+import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ItfDialogo;
 
 /**
  *
@@ -31,7 +31,7 @@ public class ModalDadosPaginaSimples implements ItfModalDados {
 
     private ItfCampoInstanciado campoInstanciadoSelecionado;
     private ItfBeanSimples entidadeSelecionada;
-    private ItfComunicacao comunicacaoDoMomento;
+    private ItfDialogo comunicacaoDoMomento;
     private String observacaoDoLog;
     private final UIViewRoot viewRootOrigem;
     private final Class classeOrigem;
@@ -107,7 +107,7 @@ public class ModalDadosPaginaSimples implements ItfModalDados {
 
     }
 
-    public void setComunicacaoDoMomento(ItfComunicacao comunicacaoDoMomento) {
+    public void setComunicacaoDoMomento(ItfDialogo comunicacaoDoMomento) {
         this.comunicacaoDoMomento = comunicacaoDoMomento;
     }
 

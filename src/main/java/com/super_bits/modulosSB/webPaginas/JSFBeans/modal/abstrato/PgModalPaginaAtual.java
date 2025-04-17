@@ -4,7 +4,6 @@
  */
 package com.super_bits.modulosSB.webPaginas.JSFBeans.modal.abstrato;
 
-import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ItfComunicacao;
 import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ItfComunicacaoAcaoVinculada;
 import com.super_bits.modulosSB.webPaginas.JSFBeans.SBBeanModel.InfoMBAcao;
 import com.super_bits.modulosSB.webPaginas.JSFBeans.modal.ItfModalWebApp;
@@ -17,6 +16,7 @@ import java.util.List;
 import java.util.Map;
 import javax.faces.context.FacesContext;
 import org.primefaces.PrimeFaces;
+import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ItfDialogo;
 
 /**
  *
@@ -27,7 +27,7 @@ public abstract class PgModalPaginaAtual extends PgModalBaseAbs implements Seria
     public PgModalPaginaAtual() {
     }
 
-    public ItfComunicacao getComunincacaoAguardandoResposta() {
+    public ItfDialogo getComunincacaoAguardandoResposta() {
         return getPaginaVinculada().getComunincacaoAguardandoResposta();
     }
 

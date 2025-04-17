@@ -24,7 +24,6 @@ import com.super_bits.modulosSB.SBCore.modulos.Controller.UtilSBController;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.fabricas.FabTipoAcaoSistemaGenerica;
 import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ComunicacaoAcaoSistema;
 import com.super_bits.modulosSB.SBCore.modulos.comunicacao.FabTipoRespostaComunicacao;
-import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ItfComunicacao;
 import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ItfRespostaComunicacao;
 import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ItfTipoRespostaComunicacao;
 import com.super_bits.modulosSB.SBCore.modulos.fabrica.ItfFabricaAcoes;
@@ -84,6 +83,7 @@ import javax.persistence.EntityManager;
 import org.coletivojava.fw.api.objetoNativo.comunicacao.TipoRespostaComunicacao;
 import org.coletivojava.fw.api.tratamentoErros.FabErro;
 import org.primefaces.component.commandbutton.CommandButton;
+import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ItfDialogo;
 
 public abstract class B_Pagina implements Serializable, ItfB_Pagina {
 
@@ -126,7 +126,7 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
     protected final Map<String, ComunicacaoAcaoSistema> mapaComunicacaoTransienteDeAcaoByIdModal = new HashMap();
     protected final Map<String, ComunicacaoAcaoSistema> mapaComunicacoesTransienteDeAcaoAguardandoResposta = new HashMap();
     private String codigoComunicacaoAguardandoRespostaAtual;
-    private final Map<String, ItfComunicacao> mapaComunicacoesAguardandoResposta = new HashMap<>();
+    private final Map<String, ItfDialogo> mapaComunicacoesAguardandoResposta = new HashMap<>();
 
     private EntityManager emPagina;
     protected FabTipoFormulario tipoFormulario;
@@ -1349,7 +1349,7 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
     @Override
     public void adicionarCodigoCoversa(String pCodigoConversa) {
         try {
-            ItfComunicacao comunicacao = SBCore.getCentralComunicacao().getComnunicacaoRegistrada(pCodigoConversa);
+            ItfDialogo comunicacao = SBCore.getCentralComunicacao().getComnunicacaoRegistrada(pCodigoConversa);
             if (comunicacao == null) {
                 throw new UnsupportedOperationException("Impossível responder ao pedido de resposta solicitado, o codigodeComunicação não foi encontrado");
             }
@@ -1364,7 +1364,7 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
     }
 
     @Override
-    public ItfComunicacao getComunincacaoAguardandoResposta() {
+    public ItfDialogo getComunincacaoAguardandoResposta() {
 
         return SBCore.getCentralComunicacao().getComnunicacaoRegistrada(codigoComunicacaoAguardandoRespostaAtual);
 

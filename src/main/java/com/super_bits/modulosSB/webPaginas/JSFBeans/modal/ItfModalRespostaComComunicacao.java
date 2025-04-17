@@ -4,7 +4,7 @@
  */
 package com.super_bits.modulosSB.webPaginas.JSFBeans.modal;
 
-import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ItfComunicacao;
+import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ItfDialogo;
 
 /**
  *
@@ -13,7 +13,7 @@ import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ItfComunicacao;
 public interface ItfModalRespostaComComunicacao extends ItfModalComResposta {
 
     @Deprecated
-    ItfComunicacao getComunicacao();
+    ItfDialogo getComunicacao();
 
-    public ItfComunicacao getComunincacaoAguardandoResposta();
+    public ItfDialogo getComunincacaoAguardandoResposta();
 }

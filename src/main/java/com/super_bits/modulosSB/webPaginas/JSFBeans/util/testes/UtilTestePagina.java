@@ -4,7 +4,7 @@
  */
 package com.super_bits.modulosSB.webPaginas.JSFBeans.util.testes;
 
-import br.org.coletivojava.erp.comunicacao.transporte.ERPTransporteComunicacao;
+import br.org.coletivojava.erp.comunicacao.transporte.ERPTipoCanalComunicacao;
 import com.super_bits.modulos.SBAcessosModel.model.acoes.AcaoFormulario;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringNomeArquivosEDiretorios;
@@ -85,8 +85,8 @@ public abstract class UtilTestePagina {
             String mensagemComunicacao = "O XHTML da ação  " + pAcao.getNomeUnico() + "  não foi encontrado, deseja criar o arquivo de maneira automática ? \\n \"\n"
                     + "O arquivo será criado em: " + caminhoCompletoArquivoFormulario + " \\n\"\n"
                     + "A partir de uma cópia de: " + arquivoformularioModelo;
-            if (SBCore.getCentralComunicacao().aguardarRespostaComunicacao(ERPTransporteComunicacao.INTRANET_MODAL.getRegistro(),
-                    SBCore.getCentralDeComunicacao().gerarComunicacaoSistema_UsuairoLogado(FabTipoComunicacao.PERGUNTAR_SIM_OU_NAO,
+            if (SBCore.getServicoComunicacao().aguardarRespostaComunicacao(ERPTipoCanalComunicacao.INTRANET_BLOQUEIO_TELA.getRegistro(),
+                    SBCore.getServicoComunicacao().gerarComunicacaoSistema_UsuarioLogado(FabTipoComunicacao.PERGUNTAR_SIM_OU_NAO,
                             mensagemComunicacao),
                     0, FabTipoRespostaComunicacao.PERSONALIZADA) == FabTipoRespostaComunicacao.SIM) {
 
