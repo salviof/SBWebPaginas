@@ -14,6 +14,7 @@ import com.super_bits.modulosSB.SBCore.modulos.view.telas.LayoutComponentesEmTel
 import com.super_bits.modulosSB.SBCore.modulos.view.telas.LayoutComponentesEmTelaComGrupoDeAcoes;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.interfaces.ItfPaginaAtual;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.qualificadoresCDI.sessao.QlSessaoFacesContext;
+import com.super_bits.modulosSB.webPaginas.controller.servletes.urls.parametrosURL.ParametroUrlInstanciado;
 import java.io.Serializable;
 import java.util.List;
 import javax.enterprise.context.RequestScoped;
@@ -70,6 +71,7 @@ public class PgUtilLayout implements Serializable {
 
     @Deprecated
     public boolean verificaExisteLayout(String pNomeLayot) {
+
         return false;
 
     }
