@@ -12,6 +12,7 @@ import com.super_bits.modulosSB.SBCore.modulos.Controller.acoesAutomatizadas.Fab
 import com.super_bits.modulosSB.webPaginas.ConfigGeral.ConfiguradorCoreDeProjetoWebWarAbstrato;
 import com.super_bits.modulosSB.webPaginas.ConfigGeral.ItfInicioFimAppWP;
 import com.super_bits.modulosSB.webPaginas.ConfigGeral.SBWebPaginas;
+import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.declarados.Paginas.PgProjetoSBVisaoGeral;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.reflexao.anotacoes.InfoPagina;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.siteMap.MapaDeFormularios;
 import java.util.List;
@@ -30,7 +31,6 @@ public class ContextoWebPaginas implements ServletContextListener {
     public static void buildSisteMap() {
 
         try {
-
             List<Class> paginasEncontradas = UtilSBCoreReflexao.getClassesComEstaAnotacao(InfoPagina.class, "com.super_bits");
             List<Class> paginasPlugins = UtilSBCoreReflexao.getClassesComEstaAnotacao(InfoPagina.class, "org.coletivoJava.superBitsFW.webPaginas.plugin");
             paginasPlugins.forEach(paginasEncontradas::add);

@@ -39,6 +39,9 @@ public class PgUtilLayout implements Serializable {
 
     @Deprecated
     public LayoutComponentesEmTelaComGrupoDeAcoes gerarLayout(ItfGrupoCampos pGrupoCampo, List<ItfAcaoDoSistema> pAcoes) {
+        if (pGrupoCampo == null) {
+            throw new UnsupportedOperationException("o Grupo de campos para montagem da lista é nulo");
+        }
         return getLayoutCamposComAcao(pGrupoCampo, pAcoes);
     }
 
@@ -56,6 +59,7 @@ public class PgUtilLayout implements Serializable {
     }
 
     public LayoutComponentesEmTelaComGrupoDeAcoes getLayoutCamposComAcao(ItfGrupoCampos pGrupoCampo, List<ItfAcaoDoSistema> pAcoes) {
+
         return paginaAtual.getInfoPagina().getComoFormularioWeb().getInfoLayout().gerarLayout(pGrupoCampo, pAcoes);
     }
 
