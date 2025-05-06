@@ -908,7 +908,7 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
                     if (pEnTidade != null) {
 
                         /// caso não se trate de um novo registro
-                        if (((ItfBeanSimplesSomenteLeitura) pEnTidade).getId() != 0) {
+                        if (((ItfBeanSimplesSomenteLeitura) pEnTidade).getId() != null) {
                             // Caso ESteja mudando de registro selecionado
                             if (getEntidadeSelecionada() == null
                                     || ((ItfBeanSimplesSomenteLeitura) getEntidadeSelecionada()).getId() != ((ItfBeanSimplesSomenteLeitura) pEnTidade).getId()) {
