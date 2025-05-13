@@ -37,6 +37,7 @@ import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.siteMap.AcaoDeContext
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.siteMap.MapaDeFormularios;
 import com.super_bits.modulosSB.webPaginas.controller.servlets.WebPaginasServlet;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.qualificadoresCDI.sessao.QlSessaoFacesContext;
+import com.super_bits.modulosSB.SBCore.modulos.view.formulario.ItfFormularioAcao;
 import com.super_bits.modulosSB.webPaginas.controller.sessao.SessaoAtualSBWP;
 import com.super_bits.modulosSB.webPaginas.util.UtilSBWPServletTools;
 import com.super_bits.modulosSB.webPaginas.util.UtilSBWP_JSFTools;
@@ -260,7 +261,7 @@ public class PgUtil implements Serializable {
             SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "A paginaatual não é do tipo Gerenciamento de Entidade, impossível determinar a entidade vinculada ao grupo", t);
             return new GrupoCampos("Grupo de Campos inreconhesível");
         }
-        String entidade = pagina.getBeanDeclarado("entidadeSelecionada").getInfoBean().getClasse();
+        String entidade = ((ItfB_Pagina) pagina).getBeanDeclarado("entidadeSelecionada").getInfoBean().getClasse();
         return gerarGrupoCamposEntidade(entidade, titulo, campos);
 
     }
@@ -1335,7 +1336,8 @@ public class PgUtil implements Serializable {
                 } else {
                     componente = componente.getParent();
                     if (componente == null) {
-                        String idAlternativo = gerarCaminhoCompletoID(paginaAtual.getInfoPagina().getIdAreaExbicaoAcaoSelecionada());
+                        String idAreaSelecionada = ((ItfFormularioAcao) paginaAtual.getInfoPagina()).getIdAreaExbicaoAcaoSelecionada();
+                        String idAlternativo = gerarCaminhoCompletoID(idAreaSelecionada);
                         if (UtilSBCoreStringValidador.isNAO_NuloNemBranco(idAlternativo)) {
                             return idAlternativo;
                         }
@@ -1559,7 +1561,7 @@ public class PgUtil implements Serializable {
                 }
             }
 
-            atualizaTelaPorID(paginaAtual.getInfoPagina().getIdAreaExbicaoAcaoSelecionada());
+            atualizaTelaPorID(((ItfFormularioAcao) paginaAtual.getInfoPagina()).getIdAreaExbicaoAcaoSelecionada());
         } catch (Throwable t) {
             SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "Erro preenchendo dados aleatórios", t);
         }

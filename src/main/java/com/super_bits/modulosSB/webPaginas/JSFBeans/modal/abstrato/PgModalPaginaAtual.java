@@ -4,6 +4,9 @@
  */
 package com.super_bits.modulosSB.webPaginas.JSFBeans.modal.abstrato;
 
+import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.ItfParametroRequisicaoInstanciado;
+import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ItfAcaoDoSistema;
+import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.permissoes.ItfAcaoGerenciarEntidade;
 import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ItfComunicacaoAcaoVinculada;
 import com.super_bits.modulosSB.webPaginas.JSFBeans.SBBeanModel.InfoMBAcao;
 import com.super_bits.modulosSB.webPaginas.JSFBeans.modal.ItfModalWebApp;
@@ -17,12 +20,14 @@ import java.util.Map;
 import javax.faces.context.FacesContext;
 import org.primefaces.PrimeFaces;
 import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ItfDialogo;
+import com.super_bits.modulosSB.SBCore.modulos.view.formulario.ItfFormularioAcao;
+import com.super_bits.modulosSB.SBCore.modulos.view.formulario.ItfFormularioSimples;
 
 /**
  *
  * @author desenvolvedor
  */
-public abstract class PgModalPaginaAtual extends PgModalBaseAbs implements Serializable, ItfModalWebApp {
+public abstract class PgModalPaginaAtual extends PgModalBaseAbs implements Serializable, ItfModalWebApp, ItfFormularioAcao {
 
     public PgModalPaginaAtual() {
     }
@@ -116,6 +121,21 @@ public abstract class PgModalPaginaAtual extends PgModalBaseAbs implements Seria
     @Deprecated
     public ItfB_Pagina getComoPaginaDeGestao() {
         return getPaginaVinculada();
+    }
+
+    @Override
+    public List<ItfParametroRequisicaoInstanciado> getParametrosURL() {
+        return getPaginaVinculada().getParametrosURL();
+    }
+
+    @Override
+    public ItfAcaoDoSistema getAcaoSelecionada() {
+        return getPaginaVinculada().getAcaoSelecionada();
+    }
+
+    @Override
+    public ItfAcaoGerenciarEntidade getAcaoVinculada() {
+        return getPaginaVinculada().getAcaoVinculada();
     }
 
 }

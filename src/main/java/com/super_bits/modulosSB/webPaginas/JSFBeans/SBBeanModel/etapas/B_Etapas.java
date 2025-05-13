@@ -224,7 +224,7 @@ public class B_Etapas implements Serializable {
 
         paginaAtual.getInfoPagina().getComoPaginaDeGestao().getComoPaginaEntidade().setAcaoSelecionada(acaoAtual);
 
-        paginaAtual.getInfoPagina().executarAcaoSelecionada();
+        paginaAtual.getInfoPagina().getComoFormularioWeb().executarAcaoSelecionada();
     }
 
     private int getIndiceEtapa(ItfAcaoDoSistema pAcao) {

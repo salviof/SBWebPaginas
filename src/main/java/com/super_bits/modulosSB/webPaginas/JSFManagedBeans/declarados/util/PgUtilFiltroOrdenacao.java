@@ -4,8 +4,6 @@
  */
 package com.super_bits.modulosSB.webPaginas.JSFManagedBeans.declarados.util;
 
-import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreListasObjeto;
-import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreNumeros;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringComparador;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.comparacao.FabTipoPesquisaGenerica;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.comparacao.ItemSimilar;
@@ -19,7 +17,6 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import org.hibernate.Hibernate;
 import org.hibernate.collection.internal.PersistentBag;
-import org.jboss.forge.roaster._shade.org.eclipse.jdt.internal.core.util.Util;
 
 /**
  *

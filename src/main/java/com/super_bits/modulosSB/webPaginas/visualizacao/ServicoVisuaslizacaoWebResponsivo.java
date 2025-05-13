@@ -169,4 +169,9 @@ public class ServicoVisuaslizacaoWebResponsivo extends ServicoVisualizacaoAbstra
         return getEndrRemotoFormulario("FabAcaoPaginasDoSistema.PAGINA_NATIVA_TOKEN_DINAMICO_MB", token);
     }
 
+    @Override
+    public String getCaminhoWebAppDeveloper() {
+        return SBWebPaginas.getCaminhoWebAppDeveloper();
+    }
+
 }

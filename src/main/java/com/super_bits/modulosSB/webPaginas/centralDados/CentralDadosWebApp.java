@@ -5,13 +5,13 @@
 package com.super_bits.modulosSB.webPaginas.centralDados;
 
 import com.super_bits.modulosSB.Persistencia.ConfigGeral.CentralDadosJPAPadrao;
+import com.super_bits.modulosSB.Persistencia.dao.UtilSBPersistencia;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 import com.super_bits.modulosSB.SBCore.UtilGeral.MapaControllerEmExecucao;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.ItfRespostaAcaoDoSistema;
 import com.super_bits.modulosSB.SBCore.modulos.fonteDados.ItfTokenAcessoDados;
 import com.super_bits.modulosSB.SBCore.modulos.fonteDados.TokenAcessoDados;
 import com.super_bits.modulosSB.webPaginas.util.UtilSBWP_JSFTools;
-import testesFW.TesteJunitSBPersistencia;
 
 /**
  *
@@ -40,7 +40,7 @@ public class CentralDadosWebApp extends CentralDadosJPAPadrao {
 
         } else {
             tipoContexto = TipoContextoDados.TESTES;
-            return new TokenAcessoDados(TesteJunitSBPersistencia.getEM());
+            return new TokenAcessoDados(UtilSBPersistencia.getEMDoContexto());
         }
 
     }

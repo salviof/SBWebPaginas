@@ -56,7 +56,7 @@ public class PgModalRequisito extends PgModalPaginaAtual {
                     if (paginavinculada.getAcaoSelecionada() != null) {
                         nomeUnicoAcao = paginavinculada.getAcaoSelecionada().getNomeUnico();
                     } else {
-                        nomeUnicoAcao = getPaginaVinculada().getAcaoVinculada().getNomeUnico();
+                        nomeUnicoAcao = getPaginaVinculada().getComoFormularioWeb().getAcaoVinculada().getNomeUnico();
                     }
                 }
             }

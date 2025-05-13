@@ -20,12 +20,13 @@ import java.util.List;
 import java.util.Map;
 import org.primefaces.event.SelectEvent;
 import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ItfDialogo;
+import com.super_bits.modulosSB.SBCore.modulos.view.formulario.ItfFormularioAcao;
 
 /**
  *
  * @author Salvio
  */
-public interface ItfB_Pagina extends ItfB_PaginaSimples, ItfB_PaginaComEntityManager {
+public interface ItfB_Pagina extends ItfB_PaginaSimples, ItfB_PaginaComEntityManager, ItfFormularioAcao {
 
     public void fecharPagina();
 
@@ -95,20 +96,6 @@ public interface ItfB_Pagina extends ItfB_PaginaSimples, ItfB_PaginaComEntityMan
 
     /**
      *
-     * Parametros de Url são parametros que podem ser configurados via chamada
-     * de URL
-     *
-     * O fato de ser possível executar uma ação da pagina pela url informando um
-     * parametro em seguida, tornou este recurso quase obsoleto, porém não
-     * chegamos a conclusão sobre sua extinção, comente sobre issso em
-     * wiki.superbits.org.br
-     *
-     * @return a lista de todos os parametros nescessários para esta pagina
-     */
-    public List<ItfParametroRequisicaoInstanciado> getParametrosURL();
-
-    /**
-     *
      * @see ItfB_Pagina#getParametrosURL()
      *
      *
@@ -159,17 +146,6 @@ public interface ItfB_Pagina extends ItfB_PaginaSimples, ItfB_PaginaComEntityMan
 
     /**
      *
-     * Todo PgAlgumacoisa é vinculado a auma ação de gestão esta ação de gestão
-     * determina quais ações existirão na pagina, nome da pagina e configurações
-     * de segurança, este metodo retorna a ação de gestão vinculada a pagina
-     *
-     *
-     * @return Ação de gestão vinculada a pagina
-     */
-    public ItfAcaoGerenciarEntidade getAcaoVinculada();
-
-    /**
-     *
      * Aplica valores de parametros passados por url no MB_pagina
      *
      * #DEveria ser protected
@@ -184,12 +160,6 @@ public interface ItfB_Pagina extends ItfB_PaginaSimples, ItfB_PaginaComEntityMan
      * @return Todas as ações declaradas no managed Bean
      */
     public List<ItfAcaoDoSistema> getAcoesDaPagina();
-
-    /**
-     *
-     * @return A ação selecionada no momento
-     */
-    public ItfAcaoDoSistema getAcaoSelecionada();
 
     public ItfB_PaginaComEtapaVinculada getComoPaginaComEtapa();
 

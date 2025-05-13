@@ -10,41 +10,17 @@ import com.super_bits.modulosSB.SBCore.UtilGeral.json.ErroProcessandoJson;
 import com.super_bits.modulosSB.webPaginas.JSFBeans.SBBeanModel.InfoMBAcao;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.B_Pagina;
 import com.super_bits.modulosSB.webPaginas.util.UtilSBWPJson;
-import groovy.json.JsonBuilder;
-import jakarta.json.Json;
-import jakarta.json.JsonObject;
 import jakarta.json.JsonObjectBuilder;
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpSession;
 import org.coletivojava.fw.api.tratamentoErros.FabErro;
+import com.super_bits.modulosSB.SBCore.modulos.view.formulario.ItfFormularioSimples;
 
 /**
  *
  * @author desenvolvedor
  */
-public interface ItfB_PaginaSimples {
-
-    /**
-     * Por padrão o titulo da pagina é a descrição da ação vinculada a pagina
-     *
-     * @return Titulo da Pagina
-     */
-    public String getTitulo();
-
-    /**
-     *
-     * Descreve a utilidade da pagina.
-     *
-     * Ajuda o usuário a encontrar esta pagina, e a entender o que ela faz
-     *
-     * @return descrição da pagina
-     */
-    public String getDescricao();
+public interface ItfB_PaginaSimples extends ItfFormularioSimples {
 
     /**
      *
@@ -59,44 +35,6 @@ public interface ItfB_PaginaSimples {
      * @return Xhtml principal da pagina
      */
     public String getRecursoXHTML();
-
-    /**
-     *
-     * A area de exibição selecionada é a área que será atualizada após executar
-     * uma ação atraves do
-     *
-     * @see ItfB_Pagina#executarAcaoSelecionada() , ou do
-     * executarAcaoSelecionada(Entidade)
-     *
-     * @return O id da area que será atualizada automaticamente
-     */
-    public String getIdAreaExbicaoAcaoSelecionada();
-
-    //public Conversation getConversa();
-    /**
-     *
-     * O xhtml da ação atual é o xhtml referente a ação do momento este xhtml é
-     * diferente do
-     *
-     * @see ItfB_Pagina#getRecursoXHTML() , normalmente este é um xhtml filho de
-     * uma ação de gestao (vinculada diretamente ao pg) e está vinculado a uma
-     * ação de formulario
-     *
-     *
-     * @return
-     */
-    public String getXhtmlAcaoAtual();
-
-    /**
-     *
-     * Identificação numérica da pagina, não precisa ser único (Criado para
-     * utilizar em menus)
-     *
-     * @return
-     */
-    public Long getId();
-
-    public void executarAcaoSelecionada();
 
     /**
      * Método criando antes de existir o Objeto ItfAcaoDoSistema, TODO:Criar
