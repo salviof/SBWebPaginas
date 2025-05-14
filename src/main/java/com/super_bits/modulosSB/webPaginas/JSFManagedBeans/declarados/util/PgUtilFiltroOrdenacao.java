@@ -31,7 +31,7 @@ public class PgUtilFiltroOrdenacao {
     @Inject
     private ItfPaginaAtual paginaAtual;
 
-    public boolean filtrarColuna(Object item, String pFiltro, Locale coluna) {
+    public boolean filtrarColuna(Object item, String pFiltro, Locale localPesquisa) {
         FabTipoPesquisaGenerica tipoPesquisa = FabTipoPesquisaGenerica.getTipoPesquisaByTermo(pFiltro);
         ItemSimilar itemSimilar = new ItemSimilar((ItfBeanSimples) item, UtilSBCoreStringComparador.normalizarTexto(pFiltro), tipoPesquisa);
         itemSimilar.getNota();
@@ -64,7 +64,11 @@ public class PgUtilFiltroOrdenacao {
         if (comparacao1 instanceof ItfBeanSimples) {
             ItfBeanSimples item = (ItfBeanSimples) comparacao1;
             ItfBeanSimples item2 = (ItfBeanSimples) comparacao2;
-            return item.getNome().compareTo(item2.getNome());
+            try {
+                return item.getNome().compareTo(item2.getNome());
+            } catch (Throwable t) {
+                System.out.println("Erro comparando " + item + item2);
+            }
         }
         if (comparacao1 instanceof Double) {
             Double num1 = new Double(comparacao1.toString());
