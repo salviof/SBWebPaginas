@@ -40,6 +40,17 @@ public class PgUtilFiltroOrdenacao {
     }
 
     public int ordernarPorColuna(Object comparacao1, Object comparacao2) {
+
+        if (comparacao1 == null && comparacao2 == null) {
+            return 0;
+        }
+        if (comparacao1 == null && comparacao2 != null) {
+            return -1;
+        }
+        if (comparacao1 != null && comparacao2 == null) {
+            return 1;
+        }
+
         if (comparacao1 instanceof PersistentBag) {
 
             Hibernate.initialize(comparacao1);
@@ -61,6 +72,7 @@ public class PgUtilFiltroOrdenacao {
                 return item.getNome().compareTo(item2.getNome());
             }
         }
+
         if (comparacao1 instanceof ItfBeanSimples) {
             ItfBeanSimples item = (ItfBeanSimples) comparacao1;
             ItfBeanSimples item2 = (ItfBeanSimples) comparacao2;
