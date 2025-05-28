@@ -973,7 +973,7 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
 
                     } else {
                         //Caso hajá possibilidade de alterar o URL
-                        Optional<ParametroURL> p = estrutura.getParametrosURL().stream().
+                        Optional<ItfParametroRequisicao> p = estrutura.getParametrosURL().stream().
                                 filter(pr -> pr.getTipoEntidade().equals(UtilSBCoreReflexaoObjeto.getClassExtraindoProxy(getBeanSelecionado().getClass().getSimpleName()))).findFirst();
                         if (p.isPresent()) {
                             // Se tem um parametro da entidade principal da página, então atualiza a URL
@@ -983,7 +983,7 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
                         } else {
 
                             ItfCampoInstanciado cpprvinculo = null;
-                            for (ParametroURL pr : estrutura.getParametrosURL()) {
+                            for (ItfParametroRequisicao pr : estrutura.getParametrosURL()) {
                                 Optional<ItfCampoInstanciado> cp = getBeanSelecionado().getCamposInstanciados().stream()
                                         .filter(cpinst -> cpinst.getTipoCampoSTR().equals(FabTipoAtributoObjeto.OBJETO_DE_UMA_LISTA.toString())
                                         && cpinst.getValor() != null

@@ -7,11 +7,13 @@ package com.super_bits.modulosSB.webPaginas.visualizacao;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.siteMap.MapaDeFormularios;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 import com.super_bits.modulosSB.SBCore.UtilGeral.MapaAcoesSistema;
+import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ItfAcaoDoSistema;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.permissoes.ItfAcaoFormulario;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.permissoes.ItfAcaoGerenciarEntidade;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.permissoes.token.ItfTokenAcessoDinamico;
 import com.super_bits.modulosSB.SBCore.modulos.fabrica.ItfFabricaAcoes;
 import com.super_bits.modulosSB.SBCore.modulos.view.ServicoVisualizacaoAbstrato;
+import com.super_bits.modulosSB.SBCore.modulos.view.telas.ItfEstruturaDeFormuario;
 import com.super_bits.modulosSB.webPaginas.ConfigGeral.SBWebPaginas;
 import com.super_bits.modulosSB.webPaginas.util.UtilSBWPServletTools;
 import com.super_bits.modulosSB.webPaginas.util.UtilSBWP_JSFTools;
@@ -172,6 +174,12 @@ public class ServicoVisuaslizacaoWebResponsivo extends ServicoVisualizacaoAbstra
     @Override
     public String getCaminhoWebAppDeveloper() {
         return SBWebPaginas.getCaminhoWebAppDeveloper();
+    }
+
+    @Override
+    public ItfEstruturaDeFormuario getEstruturaFormulario(ItfAcaoDoSistema pAcaop) {
+        ItfEstruturaDeFormuario estrutura = MapaDeFormularios.getEstruturaByNomeAcao(pAcaop.getAcaoDeGestaoEntidade().getNomeUnico());
+        return estrutura;
     }
 
 }

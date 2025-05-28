@@ -4,6 +4,7 @@
  */
 package com.super_bits.modulosSB.webPaginas.controller.servlets.servletWebPaginas;
 
+import com.super_bits.modulosSB.SBCore.modulos.view.telas.ItfEstruturaDeFormuario;
 import com.google.common.collect.Lists;
 import com.super_bits.modulos.SBAcessosModel.model.acoes.acaoDeEntidade.AcaoGestaoEntidade;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
@@ -13,6 +14,7 @@ import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreReflexaoObjeto;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringBuscaTrecho;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringFiltros;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringValidador;
+import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.ItfParametroRequisicao;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.ItfParametroRequisicaoInstanciado;
 import static com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.TIPO_PARTE_URL.ENTIDADE;
 import static com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.TIPO_PARTE_URL.OBJETO_COM_CONSTRUCTOR;
@@ -39,7 +41,7 @@ import org.coletivojava.fw.api.tratamentoErros.FabErro;
  *
  * @author salvioF
  */
-public class EstruturaDeFormulario {
+public class EstruturaDeFormulario implements ItfEstruturaDeFormuario {
 
     private final AcaoGestaoEntidade acaoGestaoVinculada;
     private final Map<String, ParametroURL> parametrosURL;
@@ -120,11 +122,13 @@ public class EstruturaDeFormulario {
 
     }
 
+    @Override
     public AcaoGestaoEntidade getAcaoGestaoVinculada() {
         return acaoGestaoVinculada;
     }
 
-    public List<ParametroURL> getParametrosURL() {
+    @Override
+    public List<ItfParametroRequisicao> getParametrosURL() {
         return Lists.newArrayList(parametrosURL.values());
     }
 
@@ -132,6 +136,7 @@ public class EstruturaDeFormulario {
         return quantidadeParametrosObrigatorios;
     }
 
+    @Override
     public String getUrlPadrao() {
 
         List<ItfParametroRequisicaoInstanciado> listaParametros = new ArrayList();

@@ -14,6 +14,7 @@ import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreListasObjeto;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreObjetoSB;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreReflexao;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreReflexaoObjeto;
+import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.ItfParametroRequisicao;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.ItfParametroRequisicaoInstanciado;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.ItfRespostaAcaoDoSistema;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ItfAcaoController;
@@ -1065,7 +1066,7 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
 
         try {
             EstruturaDeFormulario estruturaForm = MapaDeFormularios.getEstruturaByXHTMLDeGestao(acaoSelecionada.getAcaoDeGestaoEntidade().getXhtml());
-            List<ParametroURL> prs = estruturaForm.getParametrosURL();
+            List<ItfParametroRequisicao> prs = estruturaForm.getParametrosURL();
 
             if (prs.isEmpty()) {
                 UtilSBWP_JSFTools.vaParaPagina(MapaDeFormularios.getUrlFormulario(acaoSelecionada));
@@ -1077,7 +1078,7 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
 
                 if (getEntidadeSelecionada() != null) {
                     String classeEntidadeSel = getEntidadeSelecionada().getClass().getSimpleName();
-                    Optional<ParametroURL> pesquisaPrDesteTipo = prs.stream().filter(pr -> (pr.isUmParametroDeEntidade() && pr.getClasseObjetoValor().getSimpleName().equals(classeEntidadeSel))).findFirst();
+                    Optional<ItfParametroRequisicao> pesquisaPrDesteTipo = prs.stream().filter(pr -> (pr.isUmParametroDeEntidade() && pr.getClasseObjetoValor().getSimpleName().equals(classeEntidadeSel))).findFirst();
                     if (pesquisaPrDesteTipo.isPresent()) {
                         String urlComEntidade = MapaDeFormularios.getUrlFormulario(acaoSelecionada, getEntidadeSelecionada());
                         UtilSBWP_JSFTools.vaParaPagina(urlComEntidade);

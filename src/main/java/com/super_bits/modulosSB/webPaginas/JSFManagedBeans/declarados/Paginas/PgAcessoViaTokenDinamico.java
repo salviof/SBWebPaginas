@@ -19,6 +19,7 @@ import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.reflexao.
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.siteMap.MapaDeFormularios;
 import com.super_bits.modulos.SBAcessosModel.view.FabAcaoPaginasDoSistema;
 import com.super_bits.modulos.SBAcessosModel.view.InfoAcaoPaginaDoSistema;
+import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.ItfParametroRequisicao;
 import com.super_bits.modulosSB.webPaginas.controller.servlets.servletWebPaginas.EstruturaDeFormulario;
 import com.super_bits.modulosSB.webPaginas.controller.servletes.urls.parametrosURL.InfoParametroURL;
 import com.super_bits.modulosSB.webPaginas.controller.servletes.urls.parametrosURL.ParametroURL;
@@ -111,8 +112,8 @@ public class PgAcessoViaTokenDinamico extends MB_paginaCadastroEntidades<TokenAc
             }
 
             EstruturaDeFormulario estrutura = MapaDeFormularios.getEstruturaByNomeAcao(acao.getAcaoDeGestaoEntidade().getNomeUnico());
-            List<ParametroURL> parametros = estrutura.getParametrosURL();
-            Optional<ParametroURL> parametroToken = parametros.stream().filter(pr -> pr.getTipoEntidade().equals(TokenAcessoDinamico.class)).findFirst();
+            List<ItfParametroRequisicao> parametros = estrutura.getParametrosURL();
+            Optional<ItfParametroRequisicao> parametroToken = parametros.stream().filter(pr -> pr.getTipoEntidade().equals(TokenAcessoDinamico.class)).findFirst();
             String url = "";
             if (parametroToken.isPresent()) {
                 url = MapaDeFormularios.getUrlFormulario(acao.getComoFormulario(), entidade, tokenDinamico);
