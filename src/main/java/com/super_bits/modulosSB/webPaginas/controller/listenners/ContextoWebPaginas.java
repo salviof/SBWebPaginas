@@ -8,6 +8,7 @@ import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreReflexao;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.ErroChamadaController;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.ItfRespostaAcaoDoSistema;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ItfAcaoControllerAutoExecucao;
+import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ItfAcaoDoSistema;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.acoesAutomatizadas.FabTipoAutoExecucaoAcao;
 import com.super_bits.modulosSB.webPaginas.ConfigGeral.ConfiguradorCoreDeProjetoWebWarAbstrato;
 import com.super_bits.modulosSB.webPaginas.ConfigGeral.ItfInicioFimAppWP;
@@ -47,9 +48,14 @@ public class ContextoWebPaginas implements ServletContextListener {
         System.out.println("Iniciando contexto");
         try {
 
+            ItfInicioFimAppWP inicio = null;
             ServiceLoader<ItfInicioFimAppWP> services = ServiceLoader.load(ItfInicioFimAppWP.class);
-
-            ItfInicioFimAppWP inicio = services.iterator().next();
+            try {
+                inicio = services.iterator().next();
+            } catch (Throwable t) {
+                SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "Falha encontrando inicioa do contexto verifique"
+                        + "no resources do ModelRegras  a pasta  META-INF/services ", t);
+            }
             //   inicio.inicio();
 
             if (inicio == null) {

@@ -77,7 +77,7 @@ public class PgAutenticacaoOauth extends MB_paginaCadastroEntidades<UsuarioSB> {
 
         if (!UtilSBCoreStringValidador.isNuloOuEmbranco(hashCliente) && !UtilSBCoreStringValidador.isNuloOuEmbranco(scopoUsuario)) {
             List<ItfSistemaERP> sistemaEncontrado = (List) UtilSBPersistencia.gerarConsultaDeEntidade(MapaObjetosProjetoAtual.getClasseDoObjetoByNome("SistemaERPConfiavel"), getEMPagina())
-                    .addcondicaoCampoIgualA("hashChavePublica", hashCliente).resultadoRegistros();
+                    .addcondicaoCampoIgualA("hashChavePublica", hashCliente).gerarResultados();
             if (!sistemaEncontrado.isEmpty()) {
                 sistemaCliente = sistemaEncontrado.get(0);
             }
