@@ -98,7 +98,7 @@ public abstract class UtilSBWP_JSFTools {
 
     public final static String FORMULARIO_OAUTH_LOGIN = FabAcaoPaginasDoSistema.FORMULARIO_OAUTH_LOGIN;
 
-    public final static String FORMULARIO_API_RESTFUL_CONTROLLER = FabAcaoPaginasDoSistema.FORMULARIO_API_RESTFUL_CONTROLLER;
+    public final static String FORMULARIO_API_RESTFUL_CONTROLLER = FabAcaoPaginasDoSistema.FORMULARIO_API_RESTFUL;
 
     public final static String FORMULARIO_ACESSO_NEGADO_SUB_FORM = FabAcaoPaginasDoSistema.FORMULARIO_ACESSO_NEGADO_SUB_FORM;
 
