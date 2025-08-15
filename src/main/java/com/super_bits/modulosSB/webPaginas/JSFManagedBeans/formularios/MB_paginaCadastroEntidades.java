@@ -541,11 +541,10 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
     @Override
     public T getEntidadeSelecionada() {
         try {
-            if (entidadeSelecionada != null && entidadeSelecionada.getId() != null && entidadeSelecionada.getId() > 0) {
+            //  if (entidadeSelecionada != null && entidadeSelecionada.getId() != null && entidadeSelecionada.getId() > 0) {
 
-                entidadeSelecionada = UtilSBPersistencia.loadEntidade(entidadeSelecionada, getEMPagina());
-            }
-
+            //    entidadeSelecionada = UtilSBPersistencia.loadEntidade(entidadeSelecionada, getEMPagina());
+            // }
             return entidadeSelecionada;
         } catch (Throwable t) {
 
@@ -951,7 +950,7 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
                         }//se a nova entidade  a ser selecionada(pEntidade) não for um novo registro (com id 0)
 
                     }// se a nova entidade  a ser selecionada(pEntidade) for diferente de nulo
-
+                    break;
                 default:
                     getPaginaDoDominio().setEntidadeSelecionada(pEnTidade);
             }
