@@ -947,8 +947,10 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
 
                             }// se a entidadeSelecionada anteriormente for nula, ou se a nova entidade for diferente dela
 
-                        }//se a nova entidade  a ser selecionada(pEntidade) não for um novo registro (com id 0)
-
+                        } else {
+                            //se a nova entidade  a ser selecionada(pEntidade) não for um novo registro (com id 0)
+                            setEntidadeSelecionada(pEnTidade);
+                        }
                     }// se a nova entidade  a ser selecionada(pEntidade) for diferente de nulo
                     break;
                 default:
