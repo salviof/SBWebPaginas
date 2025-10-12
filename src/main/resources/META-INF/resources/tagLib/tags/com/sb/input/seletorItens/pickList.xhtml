@@ -11,13 +11,13 @@
 
         <ui:define name="input">
 
-            <h:panelGroup styleClass="Container12" layout="block" rendered="#{desabilitarEdicao}">
-                <p:dataList value="#{registro.valor}"
 
-                            var="item"   emptyMessage="nenhum selecionado" styleClass="inputItensDataListSomenteLeituraResponsivo">
-                    #{item.getCampoInstanciadoByNomeOuAnotacao('NOME').valor}
-                </p:dataList>
-            </h:panelGroup>
+            <p:dataList value="#{registro.valor}"
+                        rendered="#{desabilitarEdicao}"
+                        var="item"   emptyMessage="nenhum selecionado" styleClass="inputItensDataListSomenteLeituraResponsivo Container12">
+                #{item.getCampoInstanciadoByNomeOuAnotacao('NOME').valor}
+            </p:dataList>
+
 
 
 

@@ -23,6 +23,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -545,6 +546,44 @@ public class UtilSBWPServletTools {
             SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "Erro configurando parametros da pagina pela URL" + pParametros, t);
 
         }
+    }
+
+    public static void logRequest(HttpServletRequest request) {
+        System.out.println("========== NOVA REQUISIÇÃO ==========");
+
+        // Informações básicas
+        System.out.println("Método HTTP: " + request.getMethod());
+        System.out.println("URL: " + request.getRequestURL().toString());
+        System.out.println("URI: " + request.getRequestURI());
+        System.out.println("Query String: " + request.getQueryString());
+        System.out.println("Remote Addr: " + request.getRemoteAddr());
+        System.out.println("Remote Host: " + request.getRemoteHost());
+        System.out.println("User-Agent: " + request.getHeader("User-Agent"));
+
+        // Cabeçalhos
+        System.out.println("\n--- Cabeçalhos ---");
+        Enumeration<String> headerNames = request.getHeaderNames();
+        while (headerNames.hasMoreElements()) {
+            String header = headerNames.nextElement();
+            System.out.println(header + ": " + request.getHeader(header));
+        }
+
+        // Parâmetros
+        System.out.println("\n--- Parâmetros ---");
+        for (Map.Entry<String, String[]> entry : request.getParameterMap().entrySet()) {
+            String paramName = entry.getKey();
+            String[] values = entry.getValue();
+            System.out.print(paramName + ": ");
+            for (int i = 0; i < values.length; i++) {
+                System.out.print(values[i]);
+                if (i < values.length - 1) {
+                    System.out.print(", ");
+                }
+            }
+            System.out.println();
+        }
+
+        System.out.println("=====================================");
     }
 
 }

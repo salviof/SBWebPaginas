@@ -13,14 +13,15 @@
 
             <p:outputLabel value="#{valor}" rendered="#{desabilitarEdicao}" />
 
-            <p:inputText   class=" campoResponsivo  TexAlCenter #{componente.classeCSS}"
+            <p:inputText
+                class=" campoResponsivo  TexAlCenter #{componente.classeCSS}"
 
-                           required="#{obrigatorio}"
-                           disabled="#{desabilitarEdicao}"
-                           rendered="#{!desabilitarEdicao}"
-                           value="#{valor}"
-                           autocomplete="false"
-                           >
+                required="#{obrigatorio}"
+                disabled="#{desabilitarEdicao}"
+                rendered="#{!desabilitarEdicao}"
+                value="#{valor}"
+                autocomplete="false"
+                >
                 <f:passThroughAttribute name="caminhoCampo" value="#{registro.nomeCompostoIdentificador}" />
                 <f:passThroughAttribute name="dominio" value="#{registro.nomeClasseOrigemAtributo}" />
                 <f:passThroughAttribute name="campoInstanciado" value="#{registro}" />

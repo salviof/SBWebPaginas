@@ -17,6 +17,7 @@ import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.MB_pagina
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.reflexao.anotacoes.InfoPagina;
 import com.super_bits.modulos.SBAcessosModel.view.FabAcaoPaginasDoSistema;
 import com.super_bits.modulos.SBAcessosModel.view.InfoAcaoPaginaDoSistema;
+import com.super_bits.modulosSB.SBCore.modulos.Controller.ConfigPermissaoSBCoreAbstrato;
 import com.super_bits.modulosSB.webPaginas.controller.sessao.ControleDeSessaoWeb;
 import com.super_bits.modulosSB.webPaginas.util.UtilSBWPServletTools;
 import com.super_bits.modulosSB.webPaginas.util.UtilSBWP_JSFTools;
@@ -63,6 +64,11 @@ public class PgAutenticacaoOauth extends MB_paginaCadastroEntidades<UsuarioSB> {
         }
     }
 
+    public void esqueciASenha() {
+        controleDeSessao.setUsuarioLogar(usuarioLogin);
+        controleDeSessao.esqueceuaSenha();
+    }
+
     @PostConstruct()
     public void inicio() {
         urlRequisicao = UtilSBWPServletTools.getUrlDigitada();
@@ -72,21 +78,24 @@ public class PgAutenticacaoOauth extends MB_paginaCadastroEntidades<UsuarioSB> {
         requisicao.getSession().getAttribute("dataTete");
         String hashCliente = requisicao.getParameter("hashChavePublicaAplicacaoSolicitante");
         String scopoUsuario = requisicao.getParameter("scopo");
-        usuarioLogin = scopoUsuario;
-        ItfUsuario usuarioSolicitante = SBCore.getServicoPermissao().getUsuarioByEmail(scopoUsuario);
 
-        if (!UtilSBCoreStringValidador.isNuloOuEmbranco(hashCliente) && !UtilSBCoreStringValidador.isNuloOuEmbranco(scopoUsuario)) {
-            List<ItfSistemaERP> sistemaEncontrado = (List) UtilSBPersistencia.gerarConsultaDeEntidade(MapaObjetosProjetoAtual.getClasseDoObjetoByNome("SistemaERPConfiavel"), getEMPagina())
-                    .addcondicaoCampoIgualA("hashChavePublica", hashCliente).gerarResultados();
-            if (!sistemaEncontrado.isEmpty()) {
-                sistemaCliente = sistemaEncontrado.get(0);
-            }
+        if (scopoUsuario.contains("@")) {
+            usuarioLogin = scopoUsuario;
+            ItfUsuario usuarioSolicitante = SBCore.getServicoPermissao().getUsuarioByEmail(scopoUsuario);
             acoesEscopoUsuario = new ArrayList<>();
             MapaAcoesSistema.getListaTodasGestao().stream()
                     .filter(ac -> (ac.getModulo().equals(usuarioSolicitante.getGrupo().getModuloPrincipal())
                     && SBCore.getServicoPermissao().isAcaoPermitidaUsuarioLogado(ac)))
                     .forEach(acoesEscopoUsuario::add);
             controleDeSessao.setUsuarioLogar(scopoUsuario);
+        }
+        if (!UtilSBCoreStringValidador.isNuloOuEmbranco(hashCliente) && !UtilSBCoreStringValidador.isNuloOuEmbranco(scopoUsuario)) {
+            List<ItfSistemaERP> sistemaEncontrado = (List) UtilSBPersistencia.gerarConsultaDeEntidade(MapaObjetosProjetoAtual.getClasseDoObjetoByNome("SistemaERPConfiavel"), getEMPagina())
+                    .addcondicaoCampoIgualA("hashChavePublica", hashCliente).gerarResultados();
+            if (!sistemaEncontrado.isEmpty()) {
+                sistemaCliente = sistemaEncontrado.get(0);
+            }
+
             permitidoAutenticar = true;
         }
 
@@ -118,6 +127,10 @@ public class PgAutenticacaoOauth extends MB_paginaCadastroEntidades<UsuarioSB> {
 
     public boolean isUsuarioAutenticado() {
         return usuarioAutenticado;
+    }
+
+    public void setUsuarioLogin(String usuarioLogin) {
+        this.usuarioLogin = usuarioLogin;
     }
 
 }

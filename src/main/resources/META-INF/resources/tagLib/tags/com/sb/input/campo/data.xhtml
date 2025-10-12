@@ -27,20 +27,16 @@
                 requiredMessage="O campo #{label} não foi informado! "
                 disabled="#{desabilitarEdicao}"
                 >
-
-
                 <f:passThroughAttribute name="caminhoCampo" value="#{registro.nomeCompostoIdentificador}" />
                 <f:passThroughAttribute name="dominio" value="#{registro.nomeClasseOrigemAtributo}" />
                 <f:passThroughAttribute name="campoInstanciado" value="#{registro}" />
                 <p:clientValidator/>
-
                 <c:if test="#{possuiMetodoOnChange}">
                     <p:ajax rendered="#{possuiMetodoOnChange}"
                             global="true"
                             event="dateSelect"
                             listener="#{prMetodo}"/>
                 </c:if>
-
                 <c:if test="#{possuiIDOnChange}" >
                     <p:ajax
                         rendered="#{possuiIDOnChange}"
@@ -63,9 +59,7 @@
                         />
 
                 </c:if>
-
             </p:calendar>
-
         </ui:define>
     </ui:decorate>
 </ui:composition>

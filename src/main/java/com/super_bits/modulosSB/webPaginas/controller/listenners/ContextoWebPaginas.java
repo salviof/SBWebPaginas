@@ -18,8 +18,12 @@ import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.reflexao.
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.siteMap.MapaDeFormularios;
 import java.util.List;
 import java.util.ServiceLoader;
+import javax.faces.application.ProjectStage;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
+import javax.servlet.SessionCookieConfig;
+import javax.servlet.http.HttpSessionListener;
 import org.coletivojava.fw.api.tratamentoErros.FabErro;
 
 /*
@@ -47,6 +51,9 @@ public class ContextoWebPaginas implements ServletContextListener {
     public void contextInitialized(ServletContextEvent sce) {
         System.out.println("Iniciando contexto");
         try {
+            if (this instanceof HttpSessionListener) {
+                System.out.println("");
+            }
 
             ItfInicioFimAppWP inicio = null;
             ServiceLoader<ItfInicioFimAppWP> services = ServiceLoader.load(ItfInicioFimAppWP.class);
@@ -69,6 +76,13 @@ public class ContextoWebPaginas implements ServletContextListener {
             //   String webDir = this.getClass().getClassLoader().getResource("com/company/project/mywebdir").toExternalForm();
 
             inicio.inicio();
+
+            ServletContext context = sce.getServletContext();
+            if (SBCore.isEmModoProducao()) {
+                context.setInitParameter("javax.faces.PROJECT_STAGE", ProjectStage.Production.toString());
+            } else {
+                context.setInitParameter("javax.faces.PROJECT_STAGE", ProjectStage.Development.toString());
+            }
             buildSisteMap();
             System.out.println("Construindo SiteMap");
 
@@ -108,6 +122,9 @@ public class ContextoWebPaginas implements ServletContextListener {
             if (!SBCore.isIgnorarPermissoes()) {
                 UtilSBControllerAcessosModel.criarPermissoesDeAcao(false);
             }
+
+            SessionCookieConfig sessionConfig = sce.getServletContext().getSessionCookieConfig();
+            inicio.definirConfiguracoesDeCookie(sessionConfig);
 
         } catch (Throwable ex) {
             SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "Erro carregando Classe de inicio e fim de contexto", ex);

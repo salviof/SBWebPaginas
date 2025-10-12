@@ -8,7 +8,6 @@
                      class="InputSBSuperior campoSB"
                      rowClasses="#{layoutsComponenteSB.layoutCampo.superior.getEstiloLinha(desabilitarEdicao)}"
                      >
-
             <p:outputLabel
                 value="#{label}"
                 for="#{pgUtil.getNomeIdComponenteInput(component)}"
@@ -21,16 +20,11 @@
                     value="#{registro.descricao}"
                     rendered="#{registro.temDescricao}"
                     />
-
             </p:outputLabel>
-
             <ui:insert name="input" />
-
             <p:message
                 for="#{pgUtil.getNomeIdComponenteInput(component)}"
                 />
-
-
         </h:panelGrid>
     </h:body>
 </ui:composition>

@@ -44,6 +44,7 @@ import org.jboss.weld.context.RequestContext;
 import org.jboss.weld.context.http.Http;
 import org.jboss.weld.context.http.HttpRequestContextImpl;
 import org.primefaces.event.FileUploadEvent;
+import com.super_bits.modulosSB.webPaginas.controller.listenners.ItfDefinicaoUrlHostDeSessao;
 
 /**
  *
@@ -63,6 +64,9 @@ public class SessaoAtualSBWP extends SessaoOffline implements ItfSessao, Seriali
     private UserAgent agente;
 
     @Inject
+    private ItfDefinicaoUrlHostDeSessao definicaoDeUrl;
+
+    @Inject
     @Http
     private RequestContext requestContext;
 
@@ -71,6 +75,10 @@ public class SessaoAtualSBWP extends SessaoOffline implements ItfSessao, Seriali
     }
 
     public String getUrlHostDaSessao() {
+        String novourl = definicaoDeUrl.gerarUrlDeAcesso(this);
+        if (novourl != null) {
+            urlHostDaSessao = novourl;
+        }
         return urlHostDaSessao;
     }
 
@@ -121,6 +129,7 @@ public class SessaoAtualSBWP extends SessaoOffline implements ItfSessao, Seriali
             if (idSessao == null) {
                 idSessao = super.getIdSessao();
             }
+
         } catch (MalformedURLException ex) {
             Logger.getLogger(SessaoAtualSBWP.class.getName()).log(Level.SEVERE, null, ex);
         }

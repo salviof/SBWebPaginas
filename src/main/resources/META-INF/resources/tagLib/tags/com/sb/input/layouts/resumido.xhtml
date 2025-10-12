@@ -10,9 +10,7 @@
         <ui:insert name="input" />
         <p:watermark value="#{label}" for="#{pgUtil.getNomeIdComponenteInput(component)}" />
         <p:message for="#{pgUtil.getNomeIdComponenteInput(component)}"/>
-        <p:panel
-            style="border: none; position: absolute;background: none;  top: -28px;right: 0px;"
-            >
+        <p:panel style="border: none; position: absolute;background: none;  top: -28px;right: 0px;" >
             <i class="#{registro.temDescricao?'fa fa-question-circle fa-1x':''}"></i>
             <p:tooltip  rendered="#{registro.temDescricao}"
                         for="@parent"

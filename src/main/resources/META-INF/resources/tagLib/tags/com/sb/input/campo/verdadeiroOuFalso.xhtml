@@ -9,13 +9,15 @@
     <ui:decorate template="#{layout.xhtmlJsfCaminhoRelativo}">
         <ui:define name="input">
 
-            <h:panelGroup rendered="#{desabilitarEdicao}">
-                <h:panelGroup rendered="#{valor}" >
+            <h:panelGroup id="vf" rendered="#{desabilitarEdicao}" styleClass="verdadeirFalsoSomenteLeitura campoResponsivo">
+                <h:panelGroup rendered="#{registro.valorComoBoolean}" styleClass="vf-somente-leitura-verdadeiro" >
                     <i class="#{registro.comoCampoVerdadeiroOuFalso.iconePositivo}  fa-2x" ></i>
                 </h:panelGroup>
 
-                <h:panelGroup rendered="#{!valor}" >
-                    <i class="#{registro.comoCampoVerdadeiroOuFalso.iconeNegativo}   fa-2x" ></i>
+                <h:panelGroup rendered="#{!registro.valorComoBoolean}" styleClass="vf-somente-leitura-false" >
+                    <i class="#{registro.comoCampoVerdadeiroOuFalso.iconeNegativo}   fa-2x" >
+
+                    </i>
                 </h:panelGroup>
             </h:panelGroup>
 

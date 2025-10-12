@@ -26,6 +26,8 @@
         <ui:param name="valorMaximo" value="#{registro.valorMaximo}" />
         <ui:param name="valorMinimo" value="#{registro.valorMinimo}" />
         <ui:param name="mascara" value="#{registro.mascaraJqueryMode}" rendered="#{registro.temMascara}"/>
+        <ui:param name="desabilitarEdicao" value="#{desabilitarEdicao}" />
+        <ui:param name="atualizarGrupoAoAlterar" value="#{atualizarGrupoAoAlterar}"/>
         <ui:param name="atualizarFormOnChange" value="#{atualizarFormOnChange}"/>
         <ui:param name="idAtualizarOnChange" rendered="#{possuiIDOnChange}"
                   value="#{pgUtil.gerarCaminhoCompletoIDRelativoSBInput(idAtualizarOnChange,component)}"
