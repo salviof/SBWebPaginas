@@ -75,6 +75,9 @@ public class SessaoAtualSBWP extends SessaoOffline implements ItfSessao, Seriali
     }
 
     public String getUrlHostDaSessao() {
+        if (SBCore.isEmModoDesenvolvimento()) {
+            return "http://localhost:8080";
+        }
         String novourl = definicaoDeUrl.gerarUrlDeAcesso(this);
         if (novourl != null) {
             urlHostDaSessao = novourl;
