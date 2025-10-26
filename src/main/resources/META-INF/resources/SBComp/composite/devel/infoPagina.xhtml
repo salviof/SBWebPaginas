@@ -19,7 +19,7 @@
 
         <h:form>
             <p:hotkey bind="shift+r" actionListener="#{pgUtil.exibirModalRequisito()}"/>
-            <p:hotkey bind="shift+i"  actionListener="#{pgUtil.exibirModalInfopagina()}"/>
+            <p:hotkey bind="shift+i"   actionListener="#{pgUtil.exibirModalInfopagina()}"/>
             <p:hotkey bind="shift+p"  actionListener="#{pgUtil.preencherAleatorioBeanSelecionado()}"/>
             <SBAcaoNav:preencherFormulario />
         </h:form>
@@ -71,7 +71,7 @@
                                 onexception="PF('exceptionDialog').show();" />
 
         <p:dialog id="exceptionDialog" header="Ouve lançamento de exceção não tratada: '#{pfExceptionHandler.type}' !" widgetVar="exceptionDialog"
-
+                  dynamic="true"
                   height="500px">
             <h:panelGroup rendered="#{infoWebApp.emModoDesenvolvimentoHomologacao}" >
                 <h:outputText value="Mensagem: #{pfExceptionHandler.message}" /> <br/>

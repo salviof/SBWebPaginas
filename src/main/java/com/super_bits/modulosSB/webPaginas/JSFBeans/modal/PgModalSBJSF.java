@@ -6,10 +6,11 @@ package com.super_bits.modulosSB.webPaginas.JSFBeans.modal;
 
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.interfaces.ItfB_PaginaComEntityManager;
 import java.io.Serializable;
-import javax.annotation.PostConstruct;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -27,6 +28,11 @@ public class PgModalSBJSF extends PgModalCampoSelecionadoAbstrato implements Ser
     @Override
     public void recarregarEntidadeSelecionada() {
         getPaginaVinculada().recarregarEntidadeSelecionada();
+    }
+
+    public String getSessionId() {
+        return ((HttpSession) FacesContext.getCurrentInstance()
+                .getExternalContext().getSession(false)).getId();
     }
 
 }

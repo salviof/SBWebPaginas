@@ -14,6 +14,7 @@
 
     <h:body>
         <h:form>
+            <p:commandButton update="@form" />
             <p:accordionPanel >
 
                 <p:tab title="Informações do Formulário"   >
@@ -166,6 +167,57 @@
                         </p:panel>
 
                     </p:fieldset>
+
+                </p:tab>
+                <p:tab title="Facecontext" >
+                    <h:panelGroup layout="block" styleClass="faces-info" style="border:1px solid #ccc; border-radius:8px; padding:12px; margin:8px 0; font-family:monospace;">
+                        <h3 style="margin-top:0; color:#444;">#{cc.attrs.titulo}</h3>
+
+                        <h:panelGrid columns="2" columnClasses="label,value" cellpadding="4" cellspacing="0" width="100%">
+                            <h:outputText value="View ID:"/>
+                            <h:outputText value="#{facesContext.viewRoot.viewId}" />
+
+                            <h:outputText value="Current Phase:"/>
+                            <h:outputText value="#{facesContext.currentPhaseId}" />
+
+                            <h:outputText value="Response Complete:"/>
+                            <h:outputText value="#{facesContext.responseComplete}" />
+
+                            <h:outputText value="Request Context Path:"/>
+                            <h:outputText value="#{facesContext.externalContext.requestContextPath}" />
+
+                            <h:outputText value="Request Servlet Path:"/>
+                            <h:outputText value="#{facesContext.externalContext.requestServletPath}" />
+
+                            <h:outputText value="Request Path Info:"/>
+                            <h:outputText value="#{facesContext.externalContext.requestPathInfo}" />
+
+                            <h:outputText value="Request Parameter Map:"/>
+                            <h:outputText value="#{facesContext.externalContext.requestParameterMap}" />
+
+                            <h:outputText value="Session ID:"/>
+                            <h:outputText value="#{pgModalSBJSF.sessionId}" />
+
+                            <h:outputText value="Session Map (tamanho):"/>
+                            <h:outputText value="#{facesContext.externalContext.sessionMap.size()}" />
+
+                            <h:outputText value="Application Map (tamanho):"/>
+                            <h:outputText value="#{facesContext.externalContext.applicationMap.size()}" />
+
+                            <h:outputText value="Usuário Logado:"/>
+                            <h:outputText value="#{facesContext.externalContext.remoteUser}" />
+
+                            <h:outputText value="Mensagens FacesContext:"/>
+                            <h:outputText value="#{facesContext.messageList.size()}" />
+                        </h:panelGrid>
+
+                        <h:panelGroup layout="block" style="margin-top:10px;">
+                            <h:outputText value="Parâmetros da requisição:" style="font-weight:bold;" />
+                            <ui:repeat value="#{facesContext.externalContext.requestParameterMap.entrySet().toArray()}" var="param">
+                                <div>#{param.key} = #{param.value}</div>
+                            </ui:repeat>
+                        </h:panelGroup>
+                    </h:panelGroup>
 
                 </p:tab>
             </p:accordionPanel>

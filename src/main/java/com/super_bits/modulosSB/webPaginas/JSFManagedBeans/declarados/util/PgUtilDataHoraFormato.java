@@ -5,6 +5,7 @@
 package com.super_bits.modulosSB.webPaginas.JSFManagedBeans.declarados.util;
 
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
+import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreDataHora;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -154,6 +155,34 @@ public class PgUtilDataHoraFormato implements Serializable {
         } catch (Throwable t) {
             SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "Erro formantando data", t);
             return null;
+        }
+    }
+
+    public String getDataHoraRelativa(Date pData) {
+        Date hoje = new Date();
+        String texto = "Sem data definida";
+
+        SimpleDateFormat formatacaoHorario = new SimpleDateFormat("HH:mm");
+        String horario = formatacaoHorario.format(pData);
+
+        if (UtilSBCoreDataHora.isDiaIgual(hoje, pData)) {
+            texto = "Hoje às " + horario;
+            return texto;
+        } else if (UtilSBCoreDataHora.isDiaIgual(pData, UtilSBCoreDataHora.incrementaDias(hoje, 1))) {
+            texto = "Amanhã às " + horario;
+            return texto;
+        } else {
+            long dias = UtilSBCoreDataHora.intervaloTempoDias(hoje, pData);
+            String diaDaSemana = UtilSBCoreDataHora.getDiaDaSemana(pData);
+            if (dias < 6) {
+                texto = diaDaSemana + " às " + horario;
+                return texto;
+            } else {
+                Locale local = new Locale("pt", "BR");
+                SimpleDateFormat formatacaoFaraway = new SimpleDateFormat("dd'/'MM, EE", local);
+                texto = formatacaoFaraway.format(pData) + ", às " + horario;
+                return texto;
+            }
         }
     }
 
