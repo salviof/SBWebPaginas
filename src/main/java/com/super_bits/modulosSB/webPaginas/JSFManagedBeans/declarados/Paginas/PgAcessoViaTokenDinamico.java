@@ -13,7 +13,6 @@ import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.TIPO_PARTE_
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ItfAcaoDoSistema;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.MapaObjetosProjetoAtual;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfBeanSimples;
-import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.MB_PaginaConversation;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.MB_paginaCadastroEntidades;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.reflexao.anotacoes.InfoPagina;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.siteMap.MapaDeFormularios;
@@ -25,7 +24,7 @@ import com.super_bits.modulosSB.webPaginas.controller.servletes.urls.parametrosU
 import com.super_bits.modulosSB.webPaginas.controller.servletes.urls.parametrosURL.ParametroURL;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.qualificadoresCDI.sessao.QlSessaoFacesContext;
 import com.super_bits.modulosSB.webPaginas.controller.sessao.SessaoAtualSBWP;
-import com.super_bits.modulosSB.webPaginas.util.UtilSBWP_JSFTools;
+import com.super_bits.modulosSB.webPaginas.util.UtilSBWPServletTools;
 import java.util.List;
 import java.util.Optional;
 import javax.annotation.PostConstruct;
@@ -74,9 +73,13 @@ public class PgAcessoViaTokenDinamico extends MB_paginaCadastroEntidades<TokenAc
     public void inicio() {
         tokenDinamico = getTokenDinamico();
 
-        if (getParametroInstanciado(prCodigoDeAcesso).isValorDoParametroFoiConfigurado()) {
-            System.out.println("Vai!");
+        String nome = (String) UtilSBWPServletTools.getRequestParametro("nome");
+        String telefone = (String) UtilSBWPServletTools.getRequestParametro("telefone");
+        if (nome != null && telefone != null) {
+            UtilSBWPServletTools.cookieAdicionar("LEAD_NOME", nome, 0);
+            UtilSBWPServletTools.cookieAdicionar("LEAD_TELEFONE", telefone, 0);
         }
+
         if (tokenDinamico == null) {
 
             acessonegado();
@@ -103,6 +106,7 @@ public class PgAcessoViaTokenDinamico extends MB_paginaCadastroEntidades<TokenAc
                 if (!usuarios.isEmpty()) {
                     sessaoAtual.setUsuario(usuarios.get(0));
                 } else {
+
                     if (sessaoAtual.isIdentificado()) {
                         sessaoAtual.encerrarSessao(false);
                     }

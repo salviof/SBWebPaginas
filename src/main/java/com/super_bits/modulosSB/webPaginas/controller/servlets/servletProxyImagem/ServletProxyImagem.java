@@ -8,11 +8,11 @@ import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 import com.super_bits.modulosSB.SBCore.modulos.ManipulaArquivo.FabTipoArquivoConhecido;
 import com.super_bits.modulosSB.webPaginas.ConfigGeral.SBWebPaginas;
 import com.super_bits.modulosSB.webPaginas.controller.servlets.ServletArquivosSBWPGenerico;
-import com.super_bits.modulosSB.webPaginas.controller.servlets.servletArquivoDeEntidade.FabUrlArquivoDeEntidade;
 import com.super_bits.modulosSB.webPaginas.controller.servletes.urls.UrlInterpretada;
 import com.super_bits.modulosSB.webPaginas.controller.servletes.util.UtilFabUrlServlet;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.qualificadoresCDI.sessao.QlSessaoFacesContext;
 import com.super_bits.modulosSB.webPaginas.controller.sessao.SessaoAtualSBWP;
+import com.super_bits.modulosSB.webPaginas.util.UtilSBWPServletTools;
 import com.super_bits.modulosSB.webPaginas.util.UtilSBWP_JSFTools;
 import java.io.IOException;
 import java.io.Serializable;
@@ -40,8 +40,10 @@ public class ServletProxyImagem extends ServletArquivosSBWPGenerico implements S
     @Override
     protected void doGet(HttpServletRequest requisicao, HttpServletResponse resp) throws ServletException, IOException {
         UrlInterpretada parametrosDeUrl;
-        if (!sessaoAtual.isIdentificado()) {
-            throw new ServerException("Acesso negado");
+        if (UtilSBWPServletTools.cookieGet(requisicao, "LEAD_TELEFONE") == null) {
+            if (!sessaoAtual.isIdentificado()) {
+                throw new ServerException("Acesso negado");
+            }
         }
         try {
 

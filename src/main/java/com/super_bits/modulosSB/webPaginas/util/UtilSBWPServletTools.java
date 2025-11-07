@@ -7,7 +7,6 @@ package com.super_bits.modulosSB.webPaginas.util;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringFiltros;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.ItfParametroRequisicaoInstanciado;
-import com.super_bits.modulosSB.SBCore.modulos.erp.ErroJsonInterpredador;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfBeanSimples;
 import com.super_bits.modulosSB.webPaginas.ConfigGeral.SBWebPaginas;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.MB_PaginaAtual;
@@ -36,8 +35,9 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
 import javax.servlet.ServletContext;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpServletResponse;
 import org.coletivojava.fw.api.tratamentoErros.FabErro;
 
 /**
@@ -82,6 +82,50 @@ public class UtilSBWPServletTools {
 
             return null;
         }
+    }
+
+    public static Cookie cookieGet(HttpServletRequest pRequisicao, String nome) {
+        Cookie[] cookies = pRequisicao.getCookies();
+        if (cookies != null) {
+            for (Cookie c : cookies) {
+                if (c.getName().equals(nome)) {
+                    return c;
+                }
+            }
+        }
+        return null;
+    }
+
+    public static Cookie cookieGet(String nome) {
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        if (facesContext == null) {
+            return null;
+        }
+        HttpServletRequest request
+                = (HttpServletRequest) facesContext.getExternalContext().getRequest();
+
+        return cookieGet(request, nome);
+    }
+
+    public static String cookieLerValor(String nome) {
+        Cookie c = cookieGet(nome);
+        return c != null ? c.getValue() : null;
+    }
+
+    public static void cookieAdicionar(String nome, String valor, int tempoDeVidaSegundos) {
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        HttpServletResponse response
+                = (HttpServletResponse) facesContext.getExternalContext().getResponse();
+        if (tempoDeVidaSegundos <= 0) {
+            tempoDeVidaSegundos = 34560000;//40 dias (MAximo do crhome)
+        }
+        Cookie cookie = new Cookie(nome, valor);
+        cookie.setMaxAge(tempoDeVidaSegundos);  // em segundos (ex: 3600 = 1h)
+        cookie.setPath("/");                     // define o escopo (raiz do app)
+        cookie.setHttpOnly(true);                // impede acesso via JS (segurança)
+        cookie.setSecure(false);                 // true se for HTTPS
+
+        response.addCookie(cookie);
     }
 
     public static Object getObjetoByInstanciadoViewScopedByExpressao(String pExpressao, Class pClasse) throws ErroGenericoProcessandoRespostaJson {
@@ -373,13 +417,13 @@ public class UtilSBWPServletTools {
      * Procura um parametro que foi enviado em uma requisição e retorna seu
      * valor (Utiliza facesContext para obter a requisição)
      *
-     * @param pNomeBean Nome do parametro
+     * @param pNomeParametro Nome do parametro
      * @return valor do parametro ou nulo se parametro não encontrado
      */
-    public static Object getRequestParametro(String pNomeBean) {
+    public static Object getRequestParametro(String pNomeParametro) {
 
         try {
-            return getRequestParametro(pNomeBean, true);
+            return getRequestParametro(pNomeParametro, true);
         } catch (ErroSBGenericoWeb ex) {
             Logger.getLogger(UtilSBWPServletTools.class.getName()).log(Level.SEVERE, null, ex);
         }
