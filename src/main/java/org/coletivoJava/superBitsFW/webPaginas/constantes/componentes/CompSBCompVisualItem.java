@@ -6,15 +6,15 @@ import java.io.Serializable;
 import com.super_bits.modulosSB.SBCore.modulos.view.fabricasCompVisual.componentes.FabCompVisualItem;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 import org.coletivojava.fw.api.tratamentoErros.FabErro;
-import com.super_bits.modulosSB.SBCore.modulos.view.fabricasCompVisual.ItfComponenteVisualSB;
 import org.coletivojava.fw.api.objetoNativo.view.componente.FamiliaComponente;
+import com.super_bits.modulosSB.SBCore.modulos.view.fabricasCompVisual.ComoComponenteVisualSB;
 
 @Named
 @ApplicationScoped
 public class CompSBCompVisualItem implements Serializable {
 
 	private final FamiliaComponente familia;
-	private final ItfComponenteVisualSB texto_Com_Formatacao;
+	private final ComoComponenteVisualSB texto_Com_Formatacao;
 
 	CompSBCompVisualItem() {
 		this.familia = com.super_bits.modulosSB.SBCore.modulos.view.fabricasCompVisual.componentes.FabCompVisualItem.class
@@ -23,8 +23,8 @@ public class CompSBCompVisualItem implements Serializable {
 				.getRegistro();
 	}
 
-	public ItfComponenteVisualSB getComponentePadrao(
-			com.super_bits.modulosSB.SBCore.modulos.view.fabricasCompVisual.ItfComponenteVisualSB pComponente) {
+	public ComoComponenteVisualSB getComponentePadrao(
+			com.super_bits.modulosSB.SBCore.modulos.view.fabricasCompVisual.ComoComponenteVisualSB pComponente) {
 		try {
 			if (pComponente == null) {
 				return familia.getFabrica().getComponentePadrao();
@@ -51,7 +51,7 @@ public class CompSBCompVisualItem implements Serializable {
 		return familia;
 	}
 
-	public ItfComponenteVisualSB getTexto_Com_Formatacao() {
+	public ComoComponenteVisualSB getTexto_Com_Formatacao() {
 		return texto_Com_Formatacao;
 	}
 }

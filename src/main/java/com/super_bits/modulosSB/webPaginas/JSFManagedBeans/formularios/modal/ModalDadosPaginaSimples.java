@@ -7,7 +7,7 @@ package com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.modal;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringsMaiuculoMinusculo;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campoInstanciado.ItfCampoInstanciado;
-import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfBeanSimples;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ComoEntidadeSimples;
 import com.super_bits.modulosSB.webPaginas.JSFBeans.SBBeanModel.InfoMBAcao;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.B_Pagina;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.interfaces.ItfB_Pagina;
@@ -30,7 +30,7 @@ import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ItfDialogo;
 public class ModalDadosPaginaSimples implements ItfModalDados {
 
     private ItfCampoInstanciado campoInstanciadoSelecionado;
-    private ItfBeanSimples entidadeSelecionada;
+    private ComoEntidadeSimples entidadeSelecionada;
     private ItfDialogo comunicacaoDoMomento;
     private String observacaoDoLog;
     private final UIViewRoot viewRootOrigem;
@@ -75,7 +75,7 @@ public class ModalDadosPaginaSimples implements ItfModalDados {
     }
 
     @Override
-    public ItfBeanSimples getEntidadeSelecionada() {
+    public ComoEntidadeSimples getEntidadeSelecionada() {
 
         if (entidadeSelecionada != null) {
             return entidadeSelecionada;
@@ -98,7 +98,7 @@ public class ModalDadosPaginaSimples implements ItfModalDados {
         return mbDoModal.getBeanSelecionado();
     }
 
-    public void setEntidadeSelecionada(ItfBeanSimples entidadeSelecionada) {
+    public void setEntidadeSelecionada(ComoEntidadeSimples entidadeSelecionada) {
         this.entidadeSelecionada = entidadeSelecionada;
     }
 

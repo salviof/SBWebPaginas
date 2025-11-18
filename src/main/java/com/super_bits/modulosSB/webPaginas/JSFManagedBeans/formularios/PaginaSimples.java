@@ -1,6 +1,6 @@
 package com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios;
 
-import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfBeanSimples;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ComoEntidadeSimples;
 import com.super_bits.modulosSB.webPaginas.ConfigGeral.SBWebPaginas;
 
 @Deprecated
@@ -43,12 +43,12 @@ public class PaginaSimples extends B_Pagina {
     }
 
     @Override
-    public ItfBeanSimples getBeanSelecionado() {
+    public ComoEntidadeSimples getBeanSelecionado() {
         return null;
     }
 
     @Override
-    public void setBeanSelecionado(ItfBeanSimples pBeanSimples) {
+    public void setBeanSelecionado(ComoEntidadeSimples pBeanSimples) {
 
     }
 

@@ -7,7 +7,7 @@ package com.super_bits.modulosSB.webPaginas.JSFManagedBeans.declarados.util;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringComparador;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.comparacao.FabTipoPesquisaGenerica;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.comparacao.ItemSimilar;
-import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfBeanSimples;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ComoEntidadeSimples;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.interfaces.ItfPaginaAtual;
 import java.util.List;
 import java.util.Locale;
@@ -26,14 +26,14 @@ import org.hibernate.collection.internal.PersistentBag;
 @Named
 public class PgUtilFiltroOrdenacao {
 
-    private Map<String, List<ItfBeanSimples>> mapaPesquisas;
+    private Map<String, List<ComoEntidadeSimples>> mapaPesquisas;
 
     @Inject
     private ItfPaginaAtual paginaAtual;
 
     public boolean filtrarColuna(Object item, String pFiltro, Locale localPesquisa) {
         FabTipoPesquisaGenerica tipoPesquisa = FabTipoPesquisaGenerica.getTipoPesquisaByTermo(pFiltro);
-        ItemSimilar itemSimilar = new ItemSimilar((ItfBeanSimples) item, UtilSBCoreStringComparador.normalizarTexto(pFiltro), tipoPesquisa);
+        ItemSimilar itemSimilar = new ItemSimilar((ComoEntidadeSimples) item, UtilSBCoreStringComparador.normalizarTexto(pFiltro), tipoPesquisa);
         itemSimilar.getNota();
 
         return itemSimilar.getNota() > 0.8;
@@ -66,16 +66,16 @@ public class PgUtilFiltroOrdenacao {
             if (valor1.isEmpty()) {
                 return -1;
             }
-            if (valor1.get(0) instanceof ItfBeanSimples) {
-                ItfBeanSimples item = (ItfBeanSimples) valor1.get(0);
-                ItfBeanSimples item2 = (ItfBeanSimples) valor2.get(0);
+            if (valor1.get(0) instanceof ComoEntidadeSimples) {
+                ComoEntidadeSimples item = (ComoEntidadeSimples) valor1.get(0);
+                ComoEntidadeSimples item2 = (ComoEntidadeSimples) valor2.get(0);
                 return item.getNome().compareTo(item2.getNome());
             }
         }
 
-        if (comparacao1 instanceof ItfBeanSimples) {
-            ItfBeanSimples item = (ItfBeanSimples) comparacao1;
-            ItfBeanSimples item2 = (ItfBeanSimples) comparacao2;
+        if (comparacao1 instanceof ComoEntidadeSimples) {
+            ComoEntidadeSimples item = (ComoEntidadeSimples) comparacao1;
+            ComoEntidadeSimples item2 = (ComoEntidadeSimples) comparacao2;
             try {
                 return item.getNome().compareTo(item2.getNome());
             } catch (Throwable t) {

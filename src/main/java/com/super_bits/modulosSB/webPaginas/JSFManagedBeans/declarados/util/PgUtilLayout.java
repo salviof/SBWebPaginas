@@ -6,9 +6,7 @@ package com.super_bits.modulosSB.webPaginas.JSFManagedBeans.declarados.util;
 
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreListas;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.acao.AcaoTransient;
-import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ItfAcaoDoSistema;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campo.ItfGrupoCampos;
-import com.super_bits.modulosSB.SBCore.modulos.view.fabricasCompVisual.ItfComponenteVisualSB;
 import com.super_bits.modulosSB.SBCore.modulos.view.telas.ColunaTela;
 import com.super_bits.modulosSB.SBCore.modulos.view.telas.LayoutComponentesEmTela;
 import com.super_bits.modulosSB.SBCore.modulos.view.telas.LayoutComponentesEmTelaComGrupoDeAcoes;
@@ -20,6 +18,8 @@ import java.util.List;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import com.super_bits.modulosSB.SBCore.modulos.view.fabricasCompVisual.ComoComponenteVisualSB;
+import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ComoAcaoDoSistema;
 
 /**
  *
@@ -29,7 +29,7 @@ import javax.inject.Named;
 @Named
 public class PgUtilLayout implements Serializable {
 
-    private static final List<ItfAcaoDoSistema> ACAO_SELECAO_REGISTRO = UtilSBCoreListas.gerarComoLista(new AcaoTransient("nomeAcao", "iconeAcao"));
+    private static final List<ComoAcaoDoSistema> ACAO_SELECAO_REGISTRO = UtilSBCoreListas.gerarComoLista(new AcaoTransient("nomeAcao", "iconeAcao"));
 
     @Inject
     private ItfPaginaAtual paginaAtual;
@@ -38,7 +38,7 @@ public class PgUtilLayout implements Serializable {
     private PgUtil paginaUtil;
 
     @Deprecated
-    public LayoutComponentesEmTelaComGrupoDeAcoes gerarLayout(ItfGrupoCampos pGrupoCampo, List<ItfAcaoDoSistema> pAcoes) {
+    public LayoutComponentesEmTelaComGrupoDeAcoes gerarLayout(ItfGrupoCampos pGrupoCampo, List<ComoAcaoDoSistema> pAcoes) {
         if (pGrupoCampo == null) {
             throw new UnsupportedOperationException("o Grupo de campos para montagem da lista é nulo");
         }
@@ -58,7 +58,7 @@ public class PgUtilLayout implements Serializable {
         return paginaAtual.getInfoPagina().getComoFormularioWeb().getInfoLayout().gerarLayout(pGrupoCampo, ACAO_SELECAO_REGISTRO);
     }
 
-    public LayoutComponentesEmTelaComGrupoDeAcoes getLayoutCamposComAcao(ItfGrupoCampos pGrupoCampo, List<ItfAcaoDoSistema> pAcoes) {
+    public LayoutComponentesEmTelaComGrupoDeAcoes getLayoutCamposComAcao(ItfGrupoCampos pGrupoCampo, List<ComoAcaoDoSistema> pAcoes) {
 
         return paginaAtual.getInfoPagina().getComoFormularioWeb().getInfoLayout().gerarLayout(pGrupoCampo, pAcoes);
     }
@@ -140,7 +140,7 @@ public class PgUtilLayout implements Serializable {
                 : colunas.intValue();
     }
 
-    public int numeroMaximoColunasDoComponenteNaTela(ItfComponenteVisualSB pComponente) {
+    public int numeroMaximoColunasDoComponenteNaTela(ComoComponenteVisualSB pComponente) {
         int mx = getColunaMaximoNaTela();
         return (mx == 0 || pComponente.getPesoLargura() == 0) ? 1 : mx / pComponente.getPesoLargura();
 

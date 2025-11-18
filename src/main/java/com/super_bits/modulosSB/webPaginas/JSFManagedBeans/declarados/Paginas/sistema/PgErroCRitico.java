@@ -6,7 +6,7 @@ package com.super_bits.modulosSB.webPaginas.JSFManagedBeans.declarados.Paginas.s
 
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreJson;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.TIPO_PARTE_URL;
-import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfBeanSimples;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ComoEntidadeSimples;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.MB_PaginaConversation;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.reflexao.anotacoes.InfoPagina;
 
@@ -45,12 +45,12 @@ public class PgErroCRitico extends MB_PaginaConversation {
     }
 
     @Override
-    public ItfBeanSimples getBeanSelecionado() {
+    public ComoEntidadeSimples getBeanSelecionado() {
         return null;
     }
 
     @Override
-    public void setBeanSelecionado(ItfBeanSimples pBeanSimples) {
+    public void setBeanSelecionado(ComoEntidadeSimples pBeanSimples) {
 
     }
 

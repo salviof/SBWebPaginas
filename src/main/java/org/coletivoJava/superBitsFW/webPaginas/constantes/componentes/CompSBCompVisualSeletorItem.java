@@ -6,20 +6,20 @@ import java.io.Serializable;
 import com.super_bits.modulosSB.SBCore.modulos.view.fabricasCompVisual.componentes.FabCompVisualSeletorItem;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 import org.coletivojava.fw.api.tratamentoErros.FabErro;
-import com.super_bits.modulosSB.SBCore.modulos.view.fabricasCompVisual.ItfComponenteVisualSB;
 import org.coletivojava.fw.api.objetoNativo.view.componente.FamiliaComponente;
+import com.super_bits.modulosSB.SBCore.modulos.view.fabricasCompVisual.ComoComponenteVisualSB;
 
 @Named
 @ApplicationScoped
 public class CompSBCompVisualSeletorItem implements Serializable {
 
 	private final FamiliaComponente familia;
-	private final ItfComponenteVisualSB carrousel;
-	private final ItfComponenteVisualSB menu_em_Botoes;
-	private final ItfComponenteVisualSB auto_Complete;
-	private final ItfComponenteVisualSB grade;
-	private final ItfComponenteVisualSB combo;
-	private final ItfComponenteVisualSB radio;
+	private final ComoComponenteVisualSB carrousel;
+	private final ComoComponenteVisualSB menu_em_Botoes;
+	private final ComoComponenteVisualSB auto_Complete;
+	private final ComoComponenteVisualSB grade;
+	private final ComoComponenteVisualSB combo;
+	private final ComoComponenteVisualSB radio;
 
 	CompSBCompVisualSeletorItem() {
 		this.familia = com.super_bits.modulosSB.SBCore.modulos.view.fabricasCompVisual.componentes.FabCompVisualSeletorItem.class
@@ -34,8 +34,8 @@ public class CompSBCompVisualSeletorItem implements Serializable {
 		this.radio = FabCompVisualSeletorItem.RADIO.getRegistro();
 	}
 
-	public ItfComponenteVisualSB getComponentePadrao(
-			com.super_bits.modulosSB.SBCore.modulos.view.fabricasCompVisual.ItfComponenteVisualSB pComponente) {
+	public ComoComponenteVisualSB getComponentePadrao(
+			com.super_bits.modulosSB.SBCore.modulos.view.fabricasCompVisual.ComoComponenteVisualSB pComponente) {
 		try {
 			if (pComponente == null) {
 				return familia.getFabrica().getComponentePadrao();
@@ -62,27 +62,27 @@ public class CompSBCompVisualSeletorItem implements Serializable {
 		return familia;
 	}
 
-	public ItfComponenteVisualSB getCarrousel() {
+	public ComoComponenteVisualSB getCarrousel() {
 		return carrousel;
 	}
 
-	public ItfComponenteVisualSB getMenu_em_Botoes() {
+	public ComoComponenteVisualSB getMenu_em_Botoes() {
 		return menu_em_Botoes;
 	}
 
-	public ItfComponenteVisualSB getAuto_Complete() {
+	public ComoComponenteVisualSB getAuto_Complete() {
 		return auto_Complete;
 	}
 
-	public ItfComponenteVisualSB getGrade() {
+	public ComoComponenteVisualSB getGrade() {
 		return grade;
 	}
 
-	public ItfComponenteVisualSB getCombo() {
+	public ComoComponenteVisualSB getCombo() {
 		return combo;
 	}
 
-	public ItfComponenteVisualSB getRadio() {
+	public ComoComponenteVisualSB getRadio() {
 		return radio;
 	}
 }

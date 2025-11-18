@@ -6,35 +6,35 @@ import java.io.Serializable;
 import com.super_bits.modulosSB.SBCore.modulos.view.fabricasCompVisual.componentes.FabCompVisualInputs;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 import org.coletivojava.fw.api.tratamentoErros.FabErro;
-import com.super_bits.modulosSB.SBCore.modulos.view.fabricasCompVisual.ItfComponenteVisualSB;
 import org.coletivojava.fw.api.objetoNativo.view.componente.FamiliaComponente;
+import com.super_bits.modulosSB.SBCore.modulos.view.fabricasCompVisual.ComoComponenteVisualSB;
 
 @Named
 @ApplicationScoped
 public class CompSBCompVisualInputs implements Serializable {
 
     private final FamiliaComponente familia;
-    private final ItfComponenteVisualSB texto_Com_FOrmatacao;
-    private final ItfComponenteVisualSB texto_Sem_Formatacao;
-    private final ItfComponenteVisualSB texto_Grande_com_Formatacao;
-    private final ItfComponenteVisualSB texto_multiplas_Linhas;
-    private final ItfComponenteVisualSB valor_com_minimo_e_Maximo;
-    private final ItfComponenteVisualSB senha;
-    private final ItfComponenteVisualSB cor;
-    private final ItfComponenteVisualSB hTML;
-    private final ItfComponenteVisualSB hTML_Template;
-    private final ItfComponenteVisualSB quantidade;
-    private final ItfComponenteVisualSB moeda;
-    private final ItfComponenteVisualSB email;
-    private final ItfComponenteVisualSB data;
-    private final ItfComponenteVisualSB data_Hora;
-    private final ItfComponenteVisualSB hora;
-    private final ItfComponenteVisualSB ligado_ou_Desligado;
-    private final ItfComponenteVisualSB entidade_Simples;
-    private final ItfComponenteVisualSB arquivo_de_Entidade;
-    private final ItfComponenteVisualSB imagem_pequena_Entidade;
-    private final ItfComponenteVisualSB imagem_medio_de_Entidade;
-    private final ItfComponenteVisualSB imagem_grande_de_Entidade;
+    private final ComoComponenteVisualSB texto_Com_FOrmatacao;
+    private final ComoComponenteVisualSB texto_Sem_Formatacao;
+    private final ComoComponenteVisualSB texto_Grande_com_Formatacao;
+    private final ComoComponenteVisualSB texto_multiplas_Linhas;
+    private final ComoComponenteVisualSB valor_com_minimo_e_Maximo;
+    private final ComoComponenteVisualSB senha;
+    private final ComoComponenteVisualSB cor;
+    private final ComoComponenteVisualSB hTML;
+    private final ComoComponenteVisualSB hTML_Template;
+    private final ComoComponenteVisualSB quantidade;
+    private final ComoComponenteVisualSB moeda;
+    private final ComoComponenteVisualSB email;
+    private final ComoComponenteVisualSB data;
+    private final ComoComponenteVisualSB data_Hora;
+    private final ComoComponenteVisualSB hora;
+    private final ComoComponenteVisualSB ligado_ou_Desligado;
+    private final ComoComponenteVisualSB entidade_Simples;
+    private final ComoComponenteVisualSB arquivo_de_Entidade;
+    private final ComoComponenteVisualSB imagem_pequena_Entidade;
+    private final ComoComponenteVisualSB imagem_medio_de_Entidade;
+    private final ComoComponenteVisualSB imagem_grande_de_Entidade;
 
     CompSBCompVisualInputs() {
         this.familia = com.super_bits.modulosSB.SBCore.modulos.view.fabricasCompVisual.componentes.FabCompVisualInputs.class
@@ -73,8 +73,8 @@ public class CompSBCompVisualInputs implements Serializable {
                 .getRegistro();
     }
 
-    public ItfComponenteVisualSB getComponentePadrao(
-            com.super_bits.modulosSB.SBCore.modulos.view.fabricasCompVisual.ItfComponenteVisualSB pComponente) {
+    public ComoComponenteVisualSB getComponentePadrao(
+            com.super_bits.modulosSB.SBCore.modulos.view.fabricasCompVisual.ComoComponenteVisualSB pComponente) {
         try {
             if (pComponente == null) {
                 return familia.getFabrica().getComponentePadrao();
@@ -101,87 +101,87 @@ public class CompSBCompVisualInputs implements Serializable {
         return familia;
     }
 
-    public ItfComponenteVisualSB getTexto_Com_FOrmatacao() {
+    public ComoComponenteVisualSB getTexto_Com_FOrmatacao() {
         return texto_Com_FOrmatacao;
     }
 
-    public ItfComponenteVisualSB getTexto_Sem_Formatacao() {
+    public ComoComponenteVisualSB getTexto_Sem_Formatacao() {
         return texto_Sem_Formatacao;
     }
 
-    public ItfComponenteVisualSB getTexto_Grande_com_Formatacao() {
+    public ComoComponenteVisualSB getTexto_Grande_com_Formatacao() {
         return texto_Grande_com_Formatacao;
     }
 
-    public ItfComponenteVisualSB getTexto_multiplas_Linhas() {
+    public ComoComponenteVisualSB getTexto_multiplas_Linhas() {
         return texto_multiplas_Linhas;
     }
 
-    public ItfComponenteVisualSB getValor_com_minimo_e_Maximo() {
+    public ComoComponenteVisualSB getValor_com_minimo_e_Maximo() {
         return valor_com_minimo_e_Maximo;
     }
 
-    public ItfComponenteVisualSB getSenha() {
+    public ComoComponenteVisualSB getSenha() {
         return senha;
     }
 
-    public ItfComponenteVisualSB getCor() {
+    public ComoComponenteVisualSB getCor() {
         return cor;
     }
 
-    public ItfComponenteVisualSB getHTML() {
+    public ComoComponenteVisualSB getHTML() {
         return hTML;
     }
 
-    public ItfComponenteVisualSB getHTML_Template() {
+    public ComoComponenteVisualSB getHTML_Template() {
         return hTML_Template;
     }
 
-    public ItfComponenteVisualSB getQuantidade() {
+    public ComoComponenteVisualSB getQuantidade() {
         return quantidade;
     }
 
-    public ItfComponenteVisualSB getMoeda() {
+    public ComoComponenteVisualSB getMoeda() {
         return moeda;
     }
 
-    public ItfComponenteVisualSB getEmail() {
+    public ComoComponenteVisualSB getEmail() {
         return email;
     }
 
-    public ItfComponenteVisualSB getData() {
+    public ComoComponenteVisualSB getData() {
         return data;
     }
 
-    public ItfComponenteVisualSB getData_Hora() {
+    public ComoComponenteVisualSB getData_Hora() {
         return data_Hora;
     }
 
-    public ItfComponenteVisualSB getHora() {
+    public ComoComponenteVisualSB getHora() {
         return hora;
     }
 
-    public ItfComponenteVisualSB getLigado_ou_Desligado() {
+    public ComoComponenteVisualSB getLigado_ou_Desligado() {
         return ligado_ou_Desligado;
     }
 
-    public ItfComponenteVisualSB getEntidade_Simples() {
+    public ComoComponenteVisualSB getEntidade_Simples() {
         return entidade_Simples;
     }
 
-    public ItfComponenteVisualSB getArquivo_de_Entidade() {
+    public ComoComponenteVisualSB getArquivo_de_Entidade() {
         return arquivo_de_Entidade;
     }
 
-    public ItfComponenteVisualSB getImagem_pequena_Entidade() {
+    public ComoComponenteVisualSB getImagem_pequena_Entidade() {
         return imagem_pequena_Entidade;
     }
 
-    public ItfComponenteVisualSB getImagem_medio_de_Entidade() {
+    public ComoComponenteVisualSB getImagem_medio_de_Entidade() {
         return imagem_medio_de_Entidade;
     }
 
-    public ItfComponenteVisualSB getImagem_grande_de_Entidade() {
+    public ComoComponenteVisualSB getImagem_grande_de_Entidade() {
         return imagem_grande_de_Entidade;
     }
 }

@@ -5,7 +5,7 @@
 package com.super_bits.modulosSB.webPaginas.JSFBeans.util.validadores;
 
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
-import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfBeanSimples;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ComoEntidadeSimples;
 import java.util.List;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -19,10 +19,10 @@ import javax.faces.validator.ValidatorException;
  * @version 1.0
  */
 @FacesValidator("org.super_bits.view.validadores.listaBeanSimples")
-public class ValidadorGenericoListaBeanSimples extends ValidadorGenericoAbstrato<List<? extends ItfBeanSimples>> {
+public class ValidadorGenericoListaBeanSimples extends ValidadorGenericoAbstrato<List<? extends ComoEntidadeSimples>> {
 
     @Override
-    public void validate(FacesContext context, UIComponent component, List<? extends ItfBeanSimples> value) throws ValidatorException {
+    public void validate(FacesContext context, UIComponent component, List<? extends ComoEntidadeSimples> value) throws ValidatorException {
         if (value instanceof List) {
             super.validate(context, component, value); //To change body of generated methods, choose Tools | Templates.
         } else {

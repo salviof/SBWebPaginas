@@ -4,8 +4,8 @@
  */
 package com.super_bits.modulosSB.webPaginas.JSFManagedBeans.declarados.ConstAppFormEComponente.contantesView;
 
-import com.super_bits.modulosSB.SBCore.modulos.view.fabricasCompVisual.ItfComponenteVisualSB;
 import com.super_bits.modulosSB.SBCore.modulos.view.fabricasCompVisual.componentes.FabCompVIsualInputsLayout;
+import com.super_bits.modulosSB.SBCore.modulos.view.fabricasCompVisual.ComoComponenteVisualSB;
 
 /**
  *
@@ -13,29 +13,29 @@ import com.super_bits.modulosSB.SBCore.modulos.view.fabricasCompVisual.component
  */
 public class LayoutInputCampo {
 
-    private final ItfComponenteVisualSB resumido = FabCompVIsualInputsLayout.LABEL_RESUMIDO.getRegistro();
-    private final ItfComponenteVisualSB esquerda = FabCompVIsualInputsLayout.LABEL_ESQUEDA.getRegistro();
-    private final ItfComponenteVisualSB superior = FabCompVIsualInputsLayout.LABEL_SUPERIOR.getRegistro();
-    private final ItfComponenteVisualSB semLabel = FabCompVIsualInputsLayout.INPUTSEM_LABEL.getRegistro();
-    private final ItfComponenteVisualSB automatico = FabCompVIsualInputsLayout.AUTOMATICO.getRegistro();
+    private final ComoComponenteVisualSB resumido = FabCompVIsualInputsLayout.LABEL_RESUMIDO.getRegistro();
+    private final ComoComponenteVisualSB esquerda = FabCompVIsualInputsLayout.LABEL_ESQUEDA.getRegistro();
+    private final ComoComponenteVisualSB superior = FabCompVIsualInputsLayout.LABEL_SUPERIOR.getRegistro();
+    private final ComoComponenteVisualSB semLabel = FabCompVIsualInputsLayout.INPUTSEM_LABEL.getRegistro();
+    private final ComoComponenteVisualSB automatico = FabCompVIsualInputsLayout.AUTOMATICO.getRegistro();
 
-    public ItfComponenteVisualSB getResumido() {
+    public ComoComponenteVisualSB getResumido() {
         return resumido;
     }
 
-    public ItfComponenteVisualSB getEsquerda() {
+    public ComoComponenteVisualSB getEsquerda() {
         return esquerda;
     }
 
-    public ItfComponenteVisualSB getSuperior() {
+    public ComoComponenteVisualSB getSuperior() {
         return superior;
     }
 
-    public ItfComponenteVisualSB getAutomatico() {
+    public ComoComponenteVisualSB getAutomatico() {
         return automatico;
     }
 
-    public ItfComponenteVisualSB getSemLabel() {
+    public ComoComponenteVisualSB getSemLabel() {
         return semLabel;
     }
 

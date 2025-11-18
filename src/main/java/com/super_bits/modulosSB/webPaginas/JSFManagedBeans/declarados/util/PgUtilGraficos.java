@@ -5,7 +5,6 @@
 package com.super_bits.modulosSB.webPaginas.JSFManagedBeans.declarados.util;
 
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
-import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ItfAcaoDoSistema;
 import com.super_bits.modulosSB.SBCore.modulos.grafico.ItfDadoGraficoTotal;
 import com.super_bits.modulosSB.webPaginas.JSFBeans.PrimeFacesBeanModel.grafico.UtilGraficoPrimefaces;
 import com.super_bits.modulosSB.webPaginas.util.UtilSBWP_JSFTools;
@@ -23,6 +22,7 @@ import org.primefaces.model.charts.optionconfig.title.Title;
 import org.primefaces.model.charts.pie.PieChartDataSet;
 import org.primefaces.model.charts.pie.PieChartModel;
 import org.primefaces.model.charts.pie.PieChartOptions;
+import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ComoAcaoDoSistema;
 
 /**
  *
@@ -46,7 +46,7 @@ public class PgUtilGraficos {
     }
     
     
-    public LineChartModel gerarGraficoLinear(String pTitulo,List<ItfDadoGraficoTotal> pItensGrafico,ItfAcaoDoSistema pAcao){
+    public LineChartModel gerarGraficoLinear(String pTitulo,List<ItfDadoGraficoTotal> pItensGrafico,ComoAcaoDoSistema pAcao){
         ChartData data = new ChartData();
         
         LineChartDataSet dataSet = new LineChartDataSet();
@@ -91,7 +91,7 @@ public class PgUtilGraficos {
         return graficoLinerar;
     }
     
-    public PieChartModel gerarGraficoPizza(String pTitulo,List<ItfDadoGraficoTotal> pItensGrafico,ItfAcaoDoSistema pAcao) {
+    public PieChartModel gerarGraficoPizza(String pTitulo,List<ItfDadoGraficoTotal> pItensGrafico,ComoAcaoDoSistema pAcao) {
         
         ChartData data = new ChartData();
         

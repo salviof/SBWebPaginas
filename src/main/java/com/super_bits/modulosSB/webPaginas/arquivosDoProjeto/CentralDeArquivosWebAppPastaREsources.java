@@ -16,9 +16,7 @@ import com.super_bits.modulosSB.SBCore.modulos.ManipulaArquivo.acessoArquivo.Fab
 import com.super_bits.modulosSB.SBCore.modulos.ManipulaArquivo.interfaces.ItfCentralPermissaoArquivo;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campo.FabTipoAtributoObjeto;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campoInstanciado.ItfCampoInstanciado;
-import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfBeanSimples;
-import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfBeanSimplesSomenteLeitura;
-import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfSessao;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ComoEntidadeSimples;
 import com.super_bits.modulosSB.webPaginas.ConfigGeral.SBWebPaginas;
 import com.super_bits.modulosSB.webPaginas.util.UtilSBWPServletTools;
 import java.io.File;
@@ -26,6 +24,8 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import org.coletivojava.fw.api.tratamentoErros.FabErro;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ComoEntidadeSimplesSomenteLeitura;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ComoSessao;
 
 /**
  *
@@ -96,7 +96,7 @@ public class CentralDeArquivosWebAppPastaREsources extends CentralDeArquivosAbst
     }
 
     @Override
-    public List<String> getEndrsLocaisDeCategoriasItem(ItfBeanSimplesSomenteLeitura item) {
+    public List<String> getEndrsLocaisDeCategoriasItem(ComoEntidadeSimplesSomenteLeitura item) {
         List<String> pastasCategoria = new ArrayList<>();
         File pastaItem = new File(getEndrLocalRecursosDoObjeto(item.getClass()));
 
@@ -111,7 +111,7 @@ public class CentralDeArquivosWebAppPastaREsources extends CentralDeArquivosAbst
     }
 
     @Override
-    public List<String> getNomesPastasCategoriasItem(ItfBeanSimplesSomenteLeitura item) {
+    public List<String> getNomesPastasCategoriasItem(ComoEntidadeSimplesSomenteLeitura item) {
         List<String> pastasCategoria = new ArrayList<>();
         try {
 
@@ -179,7 +179,7 @@ public class CentralDeArquivosWebAppPastaREsources extends CentralDeArquivosAbst
     }
 
     @Override
-    public String getEndrRemotoImagem(ItfBeanSimplesSomenteLeitura item, FabTipoAtributoObjeto tipo) {
+    public String getEndrRemotoImagem(ComoEntidadeSimplesSomenteLeitura item, FabTipoAtributoObjeto tipo) {
         switch (tipo) {
 
             case IMG_PEQUENA:
@@ -197,7 +197,7 @@ public class CentralDeArquivosWebAppPastaREsources extends CentralDeArquivosAbst
     }
 
     @Override
-    public String getEndrRemotoRecursosItem(ItfBeanSimples item, String galeria, FabTipoAcessoArquivo pTipoAcesso, FabTipoArquivoConhecido pTipoArquivo) {
+    public String getEndrRemotoRecursosItem(ComoEntidadeSimples item, String galeria, FabTipoAcessoArquivo pTipoAcesso, FabTipoArquivoConhecido pTipoArquivo) {
         if (galeria == null) {
             return getEndrRemotoRecursosDoObjeto(item.getClass(), pTipoAcesso, pTipoArquivo);
         } else {
@@ -206,7 +206,7 @@ public class CentralDeArquivosWebAppPastaREsources extends CentralDeArquivosAbst
     }
 
     @Override
-    public List<String> getEnterecosLocaisRecursosItem(ItfBeanSimples item, String galeria) {
+    public List<String> getEnterecosLocaisRecursosItem(ComoEntidadeSimples item, String galeria) {
         List<String> recursosDoItem = new ArrayList<>();
         getEndrLocalRecursosDoObjeto(item.getClass(), galeria);
 
@@ -214,17 +214,17 @@ public class CentralDeArquivosWebAppPastaREsources extends CentralDeArquivosAbst
     }
 
     @Override
-    public List<String> getEnterecosRemotosRecursosItem(ItfBeanSimplesSomenteLeitura item) {
+    public List<String> getEnterecosRemotosRecursosItem(ComoEntidadeSimplesSomenteLeitura item) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public String getEndrLocalArquivoItem(ItfBeanSimplesSomenteLeitura pItem, String nomeArquivo) {
+    public String getEndrLocalArquivoItem(ComoEntidadeSimplesSomenteLeitura pItem, String nomeArquivo) {
         return getEndrLocalArquivoItem(pItem, nomeArquivo, null);
     }
 
     @Override
-    public String getEndrLocalArquivoItem(ItfBeanSimplesSomenteLeitura pItem, String nomeArquivo, String categoria) {
+    public String getEndrLocalArquivoItem(ComoEntidadeSimplesSomenteLeitura pItem, String nomeArquivo, String categoria) {
         if (categoria == null) {
             return getEndrLocalRecursosDoObjeto(pItem.getClass()) + "/" + pItem.getId() + "/" + nomeArquivo;
         } else {
@@ -234,45 +234,45 @@ public class CentralDeArquivosWebAppPastaREsources extends CentralDeArquivosAbst
     }
 
     @Override
-    public String getEndrRemotoArquivoItem(ItfBeanSimplesSomenteLeitura pItem, String nomeArquivo, FabTipoAcessoArquivo pTipoAcesso, FabTipoArquivoConhecido pTipoArquivo) {
+    public String getEndrRemotoArquivoItem(ComoEntidadeSimplesSomenteLeitura pItem, String nomeArquivo, FabTipoAcessoArquivo pTipoAcesso, FabTipoArquivoConhecido pTipoArquivo) {
         return getEndrRemotoRecursosDoObjeto(pItem.getClass(), pTipoAcesso, pTipoArquivo) + "/" + nomeArquivo;
 
     }
 
     @Override
-    public String getEndrRemotoArquivoItem(ItfBeanSimplesSomenteLeitura pItem, String nomeArquivo, String categoria, FabTipoAcessoArquivo pTipoAcesso, FabTipoArquivoConhecido pTipoArquivo) {
+    public String getEndrRemotoArquivoItem(ComoEntidadeSimplesSomenteLeitura pItem, String nomeArquivo, String categoria, FabTipoAcessoArquivo pTipoAcesso, FabTipoArquivoConhecido pTipoArquivo) {
         return getEndrRemotoRecursosDoObjeto(pItem.getClass(), pTipoAcesso, pTipoArquivo) + "/ " + categoria + "/" + nomeArquivo;
     }
 
     @Override
-    public boolean salvarArquivo(ItfBeanSimplesSomenteLeitura entidade, byte[] arqivo, String nome, String categoria) {
+    public boolean salvarArquivo(ComoEntidadeSimplesSomenteLeitura entidade, byte[] arqivo, String nome, String categoria) {
         String caminhoArquivo = getEndrLocalArquivoItem(entidade, nome, categoria);
         return UtilSBCoreOutputs.salvarArquivoByte(arqivo, caminhoArquivo);
 
     }
 
     @Override
-    public boolean salvarImagemTodosOsFormatos(ItfBeanSimplesSomenteLeitura entidade, InputStream foto) {
+    public boolean salvarImagemTodosOsFormatos(ComoEntidadeSimplesSomenteLeitura entidade, InputStream foto) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public boolean salvarImagemTamanhoMedio(ItfBeanSimplesSomenteLeitura entidade, InputStream foto) {
+    public boolean salvarImagemTamanhoMedio(ComoEntidadeSimplesSomenteLeitura entidade, InputStream foto) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public boolean salvarImagemTamanhoPequeno(ItfBeanSimplesSomenteLeitura entidade, InputStream foto) {
+    public boolean salvarImagemTamanhoPequeno(ComoEntidadeSimplesSomenteLeitura entidade, InputStream foto) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public boolean salvarImagemTamanhoGrande(ItfBeanSimplesSomenteLeitura entidade, InputStream foto) {
+    public boolean salvarImagemTamanhoGrande(ComoEntidadeSimplesSomenteLeitura entidade, InputStream foto) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public boolean salvarArquivo(ItfBeanSimplesSomenteLeitura entidade, byte[] arquivo, String nomeCampo) {
+    public boolean salvarArquivo(ComoEntidadeSimplesSomenteLeitura entidade, byte[] arquivo, String nomeCampo) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -307,7 +307,7 @@ public class CentralDeArquivosWebAppPastaREsources extends CentralDeArquivosAbst
     }
 
     @Override
-    public boolean baixarArquivo(ItfBeanSimplesSomenteLeitura entidade, InputStream arqivo, String pNomeCampoOuCategoria, String pNomeArquivo, MapaSubstituicao mapaSubistituicao) {
+    public boolean baixarArquivo(ComoEntidadeSimplesSomenteLeitura entidade, InputStream arqivo, String pNomeCampoOuCategoria, String pNomeArquivo, MapaSubstituicao mapaSubistituicao) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -332,7 +332,7 @@ public class CentralDeArquivosWebAppPastaREsources extends CentralDeArquivosAbst
     }
 
     @Override
-    public String getEndrLocalImagem(ItfBeanSimplesSomenteLeitura item, FabTipoAtributoObjeto tipo) {
+    public String getEndrLocalImagem(ComoEntidadeSimplesSomenteLeitura item, FabTipoAtributoObjeto tipo) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -343,7 +343,7 @@ public class CentralDeArquivosWebAppPastaREsources extends CentralDeArquivosAbst
     }
 
     @Override
-    public String getEndrLocalImagem(ItfBeanSimplesSomenteLeitura item, FabTipoAtributoObjeto tipo, ItfSessao pSessao) {
+    public String getEndrLocalImagem(ComoEntidadeSimplesSomenteLeitura item, FabTipoAtributoObjeto tipo, ComoSessao pSessao) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

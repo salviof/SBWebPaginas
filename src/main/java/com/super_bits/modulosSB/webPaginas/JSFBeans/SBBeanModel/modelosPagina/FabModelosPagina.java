@@ -4,13 +4,13 @@
  */
 package com.super_bits.modulosSB.webPaginas.JSFBeans.SBBeanModel.modelosPagina;
 
-import com.super_bits.modulosSB.SBCore.modulos.fabrica.ItfFabrica;
+import com.super_bits.modulosSB.SBCore.modulos.fabrica.ComoFabrica;
 
 /**
  *
  * @author salvioF
  */
-public enum FabModelosPagina implements ItfFabrica {
+public enum FabModelosPagina implements ComoFabrica {
 
     /**
      *

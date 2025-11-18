@@ -1,12 +1,12 @@
 package com.super_bits.modulosSB.webPaginas.JSFBeans.SBBeanModel.depreciado.seletorItem;
 
 import com.super_bits.modulosSB.Persistencia.dao.DaoGenerico;
-import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfBeanSimples;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ComoEntidadeSimples;
 import com.super_bits.modulosSB.webPaginas.JSFBeans.SBBeanModel.depreciado.B_ItemGenerico;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class B_selecaoOld<T extends ItfBeanSimples> extends B_ItemGenerico {
+public abstract class B_selecaoOld<T extends ComoEntidadeSimples> extends B_ItemGenerico {
 
     private List<T> todos;
     private List<T> selecionados;

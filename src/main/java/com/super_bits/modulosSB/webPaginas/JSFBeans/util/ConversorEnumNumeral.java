@@ -5,12 +5,12 @@
 package com.super_bits.modulosSB.webPaginas.JSFBeans.util;
 
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
-import com.super_bits.modulosSB.SBCore.modulos.fabrica.ItfFabrica;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.FacesConverter;
 import javax.persistence.EnumType;
 import org.coletivojava.fw.api.tratamentoErros.FabErro;
+import com.super_bits.modulosSB.SBCore.modulos.fabrica.ComoFabrica;
 
 /**
  *
@@ -44,7 +44,7 @@ public class ConversorEnumNumeral extends ConversorSB {
 
             }
 
-            if (value != null && value instanceof ItfFabrica) {
+            if (value != null && value instanceof ComoFabrica) {
                 return (value).toString();
             } else {
                 throw new UnsupportedOperationException("O valor que está utilizando ConversorEnum não é do tipo enum");

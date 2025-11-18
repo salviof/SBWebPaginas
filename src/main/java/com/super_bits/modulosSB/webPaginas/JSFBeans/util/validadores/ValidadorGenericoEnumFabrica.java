@@ -5,12 +5,12 @@
 package com.super_bits.modulosSB.webPaginas.JSFBeans.util.validadores;
 
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
-import com.super_bits.modulosSB.SBCore.modulos.fabrica.ItfFabrica;
-import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfBeanVinculadoAEnum;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.FacesValidator;
 import javax.faces.validator.ValidatorException;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ComoEntidadeVinculadoAEnum;
+import com.super_bits.modulosSB.SBCore.modulos.fabrica.ComoFabrica;
 
 /**
  *
@@ -23,9 +23,9 @@ public class ValidadorGenericoEnumFabrica extends ValidadorGenericoAbstrato<Obje
 
     @Override
     public void validate(FacesContext context, UIComponent component, Object value) throws ValidatorException {
-        if (value instanceof ItfFabrica) {
+        if (value instanceof ComoFabrica) {
             super.validate(context, component, value); //To change body of generated methods, choose Tools | Templates.
-        } else if (value instanceof ItfBeanVinculadoAEnum) {
+        } else if (value instanceof ComoEntidadeVinculadoAEnum) {
             super.validate(context, component, value); //To change body of generated methods, choose Tools | Templates.
         } else {
             if (!SBCore.isEmModoProducao()) {

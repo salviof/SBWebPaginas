@@ -5,7 +5,7 @@
  */
 package com.super_bits.modulosSB.webPaginas.JSFBeans.SBBeanModel.DEPRECIADO;
 
-import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfBeanNormal;
+import com.super_bits.modulosSB.Persistencia.registro.persistidos.EntidadeORMNormal;
 import java.util.List;
 
 /**
@@ -16,6 +16,6 @@ public interface ItfLista {
 
     String getNomeLista();
 
-    List<? extends ItfBeanNormal> getLista();
+    List<? extends EntidadeORMNormal> getLista();
 
 }

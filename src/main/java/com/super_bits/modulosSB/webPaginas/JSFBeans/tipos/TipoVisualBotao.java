@@ -4,9 +4,9 @@
  */
 package com.super_bits.modulosSB.webPaginas.JSFBeans.tipos;
 
-import com.super_bits.modulosSB.SBCore.modulos.view.fabricasCompVisual.ItfComponenteVisualSB;
 import com.super_bits.modulosSB.SBCore.modulos.view.fabricasCompVisual.componentes.FabCompVisualBotaoAcao;
 import javax.enterprise.context.ApplicationScoped;
+import com.super_bits.modulosSB.SBCore.modulos.view.fabricasCompVisual.ComoComponenteVisualSB;
 
 /**
  * ATENÇÃO A DOCUMENTAÇÃO DA CLASSE É OBRIGATÓRIA O JAVADOC DOS METODOS PUBLICOS
@@ -34,23 +34,23 @@ public class TipoVisualBotao extends ConstantesWeb {
         return botaoAcao.toString();
     }
 
-    public ItfComponenteVisualSB getApenasIcone() {
+    public ComoComponenteVisualSB getApenasIcone() {
         return FabCompVisualBotaoAcao.ICONE.getRegistro();
     }
 
-    public ItfComponenteVisualSB getIconeENome() {
+    public ComoComponenteVisualSB getIconeENome() {
         return FabCompVisualBotaoAcao.ICONE_E_NOME.getRegistro();
     }
 
-    public ItfComponenteVisualSB getBotaoGigante() {
+    public ComoComponenteVisualSB getBotaoGigante() {
         return FabCompVisualBotaoAcao.ICONE_GIGANTE.getRegistro();
     }
 
-    public ItfComponenteVisualSB getApenasNome() {
+    public ComoComponenteVisualSB getApenasNome() {
         return FabCompVisualBotaoAcao.NOME.getRegistro();
     }
 
-    public ItfComponenteVisualSB getApenasDescricao() {
+    public ComoComponenteVisualSB getApenasDescricao() {
         return FabCompVisualBotaoAcao.ICONE_GIGANTE.getRegistro();
     }
 

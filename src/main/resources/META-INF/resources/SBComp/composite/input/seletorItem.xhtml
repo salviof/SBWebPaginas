@@ -8,13 +8,13 @@
 
     <cc:interface>
         <cc:attribute name="itemSelecionado"
-                      type="com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfBeanSimplesSomenteLeitura"
+                      type="com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ComoEntidadeSimplesSomenteLeitura"
                       shortDescription="Bean onde o item selecionado será armazenado ao postar, e referencia de exibição "
                       />
         <cc:attribute name="lista" type="java.util.List"
                       shortDescription="Lista de opções disponíveis para seleção"
                       />
-        <cc:attribute name="tipoVisualizacao" type="com.super_bits.modulosSB.SBCore.modulos.view.fabricasCompVisual.ItfComponenteVisualSB"
+        <cc:attribute name="tipoVisualizacao" type="com.super_bits.modulosSB.SBCore.modulos.view.fabricasCompVisual.ComoComponenteVisualSB"
                       default="#{layoutsComponenteSB.layoutSeletorItem.combo}"
                       />
         <cc:attribute name="statusAjax" type="java.lang.Boolean" default="#{null}" />

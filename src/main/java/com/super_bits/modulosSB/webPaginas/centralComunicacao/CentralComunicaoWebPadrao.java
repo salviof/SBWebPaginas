@@ -10,21 +10,21 @@ import com.super_bits.modulosSB.SBCore.modulos.comunicacao.CentralComunicaoAbstr
 
 import com.super_bits.modulosSB.SBCore.modulos.comunicacao.FabTipoComunicacao;
 import com.super_bits.modulosSB.SBCore.modulos.comunicacao.FabTipoRespostaComunicacao;
-import com.super_bits.modulosSB.SBCore.modulos.servicosCore.ItfArmazenamentoComunicacao;
 
-import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfUsuario;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
-import com.super_bits.modulosSB.SBCore.modulos.servicosCore.ItfServicoComunicacao;
 import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ItfTipoCanalComunicacao;
 import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ItfDialogo;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ComoUsuario;
+import com.super_bits.modulosSB.SBCore.modulos.servicosCore.ComoArmazenamentoComunicacao;
+import com.super_bits.modulosSB.SBCore.modulos.servicosCore.ComoServicoComunicacao;
 
 /**
  *
  * @author desenvolvedor
  */
-public class CentralComunicaoWebPadrao extends CentralComunicaoAbstrato implements ItfServicoComunicacao {
+public class CentralComunicaoWebPadrao extends CentralComunicaoAbstrato implements ComoServicoComunicacao {
 
     private final List<ItfDialogo> comunicacoesAtivas = new ArrayList<>();
     private final List<ItfDialogo> comunicacoesHistorico = new ArrayList<>();
@@ -54,12 +54,12 @@ public class CentralComunicaoWebPadrao extends CentralComunicaoAbstrato implemen
     }
 
     @Override
-    public ItfArmazenamentoComunicacao getArmazenamento() {
+    public ComoArmazenamentoComunicacao getArmazenamento() {
         return aramazenamento;
     }
 
     @Override
-    public String getTokenDispositivoNotificacao(ItfUsuario pUsuario) {
+    public String getTokenDispositivoNotificacao(ComoUsuario pUsuario) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 

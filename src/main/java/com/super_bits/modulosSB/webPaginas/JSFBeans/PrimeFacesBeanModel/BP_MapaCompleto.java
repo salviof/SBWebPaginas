@@ -1,8 +1,7 @@
 package com.super_bits.modulosSB.webPaginas.JSFBeans.PrimeFacesBeanModel;
 
 import com.super_bits.modulosSB.Persistencia.registro.persistidos.EntidadeEnderecavel;
-import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfBeanLocalizavel;
-import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfBeanSimples;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ComoEntidadeSimples;
 import com.super_bits.modulosSB.webPaginas.JSFBeans.SBBeanModel.depreciado.B_ItemGenerico;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -12,6 +11,7 @@ import org.primefaces.event.map.OverlaySelectEvent;
 import org.primefaces.model.map.DefaultMapModel;
 import org.primefaces.model.map.MapModel;
 import org.primefaces.model.map.Marker;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ComoEntidadeLocalizavel;
 
 public abstract class BP_MapaCompleto<T> extends B_ItemGenerico implements Serializable {
 
@@ -20,7 +20,7 @@ public abstract class BP_MapaCompleto<T> extends B_ItemGenerico implements Seria
     private static final long serialVersionUID = 1L;
     private MapModel mapa;
     private Marker marcador;
-    private ItfBeanLocalizavel registroSelecionado;
+    private ComoEntidadeLocalizavel registroSelecionado;
     private boolean temRegistros;
     private String cepLocalizacao;
 
@@ -28,8 +28,8 @@ public abstract class BP_MapaCompleto<T> extends B_ItemGenerico implements Seria
 
         List<T> registros = getRegistros();
         for (T registro : registros) {
-            if (((ItfBeanLocalizavel) registro).getNomeCurto().equals(pNome)) {
-                registroSelecionado = (ItfBeanLocalizavel) registro;
+            if (((ComoEntidadeLocalizavel) registro).getNomeCurto().equals(pNome)) {
+                registroSelecionado = (ComoEntidadeLocalizavel) registro;
                 break;
             }
         }
@@ -80,7 +80,7 @@ public abstract class BP_MapaCompleto<T> extends B_ItemGenerico implements Seria
             locais.add((EntidadeEnderecavel) registro);
         }
 
-        setRegistroSelecionado(((ItfBeanSimples) registros.get(0)).getNomeCurto());
+        setRegistroSelecionado(((ComoEntidadeSimples) registros.get(0)).getNomeCurto());
 
         for (EntidadeEnderecavel local : locais) {
             System.out.println("Falta implementar MApa");
@@ -94,7 +94,7 @@ public abstract class BP_MapaCompleto<T> extends B_ItemGenerico implements Seria
         return marcador;
     }
 
-    public ItfBeanLocalizavel getRegistroSelecionado() {
+    public ComoEntidadeLocalizavel getRegistroSelecionado() {
         return registroSelecionado;
     }
 

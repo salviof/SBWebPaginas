@@ -1,14 +1,14 @@
 package com.super_bits.modulosSB.webPaginas.JSFBeans.SBBeanModel.crud;
 
 import com.super_bits.modulosSB.Persistencia.dao.DaoGenerico;
-import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfBeanSimples;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ComoEntidadeSimples;
 import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
 @ViewScoped
 @ManagedBean
-public abstract class B_CRUD<T extends ItfBeanSimples> implements Serializable {
+public abstract class B_CRUD<T extends ComoEntidadeSimples> implements Serializable {
 
     public B_CRUD(DaoGenerico<T> pDao, Class<?> pClasse) {
 

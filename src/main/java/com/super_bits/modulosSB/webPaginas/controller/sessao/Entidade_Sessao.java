@@ -1,9 +1,6 @@
 package com.super_bits.modulosSB.webPaginas.controller.sessao;
 
-import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ItfAcaoDoSistema;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.permissoes.ItfPermissao;
-import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfSessao;
-import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfUsuario;
 import org.coletivojava.fw.api.objetoNativo.view.menu.MenusDaSessao;
 import com.super_bits.modulosSB.webPaginas.util.UtilSBWPServletTools;
 import java.io.Serializable;
@@ -15,12 +12,15 @@ import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import com.super_bits.modulosSB.SBCore.modulos.view.telas.ItfTelaUsuario;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ComoSessao;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ComoUsuario;
+import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ComoAcaoDoSistema;
 
 /**
  * The persistent class for the MB_Sessao database table.
  *
  */
-public class Entidade_Sessao implements ItfSessao, Serializable {
+public class Entidade_Sessao implements ComoSessao, Serializable {
 
     protected static final int IDANONIMO = 0;
 
@@ -43,7 +43,7 @@ public class Entidade_Sessao implements ItfSessao, Serializable {
 
     private List<ItfPermissao> acessos;
 
-    private ItfUsuario usuario;
+    private ComoUsuario usuario;
 
     private String ip;
 
@@ -85,7 +85,7 @@ public class Entidade_Sessao implements ItfSessao, Serializable {
     }
 
     @Override
-    public ItfUsuario getUsuario() {
+    public ComoUsuario getUsuario() {
         return usuario;
     }
 
@@ -105,7 +105,7 @@ public class Entidade_Sessao implements ItfSessao, Serializable {
     }
 
     @Override
-    public void setUsuario(ItfUsuario pUsuario) {
+    public void setUsuario(ComoUsuario pUsuario) {
         usuario = pUsuario;
     }
 
@@ -138,7 +138,7 @@ public class Entidade_Sessao implements ItfSessao, Serializable {
     }
 
     @Override
-    public boolean isAcessoPermitido(ItfAcaoDoSistema pAcao) {
+    public boolean isAcessoPermitido(ComoAcaoDoSistema pAcao) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

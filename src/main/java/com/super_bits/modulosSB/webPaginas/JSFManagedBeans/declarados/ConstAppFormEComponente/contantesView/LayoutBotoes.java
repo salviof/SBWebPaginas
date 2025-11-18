@@ -4,8 +4,8 @@
  */
 package com.super_bits.modulosSB.webPaginas.JSFManagedBeans.declarados.ConstAppFormEComponente.contantesView;
 
-import com.super_bits.modulosSB.SBCore.modulos.view.fabricasCompVisual.ItfComponenteVisualSB;
 import com.super_bits.modulosSB.SBCore.modulos.view.fabricasCompVisual.componentes.FabCompVisualBotaoAcao;
+import com.super_bits.modulosSB.SBCore.modulos.view.fabricasCompVisual.ComoComponenteVisualSB;
 
 /**
  *
@@ -13,29 +13,29 @@ import com.super_bits.modulosSB.SBCore.modulos.view.fabricasCompVisual.component
  */
 public class LayoutBotoes {
 
-    private final ItfComponenteVisualSB icone = FabCompVisualBotaoAcao.ICONE.getRegistro();
-    private final ItfComponenteVisualSB iconeENome = FabCompVisualBotaoAcao.ICONE_E_NOME.getRegistro();
-    private final ItfComponenteVisualSB nome = FabCompVisualBotaoAcao.NOME.getRegistro();
-    private final ItfComponenteVisualSB gigante = FabCompVisualBotaoAcao.ICONE_GIGANTE.getRegistro();
-    private final ItfComponenteVisualSB cardResponsivo = FabCompVisualBotaoAcao.BOTAO_CARD_RESPONSIVO.getRegistro();
+    private final ComoComponenteVisualSB icone = FabCompVisualBotaoAcao.ICONE.getRegistro();
+    private final ComoComponenteVisualSB iconeENome = FabCompVisualBotaoAcao.ICONE_E_NOME.getRegistro();
+    private final ComoComponenteVisualSB nome = FabCompVisualBotaoAcao.NOME.getRegistro();
+    private final ComoComponenteVisualSB gigante = FabCompVisualBotaoAcao.ICONE_GIGANTE.getRegistro();
+    private final ComoComponenteVisualSB cardResponsivo = FabCompVisualBotaoAcao.BOTAO_CARD_RESPONSIVO.getRegistro();
 
-    public ItfComponenteVisualSB getIcone() {
+    public ComoComponenteVisualSB getIcone() {
         return icone;
     }
 
-    public ItfComponenteVisualSB getIconeENome() {
+    public ComoComponenteVisualSB getIconeENome() {
         return iconeENome;
     }
 
-    public ItfComponenteVisualSB getNome() {
+    public ComoComponenteVisualSB getNome() {
         return nome;
     }
 
-    public ItfComponenteVisualSB getGigante() {
+    public ComoComponenteVisualSB getGigante() {
         return gigante;
     }
 
-    public ItfComponenteVisualSB getCardResponsivo() {
+    public ComoComponenteVisualSB getCardResponsivo() {
         return cardResponsivo;
     }
 

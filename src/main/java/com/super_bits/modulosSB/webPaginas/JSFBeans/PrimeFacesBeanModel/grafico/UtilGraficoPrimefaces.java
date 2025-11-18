@@ -4,7 +4,7 @@
  */
 package com.super_bits.modulosSB.webPaginas.JSFBeans.PrimeFacesBeanModel.grafico;
 
-import com.super_bits.modulosSB.SBCore.modulos.fabrica.ItfFabricaAcoes;
+import com.super_bits.modulosSB.SBCore.modulos.fabrica.ComoFabricaAcoes;
 import com.super_bits.modulosSB.SBCore.modulos.grafico.ItfDadoGraficoTotal;
 import com.super_bits.modulosSB.SBCore.modulos.grafico.ItfDadosGraficoSequencia;
 import java.util.List;
@@ -46,7 +46,7 @@ public class UtilGraficoPrimefaces {
         return new GraficoPizza(pDadoGrafico, pTitulo, null);
     }
 
-    public static GraficoPizza gerarGraficoPizza(final List<ItfDadoGraficoTotal> pDadoGrafico, String pTitulo, ItfFabricaAcoes pAcao) {
+    public static GraficoPizza gerarGraficoPizza(final List<ItfDadoGraficoTotal> pDadoGrafico, String pTitulo, ComoFabricaAcoes pAcao) {
 
         return new GraficoPizza(pDadoGrafico, pTitulo, pAcao);
     }

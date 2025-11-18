@@ -1,39 +1,39 @@
 package com.super_bits.modulosSB.webPaginas.JSFBeans.SBBeanModel;
 
-import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfBeanSimples;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ComoEntidadeSimples;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 public class B_SeletorItem<T> implements Serializable {
 
-    private List<? extends ItfBeanSimples> opcoes;
-    public ItfBeanSimples itemSelecionado;
+    private List<? extends ComoEntidadeSimples> opcoes;
+    public ComoEntidadeSimples itemSelecionado;
 
-    public List<? extends ItfBeanSimples> getOpcoes() {
+    public List<? extends ComoEntidadeSimples> getOpcoes() {
         return opcoes;
     }
 
-    public void setOpcoes(List<? extends ItfBeanSimples> opcoes) {
+    public void setOpcoes(List<? extends ComoEntidadeSimples> opcoes) {
         this.opcoes = opcoes;
     }
 
-    public ItfBeanSimples getItemSelecionado() {
+    public ComoEntidadeSimples getItemSelecionado() {
         return itemSelecionado;
     }
 
-    public void setItemSelecionado(ItfBeanSimples itemSelecionado) {
+    public void setItemSelecionado(ComoEntidadeSimples itemSelecionado) {
         this.itemSelecionado = itemSelecionado;
     }
 
-    public B_SeletorItem(List<? extends ItfBeanSimples> pOpcoes) {
+    public B_SeletorItem(List<? extends ComoEntidadeSimples> pOpcoes) {
         opcoes = pOpcoes;
     }
 
-    public List<ItfBeanSimples> autocompletUpdate(String query) {
-        List<ItfBeanSimples> sugestoes = new ArrayList<>();
+    public List<ComoEntidadeSimples> autocompletUpdate(String query) {
+        List<ComoEntidadeSimples> sugestoes = new ArrayList<>();
 
-        for (ItfBeanSimples item : opcoes) {
+        for (ComoEntidadeSimples item : opcoes) {
             if (item.getNomeCurto().toLowerCase().contains(query)) {
                 sugestoes.add(item);
             }

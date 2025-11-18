@@ -5,7 +5,7 @@
 package com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios;
 
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.permissoes.ItfAcaoGerenciarEntidade;
-import com.super_bits.modulosSB.SBCore.modulos.fabrica.ItfFabricaAcoes;
+import com.super_bits.modulosSB.SBCore.modulos.fabrica.ComoFabricaAcoes;
 
 /**
  *
@@ -17,7 +17,7 @@ public interface ItfGestaoDeEntidade<T> {
 
     public void setEntidadeSelecionada();
 
-    public void ListarEntidades(ItfFabricaAcoes pAcao);
+    public void ListarEntidades(ComoFabricaAcoes pAcao);
 
     public ItfAcaoGerenciarEntidade getAcaoGestaoVinculada();
 

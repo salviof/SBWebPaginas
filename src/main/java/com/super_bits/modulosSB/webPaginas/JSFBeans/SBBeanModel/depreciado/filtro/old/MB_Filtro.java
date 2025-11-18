@@ -2,11 +2,10 @@ package com.super_bits.modulosSB.webPaginas.JSFBeans.SBBeanModel.depreciado.filt
 
 import com.super_bits.modulosSB.Persistencia.dao.DaoGenerico;
 import com.super_bits.modulosSB.Persistencia.dao.SBNQ;
-import com.super_bits.modulosSB.Persistencia.registro.persistidos.EntidadeSimples;
+
 import com.super_bits.modulosSB.SBCore.UtilGeral.ClasseTipada;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringFiltros;
-import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringValidador;
-import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfBeanSimples;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ComoEntidadeSimples;
 import com.super_bits.modulosSB.webPaginas.util.UtilSBWP_JSFTools;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -14,7 +13,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 
 @Deprecated
-public abstract class MB_Filtro<T extends ItfBeanSimples> extends ClasseTipada implements Serializable {
+public abstract class MB_Filtro<T extends ComoEntidadeSimples> extends ClasseTipada implements Serializable {
 
     // o primeiro sempre será o Default
     protected abstract List<OpcaoFiltro> definePrefiltros();
@@ -27,7 +26,7 @@ public abstract class MB_Filtro<T extends ItfBeanSimples> extends ClasseTipada i
 
     private String nomeFiltro = defineNomeFiltro();
     private List<OpcaoFiltro> opcoes;
-    private ItfBeanSimples opcaoAtual;
+    private ComoEntidadeSimples opcaoAtual;
     private List<T> selecao;
     private String strTodos;
 
@@ -61,7 +60,7 @@ public abstract class MB_Filtro<T extends ItfBeanSimples> extends ClasseTipada i
         List<Long> resposta = new ArrayList<>();;
 
         for (T item : selecao) {
-            resposta.add(((ItfBeanSimples) item).getId());
+            resposta.add(((ComoEntidadeSimples) item).getId());
         }
         return resposta;
     }
@@ -141,13 +140,13 @@ public abstract class MB_Filtro<T extends ItfBeanSimples> extends ClasseTipada i
             int i = 0;
             for (T itemopcao : listaDeOpcoesdoFiltro) {
 
-                System.out.println(((ItfBeanSimples) itemopcao).getNomeCurto());
-                Long idNovoItem = ((ItfBeanSimples) itemopcao).getId();
+                System.out.println(((ComoEntidadeSimples) itemopcao).getNomeCurto());
+                Long idNovoItem = ((ComoEntidadeSimples) itemopcao).getId();
                 Object[] paramtroID = {idNovoItem};
                 SBNQ qryItem = new SBNQ(pFiltro.getQrySelecao()
                         .getSql(), paramtroID);
                 OpcaoFiltro novaopcao = new OpcaoFiltro(
-                        ((EntidadeSimples) itemopcao).getNomeCurto(), qryItem);
+                        ((ComoEntidadeSimples) itemopcao).getNomeCurto(), qryItem);
                 novaopcao.setId(idNovoItem);
                 i = i + 1;
                 opcoes.add(novaopcao);
@@ -176,15 +175,15 @@ public abstract class MB_Filtro<T extends ItfBeanSimples> extends ClasseTipada i
         UtilSBWP_JSFTools.mensagens().erroSistema("Item" + pNomeOpcao + " ou " + UtilSBCoreStringFiltros.gerarUrlAmigavel(pNomeOpcao) + "não encontrado no filtro" + this.getClass().getSimpleName());
     }
 
-    public void setOpcaoAtual(ItfBeanSimples pOpcaoAtual) {
+    public void setOpcaoAtual(ComoEntidadeSimples pOpcaoAtual) {
         // configurando o Parametro da Pagina
 
         // definindo a opcao
-        this.opcaoAtual = (ItfBeanSimples) pOpcaoAtual;
+        this.opcaoAtual = (ComoEntidadeSimples) pOpcaoAtual;
         configSelecao();
     }
 
-    public ItfBeanSimples getOpcaoAtual() {
+    public ComoEntidadeSimples getOpcaoAtual() {
         return opcaoAtual;
     }
 
@@ -194,7 +193,7 @@ public abstract class MB_Filtro<T extends ItfBeanSimples> extends ClasseTipada i
         this.selecao = (List<T>) qrSelecao.achaItensPorSBNQ(((OpcaoFiltro) opcaoAtual)
                 .getQrySelecao());
         for (T teste : selecao) {
-            System.out.println(((ItfBeanSimples) teste).getNomeCurto());
+            System.out.println(((ComoEntidadeSimples) teste).getNomeCurto());
         }
 
     }

@@ -1,11 +1,11 @@
 package com.super_bits.modulosSB.webPaginas.JSFBeans.SBBeanModel.chart;
 
-import com.super_bits.modulosSB.Persistencia.registro.persistidos.EntidadeSimples;
+import com.super_bits.modulosSB.Persistencia.registro.persistidos.EntidadeSimplesORM;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campo.CampoEsperado;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campo.FabTipoAtributoObjeto;
-import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.charts.ItfBeanSimpleChart;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.charts.ComoEntidadeSimpleChart;
 
-public class B_ChartSimples<T> extends EntidadeSimples implements ItfBeanSimpleChart {
+public class B_ChartSimples<T> extends EntidadeSimplesORM implements ComoEntidadeSimpleChart {
 
     public B_ChartSimples() {
         super();

@@ -10,9 +10,7 @@ import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringsMaiuculoMinusc
 import com.super_bits.modulosSB.SBCore.UtilGeral.json.ErroProcessandoJson;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.ErroChamadaController;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.ItfResposta;
-import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ItfAcaoDoSistema;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.qualificadoresCDI.sessao.QlSessaoFacesContext;
-import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfSessao;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.interfaces.ItfB_PaginaSimples;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.reflexao.anotacoes.InfoPagina;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.siteMap.MapaDeFormularios;
@@ -37,6 +35,8 @@ import javax.enterprise.context.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ComoSessao;
+import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ComoAcaoDoSistema;
 
 /**
  *
@@ -48,11 +48,11 @@ import javax.inject.Named;
 @InfoPagina(tags = "pgJsonWebView", nomeCurto = "pgJsonWebView")
 public class PgJsonWebView implements Serializable {
 
-    private ItfAcaoDoSistema acaoVinculada;
+    private ComoAcaoDoSistema acaoVinculada;
 
     @QlSessaoFacesContext
     @Inject
-    private ItfSessao sessao;
+    private ComoSessao sessao;
     private EstruturaDeFormulario formulario;
     private ConfiguracoesDeFormularioPorUrl configuracoesDeUrl;
 
@@ -63,7 +63,7 @@ public class PgJsonWebView implements Serializable {
 
     }
 
-    public ItfAcaoDoSistema getAcaoVinculada() {
+    public ComoAcaoDoSistema getAcaoVinculada() {
         return acaoVinculada;
     }
 
@@ -82,7 +82,7 @@ public class PgJsonWebView implements Serializable {
 
         if (acaoVinculada.equals(FabAcaoPaginasDoSistema.PAGINA_NATIVA_JSON_WEBVIEW_MB_GESTAO.getRegistro())) {
             if (!configuracoesDeUrl.getStringAcoes().isEmpty()) {
-                ItfAcaoDoSistema acao = acaoVinculada.getAcaoDeGestaoEntidade().getSubAcaoByString(configuracoesDeUrl.getStringAcoes().get(0));
+                ComoAcaoDoSistema acao = acaoVinculada.getAcaoDeGestaoEntidade().getSubAcaoByString(configuracoesDeUrl.getStringAcoes().get(0));
                 String parametros = configuracoesDeUrl.getCorpo();
                 try {
                     if (!UtilSBWPServletTools.getRequestAtual().getMethod().equals("POST")) {

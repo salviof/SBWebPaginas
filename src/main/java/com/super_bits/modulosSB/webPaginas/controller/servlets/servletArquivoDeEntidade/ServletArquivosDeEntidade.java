@@ -16,7 +16,7 @@ import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campo.FabTipoA
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campo.ItfDadoDinamico;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campoInstanciado.ItfCampoInstanciado;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.MapaObjetosProjetoAtual;
-import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfBeanSimples;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ComoEntidadeSimples;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.ItemSimplesOffilineApartirDeSlugDeObjeto;
 import com.super_bits.modulosSB.webPaginas.ConfigGeral.SBWebPaginas;
 import com.super_bits.modulosSB.webPaginas.controller.servlets.ServletArquivosSBWPGenerico;
@@ -74,14 +74,14 @@ public class ServletArquivosDeEntidade extends ServletArquivosSBWPGenerico imple
         ItemSimplesOffilineApartirDeSlugDeObjeto itemEnviado = new ItemSimplesOffilineApartirDeSlugDeObjeto(pSlugObjeto);
 
         if (itemEnviado.getId() == null) {
-            ItfBeanSimples beanNovoItemTemporario = null;
+            ComoEntidadeSimples beanNovoItemTemporario = null;
             switch (prDadosREquisicaoArquivoEntidade.getTipoRecurso().getFabipoArquivo()) {
                 case IMAGE_REPRESENTATIVA_ENTIDADE_PEQUENO:
                 case IMAGE_REPRESENTATIVA_ENTIDADE_MEDIO:
                 case IMAGE_REPRESENTATIVA_ENTIDADE_GRANDE:
                 default:
                     try {
-                        beanNovoItemTemporario = (ItfBeanSimples) MapaObjetosProjetoAtual.getClasseDoObjetoByNome(pNomeEntidade).newInstance();
+                        beanNovoItemTemporario = (ComoEntidadeSimples) MapaObjetosProjetoAtual.getClasseDoObjetoByNome(pNomeEntidade).newInstance();
                     } catch (Throwable t) {
                         SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "Erro criando nova instancia de entidade para obtenção de arquivo temporario", t);
                     }
@@ -139,7 +139,7 @@ public class ServletArquivosDeEntidade extends ServletArquivosSBWPGenerico imple
                     default: {
                         EntityManager em = UtilSBPersistencia.getEMPadraoNovo();
                         try {
-                            prDadosREquisicaoArquivoEntidade.setEntidade((ItfBeanSimples) UtilSBPersistencia.getRegistroByNomeSlug(classeEntidade, pSlugObjeto, UtilSBPersistencia.getNovoEM()));
+                            prDadosREquisicaoArquivoEntidade.setEntidade((ComoEntidadeSimples) UtilSBPersistencia.getRegistroByNomeSlug(classeEntidade, pSlugObjeto, UtilSBPersistencia.getNovoEM()));
                             if (prDadosREquisicaoArquivoEntidade.getEntidade() != null) {
                                 if (prDadosREquisicaoArquivoEntidade.getEntidade().getId() != null && prDadosREquisicaoArquivoEntidade.getEntidade().getId() > 0) {
                                     String nomeobj = prDadosREquisicaoArquivoEntidade.getEntidade().getNome();
@@ -162,7 +162,7 @@ public class ServletArquivosDeEntidade extends ServletArquivosSBWPGenerico imple
                 case IMAGE_REPRESENTATIVA_ENTIDADE_MEDIO:
                 case IMAGE_REPRESENTATIVA_ENTIDADE_PEQUENO:
                     try {
-                        prDadosREquisicaoArquivoEntidade.setEntidade((ItfBeanSimples) classeEntidade.newInstance());
+                        prDadosREquisicaoArquivoEntidade.setEntidade((ComoEntidadeSimples) classeEntidade.newInstance());
                         String[] partes = pSlugObjeto.split("-");
                         for (String parte : partes) {
                             if (UtilSBCoreStringValidador.isContemApenasNumero(parte)) {

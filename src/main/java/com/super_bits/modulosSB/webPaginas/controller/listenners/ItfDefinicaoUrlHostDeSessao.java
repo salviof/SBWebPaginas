@@ -4,8 +4,8 @@
  */
 package com.super_bits.modulosSB.webPaginas.controller.listenners;
 
-import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfSessao;
 import java.io.Serializable;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ComoSessao;
 
 /**
  *
@@ -14,6 +14,6 @@ import java.io.Serializable;
 public interface ItfDefinicaoUrlHostDeSessao
         extends Serializable {
 
-    public String gerarUrlDeAcesso(ItfSessao pAcesso);
+    public String gerarUrlDeAcesso(ComoSessao pAcesso);
 
 }

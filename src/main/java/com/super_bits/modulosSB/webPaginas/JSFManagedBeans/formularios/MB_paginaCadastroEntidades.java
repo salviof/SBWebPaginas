@@ -8,19 +8,17 @@ import com.super_bits.modulos.SBAcessosModel.model.acoes.AcaoDoSistema;
 import com.super_bits.modulosSB.Persistencia.ConfigGeral.SBPersistencia;
 import com.super_bits.modulosSB.Persistencia.dao.UtilSBPersistencia;
 import com.super_bits.modulosSB.Persistencia.dao.consultaDinamica.ConsultaDinamicaDeEntidade;
-import com.super_bits.modulosSB.Persistencia.registro.persistidos.EntidadeSimples;
+
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreListasObjeto;
-import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreObjetoSB;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreReflexao;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreReflexaoObjeto;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.ItfParametroRequisicao;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.ItfParametroRequisicaoInstanciado;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.ItfRespostaAcaoDoSistema;
-import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ItfAcaoController;
-import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ItfAcaoControllerEntidade;
-import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ItfAcaoDoSistema;
-import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ItfAcaoSecundaria;
+import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ComoAcaoController;
+import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ComoAcaoControllerEntidade;
+import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ComoAcaoSecundaria;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.estadoFormulario.FabEstadoFormulario;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.permissoes.ItfAcaoEntidade;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.permissoes.ItfAcaoFormulario;
@@ -30,7 +28,7 @@ import com.super_bits.modulosSB.SBCore.modulos.Controller.UtilFabricaDeAcoesBasi
 import com.super_bits.modulosSB.SBCore.modulos.Controller.fabricas.FabTipoAcaoSistemaGenerica;
 import com.super_bits.modulosSB.SBCore.modulos.Mensagens.FabMensagens;
 import com.super_bits.modulosSB.SBCore.modulos.comunicacao.FabTipoRespostaComunicacao;
-import com.super_bits.modulosSB.SBCore.modulos.fabrica.ItfFabricaAcoes;
+import com.super_bits.modulosSB.SBCore.modulos.fabrica.ComoFabricaAcoes;
 import com.super_bits.modulosSB.SBCore.modulos.geradorCodigo.model.EstruturaDeEntidade;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.anotacoes.InfoPreparacaoObjeto;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campo.FabTipoAtributoObjeto;
@@ -38,17 +36,12 @@ import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campo.TIPO_PRI
 import com.super_bits.modulosSB.SBCore.modulos.objetos.MapaObjetosProjetoAtual;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.estrutura.ItfEstruturaCampoEntidade;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.estrutura.ItfLigacaoMuitosParaUm;
-import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfBeanGenerico;
-import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfBeanSimples;
-import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfBeanSimplesSomenteLeitura;
-import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfBeanStatus;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ComoEntidadeSimples;
 import com.super_bits.modulosSB.webPaginas.JSFBeans.PrimeFacesBeanModel.dataListLasy.BP_DataModelLasy;
-import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.declarados.util.PgUtil;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.interfaces.ItfPaginaGerenciarEntidade;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.siteMap.MapaDeFormularios;
 
 import com.super_bits.modulosSB.webPaginas.controller.servlets.servletWebPaginas.EstruturaDeFormulario;
-import com.super_bits.modulosSB.webPaginas.controller.servletes.urls.parametrosURL.ParametroURL;
 import com.super_bits.modulosSB.webPaginas.controller.servletes.urls.parametrosURL.ParametroUrlInstanciado;
 import com.super_bits.modulosSB.webPaginas.util.UtilSBWP_JSFTools;
 import com.super_bits.modulosSB.webPaginas.util.UtillSBWPReflexoesWebpaginas;
@@ -65,6 +58,10 @@ import org.coletivojava.fw.api.tratamentoErros.ErroPreparandoObjeto;
 import org.coletivojava.fw.api.tratamentoErros.FabErro;
 import org.primefaces.PrimeFaces;
 import org.primefaces.event.SelectEvent;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ComoDominioEntidadeGenerico;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ComoEntidadeSimplesSomenteLeitura;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ComoStatus;
+import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ComoAcaoDoSistema;
 
 /**
  * ATENÇÃO A DOCUMENTAÇÃO DA CLASSE É OBRIGATÓRIA O JAVADOC DOS METODOS PUBLICOS
@@ -78,7 +75,7 @@ import org.primefaces.event.SelectEvent;
  * @version 1.0
  *
  */
-public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> extends MB_PaginaConversation implements ItfPaginaGerenciarEntidade<T> {
+public abstract class MB_paginaCadastroEntidades<T extends ComoEntidadeSimples> extends MB_PaginaConversation implements ItfPaginaGerenciarEntidade<T> {
 
     private T entidadeSelecionada;
     private List<T> entidadesListadas;
@@ -90,13 +87,13 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
     private boolean temVisualizar = true;
     protected boolean listarEntidadesLasyMode = true;
 
-    private final List<ItfAcaoDoSistema> acoesRegistros;
+    private final List<ComoAcaoDoSistema> acoesRegistros;
     protected ItfAcaoFormularioEntidade acaoListarRegistros;
     protected final ItfAcaoFormularioEntidade acaoNovoRegistro;
-    protected final ItfAcaoControllerEntidade acaoSalvarAlteracoes;
+    protected final ComoAcaoControllerEntidade acaoSalvarAlteracoes;
 
     private ItfAcaoFormularioEntidade acaoEntidadeEditar;
-    private ItfAcaoControllerEntidade acaoEntidadeAlterarStatus;
+    private ComoAcaoControllerEntidade acaoEntidadeAlterarStatus;
     private ItfAcaoFormularioEntidade acaoEntidadeVisualizar;
 
     private boolean podeEditar;
@@ -120,7 +117,7 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
     }
 
     @Override
-    protected void autoExecProximaAcaoAposController(ItfAcaoController pAcaoController, ItfRespostaAcaoDoSistema pResposta) {
+    protected void autoExecProximaAcaoAposController(ComoAcaoController pAcaoController, ItfRespostaAcaoDoSistema pResposta) {
         super.autoExecProximaAcaoAposController(pAcaoController, pResposta);
         if (pResposta != null) {
             if (pResposta.isSucesso()) {
@@ -173,15 +170,15 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
 
     }
 
-    private static ItfAcaoDoSistema[] converterArrayDeAcoes(List<ItfAcaoDoSistema> pParametro) {
-        ItfAcaoDoSistema[] acoes = new ItfAcaoDoSistema[pParametro.size()];
+    private static ComoAcaoDoSistema[] converterArrayDeAcoes(List<ComoAcaoDoSistema> pParametro) {
+        ComoAcaoDoSistema[] acoes = new ComoAcaoDoSistema[pParametro.size()];
         pParametro.toArray(acoes);
 
         return acoes;
     }
 
-    private static ItfAcaoDoSistema[] converterAcoesSecundariasEmArrayDeAcao(List<ItfAcaoSecundaria> pParametro) {
-        ItfAcaoDoSistema[] acoes = new ItfAcaoDoSistema[pParametro.size()];
+    private static ComoAcaoDoSistema[] converterAcoesSecundariasEmArrayDeAcao(List<ComoAcaoSecundaria> pParametro) {
+        ComoAcaoDoSistema[] acoes = new ComoAcaoDoSistema[pParametro.size()];
 
         pParametro.toArray(acoes);
 
@@ -193,11 +190,11 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
      *
      * @param pAcaoDoSistema
      */
-    public void adicionarAcaoDeEntidade(ItfFabricaAcoes pAcaoDoSistema) {
+    public void adicionarAcaoDeEntidade(ComoFabricaAcoes pAcaoDoSistema) {
         adicionarAcaoDeEntidade(pAcaoDoSistema.getRegistro());
     }
 
-    public void adicionarAcaoDeEntidade(ItfAcaoDoSistema pAcaoDoSistema) {
+    public void adicionarAcaoDeEntidade(ComoAcaoDoSistema pAcaoDoSistema) {
         try {
             if (!acoesRegistros.contains(pAcaoDoSistema)) {
                 acoesRegistros.add(pAcaoDoSistema);
@@ -212,7 +209,7 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
         }
     }
 
-    public void removerAcaoDeEntidade(ItfAcaoDoSistema pAcaoDoSistema) {
+    public void removerAcaoDeEntidade(ComoAcaoDoSistema pAcaoDoSistema) {
         try {
             acoesRegistros.remove(pAcaoDoSistema);
         } catch (Throwable t) {
@@ -235,10 +232,10 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
      *
      */
     private MB_paginaCadastroEntidades(
-            ItfAcaoDoSistema[] pAcoesRegistro,
+            ComoAcaoDoSistema[] pAcoesRegistro,
             ItfAcaoFormularioEntidade pAcaoNovoRegistro,
             ItfAcaoFormularioEntidade pAcaoListar,
-            ItfAcaoControllerEntidade pAcaoSalvar,
+            ComoAcaoControllerEntidade pAcaoSalvar,
             boolean pTempesquisa,
             boolean pSubChamadaDeConstructor
     ) {
@@ -251,8 +248,8 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
 
         try {
 
-            for (ItfAcaoDoSistema acao : pAcoesRegistro) {
-                acoesRegistros.add((ItfAcaoDoSistema) acao);
+            for (ComoAcaoDoSistema acao : pAcoesRegistro) {
+                acoesRegistros.add((ComoAcaoDoSistema) acao);
             }
             if (acoesRegistros.stream().filter(ac -> ac.getTipoAcaoGenerica().equals(FabTipoAcaoSistemaGenerica.FORMULARIO_LISTAR)).findFirst().isPresent()) {
                 if (acaoListarRegistros == null) {
@@ -289,10 +286,10 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
      *
      */
     public MB_paginaCadastroEntidades(
-            ItfAcaoDoSistema[] pAcoesRegistro,
+            ComoAcaoDoSistema[] pAcoesRegistro,
             ItfAcaoFormularioEntidade pAcaoNovoRegistro,
             ItfAcaoFormularioEntidade pAcaoListar,
-            ItfAcaoControllerEntidade pAcaoSalvar,
+            ComoAcaoControllerEntidade pAcaoSalvar,
             boolean pTempesquisa
     ) {
         this(pAcoesRegistro, pAcaoNovoRegistro, pAcaoListar, pAcaoSalvar, pTempesquisa, false);
@@ -300,7 +297,7 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
     }
 
     public MB_paginaCadastroEntidades(ItfAcaoGerenciarEntidade pGestao,
-            ItfFabricaAcoes... acoesDeRegistro
+            ComoFabricaAcoes... acoesDeRegistro
     ) {
         this(UtilFabricaDeAcoesBasico.gerarAcoesArrayComEstesEnuns(acoesDeRegistro),
                 pGestao.getAcaoFormularioNovo(),
@@ -340,7 +337,7 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
             AcaoDoSistema pAcaoListar,
             AcaoDoSistema pAcaoSalvar,
             boolean pTempesquisa) {
-        this((ItfAcaoDoSistema[]) pAcoesRegistro.toArray(new AcaoDoSistema[pAcoesRegistro.size()]), pAcaoNovoRegistro.getComoFormularioEntidade(),
+        this((ComoAcaoDoSistema[]) pAcoesRegistro.toArray(new AcaoDoSistema[pAcoesRegistro.size()]), pAcaoNovoRegistro.getComoFormularioEntidade(),
                 pAcaoListar.getComoFormularioEntidade(), pAcaoSalvar.getComoControllerEntidade(), pTempesquisa);
     }
 
@@ -358,10 +355,10 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
      * @param pTemAlterarStatus Informa se o formulario tem opções de Alterar
      * Status
      */
-    public MB_paginaCadastroEntidades(ItfAcaoDoSistema[] pAcoesRegistro,
+    public MB_paginaCadastroEntidades(ComoAcaoDoSistema[] pAcoesRegistro,
             ItfAcaoFormularioEntidade pAcaoNovoRegistro,
             ItfAcaoFormularioEntidade pAcaoListar,
-            ItfAcaoControllerEntidade pAcaoSalvar,
+            ComoAcaoControllerEntidade pAcaoSalvar,
             boolean pTempesquisa,
             boolean pTemVisualizar,
             boolean pTemEditar,
@@ -398,7 +395,7 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
                         }
                         if (parametro.isUmParametroDeEntidade()) {
 
-                            T entidadeAtualizada = UtilSBPersistencia.loadEntidade((ItfBeanSimples) parametro.getValor(), getEMPagina());
+                            T entidadeAtualizada = UtilSBPersistencia.loadEntidade((ComoEntidadeSimples) parametro.getValor(), getEMPagina());
                             if (entidadeAtualizada == null) {
                                 try {
                                     setEntidadeSelecionada((T) parametro.getValor());
@@ -423,7 +420,7 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
         }
     }
 
-    public ItfRespostaAcaoDoSistema execucaoAcaoControllerPadrao(ItfAcaoController pAcaoController) {
+    public ItfRespostaAcaoDoSistema execucaoAcaoControllerPadrao(ComoAcaoController pAcaoController) {
         return execucaoAcaoControllerPadrao(pAcaoController, true);
     }
 
@@ -461,7 +458,7 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
     }
 
     @Override
-    public List<ItfAcaoDoSistema> getAcoesRegistros() {
+    public List<ComoAcaoDoSistema> getAcoesRegistros() {
 
         return acoesRegistros;
     }
@@ -498,13 +495,13 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
     }
 
     @Override
-    public ItfAcaoDoSistema getAcaoSelecionada() {
-        return (ItfAcaoDoSistema) acaoSelecionada;
+    public ComoAcaoDoSistema getAcaoSelecionada() {
+        return (ComoAcaoDoSistema) acaoSelecionada;
     }
 
     // Define a ação selecionada
     @Override
-    public void setAcaoSelecionada(ItfAcaoDoSistema acaoSelecionada) {
+    public void setAcaoSelecionada(ComoAcaoDoSistema acaoSelecionada) {
 
         this.acaoSelecionada = acaoSelecionada;
         if (acaoSelecionada != null && acaoSelecionada.isUmaAcaoFormulario()) {
@@ -521,13 +518,13 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
     }
 
     @Override
-    public ItfAcaoDoSistema getAcaoSalvarAlteracoes() {
+    public ComoAcaoDoSistema getAcaoSalvarAlteracoes() {
         try {
             if (acaoSalvarAlteracoes != null) {
                 if (!acaoSalvarAlteracoes.getComoControllerEntidade().getClasseRelacionada().getSimpleName().equals(getEntidadeSelecionada().getClass().getSimpleName())) {
                     List acoesDaEntidade = getAcaoVinculada().getAcoesVinculadasDesteTipoComEstaEntidade(FabTipoAcaoSistemaGenerica.CONTROLLER_SALVAR_MODO_MERGE, getEntidadeSelecionada().getClass());
                     if (!acoesDaEntidade.isEmpty()) {
-                        return (ItfAcaoDoSistema) acoesDaEntidade.get(0);
+                        return (ComoAcaoDoSistema) acoesDaEntidade.get(0);
                     }
                 }
             }
@@ -535,7 +532,7 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
 
         }
 
-        return (ItfAcaoDoSistema) acaoSalvarAlteracoes;
+        return (ComoAcaoDoSistema) acaoSalvarAlteracoes;
     }
 
     @Override
@@ -599,7 +596,7 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
     private void configuraAcoes() {
         try {
 
-            for (ItfAcaoDoSistema acao : acoesRegistros) {
+            for (ComoAcaoDoSistema acao : acoesRegistros) {
 
                 if (acao.isUmaAcaoGenerica()) {
 
@@ -617,7 +614,7 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
                         if (!temAlterarStatus) {
                             throw new UnsupportedOperationException("A opção TemAlterarStatus está false, mas uma ação do tipo controller Ativa_desativar foi encontrada entre as ações dos registros de entidade, verifique o constructor, ou a  config da ação" + acao.getNomeAcao());
                         } else {
-                            acaoEntidadeAlterarStatus = (ItfAcaoControllerEntidade) acao;
+                            acaoEntidadeAlterarStatus = (ComoAcaoControllerEntidade) acao;
                         }
 
                     }
@@ -663,7 +660,7 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
     }
 
     @Override
-    public ItfAcaoControllerEntidade getAcaoAlterarStatus() {
+    public ComoAcaoControllerEntidade getAcaoAlterarStatus() {
         return acaoEntidadeAlterarStatus;
     }
 
@@ -692,18 +689,18 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
 
     }
 
-    protected ItfBeanSimples getEntidadeSelecionadaComoBeanSimples() {
-        return (ItfBeanSimples) getEntidadeSelecionada();
+    protected ComoEntidadeSimples getEntidadeSelecionadaComoBeanSimples() {
+        return (ComoEntidadeSimples) getEntidadeSelecionada();
     }
 
     @Override
-    public ItfBeanSimples getBeanSelecionado() {
+    public ComoEntidadeSimples getBeanSelecionado() {
 
         return getEntidadeSelecionadaComoBeanSimples();
     }
 
     @Override
-    public void setBeanSelecionado(ItfBeanSimples pBeanSimples) {
+    public void setBeanSelecionado(ComoEntidadeSimples pBeanSimples) {
         try {
             setEntidadeSelecionada((T) pBeanSimples);
         } catch (Throwable t) {
@@ -727,7 +724,7 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
                 }
             } else {
                 try {
-                    ItfBeanSimples bean = null;
+                    ComoEntidadeSimples bean = null;
                     Class calssePesquisa = null;
                     if (getAcaoSelecionada().isUmaAcaoDeEntidade()) {
                         calssePesquisa = getAcaoSelecionada().getComoAcaoDeEntidade().getClasseRelacionada();
@@ -735,9 +732,9 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
                         calssePesquisa = getAcaoSelecionada().getAcaoDeGestaoEntidade().getClasseRelacionada();
                     }
                     if (getAcaoSelecionada().isUmaAcaoFormulario() && getAcaoSelecionada().isUmaAcaoDeEntidade()) {
-                        bean = (ItfBeanSimples) getAcaoSelecionada().getComoFormularioEntidade().getClasseRelacionada().newInstance();
+                        bean = (ComoEntidadeSimples) getAcaoSelecionada().getComoFormularioEntidade().getClasseRelacionada().newInstance();
                     } else {
-                        bean = (ItfBeanSimples) getAcaoVinculada().getClasseRelacionada().newInstance();
+                        bean = (ComoEntidadeSimples) getAcaoVinculada().getClasseRelacionada().newInstance();
                     }
                     ConsultaDinamicaDeEntidade novaConsulta = new ConsultaDinamicaDeEntidade(calssePesquisa, getEMPagina());
                     if (getParametrosURL().size() > 1) {
@@ -755,7 +752,7 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
                                         .findFirst();
                                 if (pesquisaCampoTipoParametro.isPresent()) {
                                     ItfEstruturaCampoEntidade campoMesmoTipoParametro = pesquisaCampoTipoParametro.get();
-                                    novaConsulta.addCondicaoManyToOneIgualA(campoMesmoTipoParametro.getNomeDeclarado(), (ItfBeanSimples) pr.getValor());
+                                    novaConsulta.addCondicaoManyToOneIgualA(campoMesmoTipoParametro.getNomeDeclarado(), (ComoEntidadeSimples) pr.getValor());
                                 }
 
                             }
@@ -795,7 +792,7 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
     public void atualizarEntidadeSelecionada() {
         try {
             if (getEntidadeSelecionada() != null && isUmaEntidadePersistivel()) {
-                ItfBeanSimplesSomenteLeitura entidadeComoBeanSimples = (ItfBeanSimplesSomenteLeitura) getEntidadeSelecionada();
+                ComoEntidadeSimplesSomenteLeitura entidadeComoBeanSimples = (ComoEntidadeSimplesSomenteLeitura) getEntidadeSelecionada();
 
                 renovarEMPagina();
 
@@ -843,7 +840,7 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
             InfoPreparacaoObjeto infoPreparacao = UtilSBCoreReflexaoObjeto.getInfoPreparacaoObjeto(classeDaEntidade);
             if (infoPreparacao != null) {
                 if (infoPreparacao.classesPrConstructorPrincipal().length == 0) {
-                    ((ItfBeanGenerico) getEntidadeSelecionada()).prepararNovoObjeto();
+                    ((ComoDominioEntidadeGenerico) getEntidadeSelecionada()).prepararNovoObjeto();
                 } else {
                     if (infoPreparacao.classesPrConstructorPrincipal().length == 1) {
                         Class classeParametro = infoPreparacao.classesPrConstructorPrincipal()[0];
@@ -855,7 +852,7 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
                                     throw new UnsupportedOperationException("Impossível encontrar valor de  parametro de url obrigatorio do tipo " + classeParametro.getSimpleName() + " para preparar objeto do tipo " + classeDaEntidade.getSimpleName());
                                 }
                             } else {
-                                getEntidadeSelecionada().prepararNovoObjeto(UtilSBPersistencia.loadEntidade((ItfBeanSimplesSomenteLeitura) pr.getValor(), getEMPagina()));
+                                getEntidadeSelecionada().prepararNovoObjeto(UtilSBPersistencia.loadEntidade((ComoEntidadeSimplesSomenteLeitura) pr.getValor(), getEMPagina()));
                             }
                         } else {
 
@@ -908,16 +905,16 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
                     if (pEnTidade != null) {
 
                         /// caso não se trate de um novo registro
-                        if (((ItfBeanSimplesSomenteLeitura) pEnTidade).getId() != null) {
+                        if (((ComoEntidadeSimplesSomenteLeitura) pEnTidade).getId() != null) {
                             // Caso ESteja mudando de registro selecionado
                             if (getEntidadeSelecionada() == null
-                                    || ((ItfBeanSimplesSomenteLeitura) getEntidadeSelecionada()).getId() != ((ItfBeanSimplesSomenteLeitura) pEnTidade).getId()) {
+                                    || ((ComoEntidadeSimplesSomenteLeitura) getEntidadeSelecionada()).getId() != ((ComoEntidadeSimplesSomenteLeitura) pEnTidade).getId()) {
                                 //Atualiza o REgsitro Selecionado
                                 if (isUmaEntidadePersistivel()) {
                                     renovarEMPagina();
                                     if (!getAcaoSelecionada().isUmaAcaoController()) {
                                         if (mesmoentreEntidadeEAcaoAtual) {
-                                            getPaginaDoDominio().setEntidadeSelecionada((T) UtilSBPersistencia.loadEntidade((ItfBeanSimples) pEnTidade, getEMPagina()));
+                                            getPaginaDoDominio().setEntidadeSelecionada((T) UtilSBPersistencia.loadEntidade((ComoEntidadeSimples) pEnTidade, getEMPagina()));
                                         } else {
                                             String strClasseEntidade = UtilSBCoreReflexaoObjeto.getClasseDiscriminatoriaPolimorfismoDeEntidade(pEnTidade);
                                             if (strClasseEntidade != null) {
@@ -925,17 +922,17 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
                                                     pEnTidade = (T) UtilSBPersistencia.getRegistroByID(MapaObjetosProjetoAtual.getClasseDoObjetoByNome(strClasseEntidade), pEnTidade.getId(), getEMPagina());
                                                     setEntidadeSelecionada(pEnTidade);
                                                 } catch (Throwable t) {
-                                                    getPaginaDoDominio().setEntidadeSelecionada((T) UtilSBPersistencia.loadEntidade((ItfBeanSimples) pEnTidade, getEMPagina()));
+                                                    getPaginaDoDominio().setEntidadeSelecionada((T) UtilSBPersistencia.loadEntidade((ComoEntidadeSimples) pEnTidade, getEMPagina()));
                                                 }
                                             } else {
-                                                getPaginaDoDominio().setEntidadeSelecionada((T) UtilSBPersistencia.loadEntidade((ItfBeanSimples) pEnTidade, getEMPagina()));
+                                                getPaginaDoDominio().setEntidadeSelecionada((T) UtilSBPersistencia.loadEntidade((ComoEntidadeSimples) pEnTidade, getEMPagina()));
                                             }
                                         }
 
                                     } else {
                                         if (getEntidadeSelecionada() == null || !getEntidadeSelecionada().equals(pEnTidade)) {
 
-                                            getPaginaDoDominio().setEntidadeSelecionada((T) UtilSBPersistencia.loadEntidade((ItfBeanSimples) pEnTidade, getEMPagina()));
+                                            getPaginaDoDominio().setEntidadeSelecionada((T) UtilSBPersistencia.loadEntidade((ComoEntidadeSimples) pEnTidade, getEMPagina()));
                                         } else {
                                             getPaginaDoDominio().setEntidadeSelecionada(pEnTidade);
                                         }
@@ -998,7 +995,7 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
                 return;
             }
 
-            ItfAcaoDoSistema acoAlternativa = getAcaoVinculada().getAcaoCompativelEntidadeDivergente(acaoSelecionada, classeEntidadeSelecionada);
+            ComoAcaoDoSistema acoAlternativa = getAcaoVinculada().getAcaoCompativelEntidadeDivergente(acaoSelecionada, classeEntidadeSelecionada);
             if (acoAlternativa != null) {
                 acaoSelecionada = acoAlternativa;
             }
@@ -1244,11 +1241,11 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
                                         ItfRespostaAcaoDoSistema respAcao = autoExecAcaoController((T) pEntidadeSelecionada);
                                         respAcao.dispararMensagens();
                                         ultimaRespostaControllerRecebida = respAcao;
-                                        autoExecProximaAcaoAposController((ItfAcaoController) acaoSelecionada, respAcao);
+                                        autoExecProximaAcaoAposController((ComoAcaoController) acaoSelecionada, respAcao);
                                     } else {
                                         ultimaRespostaControllerRecebida = null;
 
-                                        autoExecProximaAcaoAposController((ItfAcaoController) acaoSelecionada, null);
+                                        autoExecProximaAcaoAposController((ComoAcaoController) acaoSelecionada, null);
                                     }
                                 }
                             }
@@ -1258,13 +1255,13 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
                             if (respAcao != null) {
                                 respAcao.dispararMensagens();
                             }
-                            autoExecProximaAcaoAposController((ItfAcaoController) acaoSelecionada, respAcao);
+                            autoExecProximaAcaoAposController((ComoAcaoController) acaoSelecionada, respAcao);
                         }
 
                     } catch (Throwable t) {
                         SBCore.enviarMensagemUsuario("Houve um erro inesperado!, entre em contato com o suporte", FabMensagens.ALERTA);
                         SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "Erro executando ação de controler padrão, a resposta não foi obtida para:" + acaoSelecionada, t);
-                        autoExecProximaAcaoAposController((ItfAcaoController) acaoSelecionada, null);
+                        autoExecProximaAcaoAposController((ComoAcaoController) acaoSelecionada, null);
                     }
                     break;
 
@@ -1344,8 +1341,8 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
         return listaEntidadeLasy;
     }
 
-    public List<ItfAcaoDoSistema> autoExecObterAcoesDoRegistro(T pRegistro) {
-        List<ItfAcaoDoSistema> acoesDoRegistro = new ArrayList<>();
+    public List<ComoAcaoDoSistema> autoExecObterAcoesDoRegistro(T pRegistro) {
+        List<ComoAcaoDoSistema> acoesDoRegistro = new ArrayList<>();
         try {
             if (pRegistro == null) {
                 if (temNovo) {
@@ -1358,12 +1355,12 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
 
             }
 
-            List<Field> campos = UtilSBCoreReflexao.getCamposRecursivoPorInterface(pRegistro.getClass(), ItfBeanStatus.class,
-                    EntidadeSimples.class
+            List<Field> campos = UtilSBCoreReflexao.getCamposRecursivoPorInterface(pRegistro.getClass(), ComoStatus.class,
+                    ComoEntidadeSimples.class
             );
             if (!campos.isEmpty()) {
                 Field campo = campos.get(0);
-                ItfBeanStatus statusEntidade = (ItfBeanStatus) campo.get(getEntidadeSelecionada());
+                ComoStatus statusEntidade = (ComoStatus) campo.get(getEntidadeSelecionada());
                 return statusEntidade.getStatusEnum().opcoesPorStatus();
             }
             acoesDoRegistro.addAll(getAcaoVinculada().getAcoesVinculadasAObjetoExistente());
@@ -1374,7 +1371,7 @@ public abstract class MB_paginaCadastroEntidades<T extends ItfBeanSimples> exten
         }
     }
 
-    public List<ItfAcaoDoSistema> getAcoesDoRegistroSelecionado() {
+    public List<ComoAcaoDoSistema> getAcoesDoRegistroSelecionado() {
         return autoExecObterAcoesDoRegistro(getEntidadeSelecionada());
     }
 

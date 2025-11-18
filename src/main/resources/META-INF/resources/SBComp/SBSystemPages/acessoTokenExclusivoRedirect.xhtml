@@ -1,0 +1,69 @@
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:SBAcao="http://xmlns.jcp.org/jsf/composite/SBComp/composite/acoesENavegacao"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    template="#{layoutsPaginas.modeloGeralAnonimo.xhtmlVinculado}"
+    xmlns:fb="http://ogp.me/ns/fb#"
+    xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="head"  >
+        <style>
+            .botaoBox {
+
+                margin-top: 3px;
+            }
+        </style>
+    </ui:define>
+
+    <ui:define name="divConteudo">
+
+        <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+            <div class="p-text-center">
+                <i class="Fs100 pi pi-spin pi-spinner loading-icon" aria-hidden="true"></i>
+            </div>
+        </p:dialog>
+        #{sessaoAtualSBWP.usuario.nome}
+        #{sessaoAtualSBWP.urlHostDaSessao}
+        <h:form>
+            <script >
+                function  atualizarTelaSeNaoConfigurado() {
+                    try {
+                        PF('statusDialog').show();
+                        atualizarResolucaoDaTela();
+                    } catch (t) {
+
+                    }
+                }
+            </script>
+            <p:remoteCommand
+                name="iniciarSessaoPorToken"
+                actionListener="#{pgUtil.mensagemInfo('Obtendo dados do token')}"
+                onstart="atualizarTelaSeNaoConfigurado();"
+                onsuccess="window.location.href = '#{pgAcessoViaTokenDinamico.urlAcaoDoToken}';"
+                />
+            <p:ajaxStatus onstart="PF('statusDialog').show()" oncomplete="PF('statusDialog').hide();" />
+        </h:form>
+        <script >
+
+            iniciarSessaoPorToken();
+        </script>
+
+        <h:panelGroup layout="block" styleClass="Container12 OrganizadorContainer" style="margin-top: 300px;height: 80vh;">
+            <h:panelGroup layout="block" styleClass="Container1 OrganizadorContainer" >
+                <div class="p-text-center">
+                    <p:graphicImage name="images/preloader.gif" width="100" library="primefaces-adamantium"/>
+                </div>
+            </h:panelGroup>
+
+        </h:panelGroup>
+
+
+
+        <h:panelGroup id="#{paginaAtual.infoPagina.idAreaExbicaoAcaoSelecionada}">
+            <ui:include src="#{paginaAtual.infoPagina.xhtmlAcaoAtual}" />
+        </h:panelGroup>
+
+    </ui:define>
+
+</ui:composition>

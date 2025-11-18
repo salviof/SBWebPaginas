@@ -4,8 +4,8 @@
  */
 package com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.interfaces;
 
-import com.super_bits.modulosSB.SBCore.modulos.view.menu.ItfFabricaMenu;
 import java.io.Serializable;
+import com.super_bits.modulosSB.SBCore.modulos.view.menu.ComoFabricaMenu;
 
 /**
  *
@@ -22,7 +22,7 @@ public interface ItfSiteMapa extends Serializable {
      *
      * @return Fabrica de menus do sistema
      */
-    Class<? extends ItfFabricaMenu> getFabricaMenu();
+    Class<? extends ComoFabricaMenu> getFabricaMenu();
 
     ItfB_PaginaSimples getPaginaNoContexto(String xhtmlGerenciarPG) throws UnsupportedOperationException;
 

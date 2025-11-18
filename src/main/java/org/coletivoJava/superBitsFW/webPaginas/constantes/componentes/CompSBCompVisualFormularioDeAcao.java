@@ -6,21 +6,21 @@ import java.io.Serializable;
 import com.super_bits.modulosSB.SBCore.modulos.view.fabricasCompVisual.componentes.FabCompVisualFormularioDeAcao;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 import org.coletivojava.fw.api.tratamentoErros.FabErro;
-import com.super_bits.modulosSB.SBCore.modulos.view.fabricasCompVisual.ItfComponenteVisualSB;
 import org.coletivojava.fw.api.objetoNativo.view.componente.FamiliaComponente;
+import com.super_bits.modulosSB.SBCore.modulos.view.fabricasCompVisual.ComoComponenteVisualSB;
 
 @Named
 @ApplicationScoped
 public class CompSBCompVisualFormularioDeAcao implements Serializable {
 
 	private final FamiliaComponente familia;
-	private final ItfComponenteVisualSB formulario_de_acao_registro_Responsiva;
-	private final ItfComponenteVisualSB formulario_de_acao_registro_Mobile;
-	private final ItfComponenteVisualSB formulario_de_acao_registro_Desktop;
-	private final ItfComponenteVisualSB formulario_de_acao_Listagem_Responsiva;
-	private final ItfComponenteVisualSB formulario_de_acao_listagem_Mobile;
-	private final ItfComponenteVisualSB formulario_de_acao_listagem_Desktop;
-	private final ItfComponenteVisualSB formulario_de_acao_listagem_Card_Full;
+	private final ComoComponenteVisualSB formulario_de_acao_registro_Responsiva;
+	private final ComoComponenteVisualSB formulario_de_acao_registro_Mobile;
+	private final ComoComponenteVisualSB formulario_de_acao_registro_Desktop;
+	private final ComoComponenteVisualSB formulario_de_acao_Listagem_Responsiva;
+	private final ComoComponenteVisualSB formulario_de_acao_listagem_Mobile;
+	private final ComoComponenteVisualSB formulario_de_acao_listagem_Desktop;
+	private final ComoComponenteVisualSB formulario_de_acao_listagem_Card_Full;
 
 	CompSBCompVisualFormularioDeAcao() {
 		this.familia = com.super_bits.modulosSB.SBCore.modulos.view.fabricasCompVisual.componentes.FabCompVisualFormularioDeAcao.class
@@ -41,8 +41,8 @@ public class CompSBCompVisualFormularioDeAcao implements Serializable {
 				.getRegistro();
 	}
 
-	public ItfComponenteVisualSB getComponentePadrao(
-			com.super_bits.modulosSB.SBCore.modulos.view.fabricasCompVisual.ItfComponenteVisualSB pComponente) {
+	public ComoComponenteVisualSB getComponentePadrao(
+			com.super_bits.modulosSB.SBCore.modulos.view.fabricasCompVisual.ComoComponenteVisualSB pComponente) {
 		try {
 			if (pComponente == null) {
 				return familia.getFabrica().getComponentePadrao();
@@ -69,31 +69,31 @@ public class CompSBCompVisualFormularioDeAcao implements Serializable {
 		return familia;
 	}
 
-	public ItfComponenteVisualSB getFormulario_de_acao_registro_Responsiva() {
+	public ComoComponenteVisualSB getFormulario_de_acao_registro_Responsiva() {
 		return formulario_de_acao_registro_Responsiva;
 	}
 
-	public ItfComponenteVisualSB getFormulario_de_acao_registro_Mobile() {
+	public ComoComponenteVisualSB getFormulario_de_acao_registro_Mobile() {
 		return formulario_de_acao_registro_Mobile;
 	}
 
-	public ItfComponenteVisualSB getFormulario_de_acao_registro_Desktop() {
+	public ComoComponenteVisualSB getFormulario_de_acao_registro_Desktop() {
 		return formulario_de_acao_registro_Desktop;
 	}
 
-	public ItfComponenteVisualSB getFormulario_de_acao_Listagem_Responsiva() {
+	public ComoComponenteVisualSB getFormulario_de_acao_Listagem_Responsiva() {
 		return formulario_de_acao_Listagem_Responsiva;
 	}
 
-	public ItfComponenteVisualSB getFormulario_de_acao_listagem_Mobile() {
+	public ComoComponenteVisualSB getFormulario_de_acao_listagem_Mobile() {
 		return formulario_de_acao_listagem_Mobile;
 	}
 
-	public ItfComponenteVisualSB getFormulario_de_acao_listagem_Desktop() {
+	public ComoComponenteVisualSB getFormulario_de_acao_listagem_Desktop() {
 		return formulario_de_acao_listagem_Desktop;
 	}
 
-	public ItfComponenteVisualSB getFormulario_de_acao_listagem_Card_Full() {
+	public ComoComponenteVisualSB getFormulario_de_acao_listagem_Card_Full() {
 		return formulario_de_acao_listagem_Card_Full;
 	}
 }

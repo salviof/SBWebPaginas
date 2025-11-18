@@ -15,9 +15,8 @@ import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.ItfResposta
 import static com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.TIPO_PARTE_URL.ENTIDADE;
 import static com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.TIPO_PARTE_URL.OBJETO_COM_CONSTRUCTOR;
 import static com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.TIPO_PARTE_URL.TEXTO;
-import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ItfAcaoController;
-import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ItfAcaoDoSistema;
-import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ItfAcaoSecundaria;
+import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ComoAcaoController;
+import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ComoAcaoSecundaria;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.permissoes.ItfAcaoFormulario;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.permissoes.ItfAcaoGerenciarEntidade;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.UtilSBController;
@@ -26,14 +25,14 @@ import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ComunicacaoAcaoSistem
 import com.super_bits.modulosSB.SBCore.modulos.comunicacao.FabTipoRespostaComunicacao;
 import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ItfRespostaComunicacao;
 import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ItfTipoRespostaComunicacao;
-import com.super_bits.modulosSB.SBCore.modulos.fabrica.ItfFabricaAcoes;
+import com.super_bits.modulosSB.SBCore.modulos.fabrica.ComoFabricaAcoes;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campo.FabTipoAtributoObjeto;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campo.TIPO_PRIMITIVO;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campoInstanciado.ItfCampoInstanciado;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.reflexao.ReflexaoCampo;
-import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfBeanSimples;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ComoEntidadeSimples;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.validador.ErroValidacao;
-import com.super_bits.modulosSB.webPaginas.JSFBeans.SBBeanModel.DEPRECIADO.InfoMBBean;
+import com.super_bits.modulosSB.webPaginas.JSFBeans.SBBeanModel.DEPRECIADO.InfoDominioEntidade;
 import com.super_bits.modulosSB.webPaginas.JSFBeans.SBBeanModel.InfoMBAcao;
 import com.super_bits.modulosSB.webPaginas.JSFBeans.util.UtilSBWPMensagensJSF;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.declarados.util.PgUtil;
@@ -44,7 +43,6 @@ import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.interface
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.interfaces.ItfPaginaGerenciarEntidade;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.modal.ModalDadosPaginaSimples;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.modal.TipoRespostaModal;
-import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.reflexao.ItfBeanDeclarado;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.reflexao.anotacoes.beans.InfoMBIdComponente;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.reflexao.anotacoes.beans.InfoMB_Acao;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.reflexao.anotacoes.beans.InfoMB_Bean;
@@ -84,6 +82,8 @@ import org.coletivojava.fw.api.objetoNativo.comunicacao.TipoRespostaComunicacao;
 import org.coletivojava.fw.api.tratamentoErros.FabErro;
 import org.primefaces.component.commandbutton.CommandButton;
 import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ItfDialogo;
+import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ComoAcaoDoSistema;
+import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.reflexao.ComoEntidadeNoDominio;
 
 public abstract class B_Pagina implements Serializable, ItfB_Pagina {
 
@@ -113,9 +113,9 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
     @InfoMB_Bean(descricao = "Div onde será exibido o xhtml da ação selecionada", exemplo = "<h:painelGroup id={#PaginaAtual.infoPagina.idConteudoPagina}")
     protected String idAreaExbicaoAcaoSelecionada = "idSBLayotAreaAcaoSelecionada";
     protected String xhtmlAcaoAtual;
-    protected ItfAcaoDoSistema acaoSelecionada;
-    private List<ItfAcaoDoSistema> acoesDaPagina;
-    private Map<Integer, ItfAcaoDoSistema> historico_acoes_Executadas;
+    protected ComoAcaoDoSistema acaoSelecionada;
+    private List<ComoAcaoDoSistema> acoesDaPagina;
+    private Map<Integer, ComoAcaoDoSistema> historico_acoes_Executadas;
     private static List<AcaoGestaoEntidade> acoesMB;
     private String nomeMB;
     private final Map<String, String> infoIds = new HashMap<>();
@@ -184,7 +184,7 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
         return paginaUtil;
     }
 
-    protected void setAcaoSelecionadaPorEnum(ItfFabricaAcoes fabrica) {
+    protected void setAcaoSelecionadaPorEnum(ComoFabricaAcoes fabrica) {
         if (fabrica != null) {
             setAcaoSelecionada(fabrica.getRegistro());
         }
@@ -192,7 +192,7 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
 
     protected void executarAcaoSelecionadaPorString(String pAcao) {
         try {
-            ItfAcaoDoSistema acao = getAcaoVinculada().getSubAcaoByString(pAcao);
+            ComoAcaoDoSistema acao = getAcaoVinculada().getSubAcaoByString(pAcao);
             if (acao != null) {
                 setAcaoSelecionada(acao);
                 if (acao.isUmaAcaoFormulario()) {
@@ -205,20 +205,20 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
         }
     }
 
-    protected void executaAcaoSelecionadaPorEnum(ItfFabricaAcoes fabrica) {
+    protected void executaAcaoSelecionadaPorEnum(ComoFabricaAcoes fabrica) {
         if (fabrica != null) {
             setAcaoSelecionada(fabrica.getRegistro());
             executarAcaoSelecionada();
         }
     }
 
-    protected void setEExecutaAcaoSelecionada(ItfAcaoDoSistema pAcao) {
+    protected void setEExecutaAcaoSelecionada(ComoAcaoDoSistema pAcao) {
 
         setAcaoSelecionada(pAcao);
         executarAcaoSelecionada();
     }
 
-    protected boolean isAcaoSelecionadaIgualA(ItfFabricaAcoes fabrica) {
+    protected boolean isAcaoSelecionadaIgualA(ComoFabricaAcoes fabrica) {
         if (acaoSelecionada == null) {
             return false;
 
@@ -246,18 +246,18 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
         }
     }
 
-    public class BeanDeclarado extends ReflexaoCampo implements ItfBeanDeclarado {
+    public class BeanDeclarado extends ReflexaoCampo implements ComoEntidadeNoDominio {
 
-        private final InfoMBBean infoBean;
+        private final InfoDominioEntidade infoBean;
 
         public BeanDeclarado(Field campoReflection) {
             super(campoReflection);
-            infoBean = new InfoMBBean(campoReflection);
+            infoBean = new InfoDominioEntidade(campoReflection);
 
         }
 
         @Override
-        public InfoMBBean getInfoBean() {
+        public InfoDominioEntidade getInfoBean() {
             return infoBean;
         }
 
@@ -478,7 +478,7 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
                         case OBJETO_COM_CONSTRUCTOR:
                         case ENTIDADE:
                             if (parametro.isUmParametoEntidadeMBPrincipal()) {
-                                setBeanSelecionado((ItfBeanSimples) parametro.getValor());
+                                setBeanSelecionado((ComoEntidadeSimples) parametro.getValor());
                             }
                             break;
                     }
@@ -820,7 +820,7 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
         if (idModal != null) {
             mapaRespostasComunicacaoTransienteDeAcaoByAcoes.clear();
             mapaComunicacaoTransienteDeAcaoByIdModal.clear();
-            mapaComunicacaoTransienteDeAcaoByIdModal.put(idModal, new ComunicacaoAcaoSistema((ItfAcaoController) getAcaoSelecionada(), getBeanSelecionado()));
+            mapaComunicacaoTransienteDeAcaoByIdModal.put(idModal, new ComunicacaoAcaoSistema((ComoAcaoController) getAcaoSelecionada(), getBeanSelecionado()));
         }
 
     }
@@ -829,14 +829,14 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
         return mapaRespostasComunicacaoTransienteDeAcaoByAcoes.containsKey(getAcaoSelecionada().getNomeUnico());
     }
 
-    protected void adicionarAcaoNoHistorico(ItfAcaoDoSistema pAcao) {
+    protected void adicionarAcaoNoHistorico(ComoAcaoDoSistema pAcao) {
         if (pAcao == null) {
             return;
         }
         if (historico_acoes_Executadas == null) {
             historico_acoes_Executadas = new HashMap<>();
         }
-        ItfAcaoDoSistema ultimaAcao = historico_acoes_Executadas.get(historico_acoes_Executadas.size());
+        ComoAcaoDoSistema ultimaAcao = historico_acoes_Executadas.get(historico_acoes_Executadas.size());
         if (ultimaAcao != null) {
             if (!ultimaAcao.equals(pAcao)) {
                 historico_acoes_Executadas.put(historico_acoes_Executadas.size() + 1, pAcao);
@@ -856,7 +856,7 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
      *
      * @return A ação anterior Executada
      */
-    public ItfAcaoDoSistema getAcaoAnteriorExecutada() {
+    public ComoAcaoDoSistema getAcaoAnteriorExecutada() {
         return historico_acoes_Executadas.get(historico_acoes_Executadas.size() - 2);
     }
 
@@ -873,18 +873,18 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
 
     }
 
-    protected List<ItfAcaoDoSistema> getAcoesHistoricoOrdemUltimaExecucao() {
+    protected List<ComoAcaoDoSistema> getAcoesHistoricoOrdemUltimaExecucao() {
         if (historico_acoes_Executadas == null) {
             return null;
         }
         List<Integer> lista = Lists.newArrayList(historico_acoes_Executadas.keySet());
 
-        List<ItfAcaoDoSistema> acoes = new ArrayList<>();
+        List<ComoAcaoDoSistema> acoes = new ArrayList<>();
         lista.forEach(index -> acoes.add(historico_acoes_Executadas.get(index)));
         return acoes;
     }
 
-    public ItfAcaoDoSistema getAcaoUltimaDesteTipo(FabTipoAcaoSistemaGenerica pTipo) {
+    public ComoAcaoDoSistema getAcaoUltimaDesteTipo(FabTipoAcaoSistemaGenerica pTipo) {
         if (historico_acoes_Executadas == null) {
             return null;
         }
@@ -1060,18 +1060,18 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
      * @return Todas as ações do sistema declaradas no Managed Bean da pagina
      */
     @Override
-    public List<ItfAcaoDoSistema> getAcoesDaPagina() {
+    public List<ComoAcaoDoSistema> getAcoesDaPagina() {
         if (acoesDaPagina != null) {
             return acoesDaPagina;
         }
         try {
             acoesDaPagina = new ArrayList<>();
 
-            List<Field> camposDeAcao = UtilSBCoreReflexao.getCamposRecursivoPorInterface(this.getClass(), ItfAcaoDoSistema.class, B_Pagina.class, MB_PaginaConversation.class
+            List<Field> camposDeAcao = UtilSBCoreReflexao.getCamposRecursivoPorInterface(this.getClass(), ComoAcaoDoSistema.class, B_Pagina.class, MB_PaginaConversation.class
             );
             for (Field cp : camposDeAcao) {
                 cp.setAccessible(true);
-                acoesDaPagina.add((ItfAcaoDoSistema) cp.get(this));
+                acoesDaPagina.add((ComoAcaoDoSistema) cp.get(this));
             }
         } catch (Throwable t) {
             SBCore.RelatarErro(FabErro.PARA_TUDO, "Erro obtendo Ação do sistema", t);
@@ -1086,7 +1086,7 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
     }
 
     @Override
-    public ItfAcaoDoSistema getAcaoSelecionada() {
+    public ComoAcaoDoSistema getAcaoSelecionada() {
         return acaoSelecionada;
     }
 
@@ -1105,7 +1105,7 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
         this.idAreaExbicaoAcaoSelecionada = idAreaExbicaoAcaoSelecionada;
     }
 
-    public void setAcaoSelecionada(ItfAcaoDoSistema acaoSelecionada) {
+    public void setAcaoSelecionada(ComoAcaoDoSistema acaoSelecionada) {
         this.acaoSelecionada = acaoSelecionada;
     }
 
@@ -1269,7 +1269,7 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
         if (paraMetroPrincipal instanceof SelectEvent) {
             paraMetroPrincipal = ((SelectEvent) paraMetroPrincipal).getObject();
         }
-        if (paraMetroPrincipal instanceof ItfBeanSimples) {
+        if (paraMetroPrincipal instanceof ComoEntidadeSimples) {
             tipoREspostaMordal = TipoRespostaModal.ENTIDADE_SELECAO_ITEM;
         }
         if (paraMetroPrincipal instanceof ItfTipoRespostaComunicacao) {
@@ -1491,13 +1491,13 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
      * Para subistituir as que tratam o Objeto Resposta, Substituir
      *
      * @see
-     * #autoExecProximaAcaoAposController(com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ItfAcaoController,
+     * #autoExecProximaAcaoAposController(com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ComoAcaoController,
      * com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.ItfRespostaAcaoDoSistema)
      *
      * @param pEntidade Entidade selecionada
      * @return A resposta da execução de ação controller
      */
-    public ItfRespostaAcaoDoSistema autoExecAcaoController(ItfBeanSimples pEntidade) {
+    public ItfRespostaAcaoDoSistema autoExecAcaoController(ComoEntidadeSimples pEntidade) {
 
         ItfRespostaAcaoDoSistema respExecucao = null;
         if (pEntidade == null || getBeanSelecionado() == null) {
@@ -1527,7 +1527,7 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
         return respExecucao;
     }
 
-    public ItfRespostaAcaoDoSistema execucaoAcaoControllerPadrao(ItfAcaoController pAcaoController, boolean pExecutarPosAcaoPadrao) {
+    public ItfRespostaAcaoDoSistema execucaoAcaoControllerPadrao(ComoAcaoController pAcaoController, boolean pExecutarPosAcaoPadrao) {
 
         try {
 
@@ -1553,7 +1553,7 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
 
     protected void autoExecDefineFormularioPadrao() {
         if (getBeanSelecionado() == null) {
-            Optional<ItfAcaoSecundaria> acaoListagem = getAcaoVinculada().getAcoesVinculadas().stream().filter(ac -> ac.getTipoAcaoGenerica().equals(FabTipoAcaoSistemaGenerica.FORMULARIO_LISTAR)).findFirst();
+            Optional<ComoAcaoSecundaria> acaoListagem = getAcaoVinculada().getAcoesVinculadas().stream().filter(ac -> ac.getTipoAcaoGenerica().equals(FabTipoAcaoSistemaGenerica.FORMULARIO_LISTAR)).findFirst();
             if (acaoListagem.isPresent()) {
                 setAcaoSelecionada(acaoListagem.get());
                 executarAcaoSelecionada();
@@ -1561,7 +1561,7 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
                 throw new UnsupportedOperationException("Impossível determinar a ação padrão");
             }
         } else {
-            Optional<ItfAcaoSecundaria> pesquisaAcaoSelecaoAcao = getAcaoVinculada().getAcoesVinculadas().stream().filter(ac -> ac.getTipoAcaoGenerica().equals(FabTipoAcaoSistemaGenerica.SELECAO_DE_ACAO)
+            Optional<ComoAcaoSecundaria> pesquisaAcaoSelecaoAcao = getAcaoVinculada().getAcoesVinculadas().stream().filter(ac -> ac.getTipoAcaoGenerica().equals(FabTipoAcaoSistemaGenerica.SELECAO_DE_ACAO)
                     && ac.isUmaAcaoDeEntidade()
                     && ac.getComoAcaoDeEntidade().getClasseRelacionada().equals(getBeanSelecionado().getClass())
             ).findFirst();
@@ -1571,7 +1571,7 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
                 return;
             }
 
-            Optional<ItfAcaoSecundaria> pesquisaAcaoVisualizar = getAcaoVinculada().getAcoesVinculadas().stream().filter(ac -> ac.getTipoAcaoGenerica().equals(FabTipoAcaoSistemaGenerica.FORMULARIO_VISUALIZAR)
+            Optional<ComoAcaoSecundaria> pesquisaAcaoVisualizar = getAcaoVinculada().getAcoesVinculadas().stream().filter(ac -> ac.getTipoAcaoGenerica().equals(FabTipoAcaoSistemaGenerica.FORMULARIO_VISUALIZAR)
                     && ac.isUmaAcaoDeEntidade()
                     && ac.getComoAcaoDeEntidade().getClasseRelacionada().equals(getBeanSelecionado().getClass())
             ).findFirst();
@@ -1581,7 +1581,7 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
                 return;
             }
 
-            Optional<ItfAcaoSecundaria> pesquisaAcaoListagem = getAcaoVinculada().getAcoesVinculadas().stream().filter(ac -> ac.getTipoAcaoGenerica().equals(FabTipoAcaoSistemaGenerica.FORMULARIO_LISTAR)).findFirst();
+            Optional<ComoAcaoSecundaria> pesquisaAcaoListagem = getAcaoVinculada().getAcoesVinculadas().stream().filter(ac -> ac.getTipoAcaoGenerica().equals(FabTipoAcaoSistemaGenerica.FORMULARIO_LISTAR)).findFirst();
             if (pesquisaAcaoListagem.isPresent()) {
                 setAcaoSelecionada(pesquisaAcaoListagem.get());
                 executarAcaoSelecionada();
@@ -1592,7 +1592,7 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
         }
     }
 
-    protected void autoExecProximaAcaoAposController(ItfAcaoController pAcaoController, ItfRespostaAcaoDoSistema pResposta) {
+    protected void autoExecProximaAcaoAposController(ComoAcaoController pAcaoController, ItfRespostaAcaoDoSistema pResposta) {
 
         if ((pResposta == null)) {
             ItfAcaoFormulario ultimoForm = getAcaoUltimoFormularioExecutado();
@@ -1616,7 +1616,7 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
                 if (pResposta.getTipoRetorno().isInstance(getBeanSelecionado())) {
                     try {
                         if ((pResposta.getRetorno() != null)) {
-                            setBeanSelecionado((ItfBeanSimples) pResposta.getRetorno());
+                            setBeanSelecionado((ComoEntidadeSimples) pResposta.getRetorno());
 
                         }
 
@@ -1656,13 +1656,13 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
                     case CONTROLLER_ATIVAR:
                     case CONTROLLER_REMOVER:
                     case CONTROLLER_DESATIVAR:
-                        ItfAcaoDoSistema ultimaAcaoListagem = getAcaoUltimaDesteTipo(FabTipoAcaoSistemaGenerica.FORMULARIO_LISTAR);
+                        ComoAcaoDoSistema ultimaAcaoListagem = getAcaoUltimaDesteTipo(FabTipoAcaoSistemaGenerica.FORMULARIO_LISTAR);
                         if (ultimaAcaoListagem != null) {
                             setAcaoSelecionada(ultimaAcaoListagem);
                             executarAcaoSelecionada();
                             return;
                         } else {
-                            ItfAcaoDoSistema acaoListagemPadrao = pAcaoController.getAcaoDeGestaoEntidade().getAcaoFormularioListarPadrao();
+                            ComoAcaoDoSistema acaoListagemPadrao = pAcaoController.getAcaoDeGestaoEntidade().getAcaoFormularioListarPadrao();
                             if (acaoListagemPadrao != null) {
                                 setAcaoSelecionada(acaoListagemPadrao);
                                 executarAcaoSelecionada();
@@ -1674,8 +1674,8 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
                     default:
                         List acapSelecaoProximaAcao = (getAcaoVinculada().getComoGestaoEntidade().getAcoesVinculadasDesteTipo(FabTipoAcaoSistemaGenerica.SELECAO_DE_ACAO));
                         if (!acapSelecaoProximaAcao.isEmpty()) {
-                            setAcaoSelecionada((ItfAcaoDoSistema) acapSelecaoProximaAcao.get(0));
-                            xhtmlAcaoAtual = ((ItfAcaoDoSistema) acapSelecaoProximaAcao.get(0)).getComoFormulario().getXhtml();
+                            setAcaoSelecionada((ComoAcaoDoSistema) acapSelecaoProximaAcao.get(0));
+                            xhtmlAcaoAtual = ((ComoAcaoDoSistema) acapSelecaoProximaAcao.get(0)).getComoFormulario().getXhtml();
 
                         } else {
 

@@ -1,13 +1,13 @@
 package com.super_bits.modulosSB.webPaginas.JSFBeans.SBBeanModel.depreciado.filtro.old;
 
 import com.super_bits.modulosSB.Persistencia.dao.SBNQ;
-import com.super_bits.modulosSB.Persistencia.registro.persistidos.EntidadeSimples;
+import com.super_bits.modulosSB.Persistencia.registro.persistidos.EntidadeSimplesORM;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.anotacoes.InfoCampo;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campo.FabTipoAtributoObjeto;
 import java.io.Serializable;
 
 @Deprecated
-public class OpcaoFiltro extends EntidadeSimples implements Serializable {
+public class OpcaoFiltro extends EntidadeSimplesORM implements Serializable {
 
     @InfoCampo(tipo = FabTipoAtributoObjeto.ID)
     private Long id;

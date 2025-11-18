@@ -4,9 +4,9 @@
  */
 package com.super_bits.modulosSB.webPaginas.JSFBeans.SBBeanModel.controller;
 
-import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ItfAcaoController;
-import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfBeanSimples;
-import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfUsuario;
+import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ComoAcaoController;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ComoEntidadeSimples;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ComoUsuario;
 
 /**
  *
@@ -14,25 +14,25 @@ import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basic
  */
 public class PacoteExecucaoControllerJsonSimples {
 
-    private final ItfAcaoController acao;
-    private final ItfBeanSimples entidadeExecucao;
-    private final ItfUsuario usuario;
+    private final ComoAcaoController acao;
+    private final ComoEntidadeSimples entidadeExecucao;
+    private final ComoUsuario usuario;
 
-    public PacoteExecucaoControllerJsonSimples(ItfAcaoController pAceo, ItfUsuario pUsuario, ItfBeanSimples pValor) {
+    public PacoteExecucaoControllerJsonSimples(ComoAcaoController pAceo, ComoUsuario pUsuario, ComoEntidadeSimples pValor) {
         acao = pAceo;
         usuario = pUsuario;
         entidadeExecucao = pValor;
     }
 
-    public ItfAcaoController getAcao() {
+    public ComoAcaoController getAcao() {
         return acao;
     }
 
-    public ItfBeanSimples getEntidadeExecucao() {
+    public ComoEntidadeSimples getEntidadeExecucao() {
         return entidadeExecucao;
     }
 
-    public ItfUsuario getUsuario() {
+    public ComoUsuario getUsuario() {
         return usuario;
     }
 

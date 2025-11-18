@@ -6,20 +6,20 @@ import java.io.Serializable;
 import com.super_bits.modulosSB.SBCore.modulos.view.fabricasCompVisual.componentes.FabCompVisualEndereco;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 import org.coletivojava.fw.api.tratamentoErros.FabErro;
-import com.super_bits.modulosSB.SBCore.modulos.view.fabricasCompVisual.ItfComponenteVisualSB;
 import org.coletivojava.fw.api.objetoNativo.view.componente.FamiliaComponente;
+import com.super_bits.modulosSB.SBCore.modulos.view.fabricasCompVisual.ComoComponenteVisualSB;
 
 @Named
 @ApplicationScoped
 public class CompSBCompVisualEndereco implements Serializable {
 
 	private final FamiliaComponente familia;
-	private final ItfComponenteVisualSB endereco;
-	private final ItfComponenteVisualSB bairro;
-	private final ItfComponenteVisualSB cidade;
-	private final ItfComponenteVisualSB unidade_federativa_Estado;
-	private final ItfComponenteVisualSB nacao_Pais;
-	private final ItfComponenteVisualSB cep;
+	private final ComoComponenteVisualSB endereco;
+	private final ComoComponenteVisualSB bairro;
+	private final ComoComponenteVisualSB cidade;
+	private final ComoComponenteVisualSB unidade_federativa_Estado;
+	private final ComoComponenteVisualSB nacao_Pais;
+	private final ComoComponenteVisualSB cep;
 
 	CompSBCompVisualEndereco() {
 		this.familia = com.super_bits.modulosSB.SBCore.modulos.view.fabricasCompVisual.componentes.FabCompVisualEndereco.class
@@ -33,8 +33,8 @@ public class CompSBCompVisualEndereco implements Serializable {
 		this.cep = FabCompVisualEndereco.CEP.getRegistro();
 	}
 
-	public ItfComponenteVisualSB getComponentePadrao(
-			com.super_bits.modulosSB.SBCore.modulos.view.fabricasCompVisual.ItfComponenteVisualSB pComponente) {
+	public ComoComponenteVisualSB getComponentePadrao(
+			com.super_bits.modulosSB.SBCore.modulos.view.fabricasCompVisual.ComoComponenteVisualSB pComponente) {
 		try {
 			if (pComponente == null) {
 				return familia.getFabrica().getComponentePadrao();
@@ -61,27 +61,27 @@ public class CompSBCompVisualEndereco implements Serializable {
 		return familia;
 	}
 
-	public ItfComponenteVisualSB getEndereco() {
+	public ComoComponenteVisualSB getEndereco() {
 		return endereco;
 	}
 
-	public ItfComponenteVisualSB getBairro() {
+	public ComoComponenteVisualSB getBairro() {
 		return bairro;
 	}
 
-	public ItfComponenteVisualSB getCidade() {
+	public ComoComponenteVisualSB getCidade() {
 		return cidade;
 	}
 
-	public ItfComponenteVisualSB getUnidade_federativa_Estado() {
+	public ComoComponenteVisualSB getUnidade_federativa_Estado() {
 		return unidade_federativa_Estado;
 	}
 
-	public ItfComponenteVisualSB getNacao_Pais() {
+	public ComoComponenteVisualSB getNacao_Pais() {
 		return nacao_Pais;
 	}
 
-	public ItfComponenteVisualSB getCep() {
+	public ComoComponenteVisualSB getCep() {
 		return cep;
 	}
 }

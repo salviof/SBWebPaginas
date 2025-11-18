@@ -4,7 +4,7 @@ import com.super_bits.editorImagem.util.UtilSBImagemEdicao;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringFiltros;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campo.FabTipoAtributoObjeto;
-import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfBeanSimples;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ComoEntidadeSimples;
 import com.super_bits.modulosSB.webPaginas.ConfigGeral.SBWebPaginas;
 import com.super_bits.modulosSB.webPaginas.util.UtilSBWPServletTools;
 import java.io.File;
@@ -29,7 +29,7 @@ public abstract class ArquivosDeRegistrosJPA {
         peq_, med_, grande_
     }
 
-    private static String getCaminhoLocalImagens(ItfBeanSimples item) {
+    private static String getCaminhoLocalImagens(ComoEntidadeSimples item) {
         return UtilSBWPServletTools.getCaminhoLocalServlet() + pastaimagens + "/" + item.getClass().getSimpleName() + "/" + item.getId() + "/";
     }
 
@@ -48,7 +48,7 @@ public abstract class ArquivosDeRegistrosJPA {
 
     }
 
-    public static String getURLImagem(ItfBeanSimples item, FabTipoAtributoObjeto tipo) {
+    public static String getURLImagem(ComoEntidadeSimples item, FabTipoAtributoObjeto tipo) {
 
         String urlbase = SBWebPaginas.getSiteURL() + pastaimagens + "/" + item.getClass().getSimpleName() + "/" + item.getId() + "/";
         String urlpadrao = getUrlIMGPadrao(tipo);
@@ -81,7 +81,7 @@ public abstract class ArquivosDeRegistrosJPA {
     }
 
     @SuppressWarnings("unused")
-    public static List<String> getURLImagens(ItfBeanSimples item, String galeria) {
+    public static List<String> getURLImagens(ComoEntidadeSimples item, String galeria) {
         String urlbase = SBWebPaginas.getSiteURL() + pastaimagens;
         String urlpadrao = getUrlIMGPadrao(FabTipoAtributoObjeto.IMG_GRANDE);
 
@@ -111,7 +111,7 @@ public abstract class ArquivosDeRegistrosJPA {
         }
     }
 
-    public static void SalvaIMAGEM(ItfBeanSimples entidade, UploadedFile foto, String categoria) {
+    public static void SalvaIMAGEM(ComoEntidadeSimples entidade, UploadedFile foto, String categoria) {
         String tabela = entidade.getClass().getSimpleName();
 
         // Gerando Diretorios

@@ -5,7 +5,6 @@
 package com.super_bits.modulosSB.webPaginas.controller.servlets.servletJsonWebPaginas;
 
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreJson;
-import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfSessao;
 import com.super_bits.modulosSB.webPaginas.controller.servlets.ServletArquivosSBWPGenerico;
 import static com.super_bits.modulosSB.webPaginas.controller.servlets.WebPaginasServlet.NOME_BEAN_REQUEST_CONFIG_URL;
 import com.super_bits.modulosSB.webPaginas.controller.servlets.servletWebPaginas.ConfiguracoesDeFormularioPorUrl;
@@ -20,6 +19,7 @@ import com.super_bits.modulosSB.SBCore.modulos.TratamentoDeErros.UtilSBCoreErros
 import com.super_bits.modulosSB.webPaginas.TratamentoDeErros.ErroGenericoProcessandoRespostaJson;
 import com.super_bits.modulosSB.webPaginas.util.UtilSBWPJson;
 import com.super_bits.modulosSB.webPaginas.util.UtilSBWP_JSFTools;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ComoSessao;
 
 /**
  *

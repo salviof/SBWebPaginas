@@ -19,7 +19,6 @@ import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.ItfParametr
 import static com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.TIPO_PARTE_URL.ENTIDADE;
 import static com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.TIPO_PARTE_URL.OBJETO_COM_CONSTRUCTOR;
 import static com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.TIPO_PARTE_URL.TEXTO;
-import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ItfAcaoDoSistema;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.UtilSBController;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.MapaObjetosProjetoAtual;
 import com.super_bits.modulosSB.webPaginas.ConfigGeral.SBWebPaginas;
@@ -36,6 +35,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.coletivojava.fw.api.tratamentoErros.FabErro;
+import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ComoAcaoDoSistema;
 
 /**
  *
@@ -161,7 +161,7 @@ public class EstruturaDeFormulario implements ItfEstruturaDeFormuario {
         return urlBase + "/" + UtilSBCoreStringFiltros.gerarUrlAmigavel(tagURL);
     }
 
-    public String gerarUrlPorParametro(List<ItfParametroRequisicaoInstanciado> parametros, ItfAcaoDoSistema pAcao, String tagUsada) {
+    public String gerarUrlPorParametro(List<ItfParametroRequisicaoInstanciado> parametros, ComoAcaoDoSistema pAcao, String tagUsada) {
         String url = gerarBaseURL(tagUsada);
 
         for (ParametroURL pr : parametroOrdenado) {
@@ -190,7 +190,7 @@ public class EstruturaDeFormulario implements ItfEstruturaDeFormuario {
 
     }
 
-    public String gerarUrlPorValorParametro(ItfAcaoDoSistema pAcao, String tagUsada, Object... parametros) {
+    public String gerarUrlPorValorParametro(ComoAcaoDoSistema pAcao, String tagUsada, Object... parametros) {
 
         Map<String, List<Object>> mapaParametrosEnviados = new HashMap<>();
         Map<String, Integer> mapaIndicePrAplicados = new HashMap<>();
@@ -280,7 +280,7 @@ public class EstruturaDeFormulario implements ItfEstruturaDeFormuario {
 
     }
 
-    private String gerarURL(ItfAcaoDoSistema pAcao) {
+    private String gerarURL(ComoAcaoDoSistema pAcao) {
 
         List<ItfParametroRequisicaoInstanciado> listaParametros = new ArrayList();
 

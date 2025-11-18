@@ -10,9 +10,8 @@ import com.super_bits.modulosSB.Persistencia.dao.UtilSBPersistencia;
 import com.super_bits.modulosSB.Persistencia.dao.consultaDinamica.ConsultaDinamicaDeEntidade;
 import com.super_bits.modulosSB.SBCore.UtilGeral.MapaAcoesSistema;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.TIPO_PARTE_URL;
-import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ItfAcaoDoSistema;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.MapaObjetosProjetoAtual;
-import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfBeanSimples;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ComoEntidadeSimples;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.MB_paginaCadastroEntidades;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.reflexao.anotacoes.InfoPagina;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.siteMap.MapaDeFormularios;
@@ -31,6 +30,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ComoAcaoDoSistema;
 
 /**
  *
@@ -56,7 +56,7 @@ public class PgAcessoViaTokenDinamico extends MB_paginaCadastroEntidades<TokenAc
     private SessaoAtualSBWP sessaoAtual;
 
     @Override
-    public ItfBeanSimples getBeanSelecionado() {
+    public ComoEntidadeSimples getBeanSelecionado() {
         return tokenDinamico;
     }
 
@@ -75,9 +75,12 @@ public class PgAcessoViaTokenDinamico extends MB_paginaCadastroEntidades<TokenAc
 
         String nome = (String) UtilSBWPServletTools.getRequestParametro("nome");
         String telefone = (String) UtilSBWPServletTools.getRequestParametro("telefone");
+        String whatsappid = (String) UtilSBWPServletTools.getRequestParametro("whatsappid");
+
         if (nome != null && telefone != null) {
             UtilSBWPServletTools.cookieAdicionar("LEAD_NOME", nome, 0);
             UtilSBWPServletTools.cookieAdicionar("LEAD_TELEFONE", telefone, 0);
+            UtilSBWPServletTools.cookieAdicionar("LEAD_WATSAPP_ID", whatsappid, 0);
         }
 
         if (tokenDinamico == null) {
@@ -94,9 +97,9 @@ public class PgAcessoViaTokenDinamico extends MB_paginaCadastroEntidades<TokenAc
         }
         if (tokenDinamico.getEntidadeDoAcesso() != null) {
             Class tipoEntidade = MapaObjetosProjetoAtual.getClasseDoObjetoByNome(tokenDinamico.getEntidadeDoAcesso());
-            ItfBeanSimples entidade = (ItfBeanSimples) UtilSBPersistencia.getRegistroByID(tipoEntidade, Long.valueOf(tokenDinamico.getCodigoEntidade()), getEMPagina());
+            ComoEntidadeSimples entidade = (ComoEntidadeSimples) UtilSBPersistencia.getRegistroByID(tipoEntidade, Long.valueOf(tokenDinamico.getCodigoEntidade()), getEMPagina());
             String slugAcao = tokenDinamico.getSlugAcaoFormulario();
-            ItfAcaoDoSistema acao = MapaAcoesSistema.getAcaoDoSistemaByNomeUnico(slugAcao);
+            ComoAcaoDoSistema acao = MapaAcoesSistema.getAcaoDoSistemaByNomeUnico(slugAcao);
             String emailUsuario = tokenDinamico.getEmail();
             if (emailUsuario != null) {
                 ConsultaDinamicaDeEntidade consultaUsuario = new ConsultaDinamicaDeEntidade(UsuarioSB.class, getEMPagina());
@@ -148,7 +151,7 @@ public class PgAcessoViaTokenDinamico extends MB_paginaCadastroEntidades<TokenAc
     }
 
     @Override
-    public void setBeanSelecionado(ItfBeanSimples pBeanSimples) {
+    public void setBeanSelecionado(ComoEntidadeSimples pBeanSimples) {
         tokenDinamico = (TokenAcessoDinamico) pBeanSimples;
     }
 

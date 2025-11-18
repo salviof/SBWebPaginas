@@ -7,7 +7,7 @@ package com.super_bits.modulosSB.webPaginas.JSFBeans.modal;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringSlugs;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campoInstanciado.ItfCampoInstanciado;
-import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfBeanSimples;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ComoEntidadeSimples;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.interfaces.ItfModalDados;
 import org.coletivojava.fw.api.tratamentoErros.FabErro;
 import org.primefaces.PrimeFaces;
@@ -22,7 +22,7 @@ public class PgModalDados extends PgModalRespostaAbstrato implements ItfModalDad
 
     private String observacaoDeLog;
     private ItfCampoInstanciado campoSelecionado;
-    private ItfBeanSimples entidadeSelecionada;
+    private ComoEntidadeSimples entidadeSelecionada;
 
     public void setCampoSelecionado(ItfCampoInstanciado campoSelecionado) {
         this.campoSelecionado = campoSelecionado;
@@ -52,7 +52,7 @@ public class PgModalDados extends PgModalRespostaAbstrato implements ItfModalDad
     }
 
     @Override
-    public ItfBeanSimples getEntidadeSelecionada() {
+    public ComoEntidadeSimples getEntidadeSelecionada() {
         if (entidadeSelecionada != null) {
             return entidadeSelecionada;
         }

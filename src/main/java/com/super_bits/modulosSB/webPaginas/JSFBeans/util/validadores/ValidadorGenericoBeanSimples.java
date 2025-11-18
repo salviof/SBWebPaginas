@@ -6,7 +6,7 @@ package com.super_bits.modulosSB.webPaginas.JSFBeans.util.validadores;
 
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campoInstanciado.ItfCampoInstanciado;
-import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfBeanSimples;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ComoEntidadeSimples;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -24,7 +24,7 @@ public class ValidadorGenericoBeanSimples extends ValidadorGenericoAbstrato<Obje
 
     @Override
     public void validate(FacesContext context, UIComponent component, Object value) throws ValidatorException {
-        if (value instanceof ItfBeanSimples) {
+        if (value instanceof ComoEntidadeSimples) {
             super.validate(context, component, value); //To change body of generated methods, choose Tools | Templates.
         } else {
             if (value == null) {

@@ -6,15 +6,15 @@ import java.io.Serializable;
 import com.super_bits.modulosSB.SBCore.modulos.view.fabricasCompVisual.componentes.FabCompVisualItens;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 import org.coletivojava.fw.api.tratamentoErros.FabErro;
-import com.super_bits.modulosSB.SBCore.modulos.view.fabricasCompVisual.ItfComponenteVisualSB;
 import org.coletivojava.fw.api.objetoNativo.view.componente.FamiliaComponente;
+import com.super_bits.modulosSB.SBCore.modulos.view.fabricasCompVisual.ComoComponenteVisualSB;
 
 @Named
 @ApplicationScoped
 public class CompSBCompVisualItens implements Serializable {
 
 	private final FamiliaComponente familia;
-	private final ItfComponenteVisualSB itensFluidos;
+	private final ComoComponenteVisualSB itensFluidos;
 
 	CompSBCompVisualItens() {
 		this.familia = com.super_bits.modulosSB.SBCore.modulos.view.fabricasCompVisual.componentes.FabCompVisualItens.class
@@ -22,8 +22,8 @@ public class CompSBCompVisualItens implements Serializable {
 		this.itensFluidos = FabCompVisualItens.ITENS_FLUIDOS.getRegistro();
 	}
 
-	public ItfComponenteVisualSB getComponentePadrao(
-			com.super_bits.modulosSB.SBCore.modulos.view.fabricasCompVisual.ItfComponenteVisualSB pComponente) {
+	public ComoComponenteVisualSB getComponentePadrao(
+			com.super_bits.modulosSB.SBCore.modulos.view.fabricasCompVisual.ComoComponenteVisualSB pComponente) {
 		try {
 			if (pComponente == null) {
 				return familia.getFabrica().getComponentePadrao();
@@ -50,7 +50,7 @@ public class CompSBCompVisualItens implements Serializable {
 		return familia;
 	}
 
-	public ItfComponenteVisualSB getItensFluidos() {
+	public ComoComponenteVisualSB getItensFluidos() {
 		return itensFluidos;
 	}
 }

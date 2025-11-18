@@ -6,7 +6,7 @@ package com.super_bits.modulosSB.webPaginas.controller.servlets.servletArquivoDe
 
 import com.super_bits.modulosSB.SBCore.modulos.ManipulaArquivo.TipoRecurso;
 import com.super_bits.modulosSB.SBCore.modulos.ManipulaArquivo.acessoArquivo.TipoAcessoArquivo;
-import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfBeanSimples;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ComoEntidadeSimples;
 import com.super_bits.modulosSB.webPaginas.controller.servletes.urls.UrlInterpretada;
 
 /**
@@ -16,7 +16,7 @@ import com.super_bits.modulosSB.webPaginas.controller.servletes.urls.UrlInterpre
 public class DadosRequisicaoArquivoDeEntidade {
 
     private UrlInterpretada parametrosDeUrl;
-    private ItfBeanSimples entidade = null;
+    private ComoEntidadeSimples entidade = null;
     private String caminhoLocal = null;
     private String nomeArquivoDownload = null;
     private TipoAcessoArquivo tipoAcesso;
@@ -31,11 +31,11 @@ public class DadosRequisicaoArquivoDeEntidade {
         this.parametrosDeUrl = parametrosDeUrl;
     }
 
-    public ItfBeanSimples getEntidade() {
+    public ComoEntidadeSimples getEntidade() {
         return entidade;
     }
 
-    public void setEntidade(ItfBeanSimples entidade) {
+    public void setEntidade(ComoEntidadeSimples entidade) {
         this.entidade = entidade;
     }
 

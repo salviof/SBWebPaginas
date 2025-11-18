@@ -9,10 +9,8 @@ import com.super_bits.modulosSB.Persistencia.dao.UtilSBPersistencia;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 import com.super_bits.modulosSB.SBCore.UtilGeral.MapaAcoesSistema;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringValidador;
-import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ItfAcaoDoSistema;
 import com.super_bits.modulosSB.SBCore.modulos.erp.ItfSistemaERP;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.MapaObjetosProjetoAtual;
-import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfUsuario;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.MB_paginaCadastroEntidades;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.reflexao.anotacoes.InfoPagina;
 import com.super_bits.modulos.SBAcessosModel.view.FabAcaoPaginasDoSistema;
@@ -29,6 +27,8 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ComoUsuario;
+import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ComoAcaoDoSistema;
 
 @InfoAcaoPaginaDoSistema(acao = FabAcaoPaginasDoSistema.PAGINA_NATIVA_LOGIN_OAUTH_MB)
 @Named
@@ -41,7 +41,7 @@ public class PgAutenticacaoOauth extends MB_paginaCadastroEntidades<UsuarioSB> {
     @Inject
     private ControleDeSessaoWeb controleDeSessao;
 
-    private List<ItfAcaoDoSistema> acoesEscopoUsuario;
+    private List<ComoAcaoDoSistema> acoesEscopoUsuario;
 
     private boolean permitidoAutenticar;
 
@@ -81,7 +81,7 @@ public class PgAutenticacaoOauth extends MB_paginaCadastroEntidades<UsuarioSB> {
 
         if (scopoUsuario.contains("@")) {
             usuarioLogin = scopoUsuario;
-            ItfUsuario usuarioSolicitante = SBCore.getServicoPermissao().getUsuarioByEmail(scopoUsuario);
+            ComoUsuario usuarioSolicitante = SBCore.getServicoPermissao().getUsuarioByEmail(scopoUsuario);
             acoesEscopoUsuario = new ArrayList<>();
             MapaAcoesSistema.getListaTodasGestao().stream()
                     .filter(ac -> (ac.getModulo().equals(usuarioSolicitante.getGrupo().getModuloPrincipal())
@@ -109,7 +109,7 @@ public class PgAutenticacaoOauth extends MB_paginaCadastroEntidades<UsuarioSB> {
         return permitidoAutenticar;
     }
 
-    public List<ItfAcaoDoSistema> getAcoesEscopoUsuario() {
+    public List<ComoAcaoDoSistema> getAcoesEscopoUsuario() {
         return acoesEscopoUsuario;
     }
 

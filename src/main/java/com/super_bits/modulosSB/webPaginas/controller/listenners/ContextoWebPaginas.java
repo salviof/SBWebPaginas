@@ -7,8 +7,7 @@ import com.super_bits.modulosSB.SBCore.UtilGeral.MapaAcoesSistema;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreReflexao;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.ErroChamadaController;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.ItfRespostaAcaoDoSistema;
-import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ItfAcaoControllerAutoExecucao;
-import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ItfAcaoDoSistema;
+import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ComoAcaoControllerAutoExecucao;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.acoesAutomatizadas.FabTipoAutoExecucaoAcao;
 import com.super_bits.modulosSB.webPaginas.ConfigGeral.ConfiguradorCoreDeProjetoWebWarAbstrato;
 import com.super_bits.modulosSB.webPaginas.ConfigGeral.ItfInicioFimAppWP;
@@ -25,6 +24,7 @@ import javax.servlet.ServletContextListener;
 import javax.servlet.SessionCookieConfig;
 import javax.servlet.http.HttpSessionListener;
 import org.coletivojava.fw.api.tratamentoErros.FabErro;
+import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ComoAcaoDoSistema;
 
 /*
  *
@@ -88,7 +88,7 @@ public class ContextoWebPaginas implements ServletContextListener {
 
             System.out.println("Fim Construção");
             System.out.println("Listando autoexecuções");
-            for (ItfAcaoControllerAutoExecucao acao : MapaAcoesSistema.getListaAcoesAutomatizadas()) {
+            for (ComoAcaoControllerAutoExecucao acao : MapaAcoesSistema.getListaAcoesAutomatizadas()) {
                 System.out.println("Programando " + acao.getNomeUnico());
                 switch (acao.getTipoAutoExecucao().getEstrategia()) {
                     case GATILHO:
@@ -139,7 +139,7 @@ public class ContextoWebPaginas implements ServletContextListener {
     public void contextDestroyed(ServletContextEvent sce) {
         System.out.println("Finalizando contexto");
 
-        for (ItfAcaoControllerAutoExecucao acao : MapaAcoesSistema.getListaAcoesAutomatizadas()) {
+        for (ComoAcaoControllerAutoExecucao acao : MapaAcoesSistema.getListaAcoesAutomatizadas()) {
             switch (acao.getTipoAutoExecucao().getEstrategia()) {
                 case GATILHO:
                     if (acao.getTipoAutoExecucao().equals(FabTipoAutoExecucaoAcao.SISTEMA_FINAL)) {

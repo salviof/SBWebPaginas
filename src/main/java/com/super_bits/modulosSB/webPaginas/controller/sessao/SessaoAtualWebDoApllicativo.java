@@ -6,7 +6,7 @@ package com.super_bits.modulosSB.webPaginas.controller.sessao;
 
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.ItensGenericos.basico.SessaoOffline;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.ItensGenericos.basico.UsuarioAplicacaoEmExecucao;
-import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfUsuario;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ComoUsuario;
 
 /**
  *
@@ -33,7 +33,7 @@ public class SessaoAtualWebDoApllicativo extends SessaoOffline {
     }
 
     @Override
-    public ItfUsuario getUsuario() {
+    public ComoUsuario getUsuario() {
         return usuarioAplicacao;
     }
 

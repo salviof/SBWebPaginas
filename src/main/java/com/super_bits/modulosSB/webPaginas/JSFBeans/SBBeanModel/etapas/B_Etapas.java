@@ -6,13 +6,13 @@
 package com.super_bits.modulosSB.webPaginas.JSFBeans.SBBeanModel.etapas;
 
 import com.super_bits.modulos.SBAcessosModel.model.acoes.AcaoDoSistema;
-import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ItfAcaoDoSistema;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.icones.FabIconeFontAwesome;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.interfaces.ItfPaginaAtual;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
+import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ComoAcaoDoSistema;
 
 /**
  *
@@ -26,13 +26,13 @@ import javax.inject.Inject;
  */
 public class B_Etapas implements Serializable {
 
-    private List<ItfAcaoDoSistema> listaDeAcoes;
+    private List<ComoAcaoDoSistema> listaDeAcoes;
 
-    private ItfAcaoDoSistema acaoAtual;
+    private ComoAcaoDoSistema acaoAtual;
 
-    private final ItfAcaoDoSistema acaoProximo;
+    private final ComoAcaoDoSistema acaoProximo;
 
-    private final ItfAcaoDoSistema acaoVoltar;
+    private final ComoAcaoDoSistema acaoVoltar;
 
     @Inject
     private ItfPaginaAtual paginaAtual;
@@ -46,7 +46,7 @@ public class B_Etapas implements Serializable {
      * @param acaoInicial AÇÃO DA ETAPA INICIAL
      * @param pAcoes AÇÕES DAS ETAPAS SEGUINTES
      */
-    public B_Etapas(ItfAcaoDoSistema acaoInicial, ItfAcaoDoSistema... pAcoes) {
+    public B_Etapas(ComoAcaoDoSistema acaoInicial, ComoAcaoDoSistema... pAcoes) {
 
         acaoProximo = new AcaoDoSistema();
         acaoProximo.setNomeAcao("Proximo");
@@ -80,19 +80,19 @@ public class B_Etapas implements Serializable {
         return (getIndiceEtapaAtual() == 0);
     }
 
-    public List<ItfAcaoDoSistema> getListaDeAcoes() {
+    public List<ComoAcaoDoSistema> getListaDeAcoes() {
         return listaDeAcoes;
     }
 
-    public void setListaDeAcoes(List<ItfAcaoDoSistema> listaDeAcoes) {
+    public void setListaDeAcoes(List<ComoAcaoDoSistema> listaDeAcoes) {
         this.listaDeAcoes = listaDeAcoes;
     }
 
-    public ItfAcaoDoSistema getAcaoAtual() {
+    public ComoAcaoDoSistema getAcaoAtual() {
         return acaoAtual;
     }
 
-    public void setAcaoAtual(ItfAcaoDoSistema acaoAtual) {
+    public void setAcaoAtual(ComoAcaoDoSistema acaoAtual) {
         this.acaoAtual = acaoAtual;
     }
 
@@ -102,7 +102,7 @@ public class B_Etapas implements Serializable {
      * @return ESTE METODO RETORNA SE UMA AÇÃO É A AÇÃO ATUAL (TRUE SE SIM /
      * FALSE SE NÃO)
      */
-    public boolean isSelecionadaAtual(ItfAcaoDoSistema pAcao) {
+    public boolean isSelecionadaAtual(ComoAcaoDoSistema pAcao) {
 
         if (pAcao.equals(acaoAtual)) {
 
@@ -114,11 +114,11 @@ public class B_Etapas implements Serializable {
 
     }
 
-    public ItfAcaoDoSistema getAcaoProximo() {
+    public ComoAcaoDoSistema getAcaoProximo() {
         return acaoProximo;
     }
 
-    public ItfAcaoDoSistema getAcaoVoltar() {
+    public ComoAcaoDoSistema getAcaoVoltar() {
         return acaoVoltar;
     }
 
@@ -126,7 +126,7 @@ public class B_Etapas implements Serializable {
         final int idxinicial = 0;
         final int idxfinal = listaDeAcoes.size() - 1;
 
-        ArrayList<ItfAcaoDoSistema> listaMobile = new ArrayList();
+        ArrayList<ComoAcaoDoSistema> listaMobile = new ArrayList();
 
         for (int i = 0; i < listaDeAcoes.size(); i++) {
 
@@ -227,7 +227,7 @@ public class B_Etapas implements Serializable {
         paginaAtual.getInfoPagina().getComoFormularioWeb().executarAcaoSelecionada();
     }
 
-    private int getIndiceEtapa(ItfAcaoDoSistema pAcao) {
+    private int getIndiceEtapa(ComoAcaoDoSistema pAcao) {
         for (int i = 0; i < listaDeAcoes.size(); i++) {
 
             if (pAcao == listaDeAcoes.get(i)) {
@@ -247,7 +247,7 @@ public class B_Etapas implements Serializable {
      * @param pAcao
      * @return
      */
-    public int getNumeroEtapa(ItfAcaoDoSistema pAcao) {
+    public int getNumeroEtapa(ComoAcaoDoSistema pAcao) {
         return getIndiceEtapa(pAcao) + 1;
     }
 

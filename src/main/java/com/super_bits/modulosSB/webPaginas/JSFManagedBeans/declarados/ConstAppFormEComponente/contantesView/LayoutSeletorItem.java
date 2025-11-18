@@ -4,8 +4,8 @@
  */
 package com.super_bits.modulosSB.webPaginas.JSFManagedBeans.declarados.ConstAppFormEComponente.contantesView;
 
-import com.super_bits.modulosSB.SBCore.modulos.view.fabricasCompVisual.ItfComponenteVisualSB;
 import com.super_bits.modulosSB.SBCore.modulos.view.fabricasCompVisual.componentes.FabCompVisualSeletorItem;
+import com.super_bits.modulosSB.SBCore.modulos.view.fabricasCompVisual.ComoComponenteVisualSB;
 
 /**
  *
@@ -16,34 +16,34 @@ import com.super_bits.modulosSB.SBCore.modulos.view.fabricasCompVisual.component
  */
 public class LayoutSeletorItem {
 
-    private final ItfComponenteVisualSB combo = FabCompVisualSeletorItem.COMBO.getRegistro();
-    private final ItfComponenteVisualSB grade = FabCompVisualSeletorItem.GRADE.getRegistro();
-    private final ItfComponenteVisualSB autocomplete = FabCompVisualSeletorItem.AUTO_COMPLETE.getRegistro();
-    private final ItfComponenteVisualSB radio = FabCompVisualSeletorItem.RADIO.getRegistro();
-    private final ItfComponenteVisualSB carrousel = FabCompVisualSeletorItem.CARROULSEL.getRegistro();
-    private final ItfComponenteVisualSB menu = FabCompVisualSeletorItem.BOTOES_MENU.getRegistro();
+    private final ComoComponenteVisualSB combo = FabCompVisualSeletorItem.COMBO.getRegistro();
+    private final ComoComponenteVisualSB grade = FabCompVisualSeletorItem.GRADE.getRegistro();
+    private final ComoComponenteVisualSB autocomplete = FabCompVisualSeletorItem.AUTO_COMPLETE.getRegistro();
+    private final ComoComponenteVisualSB radio = FabCompVisualSeletorItem.RADIO.getRegistro();
+    private final ComoComponenteVisualSB carrousel = FabCompVisualSeletorItem.CARROULSEL.getRegistro();
+    private final ComoComponenteVisualSB menu = FabCompVisualSeletorItem.BOTOES_MENU.getRegistro();
 
-    public ItfComponenteVisualSB getCombo() {
+    public ComoComponenteVisualSB getCombo() {
         return combo;
     }
 
-    public ItfComponenteVisualSB getGrade() {
+    public ComoComponenteVisualSB getGrade() {
         return grade;
     }
 
-    public ItfComponenteVisualSB getAutocomplete() {
+    public ComoComponenteVisualSB getAutocomplete() {
         return autocomplete;
     }
 
-    public ItfComponenteVisualSB getRadio() {
+    public ComoComponenteVisualSB getRadio() {
         return radio;
     }
 
-    public ItfComponenteVisualSB getCarrousel() {
+    public ComoComponenteVisualSB getCarrousel() {
         return carrousel;
     }
 
-    public ItfComponenteVisualSB getMenu() {
+    public ComoComponenteVisualSB getMenu() {
         return menu;
     }
 

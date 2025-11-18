@@ -6,16 +6,16 @@ import java.io.Serializable;
 import com.super_bits.modulosSB.SBCore.modulos.view.fabricasCompVisual.componentes.FabcompVisualEnums;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 import org.coletivojava.fw.api.tratamentoErros.FabErro;
-import com.super_bits.modulosSB.SBCore.modulos.view.fabricasCompVisual.ItfComponenteVisualSB;
 import org.coletivojava.fw.api.objetoNativo.view.componente.FamiliaComponente;
+import com.super_bits.modulosSB.SBCore.modulos.view.fabricasCompVisual.ComoComponenteVisualSB;
 
 @Named
 @ApplicationScoped
 public class CompSBcompVisualEnums implements Serializable {
 
 	private final FamiliaComponente familia;
-	private final ItfComponenteVisualSB enum_AtutoComplete;
-	private final ItfComponenteVisualSB enum_Grade;
+	private final ComoComponenteVisualSB enum_AtutoComplete;
+	private final ComoComponenteVisualSB enum_Grade;
 
 	CompSBcompVisualEnums() {
 		this.familia = com.super_bits.modulosSB.SBCore.modulos.view.fabricasCompVisual.componentes.FabcompVisualEnums.class
@@ -25,8 +25,8 @@ public class CompSBcompVisualEnums implements Serializable {
 		this.enum_Grade = FabcompVisualEnums.GRADE.getRegistro();
 	}
 
-	public ItfComponenteVisualSB getComponentePadrao(
-			com.super_bits.modulosSB.SBCore.modulos.view.fabricasCompVisual.ItfComponenteVisualSB pComponente) {
+	public ComoComponenteVisualSB getComponentePadrao(
+			com.super_bits.modulosSB.SBCore.modulos.view.fabricasCompVisual.ComoComponenteVisualSB pComponente) {
 		try {
 			if (pComponente == null) {
 				return familia.getFabrica().getComponentePadrao();
@@ -53,11 +53,11 @@ public class CompSBcompVisualEnums implements Serializable {
 		return familia;
 	}
 
-	public ItfComponenteVisualSB getEnum_AtutoComplete() {
+	public ComoComponenteVisualSB getEnum_AtutoComplete() {
 		return enum_AtutoComplete;
 	}
 
-	public ItfComponenteVisualSB getEnum_Grade() {
+	public ComoComponenteVisualSB getEnum_Grade() {
 		return enum_Grade;
 	}
 }

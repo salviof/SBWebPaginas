@@ -18,7 +18,7 @@ import java.lang.reflect.Field;
  *
  * @author Salvio
  */
-public class InfoMBBean implements Serializable {
+public class InfoDominioEntidade implements Serializable {
 
     private String classe;
     private String descricao;
@@ -37,7 +37,7 @@ public class InfoMBBean implements Serializable {
         return formularioLab;
     }
 
-    public InfoMBBean(Field campo) {
+    public InfoDominioEntidade(Field campo) {
         InfoMB_Bean infoBean = campo.getAnnotation(InfoMB_Bean.class);
         Class classeObjeto = UtilSBCoreReflexaoAtributoDeObjeto.getClassePrincipalDoCampo(campo);
         classe = classeObjeto.getSimpleName();

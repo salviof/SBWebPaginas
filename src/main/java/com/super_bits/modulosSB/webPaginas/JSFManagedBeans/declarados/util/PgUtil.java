@@ -9,7 +9,6 @@ import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringFiltros;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringGerador;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringGerador.TIPO_LOREN;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringValidador;
-import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ItfAcaoDoSistema;
 import com.super_bits.modulosSB.SBCore.modulos.ManipulaArquivo.UtilSBCoreArquivos;
 import com.super_bits.modulosSB.SBCore.modulos.Mensagens.FabMensagens;
 import com.super_bits.modulosSB.SBCore.modulos.geradorCodigo.model.EstruturaCampo;
@@ -22,7 +21,7 @@ import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campo.ItfGrupo
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campoInstanciado.CampoNaoImplementado;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campoInstanciado.ItfCampoInstanciado;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.MapaObjetosProjetoAtual;
-import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfBeanSimples;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ComoEntidadeSimples;
 import com.super_bits.modulosSB.SBCore.modulos.view.telas.LayoutTelaAreaConhecida;
 import com.super_bits.modulosSB.webPaginas.ConfigGeral.SBWebPaginas;
 import com.super_bits.modulosSB.webPaginas.JSFBeans.temas.Tema;
@@ -69,6 +68,7 @@ import org.primefaces.component.fieldset.FieldsetRenderer;
 
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.expression.SearchExpressionUtils;
+import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ComoAcaoDoSistema;
 
 /**
  *
@@ -809,7 +809,7 @@ public class PgUtil implements Serializable {
      * @deprecated Metodo será substituido por Carregar XHTML
      */
     @Deprecated
-    public String navegar(ItfAcaoDoSistema pAcao) {
+    public String navegar(ComoAcaoDoSistema pAcao) {
 
         if (pAcao != null) {
             return infoWeb.getAcaoComLink(pAcao).getUrlDeAcesso();
@@ -825,7 +825,7 @@ public class PgUtil implements Serializable {
      *
      * @param pAcao Ação correspondente a URL desejada
      */
-    public void irParaURL(ItfAcaoDoSistema pAcao) {
+    public void irParaURL(ComoAcaoDoSistema pAcao) {
         try {
 
             if (!SBCore.isEmModoDesenvolvimento()) {
@@ -960,7 +960,7 @@ public class PgUtil implements Serializable {
         return UtilSBCoreComunicacao.getSaudacao();
     }
 
-    public AcaoDeContexto getAcaoDeContexto(ItfAcaoDoSistema pAcao) {
+    public AcaoDeContexto getAcaoDeContexto(ComoAcaoDoSistema pAcao) {
         return new AcaoDeContexto(pAcao, FacesContext.getCurrentInstance(), paginaAtual.getInfoPagina());
     }
 
@@ -1357,14 +1357,14 @@ public class PgUtil implements Serializable {
 
     }
 
-    public void removerItem(List<ItfBeanSimples> pLista, ItfBeanSimples pItem) {
+    public void removerItem(List<ComoEntidadeSimples> pLista, ComoEntidadeSimples pItem) {
         try {
             Long idremover = pItem.getId();
 
             int indiceRemocao = 0;
 
             for (int i = 0; i < pLista.size(); i++) {
-                ItfBeanSimples item = (ItfBeanSimples) pLista.get(i);
+                ComoEntidadeSimples item = (ComoEntidadeSimples) pLista.get(i);
                 if (item.getId() == idremover) {
                     indiceRemocao = i;
                     break;
@@ -1593,7 +1593,7 @@ public class PgUtil implements Serializable {
 
         }
 
-        ItfBeanSimples itemSimples = null;
+        ComoEntidadeSimples itemSimples = null;
         if (campoInstanciado != null) {
             itemSimples = campoInstanciado.getObjetoDoAtributo();
         } else {
@@ -1627,15 +1627,15 @@ public class PgUtil implements Serializable {
         return condicao ? valorPositivo : valorNegativo;
     }
 
-    public List<ItfAcaoDoSistema> getAcoesEntidade(ItfBeanSimples pItem, List<ItfAcaoDoSistema> pAcoes) {
+    public List<ComoAcaoDoSistema> getAcoesEntidade(ComoEntidadeSimples pItem, List<ComoAcaoDoSistema> pAcoes) {
         try {
-            List<ItfAcaoDoSistema> acoes = new ArrayList<>();
+            List<ComoAcaoDoSistema> acoes = new ArrayList<>();
             if (pItem != null) {
                 if (pItem == null) {
                     return new ArrayList<>();
                 }
 
-                List<ItfAcaoDoSistema> acoesItem = pItem.getAcoesDisponiveis();
+                List<ComoAcaoDoSistema> acoesItem = pItem.getAcoesDisponiveis();
                 if (acoesItem != null && !acoesItem.isEmpty()) {
                     // if (paginaAtual.getInfoPagina().isPaginaDeGestao()) {
                     //    if (paginaAtual.getInfoPagina().getComoPaginaDeGestao().getAcaoSelecionada() != null) {

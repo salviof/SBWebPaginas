@@ -10,11 +10,10 @@ import com.super_bits.modulos.SBAcessosModel.fabricas.InfoAcaoProjetoSB;
 import com.super_bits.modulos.SBAcessosModel.model.ModuloAcaoSistema;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 import com.super_bits.modulosSB.SBCore.UtilGeral.MapaAcoesSistema;
-import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ItfAcaoDoSistema;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.permissoes.ItfAcaoFormulario;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.permissoes.ItfAcaoGerenciarEntidade;
-import com.super_bits.modulosSB.SBCore.modulos.fabrica.ItfFabricaAcoes;
-import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfBeanSimples;
+import com.super_bits.modulosSB.SBCore.modulos.fabrica.ComoFabricaAcoes;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ComoEntidadeSimples;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.MB_PaginaConversation;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.reflexao.anotacoes.InfoPagina;
 import java.util.ArrayList;
@@ -23,6 +22,7 @@ import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 import org.coletivojava.fw.api.tratamentoErros.FabErro;
+import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ComoAcaoDoSistema;
 
 /**
  *
@@ -41,7 +41,7 @@ public class PgProjetoSBVisaoGeral extends MB_PaginaConversation {
     private ModuloAcaoSistema moduloSelecionado;
     private List<ModuloAcaoSistema> modulosDoSistema;
 
-    private List<ItfBeanSimples> objetosDoSistema;
+    private List<ComoEntidadeSimples> objetosDoSistema;
     private final ItfAcaoFormulario acaoVisualizarPontosDeFuncao = FabAcaoProjetoSB.PROJETO_FRM_VISUALIZAR_ACOES.getRegistro().getComoFormularioEntidade();
     private final ItfAcaoFormulario acaoVisualizarBancoDeDados = FabAcaoProjetoSB.PROJETO_FRM_VISUALIZAR_BANCO_DE_DADOS.getRegistro().getComoFormularioEntidade();
     private final ItfAcaoFormulario acaoVisisaoGeral = FabAcaoProjetoSB.PROJETO_FRM_VISAO_GERAL.getRegistro().getComoFormularioEntidade();
@@ -52,11 +52,11 @@ public class PgProjetoSBVisaoGeral extends MB_PaginaConversation {
         acaoSelecionada = acaoVisisaoGeral;
     }
 
-    public List<ItfAcaoDoSistema> buildListaDeAcoes(ItfFabricaAcoes... acoes) {
-        List<ItfAcaoDoSistema> acoesCriadas = new ArrayList<>();
+    public List<ComoAcaoDoSistema> buildListaDeAcoes(ComoFabricaAcoes... acoes) {
+        List<ComoAcaoDoSistema> acoesCriadas = new ArrayList<>();
 
         try {
-            for (ItfFabricaAcoes fabrica : acoes) {
+            for (ComoFabricaAcoes fabrica : acoes) {
                 acoesCriadas.add(fabrica.getRegistro());
             }
         } catch (Throwable t) {
@@ -95,11 +95,11 @@ public class PgProjetoSBVisaoGeral extends MB_PaginaConversation {
         this.modulosDoSistema = modulosDoSistema;
     }
 
-    public List<ItfBeanSimples> getObjetosDoSistema() {
+    public List<ComoEntidadeSimples> getObjetosDoSistema() {
         return objetosDoSistema;
     }
 
-    public void setObjetosDoSistema(List<ItfBeanSimples> objetosDoSistema) {
+    public void setObjetosDoSistema(List<ComoEntidadeSimples> objetosDoSistema) {
         this.objetosDoSistema = objetosDoSistema;
     }
 
@@ -132,12 +132,12 @@ public class PgProjetoSBVisaoGeral extends MB_PaginaConversation {
     }
 
     @Override
-    public ItfBeanSimples getBeanSelecionado() {
+    public ComoEntidadeSimples getBeanSelecionado() {
         return moduloSelecionado;
     }
 
     @Override
-    public void setBeanSelecionado(ItfBeanSimples pBeanSimples) {
+    public void setBeanSelecionado(ComoEntidadeSimples pBeanSimples) {
         moduloSelecionado = (ModuloAcaoSistema) pBeanSimples;
     }
 

@@ -1,16 +1,16 @@
 package com.super_bits.modulosSB.webPaginas.JSFBeans.SBBeanModel.DEPRECIADO;
 
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
-import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfBeanSimples;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ComoEntidadeSimples;
 import com.super_bits.modulosSB.webPaginas.JSFBeans.util.UtilSBWPMensagensJSF;
 import com.super_bits.modulosSB.webPaginas.util.UtilSBWP_JSFTools;
 import java.util.ArrayList;
 import java.util.List;
 import org.coletivojava.fw.api.tratamentoErros.FabErro;
 
-public class B_SeletorItensFacil<T extends ItfBeanSimples> extends B_SeletorItemFacil<T> {
+public class B_SeletorItensFacil<T extends ComoEntidadeSimples> extends B_SeletorItemFacil<T> {
 
-    private List<ItfBeanSimples> itensSelecionados;
+    private List<ComoEntidadeSimples> itensSelecionados;
     private final int quantidadeMaxima;
     private int itemRemover;
     private int numeroColunasDesign;
@@ -19,7 +19,7 @@ public class B_SeletorItensFacil<T extends ItfBeanSimples> extends B_SeletorItem
         return (List<T>) itensSelecionados;
     }
 
-    public void setItensSelecionados(List<ItfBeanSimples> itensSelecionados) {
+    public void setItensSelecionados(List<ComoEntidadeSimples> itensSelecionados) {
         this.itensSelecionados = itensSelecionados;
     }
 
@@ -39,7 +39,7 @@ public class B_SeletorItensFacil<T extends ItfBeanSimples> extends B_SeletorItem
         this.numeroColunasDesign = numeroColunasDesign;
     }
 
-    public B_SeletorItensFacil(int pQuantidade, List<? extends ItfBeanSimples> pOpcoes, List<B_Lista<? extends ItfBeanSimples>> pOpcoesOrdenadas) {
+    public B_SeletorItensFacil(int pQuantidade, List<? extends ComoEntidadeSimples> pOpcoes, List<B_Lista<? extends ComoEntidadeSimples>> pOpcoesOrdenadas) {
         super(pOpcoes, pOpcoesOrdenadas);
         quantidadeMaxima = pQuantidade;
         itensSelecionados = new ArrayList<>(quantidadeMaxima);
@@ -75,12 +75,12 @@ public class B_SeletorItensFacil<T extends ItfBeanSimples> extends B_SeletorItem
     }
 
     @Override
-    public void setItemSelecionado(ItfBeanSimples itemSelecionado) {
+    public void setItemSelecionado(ComoEntidadeSimples itemSelecionado) {
         try {
             boolean itemRepetido = false;
             if (itensSelecionados.size() < quantidadeMaxima) {
                 if (itemSelecionado != null) {
-                    for (ItfBeanSimples itensSelecionado : itensSelecionados) {
+                    for (ComoEntidadeSimples itensSelecionado : itensSelecionados) {
                         if (itemSelecionado.equals(itensSelecionado)) {
                             itemRepetido = true;
                             break;

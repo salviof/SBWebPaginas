@@ -7,11 +7,10 @@ package com.super_bits.modulosSB.webPaginas.visualizacao;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.siteMap.MapaDeFormularios;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 import com.super_bits.modulosSB.SBCore.UtilGeral.MapaAcoesSistema;
-import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ItfAcaoDoSistema;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.permissoes.ItfAcaoFormulario;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.permissoes.ItfAcaoGerenciarEntidade;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.permissoes.token.ItfTokenAcessoDinamico;
-import com.super_bits.modulosSB.SBCore.modulos.fabrica.ItfFabricaAcoes;
+import com.super_bits.modulosSB.SBCore.modulos.fabrica.ComoFabricaAcoes;
 import com.super_bits.modulosSB.SBCore.modulos.view.ServicoVisualizacaoAbstrato;
 import com.super_bits.modulosSB.SBCore.modulos.view.telas.ItfEstruturaDeFormuario;
 import com.super_bits.modulosSB.webPaginas.ConfigGeral.SBWebPaginas;
@@ -19,6 +18,7 @@ import com.super_bits.modulosSB.webPaginas.util.UtilSBWPServletTools;
 import com.super_bits.modulosSB.webPaginas.util.UtilSBWP_JSFTools;
 import java.util.ArrayList;
 import java.util.List;
+import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ComoAcaoDoSistema;
 
 /**
  *
@@ -157,7 +157,7 @@ public class ServicoVisuaslizacaoWebResponsivo extends ServicoVisualizacaoAbstra
     }
 
     @Override
-    public String getEndrRemotoFormulario(ItfFabricaAcoes pAcao, Object... paramentros) {
+    public String getEndrRemotoFormulario(ComoFabricaAcoes pAcao, Object... paramentros) {
         return MapaDeFormularios.getUrlFormulario(pAcao.getRegistro().getComoFormulario(), paramentros);
     }
 
@@ -177,7 +177,7 @@ public class ServicoVisuaslizacaoWebResponsivo extends ServicoVisualizacaoAbstra
     }
 
     @Override
-    public ItfEstruturaDeFormuario getEstruturaFormulario(ItfAcaoDoSistema pAcaop) {
+    public ItfEstruturaDeFormuario getEstruturaFormulario(ComoAcaoDoSistema pAcaop) {
         ItfEstruturaDeFormuario estrutura = MapaDeFormularios.getEstruturaByNomeAcao(pAcaop.getAcaoDeGestaoEntidade().getNomeUnico());
         return estrutura;
     }

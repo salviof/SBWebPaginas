@@ -5,7 +5,6 @@
 package com.super_bits.modulosSB.webPaginas.controller.listenners;
 
 import com.super_bits.modulosSB.SBCore.modulos.Controller.qualificadoresCDI.sessao.QlSessaoFacesContext;
-import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfSessao;
 import java.io.IOException;
 import java.security.Principal;
 import javax.inject.Inject;
@@ -18,6 +17,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ComoSessao;
 
 /**
  *
@@ -28,7 +28,7 @@ public class UserPrincipalFilter implements Filter {
 
     @Inject
     @QlSessaoFacesContext
-    private ItfSessao sessaoUsuario;
+    private ComoSessao sessaoUsuario;
 
     @Override
     public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain)

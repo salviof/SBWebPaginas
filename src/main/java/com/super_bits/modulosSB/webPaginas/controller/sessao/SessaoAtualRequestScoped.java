@@ -8,14 +8,14 @@ import com.super_bits.modulos.SBAcessosModel.model.UsuarioSB;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.qualificadoresCDI.sessao.QlSessaoRequestScoped;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.ItensGenericos.basico.SessaoOffline;
-import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfSessao;
-import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfUsuario;
 import java.io.Serializable;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.core.Context;
 import com.super_bits.modulosSB.webPaginas.util.UtilSBWPServletTools;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ComoSessao;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ComoUsuario;
 
 /**
  *
@@ -23,7 +23,7 @@ import com.super_bits.modulosSB.webPaginas.util.UtilSBWPServletTools;
  */
 @RequestScoped
 @QlSessaoRequestScoped
-public class SessaoAtualRequestScoped extends SessaoOffline implements ItfSessao, Serializable {
+public class SessaoAtualRequestScoped extends SessaoOffline implements ComoSessao, Serializable {
 
     private HttpServletRequest req;
 
@@ -45,7 +45,7 @@ public class SessaoAtualRequestScoped extends SessaoOffline implements ItfSessao
     }
 
     @Override
-    public ItfUsuario getUsuario() {
+    public ComoUsuario getUsuario() {
         if (!isIdentificado()) {
 
             String emailUsuario = req.getHeader("usuario");

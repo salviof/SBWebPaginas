@@ -12,8 +12,6 @@ import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringNomeArquivosEDiretorios;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.ItfModuloAcaoSistema;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.ItensGenericos.basico.SessaoOffline;
-import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfSessao;
-import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfUsuario;
 import com.super_bits.modulosSB.webPaginas.util.UtilSBWPServletTools;
 import com.super_bits.modulosSB.webPaginas.util.UtilSBWP_JSFTools;
 import java.io.File;
@@ -45,6 +43,8 @@ import org.jboss.weld.context.http.Http;
 import org.jboss.weld.context.http.HttpRequestContextImpl;
 import org.primefaces.event.FileUploadEvent;
 import com.super_bits.modulosSB.webPaginas.controller.listenners.ItfDefinicaoUrlHostDeSessao;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ComoSessao;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ComoUsuario;
 
 /**
  *
@@ -53,7 +53,7 @@ import com.super_bits.modulosSB.webPaginas.controller.listenners.ItfDefinicaoUrl
 @SessionScoped
 @QlSessaoFacesContext
 @Named
-public class SessaoAtualSBWP extends SessaoOffline implements ItfSessao, Serializable {
+public class SessaoAtualSBWP extends SessaoOffline implements ComoSessao, Serializable {
 
     private boolean tipoViewDefinido = false;
     private ItfTelaUsuario tipoView;
@@ -170,8 +170,8 @@ public class SessaoAtualSBWP extends SessaoOffline implements ItfSessao, Seriali
     }
 
     @Override
-    public ItfUsuario getUsuario() {
-        ItfUsuario usuario = (ItfUsuario) UtilSBWP_JSFTools.retirarProxyDeVisualizacaoDoBean(super.getUsuario());
+    public ComoUsuario getUsuario() {
+        ComoUsuario usuario = (ComoUsuario) UtilSBWP_JSFTools.retirarProxyDeVisualizacaoDoBean(super.getUsuario());
 
         if (usuario.getClass().getAnnotation(Entity.class) != null) {
             usuario = UtilSBPersistencia.loadEntidade(usuario, gestaoEntidadePrincipal);
@@ -218,7 +218,7 @@ public class SessaoAtualSBWP extends SessaoOffline implements ItfSessao, Seriali
 
         try {
 
-            ItfUsuario usuario = getUsuario();
+            ComoUsuario usuario = getUsuario();
             InputStream arquivo;
             if (!UtilSBCoreStringNomeArquivosEDiretorios.getExtencaoNomeArquivo(event.getFile().getFileName()).equals("png")) {
 

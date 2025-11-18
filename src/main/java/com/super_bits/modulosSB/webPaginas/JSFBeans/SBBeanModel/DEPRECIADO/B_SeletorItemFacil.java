@@ -1,22 +1,22 @@
 package com.super_bits.modulosSB.webPaginas.JSFBeans.SBBeanModel.DEPRECIADO;
 
-import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfBeanSimples;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ComoEntidadeSimples;
 import com.super_bits.modulosSB.webPaginas.JSFBeans.SBBeanModel.B_SeletorItem;
 import java.util.ArrayList;
 import java.util.List;
 
-public class B_SeletorItemFacil<T extends ItfBeanSimples> extends B_SeletorItem<T> {
+public class B_SeletorItemFacil<T extends ComoEntidadeSimples> extends B_SeletorItem<T> {
 
-    private List<B_Lista<? extends ItfBeanSimples>> opcoesOrdenadas = new ArrayList<>();
+    private List<B_Lista<? extends ComoEntidadeSimples>> opcoesOrdenadas = new ArrayList<>();
 
     boolean modoOrdenado = true;
     boolean modoAvancado = false;
 
-    public List<B_Lista<? extends ItfBeanSimples>> getOpcoesOrdenadas() {
+    public List<B_Lista<? extends ComoEntidadeSimples>> getOpcoesOrdenadas() {
         return opcoesOrdenadas;
     }
 
-    public void setOpcoesOrdenadas(List<B_Lista<? extends ItfBeanSimples>> opcoesOrdenadas) {
+    public void setOpcoesOrdenadas(List<B_Lista<? extends ComoEntidadeSimples>> opcoesOrdenadas) {
         this.opcoesOrdenadas = opcoesOrdenadas;
     }
 
@@ -36,7 +36,7 @@ public class B_SeletorItemFacil<T extends ItfBeanSimples> extends B_SeletorItem<
         this.modoAvancado = modoAvancado;
     }
 
-    public B_SeletorItemFacil(List<? extends ItfBeanSimples> pOpcoes, List<B_Lista<? extends ItfBeanSimples>> pOpcoesOrdenadas) {
+    public B_SeletorItemFacil(List<? extends ComoEntidadeSimples> pOpcoes, List<B_Lista<? extends ComoEntidadeSimples>> pOpcoesOrdenadas) {
         super(pOpcoes);
         opcoesOrdenadas = pOpcoesOrdenadas;
     }

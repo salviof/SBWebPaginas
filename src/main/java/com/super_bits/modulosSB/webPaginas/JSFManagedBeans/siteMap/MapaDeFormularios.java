@@ -8,13 +8,13 @@ import com.google.common.collect.Lists;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 import com.super_bits.modulosSB.SBCore.UtilGeral.MapaAcoesSistema;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringFiltros;
-import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ItfAcaoDoSistema;
 import com.super_bits.modulosSB.webPaginas.ConfigGeral.SBWebPaginas;
 import com.super_bits.modulosSB.webPaginas.controller.servlets.servletWebPaginas.EstruturaDeFormulario;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.coletivojava.fw.api.tratamentoErros.FabErro;
+import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ComoAcaoDoSistema;
 
 /**
  *
@@ -149,7 +149,7 @@ public class MapaDeFormularios {
 
     }
 
-    public static String getUrlFormulario(ItfAcaoDoSistema pAcao, Object... parametros) {
+    public static String getUrlFormulario(ComoAcaoDoSistema pAcao, Object... parametros) {
         if (parametros != null) {
             if (parametros.length == 1) {
                 if (parametros[0] instanceof Object[]) {
@@ -158,7 +158,7 @@ public class MapaDeFormularios {
             }
         }
         try {
-            ItfAcaoDoSistema acao = MapaAcoesSistema.getAcaoDoSistema(pAcao.getEnumAcaoDoSistema());
+            ComoAcaoDoSistema acao = MapaAcoesSistema.getAcaoDoSistema(pAcao.getEnumAcaoDoSistema());
             EstruturaDeFormulario strtura = mapaFormulariosByXhtmlPrincipal.get(acao.getAcaoDeGestaoEntidade().getXhtml());
             String url = strtura.gerarUrlPorValorParametro(acao, null, parametros);
             return url;

@@ -6,13 +6,13 @@ package com.super_bits.modulosSB.webPaginas.JSFBeans.util.centralDeArquivos;
 
 import com.super_bits.modulosSB.SBCore.modulos.view.fabricasCompVisual.FabFamiliaCompVisual;
 import com.super_bits.modulosSB.SBCore.modulos.view.fabricasCompVisual.InfoComponenteVisual;
-import com.super_bits.modulosSB.SBCore.modulos.view.fabricasCompVisual.ItfFabTipoComponenteVisual;
+import com.super_bits.modulosSB.SBCore.modulos.view.fabricasCompVisual.ComoFabTipoComponenteVisual;
 
 /**
  *
  * @author desenvolvedor
  */
-public enum FabTipoEnvioArquivoEntidade implements ItfFabTipoComponenteVisual {
+public enum FabTipoEnvioArquivoEntidade implements ComoFabTipoComponenteVisual {
     @InfoComponenteVisual(classesCSS = "")
     ARQUIVO_DA_ENTIDADE,
     @InfoComponenteVisual(classesCSS = "")

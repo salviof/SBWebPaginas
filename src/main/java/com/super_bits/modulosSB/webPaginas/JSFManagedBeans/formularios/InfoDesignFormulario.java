@@ -8,8 +8,7 @@ import com.google.common.collect.Lists;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 import com.super_bits.modulosSB.SBCore.UtilGeral.view.UtilSBCoreLayoutComponenteEmTelas;
 
-import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ItfAcaoDoSistema;
-import com.super_bits.modulosSB.SBCore.modulos.fabrica.ItfFabricaAcoes;
+import com.super_bits.modulosSB.SBCore.modulos.fabrica.ComoFabricaAcoes;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campo.ItfCampoExibicaoFormulario;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campo.ItfGrupoCampos;
 import com.super_bits.modulosSB.SBCore.modulos.view.fabricasCompVisual.componentes.FabCompVisualBotaoAcao;
@@ -26,6 +25,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.coletivojava.fw.api.tratamentoErros.FabErro;
+import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ComoAcaoDoSistema;
 
 /**
  *
@@ -34,8 +34,8 @@ import org.coletivojava.fw.api.tratamentoErros.FabErro;
 public class InfoDesignFormulario {
 
     private ModeloPagina modeloPrincipal;
-    private Map<ItfFabricaAcoes, ModeloPagina> modelosSecundarios;
-    private Map<ItfFabricaAcoes, List<String>> areasDeAtualizacao;
+    private Map<ComoFabricaAcoes, ModeloPagina> modelosSecundarios;
+    private Map<ComoFabricaAcoes, List<String>> areasDeAtualizacao;
     private Map<String, LayoutComponentesEmTela> componentesEmExibixao;
     private final ItfB_Pagina pagina;
     private Map<String, LayoutComponentesEmTela> mapaLayoutPorIdentificacao;
@@ -57,7 +57,7 @@ public class InfoDesignFormulario {
         return Lists.newArrayList(mapaLayoutPorIdentificacao.values());
     }
 
-    public ModeloPagina getModeloSecundario(ItfFabricaAcoes pAcao) {
+    public ModeloPagina getModeloSecundario(ComoFabricaAcoes pAcao) {
         return modelosSecundarios.get(pAcao);
     }
 
@@ -65,7 +65,7 @@ public class InfoDesignFormulario {
 
     }
 
-    public synchronized LayoutComponentesEmTelaComGrupoDeAcoes gerarLayout(ItfGrupoCampos pGrupoCampo, List<ItfAcaoDoSistema> pAcoes) {
+    public synchronized LayoutComponentesEmTelaComGrupoDeAcoes gerarLayout(ItfGrupoCampos pGrupoCampo, List<ComoAcaoDoSistema> pAcoes) {
         String identificacao = UtilSBCoreLayoutComponenteEmTelas.gerarIDLayout(pGrupoCampo);
         if (!isExisteLayout(identificacao)) {
             LayoutComponentesEmTela layout = gerarNovoLayout((List) pGrupoCampo.getCampos(), pAcoes, identificacao);
@@ -101,7 +101,7 @@ public class InfoDesignFormulario {
     }
 
     private LayoutComponentesEmTela gerarNovoLayout(
-            List<ItfCampoExibicaoFormulario> campos, List<ItfAcaoDoSistema> pAcoes,
+            List<ItfCampoExibicaoFormulario> campos, List<ComoAcaoDoSistema> pAcoes,
             String pIdentificacao) {
         try {
 

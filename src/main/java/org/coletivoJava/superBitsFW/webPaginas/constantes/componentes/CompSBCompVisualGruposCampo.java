@@ -6,17 +6,17 @@ import java.io.Serializable;
 import com.super_bits.modulosSB.SBCore.modulos.view.fabricasCompVisual.componentes.FabCompVisualGruposCampo;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 import org.coletivojava.fw.api.tratamentoErros.FabErro;
-import com.super_bits.modulosSB.SBCore.modulos.view.fabricasCompVisual.ItfComponenteVisualSB;
 import org.coletivojava.fw.api.objetoNativo.view.componente.FamiliaComponente;
+import com.super_bits.modulosSB.SBCore.modulos.view.fabricasCompVisual.ComoComponenteVisualSB;
 
 @Named
 @ApplicationScoped
 public class CompSBCompVisualGruposCampo implements Serializable {
 
 	private final FamiliaComponente familia;
-	private final ItfComponenteVisualSB grpo_de_Campos_Responsivos;
-	private final ItfComponenteVisualSB grpo_de_Campos_Mobile;
-	private final ItfComponenteVisualSB grpo_de_Campos_Desktop;
+	private final ComoComponenteVisualSB grpo_de_Campos_Responsivos;
+	private final ComoComponenteVisualSB grpo_de_Campos_Mobile;
+	private final ComoComponenteVisualSB grpo_de_Campos_Desktop;
 
 	CompSBCompVisualGruposCampo() {
 		this.familia = com.super_bits.modulosSB.SBCore.modulos.view.fabricasCompVisual.componentes.FabCompVisualGruposCampo.class
@@ -29,8 +29,8 @@ public class CompSBCompVisualGruposCampo implements Serializable {
 				.getRegistro();
 	}
 
-	public ItfComponenteVisualSB getComponentePadrao(
-			com.super_bits.modulosSB.SBCore.modulos.view.fabricasCompVisual.ItfComponenteVisualSB pComponente) {
+	public ComoComponenteVisualSB getComponentePadrao(
+			com.super_bits.modulosSB.SBCore.modulos.view.fabricasCompVisual.ComoComponenteVisualSB pComponente) {
 		try {
 			if (pComponente == null) {
 				return familia.getFabrica().getComponentePadrao();
@@ -57,15 +57,15 @@ public class CompSBCompVisualGruposCampo implements Serializable {
 		return familia;
 	}
 
-	public ItfComponenteVisualSB getGrpo_de_Campos_Responsivos() {
+	public ComoComponenteVisualSB getGrpo_de_Campos_Responsivos() {
 		return grpo_de_Campos_Responsivos;
 	}
 
-	public ItfComponenteVisualSB getGrpo_de_Campos_Mobile() {
+	public ComoComponenteVisualSB getGrpo_de_Campos_Mobile() {
 		return grpo_de_Campos_Mobile;
 	}
 
-	public ItfComponenteVisualSB getGrpo_de_Campos_Desktop() {
+	public ComoComponenteVisualSB getGrpo_de_Campos_Desktop() {
 		return grpo_de_Campos_Desktop;
 	}
 }

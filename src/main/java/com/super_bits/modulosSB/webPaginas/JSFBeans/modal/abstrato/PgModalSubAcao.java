@@ -7,9 +7,8 @@ package com.super_bits.modulosSB.webPaginas.JSFBeans.modal.abstrato;
 import com.super_bits.modulosSB.Persistencia.dao.UtilSBPersistencia;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 import com.super_bits.modulosSB.SBCore.UtilGeral.MapaAcoesSistema;
-import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ItfAcaoDoSistema;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.MapaObjetosProjetoAtual;
-import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfBeanSimples;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ComoEntidadeSimples;
 import com.super_bits.modulosSB.webPaginas.JSFBeans.modal.ItfModalWebApp;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.declarados.util.PgUtilModalControle;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.MB_Pagina;
@@ -23,6 +22,7 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import org.coletivojava.fw.api.tratamentoErros.FabErro;
 import org.primefaces.PrimeFaces;
+import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ComoAcaoDoSistema;
 
 /**
  *
@@ -49,12 +49,12 @@ public abstract class PgModalSubAcao extends MB_Pagina implements Serializable, 
                 String codigoEntidade = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("codigoEntidade");
                 Long codigo = Long.valueOf(codigoEntidade);
                 Class classeEntidade = MapaObjetosProjetoAtual.getClasseDoObjetoByNome(tipoEntidade);
-                ItfBeanSimples entidade = (ItfBeanSimples) UtilSBPersistencia.getRegistroByID(classeEntidade, codigo, getEMPagina());
+                ComoEntidadeSimples entidade = (ComoEntidadeSimples) UtilSBPersistencia.getRegistroByID(classeEntidade, codigo, getEMPagina());
                 setBeanSelecionado(entidade);
             }
             if (FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().containsKey("acao")) {
                 String acaoSlug = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("acao");
-                ItfAcaoDoSistema acao = MapaAcoesSistema.getAcaoDoSistemaByNomeUnico(acaoSlug);
+                ComoAcaoDoSistema acao = MapaAcoesSistema.getAcaoDoSistemaByNomeUnico(acaoSlug);
                 setAcaoSelecionada(acao);
                 executarAcaoSelecionada();
             }

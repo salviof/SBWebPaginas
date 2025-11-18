@@ -5,7 +5,7 @@
 package com.super_bits.modulosSB.webPaginas.visualizacao;
 
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campo.FabTipoAtributoObjeto;
-import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfBeanSimples;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ComoEntidadeSimples;
 import com.super_bits.modulosSB.webPaginas.util.UtilSBWPServletTools;
 import javax.el.ELContext;
 import javax.el.ExpressionFactory;
@@ -23,7 +23,7 @@ import javax.inject.Named;
 @RequestScoped
 public class ServicoVisualizacaoComponente {
 
-    public String getVisualizacaoCampo(ItfBeanSimples pVisualizacao) {
+    public String getVisualizacaoCampo(ComoEntidadeSimples pVisualizacao) {
         FacesContext contexto = FacesContext.getCurrentInstance();
         //   UIComponent componente = UIComponent.getCurrentComponent(contexto);
 
@@ -53,7 +53,7 @@ public class ServicoVisualizacaoComponente {
         //return "/resources/modelo/objeto/include/itemSimples.xhtml"; // Um fallback para evitar erro
     }
 
-    public String getIcone(ItfBeanSimples pItem) {
+    public String getIcone(ComoEntidadeSimples pItem) {
 
         if (isItemPossuiIcone(pItem)) {
 
@@ -65,7 +65,7 @@ public class ServicoVisualizacaoComponente {
         return null;
     }
 
-    public String getCor(ItfBeanSimples pItem) {
+    public String getCor(ComoEntidadeSimples pItem) {
         if (isItemPossuiCor(pItem)) {
             if (pItem.getCampoInstanciadoByAnotacao(FabTipoAtributoObjeto.COR).getValor() == null) {
                 return null;
@@ -75,39 +75,39 @@ public class ServicoVisualizacaoComponente {
         return null;
     }
 
-    public String getImagemURl(ItfBeanSimples pItem) {
+    public String getImagemURl(ComoEntidadeSimples pItem) {
         if (isItemPossuiImagemPequena(pItem)) {
             return pItem.getImgPequena();
         }
         return null;
     }
 
-    public boolean isItemPossuiIcone(ItfBeanSimples pItem) {
+    public boolean isItemPossuiIcone(ComoEntidadeSimples pItem) {
 
         return pItem.isTemCampoAnotado(FabTipoAtributoObjeto.ICONE);
     }
 
-    public String getItemSimplesNome(ItfBeanSimples pValor) {
+    public String getItemSimplesNome(ComoEntidadeSimples pValor) {
         return (String) pValor.getCampoInstanciadoByAnotacao(FabTipoAtributoObjeto.NOME).getValorTextoFormatado();
     }
 
-    public boolean isItemPossuiImagemPequena(ItfBeanSimples pItem) {
+    public boolean isItemPossuiImagemPequena(ComoEntidadeSimples pItem) {
         return pItem.isTemCampoAnotado(FabTipoAtributoObjeto.IMG_PEQUENA);
     }
 
-    public boolean isItemPossuiCor(ItfBeanSimples pItem) {
+    public boolean isItemPossuiCor(ComoEntidadeSimples pItem) {
         return pItem.isTemCampoAnotado(FabTipoAtributoObjeto.COR);
     }
 
-    public boolean visualizarEstiloStatus(ItfBeanSimples pValor) {
+    public boolean visualizarEstiloStatus(ComoEntidadeSimples pValor) {
         return (isItemPossuiIcone(pValor) && isItemPossuiCor(pValor)) && !pValor.isTemImagemPequenaAdicionada();
     }
 
-    public boolean visualizarEstiloNomeImagem(ItfBeanSimples pValor) {
+    public boolean visualizarEstiloNomeImagem(ComoEntidadeSimples pValor) {
         return !(isItemPossuiIcone(pValor) && isItemPossuiCor(pValor)) && pValor.isTemImagemPequenaAdicionada();
     }
 
-    public boolean visualizarEstiloNomeSimples(ItfBeanSimples pValor) {
+    public boolean visualizarEstiloNomeSimples(ComoEntidadeSimples pValor) {
         return !(isItemPossuiIcone(pValor) && isItemPossuiCor(pValor)) && !pValor.isTemImagemPequenaAdicionada();
     }
 }

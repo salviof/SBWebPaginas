@@ -46,6 +46,9 @@ public class PgUtilTelefone implements Serializable {
 
     public String gerarJavascriptWhatsqpp(String pNumero, String texto) {
         try {
+            if (pNumero == null || texto == null || pNumero.isEmpty() || texto.isEmpty()) {
+                return "";
+            }
             String textoCodificado = URLEncoder.encode(texto, StandardCharsets.UTF_8.toString());
             StringBuilder comandoJS = new StringBuilder();
             comandoJS.append("window.open('https://web.whatsapp.com/send?phone=");

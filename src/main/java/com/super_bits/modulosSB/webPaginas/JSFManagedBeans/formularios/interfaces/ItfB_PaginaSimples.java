@@ -37,7 +37,7 @@ public interface ItfB_PaginaSimples extends ItfFormularioSimples {
     public String getRecursoXHTML();
 
     /**
-     * Método criando antes de existir o Objeto ItfAcaoDoSistema, TODO:Criar
+     * Método criando antes de existir o Objeto ComoAcaoDoSistema, TODO:Criar
      * InfMBAção compatível
      *
      * @return

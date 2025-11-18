@@ -6,18 +6,17 @@ package com.super_bits.modulosSB.webPaginas.JSFManagedBeans.siteMap;
 
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.ItfModuloAcaoSistema;
-import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ItfAcaoController;
-import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ItfAcaoControllerEntidade;
-import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ItfAcaoDeContexto;
-import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ItfAcaoDoSistema;
-import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ItfAcaoSecundaria;
+import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ComoAcaoController;
+import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ComoAcaoControllerEntidade;
+import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ComoAcaoDeContexto;
+import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ComoAcaoSecundaria;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.permissoes.ItfAcaoFormulario;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.permissoes.ItfAcaoFormularioEntidade;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.permissoes.ItfAcaoGerenciarEntidade;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.fabricas.FabTipoAcaoSistema;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.fabricas.FabTipoAcaoSistemaGenerica;
 import com.super_bits.modulosSB.SBCore.modulos.Mensagens.ItfMensagem;
-import com.super_bits.modulosSB.SBCore.modulos.fabrica.ItfFabricaAcoes;
+import com.super_bits.modulosSB.SBCore.modulos.fabrica.ComoFabricaAcoes;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campo.CaminhoCampoReflexao;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campo.FabTipoAtributoObjeto;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campo.ItfCaminhoCampo;
@@ -25,7 +24,7 @@ import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campo.ItfCamin
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campoInstanciado.ItfAssistenteDeLocalizacao;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campoInstanciado.ItfCampoInstanciado;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.cep.LocalizacaoInputAssistente;
-import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfBeanSimples;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ComoEntidadeSimples;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.cep.TipoOrganizacaoDadosEndereco;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.validacaoRegistro.CampoInvalido;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.interfaces.ItfB_Pagina;
@@ -34,14 +33,15 @@ import java.lang.reflect.Field;
 import java.util.List;
 import javax.faces.context.FacesContext;
 import org.coletivojava.fw.api.tratamentoErros.FabErro;
+import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ComoAcaoDoSistema;
 
 /**
  *
  * @author desenvolvedor
  */
-public class AcaoDeContexto implements ItfAcaoDeContexto {
+public class AcaoDeContexto implements ComoAcaoDeContexto {
 
-    private ItfAcaoDoSistema acaoVinculada;
+    private ComoAcaoDoSistema acaoVinculada;
     private boolean permitidoExecutar;
     private boolean emPaginaDaGestao;
 
@@ -55,7 +55,7 @@ public class AcaoDeContexto implements ItfAcaoDeContexto {
         return emPaginaDaGestao;
     }
 
-    public AcaoDeContexto(ItfAcaoDoSistema pAcaoDoSistema, FacesContext fc, ItfB_Pagina pPaginaAtual, Object... parametros) {
+    public AcaoDeContexto(ComoAcaoDoSistema pAcaoDoSistema, FacesContext fc, ItfB_Pagina pPaginaAtual, Object... parametros) {
 
         try {
             acaoVinculada = pAcaoDoSistema;
@@ -76,7 +76,7 @@ public class AcaoDeContexto implements ItfAcaoDeContexto {
         }
     }
 
-    public AcaoDeContexto(ItfAcaoDoSistema pAcaoDoSistema, FacesContext fc, Object... parametros) {
+    public AcaoDeContexto(ComoAcaoDoSistema pAcaoDoSistema, FacesContext fc, Object... parametros) {
         try {
             acaoVinculada = pAcaoDoSistema;
             if (fc == null) {
@@ -169,12 +169,12 @@ public class AcaoDeContexto implements ItfAcaoDeContexto {
     }
 
     @Override
-    public ItfFabricaAcoes getEnumAcaoDoSistema() {
+    public ComoFabricaAcoes getEnumAcaoDoSistema() {
         return acaoVinculada.getEnumAcaoDoSistema();
     }
 
     @Override
-    public void configurarPropriedadesBasicas(ItfAcaoDoSistema pAcaoDoSistema) {
+    public void configurarPropriedadesBasicas(ComoAcaoDoSistema pAcaoDoSistema) {
         acaoVinculada.configurarPropriedadesBasicas(pAcaoDoSistema);
     }
 
@@ -254,17 +254,17 @@ public class AcaoDeContexto implements ItfAcaoDeContexto {
     }
 
     @Override
-    public ItfAcaoController getComoController() {
+    public ComoAcaoController getComoController() {
         return acaoVinculada.getComoController();
     }
 
     @Override
-    public ItfAcaoSecundaria getComoSecundaria() {
+    public ComoAcaoSecundaria getComoSecundaria() {
         return acaoVinculada.getComoSecundaria();
     }
 
     @Override
-    public ItfAcaoControllerEntidade getComoControllerEntidade() {
+    public ComoAcaoControllerEntidade getComoControllerEntidade() {
         return acaoVinculada.getComoControllerEntidade();
     }
 
@@ -359,17 +359,17 @@ public class AcaoDeContexto implements ItfAcaoDeContexto {
     }
 
     @Override
-    public ItfBeanSimples getBeanSimplesPorNomeCampo(String pNomeCampo) {
+    public ComoEntidadeSimples getBeanSimplesPorNomeCampo(String pNomeCampo) {
         return acaoVinculada.getBeanSimplesPorNomeCampo(pNomeCampo);
     }
 
     @Override
-    public ItfBeanSimples getItemPorCaminhoCampo(ItfCaminhoCampo pCaminho) {
+    public ComoEntidadeSimples getItemPorCaminhoCampo(ItfCaminhoCampo pCaminho) {
         return acaoVinculada.getItemPorCaminhoCampo(pCaminho);
     }
 
     @Override
-    public List<ItfBeanSimples> getListaPorCaminhoCampo(ItfCaminhoCampo pCaminho) {
+    public List<ComoEntidadeSimples> getListaPorCaminhoCampo(ItfCaminhoCampo pCaminho) {
         return acaoVinculada.getListaPorCaminhoCampo(pCaminho);
     }
 
@@ -424,12 +424,12 @@ public class AcaoDeContexto implements ItfAcaoDeContexto {
     }
 
     @Override
-    public void adicionarJustificativaExecucaoAcao(ItfAcaoDoSistema pAcao, String pJustificativa) {
+    public void adicionarJustificativaExecucaoAcao(ComoAcaoDoSistema pAcao, String pJustificativa) {
         acaoVinculada.adicionarJustificativaExecucaoAcao(pAcao, pJustificativa);
     }
 
     @Override
-    public String getJustificativa(ItfAcaoDoSistema pAcao) {
+    public String getJustificativa(ComoAcaoDoSistema pAcao) {
         return acaoVinculada.getJustificativa(pAcao);
     }
 

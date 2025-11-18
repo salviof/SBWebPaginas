@@ -7,7 +7,7 @@ package com.super_bits.modulosSB.webPaginas.util;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringFiltros;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.ItfParametroRequisicaoInstanciado;
-import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfBeanSimples;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ComoEntidadeSimples;
 import com.super_bits.modulosSB.webPaginas.ConfigGeral.SBWebPaginas;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.MB_PaginaAtual;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.interfaces.ItfPaginaAtual;
@@ -21,7 +21,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.reflect.Field;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
@@ -109,23 +111,40 @@ public class UtilSBWPServletTools {
 
     public static String cookieLerValor(String nome) {
         Cookie c = cookieGet(nome);
-        return c != null ? c.getValue() : null;
+        if (c != null) {
+            String valor = c.getValue();
+            if (valor != null && !valor.isEmpty()) {
+                valor = new String(Base64.getUrlDecoder().decode(valor), StandardCharsets.UTF_8
+                );
+                return valor;
+            } else {
+                return null;
+            }
+
+        }
+        return null;
     }
 
     public static void cookieAdicionar(String nome, String valor, int tempoDeVidaSegundos) {
-        FacesContext facesContext = FacesContext.getCurrentInstance();
-        HttpServletResponse response
-                = (HttpServletResponse) facesContext.getExternalContext().getResponse();
-        if (tempoDeVidaSegundos <= 0) {
-            tempoDeVidaSegundos = 34560000;//40 dias (MAximo do crhome)
-        }
-        Cookie cookie = new Cookie(nome, valor);
-        cookie.setMaxAge(tempoDeVidaSegundos);  // em segundos (ex: 3600 = 1h)
-        cookie.setPath("/");                     // define o escopo (raiz do app)
-        cookie.setHttpOnly(true);                // impede acesso via JS (segurança)
-        cookie.setSecure(false);                 // true se for HTTPS
+        try {
+            FacesContext facesContext = FacesContext.getCurrentInstance();
+            HttpServletResponse response
+                    = (HttpServletResponse) facesContext.getExternalContext().getResponse();
+            if (tempoDeVidaSegundos <= 0) {
+                tempoDeVidaSegundos = 34560000;//40 dias (MAximo do crhome)
+            }
+            String valorSuporteAcentuacao = Base64.getUrlEncoder().encodeToString(valor.getBytes(StandardCharsets.UTF_8));
 
-        response.addCookie(cookie);
+            Cookie cookie = new Cookie(nome, valorSuporteAcentuacao);
+            cookie.setMaxAge(tempoDeVidaSegundos);  // em segundos (ex: 3600 = 1h)
+            cookie.setPath("/");                     // define o escopo (raiz do app)
+            cookie.setHttpOnly(true);                // impede acesso via JS (segurança)
+            cookie.setSecure(false);                 // true se for HTTPS
+
+            response.addCookie(cookie);
+        } catch (Throwable t) {
+            SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "", t);
+        }
     }
 
     public static Object getObjetoByInstanciadoViewScopedByExpressao(String pExpressao, Class pClasse) throws ErroGenericoProcessandoRespostaJson {
@@ -454,9 +473,9 @@ public class UtilSBWPServletTools {
      * @param pNome
      * @return
      */
-    public static ItfBeanSimples getActionBeanSimples(ActionEvent event, String pNome) {
+    public static ComoEntidadeSimples getActionBeanSimples(ActionEvent event, String pNome) {
         try {
-            ItfBeanSimples resposta = (ItfBeanSimples) event.getComponent().getAttributes().get(pNome);
+            ComoEntidadeSimples resposta = (ComoEntidadeSimples) event.getComponent().getAttributes().get(pNome);
             if (resposta == null) {
                 SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "Atributo de Evento JSF não encontrado:" + pNome + " para o evento" + event.toString(), null);
             }

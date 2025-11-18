@@ -19,7 +19,7 @@
             <name>layout</name>
             <description><![CDATA[O componente utilizado para exibição]]></description>
             <required>true</required>
-            <type>com.super_bits.view.fabricasCompVisual.ItfComponenteVisualSB</type>
+            <type>com.super_bits.view.fabricasCompVisual.ComoComponenteVisualSB</type>
         </attribute>
         <attribute>
 
@@ -35,7 +35,7 @@
             </description>
             <type>java.lang.String</type>
             <required>true</required>
-            <type>com.super_bits.Controller.Interfaces.acoes.ItfAcaoDoSistema</type>
+            <type>com.super_bits.Controller.Interfaces.acoes.ComoAcaoDoSistema</type>
         </attribute>
         <attribute>
             <name>idUpdate</name>
@@ -80,7 +80,7 @@
             <name>layout</name>
             <description><![CDATA[O componente utilizado para exibição]]></description>
             <required>true</required>
-            <type>com.super_bits.view.fabricasCompVisual.ItfComponenteVisualSB</type>
+            <type>com.super_bits.view.fabricasCompVisual.ComoComponenteVisualSB</type>
         </attribute>
 
 
@@ -91,7 +91,7 @@
             </description>
             <type>java.lang.String</type>
             <required>true</required>
-            <type>com.super_bits.Controller.Interfaces.acoes.ItfAcaoDoSistema</type>
+            <type>com.super_bits.Controller.Interfaces.acoes.ComoAcaoDoSistema</type>
         </attribute>
         <attribute>
             <name>idUpdate</name>
@@ -133,7 +133,7 @@
             <description> <![CDATA[ Entidade referente]]></description>
             <name>entidade</name>
             <required>true</required>
-            <type>com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfBeanSimples</type>
+            <type>com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ComoEntidadeSimples</type>
         </attribute>
 
         <attribute>
@@ -156,7 +156,7 @@
             </description>
             <name>layoutCampo</name>
             <required>false</required>
-            <type>com.super_bits.view.fabricasCompVisual.ItfComponenteVisualSB</type>
+            <type>com.super_bits.view.fabricasCompVisual.ComoComponenteVisualSB</type>
         </attribute>
     </tag>
     <tag>
@@ -166,7 +166,7 @@
             <description> <![CDATA[ Entidade referente]]></description>
             <name>entidade</name>
             <required>true</required>
-            <type>com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfBeanSimples</type>
+            <type>com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ComoEntidadeSimples</type>
         </attribute>
 
         <attribute>
@@ -189,7 +189,7 @@
             </description>
             <name>layoutCampo</name>
             <required>false</required>
-            <type>com.super_bits.view.fabricasCompVisual.ItfComponenteVisualSB</type>
+            <type>com.super_bits.view.fabricasCompVisual.ComoComponenteVisualSB</type>
         </attribute>
     </tag>
 
@@ -201,7 +201,7 @@
             <description> <![CDATA[ Entidade referente]]></description>
             <name>entidade</name>
             <required>true</required>
-            <type>com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfBeanSimples</type>
+            <type>com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ComoEntidadeSimples</type>
         </attribute>
         <attribute>
             <description> <![CDATA[ Entidade referente]]></description>
@@ -214,7 +214,7 @@
             <name>layout</name>
             <description><![CDATA[O componente utilizado para exibição]]></description>
             <required>true</required>
-            <type>com.super_bits.view.fabricasCompVisual.ItfComponenteVisualSB</type>
+            <type>com.super_bits.view.fabricasCompVisual.ComoComponenteVisualSB</type>
         </attribute>
 
 
@@ -231,7 +231,7 @@
             </description>
             <name>layoutCampo</name>
             <required>false</required>
-            <type>com.super_bits.view.fabricasCompVisual.ItfComponenteVisualSB</type>
+            <type>com.super_bits.view.fabricasCompVisual.ComoComponenteVisualSB</type>
         </attribute>
     </tag>
 
@@ -253,7 +253,7 @@
             </description>
             <name>layoutCampo</name>
             <required>false</required>
-            <type>com.super_bits.view.fabricasCompVisual.ItfComponenteVisualSB</type>
+            <type>com.super_bits.view.fabricasCompVisual.ComoComponenteVisualSB</type>
         </attribute>
 
         <attribute>
@@ -263,7 +263,7 @@
             </description>
             <name>layoutCampoEspecial</name>
             <required>false</required>
-            <type>com.super_bits.view.fabricasCompVisual.ItfComponenteVisualSB</type>
+            <type>com.super_bits.view.fabricasCompVisual.ComoComponenteVisualSB</type>
         </attribute>
 
 
@@ -382,13 +382,13 @@
             <description> <![CDATA[ O componente utilizado para exibição]]></description>
             <name>componente</name>
             <required>true</required>
-            <type>com.super_bits.view.fabricasCompVisual.ItfComponenteVisualSB</type>
+            <type>com.super_bits.view.fabricasCompVisual.ComoComponenteVisualSB</type>
         </attribute>
         <attribute>
             <description>O item que será exibido no componente</description>
             <name>itemSimples</name>
             <required>true</required>
-            <type>com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfBeanSimples</type>
+            <type>com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ComoEntidadeSimples</type>
         </attribute>
     </tag>
 
@@ -400,7 +400,7 @@
             <description> <![CDATA[ O componente utilizado para exibição]]></description>
             <name>layoutComponente</name>
             <required>true</required>
-            <type>com.super_bits.view.fabricasCompVisual.ItfComponenteVisualSB</type>
+            <type>com.super_bits.view.fabricasCompVisual.ComoComponenteVisualSB</type>
         </attribute>
         <attribute>
             <description>
@@ -408,13 +408,13 @@
             </description>
             <name>layoutCampo</name>
             <required>true</required>
-            <type>com.super_bits.view.fabricasCompVisual.ItfComponenteVisualSB</type>
+            <type>com.super_bits.view.fabricasCompVisual.ComoComponenteVisualSB</type>
         </attribute>
         <attribute>
             <description> <![CDATA[ O item que será exibido no componente]]></description>
             <name>itemSelecionado</name>
             <required>true</required>
-            <type>com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfBeanSimples</type>
+            <type>com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ComoEntidadeSimples</type>
         </attribute>
         <attribute>
             <description>O item que será exibido no componente</description>
@@ -510,7 +510,7 @@
             <description> <![CDATA[ O componente utilizado para exibição]]></description>
             <name>componente</name>
             <required>true</required>
-            <type>com.super_bits.view.fabricasCompVisual.ItfComponenteVisualSB</type>
+            <type>com.super_bits.view.fabricasCompVisual.ComoComponenteVisualSB</type>
         </attribute>
         <attribute>
             <description>
@@ -518,7 +518,7 @@
             </description>
             <name>layoutCampo</name>
             <required>true</required>
-            <type>com.super_bits.view.fabricasCompVisual.ItfComponenteVisualSB</type>
+            <type>com.super_bits.view.fabricasCompVisual.ComoComponenteVisualSB</type>
         </attribute>
         <attribute>
             <description>O item que será exibido no componente</description>
@@ -584,7 +584,7 @@
             <name>layout</name>
             <description> <![CDATA[ O componente utilizado para exibição]]></description>
             <required>true</required>
-            <type>com.super_bits.view.fabricasCompVisual.ItfComponenteVisualSB</type>
+            <type>com.super_bits.view.fabricasCompVisual.ComoComponenteVisualSB</type>
         </attribute>
 
         <attribute>
@@ -593,7 +593,7 @@
                 Ação vinculada ao botão
             </description>
             <required>true</required>
-            <type>com.super_bits.Controller.Interfaces.acoes.ItfAcaoDoSistema</type>
+            <type>com.super_bits.Controller.Interfaces.acoes.ComoAcaoDoSistema</type>
         </attribute>
 
         <attribute>
@@ -622,7 +622,7 @@
             <description> <![CDATA[ O componente utilizado para exibição]]></description>
             <name>layout</name>
             <required>true</required>
-            <type>com.super_bits.view.fabricasCompVisual.ItfComponenteVisualSB</type>
+            <type>com.super_bits.view.fabricasCompVisual.ComoComponenteVisualSB</type>
         </attribute>
 
         <attribute>
@@ -631,7 +631,7 @@
             </description>
             <name>acao</name>
             <required>true</required>
-            <type>com.super_bits.Controller.Interfaces.acoes.ItfAcaoDoSistema</type>
+            <type>com.super_bits.Controller.Interfaces.acoes.ComoAcaoDoSistema</type>
         </attribute>
 
         <attribute>
@@ -671,7 +671,7 @@
             <description> <![CDATA[ O componente utilizado para exibição]]></description>
             <name>layout</name>
             <required>true</required>
-            <type>com.super_bits.view.fabricasCompVisual.ItfComponenteVisualSB</type>
+            <type>com.super_bits.view.fabricasCompVisual.ComoComponenteVisualSB</type>
         </attribute>
         <attribute>
             <description>
@@ -687,7 +687,7 @@
             </description>
             <name>acao</name>
             <required>true</required>
-            <type>com.super_bits.Controller.Interfaces.acoes.ItfAcaoDoSistema</type>
+            <type>com.super_bits.Controller.Interfaces.acoes.ComoAcaoDoSistema</type>
         </attribute>
 
 
@@ -748,7 +748,7 @@
             <description> <![CDATA[ O componente utilizado para exibição]]></description>
             <name>layout</name>
             <required>true</required>
-            <type>com.super_bits.view.fabricasCompVisual.ItfComponenteVisualSB</type>
+            <type>com.super_bits.view.fabricasCompVisual.ComoComponenteVisualSB</type>
         </attribute>
 
         <attribute>
@@ -757,7 +757,7 @@
             </description>
             <name>acao</name>
             <required>true</required>
-            <type>com.super_bits.Controller.Interfaces.acoes.ItfAcaoDoSistema</type>
+            <type>com.super_bits.Controller.Interfaces.acoes.ComoAcaoDoSistema</type>
         </attribute>
 
         <attribute>
@@ -816,7 +816,7 @@
             <description> <![CDATA[ O componente utilizado para exibição]]></description>
             <name>layout</name>
             <required>true</required>
-            <type>com.super_bits.view.fabricasCompVisual.ItfComponenteVisualSB</type>
+            <type>com.super_bits.view.fabricasCompVisual.ComoComponenteVisualSB</type>
         </attribute>
 
         <attribute>
@@ -841,7 +841,7 @@
             </description>
             <name>acao</name>
             <required>true</required>
-            <type>com.super_bits.Controller.Interfaces.acoes.ItfAcaoDoSistema</type>
+            <type>com.super_bits.Controller.Interfaces.acoes.ComoAcaoDoSistema</type>
         </attribute>
 
         <attribute>
@@ -955,7 +955,7 @@
             </description>
             <name>layout</name>
             <required>false</required>
-            <type>com.super_bits.view.fabricasCompVisual.ItfComponenteVisualSB</type>
+            <type>com.super_bits.view.fabricasCompVisual.ComoComponenteVisualSB</type>
         </attribute>
     </tag>
     <tag>

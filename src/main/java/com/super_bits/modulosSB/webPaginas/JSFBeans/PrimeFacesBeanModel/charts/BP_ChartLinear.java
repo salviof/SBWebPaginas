@@ -3,15 +3,15 @@ package com.super_bits.modulosSB.webPaginas.JSFBeans.PrimeFacesBeanModel.charts;
 import com.super_bits.modulosSB.Persistencia.dao.DaoGenerico;
 import com.super_bits.modulosSB.Persistencia.dao.SBNQ;
 import com.super_bits.modulosSB.Persistencia.dao.SBNQ.TipoObj;
-import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfBeanSimples;
-import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.charts.ItfBeanSimpleChart;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ComoEntidadeSimples;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.charts.ComoEntidadeSimpleChart;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.poi.ss.usermodel.charts.ChartSeries;
 import org.primefaces.model.charts.line.LineChartDataSet;
 import org.primefaces.model.charts.line.LineChartModel;
 
-public class BP_ChartLinear<T extends ItfBeanSimples> {
+public class BP_ChartLinear<T extends ComoEntidadeSimples> {
 
     private LineChartModel dadosGrafico;
     private String nomeGrafico = "";
@@ -19,31 +19,31 @@ public class BP_ChartLinear<T extends ItfBeanSimples> {
     private double maximo = 0;
     private Class<?> classe;
 
-    public BP_ChartLinear(String pNome, List<ItfBeanSimpleChart>[] listas,
-            Class<? extends ItfBeanSimpleChart> tipo) {
+    public BP_ChartLinear(String pNome, List<ComoEntidadeSimpleChart>[] listas,
+            Class<? extends ComoEntidadeSimpleChart> tipo) {
         classe = tipo;
         nomeGrafico = pNome;
         setDadosGrafico(new LineChartModel());
-        for (List<ItfBeanSimpleChart> lista : listas) {
+        for (List<ComoEntidadeSimpleChart> lista : listas) {
             adcionaSerie(lista);
         }
     }
 
     public BP_ChartLinear(String pNome,
-            Class<? extends ItfBeanSimpleChart> tipo) {
+            Class<? extends ComoEntidadeSimpleChart> tipo) {
         classe = tipo;
         nomeGrafico = pNome;
         setDadosGrafico(new LineChartModel());
     }
 
-    public void adcionaSerie(List<? extends ItfBeanSimpleChart> listacat) {
+    public void adcionaSerie(List<? extends ComoEntidadeSimpleChart> listacat) {
         if (listacat != null & listacat.size() > 0) {
             LineChartDataSet serie = new LineChartDataSet();
 
             serie.setLabel(listacat.get(0).getCategoria());
             List<Object> valores = new ArrayList<>();
             List<Object> nomes = new ArrayList<>();
-            for (ItfBeanSimpleChart item : listacat) {
+            for (ComoEntidadeSimpleChart item : listacat) {
                 if (item.getValor() < getMinimo()) {
                     setMinimo(item.getValor());
                 }
@@ -58,8 +58,8 @@ public class BP_ChartLinear<T extends ItfBeanSimples> {
         }// se tiver algo na lista
     }
 
-    public void adcionaSeries(List<? extends ItfBeanSimpleChart> plistas[]) {
-        for (List<? extends ItfBeanSimpleChart> serie : plistas) {
+    public void adcionaSeries(List<? extends ComoEntidadeSimpleChart> plistas[]) {
+        for (List<? extends ComoEntidadeSimpleChart> serie : plistas) {
             adcionaSerie(serie);
         }
     }
@@ -67,36 +67,36 @@ public class BP_ChartLinear<T extends ItfBeanSimples> {
     public void adcionaSerie(SBNQ qr) {
 
         DaoGenerico<T> daoRe = new DaoGenerico<T>(classe);
-        List<ItfBeanSimpleChart>[] catgraficoLiner = new ArrayList[1];
+        List<ComoEntidadeSimpleChart>[] catgraficoLiner = new ArrayList[1];
 
         if (qr.getTipolista() == TipoObj.ENTIDADE) {
             catgraficoLiner = new ArrayList[1];
-            catgraficoLiner[0] = (List<ItfBeanSimpleChart>) daoRe.achaItemPorSBNQ(qr);
+            catgraficoLiner[0] = (List<ComoEntidadeSimpleChart>) daoRe.achaItemPorSBNQ(qr);
         }
         if (qr.getTipolista() == TipoObj.SBQUERY) {
 
             if (qr.isMinMedMaximo()) {
                 catgraficoLiner = new ArrayList[3];
-                catgraficoLiner[0] = (List<ItfBeanSimpleChart>) qr.getSbQuery()
+                catgraficoLiner[0] = (List<ComoEntidadeSimpleChart>) qr.getSbQuery()
                         .getMinimo();
-                catgraficoLiner[1] = (List<ItfBeanSimpleChart>) qr.getSbQuery()
+                catgraficoLiner[1] = (List<ComoEntidadeSimpleChart>) qr.getSbQuery()
                         .getMedia();
-                catgraficoLiner[2] = (List<ItfBeanSimpleChart>) qr.getSbQuery()
+                catgraficoLiner[2] = (List<ComoEntidadeSimpleChart>) qr.getSbQuery()
                         .getMaximo();
             } else {
                 catgraficoLiner = new ArrayList[1];
-                catgraficoLiner[0] = (List<ItfBeanSimpleChart>) qr.getSbQuery()
+                catgraficoLiner[0] = (List<ComoEntidadeSimpleChart>) qr.getSbQuery()
                         .retorno();
             }
 
         }
-        for (List<ItfBeanSimpleChart> serie : catgraficoLiner) {
+        for (List<ComoEntidadeSimpleChart> serie : catgraficoLiner) {
             adcionaSerie(serie);
         }
     }
 
     public BP_ChartLinear(String pNome, SBNQ[] dados,
-            Class<? extends ItfBeanSimpleChart> tipo) {
+            Class<? extends ComoEntidadeSimpleChart> tipo) {
         classe = tipo;
         setDadosGrafico(new LineChartModel());
         nomeGrafico = pNome;

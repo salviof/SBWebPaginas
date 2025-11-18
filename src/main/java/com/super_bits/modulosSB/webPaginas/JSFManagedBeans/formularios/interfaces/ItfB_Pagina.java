@@ -6,13 +6,12 @@ package com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.interfac
 
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.ItfParametroRequisicao;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.ItfParametroRequisicaoInstanciado;
-import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ItfAcaoDoSistema;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.permissoes.ItfAcaoGerenciarEntidade;
 import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ComunicacaoAcaoSistema;
 import com.super_bits.modulosSB.SBCore.modulos.comunicacao.FabTipoRespostaComunicacao;
 import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ItfTipoRespostaComunicacao;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campoInstanciado.ItfCampoInstanciado;
-import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfBeanSimples;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ComoEntidadeSimples;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.B_Pagina;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.InfoDesignFormulario;
 import com.super_bits.modulosSB.webPaginas.controller.servlets.servletWebPaginas.ConfiguracoesDeFormularioPorUrl;
@@ -21,6 +20,7 @@ import java.util.Map;
 import org.primefaces.event.SelectEvent;
 import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ItfDialogo;
 import com.super_bits.modulosSB.SBCore.modulos.view.formulario.ItfFormularioAcao;
+import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ComoAcaoDoSistema;
 
 /**
  *
@@ -159,7 +159,7 @@ public interface ItfB_Pagina extends ItfB_PaginaSimples, ItfB_PaginaComEntityMan
      *
      * @return Todas as ações declaradas no managed Bean
      */
-    public List<ItfAcaoDoSistema> getAcoesDaPagina();
+    public List<ComoAcaoDoSistema> getAcoesDaPagina();
 
     public ItfB_PaginaComEtapaVinculada getComoPaginaComEtapa();
 
@@ -182,9 +182,9 @@ public interface ItfB_Pagina extends ItfB_PaginaSimples, ItfB_PaginaComEntityMan
 
     public String getNomeMB();
 
-    public ItfBeanSimples getBeanSelecionado();
+    public ComoEntidadeSimples getBeanSelecionado();
 
-    public void setBeanSelecionado(ItfBeanSimples pBeanSimples);
+    public void setBeanSelecionado(ComoEntidadeSimples pBeanSimples);
 
     public void setCampoInstSelecionado(ItfCampoInstanciado pCampoInstanciado);
 

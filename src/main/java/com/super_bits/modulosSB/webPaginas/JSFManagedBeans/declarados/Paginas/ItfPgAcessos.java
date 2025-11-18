@@ -6,9 +6,9 @@ package com.super_bits.modulosSB.webPaginas.JSFManagedBeans.declarados.Paginas;
 
 import com.super_bits.modulos.SBAcessosModel.model.PermissaoSB;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.permissoes.ItfPermissao;
-import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfGrupoUsuario;
-import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfUsuario;
 import java.util.List;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ComoGrupoUsuario;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ComoUsuario;
 
 /**
  *
@@ -36,7 +36,7 @@ public interface ItfPgAcessos {
      * @return Usuário Selecionado para inclusão em acessoSBSelecionado.negados
      * ou permitido
      */
-    public ItfUsuario getUsuarioSBInclusao();
+    public ComoUsuario getUsuarioSBInclusao();
 
     /**
      * Usuário selecionado para Exlusão em acessoSBSelecionado.negados ou
@@ -45,7 +45,7 @@ public interface ItfPgAcessos {
      * @return Usuário selecionado para Exlusão em acessoSBSelecionado.negados
      * ou permitido
      */
-    public ItfUsuario getUsuarioSBExclusao();
+    public ComoUsuario getUsuarioSBExclusao();
 
     /**
      * Grupo selecoinado para inclusão em acesso acessoSBSelecionado.negados ou
@@ -54,13 +54,13 @@ public interface ItfPgAcessos {
      * @return Grupo selecoinado para inclusão em acesso
      * acessoSBSelecionado.negados ou permitido
      */
-    public ItfGrupoUsuario getGrupoUsuarioSBInclusao();
+    public ComoGrupoUsuario getGrupoUsuarioSBInclusao();
 
     /**
      * @return Grupo selecoinado para exclusão em acessoSBSelecionado.negados ou
      * permitido
      */
-    public ItfGrupoUsuario getGrupoUsuarioSBExclusao();
+    public ComoGrupoUsuario getGrupoUsuarioSBExclusao();
 
     /**
      * Adiciona o usuário SelecionadoInclusão, ao

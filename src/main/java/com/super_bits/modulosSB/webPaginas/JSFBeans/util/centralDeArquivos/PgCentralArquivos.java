@@ -11,7 +11,7 @@ import com.super_bits.modulosSB.SBCore.UtilGeral.stringSubstituicao.MapaSubstitu
 import com.super_bits.modulosSB.SBCore.modulos.ManipulaArquivo.UtilSBCoreArquivos;
 import com.super_bits.modulosSB.SBCore.modulos.ManipulaArquivo.interfaces.ItfCentralDeArquivos;
 import com.super_bits.modulosSB.SBCore.modulos.Mensagens.FabMensagens;
-import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfBeanSimples;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ComoEntidadeSimples;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
@@ -33,7 +33,7 @@ import org.primefaces.model.file.UploadedFile;
 @ViewScoped
 public class PgCentralArquivos implements Serializable {
 
-    private ItfBeanSimples entidadeRelacionada;
+    private ComoEntidadeSimples entidadeRelacionada;
     private String categoria;
 
     private FabTipoEnvioArquivoEntidade tipoEnvio = FabTipoEnvioArquivoEntidade.ARQUIVO_DA_ENTIDADE;
@@ -164,11 +164,11 @@ public class PgCentralArquivos implements Serializable {
         }
     }
 
-    public ItfBeanSimples getEntidadeRelacionada() {
+    public ComoEntidadeSimples getEntidadeRelacionada() {
         return entidadeRelacionada;
     }
 
-    public void setEntidadeRelacionada(ItfBeanSimples entidadeRelacionada) {
+    public void setEntidadeRelacionada(ComoEntidadeSimples entidadeRelacionada) {
         this.entidadeRelacionada = entidadeRelacionada;
     }
 

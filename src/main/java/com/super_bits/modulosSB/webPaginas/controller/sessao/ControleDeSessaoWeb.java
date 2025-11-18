@@ -12,9 +12,6 @@ import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.permissoes.
 import com.super_bits.modulosSB.SBCore.modulos.Controller.qualificadoresCDI.sessao.QlSessaoRequestScoped;
 import com.super_bits.modulosSB.SBCore.modulos.Mensagens.FabMensagens;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.ItensGenericos.basico.UsuarioSistemaRoot;
-import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfGrupoUsuario;
-import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfSessao;
-import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfUsuario;
 import com.super_bits.modulosSB.SBCore.modulos.sessao.ControleDeSessaoAbstratoSBCore;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.siteMap.MapaDeFormularios;
 import com.super_bits.modulos.SBAcessosModel.view.FabAcaoPaginasDoSistema;
@@ -32,6 +29,9 @@ import javax.inject.Named;
 import javax.servlet.http.HttpSession;
 import org.coletivojava.fw.api.tratamentoErros.FabErro;
 import org.coletivojava.fw.utilCoreBase.UtilSBCoreComunicacao;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ComoGrupoUsuario;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ComoSessao;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ComoUsuario;
 
 /**
  *
@@ -46,10 +46,10 @@ public class ControleDeSessaoWeb extends ControleDeSessaoAbstratoSBCore implemen
 
     @Inject
     @QlSessaoFacesContext
-    private ItfSessao sessaoAtual;
+    private ComoSessao sessaoAtual;
 
     @Inject
-    private Instance<ItfSessao> sessaoProgramatic;
+    private Instance<ComoSessao> sessaoProgramatic;
 
     private String usuarioLogar;
     private String senhaLogar;
@@ -59,7 +59,7 @@ public class ControleDeSessaoWeb extends ControleDeSessaoAbstratoSBCore implemen
     }
 
     @Override
-    public ItfSessao getSessaoAtual() {
+    public ComoSessao getSessaoAtual() {
 
         if (sessaoAtual == null) {
 
@@ -126,7 +126,7 @@ public class ControleDeSessaoWeb extends ControleDeSessaoAbstratoSBCore implemen
 
         }
         SBCore.getCentralPermissao().configuraPermissoes();
-        ItfGrupoUsuario grupoUsuarioLogado = sessaoAtual.getUsuario().getGrupo();
+        ComoGrupoUsuario grupoUsuarioLogado = sessaoAtual.getUsuario().getGrupo();
 
         ((SessaoAtualSBWP) sessaoAtual).setMenusDaSessao(SBCore.getCentralPermissao().definirMenu(grupoUsuarioLogado));
 
@@ -139,7 +139,7 @@ public class ControleDeSessaoWeb extends ControleDeSessaoAbstratoSBCore implemen
 
     @Override
     protected void enviarSenhaParaEmail(String pEmail) {
-        ItfUsuario usuarioEncontrado = SBCore.getCentralPermissao().getUsuarioByEmail(pEmail);
+        ComoUsuario usuarioEncontrado = SBCore.getCentralPermissao().getUsuarioByEmail(pEmail);
 
         if (usuarioEncontrado == null) {
             SBCore.enviarMensagemUsuario("O email " + pEmail + " não foi encontrado no sistema", FabMensagens.ALERTA);

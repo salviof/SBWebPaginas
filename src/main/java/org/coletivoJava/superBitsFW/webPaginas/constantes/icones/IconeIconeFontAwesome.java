@@ -4,44 +4,44 @@ import javax.inject.Named;
 import javax.enterprise.context.ApplicationScoped;
 import java.io.Serializable;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.icones.FabIconeFontAwesome;
-import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.icones.itfIcone;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.icones.ComoIcone;
 
 @Named
 @ApplicationScoped
 public class IconeIconeFontAwesome implements Serializable {
 
-	private final itfIcone iCONE_PERSONALIZADO;
-	private final itfIcone rEG_NOVO;
-	private final itfIcone rEG_EDITAR;
-	private final itfIcone rEG_VALIDAR;
-	private final itfIcone rEG_REMOVER;
-	private final itfIcone rEG_ATUALIZAR;
-	private final itfIcone rEG_ENVIAR;
-	private final itfIcone rEG_BAIXAR;
-	private final itfIcone rEG_GERENCIAR;
-	private final itfIcone rEG_VISUALIZAR;
-	private final itfIcone rEG_SALVAR;
-	private final itfIcone rEG_PESQUISA_AVANCADA;
-	private final itfIcone rEG_AGRUPAR_REGISTROS;
-	private final itfIcone rEG_LISTAR;
-	private final itfIcone rEG_PROXIMO;
-	private final itfIcone rEG_ANTERIOR;
-	private final itfIcone rEG_PESQUISAR;
-	private final itfIcone rEG_SELECIONAR_ITEM;
-	private final itfIcone eSCRITORIO_DOCUMENTO_TEXTO;
-	private final itfIcone pESSOA_CORACAO;
-	private final itfIcone cOMERCIO_PRESENTE;
-	private final itfIcone cOMERCIO_BITCOINS;
-	private final itfIcone cOMERCIO_APERTO_DE_MAO;
-	private final itfIcone tECNOLOGIA_BATERIA;
-	private final itfIcone sISTEMA_HOME;
-	private final itfIcone sISTEMA_ACESSO_NEGADO;
-	private final itfIcone sISTEMA_USUARIO;
-	private final itfIcone sISTEMA_CARTAO_DE_ACESSO;
-	private final itfIcone sISTEMA_ENGRENAGEM;
-	private final itfIcone cOMUNICACAO_OK;
-	private final itfIcone cOMNUNICACAO_NAO_ESTA_OK;
-	private final itfIcone cOMUNICACAO_AVIAO_DE_PAPEL;
+	private final ComoIcone iCONE_PERSONALIZADO;
+	private final ComoIcone rEG_NOVO;
+	private final ComoIcone rEG_EDITAR;
+	private final ComoIcone rEG_VALIDAR;
+	private final ComoIcone rEG_REMOVER;
+	private final ComoIcone rEG_ATUALIZAR;
+	private final ComoIcone rEG_ENVIAR;
+	private final ComoIcone rEG_BAIXAR;
+	private final ComoIcone rEG_GERENCIAR;
+	private final ComoIcone rEG_VISUALIZAR;
+	private final ComoIcone rEG_SALVAR;
+	private final ComoIcone rEG_PESQUISA_AVANCADA;
+	private final ComoIcone rEG_AGRUPAR_REGISTROS;
+	private final ComoIcone rEG_LISTAR;
+	private final ComoIcone rEG_PROXIMO;
+	private final ComoIcone rEG_ANTERIOR;
+	private final ComoIcone rEG_PESQUISAR;
+	private final ComoIcone rEG_SELECIONAR_ITEM;
+	private final ComoIcone eSCRITORIO_DOCUMENTO_TEXTO;
+	private final ComoIcone pESSOA_CORACAO;
+	private final ComoIcone cOMERCIO_PRESENTE;
+	private final ComoIcone cOMERCIO_BITCOINS;
+	private final ComoIcone cOMERCIO_APERTO_DE_MAO;
+	private final ComoIcone tECNOLOGIA_BATERIA;
+	private final ComoIcone sISTEMA_HOME;
+	private final ComoIcone sISTEMA_ACESSO_NEGADO;
+	private final ComoIcone sISTEMA_USUARIO;
+	private final ComoIcone sISTEMA_CARTAO_DE_ACESSO;
+	private final ComoIcone sISTEMA_ENGRENAGEM;
+	private final ComoIcone cOMUNICACAO_OK;
+	private final ComoIcone cOMNUNICACAO_NAO_ESTA_OK;
+	private final ComoIcone cOMUNICACAO_AVIAO_DE_PAPEL;
 
 	IconeIconeFontAwesome() {
 		this.iCONE_PERSONALIZADO = FabIconeFontAwesome.ICONE_PERSONALIZADO
@@ -92,131 +92,131 @@ public class IconeIconeFontAwesome implements Serializable {
 				.getIcone();
 	}
 
-	public itfIcone getICONE_PERSONALIZADO() {
+	public ComoIcone getICONE_PERSONALIZADO() {
 		return iCONE_PERSONALIZADO;
 	}
 
-	public itfIcone getREG_NOVO() {
+	public ComoIcone getREG_NOVO() {
 		return rEG_NOVO;
 	}
 
-	public itfIcone getREG_EDITAR() {
+	public ComoIcone getREG_EDITAR() {
 		return rEG_EDITAR;
 	}
 
-	public itfIcone getREG_VALIDAR() {
+	public ComoIcone getREG_VALIDAR() {
 		return rEG_VALIDAR;
 	}
 
-	public itfIcone getREG_REMOVER() {
+	public ComoIcone getREG_REMOVER() {
 		return rEG_REMOVER;
 	}
 
-	public itfIcone getREG_ATUALIZAR() {
+	public ComoIcone getREG_ATUALIZAR() {
 		return rEG_ATUALIZAR;
 	}
 
-	public itfIcone getREG_ENVIAR() {
+	public ComoIcone getREG_ENVIAR() {
 		return rEG_ENVIAR;
 	}
 
-	public itfIcone getREG_BAIXAR() {
+	public ComoIcone getREG_BAIXAR() {
 		return rEG_BAIXAR;
 	}
 
-	public itfIcone getREG_GERENCIAR() {
+	public ComoIcone getREG_GERENCIAR() {
 		return rEG_GERENCIAR;
 	}
 
-	public itfIcone getREG_VISUALIZAR() {
+	public ComoIcone getREG_VISUALIZAR() {
 		return rEG_VISUALIZAR;
 	}
 
-	public itfIcone getREG_SALVAR() {
+	public ComoIcone getREG_SALVAR() {
 		return rEG_SALVAR;
 	}
 
-	public itfIcone getREG_PESQUISA_AVANCADA() {
+	public ComoIcone getREG_PESQUISA_AVANCADA() {
 		return rEG_PESQUISA_AVANCADA;
 	}
 
-	public itfIcone getREG_AGRUPAR_REGISTROS() {
+	public ComoIcone getREG_AGRUPAR_REGISTROS() {
 		return rEG_AGRUPAR_REGISTROS;
 	}
 
-	public itfIcone getREG_LISTAR() {
+	public ComoIcone getREG_LISTAR() {
 		return rEG_LISTAR;
 	}
 
-	public itfIcone getREG_PROXIMO() {
+	public ComoIcone getREG_PROXIMO() {
 		return rEG_PROXIMO;
 	}
 
-	public itfIcone getREG_ANTERIOR() {
+	public ComoIcone getREG_ANTERIOR() {
 		return rEG_ANTERIOR;
 	}
 
-	public itfIcone getREG_PESQUISAR() {
+	public ComoIcone getREG_PESQUISAR() {
 		return rEG_PESQUISAR;
 	}
 
-	public itfIcone getREG_SELECIONAR_ITEM() {
+	public ComoIcone getREG_SELECIONAR_ITEM() {
 		return rEG_SELECIONAR_ITEM;
 	}
 
-	public itfIcone getESCRITORIO_DOCUMENTO_TEXTO() {
+	public ComoIcone getESCRITORIO_DOCUMENTO_TEXTO() {
 		return eSCRITORIO_DOCUMENTO_TEXTO;
 	}
 
-	public itfIcone getPESSOA_CORACAO() {
+	public ComoIcone getPESSOA_CORACAO() {
 		return pESSOA_CORACAO;
 	}
 
-	public itfIcone getCOMERCIO_PRESENTE() {
+	public ComoIcone getCOMERCIO_PRESENTE() {
 		return cOMERCIO_PRESENTE;
 	}
 
-	public itfIcone getCOMERCIO_BITCOINS() {
+	public ComoIcone getCOMERCIO_BITCOINS() {
 		return cOMERCIO_BITCOINS;
 	}
 
-	public itfIcone getCOMERCIO_APERTO_DE_MAO() {
+	public ComoIcone getCOMERCIO_APERTO_DE_MAO() {
 		return cOMERCIO_APERTO_DE_MAO;
 	}
 
-	public itfIcone getTECNOLOGIA_BATERIA() {
+	public ComoIcone getTECNOLOGIA_BATERIA() {
 		return tECNOLOGIA_BATERIA;
 	}
 
-	public itfIcone getSISTEMA_HOME() {
+	public ComoIcone getSISTEMA_HOME() {
 		return sISTEMA_HOME;
 	}
 
-	public itfIcone getSISTEMA_ACESSO_NEGADO() {
+	public ComoIcone getSISTEMA_ACESSO_NEGADO() {
 		return sISTEMA_ACESSO_NEGADO;
 	}
 
-	public itfIcone getSISTEMA_USUARIO() {
+	public ComoIcone getSISTEMA_USUARIO() {
 		return sISTEMA_USUARIO;
 	}
 
-	public itfIcone getSISTEMA_CARTAO_DE_ACESSO() {
+	public ComoIcone getSISTEMA_CARTAO_DE_ACESSO() {
 		return sISTEMA_CARTAO_DE_ACESSO;
 	}
 
-	public itfIcone getSISTEMA_ENGRENAGEM() {
+	public ComoIcone getSISTEMA_ENGRENAGEM() {
 		return sISTEMA_ENGRENAGEM;
 	}
 
-	public itfIcone getCOMUNICACAO_OK() {
+	public ComoIcone getCOMUNICACAO_OK() {
 		return cOMUNICACAO_OK;
 	}
 
-	public itfIcone getCOMNUNICACAO_NAO_ESTA_OK() {
+	public ComoIcone getCOMNUNICACAO_NAO_ESTA_OK() {
 		return cOMNUNICACAO_NAO_ESTA_OK;
 	}
 
-	public itfIcone getCOMUNICACAO_AVIAO_DE_PAPEL() {
+	public ComoIcone getCOMUNICACAO_AVIAO_DE_PAPEL() {
 		return cOMUNICACAO_AVIAO_DE_PAPEL;
 	}
 }

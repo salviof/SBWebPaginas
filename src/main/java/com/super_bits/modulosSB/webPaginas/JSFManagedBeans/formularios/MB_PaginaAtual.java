@@ -2,10 +2,7 @@ package com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios;
 
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 import com.super_bits.modulosSB.SBCore.UtilGeral.MapaAcoesSistema;
-import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ItfAcaoDoSistema;
-import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfBeanSimples;
-import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfSessao;
-import com.super_bits.modulosSB.SBCore.modulos.servicosCore.ItfControleDeSessao;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ComoEntidadeSimples;
 import com.super_bits.modulosSB.webPaginas.ConfigGeral.SBWebPaginas;
 import com.super_bits.modulosSB.webPaginas.JSFBeans.modal.PgModalRespostaAcaoTransient;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.declarados.Paginas.ErroCritico.InfoErroCritico;
@@ -25,6 +22,9 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
 import org.coletivojava.fw.api.tratamentoErros.FabErro;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ComoSessao;
+import com.super_bits.modulosSB.SBCore.modulos.servicosCore.ComoControleDeSessao;
+import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ComoAcaoDoSistema;
 
 public abstract class MB_PaginaAtual implements Serializable {
 
@@ -86,7 +86,7 @@ public abstract class MB_PaginaAtual implements Serializable {
                                                 getPaginaInicial().getRegistro().getComoFormulario().getXhtml();
 
                                 if (paginaInicialDoGrupo != null && !paginaInicialDoGrupo.equals("/site/home.xhtml")) {
-                                    ItfAcaoDoSistema acao = MapaAcoesSistema.getAcaoDoSistemaByFormulario(paginaInicialDoGrupo);
+                                    ComoAcaoDoSistema acao = MapaAcoesSistema.getAcaoDoSistemaByFormulario(paginaInicialDoGrupo);
                                     String url = MapaDeFormularios.getUrlFormulario(acao);
                                     UtilSBWP_JSFTools.vaParaPagina(url);
                                     //UtilSBWP_JSFTools.vaParaPagina(WebPaginasServlet.getAcaoComLinkByXHTML(paginaInicialDoGrupo).getUrlDeAcesso());
@@ -117,7 +117,7 @@ public abstract class MB_PaginaAtual implements Serializable {
         return infoPagina.getComoFormularioWeb();
     }
 
-    public AcaoDeContexto getAcaoNoCotexto(ItfAcaoDoSistema pAcao) {
+    public AcaoDeContexto getAcaoNoCotexto(ComoAcaoDoSistema pAcao) {
         if (getInfoPagina().isPaginaDeGestao()) {
             return new AcaoDeContexto(pAcao, FacesContext.getCurrentInstance(), getInfoPagina().getComoPaginaDeGestao());
         } else {
@@ -125,7 +125,7 @@ public abstract class MB_PaginaAtual implements Serializable {
         }
     }
 
-    public boolean isPermitidoExecutarAcao(ItfAcaoDoSistema pAcao) {
+    public boolean isPermitidoExecutarAcao(ComoAcaoDoSistema pAcao) {
         return SBCore.getControleDeSessao().getSessaoAtual().isAcessoPermitido(pAcao);
     }
 
@@ -163,7 +163,7 @@ public abstract class MB_PaginaAtual implements Serializable {
 
     public void mudarDePaginaPorEntidade(ActionEvent event) {
 //        String pPagina = UtilSBWPServletTools.getRequestParametro("pPagina");
-        ItfBeanSimples pEntidade = UtilSBWPServletTools.getActionBeanSimples(event, "registro");
+        ComoEntidadeSimples pEntidade = UtilSBWPServletTools.getActionBeanSimples(event, "registro");
 
         // ItfB_Pagina novaPg = getSiteMap().getPaginaByTagOuNome(pPagina);
         //   novaPg.getParametrobyTipoEntidade(pEntidade.getClass().getSimpleName()).setValor(pEntidade.getNomeCurto());
@@ -176,11 +176,11 @@ public abstract class MB_PaginaAtual implements Serializable {
         fechaPagina();
     }
 
-    public ItfSessao getSessao() {
+    public ComoSessao getSessao() {
         return controleDeSessao.getSessaoAtual();
     }
 
-    public ItfControleDeSessao getControleDeSessao() {
+    public ComoControleDeSessao getControleDeSessao() {
         return controleDeSessao;
     }
 

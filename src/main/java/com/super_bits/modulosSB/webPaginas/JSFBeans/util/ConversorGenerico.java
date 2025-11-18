@@ -5,7 +5,6 @@ import com.sun.faces.renderkit.html_basic.MenuRenderer;
 import com.super_bits.modulosSB.Persistencia.dao.UtilSBPersistencia;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campoInstanciado.ItfCampoInstanciado;
-import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfBeanSimplesSomenteLeitura;
 import com.super_bits.modulosSB.SBCore.modulos.view.fabricasCompVisual.componentes.FabCompVisualSeletorItem;
 import com.super_bits.modulosSB.webPaginas.util.UtilSBWP_JSFTools;
 import java.util.Optional;
@@ -17,6 +16,7 @@ import org.coletivojava.fw.api.tratamentoErros.FabErro;
 import org.primefaces.component.selectmanymenu.SelectManyMenuRenderer;
 
 import org.super_bits.tags.inputGenerico.InputGenerico;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ComoEntidadeSimplesSomenteLeitura;
 
 @FacesConverter(value = "conversorGenerico")
 public class ConversorGenerico extends ConversorSB {
@@ -31,7 +31,7 @@ public class ConversorGenerico extends ConversorSB {
 
         try {
             if (value != null) {
-                // ItfBeanSimples entity =(ItfBeanSimples)
+                // ComoEntidadeSimples entity =(ComoEntidadeSimples)
                 // getAttributesFrom(component).get(value);
                 // System.out.println(entity.getNomeCurto());
                 // System.out.println("Convertido OBJ:" +value
@@ -98,7 +98,7 @@ public class ConversorGenerico extends ConversorSB {
                 }
                 if (em != null) {
                     if (resposta != null) {
-                        //   resposta = UtilSBPersistencia.loadEntidade((ItfBeanSimplesSomenteLeitura) resposta, em);
+                        //   resposta = UtilSBPersistencia.loadEntidade((ComoEntidadeSimplesSomenteLeitura) resposta, em);
                     }
                 }
                 return resposta;
@@ -120,8 +120,8 @@ public class ConversorGenerico extends ConversorSB {
 
         try {
 
-            if (value != null && value instanceof ItfBeanSimplesSomenteLeitura && !"".equals(value)) {
-                ItfBeanSimplesSomenteLeitura item = (ItfBeanSimplesSomenteLeitura) value;
+            if (value != null && value instanceof ComoEntidadeSimplesSomenteLeitura && !"".equals(value)) {
+                ComoEntidadeSimplesSomenteLeitura item = (ComoEntidadeSimplesSomenteLeitura) value;
                 String valorEmString = item.toString();
                 value.toString();
                 if (item.getId() != 0) {

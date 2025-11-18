@@ -7,20 +7,20 @@ package com.super_bits.modulosSB.webPaginas.JSFBeans.PrimeFacesBeanModel;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campo.seletores.seletorMultiplo.B_listaComOrigemAbs;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campoInstanciado.ItfCampoInstanciado;
-import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfBeanSimplesSomenteLeitura;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import jersey.repackaged.com.google.common.collect.Lists;
 import org.coletivojava.fw.api.tratamentoErros.FabErro;
 import org.primefaces.model.DualListModel;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ComoEntidadeSimplesSomenteLeitura;
 
 /**
  *
  * @author SAlvio furnbino
  * @param <T>
  */
-public class BP_PickList<T extends ItfBeanSimplesSomenteLeitura> extends B_listaComOrigemAbs<T> implements Serializable {
+public class BP_PickList<T extends ComoEntidadeSimplesSomenteLeitura> extends B_listaComOrigemAbs<T> implements Serializable {
 
     private DualListModel<T> dualListPrime;
     private int indiceItemSelecionado;

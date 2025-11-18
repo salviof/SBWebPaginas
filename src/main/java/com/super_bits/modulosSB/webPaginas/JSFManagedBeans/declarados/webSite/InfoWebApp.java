@@ -5,9 +5,7 @@
 package com.super_bits.modulosSB.webPaginas.JSFManagedBeans.declarados.webSite;
 
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
-import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ItfAcaoDoSistema;
-import com.super_bits.modulosSB.SBCore.modulos.fabrica.ItfFabricaAcoes;
-import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfGrupoUsuario;
+import com.super_bits.modulosSB.SBCore.modulos.fabrica.ComoFabricaAcoes;
 import com.super_bits.modulosSB.webPaginas.ConfigGeral.SBWebPaginas;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.siteMap.AcaoComLink;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.siteMap.MapaDeFormularios;
@@ -20,6 +18,8 @@ import javax.enterprise.context.ApplicationScoped;
 
 import javax.inject.Named;
 import org.coletivojava.fw.api.tratamentoErros.FabErro;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ComoGrupoUsuario;
+import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ComoAcaoDoSistema;
 
 /**
  *
@@ -34,7 +34,7 @@ public class InfoWebApp implements Serializable {
      * @param pAcao
      * @return Ação managed Ben contendo a URL para acesso
      */
-    public AcaoComLink getAcaoComLink(ItfAcaoDoSistema pAcao) {
+    public AcaoComLink getAcaoComLink(ComoAcaoDoSistema pAcao) {
         try {
             if (pAcao == null) {
                 System.out.println("Enviou ação nula como parametro para obtenção de link");
@@ -71,7 +71,7 @@ public class InfoWebApp implements Serializable {
         return null;
     }
 
-    public String getUrlDaAcao(ItfAcaoDoSistema pAcao) {
+    public String getUrlDaAcao(ComoAcaoDoSistema pAcao) {
         try {
             if (pAcao == null) {
                 System.out.println("Enviou ação nula como parametro para obtenção de link");
@@ -88,7 +88,7 @@ public class InfoWebApp implements Serializable {
         return null;
     }
 
-    public String getUrlDaAcao(ItfAcaoDoSistema pAcao, Object... pParametros) {
+    public String getUrlDaAcao(ComoAcaoDoSistema pAcao, Object... pParametros) {
         try {
             if (pAcao == null) {
                 System.out.println("Enviou ação nula como parametro para obtenção de link");
@@ -129,8 +129,8 @@ public class InfoWebApp implements Serializable {
         if (!SBCore.getServicoSessao().getSessaoAtual().isIdentificado()) {
             return getUrlPagina();
         }
-        ItfGrupoUsuario grupo = SBCore.getUsuarioLogado().getGrupo();
-        ItfFabricaAcoes paginaPrincipal = grupo
+        ComoGrupoUsuario grupo = SBCore.getUsuarioLogado().getGrupo();
+        ComoFabricaAcoes paginaPrincipal = grupo
                 .getPaginaInicial();
         String paginaInicial = MapaDeFormularios.getUrlFormulario(paginaPrincipal.getRegistro());
         return paginaInicial;

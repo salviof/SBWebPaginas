@@ -4,7 +4,7 @@ import com.super_bits.modulosSB.Persistencia.ConfigGeral.CSBNQ;
 import com.super_bits.modulosSB.Persistencia.dao.DaoGenerico;
 import com.super_bits.modulosSB.Persistencia.dao.SBNQ;
 import com.super_bits.modulosSB.SBCore.UtilGeral.ClasseTipada;
-import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfBeanSimples;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ComoEntidadeSimples;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
@@ -12,7 +12,7 @@ import javax.annotation.PostConstruct;
 
 //TODO ANALIZAR E EXCLUIR AS CLASSES DE FILTRO DE PAGINA CASO NESCESSÁRIO
 @Deprecated
-public abstract class MB_FiltrosPagina<T extends ItfBeanSimples> extends ClasseTipada implements
+public abstract class MB_FiltrosPagina<T extends ComoEntidadeSimples> extends ClasseTipada implements
         Serializable {
 
     private List<T> selecao;

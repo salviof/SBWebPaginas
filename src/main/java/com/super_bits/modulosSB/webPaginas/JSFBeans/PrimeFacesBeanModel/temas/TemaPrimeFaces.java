@@ -1,11 +1,11 @@
 package com.super_bits.modulosSB.webPaginas.JSFBeans.PrimeFacesBeanModel.temas;
 
-import com.super_bits.modulosSB.Persistencia.registro.persistidos.EntidadeSimples;
+import com.super_bits.modulosSB.Persistencia.registro.persistidos.EntidadeSimplesORM;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.anotacoes.InfoCampo;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campo.FabTipoAtributoObjeto;
 import java.io.Serializable;
 
-public class TemaPrimeFaces extends EntidadeSimples implements Serializable {
+public class TemaPrimeFaces extends EntidadeSimplesORM implements Serializable {
 
     @InfoCampo(tipo = FabTipoAtributoObjeto.ID)
     private Long id;

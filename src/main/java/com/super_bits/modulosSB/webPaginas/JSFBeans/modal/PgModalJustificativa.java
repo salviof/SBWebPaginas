@@ -5,7 +5,7 @@
 package com.super_bits.modulosSB.webPaginas.JSFBeans.modal;
 
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
-import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ItfAcaoController;
+import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ComoAcaoController;
 import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ComunicacaoAcaoSistema;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campoInstanciado.ItfCampoInstanciado;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.interfaces.ItfB_PaginaComEntityManager;
@@ -68,7 +68,7 @@ public class PgModalJustificativa extends PgModalDados implements ItfModalDados 
 
             if (getCampoSelecionado() == null && getPaginaVinculada().getBeanSelecionado() != null) {
                 ComunicacaoAcaoSistema comunic = (ComunicacaoAcaoSistema) comunicacao;
-                ItfAcaoController acaoCominicacao = comunic.getAcaoVinculada();
+                ComoAcaoController acaoCominicacao = comunic.getAcaoVinculada();
 
                 campoSTR = acaoCominicacao.getCampoJustificativa();
                 if (campoSTR == null) {

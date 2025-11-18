@@ -4,15 +4,15 @@
  */
 package com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.reflexao;
 
-import com.super_bits.modulosSB.webPaginas.JSFBeans.SBBeanModel.DEPRECIADO.InfoMBBean;
+import com.super_bits.modulosSB.webPaginas.JSFBeans.SBBeanModel.DEPRECIADO.InfoDominioEntidade;
 
 /**
  *
  * @author salvioF
  */
-public interface ItfBeanDeclarado {
+public interface ComoEntidadeNoDominio {
 
-    public InfoMBBean getInfoBean();
+    public InfoDominioEntidade getInfoBean();
 
     public Object getValor();
 

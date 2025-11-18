@@ -1,7 +1,7 @@
 package com.super_bits.modulosSB.webPaginas.JSFBeans.PrimeFacesBeanModel.grafico;
 
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
-import com.super_bits.modulosSB.SBCore.modulos.fabrica.ItfFabricaAcoes;
+import com.super_bits.modulosSB.SBCore.modulos.fabrica.ComoFabricaAcoes;
 import com.super_bits.modulosSB.SBCore.modulos.grafico.ItfDadoGraficoTotal;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -23,11 +23,11 @@ public class GraficoPizza {
 
     private final Map<Integer, String> mapaUrls = new HashMap<>();
     private PieChartModel grafico;
-    private final ItfFabricaAcoes acaoUrl;
+    private final ComoFabricaAcoes acaoUrl;
     private final List<ItfDadoGraficoTotal> itensGrafico;
     private final String titulo;
 
-    public GraficoPizza(final List<ItfDadoGraficoTotal> pValores, String pTitulo, ItfFabricaAcoes pAcaoUrl) {
+    public GraficoPizza(final List<ItfDadoGraficoTotal> pValores, String pTitulo, ComoFabricaAcoes pAcaoUrl) {
         itensGrafico = pValores;
         acaoUrl = pAcaoUrl;
         titulo = pTitulo;

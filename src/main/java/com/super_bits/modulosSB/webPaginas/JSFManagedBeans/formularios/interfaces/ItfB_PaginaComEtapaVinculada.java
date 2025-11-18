@@ -4,8 +4,8 @@
  */
 package com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.interfaces;
 
-import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ItfAcaoDoSistema;
 import com.super_bits.modulosSB.webPaginas.JSFBeans.SBBeanModel.etapas.B_Etapas;
+import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ComoAcaoDoSistema;
 
 /**
  *
@@ -19,7 +19,7 @@ public interface ItfB_PaginaComEtapaVinculada extends ItfB_Pagina {
 
     public boolean isLiberadoEtapaAnterior();
 
-    public ItfAcaoDoSistema getAcaoFinal();
+    public ComoAcaoDoSistema getAcaoFinal();
 
     public void irParaProximaEtapa();
 

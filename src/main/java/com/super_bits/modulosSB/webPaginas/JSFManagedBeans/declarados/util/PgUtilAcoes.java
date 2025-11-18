@@ -5,16 +5,16 @@
 package com.super_bits.modulosSB.webPaginas.JSFManagedBeans.declarados.util;
 
 import com.super_bits.modulosSB.SBCore.modulos.objetos.acao.AcaoTransient;
-import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ItfAcaoController;
-import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ItfAcaoDoSistema;
+import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ComoAcaoController;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.permissoes.ItfAcaoFormulario;
-import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfBeanSimplesSomenteLeitura;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.siteMap.MapaDeFormularios;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ComoEntidadeSimplesSomenteLeitura;
+import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ComoAcaoDoSistema;
 
 /**
  *
@@ -24,8 +24,8 @@ import javax.inject.Named;
 @Named
 public class PgUtilAcoes implements Serializable {
 
-    public List<ItfAcaoDoSistema> getListaAcaoSelecaoRegistro() {
-        List<ItfAcaoDoSistema> lista = new ArrayList<>();
+    public List<ComoAcaoDoSistema> getListaAcaoSelecaoRegistro() {
+        List<ComoAcaoDoSistema> lista = new ArrayList<>();
         AcaoTransient acao = new AcaoTransient();
         acao.setNome("Selecionar este");
         acao.setIconeAcao("fa fa-hand-pointer-o");
@@ -39,7 +39,7 @@ public class PgUtilAcoes implements Serializable {
      * @param pParametros Parametros de Url para construção da URL
      * @return A url para acesso a ação de formulário
      */
-    public String getUrlAcao(ItfAcaoController pAcao, ItfBeanSimplesSomenteLeitura... pParametros) {
+    public String getUrlAcao(ComoAcaoController pAcao, ComoEntidadeSimplesSomenteLeitura... pParametros) {
         if (pParametros != null) {
             if (pParametros.length == 1) {
                 if (pParametros[0] == null) {
@@ -51,7 +51,7 @@ public class PgUtilAcoes implements Serializable {
         return MapaDeFormularios.getUrlFormulario(pAcao, (Object[]) pParametros);
     }
 
-    public String getUrlAcao(ItfAcaoFormulario pAcao, ItfBeanSimplesSomenteLeitura... pParametros) {
+    public String getUrlAcao(ItfAcaoFormulario pAcao, ComoEntidadeSimplesSomenteLeitura... pParametros) {
         if (pParametros != null) {
             if (pParametros.length == 1) {
                 if (pParametros[0] == null) {
@@ -67,7 +67,7 @@ public class PgUtilAcoes implements Serializable {
         return MapaDeFormularios.getUrlFormulario(pAcao);
     }
 
-    public String getUrlAcao(ItfAcaoController pAcao) {
+    public String getUrlAcao(ComoAcaoController pAcao) {
         return MapaDeFormularios.getUrlFormulario(pAcao);
     }
 

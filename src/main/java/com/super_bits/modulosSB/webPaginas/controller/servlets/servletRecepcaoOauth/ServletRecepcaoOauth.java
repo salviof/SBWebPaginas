@@ -8,7 +8,6 @@ import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 import com.super_bits.modulosSB.SBCore.integracao.libRestClient.implementacao.UtilSBApiRestClient;
 import com.super_bits.modulosSB.SBCore.integracao.libRestClient.implementacao.erro.ErroRecebendoCodigoDeAcesso;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.qualificadoresCDI.sessao.QlSessaoFacesContext;
-import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfSessao;
 import com.super_bits.modulosSB.webPaginas.controller.servlets.ServletArquivosSBWPGenerico;
 import com.super_bits.modulosSB.webPaginas.util.UtilSBWP_JSFTools;
 
@@ -20,6 +19,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.coletivojava.fw.api.tratamentoErros.FabErro;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ComoSessao;
 
 /**
  *
@@ -31,13 +31,13 @@ public class ServletRecepcaoOauth extends ServletArquivosSBWPGenerico implements
 
     @Inject
     @QlSessaoFacesContext
-    private ItfSessao sessaoAtual;
+    private ComoSessao sessaoAtual;
 
     private String respostaTestReader;
 
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        ItfSessao sessao = null;
+        ComoSessao sessao = null;
         if (!SBCore.isEmModoDesenvolvimento()) {
             sessao = sessaoAtual;
         } else {

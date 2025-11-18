@@ -8,7 +8,7 @@ import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreListas;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreListasObjeto;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringValidador;
-import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfBeanSimples;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ComoEntidadeSimples;
 import com.super_bits.modulosSB.webPaginas.util.UtilSBWPServletTools;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +26,7 @@ import org.primefaces.model.SortOrder;
  * @author SalvioF
  * @param <T>
  */
-public class BP_DataModelLasy<T extends ItfBeanSimples> extends LazyDataModel<T> {
+public class BP_DataModelLasy<T extends ComoEntidadeSimples> extends LazyDataModel<T> {
 
     private final List<T> listaCompleta;
     private final List<String> camposPesquisa;

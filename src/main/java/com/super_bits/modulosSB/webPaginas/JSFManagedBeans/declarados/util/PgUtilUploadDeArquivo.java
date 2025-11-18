@@ -10,7 +10,7 @@ import com.super_bits.modulosSB.SBCore.modulos.ManipulaArquivo.UtilSBCoreArquivo
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campo.FabTipoAtributoObjeto;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campoInstanciado.ItfCampoInstArquivoEntidade;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campoInstanciado.ItfCampoInstanciado;
-import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfBeanSimples;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ComoEntidadeSimples;
 import java.io.Serializable;
 import java.util.List;
 import javax.faces.view.ViewScoped;
@@ -30,7 +30,7 @@ import org.primefaces.event.FileUploadEvent;
 public class PgUtilUploadDeArquivo implements Serializable {
 
     private String caminhoCampo;
-    private ItfBeanSimples entidade;
+    private ComoEntidadeSimples entidade;
 
     public synchronized void enviarArquivo(FileUploadEvent event) {
         try {
@@ -45,8 +45,8 @@ public class PgUtilUploadDeArquivo implements Serializable {
                     byte[] arquivoByteArray = IOUtils.toByteArray(event.getFile().getInputStream());
                     String hashArquivoNovo = UtilSBCoreArquivos.getHashDoByteArray(arquivoByteArray);
                     //todo impedir envio arquivo duplicado
-                    List<ItfBeanSimples> arquivos = (List) cp.getValor();
-                    for (ItfBeanSimples arquivo : arquivos) {
+                    List<ComoEntidadeSimples> arquivos = (List) cp.getValor();
+                    for (ComoEntidadeSimples arquivo : arquivos) {
                         ItfCampoInstanciado campoArquivo = (ItfCampoInstanciado) arquivo.getCampoInstanciadoByAnotacao(FabTipoAtributoObjeto.ARQUIVO_DE_ENTIDADE);
                         String hashDoArquivo = SBCore.getServicoArquivosDeEntidade().getHashArquivoDeEntidadeRegistrado(campoArquivo);
                         if (hashDoArquivo != null) {
@@ -57,11 +57,11 @@ public class PgUtilUploadDeArquivo implements Serializable {
                     }
 
                     cp.getComoSubItens().getSubItens().adicionarItem();
-                    ItfBeanSimples item = cp.getComoSubItens().getSubItens().getListaObjetosSelecionados().get(cp.getComoSubItens().getSubItens().getListaObjetosSelecionados().size() - 1);
+                    ComoEntidadeSimples item = cp.getComoSubItens().getSubItens().getListaObjetosSelecionados().get(cp.getComoSubItens().getSubItens().getListaObjetosSelecionados().size() - 1);
                     ItfCampoInstanciado campoArquivo = item.getCampoInstanciadoByAnotacao(FabTipoAtributoObjeto.ARQUIVO_DE_ENTIDADE);
                     campoArquivo.getComoArquivoDeEntidade();
 
-                    ItfBeanSimples arquivoAtualizado = UtilSBPersistencia.mergeRegistro(cp.getComoSubItens().getSubItens().getListaObjetosSelecionados().get(cp.getComoSubItens().getSubItens().getListaObjetosSelecionados().size() - 1));
+                    ComoEntidadeSimples arquivoAtualizado = UtilSBPersistencia.mergeRegistro(cp.getComoSubItens().getSubItens().getListaObjetosSelecionados().get(cp.getComoSubItens().getSubItens().getListaObjetosSelecionados().size() - 1));
                     campoArquivo = arquivoAtualizado.getCampoInstanciadoByAnotacao(FabTipoAtributoObjeto.ARQUIVO_DE_ENTIDADE);
                     campoArquivo.setValor(event.getFile().getFileName());
                     arquivoAtualizado.setNome(event.getFile().getFileName());
@@ -90,11 +90,11 @@ public class PgUtilUploadDeArquivo implements Serializable {
         this.caminhoCampo = caminhoCampo;
     }
 
-    public ItfBeanSimples getEntidade() {
+    public ComoEntidadeSimples getEntidade() {
         return entidade;
     }
 
-    public void setEntidade(ItfBeanSimples entidade) {
+    public void setEntidade(ComoEntidadeSimples entidade) {
         this.entidade = entidade;
     }
 

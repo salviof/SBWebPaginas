@@ -5,27 +5,26 @@
 package com.super_bits.modulosSB.webPaginas.JSFManagedBeans.siteMap;
 
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringFiltros;
-import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringValidador;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.ItfModuloAcaoSistema;
-import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ItfAcaoController;
-import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ItfAcaoControllerEntidade;
-import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ItfAcaoDoSistema;
-import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ItfAcaoSecundaria;
+import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ComoAcaoController;
+import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ComoAcaoControllerEntidade;
+import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ComoAcaoSecundaria;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.permissoes.ItfAcaoFormulario;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.permissoes.ItfAcaoFormularioEntidade;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.permissoes.ItfAcaoGerenciarEntidade;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.fabricas.FabTipoAcaoSistema;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.fabricas.FabTipoAcaoSistemaGenerica;
 import com.super_bits.modulosSB.SBCore.modulos.Mensagens.ItfMensagem;
-import com.super_bits.modulosSB.SBCore.modulos.fabrica.ItfFabricaAcoes;
+import com.super_bits.modulosSB.SBCore.modulos.fabrica.ComoFabricaAcoes;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campo.FabTipoAtributoObjeto;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campoInstanciado.ItfCampoInstanciado;
-import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.ItemGenerico;
 import com.super_bits.modulosSB.webPaginas.controller.servlets.servletWebPaginas.EstruturaDeFormulario;
 import java.io.InputStream;
 import java.lang.reflect.Field;
 import java.util.List;
 import javax.persistence.Transient;
+import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ComoAcaoDoSistema;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.ComoEntidadeGenerica;
 
 /**
  *
@@ -42,7 +41,7 @@ import javax.persistence.Transient;
  * @since 30/01/2016
  * @version 1.0
  */
-public class AcaoComLink extends ItemGenerico implements ItfAcaoDoSistema {
+public class AcaoComLink extends ComoEntidadeGenerica implements ComoAcaoDoSistema {
 
     @Transient
     private final ItfAcaoFormulario acaoOriginal;
@@ -75,7 +74,7 @@ public class AcaoComLink extends ItemGenerico implements ItfAcaoDoSistema {
      * @param pAcao
      * @param pAcaoGestaoLink
      */
-    public AcaoComLink(ItfAcaoDoSistema pAcao, AcaoComLink pAcaoGestaoLink) {
+    public AcaoComLink(ComoAcaoDoSistema pAcao, AcaoComLink pAcaoGestaoLink) {
 
         if (pAcaoGestaoLink == null) {
             throw new UnsupportedOperationException("A ação com o link de gestao não foi enviado no constructor");
@@ -209,7 +208,7 @@ public class AcaoComLink extends ItemGenerico implements ItfAcaoDoSistema {
     }
 
     @Override
-    public void configurarPropriedadesBasicas(ItfAcaoDoSistema pAcaoDoSistema) {
+    public void configurarPropriedadesBasicas(ComoAcaoDoSistema pAcaoDoSistema) {
         acaoOriginal.configurarPropriedadesBasicas(pAcaoDoSistema);
     }
 
@@ -264,7 +263,7 @@ public class AcaoComLink extends ItemGenerico implements ItfAcaoDoSistema {
     }
 
     @Override
-    public ItfFabricaAcoes getEnumAcaoDoSistema() {
+    public ComoFabricaAcoes getEnumAcaoDoSistema() {
         return acaoOriginal.getEnumAcaoDoSistema();
     }
 
@@ -304,12 +303,12 @@ public class AcaoComLink extends ItemGenerico implements ItfAcaoDoSistema {
     }
 
     @Override
-    public ItfAcaoController getComoController() {
+    public ComoAcaoController getComoController() {
         return acaoOriginal.getComoController();
     }
 
     @Override
-    public ItfAcaoSecundaria getComoSecundaria() {
+    public ComoAcaoSecundaria getComoSecundaria() {
         throw new UnsupportedOperationException("Uma ação de Managed bean não pode ser tratada como ação secundaria"); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -319,7 +318,7 @@ public class AcaoComLink extends ItemGenerico implements ItfAcaoDoSistema {
     }
 
     @Override
-    public ItfAcaoControllerEntidade getComoControllerEntidade() {
+    public ComoAcaoControllerEntidade getComoControllerEntidade() {
         return acaoOriginal.getComoControllerEntidade();
     }
 

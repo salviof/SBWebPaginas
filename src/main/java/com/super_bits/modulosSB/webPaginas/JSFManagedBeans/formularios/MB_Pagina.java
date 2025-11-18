@@ -3,8 +3,7 @@ package com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios;
 import com.super_bits.modulosSB.Persistencia.dao.SBNQ;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.ControllerAppAbstratoSBCore;
-import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ItfAcaoDoSistema;
-import com.super_bits.modulosSB.SBCore.modulos.fabrica.ItfFabricaAcoes;
+import com.super_bits.modulosSB.SBCore.modulos.fabrica.ComoFabricaAcoes;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campoInstanciado.CampoInstanciadoGenerico;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campoInstanciado.ItfAtributoObjetoEditavel;
 import com.super_bits.modulosSB.webPaginas.controller.sessao.SessaoAtualSBWP;
@@ -16,6 +15,7 @@ import org.coletivojava.fw.api.tratamentoErros.FabErro;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.qualificadoresCDI.sessao.QlSessaoFacesContext;
 import com.super_bits.modulosSB.webPaginas.util.UtilSBWP_JSFTools;
 import javax.faces.context.FacesContext;
+import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ComoAcaoDoSistema;
 
 public abstract class MB_Pagina extends B_Pagina {
 
@@ -52,7 +52,7 @@ public abstract class MB_Pagina extends B_Pagina {
 
     }
 
-    protected <Y extends ItfFabricaAcoes> Y getEnumAcaoAtual() {
+    protected <Y extends ComoFabricaAcoes> Y getEnumAcaoAtual() {
         if (getAcaoSelecionada() == null) {
             return null;
         }
@@ -72,7 +72,7 @@ public abstract class MB_Pagina extends B_Pagina {
 
     public boolean isAcessoPermitido() {
         if (getAcaoVinculada() != null) {
-            return ControllerAppAbstratoSBCore.isAcessoPermitido((ItfAcaoDoSistema) getAcaoVinculada());
+            return ControllerAppAbstratoSBCore.isAcessoPermitido((ComoAcaoDoSistema) getAcaoVinculada());
         }
         return false;
     }

@@ -12,7 +12,7 @@ import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UTilSBCoreInputs;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreInputOutputConversoes;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringNomeArquivosEDiretorios;
-import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ItfBeanSimples;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ComoEntidadeSimples;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
@@ -33,9 +33,9 @@ import org.primefaces.event.FileUploadEvent;
 @RequestScoped
 public class PgServicoImagensSB implements Serializable {
 
-    private ItfBeanSimples entidadeSelecionada;
+    private ComoEntidadeSimples entidadeSelecionada;
 
-    private void ajustarTamanho(ItfBeanSimples pEntidade, String pUrl, int larguraMaxima, int alturaMaxima) {
+    private void ajustarTamanho(ComoEntidadeSimples pEntidade, String pUrl, int larguraMaxima, int alturaMaxima) {
         try {
             BufferedImage imagem = UTilSBCoreInputs.getImagemBufferedbyURL(pUrl);
             String extencao = UtilSBCoreStringNomeArquivosEDiretorios.getExtencaoNomeArquivoSemPonto(pUrl);
@@ -57,11 +57,11 @@ public class PgServicoImagensSB implements Serializable {
 
                 try {
                     Object atributo = event.getComponent().getAttributes().get("entidadeIMG");
-                    if (!(atributo instanceof ItfBeanSimples)) {
+                    if (!(atributo instanceof ComoEntidadeSimples)) {
                         throw new UnsupportedOperationException("A entidade precisa ser um bean Simples");
                     }
 
-                    ItfBeanSimples entidadeImagem = (ItfBeanSimples) atributo;
+                    ComoEntidadeSimples entidadeImagem = (ComoEntidadeSimples) atributo;
 
                     if (entidadeImagem.getId() == null) {
 
@@ -98,7 +98,7 @@ public class PgServicoImagensSB implements Serializable {
                 try {
                     Object atributo = event.getComponent().getAttributes().get("idProspecto");
                     Long id = Long.parseLong(atributo.toString());
-                    ItfBeanSimples entidadeAtualizada = UtilSBPersistencia.getRegistroByID(entidadeSelecionada.getClass(), id, getEm());
+                    ComoEntidadeSimples entidadeAtualizada = UtilSBPersistencia.getRegistroByID(entidadeSelecionada.getClass(), id, getEm());
                     InputStream arquivo;
                     if (!UtilSBCoreStringNomeArquivosEDiretorios.getExtencaoNomeArquivo(event.getFile().getFileName()).equals("png")) {
 
@@ -130,7 +130,7 @@ public class PgServicoImagensSB implements Serializable {
                 try {
                     Object atributo = event.getComponent().getAttributes().get("idProspecto");
                     Long id = Long.parseLong(atributo.toString());
-                    ItfBeanSimples entidadeAtualizada = UtilSBPersistencia.getRegistroByID(entidadeSelecionada.getClass(), id, getEm());
+                    ComoEntidadeSimples entidadeAtualizada = UtilSBPersistencia.getRegistroByID(entidadeSelecionada.getClass(), id, getEm());
                     InputStream arquivo;
                     if (!UtilSBCoreStringNomeArquivosEDiretorios.getExtencaoNomeArquivo(event.getFile().getFileName()).equals("png")) {
 
@@ -153,11 +153,11 @@ public class PgServicoImagensSB implements Serializable {
 
     }
 
-    public ItfBeanSimples getEntidadeSelecionada() {
+    public ComoEntidadeSimples getEntidadeSelecionada() {
         return entidadeSelecionada;
     }
 
-    public void setEntidadeSelecionada(ItfBeanSimples entidadeSelecionada) {
+    public void setEntidadeSelecionada(ComoEntidadeSimples entidadeSelecionada) {
         this.entidadeSelecionada = entidadeSelecionada;
     }
 
