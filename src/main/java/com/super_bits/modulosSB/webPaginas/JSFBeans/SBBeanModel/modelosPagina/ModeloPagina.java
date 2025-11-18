@@ -7,7 +7,7 @@ package com.super_bits.modulosSB.webPaginas.JSFBeans.SBBeanModel.modelosPagina;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.anotacoes.InfoCampo;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.anotacoes.InfoObjetoSB;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campo.FabTipoAtributoObjeto;
-import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.ItemSimples;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.EntidadeSimples;
 import com.super_bits.modulosSB.SBCore.modulos.view.modeloFormulario.ItfModeloFormularioSBFW;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +17,7 @@ import java.util.List;
  * @author salvioF
  */
 @InfoObjetoSB(tags = {"Modelo de Pagina"}, plural = "Modelos de paginas")
-public class ModeloPagina extends ItemSimples implements ItfModeloFormularioSBFW {
+public class ModeloPagina extends EntidadeSimples implements ItfModeloFormularioSBFW {
 
     @InfoCampo(tipo = FabTipoAtributoObjeto.ID)
     private Long id;

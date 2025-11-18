@@ -87,7 +87,7 @@ public class ServicoVisualizacaoComponente {
         return pItem.isTemCampoAnotado(FabTipoAtributoObjeto.ICONE);
     }
 
-    public String getItemSimplesNome(ComoEntidadeSimples pValor) {
+    public String getEntidadeSimplesNome(ComoEntidadeSimples pValor) {
         return (String) pValor.getCampoInstanciadoByAnotacao(FabTipoAtributoObjeto.NOME).getValorTextoFormatado();
     }
 

@@ -376,7 +376,7 @@
     </tag>
 
     <tag>
-        <tag-name>componenteSBItemSimples</tag-name>
+        <tag-name>componenteSBEntidadeSimples</tag-name>
         <source>tags/com/sb/componenteSBGenerico.xhtml</source>
         <attribute>
             <description> <![CDATA[ O componente utilizado para exibição]]></description>

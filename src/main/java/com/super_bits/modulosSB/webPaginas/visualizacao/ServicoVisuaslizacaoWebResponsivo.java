@@ -132,17 +132,17 @@ public class ServicoVisuaslizacaoWebResponsivo extends ServicoVisualizacaoAbstra
     }
 
     @Override
-    public String buildCaminhoRelativoItemSimples() {
+    public String buildCaminhoRelativoEntidadeSimples() {
         return CAMINHO_ITEM_SIMPLES;
     }
 
     @Override
-    public String buildCaminhoRelativoItemSimplesNulo() {
+    public String buildCaminhoRelativoEntidadeSimplesNulo() {
         return CAMINHO_ITEM_SIMPLES_NULO;
     }
 
     @Override
-    public String buildCaminhoRelativoItemNormal() {
+    public String buildCaminhoRelativoEntidadeNormal() {
         return CAMINHO_ITEM_NORMAL;
     }
 

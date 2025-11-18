@@ -17,7 +17,7 @@ import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campo.ItfDadoD
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campoInstanciado.ItfCampoInstanciado;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.MapaObjetosProjetoAtual;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ComoEntidadeSimples;
-import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.ItemSimplesOffilineApartirDeSlugDeObjeto;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.EntidadeSimplesOffilineApartirDeSlugDeObjeto;
 import com.super_bits.modulosSB.webPaginas.ConfigGeral.SBWebPaginas;
 import com.super_bits.modulosSB.webPaginas.controller.servlets.ServletArquivosSBWPGenerico;
 import com.super_bits.modulosSB.webPaginas.controller.servletes.util.UtilFabUrlServlet;
@@ -71,7 +71,7 @@ public class ServletArquivosDeEntidade extends ServletArquivosSBWPGenerico imple
         prDadosREquisicaoArquivoEntidade.setTipoAcesso((TipoAcessoArquivo) prDadosREquisicaoArquivoEntidade.getParametrosDeUrl().getValorComoBeanSimples(FabUrlArquivoDeEntidade.TIPO_ACESSO));
         prDadosREquisicaoArquivoEntidade.setNomeArquivoDownload(prDadosREquisicaoArquivoEntidade.getParametrosDeUrl().getValorComoString(FabUrlArquivoDeEntidade.NOME_DO_ARQUIVO));
         prDadosREquisicaoArquivoEntidade.setCategoria(pCategoria);
-        ItemSimplesOffilineApartirDeSlugDeObjeto itemEnviado = new ItemSimplesOffilineApartirDeSlugDeObjeto(pSlugObjeto);
+        EntidadeSimplesOffilineApartirDeSlugDeObjeto itemEnviado = new EntidadeSimplesOffilineApartirDeSlugDeObjeto(pSlugObjeto);
 
         if (itemEnviado.getId() == null) {
             ComoEntidadeSimples beanNovoItemTemporario = null;
