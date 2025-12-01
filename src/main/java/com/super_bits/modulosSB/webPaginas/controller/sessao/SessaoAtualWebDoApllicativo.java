@@ -4,9 +4,13 @@
  */
 package com.super_bits.modulosSB.webPaginas.controller.sessao;
 
+import com.super_bits.modulosSB.SBCore.ConfigGeral.CarameloCode;
+import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.ItensGenericos.basico.SessaoOffline;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.ItensGenericos.basico.UsuarioAplicacaoEmExecucao;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ComoSessao;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ComoUsuario;
+import java.io.File;
 
 /**
  *
@@ -20,6 +24,16 @@ public class SessaoAtualWebDoApllicativo extends SessaoOffline {
     public SessaoAtualWebDoApllicativo() {
         super();
         inicializaSessaoAplicativo();
+    }
+
+    @Override
+    public String getPastaTempDeSessao() {
+        // super.getPastaTempDeSessao();
+        String caminho = SBCore.getServicoArquivosDeEntidade().getEndrLocalRecursosDoObjeto(ComoSessao.class, SBCore.getUsuarioLogado().getEmail());
+
+        File pastaTemo = new File(caminho + "/");
+        pastaTemo.mkdirs();
+        return caminho;
     }
 
     private void inicializaSessaoAplicativo() {

@@ -4,7 +4,7 @@
  */
 package com.super_bits.modulosSB.webPaginas.JSFManagedBeans.declarados.util;
 
-import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringComparador;
+import com.super_bits.modulosSB.SBCore.UtilGeral.UtilCRCStringComparador;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.comparacao.FabTipoPesquisaGenerica;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.comparacao.ItemSimilar;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ComoEntidadeSimples;
@@ -33,7 +33,7 @@ public class PgUtilFiltroOrdenacao {
 
     public boolean filtrarColuna(Object item, String pFiltro, Locale localPesquisa) {
         FabTipoPesquisaGenerica tipoPesquisa = FabTipoPesquisaGenerica.getTipoPesquisaByTermo(pFiltro);
-        ItemSimilar itemSimilar = new ItemSimilar((ComoEntidadeSimples) item, UtilSBCoreStringComparador.normalizarTexto(pFiltro), tipoPesquisa);
+        ItemSimilar itemSimilar = new ItemSimilar((ComoEntidadeSimples) item, UtilCRCStringComparador.normalizarTexto(pFiltro), tipoPesquisa);
         itemSimilar.getNota();
 
         return itemSimilar.getNota() > 0.8;

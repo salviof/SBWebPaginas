@@ -6,7 +6,7 @@ package com.super_bits.modulosSB.webPaginas.JSFManagedBeans.declarados.util;
 
 import com.super_bits.modulosSB.Persistencia.dao.UtilSBPersistencia;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
-import com.super_bits.modulosSB.SBCore.modulos.ManipulaArquivo.UtilSBCoreArquivos;
+import com.super_bits.modulosSB.SBCore.modulos.ManipulaArquivo.UtilCRCArquivos;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campo.FabTipoAtributoObjeto;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campoInstanciado.ItfCampoInstArquivoEntidade;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campoInstanciado.ItfCampoInstanciado;
@@ -43,7 +43,7 @@ public class PgUtilUploadDeArquivo implements Serializable {
                 if (cp.isUmaListagemParticular()) {
 
                     byte[] arquivoByteArray = IOUtils.toByteArray(event.getFile().getInputStream());
-                    String hashArquivoNovo = UtilSBCoreArquivos.getHashDoByteArray(arquivoByteArray);
+                    String hashArquivoNovo = UtilCRCArquivos.getHashDoByteArray(arquivoByteArray);
                     //todo impedir envio arquivo duplicado
                     List<ComoEntidadeSimples> arquivos = (List) cp.getValor();
                     for (ComoEntidadeSimples arquivo : arquivos) {

@@ -5,7 +5,7 @@
 package com.super_bits.modulosSB.webPaginas.util;
 
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
-import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringFiltros;
+import com.super_bits.modulosSB.SBCore.UtilGeral.UtilCRCStringFiltros;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.ItfParametroRequisicaoInstanciado;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ComoEntidadeSimples;
 import com.super_bits.modulosSB.webPaginas.ConfigGeral.SBWebPaginas;
@@ -598,7 +598,7 @@ public class UtilSBWPServletTools {
         try {
             pParametros.keySet().forEach((prStr) -> {
                 try {
-                    pParametros.get(UtilSBCoreStringFiltros.gerarUrlAmigavel(prStr)).setValor(getRequestParametro(prStr));
+                    pParametros.get(UtilCRCStringFiltros.gerarUrlAmigavel(prStr)).setValor(getRequestParametro(prStr));
                 } catch (Throwable t) {
                     throw new UnsupportedOperationException("Erro configurando parametro " + prStr);
                 }

@@ -6,8 +6,8 @@ package com.super_bits.modulosSB.webPaginas.arquivosDoProjeto;
 
 import com.super_bits.modulosSB.SBCore.ConfigGeral.FabTipoEmpacotamento;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
-import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreOutputs;
-import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringFiltros;
+import com.super_bits.modulosSB.SBCore.UtilGeral.UtilCRCOutputs;
+import com.super_bits.modulosSB.SBCore.UtilGeral.UtilCRCStringFiltros;
 import com.super_bits.modulosSB.SBCore.UtilGeral.stringSubstituicao.MapaSubstituicao;
 import com.super_bits.modulosSB.SBCore.modulos.ManipulaArquivo.CentralDeArquivosAbstrata;
 import com.super_bits.modulosSB.SBCore.modulos.ManipulaArquivo.CentralPermissaoArquivoTudoLiberado;
@@ -222,7 +222,7 @@ public class CentralDeArquivosWebAppServidorSB extends CentralDeArquivosAbstrata
         String arquivoLocal = getEndrLocalImagem(item, tipo);
         String caminhoFinal = null;
 
-        caminhoFinal = tipo.toString() + "/" + UtilSBCoreStringFiltros.gerarUrlAmigavel(item.getNome()) + "-" + item.getId() + "/" + tipo.toString() + ".jpg";
+        caminhoFinal = tipo.toString() + "/" + UtilCRCStringFiltros.gerarUrlAmigavel(item.getNome()) + "-" + item.getId() + "/" + tipo.toString() + ".jpg";
 
         switch (tipo) {
 
@@ -273,7 +273,7 @@ public class CentralDeArquivosWebAppServidorSB extends CentralDeArquivosAbstrata
         try {
             caminhoArquivo = getEndrLocalImagem(pEntidade, pTipo);
 
-            return UtilSBCoreOutputs.salvarArquivoByte(IOUtils.toByteArray(pFoto), caminhoArquivo);
+            return UtilCRCOutputs.salvarArquivoByte(IOUtils.toByteArray(pFoto), caminhoArquivo);
 
         } catch (Throwable t) {
             SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "Erro salvando arquivo de imagem de " + pEntidade + " em" + caminhoArquivo, t);

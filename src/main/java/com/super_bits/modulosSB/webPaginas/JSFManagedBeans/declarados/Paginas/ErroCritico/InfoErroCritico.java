@@ -1,8 +1,8 @@
 package com.super_bits.modulosSB.webPaginas.JSFManagedBeans.declarados.Paginas.ErroCritico;
 
-import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringFiltros;
-import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringValidador;
-import com.super_bits.modulosSB.SBCore.modulos.TratamentoDeErros.UtilSBCoreErros;
+import com.super_bits.modulosSB.SBCore.UtilGeral.UtilCRCStringFiltros;
+import com.super_bits.modulosSB.SBCore.UtilGeral.UtilCRCStringValidador;
+import com.super_bits.modulosSB.SBCore.modulos.TratamentoDeErros.UtilCRCErros;
 import java.io.PrintWriter;
 import java.io.Serializable;
 import java.io.StringWriter;
@@ -23,14 +23,14 @@ public class InfoErroCritico implements Serializable {
     }
 
     public InfoErroCritico(String pTituloErro, Throwable pExcept) {
-        tituloErro = UtilSBCoreStringFiltros.gerarUrlAmigavel(pTituloErro);
+        tituloErro = UtilCRCStringFiltros.gerarUrlAmigavel(pTituloErro);
         mensagemErro = pExcept.getMessage();
         StringWriter sw = new StringWriter();
         PrintWriter pw = new PrintWriter(sw);
         pExcept.printStackTrace(pw);
         pw.close();
 
-        printStack = "RESUMO: \n " + UtilSBCoreErros.getResumoErro(pExcept) + "/n caminho completo: /n" + sw.getBuffer().toString().replace("", "");
+        printStack = "RESUMO: \n " + UtilCRCErros.getResumoErro(pExcept) + "/n caminho completo: /n" + sw.getBuffer().toString().replace("", "");
 
     }
 

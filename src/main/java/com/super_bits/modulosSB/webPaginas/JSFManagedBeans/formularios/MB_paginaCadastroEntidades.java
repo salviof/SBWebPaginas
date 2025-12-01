@@ -10,9 +10,9 @@ import com.super_bits.modulosSB.Persistencia.dao.UtilSBPersistencia;
 import com.super_bits.modulosSB.Persistencia.dao.consultaDinamica.ConsultaDinamicaDeEntidade;
 
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
-import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreListasObjeto;
-import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreReflexao;
-import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreReflexaoObjeto;
+import com.super_bits.modulosSB.SBCore.UtilGeral.UtilCRCListasObjeto;
+import com.super_bits.modulosSB.SBCore.UtilGeral.UtilCRCReflexao;
+import com.super_bits.modulosSB.SBCore.UtilGeral.UtilCRCReflexaoObjeto;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.ItfParametroRequisicao;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.ItfParametroRequisicaoInstanciado;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.ItfRespostaAcaoDoSistema;
@@ -764,7 +764,7 @@ public abstract class MB_paginaCadastroEntidades<T extends ComoEntidadeSimples> 
 
                     }
                     setEntidadesListadas(novaConsulta.resultadoRegistros());
-                    UtilSBCoreListasObjeto.ordernarPorCampoReverso(getEntidadesListadas(), "id");
+                    UtilCRCListasObjeto.ordernarPorCampoReverso(getEntidadesListadas(), "id");
 
                 } catch (Throwable t) {
                     setEntidadesListadas(UtilSBPersistencia.getListaTodos(getAcaoVinculada().getClasseRelacionada(), getEMPagina()));
@@ -837,7 +837,7 @@ public abstract class MB_paginaCadastroEntidades<T extends ComoEntidadeSimples> 
             }
             getPaginaDoDominio().setEntidadeSelecionada((T) classeDaEntidade.newInstance());
 
-            InfoPreparacaoObjeto infoPreparacao = UtilSBCoreReflexaoObjeto.getInfoPreparacaoObjeto(classeDaEntidade);
+            InfoPreparacaoObjeto infoPreparacao = UtilCRCReflexaoObjeto.getInfoPreparacaoObjeto(classeDaEntidade);
             if (infoPreparacao != null) {
                 if (infoPreparacao.classesPrConstructorPrincipal().length == 0) {
                     ((ComoDominioEntidadeGenerico) getEntidadeSelecionada()).prepararNovoObjeto();
@@ -916,7 +916,7 @@ public abstract class MB_paginaCadastroEntidades<T extends ComoEntidadeSimples> 
                                         if (mesmoentreEntidadeEAcaoAtual) {
                                             getPaginaDoDominio().setEntidadeSelecionada((T) UtilSBPersistencia.loadEntidade((ComoEntidadeSimples) pEnTidade, getEMPagina()));
                                         } else {
-                                            String strClasseEntidade = UtilSBCoreReflexaoObjeto.getClasseDiscriminatoriaPolimorfismoDeEntidade(pEnTidade);
+                                            String strClasseEntidade = UtilCRCReflexaoObjeto.getClasseDiscriminatoriaPolimorfismoDeEntidade(pEnTidade);
                                             if (strClasseEntidade != null) {
                                                 try {
                                                     pEnTidade = (T) UtilSBPersistencia.getRegistroByID(MapaObjetosProjetoAtual.getClasseDoObjetoByNome(strClasseEntidade), pEnTidade.getId(), getEMPagina());
@@ -1355,7 +1355,7 @@ public abstract class MB_paginaCadastroEntidades<T extends ComoEntidadeSimples> 
 
             }
 
-            List<Field> campos = UtilSBCoreReflexao.getCamposRecursivoPorInterface(pRegistro.getClass(), ComoStatus.class,
+            List<Field> campos = UtilCRCReflexao.getCamposRecursivoPorInterface(pRegistro.getClass(), ComoStatus.class,
                     ComoEntidadeSimples.class
             );
             if (!campos.isEmpty()) {

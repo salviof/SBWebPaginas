@@ -1,7 +1,7 @@
 package com.super_bits.modulosSB.webPaginas.util;
 
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
-import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreReflexao;
+import com.super_bits.modulosSB.SBCore.UtilGeral.UtilCRCReflexao;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.permissoes.ItfAcaoGerenciarEntidade;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.interfaces.ItfB_Pagina;
 
@@ -101,7 +101,7 @@ public abstract class UtillSBWPReflexoesWebpaginas {
 
     public static List<ParametroURL> buildParametrosDaPagina(Class pClasseFormulario) {
 
-        List<Field> lista = UtilSBCoreReflexao.procuraCamposPorTipo(pClasseFormulario, ParametroURL.class);
+        List<Field> lista = UtilCRCReflexao.procuraCamposPorTipo(pClasseFormulario, ParametroURL.class);
         List<ParametroURL> parametrosDaPagina = new ArrayList<>();
         for (Field cp : lista) {
             ParametroURL novoParametro = new ParametroUrlInstanciado(UtilFabUrlServlet.getInfoParametroDeUrl(cp));

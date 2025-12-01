@@ -8,7 +8,7 @@ package com.super_bits.modulosSB.webPaginas.controller.servlets;
 import com.super_bits.modulos.SBAcessosModel.model.acoes.acaoDeEntidade.AcaoGestaoEntidade;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 import com.super_bits.modulosSB.SBCore.UtilGeral.MapaAcoesSistema;
-import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreReflexao;
+import com.super_bits.modulosSB.SBCore.UtilGeral.UtilCRCReflexao;
 import com.super_bits.modulosSB.webPaginas.ConfigGeral.SBWebPaginas;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.declarados.Paginas.ErroCritico.InfoErroCritico;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.interfaces.ItfSiteMapa;
@@ -69,7 +69,7 @@ public class WebPaginasServlet extends HttpServlet implements Serializable {
     public WebPaginasServlet() {
         try {
             if (SBCore.isEmModoDesenvolvimento()) {
-                Class sitMapEncontado = UtilSBCoreReflexao.getClasseQueEstendeIsto(MB_SiteMapa.class, "com.super_bits.config.webPaginas");
+                Class sitMapEncontado = UtilCRCReflexao.getClasseQueEstendeIsto(MB_SiteMapa.class, "com.super_bits.config.webPaginas");
                 buildMapaUrlsModoJunut(sitMapEncontado);
             }
         } catch (Throwable t) {

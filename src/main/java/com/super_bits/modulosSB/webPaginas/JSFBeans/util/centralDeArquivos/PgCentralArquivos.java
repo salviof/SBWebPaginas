@@ -6,9 +6,9 @@ package com.super_bits.modulosSB.webPaginas.JSFBeans.util.centralDeArquivos;
 
 import com.super_bits.modulosSB.Persistencia.util.UtilSBPersistenciaArquivosDeEntidade;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
-import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreOutputs;
+import com.super_bits.modulosSB.SBCore.UtilGeral.UtilCRCOutputs;
 import com.super_bits.modulosSB.SBCore.UtilGeral.stringSubstituicao.MapaSubstituicaoArquivo;
-import com.super_bits.modulosSB.SBCore.modulos.ManipulaArquivo.UtilSBCoreArquivos;
+import com.super_bits.modulosSB.SBCore.modulos.ManipulaArquivo.UtilCRCArquivos;
 import com.super_bits.modulosSB.SBCore.modulos.ManipulaArquivo.interfaces.ItfCentralDeArquivos;
 import com.super_bits.modulosSB.SBCore.modulos.Mensagens.FabMensagens;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ComoEntidadeSimples;
@@ -123,11 +123,11 @@ public class PgCentralArquivos implements Serializable {
                     caminhoSalvarArquivo = SBCore.getCentralDeArquivos().getEndrLocalArquivoItem(
                             entidadeRelacionada, nomeArquivo, categoria);
 
-                    if (UtilSBCoreArquivos.isArquivoExiste(caminhoSalvarArquivo)) {
+                    if (UtilCRCArquivos.isArquivoExiste(caminhoSalvarArquivo)) {
                         SBCore.enviarMensagemUsuario("O arquivo já foi enviado para o sistema \n" + caminhoSalvarArquivo, FabMensagens.AVISO);
                         throw new UnsupportedOperationException("Este arquivo já existe");
                     }
-                    if (UtilSBCoreOutputs.salvarArquivoInput(pArquivo.getInputStream(), caminhoSalvarArquivo)) {
+                    if (UtilCRCOutputs.salvarArquivoInput(pArquivo.getInputStream(), caminhoSalvarArquivo)) {
                         SBCore.enviarAvisoAoUsuario("Arquivo armezenado com sucesso");
                     }
                     break;

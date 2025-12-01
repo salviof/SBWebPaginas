@@ -5,7 +5,7 @@
 package com.super_bits.modulosSB.webPaginas.JSFBeans.modal;
 
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
-import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringSlugs;
+import com.super_bits.modulosSB.SBCore.UtilGeral.UtilCRCStringSlugs;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campoInstanciado.ItfCampoInstanciado;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ComoEntidadeSimples;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.interfaces.ItfModalDados;
@@ -35,7 +35,7 @@ public class PgModalDados extends PgModalRespostaAbstrato implements ItfModalDad
             String nomeCompleto = event.getFile().getFileName();
             String extencao = nomeCompleto.substring(event.getFile().getFileName().lastIndexOf("."), nomeCompleto.length());
             String nome = nomeCompleto.substring(0, event.getFile().getFileName().lastIndexOf("."));
-            nome = UtilSBCoreStringSlugs.gerarSlugSimples(nome);
+            nome = UtilCRCStringSlugs.gerarSlugSimples(nome);
             nomeArquivo = nome + extencao;
 
             if (getCampoSelecionado().getComoArquivoDeEntidade().uploadArquivo(nomeArquivo, event.getFile().getContent()));

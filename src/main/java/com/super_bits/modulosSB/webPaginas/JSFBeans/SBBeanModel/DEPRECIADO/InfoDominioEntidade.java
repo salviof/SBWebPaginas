@@ -7,8 +7,8 @@ package com.super_bits.modulosSB.webPaginas.JSFBeans.SBBeanModel.DEPRECIADO;
 
 import com.super_bits.modulosSB.Persistencia.dao.UtilSBPersistencia;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
-import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreReflexao;
-import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.UtilSBCoreReflexaoAtributoDeObjeto;
+import com.super_bits.modulosSB.SBCore.UtilGeral.UtilCRCReflexao;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.UtilCRCReflexaoAtributoDeObjeto;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.MapaObjetosProjetoAtual;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.reflexao.anotacoes.beans.InfoMB_Bean;
 import java.io.Serializable;
@@ -39,7 +39,7 @@ public class InfoDominioEntidade implements Serializable {
 
     public InfoDominioEntidade(Field campo) {
         InfoMB_Bean infoBean = campo.getAnnotation(InfoMB_Bean.class);
-        Class classeObjeto = UtilSBCoreReflexaoAtributoDeObjeto.getClassePrincipalDoCampo(campo);
+        Class classeObjeto = UtilCRCReflexaoAtributoDeObjeto.getClassePrincipalDoCampo(campo);
         classe = classeObjeto.getSimpleName();
         //classe = campo.getType().getSimpleName();
         if (infoBean != null) {

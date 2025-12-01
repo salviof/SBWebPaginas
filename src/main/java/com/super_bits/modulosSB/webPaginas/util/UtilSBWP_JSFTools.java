@@ -8,7 +8,7 @@ import com.super_bits.modulosSB.webPaginas.controller.servlets.WebPaginasServlet
 import com.sun.faces.component.visit.FullVisitContext;
 import com.sun.faces.facelets.el.TagValueExpression;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
-import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringValidador;
+import com.super_bits.modulosSB.SBCore.UtilGeral.UtilCRCStringValidador;
 import com.super_bits.modulosSB.SBCore.integracao.libRestClient.api.token.ItfTokenGestaoOauth;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.permissoes.ItfAcaoFormulario;
 import com.super_bits.modulosSB.SBCore.modulos.Mensagens.FabMensagens;
@@ -51,6 +51,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  *
  * Utilitários para manipulação em tempo de execução de componentes JSF
+ *
  *
  *
  * @see UtilSBWPServletTools
@@ -178,7 +179,7 @@ public abstract class UtilSBWP_JSFTools {
     }
 
     public static String getIDSCaminhoAbsoluto(String pId, boolean ignorarErro) {
-        if (UtilSBCoreStringValidador.isNuloOuEmbranco(pId)) {
+        if (UtilCRCStringValidador.isNuloOuEmbranco(pId)) {
             return "";
         }
         if (pId.contains(":")) {
@@ -518,10 +519,10 @@ public abstract class UtilSBWP_JSFTools {
     }
 
     public static boolean enviarMensagemViaWhatsapp(String pCelular, String pMensagem) {
-        if (UtilSBCoreStringValidador.isNuloOuEmbranco(pCelular)) {
+        if (UtilCRCStringValidador.isNuloOuEmbranco(pCelular)) {
             return false;
         }
-        if (UtilSBCoreStringValidador.isNuloOuEmbranco(pMensagem)) {
+        if (UtilCRCStringValidador.isNuloOuEmbranco(pMensagem)) {
             return false;
         }
         String javascript = new PgUtilTelefone().gerarJavascriptWhatsqpp(pCelular, pMensagem);

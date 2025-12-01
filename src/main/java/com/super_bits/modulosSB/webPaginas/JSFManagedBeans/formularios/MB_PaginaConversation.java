@@ -16,6 +16,7 @@ public abstract class MB_PaginaConversation extends MB_Pagina implements Seriali
     private void initBean() {
         System.out.println("Iniciando InitBeanDePagina Conversation" + this.getClass().getSimpleName());
         //     foiInjetado = true;
+        //
         //     carregarAnotacoes();
         iniciaConvesa();
     }

@@ -5,10 +5,10 @@ import com.super_bits.modulos.SBAcessosModel.model.acoes.acaoDeEntidade.AcaoGest
 import com.super_bits.modulosSB.Persistencia.ConfigGeral.SBPersistencia;
 import com.super_bits.modulosSB.Persistencia.dao.UtilSBPersistencia;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
-import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreReflexao;
-import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreReflexaoObjeto;
-import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringFiltros;
-import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringValidador;
+import com.super_bits.modulosSB.SBCore.UtilGeral.UtilCRCReflexao;
+import com.super_bits.modulosSB.SBCore.UtilGeral.UtilCRCReflexaoObjeto;
+import com.super_bits.modulosSB.SBCore.UtilGeral.UtilCRCStringFiltros;
+import com.super_bits.modulosSB.SBCore.UtilGeral.UtilCRCStringValidador;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.ItfParametroRequisicao;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.ItfParametroRequisicaoInstanciado;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.ItfRespostaAcaoDoSistema;
@@ -164,7 +164,7 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
 
     public B_Pagina() {
         tipoFormulario = FabTipoFormulario.PAGINA_SIMPLES;
-        UtilSBCoreReflexao.instanciarListas(this);
+        UtilCRCReflexao.instanciarListas(this);
         if (SBCore.getEstadoAPP() == SBCore.ESTADO_APP.DESENVOLVIMENTO) {
             paginaUtil = new PgUtil();
         }
@@ -391,7 +391,7 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
             parametrosURL.clear();
             parametrosOrdenados = new LinkedList<>();
 
-            List<Field> lista = UtilSBCoreReflexao.procuraCamposPorTipo(this, ParametroURL.class
+            List<Field> lista = UtilCRCReflexao.procuraCamposPorTipo(this, ParametroURL.class
             );
             for (Field cp : lista) {
                 ParametroUrlInstanciado novoParametro = new ParametroUrlInstanciado(UtilFabUrlServlet.getInfoParametroDeUrl(cp));
@@ -399,7 +399,7 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
                 if (parametrosURL.get(novoParametro.getNome()) != null) {
                     throw new UnsupportedOperationException("Dois parametros com o mesmo nome foram definidos no MB de formulário" + this.getClass().getSimpleName(), null);
                 }
-                parametrosURL.put(UtilSBCoreStringFiltros.gerarUrlAmigavel(novoParametro.getNome()), novoParametro);
+                parametrosURL.put(UtilCRCStringFiltros.gerarUrlAmigavel(novoParametro.getNome()), novoParametro);
                 parametrosOrdenados.add(novoParametro);
 
             }
@@ -447,7 +447,7 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
                 String valorStringURL = valorStringPorParametro.get(pr);
                 ParametroUrlInstanciado parametro = parametrosURL.get(pr);
 
-                if (UtilSBCoreStringValidador.isNuloOuEmbranco(valorStringURL)) {
+                if (UtilCRCStringValidador.isNuloOuEmbranco(valorStringURL)) {
                     if (parametro.isParametroObrigatorio()) {
 
                         throw new UnsupportedOperationException("O valor do parametro obrigatorio nao foi enviado" + parametro.getNome());
@@ -681,7 +681,7 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
     @Override
     public ItfParametroRequisicaoInstanciado getParametroByNome(String pNome) {
         try {
-            String indicePR = UtilSBCoreStringFiltros.gerarUrlAmigavel(pNome);
+            String indicePR = UtilCRCStringFiltros.gerarUrlAmigavel(pNome);
             if (getMapaParametros().containsKey(indicePR)) {
                 return getMapaParametros().get(indicePR);
             } else {
@@ -697,7 +697,7 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
     }
 
     public boolean exiteEsteParametro(String pNome) {
-        return getMapaParametros().containsKey(UtilSBCoreStringFiltros.gerarUrlAmigavel(pNome));
+        return getMapaParametros().containsKey(UtilCRCStringFiltros.gerarUrlAmigavel(pNome));
     }
 
     public boolean isTemParametrobyTipoEntidade(String nomeEntidade) {
@@ -932,7 +932,7 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
                     boolean temFormularioComParametro = false;
                     if (alterouBeanSelecionado && getBeanSelecionado() != null) {
                         temFormularioComParametro = estrutura.getParametrosURL().stream()
-                                .filter(pr -> pr.getTipoEntidade().equals(UtilSBCoreReflexaoObjeto.getClassExtraindoProxy(getBeanSelecionado().getClass().getSimpleName()))).findFirst().isPresent();
+                                .filter(pr -> pr.getTipoEntidade().equals(UtilCRCReflexaoObjeto.getClassExtraindoProxy(getBeanSelecionado().getClass().getSimpleName()))).findFirst().isPresent();
                     }
                     if (estrutura.getParametrosURL().stream().filter(pr -> pr.isUmParametoEntidadeMBPrincipal()).findFirst().isPresent()
                             && getBeanSelecionado() != null
@@ -974,7 +974,7 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
                     } else {
                         //Caso hajá possibilidade de alterar o URL
                         Optional<ItfParametroRequisicao> p = estrutura.getParametrosURL().stream().
-                                filter(pr -> pr.getTipoEntidade().equals(UtilSBCoreReflexaoObjeto.getClassExtraindoProxy(getBeanSelecionado().getClass().getSimpleName()))).findFirst();
+                                filter(pr -> pr.getTipoEntidade().equals(UtilCRCReflexaoObjeto.getClassExtraindoProxy(getBeanSelecionado().getClass().getSimpleName()))).findFirst();
                         if (p.isPresent()) {
                             // Se tem um parametro da entidade principal da página, então atualiza a URL
                             String url = MapaDeFormularios.getUrlFormulario(acaoSelecionada, getBeanSelecionado());
@@ -987,7 +987,7 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
                                 Optional<ItfCampoInstanciado> cp = getBeanSelecionado().getCamposInstanciados().stream()
                                         .filter(cpinst -> cpinst.getTipoCampoSTR().equals(FabTipoAtributoObjeto.OBJETO_DE_UMA_LISTA.toString())
                                         && cpinst.getValor() != null
-                                        && UtilSBCoreReflexao.isClasseIgualOuExetende(cpinst.getValor().getClass(), pr.getTipoEntidade())
+                                        && UtilCRCReflexao.isClasseIgualOuExetende(cpinst.getValor().getClass(), pr.getTipoEntidade())
                                         ).findFirst();
                                 if (cp.isPresent()) {
                                     cpprvinculo = cp.get();
@@ -1067,7 +1067,7 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
         try {
             acoesDaPagina = new ArrayList<>();
 
-            List<Field> camposDeAcao = UtilSBCoreReflexao.getCamposRecursivoPorInterface(this.getClass(), ComoAcaoDoSistema.class, B_Pagina.class, MB_PaginaConversation.class
+            List<Field> camposDeAcao = UtilCRCReflexao.getCamposRecursivoPorInterface(this.getClass(), ComoAcaoDoSistema.class, B_Pagina.class, MB_PaginaConversation.class
             );
             for (Field cp : camposDeAcao) {
                 cp.setAccessible(true);
@@ -1139,7 +1139,7 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
         Map<String, String> valoresStrPorParametro = new HashMap<>();
         for (int idParametro = 0; idParametro < getMapaParametros().size(); idParametro++) {
             if (idParametro <= pConfig.getStringsParametros().size() - 1) {
-                String indiceParametro = UtilSBCoreStringFiltros.gerarUrlAmigavel(parametrosOrdenados.get(idParametro).getNome());
+                String indiceParametro = UtilCRCStringFiltros.gerarUrlAmigavel(parametrosOrdenados.get(idParametro).getNome());
                 valoresStrPorParametro.put(indiceParametro, pConfig.getStringsParametros().get(idParametro));
 
             }

@@ -4,7 +4,7 @@
  */
 package com.super_bits.modulosSB.webPaginas.JSFManagedBeans.declarados.util;
 
-import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreListas;
+import com.super_bits.modulosSB.SBCore.UtilGeral.UtilCRCListas;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.acao.AcaoTransient;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campo.ItfGrupoCampos;
 import com.super_bits.modulosSB.SBCore.modulos.view.telas.ColunaTela;
@@ -29,7 +29,7 @@ import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ComoA
 @Named
 public class PgUtilLayout implements Serializable {
 
-    private static final List<ComoAcaoDoSistema> ACAO_SELECAO_REGISTRO = UtilSBCoreListas.gerarComoLista(new AcaoTransient("nomeAcao", "iconeAcao"));
+    private static final List<ComoAcaoDoSistema> ACAO_SELECAO_REGISTRO = UtilCRCListas.gerarComoLista(new AcaoTransient("nomeAcao", "iconeAcao"));
 
     @Inject
     private ItfPaginaAtual paginaAtual;

@@ -5,7 +5,7 @@
 package com.super_bits.modulosSB.webPaginas.JSFManagedBeans.declarados.util;
 
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
-import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreDataHora;
+import com.super_bits.modulosSB.SBCore.UtilGeral.UtilCRCDataHora;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -165,15 +165,15 @@ public class PgUtilDataHoraFormato implements Serializable {
         SimpleDateFormat formatacaoHorario = new SimpleDateFormat("HH:mm");
         String horario = formatacaoHorario.format(pData);
 
-        if (UtilSBCoreDataHora.isDiaIgual(hoje, pData)) {
+        if (UtilCRCDataHora.isDiaIgual(hoje, pData)) {
             texto = "Hoje às " + horario;
             return texto;
-        } else if (UtilSBCoreDataHora.isDiaIgual(pData, UtilSBCoreDataHora.incrementaDias(hoje, 1))) {
+        } else if (UtilCRCDataHora.isDiaIgual(pData, UtilCRCDataHora.incrementaDias(hoje, 1))) {
             texto = "Amanhã às " + horario;
             return texto;
         } else {
-            long dias = UtilSBCoreDataHora.intervaloTempoDias(hoje, pData);
-            String diaDaSemana = UtilSBCoreDataHora.getDiaDaSemana(pData);
+            long dias = UtilCRCDataHora.intervaloTempoDias(hoje, pData);
+            String diaDaSemana = UtilCRCDataHora.getDiaDaSemana(pData);
             if (dias < 6) {
                 texto = diaDaSemana + " às " + horario;
                 return texto;

@@ -5,8 +5,8 @@
 package com.super_bits.modulosSB.webPaginas.controller.servlets.servletEstaticoUrlPadrao;
 
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
-import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreBytes;
-import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringNomeArquivosEDiretorios;
+import com.super_bits.modulosSB.SBCore.UtilGeral.UtilCRCBytes;
+import com.super_bits.modulosSB.SBCore.UtilGeral.UtilCRCStringNomeArquivosEDiretorios;
 import com.super_bits.modulosSB.SBCore.modulos.ManipulaArquivo.FabTipoArquivoConhecido;
 import com.super_bits.modulosSB.webPaginas.ConfigGeral.SBWebPaginas;
 import com.super_bits.modulosSB.webPaginas.controller.servlets.ServletArquivosSBWPGenerico;
@@ -44,9 +44,9 @@ public class ServletArquivoEstaticoUrlPadrao extends ServletArquivosSBWPGenerico
                     throw new UnsupportedOperationException("Erro obtendo stream por classloader" + "/META-INF/resources/SBComp/recursos/urlPadrao/" + caminhoRecurso);
                 }
                 definirHeaderPorNomeDeArquivo(caminhoRecurso, resp);
-                realizarStreamDoArquivo(resp, UtilSBCoreBytes.gerarBytePorInputstream(is));
+                realizarStreamDoArquivo(resp, UtilCRCBytes.gerarBytePorInputstream(is));
             } else {
-                String nomeArquivo = UtilSBCoreStringNomeArquivosEDiretorios.getNomeArquivo(caminhoRecurso);
+                String nomeArquivo = UtilCRCStringNomeArquivosEDiretorios.getNomeArquivo(caminhoRecurso);
                 abrirArquivo(caminhoLocal, nomeArquivo, requisicao, resp, FabTipoArquivoConhecido.getTipoArquivoByNomeArquivo(nomeArquivo));
             }
         } catch (Throwable t) {

@@ -8,7 +8,7 @@ import com.super_bits.modulos.SBAcessosModel.model.UsuarioSB;
 import com.super_bits.modulosSB.Persistencia.dao.UtilSBPersistencia;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 import com.super_bits.modulosSB.SBCore.UtilGeral.MapaAcoesSistema;
-import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringValidador;
+import com.super_bits.modulosSB.SBCore.UtilGeral.UtilCRCStringValidador;
 import com.super_bits.modulosSB.SBCore.modulos.erp.ItfSistemaERP;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.MapaObjetosProjetoAtual;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.MB_paginaCadastroEntidades;
@@ -89,7 +89,7 @@ public class PgAutenticacaoOauth extends MB_paginaCadastroEntidades<UsuarioSB> {
                     .forEach(acoesEscopoUsuario::add);
             controleDeSessao.setUsuarioLogar(scopoUsuario);
         }
-        if (!UtilSBCoreStringValidador.isNuloOuEmbranco(hashCliente) && !UtilSBCoreStringValidador.isNuloOuEmbranco(scopoUsuario)) {
+        if (!UtilCRCStringValidador.isNuloOuEmbranco(hashCliente) && !UtilCRCStringValidador.isNuloOuEmbranco(scopoUsuario)) {
             List<ItfSistemaERP> sistemaEncontrado = (List) UtilSBPersistencia.gerarConsultaDeEntidade(MapaObjetosProjetoAtual.getClasseDoObjetoByNome("SistemaERPConfiavel"), getEMPagina())
                     .addcondicaoCampoIgualA("hashChavePublica", hashCliente).gerarResultados();
             if (!sistemaEncontrado.isEmpty()) {

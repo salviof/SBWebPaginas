@@ -5,7 +5,7 @@
 package com.super_bits.modulosSB.webPaginas.TratamentoDeErros;
 
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
-import com.super_bits.modulosSB.SBCore.modulos.TratamentoDeErros.UtilSBCoreErros;
+import com.super_bits.modulosSB.SBCore.modulos.TratamentoDeErros.UtilCRCErros;
 import com.super_bits.modulosSB.webPaginas.util.UtilSBWPServletTools;
 import com.super_bits.modulosSB.webPaginas.util.UtilSBWP_JSFTools;
 import java.util.Iterator;
@@ -45,7 +45,7 @@ public class ManipuladorErrosSBJSF extends PrimeExceptionHandler {
                 try {
 
                     String mensagemErro = "Erro processando JSF" + throwable.getMessage();
-                    Throwable causaraiz = UtilSBCoreErros.getCausaRaiz(throwable);
+                    Throwable causaraiz = UtilCRCErros.getCausaRaiz(throwable);
                     if (causaraiz != null) {
                         mensagemErro = mensagemErro + "-->" + causaraiz.getMessage();
                     }

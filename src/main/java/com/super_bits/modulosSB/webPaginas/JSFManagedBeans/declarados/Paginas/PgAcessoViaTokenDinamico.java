@@ -17,6 +17,7 @@ import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.reflexao.
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.siteMap.MapaDeFormularios;
 import com.super_bits.modulos.SBAcessosModel.view.FabAcaoPaginasDoSistema;
 import com.super_bits.modulos.SBAcessosModel.view.InfoAcaoPaginaDoSistema;
+import com.super_bits.modulosSB.SBCore.integracao.libRestClient.implementacao.AcaoApiIntegracaoRestAbstratoBasico;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.ItfParametroRequisicao;
 import com.super_bits.modulosSB.webPaginas.controller.servlets.servletWebPaginas.EstruturaDeFormulario;
 import com.super_bits.modulosSB.webPaginas.controller.servletes.urls.parametrosURL.InfoParametroURL;
@@ -75,12 +76,12 @@ public class PgAcessoViaTokenDinamico extends MB_paginaCadastroEntidades<TokenAc
 
         String nome = (String) UtilSBWPServletTools.getRequestParametro("nome");
         String telefone = (String) UtilSBWPServletTools.getRequestParametro("telefone");
-        String whatsappid = (String) UtilSBWPServletTools.getRequestParametro("whatsappid");
+        //  String whatsappid = (String) UtilSBWPServletTools.getRequestParametro("whatsappid");
 
         if (nome != null && telefone != null) {
             UtilSBWPServletTools.cookieAdicionar("LEAD_NOME", nome, 0);
             UtilSBWPServletTools.cookieAdicionar("LEAD_TELEFONE", telefone, 0);
-            UtilSBWPServletTools.cookieAdicionar("LEAD_WATSAPP_ID", whatsappid, 0);
+            //    UtilSBWPServletTools.cookieAdicionar("LEAD_WATSAPP_ID", whatsappid, 0);
         }
 
         if (tokenDinamico == null) {

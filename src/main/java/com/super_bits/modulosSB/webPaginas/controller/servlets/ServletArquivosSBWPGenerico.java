@@ -5,7 +5,7 @@
 package com.super_bits.modulosSB.webPaginas.controller.servlets;
 
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
-import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreBytes;
+import com.super_bits.modulosSB.SBCore.UtilGeral.UtilCRCBytes;
 import com.super_bits.modulosSB.SBCore.modulos.ManipulaArquivo.FabTipoArquivoConhecido;
 import com.super_bits.modulosSB.webPaginas.ConfigGeral.SBWebPaginas;
 import com.super_bits.modulosSB.webPaginas.controller.servlets.servletArquivoDeEntidade.ServletArquivosDeEntidade;
@@ -24,6 +24,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.coletivojava.fw.api.tratamentoErros.FabErro;
 
 /**
+ *
  *
  * @author desenvolvedor
  */
@@ -110,7 +111,7 @@ public class ServletArquivosSBWPGenerico extends HttpServlet {
     protected void realizarStreamDoArquivo(HttpServletResponse resp, byte[] pDadosArquivo) {
         try {
             resp.setContentLength(pDadosArquivo.length);
-            try ( ServletOutputStream ouputStream = resp.getOutputStream()) {
+            try (ServletOutputStream ouputStream = resp.getOutputStream()) {
                 ouputStream.write(pDadosArquivo);
                 //ouputStream.flush();
                 //ouputStream.close();
@@ -127,7 +128,7 @@ public class ServletArquivosSBWPGenerico extends HttpServlet {
 
     protected void realizarStreamDeArquivoRemoto(HttpServletResponse resp, String pUrlArquivo) {
 
-        byte[] bytes = UtilSBCoreBytes.gerarBytePorUrltream(pUrlArquivo);
+        byte[] bytes = UtilCRCBytes.gerarBytePorUrltream(pUrlArquivo);
         if (bytes != null) {
             realizarStreamDoArquivo(resp, bytes);
         } else {
@@ -138,7 +139,7 @@ public class ServletArquivosSBWPGenerico extends HttpServlet {
 
     protected void realizarStreamDeArquivoLocal(HttpServletResponse resp, String pCaminhoLocalArquivo) {
         try {
-            realizarStreamDoArquivo(resp, UtilSBCoreBytes.gerarBytesPorArquivo(new File(pCaminhoLocalArquivo)));
+            realizarStreamDoArquivo(resp, UtilCRCBytes.gerarBytesPorArquivo(new File(pCaminhoLocalArquivo)));
         } catch (Throwable t) {
             try {
                 SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "Erro obtendo bytes do arquivo", t);

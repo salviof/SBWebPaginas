@@ -3,10 +3,10 @@ package com.super_bits.modulosSB.webPaginas.ConfigGeral;
 import com.super_bits.modulosSB.webPaginas.controller.listenners.ContextoWebPaginas;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.arquivosConfiguracao.ArquivoConfiguracaoDistribuicao;
-import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringValidador;
+import com.super_bits.modulosSB.SBCore.UtilGeral.UtilCRCStringValidador;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.permissoes.ItfAcaoFormulario;
-import com.super_bits.modulosSB.SBCore.modulos.ManipulaArquivo.UtilSBCoreArquivos;
-import com.super_bits.modulosSB.SBCore.modulos.TratamentoDeErros.UtilSBCoreErros;
+import com.super_bits.modulosSB.SBCore.modulos.ManipulaArquivo.UtilCRCArquivos;
+import com.super_bits.modulosSB.SBCore.modulos.TratamentoDeErros.UtilCRCErros;
 
 import com.super_bits.modulosSB.webPaginas.controller.servlets.WebPaginasServlet;
 import com.super_bits.modulosSB.webPaginas.controller.servletes.urls.parametrosURL.ParametroURL;
@@ -78,7 +78,7 @@ public abstract class SBWebPaginas {
             SITE_URL = config.URLBASE();
             URLBASE = config.URLBASE();
         } else {
-            if (UtilSBCoreStringValidador.isNuloOuEmbranco(config.SITE_HOST())) {
+            if (UtilCRCStringValidador.isNuloOuEmbranco(config.SITE_HOST())) {
                 URLBASE = urlDesenvolvimento;
                 SITE_HOST = urlDesenvolvimento;
             } else {
@@ -93,7 +93,7 @@ public abstract class SBWebPaginas {
             try {
                 System.out.println("Nome Projeto" + SBCore.getNomeProjeto());
                 if (SBCore.getNomeProjeto().equals("webApp")) {
-                    UtilSBCoreArquivos.copiarArquivoResourceJar(config.getClass(), "SBProjeto.prop", SBCore.getCaminhoGrupoProjetoSource() + "/SBProjeto.prop");
+                    UtilCRCArquivos.copiarArquivoResourceJar(config.getClass(), "SBProjeto.prop", SBCore.getCaminhoGrupoProjetoSource() + "/SBProjeto.prop");
                 }
                 ContextoWebPaginas.buildSisteMap();
                 WebPaginasServlet construindoSiteMap = new WebPaginasServlet();
@@ -115,7 +115,7 @@ public abstract class SBWebPaginas {
         try {
             throw new UnsupportedOperationException("CONFIG webapp NAO DEFINIDO");
         } catch (Exception e) {
-            UtilSBCoreErros.getResumoErro(e);
+            UtilCRCErros.getResumoErro(e);
         }
         System.exit(0);
 

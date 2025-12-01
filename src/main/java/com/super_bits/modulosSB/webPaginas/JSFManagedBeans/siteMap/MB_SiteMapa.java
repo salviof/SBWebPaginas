@@ -2,8 +2,8 @@ package com.super_bits.modulosSB.webPaginas.JSFManagedBeans.siteMap;
 
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 import com.super_bits.modulosSB.SBCore.UtilGeral.MapaAcoesSistema;
-import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreReflexao;
-import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringsMaiuculoMinusculo;
+import com.super_bits.modulosSB.SBCore.UtilGeral.UtilCRCReflexao;
+import com.super_bits.modulosSB.SBCore.UtilGeral.UtilCRCStringsMaiuculoMinusculo;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.permissoes.ItfAcaoGerenciarEntidade;
 import com.super_bits.modulosSB.webPaginas.JSFBeans.modal.PgModalSBJSF;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.interfaces.ItfB_PaginaSimples;
@@ -29,7 +29,7 @@ public abstract class MB_SiteMapa implements ItfSiteMapa {
             ItfAcaoGerenciarEntidade acaoGestao = null;
             if (estruturaFormulario == null) {
                 if (xhtmlGerenciarPG.equals(UtilSBWP_JSFTools.FORMULARIO_MODAL_PESQUISA_ITEM_AVANCADO)) {
-                    return (ItfB_PaginaSimples) UtilSBWPServletTools.getBeanByNamed(UtilSBCoreStringsMaiuculoMinusculo.getPrimeiraLetraMinuscula(PgModalSBJSF.class.getSimpleName()), PgModalSBJSF.class);
+                    return (ItfB_PaginaSimples) UtilSBWPServletTools.getBeanByNamed(UtilCRCStringsMaiuculoMinusculo.getPrimeiraLetraMinuscula(PgModalSBJSF.class.getSimpleName()), PgModalSBJSF.class);
                 } else {
                     ComoAcaoDoSistema acao = MapaAcoesSistema.getAcaoDoSistemaByFormulario(xhtmlGerenciarPG);
 
@@ -47,7 +47,7 @@ public abstract class MB_SiteMapa implements ItfSiteMapa {
 
             if (classeMB != null) {
                 ItfB_PaginaSimples paginaDoContexto
-                        = (ItfB_PaginaSimples) UtilSBWPServletTools.getBeanByNamed(UtilSBCoreStringsMaiuculoMinusculo.getPrimeiraLetraMinuscula(classeMB.getSimpleName()), classeMB);
+                        = (ItfB_PaginaSimples) UtilSBWPServletTools.getBeanByNamed(UtilCRCStringsMaiuculoMinusculo.getPrimeiraLetraMinuscula(classeMB.getSimpleName()), classeMB);
                 return paginaDoContexto;
             } else {
                 throw new UnsupportedOperationException("a classe vinculada a ");

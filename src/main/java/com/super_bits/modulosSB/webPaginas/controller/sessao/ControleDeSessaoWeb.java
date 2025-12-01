@@ -7,7 +7,7 @@ package com.super_bits.modulosSB.webPaginas.controller.sessao;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.qualificadoresCDI.sessao.QlSessaoFacesContext;
 import com.sun.faces.config.InitFacesContext;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
-import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreEmail;
+import com.super_bits.modulosSB.SBCore.UtilGeral.UtilCRCEmail;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.permissoes.token.ItfTokenRecuperacaoEmail;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.qualificadoresCDI.sessao.QlSessaoRequestScoped;
 import com.super_bits.modulosSB.SBCore.modulos.Mensagens.FabMensagens;
@@ -28,7 +28,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.HttpSession;
 import org.coletivojava.fw.api.tratamentoErros.FabErro;
-import org.coletivojava.fw.utilCoreBase.UtilSBCoreComunicacao;
+import org.coletivojava.fw.utilCoreBase.UtilCRCComunicacao;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ComoGrupoUsuario;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ComoSessao;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ComoUsuario;
@@ -150,9 +150,9 @@ public class ControleDeSessaoWeb extends ControleDeSessaoAbstratoSBCore implemen
                 SBCore.enviarMensagemUsuario("Erro gerando token de acesso", FabMensagens.ERRO);
                 return;
             }
-            if (UtilSBCoreEmail.enviarPorServidorPadraoV2(
+            if (UtilCRCEmail.enviarPorServidorPadraoV2(
                     pEmail,
-                    UtilSBCoreComunicacao.getSaudacao() + ", " + usuarioEncontrado.getNome()
+                    UtilCRCComunicacao.getSaudacao() + ", " + usuarioEncontrado.getNome()
                     + ", utilize <a href=\" " + MapaDeFormularios.
                             getUrlFormulario(FabAcaoPaginasDoSistema.PAGINA_NATIVA_RECUPERACAO_SENHA_MB.getRegistro(), token)
                     + "\" > este link,</a> para recuperar sua senha.",

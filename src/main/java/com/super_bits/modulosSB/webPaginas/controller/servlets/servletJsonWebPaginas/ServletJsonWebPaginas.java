@@ -4,7 +4,7 @@
  */
 package com.super_bits.modulosSB.webPaginas.controller.servlets.servletJsonWebPaginas;
 
-import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreJson;
+import com.super_bits.modulosSB.SBCore.UtilGeral.UtilCRCJson;
 import com.super_bits.modulosSB.webPaginas.controller.servlets.ServletArquivosSBWPGenerico;
 import static com.super_bits.modulosSB.webPaginas.controller.servlets.WebPaginasServlet.NOME_BEAN_REQUEST_CONFIG_URL;
 import com.super_bits.modulosSB.webPaginas.controller.servlets.servletWebPaginas.ConfiguracoesDeFormularioPorUrl;
@@ -15,7 +15,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.qualificadoresCDI.sessao.QlSessaoFacesContext;
-import com.super_bits.modulosSB.SBCore.modulos.TratamentoDeErros.UtilSBCoreErros;
+import com.super_bits.modulosSB.SBCore.modulos.TratamentoDeErros.UtilCRCErros;
 import com.super_bits.modulosSB.webPaginas.TratamentoDeErros.ErroGenericoProcessandoRespostaJson;
 import com.super_bits.modulosSB.webPaginas.util.UtilSBWPJson;
 import com.super_bits.modulosSB.webPaginas.util.UtilSBWP_JSFTools;
@@ -40,7 +40,7 @@ public class ServletJsonWebPaginas extends ServletArquivosSBWPGenerico {
         } catch (ServletException t) {
             resposta.setStatus(500);
             StringBuilder mensagemErro = new StringBuilder();
-            Throwable causa = UtilSBCoreErros.getCausaRaiz(t);
+            Throwable causa = UtilCRCErros.getCausaRaiz(t);
             mensagemErro.append("FALHA PROCESSANDO JSON WEBVIEW  ");
             String strmensagemErro = t.getMessage();
             mensagemErro.append(t.getMessage());
@@ -56,10 +56,10 @@ public class ServletJsonWebPaginas extends ServletArquivosSBWPGenerico {
 
             }
 
-            resposta.getWriter().append(UtilSBCoreJson.getTextoByJsonObjeect(UtilSBWPJson.JSON_FALHA_GERANDO_JSONVIEW(mensagemErro.toString())));
+            resposta.getWriter().append(UtilCRCJson.getTextoByJsonObjeect(UtilSBWPJson.JSON_FALHA_GERANDO_JSONVIEW(mensagemErro.toString())));
         } catch (Throwable t) {
 
-            resposta.getWriter().append(UtilSBCoreJson.getTextoByJsonObjeect(UtilSBWPJson.JSON_FALHA_GERANDO_JSONVIEW("Erro inesperado Servelet JsonWebpaginas")));
+            resposta.getWriter().append(UtilCRCJson.getTextoByJsonObjeect(UtilSBWPJson.JSON_FALHA_GERANDO_JSONVIEW("Erro inesperado Servelet JsonWebpaginas")));
             throw new ServletException("Erro inesperado no " + ServletJsonWebPaginas.class.getSimpleName() + " | " + t.getMessage());
         }
 
@@ -81,14 +81,14 @@ public class ServletJsonWebPaginas extends ServletArquivosSBWPGenerico {
         try {
 
             //String caminhoChamada = requisicao.getPathInfo();
-            // JsonObject jsonCorpo = UtilSBCoreJson.getJsonObjectByTexto(corpo);
+            // JsonObject jsonCorpo = UtilCRCJson.getJsonObjectByTexto(corpo);
             // String codigoUnico = jsonCorpo.getString("codigoUnicoDispositivo");
             ConfiguracoesDeFormularioPorUrl configuracoes = new ConfiguracoesDeFormularioPorUrl(requisicao);
             requisicao.setAttribute(NOME_BEAN_REQUEST_CONFIG_URL, configuracoes);
             RequestDispatcher despachadorDeRespostaParaRequisicao = requisicao.getRequestDispatcher(UtilSBWP_JSFTools.FORMULARIO_API_JSON_WEB_VIEW);
             despachadorDeRespostaParaRequisicao.forward(requisicao, resposta);
 
-            //   UtilSBCoreJson.UtilSBCoreJson.getValorApartirDoCaminho("codigoDispositivo", UtilSBCoreStringJson.gerarObjetoJsonByString(corpo));
+            //   UtilCRCJson.UtilCRCJson.getValorApartirDoCaminho("codigoDispositivo", UtilCRCStringJson.gerarObjetoJsonByString(corpo));
         } catch (Throwable t) {
             throw new ServletException("Erro inesperado no " + ServletJsonWebPaginas.class.getSimpleName() + " | " + t.getMessage());
         }

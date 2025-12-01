@@ -6,7 +6,7 @@ package com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios;
 
 import com.google.common.collect.Lists;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
-import com.super_bits.modulosSB.SBCore.UtilGeral.view.UtilSBCoreLayoutComponenteEmTelas;
+import com.super_bits.modulosSB.SBCore.UtilGeral.view.UtilCRCLayoutComponenteEmTelas;
 
 import com.super_bits.modulosSB.SBCore.modulos.fabrica.ComoFabricaAcoes;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campo.ItfCampoExibicaoFormulario;
@@ -66,7 +66,7 @@ public class InfoDesignFormulario {
     }
 
     public synchronized LayoutComponentesEmTelaComGrupoDeAcoes gerarLayout(ItfGrupoCampos pGrupoCampo, List<ComoAcaoDoSistema> pAcoes) {
-        String identificacao = UtilSBCoreLayoutComponenteEmTelas.gerarIDLayout(pGrupoCampo);
+        String identificacao = UtilCRCLayoutComponenteEmTelas.gerarIDLayout(pGrupoCampo);
         if (!isExisteLayout(identificacao)) {
             LayoutComponentesEmTela layout = gerarNovoLayout((List) pGrupoCampo.getCampos(), pAcoes, identificacao);
             return (LayoutComponentesEmTelaComGrupoDeAcoes) layout;
@@ -87,7 +87,7 @@ public class InfoDesignFormulario {
             if (pGrupoCampo == null) {
                 throw new UnsupportedOperationException("Tentativa de gerar um layout com grupo campo nulo");
             }
-            String identificacao = UtilSBCoreLayoutComponenteEmTelas.gerarIDLayout(pGrupoCampo);
+            String identificacao = UtilCRCLayoutComponenteEmTelas.gerarIDLayout(pGrupoCampo);
             if (!isExisteLayout(identificacao)) {
                 LayoutComponentesEmTela layout = gerarNovoLayout((List) pGrupoCampo.getCampos(), new ArrayList(), identificacao);
                 return layout;
@@ -116,7 +116,7 @@ public class InfoDesignFormulario {
                 if (telaUsuario == null) {
                     throw new UnsupportedOperationException("O Tipo da tela não pôde ser recuperado");
                 }
-                LayoutComponentesEmTelaComGrupoDeAcoes novoLayout = UtilSBCoreLayoutComponenteEmTelas.gerarLayoutColunasComAcao(campos, pAcoes, FabCompVisualBotaoAcao.ICONE, telaUsuario.getTipoTela(), pIdentificacao, true);
+                LayoutComponentesEmTelaComGrupoDeAcoes novoLayout = UtilCRCLayoutComponenteEmTelas.gerarLayoutColunasComAcao(campos, pAcoes, FabCompVisualBotaoAcao.ICONE, telaUsuario.getTipoTela(), pIdentificacao, true);
                 adicionarLayout(pIdentificacao, novoLayout);
 
             }

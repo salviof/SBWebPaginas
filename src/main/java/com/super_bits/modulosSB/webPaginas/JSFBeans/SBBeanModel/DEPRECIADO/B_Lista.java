@@ -1,8 +1,8 @@
 package com.super_bits.modulosSB.webPaginas.JSFBeans.SBBeanModel.DEPRECIADO;
 
 import com.super_bits.modulosSB.SBCore.UtilGeral.ClasseTipada;
-import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringFiltros;
-import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringValidador;
+import com.super_bits.modulosSB.SBCore.UtilGeral.UtilCRCStringFiltros;
+import com.super_bits.modulosSB.SBCore.UtilGeral.UtilCRCStringValidador;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ComoEntidadeSimples;
 import java.io.Serializable;
 import java.util.List;
@@ -28,7 +28,7 @@ public class B_Lista<T extends ComoEntidadeSimples> extends ClasseTipada impleme
     }
 
     public String getNomeJsfAmigavel() {
-        return UtilSBCoreStringFiltros.gerarUrlAmigavel(nomeLista);
+        return UtilCRCStringFiltros.gerarUrlAmigavel(nomeLista);
     }
 
     public List<? extends ComoEntidadeSimples> getItens() {

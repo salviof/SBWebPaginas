@@ -4,8 +4,8 @@
  */
 package com.super_bits.modulosSB.webPaginas.JSFManagedBeans.declarados.util;
 
-import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreNumeros;
-import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringFiltros;
+import com.super_bits.modulosSB.SBCore.UtilGeral.UtilCRCNumeros;
+import com.super_bits.modulosSB.SBCore.UtilGeral.UtilCRCStringFiltros;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.SimpleDateFormat;
@@ -23,22 +23,22 @@ public class PgUtilFormatar {
 
     public String moeda(Double pValor) {
 
-        return UtilSBCoreNumeros.converterMoeda(pValor);
+        return UtilCRCNumeros.converterMoeda(pValor);
     }
 
     public String gerarTextoSemCaracterEspecial(String pValor) {
-        return UtilSBCoreStringFiltros.gerarUrlAmigavel(pValor);
+        return UtilCRCStringFiltros.gerarUrlAmigavel(pValor);
 
     }
 
     public String gerarTextoApenasNumero(String pValor) {
-        return UtilSBCoreStringFiltros.getNumericosDaString(pValor);
+        return UtilCRCStringFiltros.getNumericosDaString(pValor);
 
     }
 
     public String inteiro(long pValor) {
 
-        return UtilSBCoreNumeros.formatarNumeroInteiro(pValor);
+        return UtilCRCNumeros.formatarNumeroInteiro(pValor);
     }
 
     public String getNumeroComCasasDecimais(int pInteiro, int pQtd) {
@@ -74,7 +74,7 @@ public class PgUtilFormatar {
     }
 
     public int arredondarParaBaixo(Double pValor) {
-        Double v = UtilSBCoreNumeros.doubleArredondamentoMetadeParaBaixo(pValor, 0);
+        Double v = UtilCRCNumeros.doubleArredondamentoMetadeParaBaixo(pValor, 0);
         return v.intValue();
     }
 

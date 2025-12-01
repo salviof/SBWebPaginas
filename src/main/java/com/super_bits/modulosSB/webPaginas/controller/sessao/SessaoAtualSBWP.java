@@ -9,7 +9,7 @@ import com.super_bits.editorImagem.util.UtilSBImagemEdicao;
 import com.super_bits.modulos.SBAcessosModel.model.UsuarioSB;
 import com.super_bits.modulosSB.Persistencia.dao.UtilSBPersistencia;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
-import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringNomeArquivosEDiretorios;
+import com.super_bits.modulosSB.SBCore.UtilGeral.UtilCRCStringNomeArquivosEDiretorios;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.ItfModuloAcaoSistema;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.ItensGenericos.basico.SessaoOffline;
 import com.super_bits.modulosSB.webPaginas.util.UtilSBWPServletTools;
@@ -220,7 +220,7 @@ public class SessaoAtualSBWP extends SessaoOffline implements ComoSessao, Serial
 
             ComoUsuario usuario = getUsuario();
             InputStream arquivo;
-            if (!UtilSBCoreStringNomeArquivosEDiretorios.getExtencaoNomeArquivo(event.getFile().getFileName()).equals("png")) {
+            if (!UtilCRCStringNomeArquivosEDiretorios.getExtencaoNomeArquivo(event.getFile().getFileName()).equals("png")) {
 
                 BufferedImage imagem = UtilSBImagemEdicao.converterPNGParaJpg(ImageIO.read(event.getFile().getInputStream()), Color.white);
                 UtilSBImagemEdicao.reduzirProporcionalAlturaMaxima(imagem, 85, "jpg");
@@ -256,7 +256,7 @@ public class SessaoAtualSBWP extends SessaoOffline implements ComoSessao, Serial
             UsuarioSB usuario = UtilSBPersistencia.getRegistroByID(UsuarioSB.class,
                     id, em);
             InputStream arquivo;
-            if (!UtilSBCoreStringNomeArquivosEDiretorios.getExtencaoNomeArquivo(event.getFile().getFileName()).equals("png")) {
+            if (!UtilCRCStringNomeArquivosEDiretorios.getExtencaoNomeArquivo(event.getFile().getFileName()).equals("png")) {
 
                 BufferedImage imagem = UtilSBImagemEdicao.converterPNGParaJpg(ImageIO.read(event.getFile().getInputStream()), Color.white);
                 UtilSBImagemEdicao.reduzirProporcionalAlturaMaxima(imagem, 85, "jpg");

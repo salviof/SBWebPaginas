@@ -3,13 +3,13 @@ package com.super_bits.modulosSB.webPaginas.JSFManagedBeans.declarados.util;
 import com.google.common.collect.Lists;
 import com.sun.faces.facelets.el.TagValueExpression;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
-import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreDataHora;
-import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreNumeros;
-import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringFiltros;
-import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringGerador;
-import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringGerador.TIPO_LOREN;
-import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringValidador;
-import com.super_bits.modulosSB.SBCore.modulos.ManipulaArquivo.UtilSBCoreArquivos;
+import com.super_bits.modulosSB.SBCore.UtilGeral.UtilCRCDataHora;
+import com.super_bits.modulosSB.SBCore.UtilGeral.UtilCRCNumeros;
+import com.super_bits.modulosSB.SBCore.UtilGeral.UtilCRCStringFiltros;
+import com.super_bits.modulosSB.SBCore.UtilGeral.UtilCRCStringGerador;
+import com.super_bits.modulosSB.SBCore.UtilGeral.UtilCRCStringGerador.TIPO_LOREN;
+import com.super_bits.modulosSB.SBCore.UtilGeral.UtilCRCStringValidador;
+import com.super_bits.modulosSB.SBCore.modulos.ManipulaArquivo.UtilCRCArquivos;
 import com.super_bits.modulosSB.SBCore.modulos.Mensagens.FabMensagens;
 import com.super_bits.modulosSB.SBCore.modulos.geradorCodigo.model.EstruturaCampo;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.ItensGenericos.basico.BeanTodosSelecionados;
@@ -62,7 +62,7 @@ import javax.faces.event.AjaxBehaviorEvent;
 import javax.inject.Inject;
 import javax.inject.Named;
 import org.coletivojava.fw.api.tratamentoErros.FabErro;
-import org.coletivojava.fw.utilCoreBase.UtilSBCoreComunicacao;
+import org.coletivojava.fw.utilCoreBase.UtilCRCComunicacao;
 import org.primefaces.PrimeFaces;
 import org.primefaces.component.fieldset.FieldsetRenderer;
 
@@ -291,7 +291,7 @@ public class PgUtil implements Serializable {
         if (pTextoNormal == null) {
             return null;
         }
-        return UtilSBCoreStringFiltros.gerarUrlAmigavel(pTextoNormal);
+        return UtilCRCStringFiltros.gerarUrlAmigavel(pTextoNormal);
     }
 
     /**
@@ -370,7 +370,7 @@ public class PgUtil implements Serializable {
     public String gerarIdAtualizacaoPadraoInput(String pid, ItfCampoInstanciado pCpInst) {
 
         if (pCpInst.isTemValidadacaoLogica() || pCpInst.getFabricaTipoAtributo().isPossuiValidacaoLogicaNativa()) {
-            if (UtilSBCoreStringValidador.isNuloOuEmbranco(pid)) {
+            if (UtilCRCStringValidador.isNuloOuEmbranco(pid)) {
                 return "@this";
             }
             if (!pid.contains("@this")) {
@@ -384,7 +384,7 @@ public class PgUtil implements Serializable {
     }
 
     public String gerarCaminhoCompletoIDParaJavaScript(String pId) {
-        if (UtilSBCoreStringValidador.isNuloOuEmbranco(pId)) {
+        if (UtilCRCStringValidador.isNuloOuEmbranco(pId)) {
             return pId;
         }
         if (pId.contains(":")) {
@@ -401,7 +401,7 @@ public class PgUtil implements Serializable {
             if (i == caminhosEnviados.length - 1) {
                 separadorCaminhosEncontradors = "";
             }
-            if (!UtilSBCoreStringValidador.isNuloOuEmbranco(caminho)) {
+            if (!UtilCRCStringValidador.isNuloOuEmbranco(caminho)) {
 
                 if (caminho.contains("@") || caminho.contains(":")) {
 
@@ -446,7 +446,7 @@ public class PgUtil implements Serializable {
      *
      */
     public void copiarRessource() {
-        if (UtilSBCoreArquivos.copiarArquivos(UtilSBWP_JSFTools.getCaminhoLocalRessource(), SBCore.getCaminhoDesenvolvimento() + "/src/main/webapp/resources")) {
+        if (UtilCRCArquivos.copiarArquivos(UtilSBWP_JSFTools.getCaminhoLocalRessource(), SBCore.getCaminhoDesenvolvimento() + "/src/main/webapp/resources")) {
             SBCore.enviarMensagemUsuario("Arquivos da pasta Ressource copiados com sucesso", FabMensagens.AVISO);
         } else {
             SBCore.enviarMensagemUsuario("Aconteceu um erro ao copiar os resources", FabMensagens.ERRO);
@@ -929,7 +929,7 @@ public class PgUtil implements Serializable {
      * @return Retorna um loren Ipsum de uma palavra
      */
     public String getLorrenIpsUmaPalavra() {
-        return UtilSBCoreStringGerador.GetLorenIpsilum(1, TIPO_LOREN.PALAVRAS);
+        return UtilCRCStringGerador.GetLorenIpsilum(1, TIPO_LOREN.PALAVRAS);
     }
 
     /**
@@ -937,7 +937,7 @@ public class PgUtil implements Serializable {
      * @return Retorna 5 palavras do lorenIpsum
      */
     public String getLorrenIpsUmaFrase() {
-        return UtilSBCoreStringGerador.GetLorenIpsilum(3, TIPO_LOREN.PALAVRAS);
+        return UtilCRCStringGerador.GetLorenIpsilum(3, TIPO_LOREN.PALAVRAS);
     }
 
     /**
@@ -945,7 +945,7 @@ public class PgUtil implements Serializable {
      * @return Um paragrafro de palavras LorenIpsum
      */
     public String getLorrenIpsUmParagrafo() {
-        return UtilSBCoreStringGerador.GetLorenIpsilum(1, TIPO_LOREN.PARAGRAFO);
+        return UtilCRCStringGerador.GetLorenIpsilum(1, TIPO_LOREN.PARAGRAFO);
     }
 
     /**
@@ -953,11 +953,11 @@ public class PgUtil implements Serializable {
      * @return 3 paragrafos lorenIpsum
      */
     public String getLorrenIps3Paragrafos() {
-        return UtilSBCoreStringGerador.GetLorenIpsilum(3, UtilSBCoreStringGerador.TIPO_LOREN.PARAGRAFO);
+        return UtilCRCStringGerador.GetLorenIpsilum(3, UtilCRCStringGerador.TIPO_LOREN.PARAGRAFO);
     }
 
     public String getSaudacao() {
-        return UtilSBCoreComunicacao.getSaudacao();
+        return UtilCRCComunicacao.getSaudacao();
     }
 
     public AcaoDeContexto getAcaoDeContexto(ComoAcaoDoSistema pAcao) {
@@ -1338,7 +1338,7 @@ public class PgUtil implements Serializable {
                     if (componente == null) {
                         String idAreaSelecionada = ((ItfFormularioAcao) paginaAtual.getInfoPagina()).getIdAreaExbicaoAcaoSelecionada();
                         String idAlternativo = gerarCaminhoCompletoID(idAreaSelecionada);
-                        if (UtilSBCoreStringValidador.isNAO_NuloNemBranco(idAlternativo)) {
+                        if (UtilCRCStringValidador.isNAO_NuloNemBranco(idAlternativo)) {
                             return idAlternativo;
                         }
                         throw new UnsupportedOperationException();
@@ -1413,7 +1413,7 @@ public class PgUtil implements Serializable {
             return null;
         }
         Locale local = new Locale("pt", "BR");
-        String diaDasemana = UtilSBCoreDataHora.getDiaDaSemana(pDataHora);
+        String diaDasemana = UtilCRCDataHora.getDiaDaSemana(pDataHora);
 
         Calendar c = Calendar.getInstance();
         //objeto d foi atribuido a Calendar
@@ -1428,7 +1428,7 @@ public class PgUtil implements Serializable {
             return null;
         }
         Locale local = new Locale("pt", "BR");
-        String diaDasemana = UtilSBCoreDataHora.getDiaDaSemana(pDataHora);
+        String diaDasemana = UtilCRCDataHora.getDiaDaSemana(pDataHora);
 
         Calendar c = Calendar.getInstance();
         //objeto d foi atribuido a Calendar
@@ -1534,7 +1534,7 @@ public class PgUtil implements Serializable {
      */
     public String gerarMoeda(Double pValor) {
 
-        return UtilSBCoreNumeros.converterMoeda(pValor);
+        return UtilCRCNumeros.converterMoeda(pValor);
     }
 
     /**
@@ -1544,7 +1544,7 @@ public class PgUtil implements Serializable {
      */
     //@Deprecated
     //public String gerarMoeda(long pValor) {
-    //    return UtilSBCoreNumeros.converterMoeda(pValor);
+    //    return UtilCRCNumeros.converterMoeda(pValor);
     //}
     public void preencherAleatorioBeanSelecionado() {
         try {

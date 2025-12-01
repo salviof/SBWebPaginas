@@ -5,7 +5,7 @@
 package com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.interfaces;
 
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
-import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreJson;
+import com.super_bits.modulosSB.SBCore.UtilGeral.UtilCRCJson;
 import com.super_bits.modulosSB.SBCore.UtilGeral.json.ErroProcessandoJson;
 import com.super_bits.modulosSB.webPaginas.JSFBeans.SBBeanModel.InfoMBAcao;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.B_Pagina;
@@ -111,9 +111,9 @@ public interface ItfB_PaginaSimples extends ItfFormularioSimples {
         JsonObjectBuilder jsonPagina;
         try {
             jsonPagina = UtilSBWPJson.getJsonBuilderPaginaPadrao(this);
-            return UtilSBCoreJson.getTextoByJsonObjeect(jsonPagina.build());
+            return UtilCRCJson.getTextoByJsonObjeect(jsonPagina.build());
         } catch (ErroProcessandoJson ex) {
-            return UtilSBCoreJson.getTextoByJsonObjeect(UtilSBWPJson.JSON_FALHA_OBTENDO_CONTEXTO);
+            return UtilCRCJson.getTextoByJsonObjeect(UtilSBWPJson.JSON_FALHA_OBTENDO_CONTEXTO);
         }
 
     }

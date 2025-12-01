@@ -6,8 +6,8 @@ package com.super_bits.modulosSB.webPaginas.JSFBeans.temas;
 
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UTilSBCoreInputs;
-import com.super_bits.modulosSB.SBCore.modulos.ManipulaArquivo.UtilSBCoreArquivoTexto;
-import com.super_bits.modulosSB.SBCore.modulos.ManipulaArquivo.UtilSBCoreArquivos;
+import com.super_bits.modulosSB.SBCore.modulos.ManipulaArquivo.UtilCRCArquivoTexto;
+import com.super_bits.modulosSB.SBCore.modulos.ManipulaArquivo.UtilCRCArquivos;
 import com.super_bits.modulosSB.SBCore.modulos.Mensagens.FabMensagens;
 import com.super_bits.modulosSB.webPaginas.JSFBeans.PrimeFacesBeanModel.temas.TemaPrimeFaces;
 import com.super_bits.modulosSB.webPaginas.JSFBeans.PrimeFacesBeanModel.temas.TemasDisponiveis;
@@ -58,7 +58,7 @@ public class Tema {
                 Logger.getLogger(Tema.class.getName()).log(Level.SEVERE, null, ex);
             }
 
-            UtilSBCoreArquivos.descompactar(pastaArquivos + "/tema.zip", pastaArquivos.getAbsolutePath());
+            UtilCRCArquivos.descompactar(pastaArquivos + "/tema.zip", pastaArquivos.getAbsolutePath());
             String pastaTema = pastaArquivos.getAbsolutePath() + "/jquery-ui-1.11.4.custom";
             List<String> css = UTilSBCoreInputs.getStringsByArquivoLocal(pastaTema
                     + "/jquery-ui.css");
@@ -66,17 +66,17 @@ public class Tema {
                 SBCore.enviarMensagemUsuario("Erro lendo arquivo CSS, certifique ter enviado um arquivo versão 1.11.2 ", FabMensagens.ERRO);
                 return;
             }
-            UtilSBCoreArquivoTexto.limparArquivoTexto(UtilSBWP_JSFTools.getCaminhoLocalRessource() + "/primefaces-temaPersonalizado/theme.css");
+            UtilCRCArquivoTexto.limparArquivoTexto(UtilSBWP_JSFTools.getCaminhoLocalRessource() + "/primefaces-temaPersonalizado/theme.css");
             for (String linha : css) {
                 linha = linha.replace("url(\"images/", "url(\"#{resource['primefaces-temaPersonalizado:images/");
                 linha = linha.replace(".png\")", ".png']}\")");
                 linha = linha.replace(".gif\")", ".gif']}\")");
-                if (UtilSBCoreArquivoTexto.escreverEmArquivo(UtilSBWP_JSFTools.getCaminhoLocalRessource() + "/primefaces-temaPersonalizado/theme.css", linha)) {
+                if (UtilCRCArquivoTexto.escreverEmArquivo(UtilSBWP_JSFTools.getCaminhoLocalRessource() + "/primefaces-temaPersonalizado/theme.css", linha)) {
                     System.out.println("linha css salva em arquivo:" + linha);
                 }
 
             }
-            UtilSBCoreArquivos.copiarArquivos(pastaTema + "/images", UtilSBWP_JSFTools.getCaminhoLocalRessource() + "/primefaces-temaPersonalizado/images");
+            UtilCRCArquivos.copiarArquivos(pastaTema + "/images", UtilSBWP_JSFTools.getCaminhoLocalRessource() + "/primefaces-temaPersonalizado/images");
 
             SBCore.enviarMensagemUsuario("Arquivo Importado com sucesso de" + event.getFile().getFileName(), FabMensagens.AVISO);
 

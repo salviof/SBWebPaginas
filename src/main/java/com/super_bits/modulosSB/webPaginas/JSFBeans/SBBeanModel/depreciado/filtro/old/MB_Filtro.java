@@ -4,7 +4,7 @@ import com.super_bits.modulosSB.Persistencia.dao.DaoGenerico;
 import com.super_bits.modulosSB.Persistencia.dao.SBNQ;
 
 import com.super_bits.modulosSB.SBCore.UtilGeral.ClasseTipada;
-import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringFiltros;
+import com.super_bits.modulosSB.SBCore.UtilGeral.UtilCRCStringFiltros;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ComoEntidadeSimples;
 import com.super_bits.modulosSB.webPaginas.util.UtilSBWP_JSFTools;
 import java.io.Serializable;
@@ -126,7 +126,7 @@ public abstract class MB_Filtro<T extends ComoEntidadeSimples> extends ClasseTip
     }
 
     public String getNomeFiltroUrlAmigavel() {
-        return UtilSBCoreStringFiltros.gerarUrlAmigavel(nomeFiltro);
+        return UtilCRCStringFiltros.gerarUrlAmigavel(nomeFiltro);
     }
 
     protected void adcionaOpcao(OpcaoFiltro pFiltro) {
@@ -166,13 +166,13 @@ public abstract class MB_Filtro<T extends ComoEntidadeSimples> extends ClasseTip
     public void setOpcaoAtualByNome(String pNomeOpcao) {
 
         for (OpcaoFiltro op : opcoes) {
-            if (op.getNomeCurto().equalsIgnoreCase(pNomeOpcao) || op.getNomeCurtoURLAmigavel().equalsIgnoreCase(UtilSBCoreStringFiltros.gerarUrlAmigavel(pNomeOpcao))) {
+            if (op.getNomeCurto().equalsIgnoreCase(pNomeOpcao) || op.getNomeCurtoURLAmigavel().equalsIgnoreCase(UtilCRCStringFiltros.gerarUrlAmigavel(pNomeOpcao))) {
                 setOpcaoAtual(op);
                 return;
             }
         }
 
-        UtilSBWP_JSFTools.mensagens().erroSistema("Item" + pNomeOpcao + " ou " + UtilSBCoreStringFiltros.gerarUrlAmigavel(pNomeOpcao) + "não encontrado no filtro" + this.getClass().getSimpleName());
+        UtilSBWP_JSFTools.mensagens().erroSistema("Item" + pNomeOpcao + " ou " + UtilCRCStringFiltros.gerarUrlAmigavel(pNomeOpcao) + "não encontrado no filtro" + this.getClass().getSimpleName());
     }
 
     public void setOpcaoAtual(ComoEntidadeSimples pOpcaoAtual) {

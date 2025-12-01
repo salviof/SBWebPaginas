@@ -4,7 +4,7 @@ import br.org.coletivojava.fw.utils.agendador.UtilSBAgendadorTarefas;
 import com.super_bits.modulos.SBAcessosModel.controller.UtilSBControllerAcessosModel;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 import com.super_bits.modulosSB.SBCore.UtilGeral.MapaAcoesSistema;
-import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreReflexao;
+import com.super_bits.modulosSB.SBCore.UtilGeral.UtilCRCReflexao;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.ErroChamadaController;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.ItfRespostaAcaoDoSistema;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ComoAcaoControllerAutoExecucao;
@@ -36,8 +36,8 @@ public class ContextoWebPaginas implements ServletContextListener {
     public static void buildSisteMap() {
 
         try {
-            List<Class> paginasEncontradas = UtilSBCoreReflexao.getClassesComEstaAnotacao(InfoPagina.class, "com.super_bits");
-            List<Class> paginasPlugins = UtilSBCoreReflexao.getClassesComEstaAnotacao(InfoPagina.class, "org.coletivoJava.superBitsFW.webPaginas.plugin");
+            List<Class> paginasEncontradas = UtilCRCReflexao.getClassesComEstaAnotacao(InfoPagina.class, "com.super_bits");
+            List<Class> paginasPlugins = UtilCRCReflexao.getClassesComEstaAnotacao(InfoPagina.class, "org.coletivoJava.superBitsFW.webPaginas.plugin");
             paginasPlugins.forEach(paginasEncontradas::add);
             MapaDeFormularios.buildEstrutura(paginasEncontradas);
 
@@ -66,7 +66,7 @@ public class ContextoWebPaginas implements ServletContextListener {
             //   inicio.inicio();
 
             if (inicio == null) {
-                Class classeInicioFim = UtilSBCoreReflexao.getClasseQueEstendeIsto(ItfInicioFimAppWP.class, "com.super_bits.config.webPaginas");
+                Class classeInicioFim = UtilCRCReflexao.getClasseQueEstendeIsto(ItfInicioFimAppWP.class, "com.super_bits.config.webPaginas");
                 System.out.println("A classe de inicio e fim de contexto encontrada foi" + classeInicioFim.getName());
                 inicio = (ItfInicioFimAppWP) classeInicioFim.newInstance();
                 System.out.println("Sistema Iniciado em " + sce.getServletContext().getVirtualServerName());

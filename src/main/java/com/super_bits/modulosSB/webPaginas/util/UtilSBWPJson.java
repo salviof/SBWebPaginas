@@ -5,7 +5,7 @@
 package com.super_bits.modulosSB.webPaginas.util;
 
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
-import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreJson;
+import com.super_bits.modulosSB.SBCore.UtilGeral.UtilCRCJson;
 import com.super_bits.modulosSB.SBCore.UtilGeral.json.ErroProcessandoJson;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.ItfResposta;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.ItfRespostaAcaoDoSistema;
@@ -37,7 +37,7 @@ public class UtilSBWPJson {
         if (pPagina.getComoFormularioWeb().getAcaoSelecionada() != null) {
             strJsonAcaoSelecionada = pPagina.getComoFormularioWeb().getAcaoSelecionada().getNomeUnico();
         }
-        JsonObjectBuilder jsonInfoPagina = UtilSBCoreJson.getJsonBuilderBySequenciaChaveValor(
+        JsonObjectBuilder jsonInfoPagina = UtilCRCJson.getJsonBuilderBySequenciaChaveValor(
                 "titulo", pPagina.getTitulo(),
                 "acaoVinculada", pPagina.getComoFormularioWeb().getAcaoVinculada().getNomeUnico(),
                 "subAcaoSelecionada", strJsonAcaoSelecionada
@@ -52,7 +52,7 @@ public class UtilSBWPJson {
 
         JsonObjectBuilder jsonDadosSessao = null;
 
-        jsonDadosSessao = UtilSBCoreJson.getJsonBuilderBySequenciaChaveValor(
+        jsonDadosSessao = UtilCRCJson.getJsonBuilderBySequenciaChaveValor(
                 "jsessionId", sessionId,
                 "viewStateId", idViewState,
                 "idViewStateRoot", idViewState,
@@ -96,7 +96,7 @@ public class UtilSBWPJson {
                 }
                 if (retorno instanceof ComoEntidadeSimples) {
                     Long codigo = ((ComoEntidadeSimples) retorno).getId();
-                    jsonPadrao.add("retorno", UtilSBCoreJson.getJsonStringBySequenciaChaveValor("id", codigo));
+                    jsonPadrao.add("retorno", UtilCRCJson.getJsonStringBySequenciaChaveValor("id", codigo));
                 }
             } catch (Throwable t) {
 

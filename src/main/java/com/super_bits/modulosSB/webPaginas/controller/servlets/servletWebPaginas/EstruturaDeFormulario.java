@@ -9,11 +9,11 @@ import com.google.common.collect.Lists;
 import com.super_bits.modulos.SBAcessosModel.model.acoes.acaoDeEntidade.AcaoGestaoEntidade;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 
-import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreReflexao;
-import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreReflexaoObjeto;
-import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringBuscaTrecho;
-import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringFiltros;
-import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringValidador;
+import com.super_bits.modulosSB.SBCore.UtilGeral.UtilCRCReflexao;
+import com.super_bits.modulosSB.SBCore.UtilGeral.UtilCRCReflexaoObjeto;
+import com.super_bits.modulosSB.SBCore.UtilGeral.UtilCRCStringBuscaTrecho;
+import com.super_bits.modulosSB.SBCore.UtilGeral.UtilCRCStringFiltros;
+import com.super_bits.modulosSB.SBCore.UtilGeral.UtilCRCStringValidador;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.ItfParametroRequisicao;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.ItfParametroRequisicaoInstanciado;
 import static com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.TIPO_PARTE_URL.ENTIDADE;
@@ -71,7 +71,7 @@ public class EstruturaDeFormulario implements ItfEstruturaDeFormuario {
         }
         quantidadeParametrosObrigatorios = qtdObrigatorio;
 
-        umaPaginaCadastroEntidade = UtilSBCoreReflexao.isInterfaceImplementadaNaClasse(pClassePAgina, ItfPaginaGerenciarEntidade.class);
+        umaPaginaCadastroEntidade = UtilCRCReflexao.isInterfaceImplementadaNaClasse(pClassePAgina, ItfPaginaGerenciarEntidade.class);
 
         try {
             InfoPagina anotacaoInfopagina = (InfoPagina) pClassePAgina.getAnnotation(InfoPagina.class);
@@ -158,7 +158,7 @@ public class EstruturaDeFormulario implements ItfEstruturaDeFormuario {
             tagURL = tagsPalavraChave.get(0);
         }
 
-        return urlBase + "/" + UtilSBCoreStringFiltros.gerarUrlAmigavel(tagURL);
+        return urlBase + "/" + UtilCRCStringFiltros.gerarUrlAmigavel(tagURL);
     }
 
     public String gerarUrlPorParametro(List<ItfParametroRequisicaoInstanciado> parametros, ComoAcaoDoSistema pAcao, String tagUsada) {
@@ -182,7 +182,7 @@ public class EstruturaDeFormulario implements ItfEstruturaDeFormuario {
         String urlAcao = "";
         if (pAcao != null) {
             if (!pAcao.isUmaAcaoGestaoDominio()) {
-                urlAcao = "/ac-" + UtilSBCoreStringFiltros.gerarUrlAmigavel(pAcao.getNomeAcao());
+                urlAcao = "/ac-" + UtilCRCStringFiltros.gerarUrlAmigavel(pAcao.getNomeAcao());
             }
         }
 
@@ -201,7 +201,7 @@ public class EstruturaDeFormulario implements ItfEstruturaDeFormuario {
                 if (obj != null) {
                     String nomeClasse = null;
                     if (mapaParametrosEnviados.get(obj.getClass().getSimpleName()) == null) {
-                        nomeClasse = UtilSBCoreStringBuscaTrecho.getStringAteEncontrarIsto(obj.getClass().getSimpleName(), "$");
+                        nomeClasse = UtilCRCStringBuscaTrecho.getStringAteEncontrarIsto(obj.getClass().getSimpleName(), "$");
                         if (nomeClasse == null) {
                             nomeClasse = obj.getClass().getSimpleName();
                         }
@@ -211,7 +211,7 @@ public class EstruturaDeFormulario implements ItfEstruturaDeFormuario {
                     if (nomeClasse == null) {
                         nomeClasse = obj.getClass().getSimpleName();
                     }
-                    List<Class> classesHerenca = UtilSBCoreReflexaoObjeto.getClassesEntidadeComHeranca(MapaObjetosProjetoAtual.getClasseDoObjetoByNome(nomeClasse));
+                    List<Class> classesHerenca = UtilCRCReflexaoObjeto.getClassesEntidadeComHeranca(MapaObjetosProjetoAtual.getClasseDoObjetoByNome(nomeClasse));
                     for (Class classe : classesHerenca) {
                         mapaParametrosEnviados.put(classe.getSimpleName(), new ArrayList<>());
                         mapaParametrosEnviados.get(classe.getSimpleName()).add(obj);
@@ -244,7 +244,7 @@ public class EstruturaDeFormulario implements ItfEstruturaDeFormuario {
                     }
                     parametrosDoTipoEnviado = mapaParametrosEnviados.get(strTipoObjeto);
                     if (parametrosDoTipoEnviado == null && pr.isParametroObrigatorio()) {
-                        if (UtilSBCoreStringValidador.isNuloOuEmbranco(pr.getValorPadrao())) {
+                        if (UtilCRCStringValidador.isNuloOuEmbranco(pr.getValorPadrao())) {
                             throw new UnsupportedOperationException("O Atributo obrigatório:" + pr.getNome() + " é um parametro obrigatório, e não foi definido");
                         }
 

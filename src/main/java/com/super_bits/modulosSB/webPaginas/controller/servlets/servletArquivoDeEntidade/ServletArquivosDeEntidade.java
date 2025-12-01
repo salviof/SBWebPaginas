@@ -6,7 +6,7 @@ package com.super_bits.modulosSB.webPaginas.controller.servlets.servletArquivoDe
 
 import com.super_bits.modulosSB.Persistencia.dao.UtilSBPersistencia;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
-import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringValidador;
+import com.super_bits.modulosSB.SBCore.UtilGeral.UtilCRCStringValidador;
 import com.super_bits.modulosSB.SBCore.modulos.ManipulaArquivo.TipoRecurso;
 import com.super_bits.modulosSB.SBCore.modulos.ManipulaArquivo.acessoArquivo.FabTipoAcessoArquivo;
 import com.super_bits.modulosSB.SBCore.modulos.ManipulaArquivo.acessoArquivo.TipoAcessoArquivo;
@@ -165,7 +165,7 @@ public class ServletArquivosDeEntidade extends ServletArquivosSBWPGenerico imple
                         prDadosREquisicaoArquivoEntidade.setEntidade((ComoEntidadeSimples) classeEntidade.newInstance());
                         String[] partes = pSlugObjeto.split("-");
                         for (String parte : partes) {
-                            if (UtilSBCoreStringValidador.isContemApenasNumero(parte)) {
+                            if (UtilCRCStringValidador.isContemApenasNumero(parte)) {
                                 prDadosREquisicaoArquivoEntidade.getEntidade().setId(Long.valueOf(parte));
                             } else {
                                 prDadosREquisicaoArquivoEntidade.getEntidade().setNome(parte);

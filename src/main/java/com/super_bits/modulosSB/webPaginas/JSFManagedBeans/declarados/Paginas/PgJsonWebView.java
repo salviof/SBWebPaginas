@@ -5,8 +5,8 @@
 package com.super_bits.modulosSB.webPaginas.JSFManagedBeans.declarados.Paginas;
 
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
-import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreJson;
-import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringsMaiuculoMinusculo;
+import com.super_bits.modulosSB.SBCore.UtilGeral.UtilCRCJson;
+import com.super_bits.modulosSB.SBCore.UtilGeral.UtilCRCStringsMaiuculoMinusculo;
 import com.super_bits.modulosSB.SBCore.UtilGeral.json.ErroProcessandoJson;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.ErroChamadaController;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.ItfResposta;
@@ -74,7 +74,7 @@ public class PgJsonWebView implements Serializable {
         String viewSessaoID = FacesContext.getCurrentInstance().getApplication().getStateManager().getViewState(FacesContext.getCurrentInstance());
         formulario = MapaDeFormularios.getPaginaBySlug(configuracoesDeUrl.getStringGestao());
         if (formulario == null) {
-            return UtilSBCoreJson.getTextoByJsonObjeect(UtilSBWPJson.JSON_FALHA_GERANDO_JSONVIEW("falha identificando chamada, utilizando tag: " + configuracoesDeUrl.getStringGestao()));
+            return UtilCRCJson.getTextoByJsonObjeect(UtilSBWPJson.JSON_FALHA_GERANDO_JSONVIEW("falha identificando chamada, utilizando tag: " + configuracoesDeUrl.getStringGestao()));
         }
 
         acaoVinculada = formulario.getAcaoGestaoVinculada();
@@ -86,17 +86,17 @@ public class PgJsonWebView implements Serializable {
                 String parametros = configuracoesDeUrl.getCorpo();
                 try {
                     if (!UtilSBWPServletTools.getRequestAtual().getMethod().equals("POST")) {
-                        return UtilSBCoreJson.getTextoByJsonObjeect(UtilSBWPJson.JSON_FALHA_GERANDO_JSONVIEW("Esperado um método post"));
+                        return UtilCRCJson.getTextoByJsonObjeect(UtilSBWPJson.JSON_FALHA_GERANDO_JSONVIEW("Esperado um método post"));
 
                     }
                     ItfResposta resposta = SBCore.getServicoController().getResposta(acao.getEnumAcaoDoSistema(), parametros);
 
                     if (resposta.isSucesso()) {
                         try {
-                            return UtilSBCoreJson.getTextoByJsonObjeect(UtilSBWPJson.getJsonRespostaPadrao(resposta));
+                            return UtilCRCJson.getTextoByJsonObjeect(UtilSBWPJson.getJsonRespostaPadrao(resposta));
                         } catch (ErroProcessandoJson ex) {
                             FacesContext.getCurrentInstance().getExternalContext().setResponseStatus(418);
-                            return UtilSBCoreJson.getTextoByJsonObjeect(UtilSBWPJson.JSON_FALHA_GERANDO_JSONVIEW("ação foi executada, mas houve um erro gerando json de resposta"));
+                            return UtilCRCJson.getTextoByJsonObjeect(UtilSBWPJson.JSON_FALHA_GERANDO_JSONVIEW("ação foi executada, mas houve um erro gerando json de resposta"));
                         }
                     } else {
                         FacesContext.getCurrentInstance().getExternalContext().setResponseStatus(403);
@@ -106,23 +106,23 @@ public class PgJsonWebView implements Serializable {
                                 System.out.println(resposta.getMensagens().get(0).getMenssagem());
                             }
 
-                            return UtilSBCoreJson.getTextoByJsonObjeect(UtilSBWPJson.getJsonRespostaPadrao(resposta));
+                            return UtilCRCJson.getTextoByJsonObjeect(UtilSBWPJson.getJsonRespostaPadrao(resposta));
                         } catch (ErroProcessandoJson ex) {
                             FacesContext.getCurrentInstance().getExternalContext().setResponseStatus(418);
-                            return UtilSBCoreJson.getTextoByJsonObjeect(UtilSBWPJson.JSON_FALHA_GERANDO_JSONVIEW("ação foi executada, mas houve um erro gerando json de resposta"));
+                            return UtilCRCJson.getTextoByJsonObjeect(UtilSBWPJson.JSON_FALHA_GERANDO_JSONVIEW("ação foi executada, mas houve um erro gerando json de resposta"));
                         }
                     }
 
                 } catch (ErroChamadaController ex) {
                     FacesContext.getCurrentInstance().getExternalContext().setResponseStatus(403);
-                    return UtilSBCoreJson.getTextoByJsonObjeect(UtilSBWPJson.JSON_FALHA_GERANDO_JSONVIEW("Erro localizando implementação da ação " + acao.getEnumAcaoDoSistema()));
+                    return UtilCRCJson.getTextoByJsonObjeect(UtilSBWPJson.JSON_FALHA_GERANDO_JSONVIEW("Erro localizando implementação da ação " + acao.getEnumAcaoDoSistema()));
                 }
 
             } else {
                 try {
                     JsonObjectBuilder jsonPadrao = Json.createObjectBuilder();
                     jsonPadrao.add(ATRIBUTO_JSON_SESSAO, getJsonBuilderSessao());
-                    return UtilSBCoreJson.getTextoByJsonObjeect(jsonPadrao.build());
+                    return UtilCRCJson.getTextoByJsonObjeect(jsonPadrao.build());
                 } catch (ErroProcessandoJson ex) {
                     Logger.getLogger(PgJsonWebView.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -134,14 +134,14 @@ public class PgJsonWebView implements Serializable {
 
         if (classeMB != null) {
             try {
-                String expressaoBean = "#{" + UtilSBCoreStringsMaiuculoMinusculo.getPrimeiraLetraMinuscula(classeMB.getSimpleName()) + "}";
+                String expressaoBean = "#{" + UtilCRCStringsMaiuculoMinusculo.getPrimeiraLetraMinuscula(classeMB.getSimpleName()) + "}";
                 ItfB_PaginaSimples paginaDoContexto = (ItfB_PaginaSimples) UtilSBWPServletTools.getObjetoByInstanciadoViewScopedByExpressao(expressaoBean, classeMB);
                 return paginaDoContexto.getJsonPagina();
             } catch (ErroGenericoProcessandoRespostaJson pErro) {
-                return UtilSBCoreJson.getTextoByJsonObjeect(UtilSBWPJson.JSON_FALHA_GERANDO_JSONVIEW("Erro acessando: #{" + classeMB.getSimpleName() + "}\n causa:" + pErro.getMessage()));
+                return UtilCRCJson.getTextoByJsonObjeect(UtilSBWPJson.JSON_FALHA_GERANDO_JSONVIEW("Erro acessando: #{" + classeMB.getSimpleName() + "}\n causa:" + pErro.getMessage()));
 
             }
-            //= (ItfB_PaginaSimples) UtilSBWPServletTools.getBeanByNamed(UtilSBCoreStringsMaiuculoMinusculo.getPrimeiraLetraMinuscula(classeMB.getSimpleName()), classeMB);
+            //= (ItfB_PaginaSimples) UtilSBWPServletTools.getBeanByNamed(UtilCRCStringsMaiuculoMinusculo.getPrimeiraLetraMinuscula(classeMB.getSimpleName()), classeMB);
 
         }
         return "Chamada não Reconhecida";

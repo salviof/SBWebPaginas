@@ -5,7 +5,7 @@
 package com.super_bits.modulosSB.webPaginas.JSFManagedBeans.declarados.Paginas;
 
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
-import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreJson;
+import com.super_bits.modulosSB.SBCore.UtilGeral.UtilCRCJson;
 import com.super_bits.modulosSB.SBCore.UtilGeral.json.ErroProcessandoJson;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.ErroChamadaController;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.ItfResposta;
@@ -58,11 +58,11 @@ public class PgJsonReqController {
             } else {
                 resposta = SBCore.getServicoController().getResposta(pacoteAcaoController.getAcao().getEnumAcaoDoSistema());
             }
-            return UtilSBCoreJson.getTextoByJsonObjeect(UtilSBWPJson.getJsonRespostaPadrao(resposta));
+            return UtilCRCJson.getTextoByJsonObjeect(UtilSBWPJson.getJsonRespostaPadrao(resposta));
         } catch (ErroChamadaController ex) {
-            return UtilSBCoreJson.getTextoByJsonObjeect(UtilSBWPJson.JSON_FALHA_GERANDO_JSONVIEW("Falha localizando ação controller" + ex.getMessage()));
+            return UtilCRCJson.getTextoByJsonObjeect(UtilSBWPJson.JSON_FALHA_GERANDO_JSONVIEW("Falha localizando ação controller" + ex.getMessage()));
         } catch (ErroProcessandoJson ex) {
-            return UtilSBCoreJson.getTextoByJsonObjeect(UtilSBWPJson.JSON_FALHA_GERANDO_JSONVIEW("Falha processando resposta da ação de controller" + ex.getMessage()));
+            return UtilCRCJson.getTextoByJsonObjeect(UtilSBWPJson.JSON_FALHA_GERANDO_JSONVIEW("Falha processando resposta da ação de controller" + ex.getMessage()));
         }
     }
 

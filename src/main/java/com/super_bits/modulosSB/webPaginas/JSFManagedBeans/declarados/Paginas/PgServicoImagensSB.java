@@ -10,8 +10,8 @@ import com.super_bits.modulosSB.Persistencia.dao.ExecucaoComGestaoEntityManager;
 import com.super_bits.modulosSB.Persistencia.dao.UtilSBPersistencia;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UTilSBCoreInputs;
-import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreInputOutputConversoes;
-import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringNomeArquivosEDiretorios;
+import com.super_bits.modulosSB.SBCore.UtilGeral.UtilCRCInputOutputConversoes;
+import com.super_bits.modulosSB.SBCore.UtilGeral.UtilCRCStringNomeArquivosEDiretorios;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ComoEntidadeSimples;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
@@ -38,9 +38,9 @@ public class PgServicoImagensSB implements Serializable {
     private void ajustarTamanho(ComoEntidadeSimples pEntidade, String pUrl, int larguraMaxima, int alturaMaxima) {
         try {
             BufferedImage imagem = UTilSBCoreInputs.getImagemBufferedbyURL(pUrl);
-            String extencao = UtilSBCoreStringNomeArquivosEDiretorios.getExtencaoNomeArquivoSemPonto(pUrl);
+            String extencao = UtilCRCStringNomeArquivosEDiretorios.getExtencaoNomeArquivoSemPonto(pUrl);
             imagem = UtilSBImagemEdicao.reduzirProporcionalAlturaMaxima(imagem, 85, extencao);
-            InputStream inputImagem = UtilSBCoreInputOutputConversoes.BufferedImageToInputStream(imagem, extencao);
+            InputStream inputImagem = UtilCRCInputOutputConversoes.BufferedImageToInputStream(imagem, extencao);
 
             pEntidade.uploadFotoTamanhoPequeno(inputImagem);
         } catch (Throwable t) {
@@ -70,7 +70,7 @@ public class PgServicoImagensSB implements Serializable {
                     }
 
                     InputStream arquivo;
-                    if (!UtilSBCoreStringNomeArquivosEDiretorios.getExtencaoNomeArquivo(event.getFile().getFileName()).equals("png")) {
+                    if (!UtilCRCStringNomeArquivosEDiretorios.getExtencaoNomeArquivo(event.getFile().getFileName()).equals("png")) {
 
                         BufferedImage imagem = UtilSBImagemEdicao.converterPNGParaJpg(ImageIO.read(event.getFile().getInputStream()), Color.white);
                         ByteArrayOutputStream os = new ByteArrayOutputStream();
@@ -100,7 +100,7 @@ public class PgServicoImagensSB implements Serializable {
                     Long id = Long.parseLong(atributo.toString());
                     ComoEntidadeSimples entidadeAtualizada = UtilSBPersistencia.getRegistroByID(entidadeSelecionada.getClass(), id, getEm());
                     InputStream arquivo;
-                    if (!UtilSBCoreStringNomeArquivosEDiretorios.getExtencaoNomeArquivo(event.getFile().getFileName()).equals("png")) {
+                    if (!UtilCRCStringNomeArquivosEDiretorios.getExtencaoNomeArquivo(event.getFile().getFileName()).equals("png")) {
 
                         BufferedImage imagem = UtilSBImagemEdicao.converterPNGParaJpg(ImageIO.read(event.getFile().getInputStream()), Color.white);
                         ByteArrayOutputStream os = new ByteArrayOutputStream();
@@ -132,7 +132,7 @@ public class PgServicoImagensSB implements Serializable {
                     Long id = Long.parseLong(atributo.toString());
                     ComoEntidadeSimples entidadeAtualizada = UtilSBPersistencia.getRegistroByID(entidadeSelecionada.getClass(), id, getEm());
                     InputStream arquivo;
-                    if (!UtilSBCoreStringNomeArquivosEDiretorios.getExtencaoNomeArquivo(event.getFile().getFileName()).equals("png")) {
+                    if (!UtilCRCStringNomeArquivosEDiretorios.getExtencaoNomeArquivo(event.getFile().getFileName()).equals("png")) {
 
                         BufferedImage imagem = UtilSBImagemEdicao.converterPNGParaJpg(ImageIO.read(event.getFile().getInputStream()), Color.white);
                         ByteArrayOutputStream os = new ByteArrayOutputStream();

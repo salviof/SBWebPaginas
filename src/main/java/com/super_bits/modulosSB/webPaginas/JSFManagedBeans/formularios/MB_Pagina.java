@@ -13,8 +13,6 @@ import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import org.coletivojava.fw.api.tratamentoErros.FabErro;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.qualificadoresCDI.sessao.QlSessaoFacesContext;
-import com.super_bits.modulosSB.webPaginas.util.UtilSBWP_JSFTools;
-import javax.faces.context.FacesContext;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ComoAcaoDoSistema;
 
 public abstract class MB_Pagina extends B_Pagina {

@@ -4,7 +4,7 @@
  */
 package com.super_bits.modulosSB.webPaginas.JSFManagedBeans.siteMap;
 
-import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringFiltros;
+import com.super_bits.modulosSB.SBCore.UtilGeral.UtilCRCStringFiltros;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.ItfModuloAcaoSistema;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ComoAcaoController;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ComoAcaoControllerEntidade;
@@ -85,7 +85,7 @@ public class AcaoComLink extends ComoEntidadeGenerica implements ComoAcaoDoSiste
         } else {
             acaoOriginal = pAcaoGestaoLink.getAcaoOriginal();
         }
-        String slugurlAcao = "/ac-" + UtilSBCoreStringFiltros.gerarUrlAmigavel(pAcao.getNomeAcao());
+        String slugurlAcao = "/ac-" + UtilCRCStringFiltros.gerarUrlAmigavel(pAcao.getNomeAcao());
         urlDeAcesso = pAcaoGestaoLink.getUrlParcialGestao() + slugurlAcao + "/.html";
 
         urlParcialGestao = pAcaoGestaoLink.getUrlParcialGestao();

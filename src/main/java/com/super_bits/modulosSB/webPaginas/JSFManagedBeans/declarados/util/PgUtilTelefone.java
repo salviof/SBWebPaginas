@@ -4,8 +4,8 @@
  */
 package com.super_bits.modulosSB.webPaginas.JSFManagedBeans.declarados.util;
 
-import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreAnotacoesDinamicas;
-import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringFiltros;
+import com.super_bits.modulosSB.SBCore.UtilGeral.UtilCRCAnotacoesDinamicas;
+import com.super_bits.modulosSB.SBCore.UtilGeral.UtilCRCStringFiltros;
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -27,7 +27,7 @@ public class PgUtilTelefone implements Serializable {
         if (pNumero == null) {
             return null;
         }
-        String numeroSemCaracteresEspeciais = UtilSBCoreStringFiltros.removeCaracteresEspeciaisEspacosETracos(pNumero);
+        String numeroSemCaracteresEspeciais = UtilCRCStringFiltros.removeCaracteresEspeciaisEspacosETracos(pNumero);
         if (numeroSemCaracteresEspeciais.startsWith("55")) {
             return "+" + numeroSemCaracteresEspeciais;
         }

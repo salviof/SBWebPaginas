@@ -7,8 +7,8 @@ package com.super_bits.modulosSB.webPaginas.JSFBeans.util.validadores;
 import com.google.common.collect.Lists;
 import com.sun.faces.facelets.el.TagValueExpression;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
-import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringValidador;
-import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreValidacao;
+import com.super_bits.modulosSB.SBCore.UtilGeral.UtilCRCStringValidador;
+import com.super_bits.modulosSB.SBCore.UtilGeral.UtilCRCValidacao;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.ItfValidacao;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campoInstanciado.ItfCampoInstanciado;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.validador.ErroValidacao;
@@ -62,7 +62,7 @@ public abstract class ValidadorGenericoAbstrato<T> implements Validator<T> {
 
     protected void validar(ItfCampoInstanciado campoInstanciado, UIComponent pComponent, boolean umNovoRegistro, T value) {
 
-        List<String> validacao = UtilSBCoreValidacao.gerarMensagensValidacao(campoInstanciado, value, umNovoRegistro, !campoInstanciado.validarCampo(value));
+        List<String> validacao = UtilCRCValidacao.gerarMensagensValidacao(campoInstanciado, value, umNovoRegistro, !campoInstanciado.validarCampo(value));
         if (!validacao.isEmpty()) {
             lancarMensagemValidacao(validacao.get(0));
         }
@@ -174,7 +174,7 @@ public abstract class ValidadorGenericoAbstrato<T> implements Validator<T> {
         //  if (pApagarErro) {
         // PrimeFaces.current().executeScript("atualizarAreaByID('" + component.getClientId() + "');");
         //  }
-        if (!UtilSBCoreStringValidador.isNuloOuEmbranco(true)) {
+        if (!UtilCRCStringValidador.isNuloOuEmbranco(true)) {
             //         PrimeFaces.current().ajax().update(idCompoentePai);
             //PrimeFaces.current().scrollTo(idCompoentePai);
 

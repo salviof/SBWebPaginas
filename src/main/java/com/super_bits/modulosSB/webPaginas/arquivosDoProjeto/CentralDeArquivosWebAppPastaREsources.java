@@ -7,7 +7,7 @@ package com.super_bits.modulosSB.webPaginas.arquivosDoProjeto;
 import com.super_bits.modulosSB.Persistencia.util.UtilSBPersistenciaArquivosDeEntidade;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.FabTipoEmpacotamento;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
-import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreOutputs;
+import com.super_bits.modulosSB.SBCore.UtilGeral.UtilCRCOutputs;
 import com.super_bits.modulosSB.SBCore.UtilGeral.stringSubstituicao.MapaSubstituicao;
 import com.super_bits.modulosSB.SBCore.modulos.ManipulaArquivo.CentralDeArquivosAbstrata;
 import com.super_bits.modulosSB.SBCore.modulos.ManipulaArquivo.FabTipoArquivoConhecido;
@@ -247,7 +247,7 @@ public class CentralDeArquivosWebAppPastaREsources extends CentralDeArquivosAbst
     @Override
     public boolean salvarArquivo(ComoEntidadeSimplesSomenteLeitura entidade, byte[] arqivo, String nome, String categoria) {
         String caminhoArquivo = getEndrLocalArquivoItem(entidade, nome, categoria);
-        return UtilSBCoreOutputs.salvarArquivoByte(arqivo, caminhoArquivo);
+        return UtilCRCOutputs.salvarArquivoByte(arqivo, caminhoArquivo);
 
     }
 

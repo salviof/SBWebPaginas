@@ -4,7 +4,7 @@
  */
 package com.super_bits.modulosSB.webPaginas.JSFManagedBeans.declarados.util;
 
-import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreReflexaoObjeto;
+import com.super_bits.modulosSB.SBCore.UtilGeral.UtilCRCReflexaoObjeto;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.permissoes.ItfAcaoEntidade;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.anotacoes.InfoObjetoSB;
 import javax.enterprise.context.RequestScoped;
@@ -19,7 +19,7 @@ import javax.inject.Named;
 public class PgUtilTextos {
 
     public String gerarTextoNenhumEncontrado(ItfAcaoEntidade pAcaoEntidade) {
-        InfoObjetoSB infoObjeto = UtilSBCoreReflexaoObjeto.getInfoClasseObjeto(pAcaoEntidade.getClasseRelacionada());
+        InfoObjetoSB infoObjeto = UtilCRCReflexaoObjeto.getInfoClasseObjeto(pAcaoEntidade.getClasseRelacionada());
         if (infoObjeto.generoFeminino()) {
             return "Nenhuma " + infoObjeto.tags()[0] + "foi encontrada";
         } else {

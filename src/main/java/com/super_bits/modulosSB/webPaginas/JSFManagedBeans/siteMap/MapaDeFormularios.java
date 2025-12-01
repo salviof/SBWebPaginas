@@ -7,7 +7,7 @@ package com.super_bits.modulosSB.webPaginas.JSFManagedBeans.siteMap;
 import com.google.common.collect.Lists;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 import com.super_bits.modulosSB.SBCore.UtilGeral.MapaAcoesSistema;
-import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringFiltros;
+import com.super_bits.modulosSB.SBCore.UtilGeral.UtilCRCStringFiltros;
 import com.super_bits.modulosSB.webPaginas.ConfigGeral.SBWebPaginas;
 import com.super_bits.modulosSB.webPaginas.controller.servlets.servletWebPaginas.EstruturaDeFormulario;
 import java.util.HashMap;
@@ -17,8 +17,6 @@ import org.coletivojava.fw.api.tratamentoErros.FabErro;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ComoAcaoDoSistema;
 
 /**
- *
- *
  *
  *
  * @author desenvolvedor
@@ -81,11 +79,11 @@ public class MapaDeFormularios {
                 estrutura.getNomeCurto(),
                 mapaFormulariosByAcaoGestao.get(estrutura.getAcaoGestaoVinculada().getNomeUnico()));
 
-        mapaFormulariosBySlug.put(UtilSBCoreStringFiltros.gerarUrlAmigavel(estrutura.getAcaoGestaoVinculada().getModulo().getNome() + "_" + estrutura.getAcaoGestaoVinculada().getNomeAcao()),
+        mapaFormulariosBySlug.put(UtilCRCStringFiltros.gerarUrlAmigavel(estrutura.getAcaoGestaoVinculada().getModulo().getNome() + "_" + estrutura.getAcaoGestaoVinculada().getNomeAcao()),
                 mapaFormulariosByAcaoGestao.get(estrutura.getAcaoGestaoVinculada().getNomeUnico()));
 
         estrutura.getTagsPalavraChave().stream().forEach((tag) -> {
-            mapaFormulariosBySlug.put(UtilSBCoreStringFiltros.gerarUrlAmigavel(tag),
+            mapaFormulariosBySlug.put(UtilCRCStringFiltros.gerarUrlAmigavel(tag),
                     mapaFormulariosByAcaoGestao.get(estrutura.getAcaoGestaoVinculada().getNomeUnico()));
         });
 

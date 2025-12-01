@@ -5,9 +5,9 @@
 package com.super_bits.modulosSB.webPaginas.JSFBeans.PrimeFacesBeanModel.dataListLasy;
 
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
-import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreListas;
-import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreListasObjeto;
-import com.super_bits.modulosSB.SBCore.UtilGeral.UtilSBCoreStringValidador;
+import com.super_bits.modulosSB.SBCore.UtilGeral.UtilCRCListas;
+import com.super_bits.modulosSB.SBCore.UtilGeral.UtilCRCListasObjeto;
+import com.super_bits.modulosSB.SBCore.UtilGeral.UtilCRCStringValidador;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ComoEntidadeSimples;
 import com.super_bits.modulosSB.webPaginas.util.UtilSBWPServletTools;
 import java.util.ArrayList;
@@ -80,12 +80,12 @@ public class BP_DataModelLasy<T extends ComoEntidadeSimples> extends LazyDataMod
             }
         }
         String parametro = filters.values().iterator().next().toString().toUpperCase();
-        boolean pesquisaNumerica = UtilSBCoreStringValidador.isContemApenasNumero(parametro);
+        boolean pesquisaNumerica = UtilCRCStringValidador.isContemApenasNumero(parametro);
         Map<String, String[]> parametrosreq = UtilSBWPServletTools.getRequestAtual().getParameterMap();
         long streamStartTime = System.currentTimeMillis();
         if (camposPesquisa != null) {
 
-            //    lista.addAll(UtilSBCoreListasObjeto.filtrarOrdenandoMaisParecidos(listaCompleta, parametro, 15));
+            //    lista.addAll(UtilCRCListasObjeto.filtrarOrdenandoMaisParecidos(listaCompleta, parametro, 15));
             camposPesquisa.stream().forEach(campo
                     -> {
                 lista.addAll(listaCompleta.stream().filter(item
@@ -99,7 +99,7 @@ public class BP_DataModelLasy<T extends ComoEntidadeSimples> extends LazyDataMod
                     || filters.size() == 1 && filters.keySet().iterator().next().equals("globalFilter")) {
 
                 if (!pesquisaNumerica) {
-                    lista.addAll(UtilSBCoreListasObjeto.filtrarOrdenandoMaisParecidos(listaCompleta, parametro, 15));
+                    lista.addAll(UtilCRCListasObjeto.filtrarOrdenandoMaisParecidos(listaCompleta, parametro, 15));
                     //lista.addAll(listaCompleta.stream().filter(item
                     //      -> item.getNome().toUpperCase().contains(parametro)
                     //).collect(Collectors.toList()));
