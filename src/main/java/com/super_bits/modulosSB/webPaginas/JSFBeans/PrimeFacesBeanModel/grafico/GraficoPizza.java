@@ -1,5 +1,6 @@
 package com.super_bits.modulosSB.webPaginas.JSFBeans.PrimeFacesBeanModel.grafico;
 
+import com.super_bits.modulosSB.SBCore.ConfigGeral.CarameloCode;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 import com.super_bits.modulosSB.SBCore.modulos.fabrica.ComoFabricaAcoes;
 import com.super_bits.modulosSB.SBCore.modulos.grafico.ItfDadoGraficoTotal;
@@ -53,6 +54,10 @@ public class GraficoPizza {
 
     }
 
+    protected String buildUrl(ItfDadoGraficoTotal item) {
+        return SBCore.getServicoVisualizacao().getEndrRemotoFormulario(acaoUrl, item.getComoDadoGraficoTotalTipo().getTipo());
+    }
+
     private void buildPizza() {
         ChartData data = new ChartData();
         PieChartDataSet dataSet = new PieChartDataSet();
@@ -66,7 +71,8 @@ public class GraficoPizza {
             labels.add(item.getLabel());
             if (acaoUrl != null) {
                 if (item.isTotalPorTipo()) {
-                    String url = SBCore.getServicoVisualizacao().getEndrRemotoFormulario(acaoUrl, item.getComoDadoGraficoTotalTipo().getTipo());
+
+                    String url = buildUrl(item);
                     mapaUrls.put(indice, url);
                 }
             }
