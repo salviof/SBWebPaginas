@@ -4,6 +4,7 @@
  */
 package com.super_bits.modulosSB.webPaginas.controller.listenners;
 
+import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.qualificadoresCDI.sessao.QlSessaoFacesContext;
 import java.io.IOException;
 import java.security.Principal;
@@ -18,6 +19,7 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ComoSessao;
+import org.coletivojava.fw.api.tratamentoErros.FabErro;
 
 /**
  *
@@ -50,8 +52,11 @@ public class UserPrincipalFilter implements Filter {
                 }
             };
         }
-
-        chain.doFilter(request, res);
+        try {
+            chain.doFilter(request, res);
+        } catch (Throwable t) {
+            SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "Falha: " + t.getMessage() + " processando " + request.getRequestURI(), t);
+        }
     }
 
     @Override

@@ -36,7 +36,7 @@ public enum FabConfigModuloWebAppGenerico implements ItfFabConfigModulo {
                 return "http://localhost:8080";
 
             case NOME_APLICACAO:
-                return "Aplicação não nomeada, criada pelos incríveis cidadãos do coletivo Java";
+                return "Aplicação não nomeada, criada por Desenvolvedores que dominaram o CarameloCode";
 
             case DOMINIO_MASTER:
                 return "localhost";

@@ -45,6 +45,7 @@ import org.primefaces.event.FileUploadEvent;
 import com.super_bits.modulosSB.webPaginas.controller.listenners.ItfDefinicaoUrlHostDeSessao;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ComoSessao;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ComoUsuario;
+import com.super_bits.modulosSB.webPaginas.ConfigGeral.FabConfigModuloWebAppGenerico;
 
 /**
  *
@@ -76,7 +77,9 @@ public class SessaoAtualSBWP extends SessaoOffline implements ComoSessao, Serial
 
     public String getUrlHostDaSessao() {
         if (SBCore.isEmModoDesenvolvimento()) {
-            return "http://localhost:8080";
+            System.out.println(FabConfigModuloWebAppGenerico.URL_DOMINIO_APLICACAO.getCaminhoArquivoVariaveisAmbiente());
+            return FabConfigModuloWebAppGenerico.URL_DOMINIO_APLICACAO.getValorParametroSistema();
+            // return "http://localhost:8080";
         }
         String novourl = definicaoDeUrl.gerarUrlDeAcesso(this);
         if (novourl != null) {

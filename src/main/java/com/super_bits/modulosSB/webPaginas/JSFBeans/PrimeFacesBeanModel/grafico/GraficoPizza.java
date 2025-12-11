@@ -3,6 +3,7 @@ package com.super_bits.modulosSB.webPaginas.JSFBeans.PrimeFacesBeanModel.grafico
 import com.super_bits.modulosSB.SBCore.ConfigGeral.CarameloCode;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 import com.super_bits.modulosSB.SBCore.modulos.fabrica.ComoFabricaAcoes;
+import com.super_bits.modulosSB.SBCore.modulos.grafico.ItemGraficoTotalPorTipo;
 import com.super_bits.modulosSB.SBCore.modulos.grafico.ItfDadoGraficoTotal;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -54,10 +55,6 @@ public class GraficoPizza {
 
     }
 
-    protected String buildUrl(ItfDadoGraficoTotal item) {
-        return SBCore.getServicoVisualizacao().getEndrRemotoFormulario(acaoUrl, item.getComoDadoGraficoTotalTipo().getTipo());
-    }
-
     private void buildPizza() {
         ChartData data = new ChartData();
         PieChartDataSet dataSet = new PieChartDataSet();
@@ -71,9 +68,12 @@ public class GraficoPizza {
             labels.add(item.getLabel());
             if (acaoUrl != null) {
                 if (item.isTotalPorTipo()) {
+                    if (item instanceof ItemGraficoTotalPorTipo) {
 
-                    String url = buildUrl(item);
-                    mapaUrls.put(indice, url);
+                        mapaUrls.put(indice, ((ItemGraficoTotalPorTipo) item).getUrlDetalhes());
+
+                    }
+
                 }
             }
             indice++;
@@ -95,6 +95,18 @@ public class GraficoPizza {
 
     public PieChartModel getGrafico() {
         return grafico;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder nomeGrafico = new StringBuilder();
+        nomeGrafico.append(titulo);
+        try {
+            itensGrafico.stream().map(it -> it.getNome() + it.getValor()).forEach(nomeGrafico::append);
+        } catch (Throwable t) {
+
+        }
+        return String.valueOf(nomeGrafico.toString().hashCode());
     }
 
 }
