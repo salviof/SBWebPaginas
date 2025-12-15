@@ -15,6 +15,7 @@ import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.ItensGenericos
 import com.super_bits.modulosSB.SBCore.modulos.sessao.ControleDeSessaoAbstratoSBCore;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.siteMap.MapaDeFormularios;
 import com.super_bits.modulos.SBAcessosModel.view.FabAcaoPaginasDoSistema;
+import com.super_bits.modulosSB.SBCore.ConfigGeral.CarameloCode;
 import com.super_bits.modulosSB.webPaginas.util.UtilSBWPServletTools;
 import com.super_bits.modulosSB.webPaginas.util.UtilSBWP_JSFTools;
 import java.io.File;
@@ -101,7 +102,7 @@ public class ControleDeSessaoWeb extends ControleDeSessaoAbstratoSBCore implemen
         if (sessaoAtual.isIdentificado()) {
 
             UtilSBWP_JSFTools.executarJavaScript("location.reload();");
-            String pastaTEmporariaStr = SBCore.getCentralDeSessao().getSessaoAtual().getPastaTempDeSessao();
+            String pastaTEmporariaStr = CarameloCode.getServicoSessao().getSessaoAtual().getPastaTempDeSessao();
             Thread exclusaoArquivosTemporarios = new Thread() {
                 public void run() {
                     try {

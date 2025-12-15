@@ -109,4 +109,7 @@ public class GraficoPizza {
         return String.valueOf(nomeGrafico.toString().hashCode());
     }
 
+    public boolean isTemDados() {
+        return !(itensGrafico == null || itensGrafico.isEmpty());
+    }
 }
