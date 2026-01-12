@@ -13,7 +13,7 @@ import java.util.List;
 import jersey.repackaged.com.google.common.collect.Lists;
 import org.coletivojava.fw.api.tratamentoErros.FabErro;
 import org.primefaces.model.DualListModel;
-import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ComoEntidadeSimplesSomenteLeitura;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.entidade.basico.ComoEntidadeSimplesSomenteLeitura;
 
 /**
  *

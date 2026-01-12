@@ -3,8 +3,8 @@ package org.coletivoJava.superBitsFW.webPaginas.constantes.icones;
 import javax.inject.Named;
 import javax.enterprise.context.ApplicationScoped;
 import java.io.Serializable;
-import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.icones.FabIconeFontAwesome;
-import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.icones.ComoIcone;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.entidade.icones.FabIconeFontAwesome;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.entidade.icones.ComoIcone;
 
 @Named
 @ApplicationScoped

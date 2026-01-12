@@ -22,7 +22,7 @@ import javax.inject.Named;
 import com.super_bits.modulosSB.webPaginas.JSFBeans.SBBeanModel.controller.PacoteExecucaoControllerJsonSimples;
 import com.super_bits.modulosSB.webPaginas.util.UtilSBWPJson;
 import javax.annotation.PreDestroy;
-import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ComoSessao;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.entidade.basico.ComoSessao;
 
 @RequestScoped
 @Named

@@ -4,7 +4,7 @@ import com.super_bits.modulosSB.Persistencia.ConfigGeral.CSBNQ;
 import com.super_bits.modulosSB.Persistencia.dao.DaoGenerico;
 import com.super_bits.modulosSB.Persistencia.dao.SBNQ;
 import com.super_bits.modulosSB.SBCore.UtilGeral.ClasseTipada;
-import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ComoEntidadeSimples;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.entidade.basico.ComoEntidadeSimples;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;

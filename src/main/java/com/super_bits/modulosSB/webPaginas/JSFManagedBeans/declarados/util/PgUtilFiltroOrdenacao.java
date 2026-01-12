@@ -7,7 +7,7 @@ package com.super_bits.modulosSB.webPaginas.JSFManagedBeans.declarados.util;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilCRCStringComparador;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.comparacao.FabTipoPesquisaGenerica;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.comparacao.ItemSimilar;
-import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ComoEntidadeSimples;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.entidade.basico.ComoEntidadeSimples;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.interfaces.ItfPaginaAtual;
 import java.util.List;
 import java.util.Locale;

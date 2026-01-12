@@ -73,4 +73,8 @@ public interface ItfConfigWebPagina {
 
     public abstract ItfAcaoFormulario getAcaoPaginaInicial();
 
+    public default String getPacotePaginas() {
+        return "com.super_bits";
+    }
+
 }

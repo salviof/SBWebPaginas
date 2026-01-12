@@ -19,7 +19,7 @@ import com.super_bits.modulosSB.SBCore.modulos.TratamentoDeErros.UtilCRCErros;
 import com.super_bits.modulosSB.webPaginas.TratamentoDeErros.ErroGenericoProcessandoRespostaJson;
 import com.super_bits.modulosSB.webPaginas.util.UtilSBWPJson;
 import com.super_bits.modulosSB.webPaginas.util.UtilSBWP_JSFTools;
-import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ComoSessao;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.entidade.basico.ComoSessao;
 
 /**
  *

@@ -133,7 +133,7 @@
             <description> <![CDATA[ Entidade referente]]></description>
             <name>entidade</name>
             <required>true</required>
-            <type>com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ComoEntidadeSimples</type>
+            <type>com.super_bits.modulosSB.SBCore.modulos.objetos.entidade.basico.ComoEntidadeSimples</type>
         </attribute>
 
         <attribute>
@@ -166,7 +166,7 @@
             <description> <![CDATA[ Entidade referente]]></description>
             <name>entidade</name>
             <required>true</required>
-            <type>com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ComoEntidadeSimples</type>
+            <type>com.super_bits.modulosSB.SBCore.modulos.objetos.entidade.basico.ComoEntidadeSimples</type>
         </attribute>
 
         <attribute>
@@ -201,7 +201,7 @@
             <description> <![CDATA[ Entidade referente]]></description>
             <name>entidade</name>
             <required>true</required>
-            <type>com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ComoEntidadeSimples</type>
+            <type>com.super_bits.modulosSB.SBCore.modulos.objetos.entidade.basico.ComoEntidadeSimples</type>
         </attribute>
         <attribute>
             <description> <![CDATA[ Entidade referente]]></description>
@@ -388,7 +388,7 @@
             <description>O item que será exibido no componente</description>
             <name>itemSimples</name>
             <required>true</required>
-            <type>com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ComoEntidadeSimples</type>
+            <type>com.super_bits.modulosSB.SBCore.modulos.objetos.entidade.basico.ComoEntidadeSimples</type>
         </attribute>
     </tag>
 
@@ -414,7 +414,7 @@
             <description> <![CDATA[ O item que será exibido no componente]]></description>
             <name>itemSelecionado</name>
             <required>true</required>
-            <type>com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ComoEntidadeSimples</type>
+            <type>com.super_bits.modulosSB.SBCore.modulos.objetos.entidade.basico.ComoEntidadeSimples</type>
         </attribute>
         <attribute>
             <description>O item que será exibido no componente</description>

@@ -9,10 +9,10 @@ import com.super_bits.modulosSB.SBCore.modulos.Controller.ErroChamadaController;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.ItfRespostaAcaoDoSistema;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ComoAcaoControllerAutoExecucao;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.acoesAutomatizadas.FabTipoAutoExecucaoAcao;
+import com.super_bits.modulosSB.webPaginas.ConfigGeral.CarameloWebPaginas;
 import com.super_bits.modulosSB.webPaginas.ConfigGeral.ConfiguradorCoreDeProjetoWebWarAbstrato;
 import com.super_bits.modulosSB.webPaginas.ConfigGeral.ItfInicioFimAppWP;
 import com.super_bits.modulosSB.webPaginas.ConfigGeral.SBWebPaginas;
-import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.declarados.Paginas.PgProjetoSBVisaoGeral;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.reflexao.anotacoes.InfoPagina;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.siteMap.MapaDeFormularios;
 import java.util.List;
@@ -24,7 +24,6 @@ import javax.servlet.ServletContextListener;
 import javax.servlet.SessionCookieConfig;
 import javax.servlet.http.HttpSessionListener;
 import org.coletivojava.fw.api.tratamentoErros.FabErro;
-import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ComoAcaoDoSistema;
 
 /*
  *
@@ -36,7 +35,8 @@ public class ContextoWebPaginas implements ServletContextListener {
     public static void buildSisteMap() {
 
         try {
-            List<Class> paginasEncontradas = UtilCRCReflexao.getClassesComEstaAnotacao(InfoPagina.class, "com.super_bits");
+
+            List<Class> paginasEncontradas = UtilCRCReflexao.getClassesComEstaAnotacao(InfoPagina.class, CarameloWebPaginas.getPacotePaginas());
             List<Class> paginasPlugins = UtilCRCReflexao.getClassesComEstaAnotacao(InfoPagina.class, "org.coletivoJava.superBitsFW.webPaginas.plugin");
             paginasPlugins.forEach(paginasEncontradas::add);
             MapaDeFormularios.buildEstrutura(paginasEncontradas);

@@ -3,7 +3,7 @@ package com.super_bits.modulosSB.webPaginas.JSFBeans.SBBeanModel.depreciado;
 import com.super_bits.modulosSB.Persistencia.dao.DaoGenerico;
 import com.super_bits.modulosSB.Persistencia.dao.SBNQ;
 import com.super_bits.modulosSB.Persistencia.dao.UtilSBPersistencia;
-import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ComoEntidadeSimples;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.entidade.basico.ComoEntidadeSimples;
 import com.super_bits.modulosSB.webPaginas.JSFBeans.SBBeanModel.DEPRECIADO.B_Lista;
 import java.io.Serializable;
 import java.util.List;

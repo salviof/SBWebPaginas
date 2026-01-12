@@ -3,7 +3,7 @@ package com.super_bits.modulosSB.webPaginas.JSFBeans.SBBeanModel.chart;
 import com.super_bits.modulosSB.Persistencia.registro.persistidos.EntidadeSimplesORM;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campo.CampoEsperado;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campo.FabTipoAtributoObjeto;
-import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.charts.ComoEntidadeSimpleChart;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.entidade.charts.ComoEntidadeSimpleChart;
 
 public class B_ChartSimples<T> extends EntidadeSimplesORM implements ComoEntidadeSimpleChart {
 

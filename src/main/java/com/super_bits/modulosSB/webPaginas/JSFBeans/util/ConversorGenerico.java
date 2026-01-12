@@ -16,7 +16,7 @@ import org.coletivojava.fw.api.tratamentoErros.FabErro;
 import org.primefaces.component.selectmanymenu.SelectManyMenuRenderer;
 
 import org.super_bits.tags.inputGenerico.InputGenerico;
-import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ComoEntidadeSimplesSomenteLeitura;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.entidade.basico.ComoEntidadeSimplesSomenteLeitura;
 
 @FacesConverter(value = "conversorGenerico")
 public class ConversorGenerico extends ConversorSB {

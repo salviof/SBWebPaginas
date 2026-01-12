@@ -5,7 +5,7 @@
 package com.super_bits.modulosSB.webPaginas.controller.listenners;
 
 import java.io.Serializable;
-import com.super_bits.modulosSB.SBCore.modulos.objetos.registro.Interfaces.basico.ComoSessao;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.entidade.basico.ComoSessao;
 
 /**
  *

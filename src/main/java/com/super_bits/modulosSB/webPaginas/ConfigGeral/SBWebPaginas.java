@@ -36,6 +36,7 @@ public abstract class SBWebPaginas {
     private static boolean parametroEmSubdominio;
     private static ItfAcaoFormulario acaoPaginaInicial;
     private static String caminhoRealJavaWebAppContexto;
+    private static String pacotePaginas;
 
     public static void configurarContexto(ServletContext pContexto) {
         caminhoRealJavaWebAppContexto = pContexto.getRealPath("/");
@@ -49,6 +50,10 @@ public abstract class SBWebPaginas {
 
     public static boolean isAmbienteConfigurado() {
         return configurado;
+    }
+
+    public static String getPacotePaginas() {
+        return pacotePaginas;
     }
 
     public static void configurar(ItfConfigWebPagina config) {
@@ -65,6 +70,7 @@ public abstract class SBWebPaginas {
         System.out.println("Módulo Webpaginas Configurado");
         siteMap = config.mapaSite();
         configurado = true;
+        pacotePaginas = config.getPacotePaginas();
         acaoPaginaInicial = config.getAcaoPaginaInicial();
         URLS_HOSTS_PERMITIDOS = config.getSitesHostsAutorizados();
         ArquivoConfiguracaoDistribuicao distribuicao = SBCore.getArquivoDistribuicao();
