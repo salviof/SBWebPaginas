@@ -7,7 +7,6 @@ package org.super_bits.tags.botao.generico;
 import javax.faces.context.FacesContext;
 import org.primefaces.component.button.Button;
 import org.primefaces.component.button.ButtonRenderer;
-import org.primefaces.util.EscapeUtils;
 import org.primefaces.util.SharedStringBuilder;
 
 /**
