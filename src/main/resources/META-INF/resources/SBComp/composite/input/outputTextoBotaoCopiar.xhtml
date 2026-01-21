@@ -1,0 +1,53 @@
+<ui:component
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:cc="http://java.sun.com/jsf/composite"
+    xmlns:sb="http://superbitsframework/ui"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+    xmlns:pe="http://primefaces.org/ui/extensions"
+    xmlns:p="http://primefaces.org/ui">
+    <!-- INTERFACE -->
+    <cc:interface componentType="inputGenerico"
+                  shortDescription="Exibe um atributo para edição ou visualizção do usuário"
+                  >
+        <cc:attribute name="texto"
+                      required="true"
+                      type="java.lang.String"
+                      default="#{pgUtil.campoNaoImplementado}"
+                      shortDescription="Exibe um atributo de um Objeto para insersão de dados do usuário (Ou Visualização)"
+                      />
+
+
+    </cc:interface>
+    <!-- IMPLEMENTATION -->
+    <cc:implementation>
+
+
+        <h:panelGroup>
+
+
+            <p:panelGrid styleClass="PanelCopiarTexto " columns="2" >
+
+                <h:outputText styleClass="texto-copiavel" value="#{variavel.nomeVariavelAmbiente}"/>
+
+                <h:panelGroup layout="block" >
+
+                    <p:button id="copiarEmail" styleClass="btn-copiar-amigavel" icon="fa fa-copy" href="#" widgetVar="copiarEmailBtn"
+
+                              />
+                    <pe:clipboard trigger="copiarEmail" action="copy"
+                                  text="#{variavel.nomeVariavelAmbiente}"
+                                  widgetVar="copiarEmailAct"
+                                  onsuccess="alert('copiado com sucesso')"
+                                  />
+                </h:panelGroup>
+
+
+            </p:panelGrid>
+
+        </h:panelGroup>
+
+    </cc:implementation>
+
+</ui:component>

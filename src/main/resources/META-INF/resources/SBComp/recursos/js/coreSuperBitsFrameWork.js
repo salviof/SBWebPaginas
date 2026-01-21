@@ -735,4 +735,17 @@ try {
     //  console.log(erroPosicionandoCursor);
 }
 
+function copiarTexto(btn) {
 
+
+    try {
+        var cell = btn.closest('.ui-panelgrid-cell');
+        var texto = cell.previousElementSibling.innerText.trim();
+        if (navigator.clipboard) {
+            navigator.clipboard.writeText(texto);
+
+        }
+    } catch (t) {
+
+    }
+}

@@ -1,0 +1,42 @@
+<ui:component
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:cc="http://java.sun.com/jsf/composite"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:p="http://primefaces.org/ui">
+
+    <cc:interface
+        shortDescription="Exibe texto com botão de copiar">
+        <cc:attribute
+            name="texto"
+            required="true"
+            type="java.lang.String"/>
+    </cc:interface>
+
+    <cc:implementation>
+        <p:panelGrid styleClass="PanelCopiarTexto" columns="2" layout="grid">
+
+
+            <h:outputText
+                styleClass="texto-copiavel"
+                value="#{cc.attrs.texto}" />
+
+            <h:panelGroup layout="block">
+
+                <p:commandButton
+                    process="@this"
+                    action="#{pgUtil.mensagemInfo('Valor copiado: '.concat(cc.attrs.texto))}"
+
+
+                    icon="fa fa-copy"
+                    styleClass="btn-copiar-amigavel"
+                    onclick="copiarTexto(this);"
+                    />
+
+            </h:panelGroup>
+
+        </p:panelGrid>
+
+    </cc:implementation>
+
+</ui:component>

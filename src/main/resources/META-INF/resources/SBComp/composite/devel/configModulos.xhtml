@@ -1,0 +1,44 @@
+<ui:composition
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:cc="http://java.sun.com/jsf/composite"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:pe="http://primefaces.org/ui/extensions"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:SBAcaoNav="http://xmlns.jcp.org/jsf/composite/SBComp/composite/acoesENavegacao"
+    xmlns:CCOutput="http://xmlns.jcp.org/jsf/composite/SBComp/composite/output"
+    xmlns:CCDev="http://xmlns.jcp.org/jsf/composite/SBComp/composite/devel"
+    xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <!-- INTERFACE -->
+    <cc:interface>
+
+
+    </cc:interface>
+    <!-- IMPLEMENTATION -->
+    <cc:implementation>
+
+
+        <h:panelGroup styleClass="Container12 OrganizadorContainer" layout="block">
+
+
+
+
+            <p:tabView >
+
+                <c:forEach items="#{infoWebApp.configuracaoModulos}" var="configuracaoMod" >
+                    <p:tab title="#{configuracaoMod.nomeFabrica}">
+                        <CCDev:configModulo configuracao="#{configuracaoMod}" />
+                    </p:tab>
+
+                </c:forEach>
+
+            </p:tabView>
+            <h:panelGroup styleClass="Container12 OrganizadorContainer" layout="block" >
+
+
+            </h:panelGroup>
+        </h:panelGroup>
+
+    </cc:implementation>
+</ui:composition>

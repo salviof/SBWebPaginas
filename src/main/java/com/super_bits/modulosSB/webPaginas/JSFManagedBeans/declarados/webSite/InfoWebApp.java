@@ -4,7 +4,9 @@
  */
 package com.super_bits.modulosSB.webPaginas.JSFManagedBeans.declarados.webSite;
 
+import com.super_bits.modulosSB.SBCore.ConfigGeral.CarameloCode;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
+import com.super_bits.modulosSB.SBCore.ConfigGeral.arquivosConfiguracao.ConfigModuloDetalhes;
 import com.super_bits.modulosSB.SBCore.modulos.fabrica.ComoFabricaAcoes;
 import com.super_bits.modulosSB.webPaginas.ConfigGeral.SBWebPaginas;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.siteMap.AcaoComLink;
@@ -69,6 +71,11 @@ public class InfoWebApp implements Serializable {
             SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "Erro solicitando link de ação" + pAcao, t);
         }
         return null;
+    }
+
+    public List<ConfigModuloDetalhes> getConfiguracaoModulos() {
+        List<ConfigModuloDetalhes> configuracoes = CarameloCode.getServicoConfigModulo().getDetalhesModulosAtivos();
+        return configuracoes;
     }
 
     public String getUrlDaAcao(ComoAcaoDoSistema pAcao) {

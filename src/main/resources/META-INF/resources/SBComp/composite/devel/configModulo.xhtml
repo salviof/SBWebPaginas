@@ -1,0 +1,47 @@
+<ui:composition
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:cc="http://java.sun.com/jsf/composite"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:pe="http://primefaces.org/ui/extensions"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:SBAcaoNav="http://xmlns.jcp.org/jsf/composite/SBComp/composite/acoesENavegacao"
+    xmlns:CCOutput="http://xmlns.jcp.org/jsf/composite/SBComp/composite/output"
+    xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <!-- INTERFACE -->
+
+    <cc:interface>
+        <cc:attribute name="configuracao"
+                      type="com.super_bits.modulosSB.SBCore.ConfigGeral.arquivosConfiguracao.ConfigModuloDetalhes"
+                      />
+
+    </cc:interface>
+    <!-- IMPLEMENTATION -->
+    <cc:implementation>
+
+
+        <p:fieldset >
+            <CCOutput:textoBotaoCopiar texto="Fab#{cc.attrs.configuracao.nomeFabrica}" />
+            <CCOutput:textoBotaoCopiar texto="#{cc.attrs.configuracao.caminhoArquivoVariaveis}" />
+
+            <h:panelGroup styleClass="Container12" layout="block">
+                <c:forEach items="#{cc.attrs.configuracao.variaveisAmbiente}" var="variavel" >
+                    <p:panel >
+                        <p:panelGrid styleClass="PanelGrid-20-80" columns="2" >
+                            <h:outputText styleClass="FontAdamantiumBold" value="Nome"/>
+                            <CCOutput:textoBotaoCopiar texto="#{variavel.nomeVariavelAmbiente}" />
+                            <h:outputText styleClass="FontAdamantiumBold" value="Enum "/><CCOutput:textoBotaoCopiar texto="#{variavel.nomeEmum}" />
+                            <h:outputText styleClass="FontAdamantiumBold" value="Legado "/><CCOutput:textoBotaoCopiar texto="#{variavel.nomeLegado}" />
+                            <h:outputText styleClass="FontAdamantiumBold" value="Valor Padrão "/><CCOutput:textoBotaoCopiar texto="#{variavel.valorPadrao}"/>
+                            <h:outputText styleClass="FontAdamantiumBold" value="Tipo declaracao "/><CCOutput:textoBotaoCopiar texto="#{variavel.tipoDeclaracao}"/>
+                            <h:outputText styleClass="FontAdamantiumBold" value="Valor "/><CCOutput:textoBotaoCopiar texto="#{variavel.demonstracaoValor}"/>
+                        </p:panelGrid>
+                    </p:panel>
+                </c:forEach>
+            </h:panelGroup>
+        </p:fieldset>
+
+
+    </cc:implementation>
+</ui:composition>
