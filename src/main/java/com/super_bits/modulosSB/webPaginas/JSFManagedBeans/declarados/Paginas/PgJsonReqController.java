@@ -26,7 +26,7 @@ import com.super_bits.modulosSB.SBCore.modulos.objetos.entidade.basico.ComoSessa
 
 @RequestScoped
 @Named
-@InfoAcaoPaginaDoSistema(acao = FabAcaoPaginasDoSistema.PAGINA_NATIVA_JSON_WEBVIEW_MB_GESTAO)
+@InfoAcaoPaginaDoSistema(acao = FabAcaoPaginasDoSistema.PAGINA_NATIVA_JSON_WEBCONTROLLER_MB_GESTAO)
 @InfoPagina(tags = "pgJsonController", nomeCurto = "jsonController")
 public class PgJsonReqController {
 

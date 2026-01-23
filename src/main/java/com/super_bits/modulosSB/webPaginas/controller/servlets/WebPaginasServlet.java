@@ -55,6 +55,8 @@ public class WebPaginasServlet extends HttpServlet implements Serializable {
     public static final String NOME_BEAN_PACOTE_CONTROLLER_REQ = "PacoteAcaoControlerReq";
     public static final String NOME_PARAMETRO_REFERENCIA = "REF";
 
+    private static boolean mapConstruido = false;
+
     public final static Map<String, AcaoComLink> MAPA_ACOESMANAGED_BEAN = new HashMap<>();
 
     public final void buildMapaUrlsModoJunut(Class<? extends ItfSiteMapa> mapa) {
@@ -77,14 +79,17 @@ public class WebPaginasServlet extends HttpServlet implements Serializable {
         }
     }
 
-    private void buildMapaUrls() {
+    private synchronized void buildMapaUrls() {
 
         siteMapa.getFabricaMenu();
-
+        if (mapConstruido) {
+            return;
+        }
         try {
             for (EstruturaDeFormulario pagina : MapaDeFormularios.getTodasEstruturas()) {
                 if (pagina.getAcaoGestaoVinculada() != null) {
-                    if (MAPA_ACOESMANAGED_BEAN.get(pagina.getAcaoGestaoVinculada().getNomeUnico()) != null) {
+
+                    if (MAPA_ACOESMANAGED_BEAN.containsKey(pagina.getAcaoGestaoVinculada().getNomeUnico())) {
                         throw new UnsupportedOperationException("Uma ação de gestão só pode ser vinculada a uma única Página, no entando a pagina"
                                 + pagina.getAcaoGestaoVinculada() + "está vinculada a "
                                 + MAPA_ACOESMANAGED_BEAN.get(pagina.getAcaoGestaoVinculada().getNomeUnico()).getUrlParcialGestao() + " e a"
@@ -95,12 +100,10 @@ public class WebPaginasServlet extends HttpServlet implements Serializable {
                 }
 
             }
-
+            mapConstruido = true;
         } catch (Throwable t) {
             SBCore.RelatarErro(FabErro.PARA_TUDO, "Erro Criando Ações MB", t);
         }
-
-        System.out.println("Contexto Inicializado");
 
     }
 

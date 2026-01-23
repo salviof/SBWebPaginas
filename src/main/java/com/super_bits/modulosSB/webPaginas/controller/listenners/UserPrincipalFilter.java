@@ -19,6 +19,7 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.entidade.basico.ComoSessao;
+import javax.management.RuntimeOperationsException;
 import org.coletivojava.fw.api.tratamentoErros.FabErro;
 
 /**
@@ -54,6 +55,8 @@ public class UserPrincipalFilter implements Filter {
         }
         try {
             chain.doFilter(request, res);
+        } catch (Exception rt) {
+            SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "Falha: " + rt.getMessage() + " processando " + request.getRequestURI(), rt);
         } catch (Throwable t) {
             SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "Falha: " + t.getMessage() + " processando " + request.getRequestURI(), t);
         }

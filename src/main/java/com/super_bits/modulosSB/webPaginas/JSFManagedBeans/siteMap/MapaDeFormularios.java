@@ -64,7 +64,23 @@ public class MapaDeFormularios {
             return;
         }
         EstruturaDeFormulario estrutura = new EstruturaDeFormulario(pClasseFormulario);
+
+        if (mapaFormulariosByAcaoGestao.containsKey(estrutura.getAcaoGestaoVinculada().getNomeUnico())) {
+            Class classeJaEncontrada = mapaClasseByAcaoGestao.get(estrutura.getAcaoGestaoVinculada().getNomeUnico());
+            throw new UnsupportedOperationException(estrutura.getAcaoGestaoVinculada().getNomeUnico() + " já foi encontrado em " + classeJaEncontrada.getName() + " Conflita com " + pClasseFormulario.getName());
+        }
+        if (mapaFormulariosByAcaoGestao.containsKey(estrutura.getAcaoGestaoVinculada().getNomeUnico())) {
+            EstruturaDeFormulario estruturaJaEncontrada = mapaFormulariosByAcaoGestao.get(estrutura);
+            throw new UnsupportedOperationException(estrutura.getAcaoGestaoVinculada().getNomeUnico() + " já foi adicionada, a fabrica foi adicionada duas vezes?");
+        }
+        ;
+        if (mapaFormulariosByAcaoGestao.values().stream().filter(estPesq -> estPesq.getAcaoGestaoVinculada().getNomeUnico().equals(estrutura.getAcaoGestaoVinculada().getNomeUnico())).findFirst().isPresent()) {
+            EstruturaDeFormulario estruturaDuplicada = mapaFormulariosByAcaoGestao.values().stream().filter(estPesq -> estPesq.getAcaoGestaoVinculada().getNomeUnico().equals(estrutura.getAcaoGestaoVinculada().getNomeUnico())).findFirst().get();
+            throw new UnsupportedOperationException(estrutura.getAcaoGestaoVinculada().getNomeUnico() + " já foi adicionada, a fabrica foi adicionada duas vezes?");
+        }
+
         mapaClasseByAcaoGestao.put(estrutura.getAcaoGestaoVinculada().getNomeUnico(), pClasseFormulario);
+
         mapaFormulariosByAcaoGestao.put(estrutura.getAcaoGestaoVinculada().getNomeUnico(), estrutura);
 
         mapaFormulariosByXhtmlPrincipal.put(
