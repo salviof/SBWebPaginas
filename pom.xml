@@ -190,12 +190,13 @@
             <version>2.3</version>
         </dependency>
         <!-- FIM DEPENDENCIAS DO JETTY -->
-        <!-- WEBSERVICE  -->
+        <!-- WEBSERVICE
         <dependency>
             <groupId>com.sun.xml.ws</groupId>
             <artifactId>jaxws-rt</artifactId>
             <version>2.2.5</version>
         </dependency>
+        -->
 
         <!-- Prime Faces -->
         <dependency>

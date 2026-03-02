@@ -207,7 +207,7 @@ public class WebPaginasServlet extends HttpServlet implements Serializable {
                             recurso = MapaAcoesSistema.getAcaoDoSistemaByNomeUnico(acaoGestVinculada.getNomeUnico()).getComoFormulario().getXhtml();
                             if (pagina.getAcaoGestaoVinculada().isPrecisaPermissao()) {
 
-                                if (!SBCore.getCentralPermissao().isAcaoPermitidaUsuario(usuario, pagina.getAcaoGestaoVinculada())) {
+                                if (!SBCore.getServicoPermissao().isAcaoPermitidaUsuario(usuario, pagina.getAcaoGestaoVinculada())) {
                                     carregarFormulario(UtilSBWP_JSFTools.FORMULARIO_ACESSO_NEGADO, requisicao, resposta);
                                     return;
                                 }

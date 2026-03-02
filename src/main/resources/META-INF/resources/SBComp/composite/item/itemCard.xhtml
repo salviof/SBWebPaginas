@@ -16,6 +16,7 @@
     </cc:interface>
     <!-- IMPLEMENTATION -->
     <cc:implementation>
+
         <h:panelGroup layout="block"
                       styleClass="status-container" rendered="#{servicoVisualizacaoComponente.visualizarEstiloStatus(valor)}"
                       >
@@ -25,8 +26,17 @@
             </h:panelGroup>
         </h:panelGroup>
 
+
+        <h:panelGroup layout="block"
+                      rendered="#{servicoVisualizacaoComponente.visualizarEstiloIcone(valor)}"
+                      styleClass="Container12 OrganizadorContainer"
+                      >
+            <h:panelGroup styleClass="#{servicoVisualizacaoComponente.getIcone(valor)} Fs40" style="color: #{servicoVisualizacaoComponente.getCor(valor)}"  />
+        </h:panelGroup>
+
+
         <h:panelGroup rendered="#{servicoVisualizacaoComponente.visualizarEstiloNomeImagem(valor)}" >
-            com imagem servicoVisualizacaoComponente.getImagemURl(valor)
+            #{servicoVisualizacaoComponente.getImagemURl(valor)}
         </h:panelGroup>
 
         <h:panelGroup rendered="#{servicoVisualizacaoComponente.visualizarEstiloNomeSimples(valor)}" styleClass="statusText Fs16">

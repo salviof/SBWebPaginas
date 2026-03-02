@@ -1444,15 +1444,17 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
             return false;
         }
         Method metodo = UtilSBController.getMetodoByAcaoController(getAcaoSelecionada().getComoController());
+
+        if (metodo == null) {
+            throw new UnsupportedOperationException("Nenhum método foi encontrado vinculado a ação" + getAcaoSelecionada().getNomeUnico());
+        }
+
         if (metodo.getParameterCount() > 0) {
             if (getBeanSelecionado() == null) {
                 return false;
             }
         }
 
-        if (metodo == null) {
-            throw new UnsupportedOperationException("Nenhum método foi encontrado vinculado a ação" + getAcaoSelecionada().getNomeUnico());
-        }
         if (metodo.getParameterCount() > 1) {
             return false;
 

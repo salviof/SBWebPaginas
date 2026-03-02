@@ -139,7 +139,7 @@ public class ServletArquivosDeEntidade extends ServletArquivosSBWPGenerico imple
                     default: {
                         EntityManager em = UtilSBPersistencia.getEMPadraoNovo();
                         try {
-                            prDadosREquisicaoArquivoEntidade.setEntidade((ComoEntidadeSimples) UtilSBPersistencia.getRegistroByNomeSlug(classeEntidade, pSlugObjeto, UtilSBPersistencia.getNovoEM()));
+                            prDadosREquisicaoArquivoEntidade.setEntidade((ComoEntidadeSimples) UtilSBPersistencia.getRegistroByNomeSlug(classeEntidade, itemEnviado, UtilSBPersistencia.getNovoEM()));
                             if (prDadosREquisicaoArquivoEntidade.getEntidade() != null) {
                                 if (prDadosREquisicaoArquivoEntidade.getEntidade().getId() != null && prDadosREquisicaoArquivoEntidade.getEntidade().getId() > 0) {
                                     String nomeobj = prDadosREquisicaoArquivoEntidade.getEntidade().getNome();

@@ -6,12 +6,12 @@ package com.super_bits.modulosSB.webPaginas.visualizacao;
 
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campo.FabTipoAtributoObjeto;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.entidade.basico.ComoEntidadeSimples;
-import com.super_bits.modulosSB.webPaginas.util.UtilSBWPServletTools;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.entidade.basico.ComoStatus;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.entidade.basico.ComoTemIcone;
 import javax.el.ELContext;
 import javax.el.ExpressionFactory;
 import javax.el.ValueExpression;
 import javax.enterprise.context.RequestScoped;
-import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 
@@ -100,7 +100,7 @@ public class ServicoVisualizacaoComponente {
     }
 
     public boolean visualizarEstiloStatus(ComoEntidadeSimples pValor) {
-        return (isItemPossuiIcone(pValor) && isItemPossuiCor(pValor)) && !pValor.isTemImagemPequenaAdicionada();
+        return (isItemPossuiIcone(pValor) && isItemPossuiCor(pValor)) && !pValor.isTemImagemPequenaAdicionada() && pValor instanceof ComoStatus;
     }
 
     public boolean visualizarEstiloNomeImagem(ComoEntidadeSimples pValor) {
@@ -109,5 +109,19 @@ public class ServicoVisualizacaoComponente {
 
     public boolean visualizarEstiloNomeSimples(ComoEntidadeSimples pValor) {
         return !(isItemPossuiIcone(pValor) && isItemPossuiCor(pValor)) && !pValor.isTemImagemPequenaAdicionada();
+    }
+
+    public boolean visualizarEstiloIcone(ComoEntidadeSimples pValor) {
+        if (visualizarEstiloNomeImagem(pValor)) {
+            return false;
+        }
+        if (visualizarEstiloStatus(pValor)) {
+            return false;
+        }
+        if (pValor instanceof ComoTemIcone && pValor.isTemCampoAnotado(FabTipoAtributoObjeto.COR)) {
+            return true;
+        }
+        return false;
+
     }
 }

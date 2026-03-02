@@ -6,6 +6,7 @@ package com.super_bits.modulosSB.webPaginas.controller.servlets.servletWebPagina
 
 import com.super_bits.modulosSB.SBCore.modulos.view.telas.ItfEstruturaDeFormuario;
 import com.google.common.collect.Lists;
+import com.super_bits.modulos.SBAcessosModel.model.acoes.AcaoDoSistema;
 import com.super_bits.modulos.SBAcessosModel.model.acoes.acaoDeEntidade.AcaoGestaoEntidade;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 
@@ -13,6 +14,7 @@ import com.super_bits.modulosSB.SBCore.UtilGeral.UtilCRCReflexao;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilCRCReflexaoObjeto;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilCRCStringBuscaTrecho;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilCRCStringFiltros;
+import com.super_bits.modulosSB.SBCore.UtilGeral.UtilCRCStringSlugs;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilCRCStringValidador;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.ItfParametroRequisicao;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.ItfParametroRequisicaoInstanciado;
@@ -36,6 +38,9 @@ import java.util.List;
 import java.util.Map;
 import org.coletivojava.fw.api.tratamentoErros.FabErro;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ComoAcaoDoSistema;
+import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.permissoes.ItfAcaoFormulario;
+import com.super_bits.modulosSB.SBCore.modulos.fabrica.ComoFabrica;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.entidade.basico.ComoEntidadeSimples;
 
 /**
  *
@@ -164,6 +169,21 @@ public class EstruturaDeFormulario implements ItfEstruturaDeFormuario {
     public String gerarUrlPorParametro(List<ItfParametroRequisicaoInstanciado> parametros, ComoAcaoDoSistema pAcao, String tagUsada) {
         String url = gerarBaseURL(tagUsada);
 
+        Map<String, List<Object>> mapaParametrosEnviados = new HashMap<>();
+        if (pAcao instanceof ItfAcaoFormulario) {
+            if (pAcao.getComoFormulario().isTemValorEstaticoParametro()) {
+                AcaoDoSistema acao = (AcaoDoSistema) pAcao;
+                for (ComoFabrica fabrica : acao.getValorEstaticoParametro()) {
+                    ComoEntidadeSimples valorEstatico = (ComoEntidadeSimples) fabrica.getRegistro();
+                    List<Class> classesHerenca = UtilCRCReflexaoObjeto.getClassesEntidadeComHeranca(MapaObjetosProjetoAtual.getClasseDoObjetoByNome(valorEstatico.getClass().getSimpleName()));
+                    for (Class classe : classesHerenca) {
+                        mapaParametrosEnviados.put(classe.getSimpleName(), new ArrayList<>());
+                        mapaParametrosEnviados.get(classe.getSimpleName()).add(valorEstatico);
+                    }
+                }
+            }
+        }
+
         for (ParametroURL pr : parametroOrdenado) {
             boolean enviado = false;
             for (ItfParametroRequisicaoInstanciado prEnviado : parametros) {
@@ -173,8 +193,17 @@ public class EstruturaDeFormulario implements ItfEstruturaDeFormuario {
                     enviado = true;
                 }
             }
+
             if (!enviado) {
+                if (!pr.getTipoEntidade().equals(Void.class)) {
+                    if (mapaParametrosEnviados.containsKey(pr.getTipoEntidade().getSimpleName())) {
+                        ComoEntidadeSimples entidade = ((ComoEntidadeSimples) mapaParametrosEnviados.get(pr.getTipoEntidade().getSimpleName()).get(0));
+                        url += "/" + UtilCRCStringSlugs.gerarSlugSimples(entidade.getNome()).replace("-", "_") + "-" + entidade.getId();
+                        continue;
+                    }
+                }
                 url += "/";
+
             }
 
         }
@@ -219,7 +248,22 @@ public class EstruturaDeFormulario implements ItfEstruturaDeFormuario {
 
                 }
             }
+        }
 
+        if (pAcao instanceof ItfAcaoFormulario) {
+            if (pAcao.getComoFormulario().isTemValorEstaticoParametro()) {
+                AcaoDoSistema acao = (AcaoDoSistema) pAcao;
+                for (ComoFabrica fabrica : acao.getValorEstaticoParametro()) {
+                    if (fabrica != null) {
+                        ComoEntidadeSimples valorEstatico = (ComoEntidadeSimples) fabrica.getRegistro();
+                        List<Class> classesHerenca = UtilCRCReflexaoObjeto.getClassesEntidadeComHeranca(MapaObjetosProjetoAtual.getClasseDoObjetoByNome(valorEstatico.getClass().getSimpleName()));
+                        for (Class classe : classesHerenca) {
+                            mapaParametrosEnviados.put(classe.getSimpleName(), new ArrayList<>());
+                            mapaParametrosEnviados.get(classe.getSimpleName()).add(valorEstatico);
+                        }
+                    }
+                }
+            }
         }
 
         List<ItfParametroRequisicaoInstanciado> novosParametros = new ArrayList<>();
