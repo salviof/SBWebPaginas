@@ -1,0 +1,119 @@
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+
+    xmlns:p="http://primefaces.org/ui"
+
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <ui:decorate template="#{layout.xhtmlJsfCaminhoRelativo}">
+        <ui:define name="input">
+
+
+
+            <p:inputText
+
+                value="#{cc.attrs.contato.getCampoInstanciadoByNomeOuAnotacao('celular').valor}"
+                styleClass="mask-telefone-br-valor invisivel "
+                converter="conversorTelefoneGenerico"
+
+                />
+
+            <p:inputMask
+                id="telefonebrInput"
+                mask="+55 (99) 99999-9999"
+                styleClass="mask-telefone-br TexAlCenter campoResponsivo campoResponsivoTelefone #{componente.classeCSS}"
+                widgetVar="#{registro.nomeClasseOrigemAtributo()}_#{registro.nomeCamponaClasse}"
+                autoClear="false"
+                converterMessage="Impossível converter o valor de em um tipo válido "
+                style="width:100%"
+
+                >
+                <f:passThroughAttribute name="caminhoCampo" value="#{registro.nomeCompostoIdentificador}" />
+                <f:passThroughAttribute name="dominio" value="#{registro.nomeClasseOrigemAtributo}" />
+                <f:passThroughAttribute name="campoInstanciado" value="#{registro}" />
+                <p:tooltip
+                    for="@parent"
+                    value="Para números internacionais, digite +, para voltar ao modo brasileiro, digite 55"
+                    position="top"
+                    />
+            </p:inputMask>
+
+
+
+            <p:inputMask
+                mask="#{mascara}"
+
+                class="campoResponsivo campoResponsivoTelefone  TexAlCenter #{componente.classeCSS}"
+                disabled="#{desabilitarEdicao}"
+                rendered="#{!desabilitarEdicao}"
+                required="#{obrigatorio}"
+                value="#{valor}"
+                slotChar="_"
+                requiredMessage="O campo #{label} não foi informado! "
+                autoClear="false"
+                validator="org.super_bits.view.validadores.generico"
+                onfocus="#{metodoJSOnfocus}"
+                converterMessage="Impossível converter o valor de #{label} em um tipo válido "
+                >
+
+
+
+                <f:passThroughAttribute name="caminhoCampo" value="#{registro.nomeCompostoIdentificador}" />
+                <f:passThroughAttribute name="dominio" value="#{registro.nomeClasseOrigemAtributo}" />
+                <f:passThroughAttribute name="campoInstanciado" value="#{registro}" />
+                <p:clientValidator  />
+
+                <c:if test="#{registro.temValidacaoRegex}">
+                    <f:validateRegex pattern="#{regex}" />
+                </c:if>
+
+
+
+                <c:if test="#{atualizarGrupoOnChange}" >
+                    <p:ajax
+                        rendered="#{atualizarGrupoOnChange}"
+                        event="valueChange"
+                        onstart="bloquearArea('#{pgUtil.getNomeIdPFieldSetPai(component)}')"
+                        oncomplete="desbloquearArea('#{pgUtil.getNomeIdPFieldSetPai(component)}')"
+                        process="#{pgUtil.getIdInputSBComponentePai(component)}"
+                        update="#{pgUtil.getNomeIdPFieldSetPai(component)}"/>
+                </c:if>
+
+                <c:if test="#{atualizarFormOnChange}" >
+                    <p:ajax
+                        rendered="#{atualizarFormOnChange}"
+                        event="valueChange"
+                        update="@form"/>
+                </c:if>
+
+                <c:if test="#{possuiMetodoOnChange}" >
+                    <p:ajax rendered="#{possuiMetodoOnChange}"
+                            global="true"
+                            event="valueChange"
+                            listener="#{prMetodo}"/>
+                </c:if>
+
+
+                <c:if test="#{possuiIDOnChange}" >
+                    <p:ajax
+                        rendered="#{possuiIDOnChange}"
+                        event="valueChange"
+                        update="#{idAtualizarOnChange}"
+                        onstart="bloquearArea('#{idAtualizarOnChange}')"
+                        oncomplete="desbloquearArea('#{idAtualizarOnChange}')"
+                        />
+
+                </c:if>
+
+
+
+
+            </p:inputMask>
+            <p:outputLabel value="#{valor}" rendered="#{desabilitarEdicao}"/>
+
+        </ui:define>
+    </ui:decorate>
+</ui:composition>
