@@ -18,6 +18,7 @@ public enum FabConfigModuloWebAppGenerico implements ItfFabConfigModulo {
     URL_DOMINIO_APLICACAO,
     NOME_APLICACAO,
     PREFIXO_PATHURL,
+    TEMA,
     @Deprecated
     DOMINIO_MASTER,
     @Deprecated
@@ -52,6 +53,9 @@ public enum FabConfigModuloWebAppGenerico implements ItfFabConfigModulo {
                 return "";
             case MAUTIC_SERVER:
                 return "";
+            case TEMA:
+
+                return "saga";
 
             default:
                 throw new AssertionError(this.name());

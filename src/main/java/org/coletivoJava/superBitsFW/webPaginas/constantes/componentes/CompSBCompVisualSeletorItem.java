@@ -6,8 +6,8 @@ import java.io.Serializable;
 import com.super_bits.modulosSB.SBCore.modulos.view.fabricasCompVisual.componentes.FabCompVisualSeletorItem;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 import org.coletivojava.fw.api.tratamentoErros.FabErro;
-import org.coletivojava.fw.api.objetoNativo.view.componente.FamiliaComponente;
 import com.super_bits.modulosSB.SBCore.modulos.view.fabricasCompVisual.ComoComponenteVisualSB;
+import org.coletivojava.fw.api.objetoNativo.view.componente.FamiliaComponente;
 
 @Named
 @ApplicationScoped

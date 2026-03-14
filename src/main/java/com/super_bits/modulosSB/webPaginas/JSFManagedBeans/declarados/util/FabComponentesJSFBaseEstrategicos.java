@@ -4,11 +4,6 @@
  */
 package com.super_bits.modulosSB.webPaginas.JSFManagedBeans.declarados.util;
 
-import com.sun.faces.taglib.html_basic.PanelGroupTag;
-import javax.faces.component.html.HtmlPanelGroup;
-
-import org.primefaces.component.fieldset.FieldsetRenderer;
-
 /**
  *
  * @author desenvolvedor
@@ -17,6 +12,6 @@ public enum FabComponentesJSFBaseEstrategicos {
 
     P_FIELD_SET,
     H_PANEL_GROUP,
-    H_PANEL_GROUP_INPUTSB,;
+    H_PANEL_GROUP_INPUTSB,
 
 }

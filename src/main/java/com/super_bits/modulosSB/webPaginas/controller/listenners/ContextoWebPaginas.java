@@ -11,6 +11,7 @@ import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ComoA
 import com.super_bits.modulosSB.SBCore.modulos.Controller.acoesAutomatizadas.FabTipoAutoExecucaoAcao;
 import com.super_bits.modulosSB.webPaginas.ConfigGeral.CarameloWebPaginas;
 import com.super_bits.modulosSB.webPaginas.ConfigGeral.ConfiguradorCoreDeProjetoWebWarAbstrato;
+import com.super_bits.modulosSB.webPaginas.ConfigGeral.FabConfigModuloWebAppGenerico;
 import com.super_bits.modulosSB.webPaginas.ConfigGeral.ItfInicioFimAppWP;
 import com.super_bits.modulosSB.webPaginas.ConfigGeral.SBWebPaginas;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.reflexao.anotacoes.InfoPagina;
@@ -76,6 +77,11 @@ public class ContextoWebPaginas implements ServletContextListener {
             //   String webDir = this.getClass().getClassLoader().getResource("com/company/project/mywebdir").toExternalForm();
 
             inicio.inicio();
+            String tema = FabConfigModuloWebAppGenerico.TEMA.getValorParametroSistema();
+            if (tema == null) {
+                tema = FabConfigModuloWebAppGenerico.TEMA.getValorPadrao();
+            }
+            sce.getServletContext().setInitParameter("primefaces.THEME", tema);
 
             ServletContext context = sce.getServletContext();
             if (SBCore.isEmModoProducao()) {
