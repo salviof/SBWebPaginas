@@ -24,6 +24,7 @@ import org.coletivojava.fw.api.tratamentoErros.FabErro;
 import org.junit.Test;
 import testesFW.TesteJunit;
 import br.org.caramelo.web.testesFW.webApp.testes.UtilSBDevelGeradorCodigoWeb;
+import com.super_bits.modulosSB.SBCore.modulos.view.fabricasCompVisual.componentes.FabCompVIsualInputsLayout;
 
 /**
  *
@@ -64,6 +65,7 @@ public class UtilSBDevelGeradorCodigoWebTest extends TesteJunit {
             UtilSBDevelGeradorCodigoWeb.criarClassesDeComponentes(FabCompVisualSeletorItens.class, true);
             UtilSBDevelGeradorCodigoWeb.criarClassesDeComponentes(FabCompVisualSeletorItem.class, true);
             UtilSBDevelGeradorCodigoWeb.criarClassesDeComponentes(FabCompVisualInputs.class, true);
+            UtilSBDevelGeradorCodigoWeb.criarClassesDeComponentes(FabCompVIsualInputsLayout.class, true);
             UtilSBDevelGeradorCodigoWeb.criarClassesDeComponentes(FabCompVisualGrupoCampo.class, true);
             UtilSBDevelGeradorCodigoWeb.criarClassesDeComponentes(FabCompVisualGruposCampo.class, true);
             UtilSBDevelGeradorCodigoWeb.criarClassesDeComponentes(FabCompVisualFormularioDeAcao.class, true);

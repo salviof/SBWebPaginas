@@ -18,6 +18,9 @@ public class LayoutInputCampo {
     private final ComoComponenteVisualSB superior = FabCompVIsualInputsLayout.LABEL_SUPERIOR.getRegistro();
     private final ComoComponenteVisualSB semLabel = FabCompVIsualInputsLayout.INPUTSEM_LABEL.getRegistro();
     private final ComoComponenteVisualSB automatico = FabCompVIsualInputsLayout.AUTOMATICO.getRegistro();
+    private final ComoComponenteVisualSB debugCampo = FabCompVIsualInputsLayout.DEBUG_CAMPO.getRegistro();
+
+    ///UPP
 
     public ComoComponenteVisualSB getResumido() {
         return resumido;
@@ -37,6 +40,10 @@ public class LayoutInputCampo {
 
     public ComoComponenteVisualSB getSemLabel() {
         return semLabel;
+    }
+
+    public ComoComponenteVisualSB getDebugCampo() {
+        return debugCampo;
     }
 
 }

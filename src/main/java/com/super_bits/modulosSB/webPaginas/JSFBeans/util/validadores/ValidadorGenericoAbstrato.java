@@ -164,6 +164,7 @@ public abstract class ValidadorGenericoAbstrato<T> implements Validator<T> {
 
     protected void lancarMensagemValidacao(String pMmensagem) throws ValidatorException {
         FacesMessage mensagemErro = new FacesMessage();
+
         mensagemErro.setSummary(pMmensagem);
         mensagemErro.setSeverity(FacesMessage.SEVERITY_ERROR);
         // PgUtil paninaUtil = new PgUtil();

@@ -1,7 +1,6 @@
 package com.super_bits.modulosSB.webPaginas.JSFBeans.util;
 
 import com.sun.faces.facelets.el.TagValueExpression;
-import com.sun.faces.renderkit.html_basic.MenuRenderer;
 import com.super_bits.modulosSB.Persistencia.dao.UtilSBPersistencia;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campoInstanciado.ItfCampoInstanciado;
@@ -13,7 +12,6 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.FacesConverter;
 import javax.persistence.EntityManager;
 import org.coletivojava.fw.api.tratamentoErros.FabErro;
-import org.primefaces.component.selectmanymenu.SelectManyMenuRenderer;
 
 import org.super_bits.tags.inputGenerico.InputGenerico;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.entidade.basico.ComoEntidadeSimplesSomenteLeitura;
