@@ -33,6 +33,7 @@ import org.coletivojava.fw.utilCoreBase.UtilCRCComunicacao;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.entidade.basico.ComoGrupoUsuario;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.entidade.basico.ComoSessao;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.entidade.basico.ComoUsuario;
+import com.super_bits.modulosSB.SBCore.modulos.view.menu.ComoMenusDeSessao;
 
 /**
  *
@@ -129,8 +130,9 @@ public class ControleDeSessaoWeb extends ControleDeSessaoAbstratoSBCore implemen
         }
         SBCore.getCentralPermissao().configuraPermissoes();
         ComoGrupoUsuario grupoUsuarioLogado = sessaoAtual.getUsuario().getGrupo();
+        ComoMenusDeSessao menu = SBCore.getServicoPermissao().definirMenu(grupoUsuarioLogado);
 
-        ((SessaoAtualSBWP) sessaoAtual).setMenusDaSessao(SBCore.getCentralPermissao().definirMenu(grupoUsuarioLogado));
+        ((SessaoAtualSBWP) sessaoAtual).setMenusDaSessao(menu);
 
     }
 
