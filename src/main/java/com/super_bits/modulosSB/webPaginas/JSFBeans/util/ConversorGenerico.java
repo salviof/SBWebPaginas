@@ -122,10 +122,10 @@ public class ConversorGenerico extends ConversorSB {
                 ComoEntidadeSimplesSomenteLeitura item = (ComoEntidadeSimplesSomenteLeitura) value;
                 String valorEmString = item.toString();
                 value.toString();
-                if (item.getId() != 0) {
+                if (item.getId() != null && item.getId() != 0) {
                     this.addAtributoEmComponente(component, valorEmString, item);
 
-                    if (item.getId() != 0) {
+                    if (item.getId() != null && item.getId() != 0) {
                         // System.out.println(valorEmString);
                         return valorEmString;
                     }

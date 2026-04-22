@@ -4,10 +4,14 @@
  */
 package com.super_bits.modulosSB.webPaginas.visualizacao;
 
+import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campo.FabTipoAtributoObjeto;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.entidade.basico.ComoEntidadeSimples;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.entidade.basico.ComoStatus;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.entidade.basico.ComoTemIcone;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import javax.el.ELContext;
 import javax.el.ExpressionFactory;
 import javax.el.ValueExpression;
@@ -22,6 +26,67 @@ import javax.inject.Named;
 @Named
 @RequestScoped
 public class ServicoVisualizacaoComponente {
+
+    private static Map<ComoEntidadeSimples, TIPO_VISUALIZACAO> MAPA_ENTIDADES = new HashMap<>();
+
+    enum TIPO_VISUALIZACAO {
+        APENAS_NOME,
+        IMAGEM,
+        ICONE,
+        ICONE_COLORIDO,
+        ICONE_COLORIDO_NOME,
+
+    }
+
+    public synchronized TIPO_VISUALIZACAO getTipoVisualizacao(ComoEntidadeSimples pItem) {
+        if (MAPA_ENTIDADES.containsKey(pItem)) {
+            return MAPA_ENTIDADES.get(pItem);
+        }
+
+        if (!(isItemPossuiIcone(pItem) && isItemPossuiCor(pItem)) && pItem.isTemImagemPequenaAdicionada()) {
+            if (pItem.getImgPequena() != null) {
+
+                MAPA_ENTIDADES.put(pItem, TIPO_VISUALIZACAO.IMAGEM);
+                return MAPA_ENTIDADES.get(pItem);
+            }
+        }
+
+        if (pItem instanceof ComoTemIcone && pItem.isTemCampoAnotado(FabTipoAtributoObjeto.COR) && pItem instanceof ComoStatus) {
+            if (!(((ComoTemIcone) pItem).getIcone() != null)) {
+                if (!((ComoTemIcone) pItem).getIcone().isEmpty()) {
+
+                    MAPA_ENTIDADES.put(pItem, TIPO_VISUALIZACAO.ICONE_COLORIDO_NOME);
+                    return MAPA_ENTIDADES.get(pItem);
+
+                }
+            }
+        }
+
+        if (pItem instanceof ComoTemIcone && pItem.isTemCampoAnotado(FabTipoAtributoObjeto.COR)) {
+            if (!(((ComoTemIcone) pItem).getIcone() != null)) {
+                if (!((ComoTemIcone) pItem).getIcone().isEmpty()) {
+
+                    MAPA_ENTIDADES.put(pItem, TIPO_VISUALIZACAO.ICONE_COLORIDO);
+                    return MAPA_ENTIDADES.get(pItem);
+
+                }
+            }
+        }
+
+        if (pItem instanceof ComoTemIcone) {
+            if (!(((ComoTemIcone) pItem).getIcone() != null)) {
+                if (!((ComoTemIcone) pItem).getIcone().isEmpty()) {
+
+                    MAPA_ENTIDADES.put(pItem, TIPO_VISUALIZACAO.ICONE);
+                    return MAPA_ENTIDADES.get(pItem);
+                }
+            }
+        }
+
+        MAPA_ENTIDADES.put(pItem, TIPO_VISUALIZACAO.APENAS_NOME);
+        return MAPA_ENTIDADES.get(pItem);
+
+    }
 
     public String getVisualizacaoCampo(ComoEntidadeSimples pVisualizacao) {
         FacesContext contexto = FacesContext.getCurrentInstance();
@@ -88,11 +153,19 @@ public class ServicoVisualizacaoComponente {
     }
 
     public String getEntidadeSimplesNome(ComoEntidadeSimples pValor) {
-        return (String) pValor.getCampoInstanciadoByAnotacao(FabTipoAtributoObjeto.NOME).getValorTextoFormatado();
+        String conteudo = (String) pValor.getCampoInstanciadoByAnotacao(FabTipoAtributoObjeto.NOME).getValorTextoFormatado();
+        if (conteudo == null) {
+            return pValor.getNome();
+        }
+        return conteudo;
     }
 
     public boolean isItemPossuiImagemPequena(ComoEntidadeSimples pItem) {
-        return pItem.isTemCampoAnotado(FabTipoAtributoObjeto.IMG_PEQUENA);
+
+        if (pItem.getImgPequena() == null) {
+            return false;
+        }
+        return pItem.isTemImagemPequenaAdicionada();
     }
 
     public boolean isItemPossuiCor(ComoEntidadeSimples pItem) {
@@ -100,28 +173,19 @@ public class ServicoVisualizacaoComponente {
     }
 
     public boolean visualizarEstiloStatus(ComoEntidadeSimples pValor) {
-        return (isItemPossuiIcone(pValor) && isItemPossuiCor(pValor)) && !pValor.isTemImagemPequenaAdicionada() && pValor instanceof ComoStatus;
+        return getTipoVisualizacao(pValor).equals(TIPO_VISUALIZACAO.ICONE_COLORIDO_NOME);
     }
 
     public boolean visualizarEstiloNomeImagem(ComoEntidadeSimples pValor) {
-        return !(isItemPossuiIcone(pValor) && isItemPossuiCor(pValor)) && pValor.isTemImagemPequenaAdicionada();
+        return getTipoVisualizacao(pValor).equals(TIPO_VISUALIZACAO.IMAGEM);
     }
 
     public boolean visualizarEstiloNomeSimples(ComoEntidadeSimples pValor) {
-        return !(isItemPossuiIcone(pValor) && isItemPossuiCor(pValor)) && !pValor.isTemImagemPequenaAdicionada();
+        return getTipoVisualizacao(pValor).equals(TIPO_VISUALIZACAO.APENAS_NOME);
     }
 
     public boolean visualizarEstiloIcone(ComoEntidadeSimples pValor) {
-        if (visualizarEstiloNomeImagem(pValor)) {
-            return false;
-        }
-        if (visualizarEstiloStatus(pValor)) {
-            return false;
-        }
-        if (pValor instanceof ComoTemIcone && pValor.isTemCampoAnotado(FabTipoAtributoObjeto.COR)) {
-            return true;
-        }
-        return false;
+        return getTipoVisualizacao(pValor).equals(TIPO_VISUALIZACAO.ICONE);
 
     }
 }

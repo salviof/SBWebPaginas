@@ -97,6 +97,7 @@ public class ControleDeSessaoWeb extends ControleDeSessaoAbstratoSBCore implemen
 
     @Override
     public void efetuarLogIn() {
+
         logarEmailESenha(usuarioLogar, senhaLogar);
         UtilSBWP_JSFTools.atualizaPorId("infoLoginSB");
         if (sessaoAtual.isIdentificado()) {

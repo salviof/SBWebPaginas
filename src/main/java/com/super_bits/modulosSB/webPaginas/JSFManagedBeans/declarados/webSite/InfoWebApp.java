@@ -31,6 +31,12 @@ import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ComoA
 @Named
 public class InfoWebApp implements Serializable {
 
+    private final String versao = "042026";
+
+    public String getVersao() {
+        return versao;
+    }
+
     /**
      *
      * @param pAcao

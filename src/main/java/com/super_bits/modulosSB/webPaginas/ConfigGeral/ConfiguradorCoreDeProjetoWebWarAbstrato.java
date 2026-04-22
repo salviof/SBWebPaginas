@@ -4,6 +4,8 @@
  */
 package com.super_bits.modulosSB.webPaginas.ConfigGeral;
 
+import com.super_bits.modulos.SBAcessosModel.fabricas.FabAcaoProjetoSB;
+import com.super_bits.modulos.SBAcessosModel.view.FabAcaoPaginasDoSistema;
 import com.super_bits.modulosSB.Persistencia.centralOrigemDados.CentralAtributosSBPersistencia;
 import com.super_bits.modulosSB.Persistencia.registro.persistidos.modulos.CEP.CentraLocalizacaoSBPersistenciaPadrao;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.ConfiguradorCoreAbstrato;
@@ -17,6 +19,7 @@ import com.super_bits.modulosSB.SBCore.modulos.Controller.ServicoControllerExecu
 import com.super_bits.modulosSB.SBCore.modulos.Mensagens.CentramMensagemProgramadorMsgStop;
 import com.super_bits.modulosSB.SBCore.modulos.TratamentoDeErros.InfoErroSBCoreDeveloperSopMessagem;
 import com.super_bits.modulosSB.SBCore.modulos.TratamentoDeErros.InfoErroSBCoreFW;
+import com.super_bits.modulosSB.SBCore.modulos.admin.CentralAdministrativaPadrao;
 import com.super_bits.modulosSB.SBCore.modulos.logeventos.CentralLogEventosArqTextoGenerica;
 import com.super_bits.modulosSB.webPaginas.arquivosDoProjeto.CentralDeArquivosWebAppServidorSB;
 import com.super_bits.modulosSB.webPaginas.centralAtributo.CentralAtributosWebApp;
@@ -83,6 +86,7 @@ public abstract class ConfiguradorCoreDeProjetoWebWarAbstrato extends Configurad
         pConfiguracao.setCentralDeLocalizacao(CentraLocalizacaoSBPersistenciaPadrao.class);
         pConfiguracao.setTipoProjeto(FabTipoProjeto.WEB_APP);
         pConfiguracao.setServicoController(ServicoControllerExecucaoLocal.class);
+        pConfiguracao.setCentralAdmin(new CentralAdministrativaPadrao(FabAcaoPaginasDoSistema.PAGINA_NATIVA_HOME_MB_PADRAO, FabAcaoProjetoSB.PROJETO_MB_GERENCIAR));
         switch (pConfiguracao.getEstadoApp()) {
             case DESENVOLVIMENTO:
                 pConfiguracao.setCentralMEnsagens(CentramMensagemProgramadorMsgStop.class);

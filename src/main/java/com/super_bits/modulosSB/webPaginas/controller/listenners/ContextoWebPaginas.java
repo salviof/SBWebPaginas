@@ -36,10 +36,14 @@ public class ContextoWebPaginas implements ServletContextListener {
     public static void buildSisteMap() {
 
         try {
+            String pacotePaginas = CarameloWebPaginas.getPacotePaginas();
+            List<Class> paginasEncontradas = UtilCRCReflexao.getClassesComEstaAnotacao(InfoPagina.class, pacotePaginas);
 
-            List<Class> paginasEncontradas = UtilCRCReflexao.getClassesComEstaAnotacao(InfoPagina.class, CarameloWebPaginas.getPacotePaginas());
             List<Class> paginasPlugins = UtilCRCReflexao.getClassesComEstaAnotacao(InfoPagina.class, "org.coletivoJava.superBitsFW.webPaginas.plugin");
+            List<Class> paginasWebApp = UtilCRCReflexao.getClassesComEstaAnotacao(InfoPagina.class, "com.super_bits.modulosSB.webPaginas.JSFManagedBeans.declarados.Paginas");
             paginasPlugins.forEach(paginasEncontradas::add);
+            paginasWebApp.forEach(paginasEncontradas::add);
+
             MapaDeFormularios.buildEstrutura(paginasEncontradas);
 
         } catch (Throwable t) {

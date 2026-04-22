@@ -763,7 +763,7 @@ public abstract class MB_paginaCadastroEntidades<T extends ComoEntidadeSimples> 
                         novaConsulta.addCondicaoPositivo(bean.getNomeCampo(FabTipoAtributoObjeto.REG_ATIVO_INATIVO));
 
                     }
-                    setEntidadesListadas(novaConsulta.resultadoRegistros());
+                    setEntidadesListadas(novaConsulta.gerarResultados());
                     UtilCRCListasObjeto.ordernarPorCampoReverso(getEntidadesListadas(), "id");
 
                 } catch (Throwable t) {
