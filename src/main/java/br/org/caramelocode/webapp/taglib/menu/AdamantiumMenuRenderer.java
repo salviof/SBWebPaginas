@@ -19,9 +19,12 @@ import org.primefaces.model.menu.MenuItem;
 import org.primefaces.model.menu.Separator;
 import org.primefaces.model.menu.Submenu;
 import org.primefaces.util.ComponentTraversalUtils;
-import org.primefaces.util.ComponentUtils;
 
 public class AdamantiumMenuRenderer extends BaseMenuRenderer {
+
+    public AdamantiumMenuRenderer() {
+        System.out.println("up");
+    }
 
     @Override
     protected void encodeMarkup(FacesContext context, AbstractMenu abstractMenu) throws IOException {
