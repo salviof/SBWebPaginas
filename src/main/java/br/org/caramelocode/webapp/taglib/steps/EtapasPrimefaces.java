@@ -24,12 +24,13 @@ import org.primefaces.util.ComponentTraversalUtils;
 
 /**
  *
+ * (Corrige bug steps sem link) <br>
  * facesconfig.xml:
  * <render-kit>
  * <renderer>
  * <component-family>org.primefaces.component</component-family>
  * <renderer-type>org.primefaces.component.StepsRenderer</renderer-type>
- * <renderer-class>org.super_bits.tags.steps.EtapasPrimefaces</renderer-class>
+ * <renderer-class>br.org.caramelocode.webapp.taglib.steps.EtapasPrimOefaces</renderer-class>
  * </renderer>
  * </render-kit>
  *
