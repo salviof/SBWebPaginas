@@ -16,6 +16,7 @@ import javax.inject.Named;
 import org.coletivojava.fw.api.tratamentoErros.FabErro;
 import org.primefaces.event.SelectEvent;
 import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ItfDialogo;
+import java.util.List;
 
 /**
  *
@@ -54,7 +55,8 @@ public class PgUtilComunicacao implements Serializable {
                 throw new UnsupportedOperationException("Defina o id do tipo de resposta");
             }
             ItfDialogo cm = SBCore.getServicoComunicacao().getComnunicacaoRegistrada(codigoComunicacao);
-            ItfRespostaComunicacao resposta = cm.getRepostasPossiveis().stream()
+            List<ItfRespostaComunicacao> respostas = cm.getRepostasPossiveis();
+            ItfRespostaComunicacao resposta = respostas.stream()
                     .filter(resp -> resp.getTipoResposta().getId() == Long.valueOf(idTipoResposta))
                     .findFirst().get();
             SBCore.getServicoComunicacao().responderComunicacao(cm.getCodigoSelo(), resposta);

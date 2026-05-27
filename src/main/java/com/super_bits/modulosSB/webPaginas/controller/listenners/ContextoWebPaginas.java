@@ -2,6 +2,7 @@ package com.super_bits.modulosSB.webPaginas.controller.listenners;
 
 import br.org.coletivojava.fw.utils.agendador.UtilSBAgendadorTarefas;
 import com.super_bits.modulos.SBAcessosModel.controller.UtilSBControllerAcessosModel;
+import com.super_bits.modulos.SBAcessosModel.model.ConfiguracaoDePermissao;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 import com.super_bits.modulosSB.SBCore.UtilGeral.MapaAcoesSistema;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilCRCReflexao;
@@ -36,6 +37,7 @@ public class ContextoWebPaginas implements ServletContextListener {
     public static void buildSisteMap() {
 
         try {
+
             String pacotePaginas = CarameloWebPaginas.getPacotePaginas();
             List<Class> paginasEncontradas = UtilCRCReflexao.getClassesComEstaAnotacao(InfoPagina.class, pacotePaginas);
 

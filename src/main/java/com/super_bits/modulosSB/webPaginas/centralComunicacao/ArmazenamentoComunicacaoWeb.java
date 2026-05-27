@@ -13,11 +13,16 @@ import com.super_bits.modulosSB.webPaginas.util.UtilSBWP_JSFTools;
  */
 public class ArmazenamentoComunicacaoWeb extends ArmazenamentoComunicacaoTransient {
 
+    public ArmazenamentoComunicacaoWeb() {
+        super();
+    }
+
     @Override
     public boolean removerDialogoByCodigoSelo(String pCodigoSelo) {
         if (!super.removerDialogoByCodigoSelo(pCodigoSelo)) {
             return false;
         }
+
         UtilSBWP_JSFTools.atualizaPorId("painelMenuUsuario");
         return true;
     }

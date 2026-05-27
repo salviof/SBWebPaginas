@@ -104,7 +104,7 @@ public class PgAcessoViaTokenDinamico extends MB_paginaCadastroEntidades<TokenAc
             String emailUsuario = tokenDinamico.getEmail();
             if (emailUsuario != null) {
                 ConsultaDinamicaDeEntidade consultaUsuario = new ConsultaDinamicaDeEntidade(UsuarioSB.class, getEMPagina());
-                consultaUsuario.addcondicaoCampoIgualA("email", tokenDinamico.getEmail());
+                consultaUsuario.addcondicaoCampoIgualA("email", emailUsuario);
                 List<UsuarioSB> usuarios = consultaUsuario.resultadoRegistros();
 
                 if (!usuarios.isEmpty()) {

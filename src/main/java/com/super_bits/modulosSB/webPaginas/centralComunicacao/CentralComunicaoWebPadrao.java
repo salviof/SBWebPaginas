@@ -28,10 +28,10 @@ public class CentralComunicaoWebPadrao extends CentralComunicaoAbstrato implemen
 
     private final List<ItfDialogo> comunicacoesAtivas = new ArrayList<>();
     private final List<ItfDialogo> comunicacoesHistorico = new ArrayList<>();
-    private final ArmazenamentoComunicacaoWeb aramazenamento;
+    protected ComoArmazenamentoComunicacao armazenamento;
 
     public CentralComunicaoWebPadrao() {
-        aramazenamento = new ArmazenamentoComunicacaoWeb();
+
     }
 
     @Override
@@ -55,7 +55,10 @@ public class CentralComunicaoWebPadrao extends CentralComunicaoAbstrato implemen
 
     @Override
     public ComoArmazenamentoComunicacao getArmazenamento() {
-        return aramazenamento;
+        if (armazenamento == null) {
+            armazenamento = new ArmazenamentoComunicacaoWeb();
+        }
+        return armazenamento;
     }
 
     @Override

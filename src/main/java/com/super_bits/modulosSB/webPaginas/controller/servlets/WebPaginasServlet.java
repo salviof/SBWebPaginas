@@ -75,6 +75,9 @@ public class WebPaginasServlet extends HttpServlet implements Serializable {
                 if (sitMapEncontado == null) {
                     sitMapEncontado = UtilCRCReflexao.getClasseQueEstendeIsto(MB_SiteMapa.class, "br.org.carameloCode.erp");
                 }
+                if (sitMapEncontado == null) {
+                    sitMapEncontado = UtilCRCReflexao.getClasseQueEstendeIsto(MB_SiteMapa.class, "br.org.carameloCode.projetos");
+                }
                 buildMapaUrlsModoJunut(sitMapEncontado);
             }
         } catch (Throwable t) {

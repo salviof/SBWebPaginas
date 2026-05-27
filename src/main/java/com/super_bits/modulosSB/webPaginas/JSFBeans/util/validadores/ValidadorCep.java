@@ -28,10 +28,11 @@ public class ValidadorCep implements Validator<String> {
     @Override
     public void validate(FacesContext fc, UIComponent uic, String pCep) throws ValidatorException {
         ItfCampoInstanciado campoInstanciado = UtilSBWP_JSFTools.getInputGenericoDoComponente(uic).getRegistro();
-//        SBCore.getServicoLocalizacao().getImplementacaoPadraoApiCep().
-//UtilCRCCEP.cepExiste(pCep);
+        //        SBCore.getServicoLocalizacao().getImplementacaoPadraoApiCep().
+        //UtilCRCCEP.cepExiste(pCep);
         if (UtilCRCStringValidador.isNuloOuEmbranco(pCep)) {
-            return;
+            throw new ValidatorException(UtilSBWPMensagensJSF.criarMensagemJSF(FacesMessage.SEVERITY_ERROR, "Informe o CEP"));
+
         }
         if (!pCep.replace("-", "").matches("\\d{8}")) {
             throw new ValidatorException(UtilSBWPMensagensJSF.criarMensagemJSF(FacesMessage.SEVERITY_WARN, "Cep inválido"));
@@ -40,7 +41,7 @@ public class ValidadorCep implements Validator<String> {
             if (campoInstanciado != null) {
                 CampoInstanciadoGenerico cp = (CampoInstanciadoGenerico) campoInstanciado;
 
-                if (campoInstanciado.isObrigatorio() || UtilCRCStringValidador.isNAO_NuloNemBranco(pCep)) {
+                if (campoInstanciado.isObrigatorio() || !UtilCRCStringValidador.isNuloOuEmbranco(pCep)) {
                     if (campoInstanciado.getComoCampoLocalizacao().isCepEncontradoObrigatorio()) {
                         throw new ValidatorException(UtilSBWPMensagensJSF.criarMensagemJSF(FacesMessage.SEVERITY_ERROR, "O cep não foi encontrado"));
                     }
