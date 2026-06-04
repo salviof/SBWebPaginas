@@ -18,8 +18,8 @@ public class ArmazenamentoComunicacaoWeb extends ArmazenamentoComunicacaoTransie
     }
 
     @Override
-    public boolean removerDialogoByCodigoSelo(String pCodigoSelo) {
-        if (!super.removerDialogoByCodigoSelo(pCodigoSelo)) {
+    public boolean removerDialogoAtivo(String pCodigoSelo) {
+        if (!super.removerDialogoAtivo(pCodigoSelo)) {
             return false;
         }
 

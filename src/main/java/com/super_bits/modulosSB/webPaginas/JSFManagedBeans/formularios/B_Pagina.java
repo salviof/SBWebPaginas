@@ -1349,7 +1349,7 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
     @Override
     public void adicionarCodigoCoversa(String pCodigoConversa) {
         try {
-            ItfDialogo comunicacao = SBCore.getServicoComunicacao().getComnunicacaoRegistrada(pCodigoConversa);
+            ItfDialogo comunicacao = SBCore.getServicoComunicacao().getArmazenamento().getDialogoAtivoByCodigoSelo(pCodigoConversa);
             if (comunicacao == null) {
                 throw new UnsupportedOperationException("Impossível responder ao pedido de resposta solicitado, o codigodeComunicação não foi encontrado");
             }
@@ -1366,7 +1366,7 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
     @Override
     public ItfDialogo getComunincacaoAguardandoResposta() {
 
-        return SBCore.getServicoComunicacao().getComnunicacaoRegistrada(codigoComunicacaoAguardandoRespostaAtual);
+        return SBCore.getServicoComunicacao().getArmazenamento().getDialogoAtivoByCodigoSelo(codigoComunicacaoAguardandoRespostaAtual);
 
     }
 

@@ -7,6 +7,7 @@ package com.super_bits.modulosSB.webPaginas.centralComunicacao;
 
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 import com.super_bits.modulosSB.SBCore.modulos.comunicacao.CentralComunicaoAbstrato;
+import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ERPTipoCanalComunicacao;
 
 import com.super_bits.modulosSB.SBCore.modulos.comunicacao.FabTipoComunicacao;
 import com.super_bits.modulosSB.SBCore.modulos.comunicacao.FabTipoRespostaComunicacao;
@@ -16,6 +17,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ItfTipoCanalComunicacao;
 import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ItfDialogo;
+import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ItffabricaCanalComunicacao;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.entidade.basico.ComoUsuario;
 import com.super_bits.modulosSB.SBCore.modulos.servicosCore.ComoArmazenamentoComunicacao;
 import com.super_bits.modulosSB.SBCore.modulos.servicosCore.ComoServicoComunicacao;
@@ -63,6 +65,21 @@ public class CentralComunicaoWebPadrao extends CentralComunicaoAbstrato implemen
 
     @Override
     public String getTokenDispositivoNotificacao(ComoUsuario pUsuario) {
+        return null;
+    }
+
+    @Override
+    public ItffabricaCanalComunicacao getCanalPadrao() {
+        return ERPTipoCanalComunicacao.INTRANET_MENU;
+    }
+
+    @Override
+    public boolean notificarViaMenu(ItfDialogo pDialogo) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public boolean notificarViaBloqueioTEla(ItfDialogo pDialogo) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 

@@ -5,6 +5,7 @@
 package com.super_bits.modulosSB.webPaginas.JSFBeans.modal;
 
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
+import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ERPTipoCanalComunicacao;
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
@@ -32,7 +33,7 @@ public class PgModalREspostaComunicacao extends PgModalRespostaAbstrato {
             if (getRespostaSelecionada() == null) {
                 throw new UnsupportedOperationException("A resposta não foi configurada");
             }
-            SBCore.getServicoComunicacao().responderComunicacao(getComunicacao().getCodigoSelo(), getRespostaSelecionada());
+            SBCore.getServicoComunicacao().responderComunicacao(getComunincacaoAguardandoResposta().getCodigoSelo(), getRespostaSelecionada(), ERPTipoCanalComunicacao.INTRANET_MENU);
 
             PrimeFaces.current().dialog().closeDynamic(getRespostaSelecionada());
         } catch (Throwable t) {

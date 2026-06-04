@@ -22,6 +22,12 @@ import javax.inject.Named;
 import org.coletivojava.fw.api.tratamentoErros.FabErro;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.entidade.basico.ComoGrupoUsuario;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ComoAcaoDoSistema;
+import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ItfDialogo;
+import java.util.HashMap;
+import java.util.Map;
+import javax.faces.push.Push;
+import javax.faces.push.PushContext;
+import javax.inject.Inject;
 
 /**
  *
@@ -31,10 +37,26 @@ import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ComoA
 @Named
 public class InfoWebApp implements Serializable {
 
+    @Inject
+    @Push(channel = "usuario")
+    private PushContext pushContext;
+
     private final String versao = "042026";
 
     public String getVersao() {
         return versao;
+    }
+
+    public boolean publicar(ItfDialogo pDialogo) {
+
+        Map<String, Object> mensagem = new HashMap<>();
+        mensagem.put("tipo", "executarJS");
+        mensagem.put("script", "alert('PushExecutado para " + pDialogo.getDestinatario().getUsuario().getNome() + "')");
+        mensagem.put("timestamp", System.currentTimeMillis());
+
+        // Envia só para quem está no canal + userId (o JSF filtra pelo segundo parâmetro)
+        return !pushContext.send(mensagem, pDialogo.getDestinatario().getUsuario().getEmail()).isEmpty();
+
     }
 
     /**

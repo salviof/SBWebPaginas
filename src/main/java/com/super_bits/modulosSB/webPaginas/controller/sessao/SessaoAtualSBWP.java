@@ -8,6 +8,7 @@ import com.super_bits.modulosSB.SBCore.modulos.Controller.qualificadoresCDI.sess
 import com.super_bits.editorImagem.util.UtilSBImagemEdicao;
 import com.super_bits.modulos.SBAcessosModel.model.UsuarioSB;
 import com.super_bits.modulosSB.Persistencia.dao.UtilSBPersistencia;
+import com.super_bits.modulosSB.SBCore.ConfigGeral.CarameloCode;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilCRCStringNomeArquivosEDiretorios;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.ItfModuloAcaoSistema;
@@ -76,7 +77,7 @@ public class SessaoAtualSBWP extends SessaoOffline implements ComoSessao, Serial
     }
 
     public String getUrlHostDaSessao() {
-        if (SBCore.isEmModoDesenvolvimento()) {
+        if (CarameloCode.isEmModoDesenvolvimento()) {
             System.out.println(FabConfigModuloWebAppGenerico.URL_DOMINIO_APLICACAO.getCaminhoArquivoVariaveisAmbiente());
             return FabConfigModuloWebAppGenerico.URL_DOMINIO_APLICACAO.getValorParametroSistema();
             // return "http://localhost:8080";

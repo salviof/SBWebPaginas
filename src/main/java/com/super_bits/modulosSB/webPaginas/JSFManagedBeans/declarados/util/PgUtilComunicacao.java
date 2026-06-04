@@ -6,6 +6,7 @@ package com.super_bits.modulosSB.webPaginas.JSFManagedBeans.declarados.util;
 
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ComunicacaoAcaoSistema;
+import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ERPTipoCanalComunicacao;
 import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ItfRespostaComunicacao;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.interfaces.ItfPaginaAtual;
 import com.super_bits.modulosSB.webPaginas.util.UtilSBWP_JSFTools;
@@ -54,12 +55,12 @@ public class PgUtilComunicacao implements Serializable {
             if (idTipoResposta == null) {
                 throw new UnsupportedOperationException("Defina o id do tipo de resposta");
             }
-            ItfDialogo cm = SBCore.getServicoComunicacao().getComnunicacaoRegistrada(codigoComunicacao);
+            ItfDialogo cm = SBCore.getServicoComunicacao().getArmazenamento().getDialogoAtivoByCodigoSelo(codigoComunicacao);
             List<ItfRespostaComunicacao> respostas = cm.getRepostasPossiveis();
             ItfRespostaComunicacao resposta = respostas.stream()
                     .filter(resp -> resp.getTipoResposta().getId() == Long.valueOf(idTipoResposta))
                     .findFirst().get();
-            SBCore.getServicoComunicacao().responderComunicacao(cm.getCodigoSelo(), resposta);
+            SBCore.getServicoComunicacao().responderComunicacao(cm.getCodigoSelo(), resposta, ERPTipoCanalComunicacao.INTRANET_MENU);
             paginaUtil.atualizaTelaPorID("idAreaSBTopoInterface");
         } catch (Throwable t) {
             SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "Erro ao exibir comunicação por código ", t);
@@ -67,15 +68,17 @@ public class PgUtilComunicacao implements Serializable {
     }
 
     public void removerNotificacoes() {
-        SBCore.getServicoComunicacao().getComunicacoesAguardandoRespostaDoDestinatario(SBCore.getUsuarioLogado()).forEach(cm -> {
-            SBCore.getServicoComunicacao().responderComunicacao(cm.getCodigoSelo(), cm.getRepostasPossiveis().get(0));
+        SBCore.getServicoComunicacao().getNotificacoesAtivasMenu().forEach(cm -> {
+            SBCore.getServicoComunicacao().responderComunicacao(cm.getCodigoSelo(), cm.getRepostasPossiveis().get(0), ERPTipoCanalComunicacao.INTRANET_MENU);
 
         });
         paginaUtil.atualizaTelaPorID("idAreaSBTopoInterface");
     }
 
     public void responderComunicacao(ComunicacaoAcaoSistema pComunicacao, ItfRespostaComunicacao pResposta) {
-        SBCore.getServicoComunicacao().responderComunicacao(pComunicacao.getCodigoSelo(), pResposta);
+
+        SBCore.getServicoComunicacao().responderComunicacao(pComunicacao.getCodigoSelo(), pResposta, ERPTipoCanalComunicacao.INTRANET_MENU);
+//responderComunicacao(pComunicacao.getCodigoSelo(), pResposta);
     }
 
     public String getCodigoComunicacao() {
