@@ -16,7 +16,8 @@ import java.io.File;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.faces.bean.RequestScoped;
+import javax.enterprise.context.RequestScoped;
+
 import org.primefaces.event.FileUploadEvent;
 
 /**
@@ -30,6 +31,7 @@ import org.primefaces.event.FileUploadEvent;
  * @version 1.0
  */
 @RequestScoped
+@Deprecated
 public class Tema {
 
     private static TemaPrimeFaces temaOficial = new TemaPrimeFaces(1l, "blitzer", "blitzer");

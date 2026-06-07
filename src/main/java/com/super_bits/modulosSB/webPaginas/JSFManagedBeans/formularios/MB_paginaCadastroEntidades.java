@@ -879,7 +879,8 @@ public abstract class MB_paginaCadastroEntidades<T extends ComoEntidadeSimples> 
         if (getAcaoSelecionada().isUmaAcaoFormulario()) {
             switch (getAcaoSelecionada().getComoFormulario().getEstadoFormulario()) {
                 case NOVO:
-                    if (getEntidadeSelecionada() == null || getEntidadeSelecionada().getId() != 0) {
+                    if (getEntidadeSelecionada() == null || getEntidadeSelecionada().getId() != null) {
+
                         if (getComoFormularioWeb().getAcaoVinculada().equals(getAcaoSelecionada().getAcaoDeGestaoEntidade())) {
                             autoexecEntidadeNova();
                             break;
@@ -1261,7 +1262,10 @@ public abstract class MB_paginaCadastroEntidades<T extends ComoEntidadeSimples> 
                     } catch (Throwable t) {
                         SBCore.enviarMensagemUsuario("Houve um erro inesperado!, entre em contato com o suporte", FabMensagens.ALERTA);
                         SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "Erro executando ação de controler padrão, a resposta não foi obtida para:" + acaoSelecionada, t);
-                        autoExecProximaAcaoAposController((ComoAcaoController) acaoSelecionada, null);
+                        if (getAcaoUltimoFormularioExecutado() != null) {
+                            setAcaoSelecionada(getAcaoUltimoFormularioExecutado());
+                        }
+//  autoExecProximaAcaoAposController((ComoAcaoController) acaoSelecionada, null);
                     }
                     break;
 

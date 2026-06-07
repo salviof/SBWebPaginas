@@ -23,10 +23,15 @@ import org.coletivojava.fw.api.tratamentoErros.FabErro;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.entidade.basico.ComoGrupoUsuario;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ComoAcaoDoSistema;
 import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ItfDialogo;
+import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.declarados.util.ItfServicoPush;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import javax.faces.push.Push;
-import javax.faces.push.PushContext;
 import javax.inject.Inject;
 
 /**
@@ -38,8 +43,7 @@ import javax.inject.Inject;
 public class InfoWebApp implements Serializable {
 
     @Inject
-    @Push(channel = "usuario")
-    private PushContext pushContext;
+    private ItfServicoPush pushContext;
 
     private final String versao = "042026";
 
@@ -53,9 +57,8 @@ public class InfoWebApp implements Serializable {
         mensagem.put("tipo", "executarJS");
         mensagem.put("script", "alert('PushExecutado para " + pDialogo.getDestinatario().getUsuario().getNome() + "')");
         mensagem.put("timestamp", System.currentTimeMillis());
-
-        // Envia só para quem está no canal + userId (o JSF filtra pelo segundo parâmetro)
-        return !pushContext.send(mensagem, pDialogo.getDestinatario().getUsuario().getEmail()).isEmpty();
+        return pushContext.enviar(
+                pDialogo.getDestinatario().getUsuario().getEmail(), mensagem);
 
     }
 

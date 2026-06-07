@@ -79,8 +79,10 @@ import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ComoA
 public class PgUtil implements Serializable {
 
     @Inject
+    @Deprecated
     private Cores cores;
     @Inject
+    @Deprecated
     private Tema tema;
 
     @Inject

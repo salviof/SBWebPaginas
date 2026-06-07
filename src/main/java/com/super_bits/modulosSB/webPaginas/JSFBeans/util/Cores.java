@@ -16,7 +16,8 @@ import java.io.OutputStream;
 import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.util.Properties;
-import javax.faces.bean.RequestScoped;
+import javax.enterprise.context.RequestScoped;
+
 import javax.inject.Named;
 import org.coletivojava.fw.api.tratamentoErros.FabErro;
 
@@ -30,6 +31,7 @@ import org.coletivojava.fw.api.tratamentoErros.FabErro;
  */
 @RequestScoped
 @Named
+@Deprecated
 public class Cores implements Serializable {
 
     private static String corHeader = "#4DA86E";
