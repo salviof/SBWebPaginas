@@ -119,7 +119,9 @@ public class ServicoVisualizacaoComponente {
     }
 
     public String getIcone(ComoEntidadeSimples pItem) {
-
+        if (pItem == null) {
+            return null;
+        }
         if (isItemPossuiIcone(pItem)) {
 
             if (pItem.getCampoInstanciadoByAnotacao(FabTipoAtributoObjeto.ICONE).getValor() == null) {
@@ -148,7 +150,9 @@ public class ServicoVisualizacaoComponente {
     }
 
     public boolean isItemPossuiIcone(ComoEntidadeSimples pItem) {
-
+        if (pItem == null) {
+            return false;
+        }
         return pItem.isTemCampoAnotado(FabTipoAtributoObjeto.ICONE);
     }
 
