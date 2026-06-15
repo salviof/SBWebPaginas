@@ -17,7 +17,7 @@ import com.super_bits.modulosSB.SBCore.modulos.view.telas.FabTipoTamanhoTelas;
 import com.super_bits.modulosSB.SBCore.modulos.view.telas.ItfTelaUsuario;
 import com.super_bits.modulosSB.SBCore.modulos.view.telas.LayoutComponentesEmTela;
 import com.super_bits.modulosSB.SBCore.modulos.view.telas.LayoutComponentesEmTelaComGrupoDeAcoes;
-import com.super_bits.modulosSB.webPaginas.JSFBeans.SBBeanModel.modelosPagina.ModeloPagina;
+import com.super_bits.modulosSB.SBCore.modulos.view.modeloFormulario.ModeloPagina;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.interfaces.ItfB_Pagina;
 import com.super_bits.modulosSB.webPaginas.controller.sessao.TelaWP;
 import java.util.ArrayList;

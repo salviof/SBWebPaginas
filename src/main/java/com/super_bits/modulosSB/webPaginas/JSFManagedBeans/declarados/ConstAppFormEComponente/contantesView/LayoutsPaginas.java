@@ -5,7 +5,7 @@
 package com.super_bits.modulosSB.webPaginas.JSFManagedBeans.declarados.ConstAppFormEComponente.contantesView;
 
 import com.super_bits.modulosSB.webPaginas.JSFBeans.SBBeanModel.modelosPagina.FabModelosPagina;
-import com.super_bits.modulosSB.webPaginas.JSFBeans.SBBeanModel.modelosPagina.ModeloPagina;
+import com.super_bits.modulosSB.SBCore.modulos.view.modeloFormulario.ModeloPagina;
 import java.io.Serializable;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Named;

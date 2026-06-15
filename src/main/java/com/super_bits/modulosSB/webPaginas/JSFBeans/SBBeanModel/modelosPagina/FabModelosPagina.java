@@ -4,6 +4,7 @@
  */
 package com.super_bits.modulosSB.webPaginas.JSFBeans.SBBeanModel.modelosPagina;
 
+import com.super_bits.modulosSB.SBCore.modulos.view.modeloFormulario.ModeloPagina;
 import com.super_bits.modulosSB.SBCore.modulos.fabrica.ComoFabrica;
 
 /**
