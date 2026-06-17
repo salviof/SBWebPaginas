@@ -46,7 +46,9 @@ public abstract class PgModalBaseAbs implements Serializable, ItfModalWebApp {
         } catch (Throwable t) {
             SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, chaveIdentificacaoViewOrigem, t);
         } finally {
-            paginaVinculada.setModalAtual(this);
+            if (paginaVinculada != null) {
+                paginaVinculada.setModalAtual(this);
+            }
         }
 
     }
