@@ -9,7 +9,7 @@ import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ItfRespostaComunicaca
 import org.coletivojava.fw.api.tratamentoErros.FabErro;
 import org.primefaces.PrimeFaces;
 import com.super_bits.modulosSB.webPaginas.JSFBeans.modal.abstrato.PgModalPaginaAtual;
-import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ItfDialogo;
+import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ComoDialogo;
 
 /**
  *
@@ -18,7 +18,7 @@ import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ItfDialogo;
 public abstract class PgModalRespostaAbstrato extends PgModalPaginaAtual implements ItfModalRespostaComComunicacao {
 
     private ItfRespostaComunicacao respostaSelecionada;
-    protected ItfDialogo comunicacao;
+    protected ComoDialogo comunicacao;
 
     @Override
     public ItfRespostaComunicacao getRespostaSelecionada() {
@@ -36,13 +36,13 @@ public abstract class PgModalRespostaAbstrato extends PgModalPaginaAtual impleme
      */
     @Override
     @Deprecated
-    public ItfDialogo getComunicacao() {
+    public ComoDialogo getComunicacao() {
         return getComunincacaoAguardandoResposta();
 
     }
 
     @Override
-    public ItfDialogo getComunincacaoAguardandoResposta() {
+    public ComoDialogo getComunincacaoAguardandoResposta() {
         try {
             if (comunicacao != null) {
                 return comunicacao;

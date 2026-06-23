@@ -24,7 +24,6 @@ import com.super_bits.modulosSB.SBCore.modulos.Controller.fabricas.FabTipoAcaoSi
 import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ComunicacaoAcaoSistema;
 import com.super_bits.modulosSB.SBCore.modulos.comunicacao.FabTipoRespostaComunicacao;
 import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ItfRespostaComunicacao;
-import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ItfTipoRespostaComunicacao;
 import com.super_bits.modulosSB.SBCore.modulos.fabrica.ComoFabricaAcoes;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campo.FabTipoAtributoObjeto;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campo.TIPO_PRIMITIVO;
@@ -78,12 +77,13 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import org.primefaces.event.SelectEvent;
 import javax.persistence.EntityManager;
-import org.coletivojava.fw.api.objetoNativo.comunicacao.TipoRespostaComunicacao;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.dialogo.tipoResposta.TipoRespostaComunicacao;
 import org.coletivojava.fw.api.tratamentoErros.FabErro;
 import org.primefaces.component.commandbutton.CommandButton;
-import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ItfDialogo;
+import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ComoDialogo;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ComoAcaoDoSistema;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.reflexao.ComoEntidadeNoDominio;
+import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ComoTipoRespostaComunicacao;
 
 public abstract class B_Pagina implements Serializable, ItfB_Pagina {
 
@@ -126,7 +126,7 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
     protected final Map<String, ComunicacaoAcaoSistema> mapaComunicacaoTransienteDeAcaoByIdModal = new HashMap();
     protected final Map<String, ComunicacaoAcaoSistema> mapaComunicacoesTransienteDeAcaoAguardandoResposta = new HashMap();
     private String codigoComunicacaoAguardandoRespostaAtual;
-    private final Map<String, ItfDialogo> mapaComunicacoesAguardandoResposta = new HashMap<>();
+    private final Map<String, ComoDialogo> mapaComunicacoesAguardandoResposta = new HashMap<>();
 
     private EntityManager emPagina;
     protected FabTipoFormulario tipoFormulario;
@@ -1216,7 +1216,7 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
     }
 
     @Override
-    public void setTipoRespostaParaAcaoAtual(ItfTipoRespostaComunicacao pTipoResp) {
+    public void setTipoRespostaParaAcaoAtual(ComoTipoRespostaComunicacao pTipoResp) {
         mapaRespostasComunicacaoTransienteDeAcaoByAcoes.put(getAcaoSelecionada().getNomeUnico(), pTipoResp.getFabricaTipoResposta());
 
     }
@@ -1257,7 +1257,7 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
     public synchronized void metodoRespostaModal(Object... pParametros) {
         System.out.println("Processando parametros método modal:" + pParametros);
         TipoRespostaModal tipoREspostaMordal = TipoRespostaModal.INDEFINIDO;
-        TipoRespostaComunicacao tipoREspostacomunicacaoModal = null;
+        ComoTipoRespostaComunicacao tipoREspostacomunicacaoModal = null;
         if (pParametros == null) {
             return;
         }
@@ -1272,7 +1272,7 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
         if (paraMetroPrincipal instanceof ComoEntidadeSimples) {
             tipoREspostaMordal = TipoRespostaModal.ENTIDADE_SELECAO_ITEM;
         }
-        if (paraMetroPrincipal instanceof ItfTipoRespostaComunicacao) {
+        if (paraMetroPrincipal instanceof ComoTipoRespostaComunicacao) {
             tipoREspostaMordal = TipoRespostaModal.RESPOSTA_TRANSIENTE;
 
             tipoREspostacomunicacaoModal = (TipoRespostaComunicacao) paraMetroPrincipal;
@@ -1320,10 +1320,10 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
                 }
                 break;
             case RESPOSTA_TRANSIENTE:
-                setTipoRespostaParaAcaoAtual((ItfTipoRespostaComunicacao) paraMetroPrincipal);
+                setTipoRespostaParaAcaoAtual((ComoTipoRespostaComunicacao) paraMetroPrincipal);
                 break;
             case RESPOSTA_ACAOsISTEMA:
-                setTipoRespostaParaAcaoAtual((ItfTipoRespostaComunicacao) tipoREspostacomunicacaoModal);
+                setTipoRespostaParaAcaoAtual((ComoTipoRespostaComunicacao) tipoREspostacomunicacaoModal);
                 if (!mapaRespostasComunicacaoTransienteDeAcaoByAcoes.isEmpty()) {
                     if (mapaRespostasComunicacaoTransienteDeAcaoByAcoes.containsKey(getAcaoSelecionada().getNomeUnico())) {
                         if (tipoREspostacomunicacaoModal.isRespostasPosiva()) {
@@ -1349,7 +1349,7 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
     @Override
     public void adicionarCodigoCoversa(String pCodigoConversa) {
         try {
-            ItfDialogo comunicacao = SBCore.getServicoComunicacao().getArmazenamento().getDialogoAtivoByCodigoSelo(pCodigoConversa);
+            ComoDialogo comunicacao = SBCore.getServicoComunicacao().getArmazenamento().getDialogoAtivoByCodigoSelo(pCodigoConversa);
             if (comunicacao == null) {
                 throw new UnsupportedOperationException("Impossível responder ao pedido de resposta solicitado, o codigodeComunicação não foi encontrado");
             }
@@ -1364,7 +1364,7 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
     }
 
     @Override
-    public ItfDialogo getComunincacaoAguardandoResposta() {
+    public ComoDialogo getComunincacaoAguardandoResposta() {
 
         return SBCore.getServicoComunicacao().getArmazenamento().getDialogoAtivoByCodigoSelo(codigoComunicacaoAguardandoRespostaAtual);
 

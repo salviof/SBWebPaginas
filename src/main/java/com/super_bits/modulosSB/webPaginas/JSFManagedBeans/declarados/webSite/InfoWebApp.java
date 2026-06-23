@@ -22,16 +22,10 @@ import javax.inject.Named;
 import org.coletivojava.fw.api.tratamentoErros.FabErro;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.entidade.basico.ComoGrupoUsuario;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ComoAcaoDoSistema;
-import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ItfDialogo;
+import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ComoDialogo;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.declarados.util.ItfServicoPush;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Future;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
-import javax.faces.push.Push;
 import javax.inject.Inject;
 
 /**
@@ -51,7 +45,7 @@ public class InfoWebApp implements Serializable {
         return versao;
     }
 
-    public boolean publicar(ItfDialogo pDialogo) {
+    public boolean publicar(ComoDialogo pDialogo) {
 
         Map<String, Object> mensagem = new HashMap<>();
         mensagem.put("tipo", "executarJS");

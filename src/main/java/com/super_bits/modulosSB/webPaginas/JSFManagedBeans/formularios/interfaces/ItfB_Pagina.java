@@ -9,7 +9,6 @@ import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.ItfParametr
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.permissoes.ItfAcaoGerenciarEntidade;
 import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ComunicacaoAcaoSistema;
 import com.super_bits.modulosSB.SBCore.modulos.comunicacao.FabTipoRespostaComunicacao;
-import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ItfTipoRespostaComunicacao;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campoInstanciado.ItfCampoInstanciado;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.entidade.basico.ComoEntidadeSimples;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.B_Pagina;
@@ -18,9 +17,10 @@ import com.super_bits.modulosSB.webPaginas.controller.servlets.servletWebPaginas
 import java.util.List;
 import java.util.Map;
 import org.primefaces.event.SelectEvent;
-import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ItfDialogo;
+import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ComoDialogo;
 import com.super_bits.modulosSB.SBCore.modulos.view.formulario.ItfFormularioAcao;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ComoAcaoDoSistema;
+import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ComoTipoRespostaComunicacao;
 
 /**
  *
@@ -192,7 +192,7 @@ public interface ItfB_Pagina extends ItfB_PaginaSimples, ItfB_PaginaComEntityMan
 
     public FabTipoRespostaComunicacao getRespostaAcaoAtual();
 
-    public void setTipoRespostaParaAcaoAtual(ItfTipoRespostaComunicacao pTipoResp);
+    public void setTipoRespostaParaAcaoAtual(ComoTipoRespostaComunicacao pTipoResp);
 
     public ComunicacaoAcaoSistema getComunicacaoTransientAcaoByIdModal(String pIdModal);
 
@@ -219,7 +219,7 @@ public interface ItfB_Pagina extends ItfB_PaginaSimples, ItfB_PaginaComEntityMan
      */
     public void metodoRespostaModal(Object... pParametros);
 
-    public ItfDialogo getComunincacaoAguardandoResposta();
+    public ComoDialogo getComunincacaoAguardandoResposta();
 
     public void zerarDadosModal();
 

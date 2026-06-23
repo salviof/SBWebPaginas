@@ -4,7 +4,7 @@
  */
 package com.super_bits.modulosSB.webPaginas.JSFBeans.modal;
 
-import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ItfComunicacaoAcaoVinculada;
+import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ComoDialogoAcaoVinculada;
 import javax.annotation.PostConstruct;
 
 /**
@@ -19,8 +19,8 @@ public abstract class PgModalComunicacaoAcaoTransientAbstrato extends PgModalRes
     }
 
     @Override
-    public ItfComunicacaoAcaoVinculada getComunicacao() {
-        return (ItfComunicacaoAcaoVinculada) super.getComunicacao(); //To change body of generated methods, choose Tools | Templates.
+    public ComoDialogoAcaoVinculada getComunicacao() {
+        return (ComoDialogoAcaoVinculada) super.getComunicacao(); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

@@ -6,7 +6,7 @@ package com.super_bits.modulosSB.webPaginas.JSFBeans.modal.abstrato;
 
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.ItfParametroRequisicaoInstanciado;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.permissoes.ItfAcaoGerenciarEntidade;
-import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ItfComunicacaoAcaoVinculada;
+import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ComoDialogoAcaoVinculada;
 import com.super_bits.modulosSB.webPaginas.JSFBeans.SBBeanModel.InfoMBAcao;
 import com.super_bits.modulosSB.webPaginas.JSFBeans.modal.ItfModalWebApp;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.B_Pagina;
@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Map;
 import javax.faces.context.FacesContext;
 import org.primefaces.PrimeFaces;
-import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ItfDialogo;
+import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ComoDialogo;
 import com.super_bits.modulosSB.SBCore.modulos.view.formulario.ItfFormularioAcao;
 import com.super_bits.modulosSB.SBCore.modulos.view.formulario.ItfFormularioSimples;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ComoAcaoDoSistema;
@@ -32,11 +32,11 @@ public abstract class PgModalPaginaAtual extends PgModalBaseAbs implements Seria
     public PgModalPaginaAtual() {
     }
 
-    public ItfDialogo getComunincacaoAguardandoResposta() {
+    public ComoDialogo getComunincacaoAguardandoResposta() {
         return getPaginaVinculada().getComunincacaoAguardandoResposta();
     }
 
-    public ItfComunicacaoAcaoVinculada getComunicacaoTransienteDeAcaoDoModal() {
+    public ComoDialogoAcaoVinculada getComunicacaoTransienteDeAcaoDoModal() {
 
         return getPaginaVinculada().getComunicacaoTransientAcaoByIdModal(chaveIdentificacaoViewOrigem);
 

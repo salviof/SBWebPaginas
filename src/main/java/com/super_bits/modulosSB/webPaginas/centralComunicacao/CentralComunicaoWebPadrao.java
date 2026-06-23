@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ItfTipoCanalComunicacao;
-import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ItfDialogo;
+import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ComoDialogo;
 import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ItffabricaCanalComunicacao;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.entidade.basico.ComoUsuario;
 import com.super_bits.modulosSB.SBCore.modulos.servicosCore.ComoArmazenamentoComunicacao;
@@ -28,8 +28,8 @@ import com.super_bits.modulosSB.SBCore.modulos.servicosCore.ComoServicoComunicac
  */
 public class CentralComunicaoWebPadrao extends CentralComunicaoAbstrato implements ComoServicoComunicacao {
 
-    private final List<ItfDialogo> comunicacoesAtivas = new ArrayList<>();
-    private final List<ItfDialogo> comunicacoesHistorico = new ArrayList<>();
+    private final List<ComoDialogo> comunicacoesAtivas = new ArrayList<>();
+    private final List<ComoDialogo> comunicacoesHistorico = new ArrayList<>();
     protected ComoArmazenamentoComunicacao armazenamento;
 
     public CentralComunicaoWebPadrao() {
@@ -38,7 +38,7 @@ public class CentralComunicaoWebPadrao extends CentralComunicaoAbstrato implemen
 
     @Override
     public FabTipoRespostaComunicacao aguardarRespostaComunicacao(ItfTipoCanalComunicacao pTransporte,
-            ItfDialogo pComunicacao, int tempoAguardar, FabTipoRespostaComunicacao pTipoRespostaTempoFinal) {
+            ComoDialogo pComunicacao, int tempoAguardar, FabTipoRespostaComunicacao pTipoRespostaTempoFinal) {
         FabTipoComunicacao tipocomunicacao = pComunicacao.getTipoComunicacao().getFabTipoComunicacao();
         if (SBCore.isEmModoDesenvolvimento()) {
             int dialogResult
@@ -74,12 +74,12 @@ public class CentralComunicaoWebPadrao extends CentralComunicaoAbstrato implemen
     }
 
     @Override
-    public boolean notificarViaMenu(ItfDialogo pDialogo) {
+    public boolean notificarViaMenu(ComoDialogo pDialogo) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public boolean notificarViaBloqueioTEla(ItfDialogo pDialogo) {
+    public boolean notificarViaBloqueioTEla(ComoDialogo pDialogo) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 

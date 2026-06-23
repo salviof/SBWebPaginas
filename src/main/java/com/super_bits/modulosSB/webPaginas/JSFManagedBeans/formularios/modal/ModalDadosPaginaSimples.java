@@ -20,7 +20,7 @@ import org.coletivojava.fw.api.tratamentoErros.FabErro;
 import org.primefaces.PrimeFaces;
 
 import org.primefaces.event.FileUploadEvent;
-import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ItfDialogo;
+import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ComoDialogo;
 
 /**
  *
@@ -31,7 +31,7 @@ public class ModalDadosPaginaSimples implements ItfModalDados {
 
     private ItfCampoInstanciado campoInstanciadoSelecionado;
     private ComoEntidadeSimples entidadeSelecionada;
-    private ItfDialogo comunicacaoDoMomento;
+    private ComoDialogo comunicacaoDoMomento;
     private String observacaoDoLog;
     private final UIViewRoot viewRootOrigem;
     private final Class classeOrigem;
@@ -107,7 +107,7 @@ public class ModalDadosPaginaSimples implements ItfModalDados {
 
     }
 
-    public void setComunicacaoDoMomento(ItfDialogo comunicacaoDoMomento) {
+    public void setComunicacaoDoMomento(ComoDialogo comunicacaoDoMomento) {
         this.comunicacaoDoMomento = comunicacaoDoMomento;
     }
 
