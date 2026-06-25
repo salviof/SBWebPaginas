@@ -84,6 +84,8 @@ import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ComoDialogo;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ComoAcaoDoSistema;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.reflexao.ComoEntidadeNoDominio;
 import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ComoTipoRespostaComunicacao;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.dialogo.resposta.RespostaComunicacao;
+import com.super_bits.modulosSB.SBCore.modulos.servicosCore.ErroDetectandoTelaBloqueio;
 
 public abstract class B_Pagina implements Serializable, ItfB_Pagina {
 
@@ -124,7 +126,23 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
     private final List<InfoMBAcao> infoAcoes = new ArrayList<>();
     protected final Map<String, FabTipoRespostaComunicacao> mapaRespostasComunicacaoTransienteDeAcaoByAcoes = new HashMap();
     protected final Map<String, ComunicacaoAcaoSistema> mapaComunicacaoTransienteDeAcaoByIdModal = new HashMap();
-    protected final Map<String, ComunicacaoAcaoSistema> mapaComunicacoesTransienteDeAcaoAguardandoResposta = new HashMap();
+
+    private final List<ComoDialogo> dialogosTransitorios = new ArrayList<>();
+    private final Map<String, RespostaComunicacao> respostasDialogosTransitorios = new HashMap<>();
+
+    public Map<String, RespostaComunicacao> getRespostasDialogosTransitorios() {
+        return respostasDialogosTransitorios;
+    }
+
+    public void registrarDialogoTransitorio(ComoDialogo pDialogo) throws ErroDetectandoTelaBloqueio {
+        if (pDialogo.getPaginaInstanciaID() == null) {
+            throw new ErroDetectandoTelaBloqueio("o ID DO FOrmulário é obrigatório para registrar um dialogo transitorio");
+        }
+        if (!pDialogo.getPaginaInstanciaID().equals(getPaginaInstanciaID())) {
+
+        }
+    }
+
     private String codigoComunicacaoAguardandoRespostaAtual;
     private final Map<String, ComoDialogo> mapaComunicacoesAguardandoResposta = new HashMap<>();
 
@@ -132,6 +150,8 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
     protected FabTipoFormulario tipoFormulario;
 
     private EstruturaDeFormulario estruturaFormulario;
+
+    private String paginaInstanciaID = java.util.UUID.randomUUID().toString();
 
     @InfoMB_Bean(descricao = "Campo instanciado Selecionado")
     private ItfCampoInstanciado campoInstanciadoSelecionado;
@@ -1698,6 +1718,10 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
 
             }
         }
+    }
+
+    public String getPaginaInstanciaID() {
+        return paginaInstanciaID;
     }
 
 }

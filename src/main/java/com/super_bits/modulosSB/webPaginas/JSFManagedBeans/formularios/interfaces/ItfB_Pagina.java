@@ -21,6 +21,8 @@ import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ComoDialogo;
 import com.super_bits.modulosSB.SBCore.modulos.view.formulario.ItfFormularioAcao;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ComoAcaoDoSistema;
 import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ComoTipoRespostaComunicacao;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.dialogo.resposta.RespostaComunicacao;
+import com.super_bits.modulosSB.SBCore.modulos.servicosCore.ErroDetectandoTelaBloqueio;
 
 /**
  *
@@ -29,6 +31,10 @@ import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ComoTipoRespostaComun
 public interface ItfB_Pagina extends ItfB_PaginaSimples, ItfB_PaginaComEntityManager, ItfFormularioAcao {
 
     public void fecharPagina();
+
+    public Map<String, RespostaComunicacao> getRespostasDialogosTransitorios();
+
+    public void registrarDialogoTransitorio(ComoDialogo pDialogo) throws ErroDetectandoTelaBloqueio;
 
     /**
      *
@@ -62,20 +68,6 @@ public interface ItfB_Pagina extends ItfB_PaginaSimples, ItfB_PaginaComEntityMan
 
     /**
      *
-     * REtorna o nome de chamada para criação de links para esta pagina (Função
-     * antiga e hoje praticamente descessária, será excluida no futuro)
-     *
-     * Motivo principal:(para você que ficou curioso) os componentes para
-     * ciração de botão de ação como <sbComp:botaoDeAcao fazem este trabalho com
-     * mais eficiencia.
-     *
-     * @return
-     */
-    @Deprecated
-    public String getLinkRotulo();
-
-    /**
-     *
      * Retorna a tag de url (do getTags)que foi utilizada para carregar a pagina
      *
      * @see ItfB_Pagina#getTags()
@@ -83,16 +75,6 @@ public interface ItfB_Pagina extends ItfB_PaginaSimples, ItfB_PaginaComEntityMan
      * @return tag utilizada para carregar a pagina
      */
     public String getTagUsada();
-
-    /**
-     *
-     *
-     * @deprecated (nomeclatura ruim, pois retorna a Url de acordo com o
-     * parametro selecionado e não de acordo com o padrão
-     * @return Url padrão para acesso a esta pagina
-     */
-    @Deprecated
-    public String getUrlPadrao();
 
     /**
      *
@@ -115,16 +97,6 @@ public interface ItfB_Pagina extends ItfB_PaginaSimples, ItfB_PaginaComEntityMan
 
     /**
      *
-     * Este método altera a tag utilizada, deveria estar protegido, será
-     * excluido no futuro..
-     *
-     * @param tagUsada
-     */
-    @Deprecated
-    public void setTagUsada(String tagUsada);
-
-    /**
-     *
      * Retorna o parametro de acordo com o nome da entidade
      *
      * @see ItfB_Pagina#getParametrosURL()
@@ -135,25 +107,6 @@ public interface ItfB_Pagina extends ItfB_PaginaSimples, ItfB_PaginaComEntityMan
     public ItfParametroRequisicaoInstanciado getParametrobyTipoEntidade(String nomeEntidade);
 
     public ItfParametroRequisicaoInstanciado getParametroInstanciado(ItfParametroRequisicao pParametro);
-
-    /**
-     *
-     * @return @deprecated O controle de acesso agora é configurado pela
-     * AcaoVinculada
-     */
-    @Deprecated
-    public boolean isAcessoLivre();
-
-    /**
-     *
-     * Aplica valores de parametros passados por url no MB_pagina
-     *
-     * #DEveria ser protected
-     *
-     * @param valorStringPorParametro
-     */
-    @Deprecated
-    public void aplicaValoresDeParametrosModoDesenvolvimento(Map<String, String> valorStringPorParametro);
 
     /**
      *
@@ -224,4 +177,58 @@ public interface ItfB_Pagina extends ItfB_PaginaSimples, ItfB_PaginaComEntityMan
     public void zerarDadosModal();
 
     public InfoDesignFormulario getInfoLayout();
+
+    /**
+     *
+     * @return @deprecated O controle de acesso agora é configurado pela
+     * AcaoVinculada
+     */
+    @Deprecated
+    public boolean isAcessoLivre();
+
+    /**
+     *
+     * Aplica valores de parametros passados por url no MB_pagina
+     *
+     * #DEveria ser protected
+     *
+     * @param valorStringPorParametro
+     */
+    @Deprecated
+    public void aplicaValoresDeParametrosModoDesenvolvimento(Map<String, String> valorStringPorParametro);
+
+    /**
+     *
+     * Este método altera a tag utilizada, deveria estar protegido, será
+     * excluido no futuro..
+     *
+     * @param tagUsada
+     */
+    @Deprecated
+    public void setTagUsada(String tagUsada);
+
+    /**
+     *
+     *
+     * @deprecated (nomeclatura ruim, pois retorna a Url de acordo com o
+     * parametro selecionado e não de acordo com o padrão
+     * @return Url padrão para acesso a esta pagina
+     */
+    @Deprecated
+    public String getUrlPadrao();
+
+    /**
+     *
+     * REtorna o nome de chamada para criação de links para esta pagina (Função
+     * antiga e hoje praticamente descessária, será excluida no futuro)
+     *
+     * Motivo principal:(para você que ficou curioso) os componentes para
+     * ciração de botão de ação como <sbComp:botaoDeAcao fazem este trabalho com
+     * mais eficiencia.
+     *
+     * @return
+     */
+    @Deprecated
+    public String getLinkRotulo();
+
 }

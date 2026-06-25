@@ -23,9 +23,14 @@ import org.coletivojava.fw.api.tratamentoErros.FabErro;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.entidade.basico.ComoGrupoUsuario;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ComoAcaoDoSistema;
 import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ComoDialogo;
+import com.super_bits.modulosSB.SBCore.modulos.erpCore.ErpCarameloCore;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.entidade.basico.ComoEntidadeSimples;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.declarados.util.ItfServicoPush;
+import com.super_bits.modulosSB.webPaginas.util.UtilSBWPServletTools;
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
 /**
@@ -48,9 +53,19 @@ public class InfoWebApp implements Serializable {
     public boolean publicar(ComoDialogo pDialogo) {
 
         Map<String, Object> mensagem = new HashMap<>();
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+
         mensagem.put("tipo", "executarJS");
-        mensagem.put("script", "alert('PushExecutado para " + pDialogo.getDestinatario().getUsuario().getNome() + "')");
+        mensagem.put("script", "alert(\"PushExecutado para " + pDialogo.getDestinatario().getUsuario().getNome() + "\")");
+
         mensagem.put("timestamp", System.currentTimeMillis());
+
+        if (pDialogo.getPaginaInstanciaID() != null) {
+            mensagem.put("paginaInstanciaID", pDialogo.getPaginaInstanciaID());
+            mensagem.put("mensagemTransitoria", ErpCarameloCore.CORE_PADRAO.getJsonEntidade((ComoEntidadeSimples) pDialogo).add("paginaInstanciaID", pDialogo.getPaginaInstanciaID()).build().toString());
+        } else {
+            mensagem.put(" mensagem.put(\"viewState\", viewState);", ErpCarameloCore.CORE_PADRAO.getJsonEntidade((ComoEntidadeSimples) pDialogo).build().toString());
+        }
         return pushContext.enviar(
                 pDialogo.getDestinatario().getUsuario().getEmail(), mensagem);
 
