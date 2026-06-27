@@ -86,6 +86,7 @@ import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.reflexao.
 import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ComoTipoRespostaComunicacao;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.dialogo.resposta.RespostaComunicacao;
 import com.super_bits.modulosSB.SBCore.modulos.servicosCore.ErroDetectandoTelaBloqueio;
+import java.util.concurrent.ConcurrentHashMap;
 
 public abstract class B_Pagina implements Serializable, ItfB_Pagina {
 
@@ -124,8 +125,8 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
     private final Map<String, String> infoWidget = new HashMap<>();
     private final Map<String, BeanDeclarado> beansDeclarados = new HashMap<>();
     private final List<InfoMBAcao> infoAcoes = new ArrayList<>();
-    protected final Map<String, FabTipoRespostaComunicacao> mapaRespostasComunicacaoTransienteDeAcaoByAcoes = new HashMap();
-    protected final Map<String, ComunicacaoAcaoSistema> mapaComunicacaoTransienteDeAcaoByIdModal = new HashMap();
+    protected final Map<String, FabTipoRespostaComunicacao> mapaRespostasComunicacaoTransienteDeAcaoByAcoes = new ConcurrentHashMap<>();
+    protected final Map<String, ComunicacaoAcaoSistema> mapaComunicacaoTransienteDeAcaoByIdModal = new ConcurrentHashMap<>();
 
     private final List<ComoDialogo> dialogosTransitorios = new ArrayList<>();
     private final Map<String, RespostaComunicacao> respostasDialogosTransitorios = new HashMap<>();
@@ -144,7 +145,7 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
     }
 
     private String codigoComunicacaoAguardandoRespostaAtual;
-    private final Map<String, ComoDialogo> mapaComunicacoesAguardandoResposta = new HashMap<>();
+    private final Map<String, ComoDialogo> mapaComunicacoesAguardandoResposta = new ConcurrentHashMap<>();
 
     private EntityManager emPagina;
     protected FabTipoFormulario tipoFormulario;
