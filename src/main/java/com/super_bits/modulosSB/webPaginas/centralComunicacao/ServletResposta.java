@@ -24,7 +24,7 @@ public class ServletResposta extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException {
         String codigoDialogo = req.getParameter("codigoSelo");
         String respostaJson = req.getParameter("resposta");
-        String paginaInstanciaID = req.getParameter("paginaInstanciaID"); // ← getParameter, não getAttribute
+        String paginaInstanciaID = req.getParameter("paginaInstanciaID");
 
         try {
             RespostaComunicacao resposta = ErpCarameloCore.CORE_PADRAO

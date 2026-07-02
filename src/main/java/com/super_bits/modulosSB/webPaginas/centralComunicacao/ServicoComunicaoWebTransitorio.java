@@ -19,21 +19,22 @@ import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ItfTipoCanalComunicac
 import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ComoDialogo;
 import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ItffabricaCanalComunicacao;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.entidade.basico.ComoUsuario;
-import com.super_bits.modulosSB.SBCore.modulos.servicosCore.ComoArmazenamentoComunicacao;
 import com.super_bits.modulosSB.SBCore.modulos.servicosCore.ComoServicoComunicacao;
+import com.super_bits.modulosSB.webPaginas.push.NotificadorIntranetJSF;
 
 /**
  *
  * @author desenvolvedor
  */
-public class CentralComunicaoWebPadrao extends CentralComunicaoAbstrato implements ComoServicoComunicacao {
+public class ServicoComunicaoWebTransitorio extends CentralComunicaoAbstrato implements ComoServicoComunicacao {
 
     private final List<ComoDialogo> comunicacoesAtivas = new ArrayList<>();
     private final List<ComoDialogo> comunicacoesHistorico = new ArrayList<>();
-    protected ComoArmazenamentoComunicacao armazenamento;
 
-    public CentralComunicaoWebPadrao() {
+    private NotificadorIntranetJSF notificadorJsf = new NotificadorIntranetJSF();
 
+    public ServicoComunicaoWebTransitorio() {
+        super(ArmazenamentoComunicacaoWeb.class);
     }
 
     @Override
@@ -56,14 +57,6 @@ public class CentralComunicaoWebPadrao extends CentralComunicaoAbstrato implemen
     }
 
     @Override
-    public ComoArmazenamentoComunicacao getArmazenamento() {
-        if (armazenamento == null) {
-            armazenamento = new ArmazenamentoComunicacaoWeb();
-        }
-        return armazenamento;
-    }
-
-    @Override
     public String getTokenDispositivoNotificacao(ComoUsuario pUsuario) {
         return null;
     }
@@ -75,12 +68,12 @@ public class CentralComunicaoWebPadrao extends CentralComunicaoAbstrato implemen
 
     @Override
     public boolean notificarViaMenu(ComoDialogo pDialogo) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return notificadorJsf.notificarViaMenu(pDialogo);
     }
 
     @Override
     public boolean notificarViaBloqueioTEla(ComoDialogo pDialogo) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return notificadorJsf.notificarViaBloqueioTEla(pDialogo);
     }
 
 }

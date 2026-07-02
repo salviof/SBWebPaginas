@@ -35,8 +35,6 @@ public class PgUtilContextoPorID implements Serializable {
     @Inject
     private HttpServletRequest request;
 
-    @Inject
-    private ItfPaginaAtual paginaatual;
     // ── cache — busca feita só uma vez por request ───────────
     private Object paginaDoContextoCache;
     private String escopoEncontrado;
@@ -47,15 +45,12 @@ public class PgUtilContextoPorID implements Serializable {
         if (!buscaRealizada) {
             realizarBusca();
         }
-        if (request.getAttribute("respostaObj") != null) {
-
-            RespostaComunicacao r = (RespostaComunicacao) request.getAttribute("respostaObj");
-
-            String codigoDialogo = request.getParameter("codigoSelo");
-            ((ItfB_Pagina) paginaDoContextoCache).getRespostasDialogosTransitorios().put(codigoDialogo, r);
-        }
 
         return paginaDoContextoCache;
+    }
+
+    public boolean isTemContextoAtivo() {
+        return getPaginaDoContexto() != null;
     }
 
     public <T> T getPaginaDoContexto(Class<T> classe) {
@@ -89,7 +84,7 @@ public class PgUtilContextoPorID implements Serializable {
 
             if (paginaDoContextoCache == null) {
                 try {
-                    paginaInstanciaID = ((B_Pagina) paginaatual.getInfoPagina()).getPaginaInstanciaID();
+                    //  paginaInstanciaID = ((B_Pagina) paginaatual.getInfoPagina()).getPaginaInstanciaID();
                 } catch (Throwable t) {
 
                 }

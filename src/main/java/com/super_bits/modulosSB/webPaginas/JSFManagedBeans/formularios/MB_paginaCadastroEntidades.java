@@ -797,7 +797,7 @@ public abstract class MB_paginaCadastroEntidades<T extends ComoEntidadeSimples> 
 
                 renovarEMPagina();
 
-                if (entidadeComoBeanSimples.getId() != 0) {
+                if (entidadeComoBeanSimples.getId() != null && entidadeComoBeanSimples.getId() != 0) {
                     setEntidadeSelecionada(UtilSBPersistencia.loadEntidade(entidadeComoBeanSimples, getEMPagina()));
                 }
             }
