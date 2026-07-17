@@ -82,6 +82,7 @@ import org.coletivojava.fw.api.tratamentoErros.FabErro;
 import org.primefaces.component.commandbutton.CommandButton;
 import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ComoDialogo;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ComoAcaoDoSistema;
+import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.permissoes.ItfAcaoFormularioEntidade;
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.reflexao.ComoEntidadeNoDominio;
 import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ComoTipoRespostaComunicacao;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.dialogo.resposta.RespostaComunicacao;
@@ -1723,6 +1724,16 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
 
     public String getPaginaInstanciaID() {
         return paginaInstanciaID;
+    }
+    private List<ItfAcaoFormularioEntidade> acoesNovoRegistro;
+
+    @Override
+    public List<ItfAcaoFormularioEntidade> getAcoesNovoRegistro() {
+        if (acoesNovoRegistro == null || acoesNovoRegistro.isEmpty()) {
+            acoesNovoRegistro = new ArrayList<>();
+            getAcaoVinculada().getAcoesVinculadasTipoNovoRegistro().stream().forEach(acoesNovoRegistro::add);
+        }
+        return acoesNovoRegistro;
     }
 
 }

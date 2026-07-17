@@ -4,6 +4,7 @@
  */
 package com.super_bits.modulosSB.webPaginas.JSFManagedBeans.declarados.util;
 
+import com.google.common.collect.Lists;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilCRCListas;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.acao.AcaoTransient;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campo.ItfGrupoCampos;
@@ -43,6 +44,14 @@ public class PgUtilLayout implements Serializable {
             throw new UnsupportedOperationException("o Grupo de campos para montagem da lista é nulo");
         }
         return getLayoutCamposComAcao(pGrupoCampo, pAcoes);
+    }
+
+    @Deprecated
+    public LayoutComponentesEmTelaComGrupoDeAcoes gerarLayout(ItfGrupoCampos pGrupoCampo, ComoAcaoDoSistema pAcoes) {
+        if (pGrupoCampo == null) {
+            throw new UnsupportedOperationException("o Grupo de campos para montagem da lista é nulo");
+        }
+        return getLayoutCamposComAcao(pGrupoCampo, Lists.newArrayList(pAcoes));
     }
 
     @Deprecated

@@ -4,6 +4,7 @@
  */
 package com.super_bits.modulosSB.webPaginas.arquivosDoProjeto;
 
+import com.super_bits.modulosSB.SBCore.ConfigGeral.CarameloCode;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.FabTipoEmpacotamento;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilCRCOutputs;
@@ -17,6 +18,7 @@ import com.super_bits.modulosSB.SBCore.modulos.ManipulaArquivo.acessoArquivo.Fab
 import com.super_bits.modulosSB.SBCore.modulos.ManipulaArquivo.interfaces.ItfCentralDeArquivos;
 import com.super_bits.modulosSB.SBCore.modulos.ManipulaArquivo.interfaces.ItfCentralPermissaoArquivo;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campo.FabTipoAtributoObjeto;
+import static com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campo.FabTipoAtributoObjeto.IMG_PEQUENA;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campoInstanciado.ItfCampoInstanciado;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.entidade.basico.ComoEntidadeSimples;
 import com.super_bits.modulosSB.webPaginas.ConfigGeral.SBWebPaginas;
@@ -316,17 +318,18 @@ public class CentralDeArquivosWebAppServidorSB extends CentralDeArquivosAbstrata
         } else {
             diretorioBase = getEndrLocalImagens() + "/" + item.getClass().getSimpleName() + "/" + item.getId() + "/";
         }
+
         switch (tipo) {
 
             case IMG_PEQUENA:
-                return diretorioBase + "imagemLogoPequeno.jpg";
+                return diretorioBase + tipo.getNomeImagemPadrao();
 
             case IMG_MEDIA:
-                return diretorioBase + "imagemLogoMedio.jpg";
+                return diretorioBase + tipo.getNomeImagemPadrao();
             case IMG_GRANDE:
-                return diretorioBase + "imagemLogoGrande.jpg";
+                return diretorioBase + tipo.getNomeImagemPadrao();
             default:
-                return diretorioBase + "imagemLogoPequeno.jpg";
+                return diretorioBase + IMG_PEQUENA.getNomeImagemPadrao();
 
         }
     }
@@ -334,7 +337,7 @@ public class CentralDeArquivosWebAppServidorSB extends CentralDeArquivosAbstrata
     @Override
     public String getEndrLocalImagem(ComoEntidadeSimplesSomenteLeitura item, FabTipoAtributoObjeto tipo) {
         if (item.getId() == null && item.getId() == null) {
-            return getEndrLocalImagem(item, tipo, SBCore.getControleDeSessao().getSessaoAtual());
+            return getEndrLocalImagem(item, tipo, CarameloCode.getServicoSessao().getSessaoAtual());
         } else {
             return getEndrLocalImagem(item, tipo, null);
         }

@@ -5,6 +5,7 @@
 package com.super_bits.modulosSB.webPaginas.controller.servlets.servletArquivoDeEntidade;
 
 import com.super_bits.modulosSB.Persistencia.dao.UtilSBPersistencia;
+import com.super_bits.modulosSB.SBCore.ConfigGeral.CarameloCode;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilCRCStringValidador;
 import com.super_bits.modulosSB.SBCore.modulos.ManipulaArquivo.TipoRecurso;
@@ -89,18 +90,18 @@ public class ServletArquivosDeEntidade extends ServletArquivosSBWPGenerico imple
             switch (prDadosREquisicaoArquivoEntidade.getTipoRecurso().getFabipoArquivo()) {
 
                 case IMAGE_REPRESENTATIVA_ENTIDADE_PEQUENO:
-                    prDadosREquisicaoArquivoEntidade.setCaminhoLocal(SBCore.getCentralDeArquivos().getEndrLocalImagem(beanNovoItemTemporario, FabTipoAtributoObjeto.IMG_PEQUENA, sessaoAtual));
-                    prDadosREquisicaoArquivoEntidade.setNomeArquivoDownload(FabTipoAtributoObjeto.IMG_PEQUENA.toString() + ".jpg");
+                    prDadosREquisicaoArquivoEntidade.setCaminhoLocal(UtilArmazenamentoLocalLogoTipo.getEnderecoLogoTipoDeEntidadeRepositorioWebAppLocal(FabTipoAtributoObjeto.IMG_PEQUENA, beanNovoItemTemporario, sessaoAtual));
+                    prDadosREquisicaoArquivoEntidade.setNomeArquivoDownload(FabTipoAtributoObjeto.IMG_PEQUENA.getNomeImagemPadrao());
 
                     break;
                 case IMAGE_REPRESENTATIVA_ENTIDADE_MEDIO:
 
-                    prDadosREquisicaoArquivoEntidade.setCaminhoLocal(SBCore.getCentralDeArquivos().getEndrLocalImagem(beanNovoItemTemporario, FabTipoAtributoObjeto.IMG_MEDIA, sessaoAtual));
-                    prDadosREquisicaoArquivoEntidade.setNomeArquivoDownload(FabTipoAtributoObjeto.IMG_MEDIA.toString() + ".jpg");
+                    prDadosREquisicaoArquivoEntidade.setCaminhoLocal(CarameloCode.getServicoArquivosDeEntidade().getEndrLocalImagem(beanNovoItemTemporario, FabTipoAtributoObjeto.IMG_MEDIA, sessaoAtual));
+                    prDadosREquisicaoArquivoEntidade.setNomeArquivoDownload(FabTipoAtributoObjeto.IMG_MEDIA.getNomeImagemPadrao());
                     break;
                 case IMAGE_REPRESENTATIVA_ENTIDADE_GRANDE:
-                    prDadosREquisicaoArquivoEntidade.setCaminhoLocal(SBCore.getCentralDeArquivos().getEndrLocalImagem(beanNovoItemTemporario, FabTipoAtributoObjeto.IMG_GRANDE, sessaoAtual));
-                    prDadosREquisicaoArquivoEntidade.setNomeArquivoDownload(FabTipoAtributoObjeto.IMG_GRANDE.toString() + ".jpg");
+                    prDadosREquisicaoArquivoEntidade.setCaminhoLocal(CarameloCode.getServicoArquivosDeEntidade().getEndrLocalImagem(beanNovoItemTemporario, FabTipoAtributoObjeto.IMG_GRANDE, sessaoAtual));
+                    prDadosREquisicaoArquivoEntidade.setNomeArquivoDownload(FabTipoAtributoObjeto.IMG_GRANDE.getNomeImagemPadrao());
                     break;
                 default:
                     prDadosREquisicaoArquivoEntidade.setCaminhoLocal(SBCore.getCentralDeArquivos().getEndrLocalArquivoTemporario(pCategoria, pNomeEntidade, prDadosREquisicaoArquivoEntidade.getNomeArquivoDownload()));
@@ -185,16 +186,16 @@ public class ServletArquivosDeEntidade extends ServletArquivosSBWPGenerico imple
             switch (prDadosREquisicaoArquivoEntidade.getTipoRecurso().getFabipoArquivo()) {
 
                 case IMAGE_REPRESENTATIVA_ENTIDADE_PEQUENO:
-                    prDadosREquisicaoArquivoEntidade.setCaminhoLocal(SBCore.getCentralDeArquivos().getEndrLocalImagem(prDadosREquisicaoArquivoEntidade.getEntidade(), FabTipoAtributoObjeto.IMG_PEQUENA, sessaoAtual));
-                    prDadosREquisicaoArquivoEntidade.setNomeArquivoDownload(FabTipoAtributoObjeto.IMG_PEQUENA.toString() + ".jpg");
+                    prDadosREquisicaoArquivoEntidade.setCaminhoLocal(UtilArmazenamentoLocalLogoTipo.getEnderecoLogoTipoDeEntidadeRepositorioWebAppLocal(FabTipoAtributoObjeto.IMG_PEQUENA, prDadosREquisicaoArquivoEntidade.getEntidade(), sessaoAtual));
+                    prDadosREquisicaoArquivoEntidade.setNomeArquivoDownload(FabTipoAtributoObjeto.IMG_PEQUENA.getNomeImagemPadrao());
                     break;
                 case IMAGE_REPRESENTATIVA_ENTIDADE_MEDIO:
-                    prDadosREquisicaoArquivoEntidade.setCaminhoLocal(SBCore.getCentralDeArquivos().getEndrLocalImagem(prDadosREquisicaoArquivoEntidade.getEntidade(), FabTipoAtributoObjeto.IMG_MEDIA, sessaoAtual));
-                    prDadosREquisicaoArquivoEntidade.setNomeArquivoDownload(FabTipoAtributoObjeto.IMG_MEDIA.toString() + ".jpg");
+                    prDadosREquisicaoArquivoEntidade.setCaminhoLocal(CarameloCode.getServicoArquivosDeEntidade().getEndrLocalImagem(prDadosREquisicaoArquivoEntidade.getEntidade(), FabTipoAtributoObjeto.IMG_MEDIA, sessaoAtual));
+                    prDadosREquisicaoArquivoEntidade.setNomeArquivoDownload(FabTipoAtributoObjeto.IMG_PEQUENA.getNomeImagemPadrao());
                     break;
                 case IMAGE_REPRESENTATIVA_ENTIDADE_GRANDE:
-                    prDadosREquisicaoArquivoEntidade.setCaminhoLocal(SBCore.getCentralDeArquivos().getEndrLocalImagem(prDadosREquisicaoArquivoEntidade.getEntidade(), FabTipoAtributoObjeto.IMG_GRANDE, sessaoAtual));
-                    prDadosREquisicaoArquivoEntidade.setNomeArquivoDownload(FabTipoAtributoObjeto.IMG_GRANDE.toString() + ".jpg");
+                    prDadosREquisicaoArquivoEntidade.setCaminhoLocal(CarameloCode.getServicoArquivosDeEntidade().getEndrLocalImagem(prDadosREquisicaoArquivoEntidade.getEntidade(), FabTipoAtributoObjeto.IMG_GRANDE, sessaoAtual));
+                    prDadosREquisicaoArquivoEntidade.setNomeArquivoDownload(FabTipoAtributoObjeto.IMG_GRANDE.getNomeImagemPadrao());
                     break;
                 default:
                     ItfCampoInstanciado campoArquivo = null;
@@ -242,6 +243,7 @@ public class ServletArquivosDeEntidade extends ServletArquivosSBWPGenerico imple
 
         if (!dados.getCaminhoLocal().startsWith("https")) {
             File arquivo = new File(dados.getCaminhoLocal());
+
             if (!arquivo.exists()) {
                 dados.setCaminhoLocal(SBWebPaginas.getCaminhoRealJavaWebAppContexto() + "/resources/img/imagempadrao.jpg");
             }

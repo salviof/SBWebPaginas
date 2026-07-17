@@ -6,6 +6,7 @@ package com.super_bits.modulosSB.webPaginas.visualizacao;
 
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campo.FabTipoAtributoObjeto;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.InfoCampos.campoInstanciado.ItfCampoInstanciado;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.entidade.basico.ComoEntidadeSimples;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.entidade.basico.ComoStatus;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.entidade.basico.ComoTemIcone;
@@ -123,8 +124,8 @@ public class ServicoVisualizacaoComponente {
             return null;
         }
         if (isItemPossuiIcone(pItem)) {
-
-            if (pItem.getCampoInstanciadoByAnotacao(FabTipoAtributoObjeto.ICONE).getValor() == null) {
+            ItfCampoInstanciado cpinstanciado = pItem.getCampoInstanciadoByAnotacao(FabTipoAtributoObjeto.ICONE);
+            if (cpinstanciado == null || cpinstanciado.getValor() == null || cpinstanciado.isCampoNaoInstanciado()) {
                 return null;
             }
             return pItem.getCampoInstanciadoByAnotacao(FabTipoAtributoObjeto.ICONE).getValor().toString();

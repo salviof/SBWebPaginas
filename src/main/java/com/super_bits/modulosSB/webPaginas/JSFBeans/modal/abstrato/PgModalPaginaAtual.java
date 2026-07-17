@@ -20,8 +20,8 @@ import javax.faces.context.FacesContext;
 import org.primefaces.PrimeFaces;
 import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ComoDialogo;
 import com.super_bits.modulosSB.SBCore.modulos.view.formulario.ItfFormularioAcao;
-import com.super_bits.modulosSB.SBCore.modulos.view.formulario.ItfFormularioSimples;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ComoAcaoDoSistema;
+import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.permissoes.ItfAcaoFormularioEntidade;
 
 /**
  *
@@ -136,6 +136,16 @@ public abstract class PgModalPaginaAtual extends PgModalBaseAbs implements Seria
     @Override
     public ItfAcaoGerenciarEntidade getAcaoVinculada() {
         return getPaginaVinculada().getAcaoVinculada();
+    }
+
+    @Override
+    public List<ItfAcaoFormularioEntidade> getAcoesNovoRegistro() {
+        return getPaginaVinculada().getAcoesNovoRegistro();
+    }
+
+    @Override
+    public boolean isTemAcoesMultiplasNovoRegistro() {
+        return ItfFormularioAcao.super.isTemAcoesMultiplasNovoRegistro(); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
     }
 
 }
