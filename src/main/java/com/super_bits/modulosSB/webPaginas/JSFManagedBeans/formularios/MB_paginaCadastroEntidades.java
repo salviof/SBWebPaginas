@@ -860,7 +860,7 @@ public abstract class MB_paginaCadastroEntidades<T extends ComoEntidadeSimples> 
                             throw new UnsupportedOperationException("Impossível encontrar parametros do tipo " + classeParametro.getSimpleName() + " para preparar objeto do tipo " + classeDaEntidade.getSimpleName());
                         }
                     } else {
-                        // todo Erro buscar em beans declarados
+                        // todo Erro buscar em parametros todos parametros pagina
                         throw new UnsupportedOperationException("Impossível encontrar parametros para preparar objeto");
                     }
                 }
