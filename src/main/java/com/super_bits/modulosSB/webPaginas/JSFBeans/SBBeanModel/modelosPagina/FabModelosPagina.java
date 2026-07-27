@@ -89,12 +89,14 @@ public enum FabModelosPagina implements ComoFabrica {
                 mp.getAreas().add("topo");
                 mp.getAreas().add("rodape");
                 mp.setXhtmlVinculado("/resources/SBComp/template/basico/modeloGeral.xhtml");
+                mp.setUmaSubPagina(false);
                 break;
             case MODELO_GERAL_ANONIMO:
                 mp.setNome("Modelo Geral Anonimo");
                 mp.setDescricao("Inclui o toda estrutura basica de css, topo sem menu e conteúdo");
                 mp.getAreas().add("divConteudo");
                 mp.setXhtmlVinculado("/resources/SBComp/template/basico/modeloAnonimo.xhtml");
+                mp.setUmaSubPagina(false);
                 break;
             case FORMULARIO_PERSONALIZADO:
                 mp.setNome("Conteúdo personalizado ");
@@ -106,11 +108,13 @@ public enum FabModelosPagina implements ComoFabrica {
                 mp.getAreas().add("conteudoDireita");
                 mp.getAreas().add("conteudoCard");
                 mp.setXhtmlVinculado("/resources/SBComp/template/basico/conteudo.xhtml");
+                mp.setUmaSubPagina(true);
                 break;
             case FORMULARIO_PG_ENTIDADE_LISTAR:
                 mp.setNome("Conteúdo listar Automático");
                 mp.setDescricao("Apresenta listar automatico, não possui areas para serem devinidas, precisa ser usuaro em uma Pagina do tipo Entidade");
                 mp.setXhtmlVinculado("/resources/SBComp/template/basico/formularioEntidadeListar.xhtml");
+                mp.setUmaSubPagina(true);
                 break;
             case FORMULARIO_PG_ACAO_ATUAL:
                 mp.setNome("Formulario da ação Atual");
@@ -119,25 +123,30 @@ public enum FabModelosPagina implements ComoFabrica {
                 mp.getAreas().add("conteudo");
                 mp.getAreas().add("direita");
                 mp.setXhtmlVinculado("/resources/SBComp/template/basico/formularioAcaoAtual.xhtml");
+                mp.setUmaSubPagina(true);
                 break;
             case FORMULARIO_PG_ENTIDADE_ACAO_ATUAL:
                 mp.setDescricao("Mostra o formato padrão de formulário, contendo o icone da ação atual, o titulo, como o nome da ação,"
                         + " o subtitulo a descrição da ação, e o botão da direita definido como: novo em caso de listar e pagina.temNovo == true, e listar nos outros casos ");
                 mp.getAreas().add("conteudo");
                 mp.setXhtmlVinculado("/resources/SBComp/template/basico/formularioEntidadeAcaoAtual.xhtml");
+                mp.setUmaSubPagina(true);
                 break;
             case FORMULARIO_PG_ENTIDADE_EDITAR:
                 mp.setXhtmlVinculado("/resources/SBComp/template/basico/formularioEntidadeEditar.xhtml");
+                mp.setUmaSubPagina(true);
                 break;
             case CONTEUDO_EM_BRANCO:
                 mp.setDescricao("Um formulario em branco");
                 mp.getAreas().add("conteudo");
                 mp.setXhtmlVinculado("/resources/SBComp/template/basico/exemplo/conteudoEmBranco.xhtml");
+                mp.setUmaSubPagina(true);
                 break;
             case MODELO_GERAL_MODAL:
                 mp.setDescricao("Modelo Geral Modais");
                 mp.getAreas().add("conteudo");
                 mp.setXhtmlVinculado("/resources/SBComp/template/basico/modeloGeralModal.xhtml");
+                mp.setUmaSubPagina(false);
                 break;
             default:
                 throw new AssertionError(this.name());

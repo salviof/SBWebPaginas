@@ -4,8 +4,11 @@
  */
 package com.super_bits.modulosSB.webPaginas.JSFBeans.modal;
 
+import com.super_bits.modulosSB.SBCore.ConfigGeral.CarameloCode;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
+import com.super_bits.modulosSB.SBCore.UtilGeral.UtilCRCDataHora;
 import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ERPTipoCanalComunicacao;
+import java.util.Date;
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
@@ -33,8 +36,18 @@ public class PgModalREspostaComunicacao extends PgModalRespostaAbstrato {
             if (getRespostaSelecionada() == null) {
                 throw new UnsupportedOperationException("A resposta não foi configurada");
             }
-            SBCore.getServicoComunicacao().responderComunicacao(getComunincacaoAguardandoResposta().getCodigoSelo(), getRespostaSelecionada(), ERPTipoCanalComunicacao.INTRANET_MENU);
+            if (getRespostaSelecionada().isRespostaEmTelaPersonalizada()) {
+                if (getRespostaSelecionada().getTipoResposta().isRespostasPosiva()) {
+                    //TODO, onde busco a url de resolução?
+                } else {
+                    CarameloCode.getServicoComunicacao().agendarNovoDisparo(getComunincacaoAguardandoResposta().getCodigoSelo(), UtilCRCDataHora.incrementaHoras(new Date(), 24));
+                    CarameloCode.getServicoComunicacao().responderComunicacao(getComunincacaoAguardandoResposta().getCodigoSelo(), getRespostaSelecionada(), ERPTipoCanalComunicacao.INTRANET_MENU);
+                }
 
+            } else {
+
+                CarameloCode.getServicoComunicacao().responderComunicacao(getComunincacaoAguardandoResposta().getCodigoSelo(), getRespostaSelecionada(), ERPTipoCanalComunicacao.INTRANET_MENU);
+            }
             PrimeFaces.current().dialog().closeDynamic(getRespostaSelecionada());
         } catch (Throwable t) {
             SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "Erro enviando resposta para pagina", t);

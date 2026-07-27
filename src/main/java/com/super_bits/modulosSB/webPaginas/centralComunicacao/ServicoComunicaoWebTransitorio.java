@@ -5,6 +5,7 @@
  */
 package com.super_bits.modulosSB.webPaginas.centralComunicacao;
 
+import com.super_bits.modulosSB.SBCore.ConfigGeral.CarameloCode;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 import com.super_bits.modulosSB.SBCore.modulos.comunicacao.CentralComunicaoAbstrato;
 import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ERPTipoCanalComunicacao;
@@ -21,6 +22,7 @@ import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ItffabricaCanalComuni
 import com.super_bits.modulosSB.SBCore.modulos.objetos.entidade.basico.ComoUsuario;
 import com.super_bits.modulosSB.SBCore.modulos.servicosCore.ComoServicoComunicacao;
 import com.super_bits.modulosSB.webPaginas.push.NotificadorIntranetJSF;
+import java.util.Date;
 
 /**
  *
@@ -74,6 +76,13 @@ public class ServicoComunicaoWebTransitorio extends CentralComunicaoAbstrato imp
     @Override
     public boolean notificarViaBloqueioTEla(ComoDialogo pDialogo) {
         return notificadorJsf.notificarViaBloqueioTEla(pDialogo);
+    }
+
+    @Override
+    public boolean agendarNovoDisparo(String codigoSeloComunicacao, Date pDataAgendamento) {
+        CarameloCode.getServicoMensagemFireForget().enviarMsgAlertaAoUsuario("Agenda de novo disparo não foi implementado em " + ServicoComunicaoWebTransitorio.class.getSimpleName());
+
+        return false;
     }
 
 }
