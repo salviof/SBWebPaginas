@@ -17,6 +17,7 @@ import javax.inject.Named;
 import org.coletivojava.fw.api.tratamentoErros.FabErro;
 import org.primefaces.event.SelectEvent;
 import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ComoDialogo;
+import com.super_bits.modulosSB.SBCore.modulos.servicosCore.EncGestaoRespostaPersonalizada;
 import java.util.List;
 
 /**
@@ -57,27 +58,41 @@ public class PgUtilComunicacao implements Serializable {
             }
             ComoDialogo cm = SBCore.getServicoComunicacao().getArmazenamento().getDialogoAtivoByCodigoSelo(codigoComunicacao);
             List<ItfRespostaComunicacao> respostas = cm.getRepostasPossiveis();
+
             ItfRespostaComunicacao resposta = respostas.stream()
                     .filter(resp -> resp.getTipoResposta().getId() == Long.valueOf(idTipoResposta))
                     .findFirst().get();
             SBCore.getServicoComunicacao().responderComunicacao(cm.getCodigoSelo(), resposta, ERPTipoCanalComunicacao.INTRANET_MENU);
+
             paginaUtil.atualizaTelaPorID("idAreaSBTopoInterface");
+        } catch (EncGestaoRespostaPersonalizada pEncaminhamentoDeContexto) {
+            UtilSBWP_JSFTools.executarJavaScript("window.top.location.href='" + pEncaminhamentoDeContexto.getUrlInterfaceDeResposta() + "';");
         } catch (Throwable t) {
             SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "Erro ao exibir comunicação por código ", t);
         }
     }
 
     public void removerNotificacoes() {
+
         SBCore.getServicoComunicacao().getNotificacoesAtivasMenu().forEach(cm -> {
-            SBCore.getServicoComunicacao().responderComunicacao(cm.getCodigoSelo(), cm.getRepostasPossiveis().get(0), ERPTipoCanalComunicacao.INTRANET_MENU);
+            try {
+                SBCore.getServicoComunicacao().responderComunicacao(cm.getCodigoSelo(), cm.getRepostasPossiveis().get(0), ERPTipoCanalComunicacao.INTRANET_MENU);
+            } catch (EncGestaoRespostaPersonalizada pEncaminhamentoDeContexto) {
+                UtilSBWP_JSFTools.executarJavaScript("window.top.location.href='" + pEncaminhamentoDeContexto.getUrlInterfaceDeResposta() + "';");
+            }
 
         });
+
         paginaUtil.atualizaTelaPorID("idAreaSBTopoInterface");
     }
 
     public void responderComunicacao(ComunicacaoAcaoSistema pComunicacao, ItfRespostaComunicacao pResposta) {
+        try {
+            SBCore.getServicoComunicacao().responderComunicacao(pComunicacao.getCodigoSelo(), pResposta, ERPTipoCanalComunicacao.INTRANET_MENU);
+        } catch (EncGestaoRespostaPersonalizada pEncaminhamentoDeContexto) {
+            UtilSBWP_JSFTools.executarJavaScript("window.top.location.href='" + pEncaminhamentoDeContexto.getUrlInterfaceDeResposta() + "';");
+        }
 
-        SBCore.getServicoComunicacao().responderComunicacao(pComunicacao.getCodigoSelo(), pResposta, ERPTipoCanalComunicacao.INTRANET_MENU);
 //responderComunicacao(pComunicacao.getCodigoSelo(), pResposta);
     }
 

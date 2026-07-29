@@ -8,6 +8,8 @@ import com.super_bits.modulosSB.SBCore.ConfigGeral.CarameloCode;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilCRCDataHora;
 import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ERPTipoCanalComunicacao;
+import com.super_bits.modulosSB.SBCore.modulos.servicosCore.EncGestaoRespostaPersonalizada;
+import com.super_bits.modulosSB.webPaginas.util.UtilSBWP_JSFTools;
 import java.util.Date;
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
@@ -36,19 +38,12 @@ public class PgModalREspostaComunicacao extends PgModalRespostaAbstrato {
             if (getRespostaSelecionada() == null) {
                 throw new UnsupportedOperationException("A resposta não foi configurada");
             }
-            if (getRespostaSelecionada().isRespostaEmTelaPersonalizada()) {
-                if (getRespostaSelecionada().getTipoResposta().isRespostasPosiva()) {
-                    //TODO, onde busco a url de resolução?
-                } else {
-                    CarameloCode.getServicoComunicacao().agendarNovoDisparo(getComunincacaoAguardandoResposta().getCodigoSelo(), UtilCRCDataHora.incrementaHoras(new Date(), 24));
-                    CarameloCode.getServicoComunicacao().responderComunicacao(getComunincacaoAguardandoResposta().getCodigoSelo(), getRespostaSelecionada(), ERPTipoCanalComunicacao.INTRANET_MENU);
-                }
 
-            } else {
+            CarameloCode.getServicoComunicacao().responderComunicacao(getComunincacaoAguardandoResposta().getCodigoSelo(), getRespostaSelecionada(), ERPTipoCanalComunicacao.INTRANET_MENU);
 
-                CarameloCode.getServicoComunicacao().responderComunicacao(getComunincacaoAguardandoResposta().getCodigoSelo(), getRespostaSelecionada(), ERPTipoCanalComunicacao.INTRANET_MENU);
-            }
             PrimeFaces.current().dialog().closeDynamic(getRespostaSelecionada());
+        } catch (EncGestaoRespostaPersonalizada pEncaminhamentoDeContexto) {
+            UtilSBWP_JSFTools.executarJavaScript("window.top.location.href='" + pEncaminhamentoDeContexto.getUrlInterfaceDeResposta() + "';");
         } catch (Throwable t) {
             SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "Erro enviando resposta para pagina", t);
         }

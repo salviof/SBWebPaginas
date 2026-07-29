@@ -158,7 +158,7 @@ public class ServicoVisuaslizacaoWebResponsivo extends ServicoVisualizacaoAbstra
 
     @Override
     public String getEndrRemotoFormulario(ComoFabricaAcoes pAcao, Object... paramentros) {
-        return MapaDeFormularios.getUrlFormulario(pAcao.getRegistro().getComoFormulario(), paramentros);
+        return MapaDeFormularios.getUrlFormulario(pAcao.getRegistro(), paramentros);
     }
 
     @Override
