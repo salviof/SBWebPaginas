@@ -159,6 +159,9 @@ public class PgUtilDataHoraFormato implements Serializable {
     }
 
     public String getDataHoraRelativa(Date pData) {
+        if (pData == null) {
+            return "";
+        }
         Date hoje = new Date();
         String texto = "Sem data definida";
 

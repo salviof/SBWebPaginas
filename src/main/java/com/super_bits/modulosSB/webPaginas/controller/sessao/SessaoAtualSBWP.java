@@ -163,8 +163,14 @@ public class SessaoAtualSBWP extends SessaoOffline implements ComoSessao, Serial
     @Override
     public String getPastaTempDeSessao() {
         if (pastaTempDeSessao == null) {
-            pastaTempDeSessao = UtilSBWPServletTools.getCaminhoLocalServletsResource()
-                    + "/arqSessao/" + getUsuario().getEmail().hashCode();
+            if (getUsuario().getEmail() != null && !getUsuario().getEmail().isEmpty()) {
+                pastaTempDeSessao = UtilSBWPServletTools.getCaminhoLocalServletsResource()
+                        + "/arqSessao/" + getUsuario().getEmail().hashCode();
+            } else {
+                pastaTempDeSessao = UtilSBWPServletTools.getCaminhoLocalServletsResource()
+                        + "/arqSessao/convidadoTemp";
+            }
+
         }
         File pastaTempSessao = new File(pastaTempDeSessao + "/");
         if (!pastaTempSessao.exists()) {

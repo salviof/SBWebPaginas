@@ -22,4 +22,7 @@ public interface ItfB_PaginaComEntityManager {
      * Fecha a sessão do entity manager vigente e cria uma nova sessão
      */
     public void recarregarEntidadeSelecionada();
+
+    public void renovarEntityManager();
+
 }

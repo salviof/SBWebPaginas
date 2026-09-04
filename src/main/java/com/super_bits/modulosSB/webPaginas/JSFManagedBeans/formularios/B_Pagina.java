@@ -168,6 +168,11 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
     }
 
     @Override
+    public void renovarEntityManager() {
+        renovarEMPagina();
+    }
+
+    @Override
     public void recarregarEntidadeSelecionada() {
         if (getBeanSelecionado() != null) {
             renovarEMPagina();
@@ -345,7 +350,9 @@ public abstract class B_Pagina implements Serializable, ItfB_Pagina {
             } catch (Throwable t) {
                 SBCore.RelatarErro(FabErro.SOLICITAR_REPARO, "Erro renovando Entitymanager da PAgina talvez você tenha encerrado o entity manager manualmente..", t);
             }
-
+            if (emPagina != null && emPagina.isOpen()) {
+                emPagina.close();
+            }
             emPagina = null;
             emPagina = getEMPagina();
 

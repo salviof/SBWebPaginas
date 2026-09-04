@@ -17,6 +17,8 @@ import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.reflexao.
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.siteMap.MapaDeFormularios;
 import com.super_bits.modulos.SBAcessosModel.view.FabAcaoPaginasDoSistema;
 import com.super_bits.modulos.SBAcessosModel.view.InfoAcaoPaginaDoSistema;
+import com.super_bits.modulosSB.SBCore.ConfigGeral.CarameloCode;
+import com.super_bits.modulosSB.SBCore.UtilGeral.UtilCRCStringTelefone;
 import com.super_bits.modulosSB.SBCore.integracao.libRestClient.implementacao.AcaoApiIntegracaoRestAbstratoBasico;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.ItfParametroRequisicao;
 import com.super_bits.modulosSB.webPaginas.controller.servlets.servletWebPaginas.EstruturaDeFormulario;
@@ -32,6 +34,8 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ComoAcaoDoSistema;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.entidade.basico.ComoUsuario;
+import com.super_bits.modulosSB.webPaginas.JSFBeans.util.UtilSBWPMensagensJSF;
 
 /**
  *
@@ -69,24 +73,25 @@ public class PgAcessoViaTokenDinamico extends MB_paginaCadastroEntidades<TokenAc
         setAcaoSelecionada(FabAcaoPaginasDoSistema.PAGINA_NATIVA_ACESSO_NEGADO_FRM_SUB_FORM.getRegistro());
         xhtmlAcaoAtual = FabAcaoPaginasDoSistema.PAGINA_NATIVA_ACESSO_NEGADO_FRM_SUB_FORM.getRegistro().getComoFormulario().getXhtml();
     }
+    String nomeLeadEnviado;
+    String telefoneLeadEnviado;
 
     @PostConstruct
     public void inicio() {
         tokenDinamico = getTokenDinamico();
-
-        String nome = (String) UtilSBWPServletTools.getRequestParametro("nome");
-        String telefone = (String) UtilSBWPServletTools.getRequestParametro("telefone");
+        if (tokenDinamico == null) {
+            acessonegado();
+        }
+        nomeLeadEnviado = (String) UtilSBWPServletTools.getRequestParametro("nome");
+        telefoneLeadEnviado = (String) UtilSBWPServletTools.getRequestParametro("telefone");
         //  String whatsappid = (String) UtilSBWPServletTools.getRequestParametro("whatsappid");
 
-        if (nome != null && telefone != null) {
-            UtilSBWPServletTools.cookieAdicionar("LEAD_NOME", nome, 0);
-            UtilSBWPServletTools.cookieAdicionar("LEAD_TELEFONE", telefone, 0);
-            //    UtilSBWPServletTools.cookieAdicionar("LEAD_WATSAPP_ID", whatsappid, 0);
-        }
-
-        if (tokenDinamico == null) {
-
-            acessonegado();
+        if (nomeLeadEnviado != null && telefoneLeadEnviado != null) {
+            UtilSBWPServletTools.cookieAdicionar("LEAD_NOME", nomeLeadEnviado, 0);
+            UtilSBWPServletTools.cookieAdicionar("LEAD_TELEFONE", telefoneLeadEnviado, 0);
+        } else {
+            nomeLeadEnviado = UtilSBWPServletTools.cookieLerValor("LEAD_NOME");
+            telefoneLeadEnviado = UtilSBWPServletTools.cookieLerValor("LEAD_TELEFONE");
         }
 
     }
@@ -108,7 +113,11 @@ public class PgAcessoViaTokenDinamico extends MB_paginaCadastroEntidades<TokenAc
                 List<UsuarioSB> usuarios = consultaUsuario.resultadoRegistros();
 
                 if (!usuarios.isEmpty()) {
-                    sessaoAtual.setUsuario(usuarios.get(0));
+                    if (usuarios.get(0).isAtivo()) {
+                        sessaoAtual.setUsuario(usuarios.get(0));
+                    } else {
+                        UtilSBWPMensagensJSF.alertaMensagem("Seu usuário está desativado");
+                    }
                 } else {
 
                     if (sessaoAtual.isIdentificado()) {
@@ -116,7 +125,13 @@ public class PgAcessoViaTokenDinamico extends MB_paginaCadastroEntidades<TokenAc
                     }
                 }
             } else {
-                sessaoAtual.encerrarSessao(false);
+                if (nomeLeadEnviado != null && telefoneLeadEnviado != null) {
+                    ComoUsuario usuarioLeadConvidado = CarameloCode.getServicoPermissao().gerarUsuarioConvidado(nomeLeadEnviado,
+                            UtilCRCStringTelefone.gerarNumeroTelefoneInternacional(telefoneLeadEnviado));
+                    CarameloCode.getServicoSessao().getSessaoAtual().setUsuario(usuarioLeadConvidado);
+                } else {
+                    sessaoAtual.encerrarSessao(false);
+                }
             }
 
             EstruturaDeFormulario estrutura = MapaDeFormularios.getEstruturaByNomeAcao(acao.getAcaoDeGestaoEntidade().getNomeUnico());

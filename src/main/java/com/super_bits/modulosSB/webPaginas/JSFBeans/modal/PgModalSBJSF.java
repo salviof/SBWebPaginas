@@ -35,4 +35,9 @@ public class PgModalSBJSF extends PgModalCampoSelecionadoAbstrato implements Ser
                 .getExternalContext().getSession(false)).getId();
     }
 
+    @Override
+    public void renovarEntityManager() {
+        getPaginaVinculada().renovarEntityManager();
+    }
+
 }

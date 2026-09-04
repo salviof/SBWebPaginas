@@ -9,7 +9,8 @@ import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.MB_Pagina
 import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.formularios.reflexao.anotacoes.InfoPagina;
 import com.super_bits.modulos.SBAcessosModel.view.FabAcaoPaginasDoSistema;
 import com.super_bits.modulos.SBAcessosModel.view.InfoAcaoPaginaDoSistema;
-import javax.faces.bean.ViewScoped;
+import javax.faces.view.ViewScoped;
+
 import javax.inject.Named;
 
 /**
@@ -18,7 +19,7 @@ import javax.inject.Named;
  */
 @InfoAcaoPaginaDoSistema(acao = FabAcaoPaginasDoSistema.PAGINA_NATIVA_PARAMETRO_NAO_ENCONTRADO_MB)
 @ViewScoped
-@InfoPagina(nomeCurto = "AN", tags = "acessoNegado")
+@InfoPagina(nomeCurto = "PNE", tags = "prNaoEncontrado")
 @Named
 public class PgParametroNaoEncontrado extends MB_PaginaConversation {
 

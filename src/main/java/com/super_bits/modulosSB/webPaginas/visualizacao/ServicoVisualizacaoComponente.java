@@ -53,7 +53,7 @@ public class ServicoVisualizacaoComponente {
         }
 
         if (pItem instanceof ComoTemIcone && pItem.isTemCampoAnotado(FabTipoAtributoObjeto.COR) && pItem instanceof ComoStatus) {
-            if (!(((ComoTemIcone) pItem).getIcone() != null)) {
+            if ((((ComoTemIcone) pItem).getIcone() != null)) {
                 if (!((ComoTemIcone) pItem).getIcone().isEmpty()) {
 
                     MAPA_ENTIDADES.put(pItem, TIPO_VISUALIZACAO.ICONE_COLORIDO_NOME);
