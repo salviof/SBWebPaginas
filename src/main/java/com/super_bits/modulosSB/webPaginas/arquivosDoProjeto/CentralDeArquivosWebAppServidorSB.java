@@ -111,6 +111,7 @@ public class CentralDeArquivosWebAppServidorSB extends CentralDeArquivosAbstrata
             }
 
         }
+
         return endrLocaResource;
 
     }

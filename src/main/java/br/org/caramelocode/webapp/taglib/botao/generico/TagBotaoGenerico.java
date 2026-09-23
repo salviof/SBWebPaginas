@@ -4,7 +4,6 @@
  */
 package br.org.caramelocode.webapp.taglib.botao.generico;
 
-import com.sun.faces.application.applicationimpl.InstanceFactory;
 import javax.faces.application.ResourceDependency;
 import org.primefaces.component.button.Button;
 
