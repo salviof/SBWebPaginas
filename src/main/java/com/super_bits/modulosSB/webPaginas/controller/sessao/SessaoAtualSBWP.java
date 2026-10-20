@@ -43,10 +43,14 @@ import org.jboss.weld.context.RequestContext;
 import org.jboss.weld.context.http.Http;
 import org.jboss.weld.context.http.HttpRequestContextImpl;
 import org.primefaces.event.FileUploadEvent;
-import com.super_bits.modulosSB.webPaginas.controller.listenners.ItfDefinicaoUrlHostDeSessao;
+import com.super_bits.modulosSB.SBCore.modulos.view.telas.ItfDefinicaoUrlHostDeSessao;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.entidade.basico.ComoSessao;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.entidade.basico.ComoUsuario;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.entidade.chat.ComoEscutaJanelasChatNotificacao;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.entidade.chat.NotificacaoUsuarioJanelaChat;
 import com.super_bits.modulosSB.webPaginas.ConfigGeral.FabConfigModuloWebAppGenerico;
+import com.super_bits.modulosSB.webPaginas.JSFManagedBeans.declarados.util.ItfServicoPush;
+import com.super_bits.modulosSB.webPaginas.push.FabTipoMensagemPush;
 
 /**
  *
@@ -71,9 +75,27 @@ public class SessaoAtualSBWP extends SessaoOffline implements ComoSessao, Serial
     @Inject
     @Http
     private RequestContext requestContext;
+    @Inject
+    private ItfServicoPush pushContext;
 
     public SessaoAtualSBWP() {
         super();
+    }
+    private NotificacaoUsuarioJanelaChat gestaoJanelaChat = null;
+
+    @Override
+    public NotificacaoUsuarioJanelaChat getNotificacoesJanelasChat() {
+        if (gestaoJanelaChat == null) {
+            if (isIdentificado()) {
+                gestaoJanelaChat = CarameloCode.getServicoComunicacao().gerarGestaoNotificacaoChat(getUsuario().getEmail());
+            }
+        }
+        return gestaoJanelaChat;
+    }
+
+    @Override
+    public void atualizarJanelasChat(ComoEscutaJanelasChatNotificacao pEscuta) {
+        pushContext.enviar(getUsuario().getEmail(), FabTipoMensagemPush.ATUALIZAR_AREA.getPaylouadPush("compJanelasNotificacao"));
     }
 
     public String getUrlHostDaSessao() {
@@ -97,13 +119,10 @@ public class SessaoAtualSBWP extends SessaoOffline implements ComoSessao, Serial
             FacesContext contextoJSF = FacesContext.getCurrentInstance();
 
             HttpServletRequest origRequest = null;
-            if (contextoJSF != null) {
-                origRequest = (HttpServletRequest) contextoJSF.getExternalContext().getRequest();
 
-            } else {
-                HttpRequestContextImpl teste = (HttpRequestContextImpl) requestContext;
-                origRequest = teste.getHttpServletRequest();
-            }
+            HttpRequestContextImpl teste = (HttpRequestContextImpl) requestContext;
+            origRequest = teste.getHttpServletRequest();
+
             String url = origRequest.getRequestURL().toString();
             try {
                 String agenteFullStr = origRequest.getHeader("User-Agent");

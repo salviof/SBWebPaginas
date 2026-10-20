@@ -11,6 +11,7 @@ import com.super_bits.modulosSB.SBCore.modulos.objetos.entidade.basico.ComoEntid
 import com.super_bits.modulosSB.SBCore.modulos.view.widgetsFormulario.WidgetsFormulario;
 import jakarta.json.Json;
 import jakarta.json.JsonArrayBuilder;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,6 +32,25 @@ public enum FabTipoMensagemPush {
         Map<String, Object> parametros = new HashMap<>();
         parametros.put("tipo", this.toString());
         parametros.put("timestamp", System.currentTimeMillis());
+        return parametros;
+    }
+
+    public Map<String, Object> getPaylouadPush(String pJavascriptOuNomeArea) {
+        Map<String, Object> parametros = new HashMap<>();
+        parametros.put("tipo", this.toString());
+        parametros.put("timestamp", System.currentTimeMillis());
+        switch (this) {
+            case ATUALIZAR_AREA:
+                parametros.put("areas", Collections.singletonList(pJavascriptOuNomeArea));
+                break;
+
+            case EXECUTAR_JAVASCRIPT:
+                parametros.put("javascript", pJavascriptOuNomeArea);
+                break;
+
+            default:
+                throw new AssertionError();
+        }
         return parametros;
     }
 

@@ -11,7 +11,6 @@ import com.super_bits.modulosSB.Persistencia.registro.persistidos.modulos.CEP.Ce
 import com.super_bits.modulosSB.SBCore.ConfigGeral.ConfiguradorCoreAbstrato;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.ControleDeSessaoPadrao;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.FabTipoProjeto;
-import com.super_bits.modulosSB.SBCore.ConfigGeral.ItfConfiguracaoCoreCustomizavel;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.arquivosConfiguracao.ArquivoConfiguracaoBase;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.arquivosConfiguracao.ArquivoConfiguracaoDistribuicao;
@@ -32,6 +31,7 @@ import java.io.InputStream;
 import java.util.Properties;
 import javax.servlet.ServletContext;
 import org.coletivojava.fw.api.tratamentoErros.FabErro;
+import com.super_bits.modulosSB.SBCore.ConfigGeral.ComoContextoExecCustomizavel;
 
 /**
  *
@@ -74,7 +74,7 @@ public abstract class ConfiguradorCoreDeProjetoWebWarAbstrato extends Configurad
     }
 
     @Override
-    public void defineClassesBasicas(ItfConfiguracaoCoreCustomizavel pConfiguracao) {
+    public void defineClassesBasicas(ComoContextoExecCustomizavel pConfiguracao) {
         aplicarDadosArquivoConfiguracao(pConfiguracao);
         pConfiguracao.setCentralDeEventos(CentralLogEventosArqTextoGenerica.class);
         pConfiguracao.setServicoVisualizacao(ServicoVisuaslizacaoWebResponsivo.class);

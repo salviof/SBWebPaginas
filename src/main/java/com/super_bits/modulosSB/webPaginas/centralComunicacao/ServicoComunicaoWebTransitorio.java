@@ -20,6 +20,8 @@ import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ItfTipoCanalComunicac
 import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ComoDialogo;
 import com.super_bits.modulosSB.SBCore.modulos.comunicacao.ItffabricaCanalComunicacao;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.entidade.basico.ComoUsuario;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.entidade.chat.ComoServicoChatNotificacoes;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.entidade.chat.NotificacaoUsuarioJanelaChat;
 import com.super_bits.modulosSB.SBCore.modulos.servicosCore.ComoServicoComunicacao;
 import com.super_bits.modulosSB.webPaginas.push.NotificadorIntranetJSF;
 import java.util.Date;
@@ -83,6 +85,16 @@ public class ServicoComunicaoWebTransitorio extends CentralComunicaoAbstrato imp
         CarameloCode.getServicoMensagemFireForget().enviarMsgAlertaAoUsuario("Agenda de novo disparo não foi implementado em " + ServicoComunicaoWebTransitorio.class.getSimpleName());
 
         return false;
+    }
+
+    private NotificacaoUsuarioJanelaChat notificacaoChat;
+
+    @Override
+    public NotificacaoUsuarioJanelaChat gerarGestaoNotificacaoChat(String pEmailAtendimento) {
+        if (notificacaoChat == null) {
+            notificacaoChat = new NotificacaoUsuarioJanelaChat("https://chat.localhost.com.br:8080");
+        }
+        return notificacaoChat;
     }
 
 }

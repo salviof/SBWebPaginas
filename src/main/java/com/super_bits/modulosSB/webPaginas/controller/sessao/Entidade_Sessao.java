@@ -15,6 +15,8 @@ import com.super_bits.modulosSB.SBCore.modulos.view.telas.ItfTelaUsuario;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.entidade.basico.ComoSessao;
 import com.super_bits.modulosSB.SBCore.modulos.objetos.entidade.basico.ComoUsuario;
 import com.super_bits.modulosSB.SBCore.modulos.Controller.Interfaces.acoes.ComoAcaoDoSistema;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.entidade.chat.ComoEscutaJanelasChatNotificacao;
+import com.super_bits.modulosSB.SBCore.modulos.objetos.entidade.chat.NotificacaoUsuarioJanelaChat;
 
 /**
  * The persistent class for the MB_Sessao database table.
@@ -153,6 +155,16 @@ public class Entidade_Sessao implements ComoSessao, Serializable {
             idSessao = String.valueOf(Thread.currentThread().toString().hashCode());
         }
         return idSessao;
+    }
+
+    @Override
+    public NotificacaoUsuarioJanelaChat getNotificacoesJanelasChat() {
+        return new NotificacaoUsuarioJanelaChat("");
+    }
+
+    @Override
+    public void atualizarJanelasChat(ComoEscutaJanelasChatNotificacao pEscuta) {
+
     }
 
 }
