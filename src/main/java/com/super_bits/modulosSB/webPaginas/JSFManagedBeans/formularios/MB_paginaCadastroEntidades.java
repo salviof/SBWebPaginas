@@ -563,7 +563,7 @@ public abstract class MB_paginaCadastroEntidades<T extends ComoEntidadeSimples> 
         try {
             if (entidadesListadas == null) {
                 listarDados(!listarApenasRegistrosAtivos);
-                //proteção de  stackoverflow, chamando getEntidadesListadas dentro do listar(dados)
+
                 if (entidadesListadas == null) {
                     entidadesListadas = new ArrayList<>();
                 }
@@ -571,7 +571,7 @@ public abstract class MB_paginaCadastroEntidades<T extends ComoEntidadeSimples> 
             }
             if (entidadesListadas != null && entidadesListadas.isEmpty()) {
                 entidadesListadas = null;
-                return entidadesListadas;
+                return new ArrayList<>();
             }
 
         } catch (Throwable t) {
