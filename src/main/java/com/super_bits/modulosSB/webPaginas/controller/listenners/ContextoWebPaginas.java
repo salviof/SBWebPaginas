@@ -3,6 +3,7 @@ package com.super_bits.modulosSB.webPaginas.controller.listenners;
 import br.org.coletivojava.fw.utils.agendador.UtilSBAgendadorTarefas;
 import com.super_bits.modulos.SBAcessosModel.controller.UtilSBControllerAcessosModel;
 import com.super_bits.modulos.SBAcessosModel.model.ConfiguracaoDePermissao;
+import com.super_bits.modulosSB.SBCore.ConfigGeral.CarameloCode;
 import com.super_bits.modulosSB.SBCore.ConfigGeral.SBCore;
 import com.super_bits.modulosSB.SBCore.UtilGeral.MapaAcoesSistema;
 import com.super_bits.modulosSB.SBCore.UtilGeral.UtilCRCReflexao;
@@ -54,9 +55,31 @@ public class ContextoWebPaginas implements ServletContextListener {
 
     }
 
+    private void defineEstagio(ServletContext ctx) {
+        String estagioProjeto = null;
+        if (CarameloCode.isEmModoProducao()) {
+            estagioProjeto = ProjectStage.Production.toString();
+        } else {
+            estagioProjeto = ProjectStage.Development.toString();
+        }
+
+        System.out.println("[ProjectStage] antes=" + ctx.getInitParameter("javax.faces.PROJECT_STAGE")
+                + " desejado=" + estagioProjeto
+                + " emModoProducao=" + SBCore.isEmModoProducao());
+
+        ctx.setInitParameter("javax.faces.PROJECT_STAGE", estagioProjeto);
+
+        boolean aplicou = ctx.setInitParameter("javax.faces.PROJECT_STAGE", estagioProjeto);
+
+        System.out.println("[ProjectStage] aplicou=" + aplicou
+                + " depois=" + ctx.getInitParameter("javax.faces.PROJECT_STAGE"));
+    }
+
     @Override
     public void contextInitialized(ServletContextEvent sce) {
         System.out.println("Iniciando contexto");
+        ServletContext context = sce.getServletContext();
+
         try {
             if (this instanceof HttpSessionListener) {
                 System.out.println("");
@@ -83,18 +106,13 @@ public class ContextoWebPaginas implements ServletContextListener {
             //   String webDir = this.getClass().getClassLoader().getResource("com/company/project/mywebdir").toExternalForm();
 
             inicio.inicio();
+            defineEstagio(context);
             String tema = FabConfigModuloWebAppGenerico.TEMA.getValorParametroSistema();
             if (tema == null) {
                 tema = FabConfigModuloWebAppGenerico.TEMA.getValorPadrao();
             }
             sce.getServletContext().setInitParameter("primefaces.THEME", tema);
 
-            ServletContext context = sce.getServletContext();
-            if (SBCore.isEmModoProducao()) {
-                context.setInitParameter("javax.faces.PROJECT_STAGE", ProjectStage.Production.toString());
-            } else {
-                context.setInitParameter("javax.faces.PROJECT_STAGE", ProjectStage.Development.toString());
-            }
             buildSisteMap();
             System.out.println("Construindo SiteMap");
 
